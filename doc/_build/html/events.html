@@ -1,0 +1,371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>events package &mdash; .  documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title=".  documentation" href="index.html" />
+    <link rel="next" title="manage module" href="manage.html" />
+    <link rel="prev" title="eestecnet package" href="eestecnet.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="manage.html" title="manage module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="eestecnet.html" title="eestecnet package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">.  documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="events-package">
+<h1>events package<a class="headerlink" href="#events-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-events.admin">
+<span id="events-admin-module"></span><h2>events.admin module<a class="headerlink" href="#module-events.admin" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-events.models">
+<span id="events-models-module"></span><h2>events.models module<a class="headerlink" href="#module-events.models" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="events.models.Congress">
+<em class="property">class </em><tt class="descclassname">events.models.</tt><tt class="descname">Congress</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/events/models.html#Congress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#events.models.Congress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#events.models.Event" title="events.models.Event"><tt class="xref py py-class docutils literal"><span class="pre">events.models.Event</span></tt></a></p>
+<p>Congress(id, name, start_date, end_date, summary, description, event_ptr_id)</p>
+<dl class="exception">
+<dt id="events.models.Congress.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#events.models.Congress.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">events.models.DoesNotExist</span></tt></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="events.models.Congress.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Congress.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#events.models.Congress.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">events.models.MultipleObjectsReturned</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Congress.event_ptr">
+<tt class="descclassname">Congress.</tt><tt class="descname">event_ptr</tt><a class="headerlink" href="#events.models.Congress.event_ptr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Congress.objects">
+<tt class="descclassname">Congress.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x03B31270&gt;</em><a class="headerlink" href="#events.models.Congress.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="events.models.Event">
+<em class="property">class </em><tt class="descclassname">events.models.</tt><tt class="descname">Event</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/events/models.html#Event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#events.models.Event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></tt></p>
+<p>We use this as a public class example class.</p>
+<p>You never call this class before calling <tt class="xref py py-func docutils literal"><span class="pre">public_fn_with_sphinxy_docstring()</span></tt>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">An example of intersphinx is this: you <strong>cannot</strong> use <tt class="xref py py-mod docutils literal"><span class="pre">pickle</span></tt> on this class.</p>
+</div>
+<dl class="exception">
+<dt id="events.models.Event.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#events.models.Event.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></tt></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="events.models.Event.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Event.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#events.models.Event.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Event.congress">
+<tt class="descclassname">Event.</tt><tt class="descname">congress</tt><a class="headerlink" href="#events.models.Event.congress" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Event.exchange">
+<tt class="descclassname">Event.</tt><tt class="descname">exchange</tt><a class="headerlink" href="#events.models.Event.exchange" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="events.models.Event.get_next_by_end_date">
+<tt class="descclassname">Event.</tt><tt class="descname">get_next_by_end_date</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#events.models.Event.get_next_by_end_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="events.models.Event.get_next_by_start_date">
+<tt class="descclassname">Event.</tt><tt class="descname">get_next_by_start_date</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#events.models.Event.get_next_by_start_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="events.models.Event.get_previous_by_end_date">
+<tt class="descclassname">Event.</tt><tt class="descname">get_previous_by_end_date</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#events.models.Event.get_previous_by_end_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="events.models.Event.get_previous_by_start_date">
+<tt class="descclassname">Event.</tt><tt class="descname">get_previous_by_start_date</tt><big>(</big><em>*moreargs</em>, <em>**morekwargs</em><big>)</big><a class="headerlink" href="#events.models.Event.get_previous_by_start_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Event.imw">
+<tt class="descclassname">Event.</tt><tt class="descname">imw</tt><a class="headerlink" href="#events.models.Event.imw" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Event.objects">
+<tt class="descclassname">Event.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x03B1E850&gt;</em><a class="headerlink" href="#events.models.Event.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="events.models.Event.save">
+<tt class="descclassname">Event.</tt><tt class="descname">save</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/events/models.html#Event.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#events.models.Event.save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Event.teamevent">
+<tt class="descclassname">Event.</tt><tt class="descname">teamevent</tt><a class="headerlink" href="#events.models.Event.teamevent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Event.workshop">
+<tt class="descclassname">Event.</tt><tt class="descname">workshop</tt><a class="headerlink" href="#events.models.Event.workshop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="events.models.Exchange">
+<em class="property">class </em><tt class="descclassname">events.models.</tt><tt class="descname">Exchange</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/events/models.html#Exchange"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#events.models.Exchange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#events.models.Event" title="events.models.Event"><tt class="xref py py-class docutils literal"><span class="pre">events.models.Event</span></tt></a></p>
+<p>Exchange(id, name, start_date, end_date, summary, description, event_ptr_id)</p>
+<dl class="exception">
+<dt id="events.models.Exchange.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#events.models.Exchange.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">events.models.DoesNotExist</span></tt></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="events.models.Exchange.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Exchange.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#events.models.Exchange.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">events.models.MultipleObjectsReturned</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Exchange.event_ptr">
+<tt class="descclassname">Exchange.</tt><tt class="descname">event_ptr</tt><a class="headerlink" href="#events.models.Exchange.event_ptr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Exchange.objects">
+<tt class="descclassname">Exchange.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x03B1EFD0&gt;</em><a class="headerlink" href="#events.models.Exchange.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="events.models.Imw">
+<em class="property">class </em><tt class="descclassname">events.models.</tt><tt class="descname">Imw</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/events/models.html#Imw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#events.models.Imw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#events.models.Event" title="events.models.Event"><tt class="xref py py-class docutils literal"><span class="pre">events.models.Event</span></tt></a></p>
+<p>Imw(id, name, start_date, end_date, summary, description, event_ptr_id)</p>
+<dl class="exception">
+<dt id="events.models.Imw.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#events.models.Imw.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">events.models.DoesNotExist</span></tt></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="events.models.Imw.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Imw.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#events.models.Imw.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">events.models.MultipleObjectsReturned</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Imw.event_ptr">
+<tt class="descclassname">Imw.</tt><tt class="descname">event_ptr</tt><a class="headerlink" href="#events.models.Imw.event_ptr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Imw.objects">
+<tt class="descclassname">Imw.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x03B1EAD0&gt;</em><a class="headerlink" href="#events.models.Imw.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="events.models.TeamEvent">
+<em class="property">class </em><tt class="descclassname">events.models.</tt><tt class="descname">TeamEvent</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/events/models.html#TeamEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#events.models.TeamEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#events.models.Event" title="events.models.Event"><tt class="xref py py-class docutils literal"><span class="pre">events.models.Event</span></tt></a></p>
+<p>TeamEvent(id, name, start_date, end_date, summary, description, event_ptr_id)</p>
+<dl class="exception">
+<dt id="events.models.TeamEvent.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#events.models.TeamEvent.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">events.models.DoesNotExist</span></tt></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="events.models.TeamEvent.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">TeamEvent.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#events.models.TeamEvent.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">events.models.MultipleObjectsReturned</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.TeamEvent.event_ptr">
+<tt class="descclassname">TeamEvent.</tt><tt class="descname">event_ptr</tt><a class="headerlink" href="#events.models.TeamEvent.event_ptr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.TeamEvent.objects">
+<tt class="descclassname">TeamEvent.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x03B314B0&gt;</em><a class="headerlink" href="#events.models.TeamEvent.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="events.models.Workshop">
+<em class="property">class </em><tt class="descclassname">events.models.</tt><tt class="descname">Workshop</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/events/models.html#Workshop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#events.models.Workshop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#events.models.Event" title="events.models.Event"><tt class="xref py py-class docutils literal"><span class="pre">events.models.Event</span></tt></a></p>
+<p>Workshop(id, name, start_date, end_date, summary, description, event_ptr_id)</p>
+<dl class="exception">
+<dt id="events.models.Workshop.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#events.models.Workshop.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">events.models.DoesNotExist</span></tt></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="events.models.Workshop.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Workshop.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#events.models.Workshop.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">events.models.MultipleObjectsReturned</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Workshop.event_ptr">
+<tt class="descclassname">Workshop.</tt><tt class="descname">event_ptr</tt><a class="headerlink" href="#events.models.Workshop.event_ptr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Workshop.objects">
+<tt class="descclassname">Workshop.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x03B1ED50&gt;</em><a class="headerlink" href="#events.models.Workshop.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-events.tests">
+<span id="events-tests-module"></span><h2>events.tests module<a class="headerlink" href="#module-events.tests" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-events.views">
+<span id="events-views-module"></span><h2>events.views module<a class="headerlink" href="#module-events.views" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-events">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-events" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">events package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-events.admin">events.admin module</a></li>
+<li><a class="reference internal" href="#module-events.models">events.models module</a></li>
+<li><a class="reference internal" href="#module-events.tests">events.tests module</a></li>
+<li><a class="reference internal" href="#module-events.views">events.views module</a></li>
+<li><a class="reference internal" href="#module-events">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="eestecnet.html"
+                        title="previous chapter">eestecnet package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="manage.html"
+                        title="next chapter">manage module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/events.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="manage.html" title="manage module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="eestecnet.html" title="eestecnet package"
+             >previous</a> |</li>
+        <li><a href="index.html">.  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Author.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
