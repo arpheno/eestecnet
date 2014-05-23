@@ -1,0 +1,68 @@
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'trt/js/prefixfree.min.js' %}" ></script>
+<style type="text/css">
+    .user-image {
+        display: inline-block;
+        height: 250px;
+        padding: 0 !important;
+        margin: 0;
+        transition: all .25s;
+        cursor: pointer;
+        z-index: 0;
+        position: relative;
+        outline: solid 20px rgba(255, 255, 255, 0.4);
+        outline-offset: -20px;
+    }
+    .user-image:hover {
+        transform: scale(1.2);
+        outline-offset: -100px;
+        outline-color: transparent;
+        z-index: 1;
+    }
+    .user-image:hover .comment {
+        opacity: 1;
+        top: 50%;
+    }
+    .comment {
+        opacity: 0.3;
+        overflow: visible;
+        margin: auto;
+        position: absolute;
+        padding-left: 20px;
+        padding-right: 20px;
+        top: 10%;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.5);
+        text-align: left;
+        transition: all .5s;
+    }
+    .comment .hashtag {
+        color: blue;
+    }
+    ul {
+        list-style:None;
+        padding-left:0;
+    }
+</style>
+{% load thumbnail %}
+<h2 class="post_title">Trainers</h2>
+<ul>
+    {% for trainer in object_list %}
+    {% thumbnail trainer.profile_picture "250x250" crop="center" as im %}
+    <li class="user-image">
+    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+    <div class="comment">
+        <ul>
+            <li>{{ trainer.first_name }}{{ trainer.last_name }}</li>
+            <li>LC: {{ trainer.lc }}</li>
+            <li>Trainings delivered: {{ trainer.trainings_delivered }}</li>
+            <li>Speaks {{ trainer.languages }}</li>
+            <li>Contact: {{ trainer.contact }}</li>
+            <li>Favourite Trainings {{ trainer.preferred_topics }}</li>
+
+        </ul>
+    </div>
+    </li>
+    {% endthumbnail %}
+    {% endfor %}
+</ul>

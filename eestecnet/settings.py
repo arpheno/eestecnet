@@ -36,7 +36,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'base',
+    'events',
+    'members',
+    'news',
+    'account',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -48,6 +51,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+AUTH_USER_MODEL = 'account.Eestecer'
 ROOT_URLCONF = 'eestecnet.urls'
 
 WSGI_APPLICATION = 'eestecnet.wsgi.application'
@@ -75,9 +79,18 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',)
+TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'), )
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)

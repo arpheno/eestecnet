@@ -1,0 +1,128 @@
+<style type="text/css">
+    #signin_menu {
+        -moz-border-radius-bottomleft:5px;
+        -moz-border-radius-bottomright:5px;
+        -webkit-border-bottom-left-radius:5px;
+        -webkit-border-bottom-right-radius:5px;
+        display:none;
+        background-color:#ee1f28;
+        position:absolute;
+        width:210px;
+        z-index:100;
+        border:1px transparent;
+        text-align:left;
+        padding:12px;
+        top: 48px;
+        right: 0px;
+        margin-top:5px;
+        margin-right: 0px;
+        *margin-right: -1px;
+        color:#FFFFFF;
+        font-size:11px;
+    }
+
+    #signin_menu input[type=text], #signin_menu input[type=password] {
+        display:block;
+        -moz-border-radius:4px;
+        -webkit-border-radius:4px;
+        border:1px solid #ACE;
+        font-size:13px;
+        margin:0 0 5px;
+        padding:5px;
+        width:203px;
+    }
+    #signin_menu p {
+        margin:0;
+    }
+    #signin_menu a {
+        color:#6AC;
+    }
+    #signin_menu label {
+        font-weight:normal;
+    }
+    #signin_menu p.remember {
+        padding:10px 0;
+    }
+    #signin_menu p.forgot, #signin_menu p.complete {
+        clear:both;
+        margin:5px 0;
+    }
+    #signin_menu p a {
+        color:#27B!important;
+    }
+    #signin_submit {
+        -moz-border-radius:4px;
+        -webkit-border-radius:4px;
+        background:#FFFFFF ;
+        border:1px solid #39D;
+        color:#666666;
+        text-shadow:0 -1px 0 #39d;
+        padding:4px 10px 5px;
+        font-size:11px;
+        margin:0 5px 0 0;
+    }
+    #signin_submit::-moz-focus-inner {
+        padding:0;
+        border:0;
+    }
+    #signin_submit:hover, #signin_submit:focus {
+        background-position:0 -5px;
+        cursor:pointer;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".signin").click(function(e) {
+            e.preventDefault();
+            $("fieldset#signin_menu").toggle("slow");
+            $("fieldset#signup_menu").hide("slow");
+        });
+        // this is the id of the form
+        $("#signin").submit(function() {
+            var url = "/account/login/";
+            $.ajax({
+                type: "POST",
+                url: "/account/login/",
+                data: $("#signin").serialize(), // serializes the form's elements.
+                success: function(data){
+                    if(data.status=="success"){
+                        $(".authed").show("slow");
+                        $(".anon").hide("slow");
+                        if(data.staff==true){
+                        $(".staffed").show("slow");
+                        }
+                    }else if(data.status=="inactive"){
+                        alert("Your account has been deactivated. Please Contact the system administrator.");
+                        $("#signin_menu").hide("slow");
+                    }
+                    else{
+                        alert("No such combination of E-Mail and Password. Please try again");
+                        $(".userinput").val("");
+                    }
+                }
+            });
+            return false; // avoid to execute the actual submit of the form.
+        });
+    });
+</script>
+<fieldset id="signin_menu">
+    <form method="post" id="signin" action="">{% csrf_token %}
+        <input class="userinput" id="username" name="username" value="" title="username" tabindex="4" placeholder="Email" type="text">
+        </p>
+        <p>
+        <input class="userinput" id="password" name="password" value="" title="password" tabindex="5" type="password" placeholder="Password">
+        </p>
+        <p class="remember">
+        <input id="signin_submit" value="Sign in" tabindex="6" type="submit">
+        </p>
+        <!--TODOinput id="remember" name="remember_me" value="1" tabindex="7" type="checkbox">
+        <label for="remember">Remember me</label>
+        <p class="forgot"> <a href="#" id="resend_password_link">Forgot your password?</a> </p>
+        <p class="forgot-username">
+        <A id=forgot_username_link
+            title="If you remember your password, try logging in with your email"
+            href="#">Forgot your username?</A>
+        </p-->
+    </form>
+</fieldset>
+

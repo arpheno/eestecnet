@@ -1,0 +1,48 @@
+<style type="text/css">
+    {% if user.is_authenticated %}
+    .authed{ display:block; }
+    .anon{ display:None; }
+    {% if user.is_staff %}
+    .staffed{display:block;}
+    {% else %}
+    .staffed{display:None;}
+    {% endif %}
+    {% else %}
+    .authed{ display:None; }
+    .anon{ display:block; }
+    .staffed{display:None;}
+    {% endif %}
+</style>
+<script type="text/javascript">
+    function linkbutton(name){
+        $("#button-"+name).click(function(){
+            current(name);
+            $("#"+name).load("/"+name);
+            return false;
+        });
+    };
+    $(function(){
+        linkbutton("materials");
+        linkbutton("account");
+        linkbutton("pool");
+        $("#button-news").click(function(){ current("news"); return false;});
+        $("#button-contact").click(function(){ current("contact"); return false});
+    });
+</script>
+<ul id="menu-header-menu" class="menu">
+    <li>
+    Member Name
+    </li>
+    <li>
+    <a href="#" id="member-news">Announcements</a>
+    </li>
+    <li>
+    <a href="#" id="member-events">Activity</a>
+    </li>
+    <li class="authed">
+    <a href="#" id="member-materials">Files</a>
+    </li>
+    <li class="staffed">
+    <a href="/admin/"> Admin </a>
+    </li>
+</ul>

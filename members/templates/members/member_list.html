@@ -1,0 +1,8 @@
+{% block content %}
+    <h2>Members</h2>
+    <ul>
+        {% for event in object_list %}
+            <li><a href="{{  event.pk }}"> {{ event.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
