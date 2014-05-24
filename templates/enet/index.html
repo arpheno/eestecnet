@@ -1,89 +1,48 @@
 {% load staticfiles %}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>EESTEC Training Team Platform</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<link rel="stylesheet" type="text/css" href="{% static 'enet/style.css' %}"  />
-<link rel="shortcut icon" href="http://eestec.net/wp-content/themes/neutral/favicon.ico">
-<link rel="stylesheet" type="text/css" media="screen" href="{% static 'enet/jquery-ui.css' %}" />
-<link rel="stylesheet" type="text/css" media="screen" href="{% static 'enet/loader.css' %}" />
-<script type="text/javascript" src="{% static 'enet/js/jquery.min.js' %}" ></script>
-<script type="text/javascript" src="{% static 'enet/js/jquery-ui.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'enet/js/enet.js' %}" ></script>
-<script type="text/javascript" src="{% static 'enet/js/prefixfree.min.js' %}" ></script>
-<script type="text/javascript" src="{% static 'history/js/history.js' %}" ></script>
-<script type="text/javascript" src="{% static 'news/js/news.js' %}" ></script>
-<link rel="stylesheet" type="text/css" media="screen" href="{% static "elfinder/css/elfinder.min.css" %}">
-<script type="text/javascript" src="{% static "elfinder/js/elfinder.full.js" %}"></script>
-<script type="text/javascript">
-    $(function () {
-        window.addEventListener('popstate', function(event) {
-            if (event.state!= null){
-            console.log('popstate fired!');
-            $(".contents").hide();
-            $("#"+event.state['which']).show();
-            }});
-        //history.replaceState({"which":{{ target }} },{{ target }},"/{{ target }}/");
-        $("#{{ target }}").show();
-    {% if target == "materials" %}
-        $("#materials").load("/materials");<!-- this is a dirty dirty hack-->
-    {% endif %}
-    });
-</script>
-<style border-right-style:pe="text/css">
-    .contents{
-        display:none;
-    }
-</style>
-</head>
-<body>
-<div id="loader">
-  <div class="shadow"></div>
-  <div id="portalcube">
-    <div class="squares">
-      <div class="box"></div>
-      <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-    </div>
-    <div class="circle">
-      <div class="heart"></div>
-    </div>
-  </div>
-</div>
-<div id="wrapper">
-    <div id="header">
-        <div id="logo">
-            <a href="/" id="logo_image">
-                <img src="{% static "enet/img/banner.png" %}" alt="EESTEC International" title="EESTEC International" />
-            </a>
-        </div>
-        <div class="international_menu">
-            {% include "enet/international_header.html" %}
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>EESTEC Training Team Platform</title>
+		<meta charset="utf-8"/>
+		<link rel="shortcut icon" href="http://eestec.net/wp-content/themes/neutral/favicon.ico">
+		<link rel="stylesheet" href="{% static 'enet/jquery-ui.css' %}" />
+		<link rel="stylesheet" href="{% static 'enet/loader.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'enet/style.css' %}" />
+		<script src="{% static 'enet/js/jquery.min.js' %}" ></script>
+		<script src="{% static 'enet/js/prefixfree.min.js' %}" ></script>
+		<script src="{% static 'enet/js/trt.js' %}" ></script>
+		<style>
+			{% if user.is_authenticated %}
+			.authed{ display:inline; }
+			{% if user.is_staff %}
+			.staffed{display:inline;}
+			{% endif %}
+			{% else %}
+			.anon{ display:inline; }
+			{% endif %}
+		</style>
 
-    </div>
-    <div id="contents" class="clearfix">
-        <div class="contents" id="news"></div>
-        <div class="contents" id="account"></div>
-        <div class="contents" id="contact">{% include "enet/contact.html" %}</div>
-        <div class="contents" id="cities"></div>
-        <div class="contents" id="events"></div>
-        <div class="contents" id="teams"></div>
-        <div class="contents" id="training"></div>
-    </div>
-    <div id="footer">
-        <ul id="copyright">
-            <li style="background:none;"><a href="/">EESTEC International</a></li>
-            <li style="background:none;"><a href="/">Sebastian Wozny</a></li>
-        </ul>
-    </div>
-
-</div>
-</body>
+	</head>
+	<body>
+		<header>
+		<img src="{% static "enet/img/banner.png" %}" alt="EESTEC International" title="EESTEC International" />
+		<nav>
+		{% include "enet/international_header.html" %}
+		</nav>
+		</header>
+		<main class="clearfix">
+		<section class="news"></section>
+		<section class="application"></section>
+        <section class="events"></section>
+		<section class="account"></section>
+		<section class="cities"></section>
+		<section class="teams"></section>
+		<section class="profile"></section>
+		</main>
+		<footer>
+		<ul id="copyright">
+			<li style="background:none;"><a href="/">EESTEC Training Team</a></li>
+		</ul>
+		</footer>
+	</body>
 </html>

@@ -1,0 +1,22 @@
+{% for entry in object_list %}
+<article>
+    <h2>{{ entry.headline }}</h2>
+
+    <ul>
+        <li>{{ entry.pub_date }}</li>
+    </ul>
+
+    <p class="post_content">{{ entry.message }}</p>
+
+    <div class="post_meta">
+        <div class="post_meta">
+            <ul class="clearfix">
+                <li class="post_category">Published in <a href="#" rel=
+                        "category tag" title="View all posts in News">News</a>,
+                    <a href="#" rel="category tag" title=
+                        "View all posts in TrainingTeam">Training Team</a></li>
+            </ul>
+        </div>
+    </div>
+</article>
+{% endfor %}

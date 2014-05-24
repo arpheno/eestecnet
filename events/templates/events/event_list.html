@@ -1,8 +1,18 @@
-{% block content %}
-    <h2>Events</h2>
-    <ul>
-        {% for event in object_list %}
-            <li><a href="{{  event.pk }}"> {{ event.name }}</a></li>
-        {% endfor %}
-    </ul>
-{% endblock %}
+{% for event in object_list %}
+<article class="hover">
+    <header>
+        <div class="meta">
+            <h2>{{ event.name }}</h2>
+            <h3>{{ event.date }}</h3>
+            <h3>{{ event.location }}</h3>
+            <h3>{% for oc in event.organizing_committee.all %}{{ oc.name }}{% endfor %}</h3>
+        </div>
+
+        <div class="actions">
+            <button onclick="$('.application').load('{{ event.pk }}/apply/');$('.application').show();history.pushState({asd:'asd'},'asdaf', '{{ event.pk }}/apply/');">Sign up!</button>
+        </div>
+    </header>
+
+    <p>{{ event.description }}</p>
+</article>
+{% endfor %}

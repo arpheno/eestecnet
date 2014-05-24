@@ -1,68 +1,12 @@
-<style type="text/css">
-    .local{ display:None; }
-    {% if user.is_authenticated %}
-    .authed{ display:block; }
-    .anon{ display:None; }
-    {% if user.is_staff %}
-    .staffed{display:block;}
-    {% else %}
-    .staffed{display:None;}
-    {% endif %}
-    {% else %}
-    .authed{ display:None; }
-    .anon{ display:block; }
-    .staffed{display:None;}
-    {% endif %}
-</style>
-<script type="text/javascript">
-    function linkbutton(name){
-        $("#button-"+name).click(function(){
-            current(name);
-            $("#"+name).load("/"+name);
-            return false;
-        });
-    };
-    $(function(){
-        linkbutton("teams");
-        linkbutton("cities");
-        linkbutton("news");
-        linkbutton("events");
-    });
-</script>
-<ul id="menu-header-menu" class="menu">
-    <li>
-    <a href="#" id="button-news">News</a>
-    </li>
-    <li>
-    <a href="#" id="button-events">Events</a>
-    </li>
-    <li>
-    <a href="#" id="button-teams">Teams</a>
-    </li>
-    <li>
-    <a href="#" id="button-cities">Cities</a>
-    </li>
-    <li>
-    <a href="#" id="button-about">About us</a>
-    </li>
-    <li class="local">
-    <a href="#" id="member-materials">Files</a>
-    </li>
-    <li class="authed">
-    <a href="#" id="button-account">My Account </a>
-    </li>
-    <li class="staffed">
-    <a href="/admin/"> Admin </a>
-    </li>
-    <li class="authed">
-    <a href="/account/logout">  Logout </a>
-    </li>
-    <li class="anon">
-    <a href="#" class="signup"> Register </a>
-    {% include "account/register.html" %}
-    </li>
-    <li class="anon">
-    <a href="#" class="signin"> Log In </a>
-    {% include "account/login.html" %}
-    </li>
-</ul>
+    <button class="home">Home</button>
+    <button class="news">News</button>
+    <button class="events">Events</button>
+    <button class="cities">Cities</button>
+    <button class="teams">Teams</button>
+    <button class="account authed">My Account </button>
+    <button class="admin staffed" ><a href="/admin"> Admin </a></button>
+    <button class="logout authed">  Logout </button>
+    <button class="signup anon"> Register
+    {% include "account/register.html" %}</button>
+    <button class="signin anon"> Log In
+    {% include "account/login.html" %}</button>

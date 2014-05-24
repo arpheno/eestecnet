@@ -1,0 +1,14 @@
+<script type="text/javascript">
+$(function(){
+    $('#apply').submit(function(){
+        $.post('', $( '#apply' ).serialize());
+        $('.application').hide();
+        alert("Thank you for your application");
+        return false;
+    });
+});
+</script>
+<form id="apply" action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Create" />
+</form>

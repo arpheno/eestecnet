@@ -51,6 +51,6 @@ class Event(models.Model):
 class Application(models.Model):
     target = models.ForeignKey(Event)
     applicant = models.ForeignKey(settings.AUTH_USER_MODEL)
-    date=models.DateTimeField(auto_created=True)
+    date=models.DateTimeField(auto_now_add=True)
     letter = models.TextField(blank=True, null=True)
     priority = models.IntegerField(blank=True, null=True)
