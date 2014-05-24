@@ -84,9 +84,6 @@ $(function () {
         });
         // Bind buttons
 
-        Training = new Page("training");
-        Pool = new Page("pool");
-        News = new Page("news");
         linkbutton("materials");
         linkbutton("account");
         linkbutton("news");

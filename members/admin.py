@@ -24,9 +24,11 @@ class MyMemberAdmin(admin.ModelAdmin):
         #    if not usr.is_staff:
         #    for mmbr in Member.objects.all():
         obj.save() # Save before meddling with permissions
+        import pdb;pdb.set_trace();
         for usr in obj.priviledged.all():
             usr.is_staff=True
             mygroup, created = Group.objects.get_or_create(name='Local Admins')
+            import pdb;pdb.set_trace();
             if created:
                 for perm in [
                     'add_entry', 'change_entry', 'delete_entry',

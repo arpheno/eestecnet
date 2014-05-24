@@ -24,7 +24,7 @@ class Event(models.Model):
     #General
     name = models.CharField(max_length=50)
     scope = models.CharField(
-        max_length=11,
+        max_length=15,
         choices=SCOPE_CHOICES,
         default='international')
     max_participants = models.IntegerField(blank=True, null=True)
