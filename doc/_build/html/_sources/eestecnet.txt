@@ -34,5 +34,4 @@ Module contents
 
 .. automodule:: eestecnet
     :members:
-    :undoc-members:
-    :show-inheritance:
+    

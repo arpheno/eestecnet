@@ -54,7 +54,7 @@ class Eestecer(AbstractBaseUser,PermissionsMixin):
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     last_event = models.DateTimeField(_('last event'), blank=True, null=True)
     events_participated = models.PositiveIntegerField(_('Event number'), default=0)
-
+    still_active=models.NullBooleanField()
     objects = EestecerManager()
 
     USERNAME_FIELD = 'email'

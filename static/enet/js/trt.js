@@ -88,32 +88,22 @@ $(function () {
         linkbutton("account");
         linkbutton("news");
         linkbutton("events");
-        linkbutton("cities");
-        linkbutton("teams");
         linkbutton("home");
-
-
-        $("button.pool").click(function () {
-
-            current("pool");
-            Pool.fetch();
+        $("button.cities").click(function () {
+            history.pushState({"cities": "cities"}, "cities", "/cities/");
+            $("section").hide("slow");
+            $("section.members").show("slow");
+            $("section.members").load("/cities/")
             return false;
         });
-        $("button.training").click(function () {
-            current("training");
-            Training.fetch();
+        $("button.teams").click(function () {
+            history.pushState({"teams": "teams"}, "teams", "/teams/");
+            $("section").hide("slow");
+            $("section.members").show("slow");
+            $("section.members").load("/teams/")
             return false;
         });
-        $("button.news").click(function () {
-            current("news");
-            News.fetch();
-            return false;
-        });
-        $("button.contact").click(function () {
-            current("contact");
-            return false;
-        });
-        $("button.logout").click(function () {
+    $("button.logout").click(function () {
             current("news");
             $("body").load("/account/logout/")
             News.fetch();

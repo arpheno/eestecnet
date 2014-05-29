@@ -9,13 +9,30 @@ class Member(models.Model):
         ('team', 'International Team'),
         ('commitment', 'Commitment'),
     )
-    members = models.ManyToManyField(settings.AUTH_USER_MODEL,blank=True, null=True, related_name='members')
-    priviledged = models.ManyToManyField(settings.AUTH_USER_MODEL,blank=True, null=True, related_name='priviledged')
     #General
     name = models.CharField(max_length=50)
     type = models.CharField(
         max_length=15,
         choices=TYPE_CHOICES,
         default='commitment')
+    thumbnail=models.ImageField(blank=True,null=True,upload_to="memberthumbs")
+    #Members
+    members = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        null=True,
+        related_name='members')
+    priviledged = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        null=True,
+        related_name='priviledged')
+
     def __unicode__(self):
         return self.name
+
+    def member_count(self):
+        return str(len(self.members.all()))
+class MemberImage(models.Model):
+    property = models.ForeignKey(Member, related_name='images')
+    image = models.ImageField(upload_to="memberimages")

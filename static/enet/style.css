@@ -1,4 +1,4 @@
-/*   
+/*
 Theme Name:neutral
 Theme URI:
 Description:This theme supports widget, threaded-comments, theme-options,and translation is ready. Also including page-navigation and multi level dropdown menu.You can see live demo including more information here http://www.mono-lab.net/demo2/
@@ -71,7 +71,7 @@ header nav  button {
 main { background:url(img/side.gif) repeat-y; clear:both; padding:0 28px; }
 main section { display:none;}
 article {float:left;padding:15px;width:916px;border-bottom:1px;}
-article header {padding:0;display: block; background:none;}
+article header.toplevel {padding:0;display: block; background:none;}
 article p { padding: 1px;margin:10px 0 1em 0; word-wrap:break-word;}
 .hover:hover{background-color:#F9BBBE}
 .meta{ display:block; float:left;margin-right: 30px;}
@@ -84,7 +84,7 @@ article p { padding: 1px;margin:10px 0 1em 0; word-wrap:break-word;}
 #id_last_name{font-size:29px; font-weight:bold; line-height:140%; padding:0; color:#ee1f28;border-left:None}
 .meta h2 { display:block;clear:both;text-align:center;}
 .meta h1 { display:block;float:left;}
-footer { background:url(img/footer.gif) no-repeat top; height:90px; padding:0 0 30px 0; }
+footer.toplevel{ background:url(img/footer.gif) no-repeat top; height:90px; padding:0 0 30px 0; }
 section.profile{ padding:35px; }
 section.account{ padding:35px; }
 .left { float:left;margin-right:35px;}

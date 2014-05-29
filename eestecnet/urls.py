@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
 from events.models import Event, Application
 from events.views import EventList, EventDetail, ApplyToEvent
+from members.models import Member
 from members.views import CommitmentList, TeamList
 from news.models import Entry
 
@@ -21,7 +22,9 @@ urlpatterns = patterns('',
     url(r'^events/(?P<pk>[-_\w]+)/$', DetailView.as_view(model=Event)),
     url(r'^events/(?P<pk>[-_\w]+)/apply/$', ApplyToEvent.as_view()),
     url(r'^cities/$', CommitmentList.as_view()),
+    url(r'^cities/(?P<pk>[-_\w]+)/$', DetailView.as_view(model=Member)),
     url(r'^teams/$', TeamList.as_view()),
+    url(r'^teams/(?P<pk>[-_\w]+)/$', DetailView.as_view(model=Member)),
     url(r'^members/$', ListView.as_view(model=Event)),
     url(r'^members/(?P<pk>[-_\w]+)/$', DetailView.as_view(model=Event)),
 

@@ -1,3 +1,27 @@
-<h1>{{ object.name }}</h1>
-<p>{{ object.description }}</p>
-<p>Reporter: {{ object.summary }}</p>
+<article class="event">
+        <div class="pictures"></div>
+        <div class="information">
+            <h3>General</h3>
+            <ul>
+                <li>{{ object.name }} </li>
+                <li>{% for oc in object.organizing_committee.all %}{{ oc.name }}{% endfor %}</li>
+                <li>{{ object.location }}</li>
+                <li>From {{ object.start_date }} - {{ object.end_date }}</li>
+            </ul>
+            <h3>Participants</h3>
+            <ul>
+                <li>Maximum of {{ object.max_participants }} participants</li>
+                <li>Currently {{ object.participant_count }} participants</li>
+            </ul>
+        </div>
+        <h3>Summary</h3>
+        {{ object.summary }}
+        <h3>Description</h3>
+        {{ object.description }}
+    <ul>
+        {%  for participant in object.participants.all %}
+            <li>{{ participant.get_full_name }}</li>
+        {% endfor %}
+    </ul>
+
+</article>

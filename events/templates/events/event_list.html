@@ -1,6 +1,5 @@
 {% for event in object_list %}
-<article class="hover">
-    <header>
+<article class="hover" onclick="$('section.events').empty();$('section.events').load('{{ event.pk }}')">
         <div class="meta">
             <h2>{{ event.name }}</h2>
             <h3>{{ event.date }}</h3>
@@ -11,8 +10,7 @@
         <div class="actions">
             <button onclick="$('.application').load('{{ event.pk }}/apply/');$('.application').show();history.pushState({asd:'asd'},'asdaf', '{{ event.pk }}/apply/');">Sign up!</button>
         </div>
-    </header>
 
-    <p>{{ event.description }}</p>
+    <p>{{ event.description }}</p></a>
 </article>
 {% endfor %}

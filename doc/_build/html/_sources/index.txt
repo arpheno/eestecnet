@@ -11,10 +11,8 @@ Contents:
 .. toctree::
    :maxdepth: 4
 
-   eestecnet
-   events
-   manage
-
+.. autoclass:: eestecnet.events.models.Event
+    :members: participants
 
 Indices and tables
 ==================

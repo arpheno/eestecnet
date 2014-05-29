@@ -1,0 +1,20 @@
+<article class="member">
+        <div class="pictures">
+            {% for im in object.images.all %}
+            <img src="{{ im.image.url }}" height="420">
+            {% endfor %}
+        </div>
+        <div class="information">
+            <ul>
+                <li>{{ object.name }} </li>
+                <li>Currently {{ object.member_count }} Members</li>
+            </ul>
+        </div>
+        <h3>Last events</h3>
+    {% include  'events/event_list.html' with object_list=object.event_set.all %}
+        <ul>
+        {%  for member in object.members.all %}
+            <li>{{ member.get_full_name }}</li>
+        {% endfor %}
+        </ul>
+</article>
