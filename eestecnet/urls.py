@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
+from eestecnet.settings import MEDIA_ROOT
 from events.models import Event, Application
 from events.views import EventList, EventDetail, ApplyToEvent
 from members.models import Member
@@ -27,5 +28,6 @@ urlpatterns = patterns('',
     url(r'^teams/(?P<pk>[-_\w]+)/$', DetailView.as_view(model=Member)),
     url(r'^members/$', ListView.as_view(model=Event)),
     url(r'^members/(?P<pk>[-_\w]+)/$', DetailView.as_view(model=Event)),
-
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
+        {'document_root':MEDIA_ROOT}),
     )

@@ -49,46 +49,8 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-events.admin">
-<span id="events-admin-module"></span><h2>events.admin module<a class="headerlink" href="#module-events.admin" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="events.admin.MyEventAdmin">
-<em class="property">class </em><tt class="descclassname">events.admin.</tt><tt class="descname">MyEventAdmin</tt><big>(</big><em>model</em>, <em>admin_site</em><big>)</big><a class="reference internal" href="_modules/events/admin.html#MyEventAdmin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#events.admin.MyEventAdmin" title="Permalink to this definition">¶</a></dt>
-<dd><p>Custom interface to administrate <tt class="xref py py-class docutils literal"><span class="pre">Event</span></tt> s from the django admin interface.</p>
-<dl class="attribute">
-<dt id="events.admin.MyEventAdmin.exclude">
-<tt class="descname">exclude</tt><em class="property"> = ['participants']</em><a class="headerlink" href="#events.admin.MyEventAdmin.exclude" title="Permalink to this definition">¶</a></dt>
-<dd><p>We exclude the participants from being modified because we accept participants through :class:<a href="#id1"><span class="problematic" id="id2">`</span></a>Application`s.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="events.admin.MyEventAdmin.formfield_for_manytomany">
-<tt class="descname">formfield_for_manytomany</tt><big>(</big><em>db_field</em>, <em>request</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/events/admin.html#MyEventAdmin.formfield_for_manytomany"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#events.admin.MyEventAdmin.formfield_for_manytomany" title="Permalink to this definition">¶</a></dt>
-<dd><p>A Local adminstrator will only be able to create :class:<a href="#id3"><span class="problematic" id="id4">`</span></a>Event`s for
-:class:<a href="#id5"><span class="problematic" id="id6">`</span></a>Member`s that he has priviledges for. Admins still get to see all events</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="events.admin.MyEventAdmin.get_queryset">
-<tt class="descname">get_queryset</tt><big>(</big><em>request</em><big>)</big><a class="reference internal" href="_modules/events/admin.html#MyEventAdmin.get_queryset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#events.admin.MyEventAdmin.get_queryset" title="Permalink to this definition">¶</a></dt>
-<dd><p>A Local adminstrator will only be able to modify :class:<a href="#id7"><span class="problematic" id="id8">`</span></a>Event`s that he has priviledges for.
-Admins still get to see all events</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.admin.MyEventAdmin.inlines">
-<tt class="descname">inlines</tt><em class="property"> = [&lt;class 'events.admin.ApplicationInline'&gt;]</em><a class="headerlink" href="#events.admin.MyEventAdmin.inlines" title="Permalink to this definition">¶</a></dt>
-<dd><p>Inline interface for displaying the applications to an event and making it possible to accept them</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.admin.MyEventAdmin.readonly_fields">
-<tt class="descname">readonly_fields</tt><em class="property"> = ['participant_count']</em><a class="headerlink" href="#events.admin.MyEventAdmin.readonly_fields" title="Permalink to this definition">¶</a></dt>
-<dd><p>We exclude the participant count from being modified because its indirectly calculated by a method</p>
-</dd></dl>
-
-</dd></dl>
-
+<div class="section" id="events-admin-module">
+<h2>events.admin module<a class="headerlink" href="#events-admin-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-events.models">
 <span id="events-models-module"></span><h2>events.models module<a class="headerlink" href="#module-events.models" title="Permalink to this headline">¶</a></h2>
@@ -116,6 +78,12 @@ becomes a Participant of the <a class="reference internal" href="#events.models.
 </dd></dl>
 
 <dl class="attribute">
+<dt id="events.models.Application.food_preferences">
+<tt class="descname">food_preferences</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Application.food_preferences" title="Permalink to this definition">¶</a></dt>
+<dd><p>Food preferences as selected by the user</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="events.models.Application.letter">
 <tt class="descname">letter</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Application.letter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Optional: Motivational letter, if the event requires one.</p>
@@ -124,7 +92,7 @@ becomes a Participant of the <a class="reference internal" href="#events.models.
 <dl class="method">
 <dt id="events.models.Application.member_in">
 <tt class="descname">member_in</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/events/models.html#Application.member_in"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#events.models.Application.member_in" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns a String containing all :class:<a href="#id9"><span class="problematic" id="id10">`</span></a>Member`s the applicant is part of</p>
+<dd><p>returns a String containing all :class:<a href="#id1"><span class="problematic" id="id2">`</span></a>Member`s the applicant is part of</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -276,7 +244,7 @@ The main event list will only contain International Events by default. Also see
   <ul>
 <li><a class="reference internal" href="#">events package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-events.admin">events.admin module</a></li>
+<li><a class="reference internal" href="#events-admin-module">events.admin module</a></li>
 <li><a class="reference internal" href="#module-events.models">events.models module</a></li>
 <li><a class="reference internal" href="#module-events.tests">events.tests module</a></li>
 <li><a class="reference internal" href="#module-events.views">events.views module</a></li>

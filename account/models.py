@@ -38,7 +38,8 @@ class EestecerManager(BaseUserManager):
 class Eestecer(AbstractBaseUser,PermissionsMixin):
     """
     A fully featured User model with admin-compliant permissions that uses
-    a full-length email field as the username.
+    a full-length email field as the username. It stores additional information
+    about eestecers.
 
     Email and password are required. Other fields are optional.
     """
@@ -52,22 +53,28 @@ class Eestecer(AbstractBaseUser,PermissionsMixin):
         help_text=_('Designates whether this user should be treated as '
                     'active. Unselect this instead of deleting accounts.'))
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
-    last_event = models.DateTimeField(_('last event'), blank=True, null=True)
-    events_participated = models.PositiveIntegerField(_('Event number'), default=0)
-    still_active=models.NullBooleanField()
+    still_active=models.NullBooleanField(null=True, blank=True)
     objects = EestecerManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
-    def save(self, *args, **kwargs):
+    def events_participated(self):
         try:
             ownevents=self.event_set.all()
-            self.events_participated=len(ownevents)
-            if ownevents:
-                self.last_event=self.event_set.all().order_by('-start_date')[0]
+            return len(ownevents)
         except:
-            pass
-        super(Eestecer,self).save(*args,**kwargs)
+            return 0
+    def last_event(self):
+        try:
+            ownevents=self.event_set.all()
+            if ownevents:
+                return self.event_set.all().order_by('-start_date')[0].start_date
+            else:
+                return 0
+        except:
+            return 0
+
+
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')

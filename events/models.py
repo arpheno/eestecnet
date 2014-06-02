@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 from django.db import models
@@ -40,46 +41,37 @@ class Event(models.Model):
     organizing_committee = models.ManyToManyField(Member)
     """ Defines the Organizing Members of the event. May be more than one. Only
      those Members can be selected, the editor is a priviledged member of."""
-    participants = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, null=True, related_name='participants')
-    """ A list of all Users currently connected to the event as participants.
-    They are added by accepting applications"""
     organizers = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, null=True, related_name='organizers')
     """ A list of all Users currently connected to the event as Organizers.
     Usually the head Organizers of the event."""
     participation_fee = models.PositiveIntegerField(blank=True, null=True)
     """Optional: Participation Fee for the event. """
+    participants=models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, null=True, related_name='participants')
+
+    def participant_count(self):
+        """Number of participants"""
+        return len(self.participants.all())
+
     #Time and place
-    location = models.CharField(max_length=30, blank=True, null=True)
+    location = models.CharField(help_text=_("Where are you planning your Event?"), max_length=30, blank=True, null=True)
     """Optional: Location of the event."""
-    start_date = models.DateField()
+    start_date = models.DateField(help_text=_("When does your Event start?"))
     """Start of the event."""
-    end_date = models.DateField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True,help_text=_("When does your Event end? (If ever ;) )"))
     """Optional: End of the event."""
-    deadline = models.DateTimeField(blank=True, null=True)
+    deadline = models.DateTimeField(blank=True, null=True,)
     """Deadline until no more applications will be accepted."""
 
     #Content
-    summary = models.TextField()
+    summary = models.TextField(help_text=_("Please provide a short summary which will interest people in your Event."))
     """ A summary of the event. This will be displayed on the events page."""
-    description = models.TextField()
+    description = models.TextField(help_text=_("Please provide a detailed description for interesed readers"))
     """ A detailed description of the event. Pictures and videos can be included here"""
     pax_report = models.TextField(blank=True, null=True)
     """ Optional: This is a field where the participants report can be stored and accessed."""
     organizer_report = models.TextField(blank=True, null=True)
     """ Optional: This is a field where the organizers report can be stored and accessed."""
 
-    def participant_count(self):
-        return str(len(self.participants.all()))
-
-    def save(self, *args, **kwargs):
-        """ We try to add all :class:`Application`s' respective users to :attr:`participants` ."""
-        try:
-            self.participants = [aplctn.applicant for aplctn in self.application_set.filter(accepted=True)]
-        except:
-            pass
-        super(Event, self).save(*args, **kwargs)
-        self.participants = [aplctn.applicant for aplctn in self.application_set.filter(accepted=True)]
-        super(Event, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.name
@@ -88,6 +80,7 @@ class Event(models.Model):
 class Application(models.Model):
     """Application objects link Users to :class:`Event` objects and provide additional information"""
     FOOD_CHOICES = (
+        ('none','None'),
         ('nopork', 'No Pork'),
         ('veggie', 'Vegetarian'),
         ('vegan', 'Vegan'),
@@ -105,7 +98,7 @@ class Application(models.Model):
     accepted = models.BooleanField(default=False)
     """If this field is set to true, the application is accepted and the User
     becomes a Participant of the :class:`Event`"""
-    food_preferences = models.CharField(max_length=15, choices=FOOD_CHOICES, default='None')
+    food_preferences = models.CharField(max_length=15, choices=FOOD_CHOICES, default='none')
     """ Food preferences as selected by the user """
     def member_in(self):
         """ returns a String containing all :class:`Member`s the applicant is part of """

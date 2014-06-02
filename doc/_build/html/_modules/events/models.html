@@ -136,7 +136,11 @@
 </div>
 <div class="viewcode-block" id="Application"><a class="viewcode-back" href="../../events.html#events.models.Application">[docs]</a><span class="k">class</span> <span class="nc">Application</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Application objects link Users to :class:`Event` objects and provide additional information&quot;&quot;&quot;</span>
-
+    <span class="n">FOOD_CHOICES</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="s">&#39;nopork&#39;</span><span class="p">,</span> <span class="s">&#39;No Pork&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;veggie&#39;</span><span class="p">,</span> <span class="s">&#39;Vegetarian&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s">&#39;vegan&#39;</span><span class="p">,</span> <span class="s">&#39;Vegan&#39;</span><span class="p">),</span>
+    <span class="p">)</span>
     <span class="n">applicant</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">AUTH_USER_MODEL</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot; The User issuing this application&quot;&quot;&quot;</span>
     <span class="n">target</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Event</span><span class="p">)</span>
@@ -150,7 +154,8 @@
     <span class="n">accepted</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
     <span class="sd">&quot;&quot;&quot;If this field is set to true, the application is accepted and the User</span>
 <span class="sd">    becomes a Participant of the :class:`Event`&quot;&quot;&quot;</span>
-
+    <span class="n">food_preferences</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">FOOD_CHOICES</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&#39;None&#39;</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot; Food preferences as selected by the user &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="Application.member_in"><a class="viewcode-back" href="../../events.html#events.models.Application.member_in">[docs]</a>    <span class="k">def</span> <span class="nf">member_in</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; returns a String containing all :class:`Member`s the applicant is part of &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
