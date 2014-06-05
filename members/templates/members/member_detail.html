@@ -1,23 +1,37 @@
 {% load thumbnail %}
 <article class="member">
-    <h1>{{ object.name }}</h1>
+    <h1>{{ object.name }}
+            {% if request.user and request.user not in object.members.all %}
+                {% for event in object.event_set.all %}
+                    {% if event.name == "Recruitment" %}
+                        <div class="actions">
+                        <button onclick="$('.application').load('{% url 'events' %}{{ event.pk }}/apply/');$('.application').show();history.pushState({asd:'asd'},'asdaf', '{% url 'events' %}{{ event.pk }}/apply/');">
+                            Join us!
+                        </button>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+</h1>
     <div class="pictures alignleft" style="width:330px">
-            {% for im in object.images.all %}
-                {% thumbnail im.image "150x150" crop="center" as imq %}
-                    <img src="{{ imq.url }}" width="{{ imq.width }}" height="{{ imq.height }}">
-                {% endthumbnail %}
-            {% endfor %}
-        </div>
-        <div class="information alignleft">
-            <ul>
-                <li class="lc_info">Currently {{ object.member_count }} Members</li>
-            </ul>
-        </div>
-        <div class="people clear">
-            {% include  'account/eestecer_list.html' with object_list=object.members.all %}
-        </div>
-        <div class="events">
-            <h2>Last events</h2>
-            {% include  'events/event_list.html' with object_list=object.event_set.all %}
-        </div>
+        {% for im in object.images.all %}
+            {% thumbnail im.image "150x150" crop="center" as imq %}
+                <img src="{{ imq.url }}" width="{{ imq.width }}" height="{{ imq.height }}">
+            {% endthumbnail %}
+        {% endfor %}
+    </div>
+    <div class="information alignright" style="width:300px">
+        <ul>
+            <li class="lc_info">Currently {{ object.member_count }} Members</li>
+            <li class="lc_info">Last event {{ object.last_event }}</li>
+
+        </ul>
+    </div>
+    <div class="people clear">
+        {% include  'account/eestecer_list.html' with object_list=object.members.all %}
+    </div>
+    <div class="events">
+        <h2>Last events</h2>
+        {% include  'events/event_list.html' with object_list=object.event_set.all %}
+    </div>
 </article>

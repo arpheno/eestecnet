@@ -19,9 +19,9 @@ class Member(models.Model):
     name = models.CharField(max_length=50,unique=True)
     """ The name of the member"""
     type = models.CharField(
-        max_length=15,
+        max_length=30,
         choices=TYPE_CHOICES,
-        default='commitment')
+        default='lc')
     """The type of the member"""
     thumbnail=models.ImageField(blank=True,null=True,upload_to="memberthumbs")
     """The picture that should appear in the member list"""
@@ -45,6 +45,16 @@ class Member(models.Model):
         return self.name
     def member_count(self):
         return len(self.members.all())
+    def last_event(self):
+        try:
+            ownevents=self.event_set.all()
+            if ownevents:
+                return self.event_set.all().order_by('-start_date')[0].start_date
+            else:
+                return 0
+        except:
+            return 0
+
 class MemberImage(models.Model):
     """ Helper class used to associate an arbitrary number of images with a :class:`Member` """
 

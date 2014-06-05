@@ -66,7 +66,7 @@ class MyEventAdmin(admin.ModelAdmin):
         myevent = Event.objects.get(name=form.cleaned_data["name"])
         for aplctn in myevent.application_set.filter(accepted=True):
             if myevent.name == "Recruitment":
-                myevent.organizing_committee.members.add(aplctn.applicant)
+                myevent.organizing_committee.all()[0].members.add(aplctn.applicant)
             else:
                 myevent.participants.add(aplctn.applicant)
                 #TODO send emails to participant, maybe make them confirm

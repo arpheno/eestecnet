@@ -112,4 +112,4 @@ class Application(models.Model):
 
 class EventImage(models.Model):
     property = models.ForeignKey(Event, related_name='images')
-    image = models.ImageField(upload_to="memberimages")
+    image = models.ImageField(upload_to="eventimages")
