@@ -1,8 +1,13 @@
+{% load thumbnail %}
 {% block content %}
     <h2>Members</h2>
     <ul>
         {% for mmbr in object_list %}
-            <li onclick="$('section.members').empty();$('section.members').load('{{ mmbr.pk }}')"> {{ mmbr.name }}</li>
+            <li onclick="$('section.members').empty();$('section.members').load('{{ mmbr.pk }}')">
+                {% thumbnail mmbr.thumbnail "200x200" crop="center" as im %}
+                    <img src="{{ im.url }}" height="{{ im.height }}" width="{{ im.width }}">
+                {% endthumbnail %}
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}

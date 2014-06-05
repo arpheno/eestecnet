@@ -55,6 +55,7 @@ class Eestecer(AbstractBaseUser,PermissionsMixin):
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     still_active=models.NullBooleanField(null=True, blank=True)
     objects = EestecerManager()
+    profile_picture = models.ImageField(upload_to="users", blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

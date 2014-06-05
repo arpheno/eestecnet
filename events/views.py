@@ -8,8 +8,10 @@ from django.views.generic import ListView, DetailView, CreateView, View
 from events.models import Event, Application
 
 
-class EventList(ListView):
+class InternationalEvents(ListView):
     model = Event
+    def get_queryset(self):
+        return Event.objects.filter(scope="international")
 
 class EventDetail(DetailView):
     model = Event

@@ -14,4 +14,4 @@ class TeamList(ListView):
 class CommitmentList(ListView):
     model = Member
     def get_queryset(self):
-        return Member.objects.filter(type='commitment')
+        return Member.objects.filter(type__in=["lc","jlc","observer"])

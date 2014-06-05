@@ -1,20 +1,23 @@
+{% load thumbnail %}
 <article class="member">
-        <div class="pictures">
+    <h1>{{ object.name }}</h1>
+    <div class="pictures alignleft" style="width:330px">
             {% for im in object.images.all %}
-            <img src="{{ im.image.url }}" height="420">
+                {% thumbnail im.image "150x150" crop="center" as imq %}
+                    <img src="{{ imq.url }}" width="{{ imq.width }}" height="{{ imq.height }}">
+                {% endthumbnail %}
             {% endfor %}
         </div>
-        <div class="information">
+        <div class="information alignleft">
             <ul>
-                <li>{{ object.name }} </li>
-                <li>Currently {{ object.member_count }} Members</li>
+                <li class="lc_info">Currently {{ object.member_count }} Members</li>
             </ul>
         </div>
-        <h3>Last events</h3>
-    {% include  'events/event_list.html' with object_list=object.event_set.all %}
-        <ul>
-        {%  for member in object.members.all %}
-            <li>{{ member.get_full_name }}</li>
-        {% endfor %}
-        </ul>
+        <div class="people clear">
+            {% include  'account/eestecer_list.html' with object_list=object.members.all %}
+        </div>
+        <div class="events">
+            <h2>Last events</h2>
+            {% include  'events/event_list.html' with object_list=object.event_set.all %}
+        </div>
 </article>

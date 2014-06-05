@@ -1,108 +1,4 @@
-<style type="text/css">
-    #signup_menu {
-        -moz-border-radius-bottomleft:5px;
-        -moz-border-radius-bottomright:5px;
-        -webkit-border-bottom-left-radius:5px;
-        -webkit-border-bottom-right-radius:5px;
-        display:none;
-        background-color:#ee1f28;
-        position:absolute;
-        width:210px;
-        z-index:100;
-        border:1px transparent;
-        text-align:left;
-        padding:12px;
-        top: 48px;
-        right: 0px;
-        margin-top:5px;
-        margin-right: 0px;
-        *margin-right: -1px;
-        color:#FFFFFF;
-        font-size:11px;
-    }
-
-    #signup_menu input[type=text], #signup_menu input[type=password] {
-        display:block;
-        -moz-border-radius:4px;
-        -webkit-border-radius:4px;
-        border:1px solid #ACE;
-        font-size:13px;
-        margin:0 0 5px;
-        padding:5px;
-        width:203px;
-    }
-    #signup_menu p {
-        margin:0;
-    }
-    #signup_menu a {
-        color:#6AC;
-    }
-    #signup_menu label {
-        font-weight:normal;
-    }
-    #signup_menu p.remember {
-        padding:10px 0;
-    }
-    #signup_menu p.forgot, #signup_menu p.complete {
-        clear:both;
-        margin:5px 0;
-    }
-    #signup_menu p a {
-        color:#27B!important;
-    }
-    #signup_submit {
-        -moz-border-radius:4px;
-        -webkit-border-radius:4px;
-        background:#FFFFFF ;
-        border:1px solid #39D;
-        color:#666666;
-        text-shadow:0 -1px 0 #39d;
-        padding:4px 10px 5px;
-        font-size:11px;
-        margin:0 5px 0 0;
-    }
-    #signup_submit::-moz-focus-inner {
-        padding:0;
-        border:0;
-    }
-    #signup_submit:hover, #signup_submit:focus {
-        background-position:0 -5px;
-        cursor:pointer;
-    }
-</style>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $(".signup").click(function(e) {
-            e.preventDefault();
-            $("fieldset#signup_menu").toggle("slow");
-            $("fieldset#signin_menu").hide();
-        });
-        $("#signup").submit(function() {
-            var url = "/account/new/";
-            $("#loader").show();
-            $.ajax({
-                type: "POST",
-                url: "/account/new/",
-                data: $("#signup").serialize(), // serializes the form's elements.
-                success: function(data){
-                    $("#loader").hide();
-                    if(data.status=="success"){
-                        alert("Please check your email to activate your account.");
-                        $("fieldset#signup_menu").hide("slow");
-                        $("fieldset#signin_menu").show("slow");
-                    }else if(data.status=="failure"){
-                        alert("This email is already registered.");
-                    }else if(data.status=="notatrainer"){
-                        alert("The eestec Training Team platform is currently in beta, and only available to EESTEC trainers and EESTEC training candidates. If you are a trainer and are seeing this message, please make sure you register your account with the email adress you're registered with on the trainings@eestec.net mailing list. If the problem persists, please contact the admin at arpheno@gmail.com.");
-                    }
-                }
-            });
-            return false; // avoid to execute the actual submit of the form.
-        });
-
-    });
-</script>
-<fieldset id="signup_menu">
+<fieldset id="signup_menu" class="floatmenu">
     <form method="post" id="signup" action="">{% csrf_token %}
         <input id="username" name="username" value="" title="username" tabindex="4" placeholder="Email" type="text">
         </p>
@@ -110,7 +6,7 @@
         <input id="password" name="password" value="" title="password" tabindex="5" type="password" placeholder="Password">
         </p>
         <p class="remember">
-        <input id="signup_submit" value="Create Account" tabindex="6" type="submit">
+        <input id="signup_submit" class="floatsubmit" value="Create Account" tabindex="6" type="submit">
         </p>
         <!--TODOinput id="remember" name="remember_me" value="1" tabindex="7" type="checkbox">
         <label for="remember">Remember me</label>

@@ -1,4 +1,115 @@
-<form action="/account/"enctype="multipart/form-data" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Send message" />
+{% load thumbnail %}
+<form action="/account/" enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    <div style="float:left;margin-right:30px;width:200px">
+        {% thumbnail user.profile_picture "200x200" crop="center" as im %}
+        <img src="{{ im.url }}" height="{{ im.height }}" width="{{ im.width }}">
+        {% endthumbnail %}
+        {{ form.profile_picture }}
+    </div>
+    <div class="meta">
+        {{form.first_name}} {{ form.last_name}}
+
+        <div style="clear: both;">
+            <h2>General</h2>
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="width: 200px;">
+                            <label>
+                                {{ form.born_on.label }}
+                            </label>
+                        </td>
+
+                        <td>{{ form.born_on }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>EESTEC</h2>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="width: 200px;">
+                            <h3 style="text-align: left;">{{form.lc.label}}</h3>
+                        </td>
+
+                        <td>{{ form.lc }}</td>
+                    </tr>
+
+                    <tr>
+                        <td style="width: 200px;">
+                            <h3 style="text-align: left;">
+                                {{ form.joined_eestec_on.label }}</h3>
+                        </td>
+
+                        <td>{{ form.joined_eestec_on }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>TRT</h2>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="width: 200px;">
+                            <h3 style="text-align: left;">
+                                {{ form.trainings_delivered.label }}</h3>
+                        </td>
+
+                        <td>{{ form.trainings_delivered }}</td>
+                    </tr>
+
+                    <tr>
+                        <td style="width: 200px;">
+                            <h3 style="text-align: left;">
+                                {{ form.preferred_topics.label }}</h3>
+                        </td>
+
+                        <td>{{ form.preferred_topics }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Contact</h2>
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td style="width: 200px;">
+                            <h3 style="text-align: left;">{{ form.mobile.label }}</h3>
+                        </td>
+
+                        <td>{{ form.mobile }}</td>
+                    </tr>
+
+                    <tr>
+                        <td style="width: 200px;">
+                            <h3 style="text-align: left;">{{ form.facebook.label }}</h3>
+                        </td>
+
+                        <td>{{ form.facebook }}</td>
+                    </tr>
+
+                    <tr>
+                        <td style="width: 200px;">
+                            <h3 style="text-align: left;">{{ form.hangout.label }}</h3>
+                        </td>
+
+                        <td>{{ form.hangout }}</td>
+                    </tr>
+
+                    <tr>
+                        <td style="width: 200px;">
+                            <h3 style="text-align: left;">{{ form.skype.label }}</h3>
+                        </td>
+
+                        <td>{{ form.skype }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div><input type="submit" value="Update Information">
 </form>

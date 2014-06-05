@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'news',
     'account',
     'gunicorn',
+    'sorl.thumbnail',
 )
 
 MIDDLEWARE_CLASSES = (

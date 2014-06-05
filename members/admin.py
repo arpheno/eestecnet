@@ -1,3 +1,4 @@
+from datetime import datetime
 from django import forms
 from django.contrib import admin
 
@@ -33,12 +34,24 @@ class MemberForm(forms.ModelForm):
         return self.cleaned_data
 class MemberImageInline(admin.TabularInline):
     model = MemberImage
+
 class MyMemberAdmin(admin.ModelAdmin):
     form=MemberForm
     readonly_fields = ['member_count',]
     inlines = [MemberImageInline]
     def save_model(self, request, obj, form, change):
         obj.save()
+        if not change:
+            a=Event.objects.create(
+                name="Recruitment",
+                scope="local",
+                category="operational",
+                summary="Interested in joining? Apply here or click for more information",
+                description="We are always recruiting and welcoming new people.",
+                start_date=datetime.now()
+            )
+            a.save()
+            a.organizing_committee=[obj]
 
     def get_queryset(self, request):
         qs = super(MyMemberAdmin, self).get_queryset(request)

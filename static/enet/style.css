@@ -19,9 +19,7 @@ ol { margin:0 0 1em 19px; padding:0; }
 ol li { padding:0 0 5px 0; line-height:normal; }
 form,table,input,textarea,dl,dt,dd { margin:0; padding:0; }
 table { border-collapse:collapse; width:100%; border:0; }
-blockquote { margin:0 0 1em 0; padding:35px 20px 0 20px; border:1px solid #ccc; background:#fafafa url(img/quote1.gif) no-repeat 10px 10px; }
 blockquote p { margin:0 0 5px 0; }
-.quote_bottom { height:30px; background:#fafafa url(img/quote2.gif) no-repeat right ; margin-right:-10px; }
 pre { border:1px solid #ccc; background:#fafafa; padding:10px 20px; margin:0 0 1em 0; overflow:auto; }
 object { display:block; margin:0 auto; }
 .wp-caption-text { text-align:center; }
@@ -32,6 +30,7 @@ object { display:block; margin:0 auto; }
 .aligncenter { margin-left:auto; margin-right:auto; }
 .centered { margin-left:auto; margin-right:auto; }
 .clear { clear:both; }
+.pictures{ width: 310px}
 
 /* EESTEC layout */
 h1{ font-size:29px; margin:0; font-weight:bold; line-height:140%; padding:0; color:#ee1f28; }
@@ -95,13 +94,9 @@ section.account{ padding:35px; }
 .post_meta ul { background:url(img/meta_top.gif) no-repeat right top; padding:12px 10px 12px 25px; margin:0; line-height:0%; }
 .post_meta li { display:block; font-size:11px; line-height:140%; margin:0; }
 .post_category { float:left; width:410px; background:url(img/category_icon.gif) no-repeat 4px 2px; padding:0 0 0 22px; }
-.post_tag { float:left; width:410px; background:url(img/tag_icon.gif) no-repeat 2px 2px; padding:0 0 0 22px; }
-.post_comment { float:right; background:url(img/write_comment.gif) no-repeat left 2px; padding:0 10px 0 22px; max-width:80px; width:auto !important;width:80px; }
-
 
 /* ----- footer ------------------------------------------------------------------------------------------------------------------------------- */
 #copyright { float:left; display:inline; margin:20px 0 0 55px; padding:0 0 0 15px; background:url(img/copyright.gif) no-repeat left top; }
-#copyright li { float:left; display:inline; font-size:11px; margin:0 10px 0 0; padding:3px 0 5px 13px; background:url(img/footer_line.gif) no-repeat left center; }
 #copyright li a, #copyright li a:visited { }
 
 
@@ -187,7 +182,6 @@ h3.entry-title a span{font-size:11px;}
     }
         .user-image {
         display: inline-block;
-        height: 250px;
         padding: 0 !important;
         margin: 0;
         transition: all .25s;
@@ -199,22 +193,19 @@ h3.entry-title a span{font-size:11px;}
     }
     .user-image:hover {
         transform: scale(1.2);
-        outline-offset: -100px;
         outline-color: transparent;
         z-index: 1;
     }
     .user-image:hover .comment {
         opacity: 1;
-        top: 50%;
+
     }
     .comment {
         opacity: 0.3;
         overflow: visible;
         margin: auto;
         position: absolute;
-        padding-left: 20px;
-        padding-right: 20px;
-        top: 10%;
+        top: 15%;
         width: 100%;
         background-color: rgba(255, 255, 255, 0.5);
         text-align: left;

@@ -2,9 +2,10 @@ from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
+import account
 from eestecnet.settings import MEDIA_ROOT
 from events.models import Event, Application
-from events.views import EventList, EventDetail, ApplyToEvent
+from events.views import EventDetail, ApplyToEvent, InternationalEvents
 from members.models import Member
 from members.views import CommitmentList, TeamList
 from news.models import Entry
@@ -19,15 +20,14 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^news/$', ListView.as_view(model=Entry)),
     url(r'^news/(?P<pk>[-_\w]+)/$', DetailView.as_view(model=Entry)),
-    url(r'^events/$', ListView.as_view(model=Event)),
-    url(r'^events/(?P<pk>[-_\w]+)/$', DetailView.as_view(model=Event)),
+    url(r'^events/$', InternationalEvents.as_view(), name='events'),
+    url(r'^events/(?P<pk>[-_\w]+)/$', EventDetail.as_view()),
     url(r'^events/(?P<pk>[-_\w]+)/apply/$', ApplyToEvent.as_view()),
     url(r'^cities/$', CommitmentList.as_view()),
     url(r'^cities/(?P<pk>[-_\w]+)/$', DetailView.as_view(model=Member)),
     url(r'^teams/$', TeamList.as_view()),
+    url(r'^account/',include('account.urls')),
     url(r'^teams/(?P<pk>[-_\w]+)/$', DetailView.as_view(model=Member)),
-    url(r'^members/$', ListView.as_view(model=Event)),
-    url(r'^members/(?P<pk>[-_\w]+)/$', DetailView.as_view(model=Event)),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root':MEDIA_ROOT}),
     )

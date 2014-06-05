@@ -12,10 +12,10 @@ class EventTestCase(TestCase):
                              summary="Nice event",
                              description="Cool thing",
                              start_date=datetime.now(),
-                            # organizing_committee=Member.objects.get(name='LC Skopje'),
                              category="workshop",
                              scope="international",
                              )
+
         Eestecer.objects.create_superuser("admin@eestec.net", "test")
     def test_animals_can_speak(self):
         """Animals that can speak are correctly identified"""

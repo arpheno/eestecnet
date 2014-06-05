@@ -109,3 +109,7 @@ class Application(models.Model):
 
     def __unicode__(self):
         return self.applicant.get_full_name()
+
+class EventImage(models.Model):
+    property = models.ForeignKey(Event, related_name='images')
+    image = models.ImageField(upload_to="memberimages")
