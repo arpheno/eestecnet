@@ -1,6 +1,6 @@
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, DetailView
 from django.contrib.auth.models import Group
 from django.forms import ModelForm
 import json
@@ -67,3 +67,9 @@ def auth(request):
     else:
         data['status'] = 'invalid'
         return HttpResponse(json.dumps(data), content_type="application/json")
+class EestecerProfile(DetailView):
+    model = Eestecer
+    slug_field= "last_name"
+    template_name= "account/eestecer_detail.html"
+
+

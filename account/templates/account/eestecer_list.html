@@ -3,7 +3,7 @@
 <ul>
     {% for trainer in object_list %}
     {% thumbnail trainer.profile_picture "100x100" crop="center" as im %}
-    <li class="user-image" onClick=" $('section').hide(); $('section.profile').show(); history.pushState({'which': 'profile'}, 'profile', '/profile/{{trainer.first_name}}/{{trainer.last_name}}/'); $('section.profile').load('/profile/{{trainer.first_name}}/{{trainer.last_name}}/');">
+    <li class="user-image" onClick=" $('section').hide(); $('section.profile').show(); history.pushState({'which': 'profile'}, 'profile', '/account/id/{{ user.pk }}/'); $('section.profile').load('/account/id/{{ user.pk }}/');">
     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
     <div class="comment">
         <ul>

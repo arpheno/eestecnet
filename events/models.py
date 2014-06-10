@@ -79,12 +79,6 @@ class Event(models.Model):
 
 class Application(models.Model):
     """Application objects link Users to :class:`Event` objects and provide additional information"""
-    FOOD_CHOICES = (
-        ('none','None'),
-        ('nopork', 'No Pork'),
-        ('veggie', 'Vegetarian'),
-        ('vegan', 'Vegan'),
-    )
     applicant = models.ForeignKey(settings.AUTH_USER_MODEL)
     """ The User issuing this application"""
     target = models.ForeignKey(Event)
@@ -98,8 +92,6 @@ class Application(models.Model):
     accepted = models.BooleanField(default=False)
     """If this field is set to true, the application is accepted and the User
     becomes a Participant of the :class:`Event`"""
-    food_preferences = models.CharField(max_length=15, choices=FOOD_CHOICES, default='none')
-    """ Food preferences as selected by the user """
     def member_in(self):
         """ returns a String containing all :class:`Member`s the applicant is part of """
         try:

@@ -36,6 +36,13 @@ class EestecerAdmin(UserAdmin):
     list_display = ('email', 'first_name', 'last_name', 'events_participated', 'last_event')
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
+    def get_queryset(self, request):
+        """ A Local adminstrator will only be able to modify :class:`Event`s that he has priviledges for.
+        Admins still get to see all events"""
+        qs = super(EestecerAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(organizing_committee__in=request.user.members.all())
 
 # Re-register UserAdmin
 admin.site.register(Eestecer, EestecerAdmin)

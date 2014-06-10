@@ -1,7 +1,7 @@
 {% load thumbnail %}
 <article class="member">
     <h1>{{ object.name }}
-            {% if request.user and request.user not in object.members.all %}
+            {% if user.is_authenticated and user not in object.members.all %}
                 {% for event in object.event_set.all %}
                     {% if event.name == "Recruitment" %}
                         <div class="actions">

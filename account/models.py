@@ -56,6 +56,14 @@ class Eestecer(AbstractBaseUser,PermissionsMixin):
     still_active=models.NullBooleanField(null=True, blank=True)
     objects = EestecerManager()
     profile_picture = models.ImageField(upload_to="users", blank=True)
+    FOOD_CHOICES = (
+        ('none','None'),
+        ('nopork', 'No Pork'),
+        ('veggie', 'Vegetarian'),
+        ('vegan', 'Vegan'),
+    )
+    food_preferences = models.CharField(max_length=15, choices=FOOD_CHOICES, default='none')
+    """ Food preferences as selected by the user """
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -84,7 +92,7 @@ class Eestecer(AbstractBaseUser,PermissionsMixin):
         """
         Returns the first_name plus the last_name, with a space in between.
         """
-        full_name = '%s %s' % (self.first_name, self.last_name)
+        full_name = '%s%s' % (self.first_name, self.last_name)
         return full_name.strip()
 
     def get_short_name(self):
