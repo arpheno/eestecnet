@@ -42,7 +42,7 @@ class EestecerAdmin(UserAdmin):
         qs = super(EestecerAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(organizing_committee__in=request.user.members.all())
+        return qs.filter(first_name='big_fat_penis')# todo need something sane here
 
 # Re-register UserAdmin
 admin.site.register(Eestecer, EestecerAdmin)

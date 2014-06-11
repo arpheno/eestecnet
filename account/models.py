@@ -55,16 +55,19 @@ class Eestecer(AbstractBaseUser,PermissionsMixin):
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     still_active=models.NullBooleanField(null=True, blank=True)
     objects = EestecerManager()
-    profile_picture = models.ImageField(upload_to="users", blank=True)
+    profile_picture = models.ImageField(upload_to="users", blank=True, null=True)
     FOOD_CHOICES = (
         ('none','None'),
         ('nopork', 'No Pork'),
         ('veggie', 'Vegetarian'),
         ('vegan', 'Vegan'),
+
     )
+    GENDER_CHOICES = (('m', 'Male'), ('f', 'Female'), ('x', 'Other'), )
+    gender = models.CharField(max_length=15, choices=GENDER_CHOICES)
     food_preferences = models.CharField(max_length=15, choices=FOOD_CHOICES, default='none')
     """ Food preferences as selected by the user """
-
+    passport_number = models.CharField(max_length=20,blank=True, null=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     def events_participated(self):
