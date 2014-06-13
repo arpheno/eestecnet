@@ -1,18 +1,22 @@
-.. . documentation master file, created by
-   sphinx-quickstart on Thu May 15 17:10:48 2014.
+.. eestec documentation master file, created by
+   sphinx-quickstart on Fri Jun 13 15:07:03 2014.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to .'s documentation!
-=============================
+Welcome to eestec's documentation!
+==================================
 
-Contents:
+
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 1
 
-.. autoclass:: eestecnet.events.models.Event
-    :members: participants
+   setup
+   overview
+   members
+   events
+   account
+   news
 
 Indices and tables
 ==================

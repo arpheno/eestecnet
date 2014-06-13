@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>events package &mdash; .  documentation</title>
+    <title>events package &mdash; eestec 1 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '',
+        VERSION:     '1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,9 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title=".  documentation" href="index.html" /> 
+    <link rel="top" title="eestec 1 documentation" href="index.html" />
+    <link rel="next" title="account package" href="account.html" />
+    <link rel="prev" title="members package" href="members.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,7 +37,13 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">.  documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="account.html" title="account package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="members.html" title="members package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">eestec 1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -49,106 +57,67 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="events-admin-module">
-<h2>events.admin module<a class="headerlink" href="#events-admin-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-events.admin">
+<span id="events-admin-module"></span><h2>events.admin module<a class="headerlink" href="#module-events.admin" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="events.admin.MyEventAdmin">
+<em class="property">class </em><tt class="descclassname">events.admin.</tt><tt class="descname">MyEventAdmin</tt><big>(</big><em>model</em>, <em>admin_site</em><big>)</big><a class="headerlink" href="#events.admin.MyEventAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom interface to administrate Events from the django admin interface.</p>
+<dl class="attribute">
+<dt id="events.admin.MyEventAdmin.inlines">
+<tt class="descname">inlines</tt><em class="property"> = [&lt;class 'events.admin.ApplicationInline'&gt;, &lt;class 'events.admin.ParticipantInline'&gt;]</em><a class="headerlink" href="#events.admin.MyEventAdmin.inlines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inline interface for displaying the applications to an event and making it possible to accept them</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.admin.MyEventAdmin.readonly_fields">
+<tt class="descname">readonly_fields</tt><em class="property"> = ['participant_count']</em><a class="headerlink" href="#events.admin.MyEventAdmin.readonly_fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>We exclude the participant count from being modified because its indirectly calculated by a method
+We exclude the participants from being modified because we accept participants through :class:<a href="#id1"><span class="problematic" id="id2">`</span></a>Application`s.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="events.admin.MyEventAdmin.formfield_for_manytomany">
+<tt class="descname">formfield_for_manytomany</tt><big>(</big><em>db_field</em>, <em>request</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#events.admin.MyEventAdmin.formfield_for_manytomany" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Local admin will only be able to create :class:<a href="#id3"><span class="problematic" id="id4">`</span></a>Event`s for
+:class:<a href="#id5"><span class="problematic" id="id6">`</span></a>Member`s that he has privileges for. Admins still get to see all events</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="events.admin.MyEventAdmin.get_queryset">
+<tt class="descname">get_queryset</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#events.admin.MyEventAdmin.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Local admin will only be able to modify :class:<a href="#id7"><span class="problematic" id="id8">`</span></a>Event`s that he has privileges for.
+Admins still get to see all events</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="events.admin.MyEventAdmin.save_related">
+<tt class="descname">save_related</tt><big>(</big><em>request</em>, <em>form</em>, <em>formsets</em>, <em>change</em><big>)</big><a class="headerlink" href="#events.admin.MyEventAdmin.save_related" title="Permalink to this definition">¶</a></dt>
+<dd><p>If there are accepted applications, we remove them and take action accordingly</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="events.admin.MyApplicationAdmin">
+<em class="property">class </em><tt class="descclassname">events.admin.</tt><tt class="descname">MyApplicationAdmin</tt><big>(</big><em>model</em>, <em>admin_site</em><big>)</big><a class="headerlink" href="#events.admin.MyApplicationAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom interface to administrate Events from the django admin interface.</p>
+<dl class="method">
+<dt id="events.admin.MyApplicationAdmin.get_queryset">
+<tt class="descname">get_queryset</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#events.admin.MyApplicationAdmin.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>A Local admin will only be able to modify applications issued by members from their LC
+Admins still get to see all applications</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-events.models">
 <span id="events-models-module"></span><h2>events.models module<a class="headerlink" href="#module-events.models" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="events.models.Application">
-<em class="property">class </em><tt class="descclassname">events.models.</tt><tt class="descname">Application</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/events/models.html#Application"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#events.models.Application" title="Permalink to this definition">¶</a></dt>
-<dd><p>Application objects link Users to <a class="reference internal" href="#events.models.Event" title="events.models.Event"><tt class="xref py py-class docutils literal"><span class="pre">Event</span></tt></a> objects and provide additional information</p>
-<dl class="attribute">
-<dt id="events.models.Application.accepted">
-<tt class="descname">accepted</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Application.accepted" title="Permalink to this definition">¶</a></dt>
-<dd><p>If this field is set to true, the application is accepted and the User
-becomes a Participant of the <a class="reference internal" href="#events.models.Event" title="events.models.Event"><tt class="xref py py-class docutils literal"><span class="pre">Event</span></tt></a></p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.models.Application.applicant">
-<tt class="descname">applicant</tt><a class="headerlink" href="#events.models.Application.applicant" title="Permalink to this definition">¶</a></dt>
-<dd><p>The User issuing this application</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.models.Application.date">
-<tt class="descname">date</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Application.date" title="Permalink to this definition">¶</a></dt>
-<dd><p>Auto: The date when the application is created.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.models.Application.food_preferences">
-<tt class="descname">food_preferences</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Application.food_preferences" title="Permalink to this definition">¶</a></dt>
-<dd><p>Food preferences as selected by the user</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.models.Application.letter">
-<tt class="descname">letter</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Application.letter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Optional: Motivational letter, if the event requires one.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="events.models.Application.member_in">
-<tt class="descname">member_in</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/events/models.html#Application.member_in"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#events.models.Application.member_in" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns a String containing all :class:<a href="#id1"><span class="problematic" id="id2">`</span></a>Member`s the applicant is part of</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.models.Application.priority">
-<tt class="descname">priority</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Application.priority" title="Permalink to this definition">¶</a></dt>
-<dd><p>Optional: Priority of the application as issued by the corresponding LC</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.models.Application.target">
-<tt class="descname">target</tt><a class="headerlink" href="#events.models.Application.target" title="Permalink to this definition">¶</a></dt>
-<dd><p>The <a class="reference internal" href="#events.models.Event" title="events.models.Event"><tt class="xref py py-class docutils literal"><span class="pre">Event</span></tt></a> the User is applying for.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
 <dt id="events.models.Event">
-<em class="property">class </em><tt class="descclassname">events.models.</tt><tt class="descname">Event</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/events/models.html#Event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#events.models.Event" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">events.models.</tt><tt class="descname">Event</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#events.models.Event" title="Permalink to this definition">¶</a></dt>
 <dd><p>Event objects encapsulate all information that is necessary to describe an event.</p>
-<dl class="attribute">
-<dt id="events.models.Event.category">
-<tt class="descname">category</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.category" title="Permalink to this definition">¶</a></dt>
-<dd><p>Category of the event, for choices see <tt class="xref py py-attr docutils literal"><span class="pre">CATEGORY_CHOICES</span></tt> .</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.models.Event.deadline">
-<tt class="descname">deadline</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.deadline" title="Permalink to this definition">¶</a></dt>
-<dd><p>Deadline until no more applications will be accepted.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.models.Event.description">
-<tt class="descname">description</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.description" title="Permalink to this definition">¶</a></dt>
-<dd><p>A detailed description of the event. Pictures and videos can be included here</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.models.Event.end_date">
-<tt class="descname">end_date</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.end_date" title="Permalink to this definition">¶</a></dt>
-<dd><p>Optional: End of the event.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.models.Event.location">
-<tt class="descname">location</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.location" title="Permalink to this definition">¶</a></dt>
-<dd><p>Optional: Location of the event.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.models.Event.max_participants">
-<tt class="descname">max_participants</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.max_participants" title="Permalink to this definition">¶</a></dt>
-<dd><p>Optional: Maximum amount of participants that will be admitted to the event</p>
-</dd></dl>
-
 <dl class="attribute">
 <dt id="events.models.Event.name">
 <tt class="descname">name</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.name" title="Permalink to this definition">¶</a></dt>
@@ -156,48 +125,9 @@ becomes a Participant of the <a class="reference internal" href="#events.models.
 </dd></dl>
 
 <dl class="attribute">
-<dt id="events.models.Event.organizer_report">
-<tt class="descname">organizer_report</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.organizer_report" title="Permalink to this definition">¶</a></dt>
-<dd><p>Optional: This is a field where the organizers report can be stored and accessed.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.models.Event.organizers">
-<tt class="descname">organizers</tt><a class="headerlink" href="#events.models.Event.organizers" title="Permalink to this definition">¶</a></dt>
-<dd><p>A list of all Users currently connected to the event as Organizers.
-Usually the head Organizers of the event.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.models.Event.organizing_committee">
-<tt class="descname">organizing_committee</tt><a class="headerlink" href="#events.models.Event.organizing_committee" title="Permalink to this definition">¶</a></dt>
-<dd><p>Defines the Organizing Members of the event. May be more than one. Only
-those Members can be selected, the editor is a priviledged member of.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.models.Event.participants">
-<tt class="descname">participants</tt><a class="headerlink" href="#events.models.Event.participants" title="Permalink to this definition">¶</a></dt>
-<dd><p>A list of all Users currently connected to the event as participants.
-They are added by accepting applications</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.models.Event.participation_fee">
-<tt class="descname">participation_fee</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.participation_fee" title="Permalink to this definition">¶</a></dt>
-<dd><p>Optional: Participation Fee for the event.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="events.models.Event.pax_report">
-<tt class="descname">pax_report</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.pax_report" title="Permalink to this definition">¶</a></dt>
-<dd><p>Optional: This is a field where the participants report can be stored and accessed.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="events.models.Event.save">
-<tt class="descname">save</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="_modules/events/models.html#Event.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#events.models.Event.save" title="Permalink to this definition">¶</a></dt>
-<dd><p>We try to add all <tt class="xref py py-class docutils literal"><span class="pre">Application`s'</span> <span class="pre">respective</span> <span class="pre">users</span> <span class="pre">to</span> <span class="pre">:attr:`participants</span></tt> .</p>
+<dt id="events.models.Event.category">
+<tt class="descname">category</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.category" title="Permalink to this definition">¶</a></dt>
+<dd><p>Category of the event, for choices see <tt class="xref py py-attr docutils literal"><span class="pre">CATEGORY_CHOICES</span></tt> .</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -209,9 +139,59 @@ The main event list will only contain International Events by default. Also see
 </dd></dl>
 
 <dl class="attribute">
+<dt id="events.models.Event.max_participants">
+<tt class="descname">max_participants</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.max_participants" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional: Maximum amount of participants that will be admitted to the event</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Event.organizing_committee">
+<tt class="descname">organizing_committee</tt><a class="headerlink" href="#events.models.Event.organizing_committee" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the Organizing Members of the event. May be more than one. Only
+those Members can be selected, the editor is a priviledged member of.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Event.organizers">
+<tt class="descname">organizers</tt><a class="headerlink" href="#events.models.Event.organizers" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of all Users currently connected to the event as Organizers.
+Usually the head Organizers of the event.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Event.participation_fee">
+<tt class="descname">participation_fee</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.participation_fee" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional: Participation Fee for the event.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="events.models.Event.participant_count">
+<tt class="descname">participant_count</tt><big>(</big><big>)</big><a class="headerlink" href="#events.models.Event.participant_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of participants</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Event.location">
+<tt class="descname">location</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.location" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional: Location of the event.</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="events.models.Event.start_date">
 <tt class="descname">start_date</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.start_date" title="Permalink to this definition">¶</a></dt>
 <dd><p>Start of the event.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Event.end_date">
+<tt class="descname">end_date</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.end_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional: End of the event.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Event.deadline">
+<tt class="descname">deadline</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.deadline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deadline until no more applications will be accepted.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -220,6 +200,79 @@ The main event list will only contain International Events by default. Also see
 <dd><p>A summary of the event. This will be displayed on the events page.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="events.models.Event.description">
+<tt class="descname">description</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>A detailed description of the event. Pictures and videos can be included here</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Event.pax_report">
+<tt class="descname">pax_report</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.pax_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional: This is a field where the participants report can be stored and accessed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Event.organizer_report">
+<tt class="descname">organizer_report</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Event.organizer_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional: This is a field where the organizers report can be stored and accessed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="events.models.Application">
+<em class="property">class </em><tt class="descclassname">events.models.</tt><tt class="descname">Application</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#events.models.Application" title="Permalink to this definition">¶</a></dt>
+<dd><p>Application objects link Users to <a class="reference internal" href="#events.models.Event" title="events.models.Event"><tt class="xref py py-class docutils literal"><span class="pre">Event</span></tt></a> objects and provide additional information</p>
+<dl class="attribute">
+<dt id="events.models.Application.applicant">
+<tt class="descname">applicant</tt><a class="headerlink" href="#events.models.Application.applicant" title="Permalink to this definition">¶</a></dt>
+<dd><p>The User issuing this application</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Application.target">
+<tt class="descname">target</tt><a class="headerlink" href="#events.models.Application.target" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="#events.models.Event" title="events.models.Event"><tt class="xref py py-class docutils literal"><span class="pre">Event</span></tt></a> the User is applying for.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Application.date">
+<tt class="descname">date</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Application.date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Auto: The date when the application is created.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Application.letter">
+<tt class="descname">letter</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Application.letter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional: Motivational letter, if the event requires one.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Application.priority">
+<tt class="descname">priority</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Application.priority" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional: Priority of the application as issued by the corresponding LC</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="events.models.Application.accepted">
+<tt class="descname">accepted</tt><em class="property"> = None</em><a class="headerlink" href="#events.models.Application.accepted" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this field is set to true, the application is accepted and the User
+becomes a Participant of the <a class="reference internal" href="#events.models.Event" title="events.models.Event"><tt class="xref py py-class docutils literal"><span class="pre">Event</span></tt></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="events.models.Application.member_in">
+<tt class="descname">member_in</tt><big>(</big><big>)</big><a class="headerlink" href="#events.models.Application.member_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns a String containing all :class:<a href="#id9"><span class="problematic" id="id10">`</span></a>Member`s the applicant is part of</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="events.models.EventImage">
+<em class="property">class </em><tt class="descclassname">events.models.</tt><tt class="descname">EventImage</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#events.models.EventImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>EventImage(id, property_id, image)</p>
 </dd></dl>
 
 </div>
@@ -244,7 +297,7 @@ The main event list will only contain International Events by default. Also see
   <ul>
 <li><a class="reference internal" href="#">events package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#events-admin-module">events.admin module</a></li>
+<li><a class="reference internal" href="#module-events.admin">events.admin module</a></li>
 <li><a class="reference internal" href="#module-events.models">events.models module</a></li>
 <li><a class="reference internal" href="#module-events.tests">events.tests module</a></li>
 <li><a class="reference internal" href="#module-events.views">events.views module</a></li>
@@ -253,6 +306,12 @@ The main event list will only contain International Events by default. Also see
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="members.html"
+                        title="previous chapter">members package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="account.html"
+                        title="next chapter">account package</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/events.txt"
@@ -284,11 +343,17 @@ The main event list will only contain International Events by default. Also see
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">.  documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="account.html" title="account package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="members.html" title="members package"
+             >previous</a> |</li>
+        <li><a href="index.html">eestec 1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2014, Author.
+        &copy; Copyright 2014, s.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>

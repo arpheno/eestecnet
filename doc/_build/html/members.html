@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>members package &mdash; eestec 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="eestec 1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">eestec 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="members-package">
+<h1>members package<a class="headerlink" href="#members-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-members.admin">
+<span id="members-admin-module"></span><h2>members.admin module<a class="headerlink" href="#module-members.admin" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="members.admin.MemberInline">
+<em class="property">class </em><tt class="descclassname">members.admin.</tt><tt class="descname">MemberInline</tt><big>(</big><em>parent_model</em>, <em>admin_site</em><big>)</big><a class="headerlink" href="#members.admin.MemberInline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inline Widget to display the Members of the Member with relevant information</p>
+<dl class="attribute">
+<dt id="members.admin.MemberInline.model">
+<tt class="descname">model</tt><a class="headerlink" href="#members.admin.MemberInline.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>The model that is used</p>
+<p>alias of <tt class="xref py py-class docutils literal"><span class="pre">Member_members</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="members.admin.MemberInline.readonly_fields">
+<tt class="descname">readonly_fields</tt><em class="property"> = ['name', 'number_of_events', 'last_event']</em><a class="headerlink" href="#members.admin.MemberInline.readonly_fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>The fields we want to display</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="members.admin.MemberInline.exclude">
+<tt class="descname">exclude</tt><em class="property"> = ['eestecer']</em><a class="headerlink" href="#members.admin.MemberInline.exclude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exclude eestecer, or we end up being able to change things which we should not</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="members.admin.MemberInline.verbose_name_plural">
+<tt class="descname">verbose_name_plural</tt><em class="property"> = 'Members'</em><a class="headerlink" href="#members.admin.MemberInline.verbose_name_plural" title="Permalink to this definition">¶</a></dt>
+<dd><p>The title of the widget</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="members.admin.MemberInline.name">
+<tt class="descname">name</tt><big>(</big><em>instance</em><big>)</big><a class="headerlink" href="#members.admin.MemberInline.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the User&#8217;s full name</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="members.admin.MemberInline.last_event">
+<tt class="descname">last_event</tt><big>(</big><em>instance</em><big>)</big><a class="headerlink" href="#members.admin.MemberInline.last_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the last time a User went to an <tt class="xref py py-class docutils literal"><span class="pre">Event</span></tt></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="members.admin.MemberInline.number_of_events">
+<tt class="descname">number_of_events</tt><big>(</big><em>instance</em><big>)</big><a class="headerlink" href="#members.admin.MemberInline.number_of_events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the amount of times a User participated in Events</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="members.admin.MemberInline.has_add_permission">
+<tt class="descname">has_add_permission</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#members.admin.MemberInline.has_add_permission" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is important so admins can&#8217;t mess around</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="members.admin.MyMemberAdmin">
+<em class="property">class </em><tt class="descclassname">members.admin.</tt><tt class="descname">MyMemberAdmin</tt><big>(</big><em>model</em>, <em>admin_site</em><big>)</big><a class="headerlink" href="#members.admin.MyMemberAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>A custom Admin displaying additional Member specific information</p>
+<dl class="method">
+<dt id="members.admin.MyMemberAdmin.save_model">
+<tt class="descname">save_model</tt><big>(</big><em>request</em>, <em>obj</em>, <em>form</em>, <em>change</em><big>)</big><a class="headerlink" href="#members.admin.MyMemberAdmin.save_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the Member was just created, create a recruitment Event for it</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="members.admin.MyMemberAdmin.get_queryset">
+<tt class="descname">get_queryset</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#members.admin.MyMemberAdmin.get_queryset" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the modifying User is not an Admin, only show them their own Members</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-members.models">
+<span id="members-models-module"></span><h2>members.models module<a class="headerlink" href="#module-members.models" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="members.models.Member">
+<em class="property">class </em><tt class="descclassname">members.models.</tt><tt class="descname">Member</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#members.models.Member" title="Permalink to this definition">¶</a></dt>
+<dd><p>Member objects are used to unify and abstract away from the internal entity of parts of our organization.</p>
+<p>Members can be Observers, LCs, Junior LCs, International Teams or Bodies of the association.
+The goal using these objects is to unify the way how we handle interactions that are common to all five kinds of parts of eestec</p>
+<p>When Members are created first, a local event called Recruitment is automatically created. By applying to
+event, registered users can become part of one or more members.</p>
+<dl class="attribute">
+<dt id="members.models.Member.name">
+<tt class="descname">name</tt><em class="property"> = None</em><a class="headerlink" href="#members.models.Member.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type of the <a class="reference internal" href="#members.models.Member" title="members.models.Member"><tt class="xref py py-class docutils literal"><span class="pre">Member</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="members.models.Member.thumbnail">
+<tt class="descname">thumbnail</tt><a class="headerlink" href="#members.models.Member.thumbnail" title="Permalink to this definition">¶</a></dt>
+<dd><p>The picture that should appear in the <a class="reference internal" href="#members.models.Member" title="members.models.Member"><tt class="xref py py-class docutils literal"><span class="pre">Member</span></tt></a> list</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="members.models.Member.description">
+<tt class="descname">description</tt><em class="property"> = None</em><a class="headerlink" href="#members.models.Member.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>LC info text</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="members.models.Member.members">
+<tt class="descname">members</tt><a class="headerlink" href="#members.models.Member.members" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="account.html#account.models.Eestecer" title="account.models.Eestecer"><tt class="xref py py-class docutils literal"><span class="pre">Users</span></tt></a> who are considered
+to be part of the <a class="reference internal" href="#members.models.Member" title="members.models.Member"><tt class="xref py py-class docutils literal"><span class="pre">Member</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="members.models.Member.priviledged">
+<tt class="descname">priviledged</tt><a class="headerlink" href="#members.models.Member.priviledged" title="Permalink to this definition">¶</a></dt>
+<dd><p>The priviledged <a class="reference internal" href="account.html#account.models.Eestecer" title="account.models.Eestecer"><tt class="xref py py-class docutils literal"><span class="pre">Users</span></tt></a> of the <a class="reference internal" href="#members.models.Member" title="members.models.Member"><tt class="xref py py-class docutils literal"><span class="pre">Member</span></tt></a>,
+they are able to make changes.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="members.models.Member.board">
+<tt class="descname">board</tt><a class="headerlink" href="#members.models.Member.board" title="Permalink to this definition">¶</a></dt>
+<dd><p>The board of the <a class="reference internal" href="#members.models.Member" title="members.models.Member"><tt class="xref py py-class docutils literal"><span class="pre">Member</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="members.models.Member.founded">
+<tt class="descname">founded</tt><em class="property"> = None</em><a class="headerlink" href="#members.models.Member.founded" title="Permalink to this definition">¶</a></dt>
+<dd><p>When the <a class="reference internal" href="#members.models.Member" title="members.models.Member"><tt class="xref py py-class docutils literal"><span class="pre">Member</span></tt></a> was first established</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="members.models.Member.member_count">
+<tt class="descname">member_count</tt><big>(</big><big>)</big><a class="headerlink" href="#members.models.Member.member_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>The amount of members currently in the <a class="reference internal" href="#members.models.Member" title="members.models.Member"><tt class="xref py py-class docutils literal"><span class="pre">Member</span></tt></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="members.models.Member.last_event">
+<tt class="descname">last_event</tt><big>(</big><big>)</big><a class="headerlink" href="#members.models.Member.last_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>The date of the last <a class="reference internal" href="events.html#events.models.Event" title="events.models.Event"><tt class="xref py py-class docutils literal"><span class="pre">Event</span></tt></a> organized by the <a class="reference internal" href="#members.models.Member" title="members.models.Member"><tt class="xref py py-class docutils literal"><span class="pre">Member</span></tt></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="members.models.MemberImage">
+<em class="property">class </em><tt class="descclassname">members.models.</tt><tt class="descname">MemberImage</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#members.models.MemberImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper class used to associate an arbitrary number of images with a <a class="reference internal" href="#members.models.Member" title="members.models.Member"><tt class="xref py py-class docutils literal"><span class="pre">Member</span></tt></a></p>
+<dl class="attribute">
+<dt id="members.models.MemberImage.image">
+<tt class="descname">image</tt><a class="headerlink" href="#members.models.MemberImage.image" title="Permalink to this definition">¶</a></dt>
+<dd><p>An Image</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-members.views">
+<span id="members-views-module"></span><h2>members.views module<a class="headerlink" href="#module-members.views" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-members">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-members" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">members package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-members.admin">members.admin module</a></li>
+<li><a class="reference internal" href="#module-members.models">members.models module</a></li>
+<li><a class="reference internal" href="#module-members.views">members.views module</a></li>
+<li><a class="reference internal" href="#module-members">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/members.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">eestec 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, s.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

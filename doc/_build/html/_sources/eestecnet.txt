@@ -9,24 +9,23 @@ eestecnet.settings module
 
 .. automodule:: eestecnet.settings
     :members:
-    :undoc-members:
-    :show-inheritance:
+eestecnet.settings_local module
+-------------------------------
+
+.. automodule:: eestecnet.settings_local
+    :members:
 
 eestecnet.urls module
 ---------------------
 
 .. automodule:: eestecnet.urls
     :members:
-    :undoc-members:
-    :show-inheritance:
 
 eestecnet.wsgi module
 ---------------------
 
 .. automodule:: eestecnet.wsgi
     :members:
-    :undoc-members:
-    :show-inheritance:
 
 
 Module contents
@@ -34,4 +33,3 @@ Module contents
 
 .. automodule:: eestecnet
     :members:
-    

@@ -8,10 +8,11 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager)
 from django.db import models
-from events.models import Event
 
 
 class EestecerManager(BaseUserManager):
+    """ A manager taking care of creating :class:`Eestecer`objects.
+    """
     def _create_user(self, email, password,
                      is_staff, is_superuser, **extra_fields):
         """
@@ -62,34 +63,38 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     """
     #Contact information
     email = models.EmailField(_('email address'), max_length=254, unique=True)
-    """Skype contact info."""
+    """email adress"""
     skype = models.CharField(_('Skype Account'), max_length=30, null=True, blank=True)
-    """Hangouts contact info"""
+    """Skype contact info."""
     hangouts = models.CharField(_('Google Hangouts account'), max_length=30, null=True,
                                 blank=True)
-    """Mobile Phone number of the user. Mostly used for contact during events."""
+    """Hangouts contact info"""
     mobile = models.CharField(_('Mobile Phone Number'), max_length=30, null=True,
                               blank=True,
                               help_text=_(
                                   'Please provide your phone number in +XX XXX XXXXXX format'))
+    """Mobile Phone number of the user. Mostly used for contact during events."""
     #Personal Information
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
+    """First name"""
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
+    """Last name """
     date_of_birth = models.DateField(blank=True,null=True)
-    """A profile picture to be used on the website. Without a Profile picture the user will not appear in lists"""
+    """ Date of birth"""
     profile_picture = models.ImageField(upload_to="users", blank=True, null=True)
-    "Gender of the applicant. Useful for overview on Gender balance."
+    """A profile picture to be used on the website. Without a Profile picture the user will not appear in lists"""
     gender = models.CharField(max_length=15, choices=GENDER_CHOICES)
-    """T-shirt size. Used for events"""
+    "Gender of the applicant. Useful for overview on Gender balance."
     tshirt_size = models.CharField(max_length=15, choices=TSHIRT_SIZE)
-    """Passport number required by many hostels. Makes it easier for organizers."""
+    """T-shirt size. Used for events"""
     passport_number = models.CharField(max_length=20, blank=True, null=True)
-    """ Food preferences, for example vegetarian or no pork. """
+    """Passport number required by many hostels. Makes it easier for organizers."""
     food_preferences = models.CharField(max_length=15, choices=FOOD_CHOICES,
                                         default='none')
+    """ Food preferences, for example vegetarian or no pork. """
     #EESTEC information
-    """Should be set by the user to the time they joined eestec. For new users it will be the moment they register with the website"""
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    """Should be set by the user to the time they joined eestec. For new users it will be the moment they register with the website"""
     def events_participated(self):
         try:
             ownevents = self.event_set.all()
@@ -109,15 +114,15 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
 
 
     #Django information
-    """Designates whether the user can log into this admin site"""
     is_staff = models.BooleanField(_('staff status'), default=False,
                                    help_text=_(
                                        'Designates whether the user can log into this admin site.'))
-    """Designates whether this user should be treated as active. Unselect this instead of deleting accounts"""
+    """Designates whether the user can log into this admin site"""
     is_active = models.BooleanField(_('active'), default=True,
                                     help_text=_(
                                         'Designates whether this user should be treated as '
                                         'active. Unselect this instead of deleting accounts.'))
+    """Designates whether this user should be treated as active. Unselect this instead of deleting accounts"""
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

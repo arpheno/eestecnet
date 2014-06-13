@@ -4,17 +4,16 @@ from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 from django.db import models
+from account.models import Eestecer
 from eestecnet import settings
 from members.models import Member
 
 
-class Event(models.Model):
-    """Event objects encapsulate all information that is necessary to describe an event. """
-    SCOPE_CHOICES = (
+SCOPE_CHOICES = (
         ('local', 'Local'),
         ('international', 'International'),
-    )
-    CATEGORY_CHOICES = (
+)
+CATEGORY_CHOICES = (
         ('ssa', 'Soft Skills Academy'),
         ('exchange', 'Exchange'),
         ('workshop', 'Workshop'),
@@ -24,7 +23,10 @@ class Event(models.Model):
         ('congress', 'Congress'),
         ('ecm', 'EESTEC Chairpersons\' Meeting'),
         ('training', 'Training'),
-    )
+)
+class Event(models.Model):
+    """Event objects encapsulate all information that is necessary to describe an event. """
+
     #General
     name = models.CharField(max_length=50)
     """Name of the event. Examples: bEErSTEC, Trainers' Meeting, RISEX."""
@@ -41,12 +43,12 @@ class Event(models.Model):
     organizing_committee = models.ManyToManyField(Member)
     """ Defines the Organizing Members of the event. May be more than one. Only
      those Members can be selected, the editor is a priviledged member of."""
-    organizers = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, null=True, related_name='organizers')
+    organizers = models.ManyToManyField(Eestecer, blank=True, null=True, related_name='organizers')
     """ A list of all Users currently connected to the event as Organizers.
     Usually the head Organizers of the event."""
     participation_fee = models.PositiveIntegerField(blank=True, null=True)
     """Optional: Participation Fee for the event. """
-    participants=models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, null=True, related_name='participants')
+    participants=models.ManyToManyField(Eestecer, blank=True, null=True, related_name='participants')
 
     def participant_count(self):
         """Number of participants"""
@@ -79,7 +81,7 @@ class Event(models.Model):
 
 class Application(models.Model):
     """Application objects link Users to :class:`Event` objects and provide additional information"""
-    applicant = models.ForeignKey(settings.AUTH_USER_MODEL)
+    applicant = models.ForeignKey(Eestecer)
     """ The User issuing this application"""
     target = models.ForeignKey(Event)
     """ The :class:`Event` the User is applying for."""
