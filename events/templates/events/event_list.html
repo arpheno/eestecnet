@@ -1,6 +1,6 @@
 {% for event in object_list %}
     {% if event.name != "Recruitment" %}
-<article class="hover" onclick="$('section.events').empty();$('section.events').load('{% url 'events' %}{{ event.pk }}')">
+<article class="hover" onclick="current('events');$('section.events').load('{% url 'events' %}{{ event.pk }}')">
         <div class="meta">
             <h2>{{ event.name }}</h2>
             <h3>{{ event.date }}</h3>
@@ -12,7 +12,7 @@
             <button onclick="$('.application').load('{% url 'events' %}{{ event.pk }}/apply/');$('.application').show();history.pushState({asd:'asd'},'asdaf', '{{ event.pk }}/apply/');">Sign up!</button>
         </div>
 
-    <p>{{ summary }}</p></a>
+    <p>{{ event.summary }}</p>
 </article>
     {% endif %}
 {% endfor %}
