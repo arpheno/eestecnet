@@ -9,7 +9,7 @@
         </div>
 
         <div class="actions">
-            <button onclick="$('.application').load('{% url 'events' %}{{ event.pk }}/apply/');$('.application').show();history.pushState({asd:'asd'},'asdaf', '{{ event.pk }}/apply/');">Sign up!</button>
+            <button onclick="$('.application').load('{% url 'events' %}{{ event.pk }}/apply/');$('section.application').show();history.pushState({asd:'asd'},'asdaf', '{{ event.pk }}/apply/');">Sign up!</button>
         </div>
 
     <p>{{ event.summary }}</p>

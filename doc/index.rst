@@ -11,6 +11,7 @@ Welcome to eestec's documentation!
 .. toctree::
    :maxdepth: 1
 
+   problem
    setup
    overview
    members

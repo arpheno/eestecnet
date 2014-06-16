@@ -27,7 +27,6 @@ class ApplyForm(ModelForm):
             'applicant': widgets.HiddenInput(),
             }
 
-
 class ApplyToEvent(View):
     form_class = ApplyForm
     initial = {'key': 'value'}
@@ -35,7 +34,7 @@ class ApplyToEvent(View):
 
     def get(self, request, *args, **kwargs):
         form = self.form_class(initial={'target':kwargs['pk'],'applicant':request.user})
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form,'target':kwargs['pk']})
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)

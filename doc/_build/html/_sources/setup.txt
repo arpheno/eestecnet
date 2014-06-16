@@ -21,7 +21,8 @@ https://www.python.org/ftp/python/2.7.7/python-2.7.7.msi and install it with def
 
 **Configuration**
 
-* Open System Properties (Win+Pause)
+* Control panel
+* Open System Properties
 * Switch to the Advanced tab
 * Click Environment Variables
 * Select PATH in the System variables section

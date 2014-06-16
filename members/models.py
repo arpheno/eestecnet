@@ -30,6 +30,8 @@ class Member(models.Model):
     """The picture that should appear in the :class:`Member` list"""
     description= models.TextField(blank= True, null=True)
     """ LC info text"""
+    facebook = models.URLField(blank=True, null=True)
+    """ Facebook page for the member"""
     #Members
     members = models.ManyToManyField(
         Eestecer,
@@ -49,7 +51,7 @@ class Member(models.Model):
         Eestecer,
         blank=True,
         null=True,
-        related_name='board_set')
+        related_name='board')
     """The board of the :class:`Member`"""
     founded=models.DateField(null=True, blank=True)
     """When the :class:`Member` was first established"""

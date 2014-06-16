@@ -5,6 +5,11 @@ from django.views.generic import ListView, DetailView
 from events.models import Event
 from members.models import Member
 
+class MemberDetail(DetailView):
+    model=Member
+    def get_object(self, queryset=None):
+
+        return Member.objects.get(name__iexact=self.kwargs['slug'].replace("_"," "))
 
 class TeamList(ListView):
     model = Member

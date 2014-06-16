@@ -7,7 +7,7 @@ from eestecnet.settings import MEDIA_ROOT
 from events.models import Event, Application
 from events.views import EventDetail, ApplyToEvent, InternationalEvents
 from members.models import Member
-from members.views import CommitmentList, TeamList
+from members.views import CommitmentList, TeamList, MemberDetail
 from news.models import Entry
 
 admin.autodiscover()
@@ -26,6 +26,7 @@ urlpatterns = patterns('',
     url(r'^cities/$', CommitmentList.as_view()),
     url(r'^cities/(?P<pk>[-_\w]+)/$', DetailView.as_view(model=Member)),
     url(r'^teams/$', TeamList.as_view()),
+    url(r'^(?P<slug>[a-zA-Z0-9-_]+)/$', MemberDetail.as_view()),
     url(r'^account/',include('account.urls')),
     url(r'^teams/(?P<pk>[-_\w]+)/$', DetailView.as_view(model=Member)),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',

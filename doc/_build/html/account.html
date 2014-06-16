@@ -23,7 +23,9 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="eestec 1 documentation" href="index.html" /> 
+    <link rel="top" title="eestec 1 documentation" href="index.html" />
+    <link rel="next" title="news package" href="news.html" />
+    <link rel="prev" title="events package" href="events.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,6 +37,12 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="news.html" title="news package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="events.html" title="events package"
+             accesskey="P">previous</a> |</li>
         <li><a href="index.html">eestec 1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -57,7 +65,7 @@
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.contrib.auth.admin.UserAdmin</span></tt></p>
 <dl class="attribute">
 <dt id="account.admin.EestecerAdmin.fieldsets">
-<tt class="descname">fieldsets</tt><em class="property"> = ((None, {'fields': ('email', 'password')}), (&lt;django.utils.functional.__proxy__ object at 0x0365FAB0&gt;, {'fields': ('first_name', 'last_name', 'profile_picture')}), (&lt;django.utils.functional.__proxy__ object at 0x036D3E10&gt;, {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}), (&lt;django.utils.functional.__proxy__ object at 0x036D32D0&gt;, {'fields': ('last_login', 'date_joined')}))</em><a class="headerlink" href="#account.admin.EestecerAdmin.fieldsets" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">fieldsets</tt><em class="property"> = ((None, {'fields': ('email', 'password')}), (&lt;django.utils.functional.__proxy__ object at 0x03726DD0&gt;, {'fields': ('first_name', 'last_name', 'profile_picture')}), (&lt;django.utils.functional.__proxy__ object at 0x0372E930&gt;, {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}), (&lt;django.utils.functional.__proxy__ object at 0x0372E890&gt;, {'fields': ('last_login', 'date_joined')}))</em><a class="headerlink" href="#account.admin.EestecerAdmin.fieldsets" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -138,12 +146,12 @@ password.</p>
 
 <dl class="attribute">
 <dt id="account.forms.EestecerCreationForm.base_fields">
-<tt class="descclassname">EestecerCreationForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'email': &lt;django.forms.fields.EmailField object at 0x036D3ED0&gt;, 'username': &lt;django.forms.fields.RegexField object at 0x035FBB90&gt;, 'password1': &lt;django.forms.fields.CharField object at 0x035FBC90&gt;, 'password2': &lt;django.forms.fields.CharField object at 0x035FBD30&gt;}</em><a class="headerlink" href="#account.forms.EestecerCreationForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">EestecerCreationForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'email': &lt;django.forms.fields.EmailField object at 0x0372E9F0&gt;, 'username': &lt;django.forms.fields.RegexField object at 0x0367A850&gt;, 'password1': &lt;django.forms.fields.CharField object at 0x0367A950&gt;, 'password2': &lt;django.forms.fields.CharField object at 0x0367A9F0&gt;}</em><a class="headerlink" href="#account.forms.EestecerCreationForm.base_fields" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="account.forms.EestecerCreationForm.declared_fields">
-<tt class="descclassname">EestecerCreationForm.</tt><tt class="descname">declared_fields</tt><em class="property"> = {'username': &lt;django.forms.fields.RegexField object at 0x035FBB90&gt;, 'password1': &lt;django.forms.fields.CharField object at 0x035FBC90&gt;, 'password2': &lt;django.forms.fields.CharField object at 0x035FBD30&gt;}</em><a class="headerlink" href="#account.forms.EestecerCreationForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">EestecerCreationForm.</tt><tt class="descname">declared_fields</tt><em class="property"> = {'username': &lt;django.forms.fields.RegexField object at 0x0367A850&gt;, 'password1': &lt;django.forms.fields.CharField object at 0x0367A950&gt;, 'password2': &lt;django.forms.fields.CharField object at 0x0367A9F0&gt;}</em><a class="headerlink" href="#account.forms.EestecerCreationForm.declared_fields" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -173,12 +181,12 @@ password hash display field.</p>
 
 <dl class="attribute">
 <dt id="account.forms.EestecerChangeForm.base_fields">
-<tt class="descclassname">EestecerChangeForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'password': &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x036028F0&gt;, 'last_login': &lt;django.forms.fields.DateTimeField object at 0x036DE810&gt;, 'is_superuser': &lt;django.forms.fields.BooleanField object at 0x036E3050&gt;, 'groups': &lt;django.forms.models.ModelMultipleChoiceField object at 0x036E3FF0&gt;, 'user_permissions': &lt;django.forms.models.ModelMultipleChoiceField object at 0x036E9950&gt;, 'email': &lt;django.forms.fields.EmailField object at 0x036F01D0&gt;, 'skype': &lt;django.forms.fields.CharField object at 0x03618510&gt;, 'hangouts': &lt;django.forms.fields.CharField object at 0x03618490&gt;, 'mobile': &lt;django.forms.fields.CharField object at 0x036183B0&gt;, 'first_name': &lt;django.forms.fields.CharField object at 0x037484D0&gt;, 'last_name': &lt;django.forms.fields.CharField object at 0x03748D50&gt;, 'date_of_birth': &lt;django.forms.fields.DateField object at 0x0374E5B0&gt;, 'profile_picture': &lt;django.forms.fields.ImageField object at 0x0374ECD0&gt;, 'gender': &lt;django.forms.fields.TypedChoiceField object at 0x0374ED50&gt;, 'tshirt_size': &lt;django.forms.fields.TypedChoiceField object at 0x0374ED90&gt;, 'passport_number': &lt;django.forms.fields.CharField object at 0x0374EDD0&gt;, 'food_preferences': &lt;django.forms.fields.TypedChoiceField object at 0x0374EE50&gt;, 'date_joined': &lt;django.forms.fields.DateTimeField object at 0x0374EE90&gt;, 'is_staff': &lt;django.forms.fields.BooleanField object at 0x037546D0&gt;, 'is_active': &lt;django.forms.fields.BooleanField object at 0x03754830&gt;, 'username': &lt;django.forms.fields.RegexField object at 0x03602170&gt;}</em><a class="headerlink" href="#account.forms.EestecerChangeForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">EestecerChangeForm.</tt><tt class="descname">base_fields</tt><em class="property"> = {'password': &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x036815B0&gt;, 'last_login': &lt;django.forms.fields.DateTimeField object at 0x03738310&gt;, 'is_superuser': &lt;django.forms.fields.BooleanField object at 0x03738B90&gt;, 'groups': &lt;django.forms.models.ModelMultipleChoiceField object at 0x037B0B10&gt;, 'user_permissions': &lt;django.forms.models.ModelMultipleChoiceField object at 0x036B6810&gt;, 'email': &lt;django.forms.fields.EmailField object at 0x036B6750&gt;, 'skype': &lt;django.forms.fields.CharField object at 0x03681E50&gt;, 'hangouts': &lt;django.forms.fields.CharField object at 0x037B6770&gt;, 'mobile': &lt;django.forms.fields.CharField object at 0x037B6FF0&gt;, 'first_name': &lt;django.forms.fields.CharField object at 0x037BC850&gt;, 'last_name': &lt;django.forms.fields.CharField object at 0x037C00D0&gt;, 'date_of_birth': &lt;django.forms.fields.DateField object at 0x037C0930&gt;, 'profile_picture': &lt;django.forms.fields.ImageField object at 0x037C6070&gt;, 'gender': &lt;django.forms.fields.TypedChoiceField object at 0x037C60F0&gt;, 'tshirt_size': &lt;django.forms.fields.TypedChoiceField object at 0x037C6130&gt;, 'passport_number': &lt;django.forms.fields.CharField object at 0x037C6170&gt;, 'food_preferences': &lt;django.forms.fields.TypedChoiceField object at 0x037C61F0&gt;, 'date_joined': &lt;django.forms.fields.DateTimeField object at 0x037C6230&gt;, 'is_staff': &lt;django.forms.fields.BooleanField object at 0x037C6390&gt;, 'is_active': &lt;django.forms.fields.BooleanField object at 0x037C6BF0&gt;, 'username': &lt;django.forms.fields.RegexField object at 0x0367AE50&gt;}</em><a class="headerlink" href="#account.forms.EestecerChangeForm.base_fields" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="account.forms.EestecerChangeForm.declared_fields">
-<tt class="descclassname">EestecerChangeForm.</tt><tt class="descname">declared_fields</tt><em class="property"> = {'username': &lt;django.forms.fields.RegexField object at 0x03602170&gt;, 'password': &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x036028F0&gt;}</em><a class="headerlink" href="#account.forms.EestecerChangeForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">EestecerChangeForm.</tt><tt class="descname">declared_fields</tt><em class="property"> = {'username': &lt;django.forms.fields.RegexField object at 0x0367AE50&gt;, 'password': &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object at 0x036815B0&gt;}</em><a class="headerlink" href="#account.forms.EestecerChangeForm.declared_fields" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -288,6 +296,30 @@ about eestecers.</p>
 <dd><p>Food preferences, for example vegetarian or no pork.</p>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="account.models.Eestecer.date_joined">
+<tt class="descname">date_joined</tt><em class="property"> = None</em><a class="headerlink" href="#account.models.Eestecer.date_joined" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should be set by the user to the time they joined eestec. For new users it will be the moment they register with the website</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="account.models.Eestecer.events_participated">
+<tt class="descname">events_participated</tt><big>(</big><big>)</big><a class="headerlink" href="#account.models.Eestecer.events_participated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of <tt class="xref py py-class docutils literal"><span class="pre">Events</span></tt> a <a class="reference internal" href="#account.models.Eestecer" title="account.models.Eestecer"><tt class="xref py py-class docutils literal"><span class="pre">User</span></tt></a> has been to</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="account.models.Eestecer.last_event">
+<tt class="descname">last_event</tt><big>(</big><big>)</big><a class="headerlink" href="#account.models.Eestecer.last_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Date of the last <tt class="xref py py-class docutils literal"><span class="pre">Event</span></tt> a <a class="reference internal" href="#account.models.Eestecer" title="account.models.Eestecer"><tt class="xref py py-class docutils literal"><span class="pre">User</span></tt></a> has been to</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="account.models.Eestecer.is_staff">
+<tt class="descname">is_staff</tt><em class="property"> = None</em><a class="headerlink" href="#account.models.Eestecer.is_staff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Designates whether the user can log into this admin site</p>
+</dd></dl>
+
 <dl class="exception">
 <dt id="account.models.Eestecer.DoesNotExist">
 <em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#account.models.Eestecer.DoesNotExist" title="Permalink to this definition">¶</a></dt>
@@ -301,20 +333,29 @@ about eestecers.</p>
 </dd></dl>
 
 <dl class="attribute">
+<dt id="account.models.Eestecer.achievements">
+<tt class="descclassname">Eestecer.</tt><tt class="descname">achievements</tt><a class="headerlink" href="#account.models.Eestecer.achievements" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="account.models.Eestecer.application_set">
 <tt class="descclassname">Eestecer.</tt><tt class="descname">application_set</tt><a class="headerlink" href="#account.models.Eestecer.application_set" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="account.models.Eestecer.board_set">
-<tt class="descclassname">Eestecer.</tt><tt class="descname">board_set</tt><a class="headerlink" href="#account.models.Eestecer.board_set" title="Permalink to this definition">¶</a></dt>
+<dt id="account.models.Eestecer.board">
+<tt class="descclassname">Eestecer.</tt><tt class="descname">board</tt><a class="headerlink" href="#account.models.Eestecer.board" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="account.models.Eestecer.date_joined">
-<tt class="descclassname">Eestecer.</tt><tt class="descname">date_joined</tt><em class="property"> = None</em><a class="headerlink" href="#account.models.Eestecer.date_joined" title="Permalink to this definition">¶</a></dt>
-<dd><p>Should be set by the user to the time they joined eestec. For new users it will be the moment they register with the website</p>
-</dd></dl>
+<dt id="account.models.Eestecer.events">
+<tt class="descclassname">Eestecer.</tt><tt class="descname">events</tt><a class="headerlink" href="#account.models.Eestecer.events" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="account.models.Eestecer.events_organized">
+<tt class="descclassname">Eestecer.</tt><tt class="descname">events_organized</tt><a class="headerlink" href="#account.models.Eestecer.events_organized" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="account.models.Eestecer.get_food_preferences_display">
@@ -357,6 +398,12 @@ about eestecers.</p>
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="account.models.Eestecer.is_active">
+<tt class="descclassname">Eestecer.</tt><tt class="descname">is_active</tt><em class="property"> = None</em><a class="headerlink" href="#account.models.Eestecer.is_active" title="Permalink to this definition">¶</a></dt>
+<dd><p>Designates whether this user should be treated as active. Unselect this instead of deleting accounts</p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="account.models.Eestecer.logentry_set">
 <tt class="descclassname">Eestecer.</tt><tt class="descname">logentry_set</tt><a class="headerlink" href="#account.models.Eestecer.logentry_set" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -364,16 +411,6 @@ about eestecers.</p>
 <dl class="attribute">
 <dt id="account.models.Eestecer.members">
 <tt class="descclassname">Eestecer.</tt><tt class="descname">members</tt><a class="headerlink" href="#account.models.Eestecer.members" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="account.models.Eestecer.organizers">
-<tt class="descclassname">Eestecer.</tt><tt class="descname">organizers</tt><a class="headerlink" href="#account.models.Eestecer.organizers" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="account.models.Eestecer.participants">
-<tt class="descclassname">Eestecer.</tt><tt class="descname">participants</tt><a class="headerlink" href="#account.models.Eestecer.participants" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -385,28 +422,6 @@ about eestecers.</p>
 <dt id="account.models.Eestecer.user_permissions">
 <tt class="descclassname">Eestecer.</tt><tt class="descname">user_permissions</tt><a class="headerlink" href="#account.models.Eestecer.user_permissions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-<dl class="method">
-<dt id="account.models.Eestecer.events_participated">
-<tt class="descclassname">Eestecer.</tt><tt class="descname">events_participated</tt><big>(</big><big>)</big><a class="headerlink" href="#account.models.Eestecer.events_participated" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="account.models.Eestecer.last_event">
-<tt class="descclassname">Eestecer.</tt><tt class="descname">last_event</tt><big>(</big><big>)</big><a class="headerlink" href="#account.models.Eestecer.last_event" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="account.models.Eestecer.is_staff">
-<tt class="descclassname">Eestecer.</tt><tt class="descname">is_staff</tt><em class="property"> = None</em><a class="headerlink" href="#account.models.Eestecer.is_staff" title="Permalink to this definition">¶</a></dt>
-<dd><p>Designates whether the user can log into this admin site</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="account.models.Eestecer.is_active">
-<tt class="descclassname">Eestecer.</tt><tt class="descname">is_active</tt><em class="property"> = None</em><a class="headerlink" href="#account.models.Eestecer.is_active" title="Permalink to this definition">¶</a></dt>
-<dd><p>Designates whether this user should be treated as active. Unselect this instead of deleting accounts</p>
-</dd></dl>
 
 <dl class="attribute">
 <dt id="account.models.Eestecer.USERNAME_FIELD">
@@ -420,7 +435,7 @@ about eestecers.</p>
 
 <dl class="attribute">
 <dt id="account.models.Eestecer.objects">
-<tt class="descclassname">Eestecer.</tt><tt class="descname">objects</tt><em class="property"> = &lt;account.models.EestecerManager object at 0x03677130&gt;</em><a class="headerlink" href="#account.models.Eestecer.objects" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">Eestecer.</tt><tt class="descname">objects</tt><em class="property"> = &lt;account.models.EestecerManager object at 0x036FC3F0&gt;</em><a class="headerlink" href="#account.models.Eestecer.objects" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -434,6 +449,69 @@ about eestecers.</p>
 <tt class="descclassname">Eestecer.</tt><tt class="descname">get_short_name</tt><big>(</big><big>)</big><a class="headerlink" href="#account.models.Eestecer.get_short_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the short name for the user.</p>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="account.models.Position">
+<em class="property">class </em><tt class="descclassname">account.models.</tt><tt class="descname">Position</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#account.models.Position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></tt></p>
+<p>Position(id, name, description)</p>
+<dl class="exception">
+<dt id="account.models.Position.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#account.models.Position.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></tt></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="account.models.Position.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Position.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#account.models.Position.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="account.models.Position.achievement_set">
+<tt class="descclassname">Position.</tt><tt class="descname">achievement_set</tt><a class="headerlink" href="#account.models.Position.achievement_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="account.models.Position.objects">
+<tt class="descclassname">Position.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x03701A90&gt;</em><a class="headerlink" href="#account.models.Position.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="account.models.Achievement">
+<em class="property">class </em><tt class="descclassname">account.models.</tt><tt class="descname">Achievement</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#account.models.Achievement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></tt></p>
+<p>Achievement(id, person_id, position_id)</p>
+<dl class="exception">
+<dt id="account.models.Achievement.DoesNotExist">
+<em class="property">exception </em><tt class="descname">DoesNotExist</tt><a class="headerlink" href="#account.models.Achievement.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></tt></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="account.models.Achievement.MultipleObjectsReturned">
+<em class="property">exception </em><tt class="descclassname">Achievement.</tt><tt class="descname">MultipleObjectsReturned</tt><a class="headerlink" href="#account.models.Achievement.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></tt></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="account.models.Achievement.objects">
+<tt class="descclassname">Achievement.</tt><tt class="descname">objects</tt><em class="property"> = &lt;django.db.models.manager.Manager object at 0x03701DF0&gt;</em><a class="headerlink" href="#account.models.Achievement.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="account.models.Achievement.person">
+<tt class="descclassname">Achievement.</tt><tt class="descname">person</tt><a class="headerlink" href="#account.models.Achievement.person" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="account.models.Achievement.position">
+<tt class="descclassname">Achievement.</tt><tt class="descname">position</tt><a class="headerlink" href="#account.models.Achievement.position" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -520,6 +598,12 @@ about eestecers.</p>
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="events.html"
+                        title="previous chapter">events package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="news.html"
+                        title="next chapter">news package</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/account.txt"
@@ -551,6 +635,12 @@ about eestecers.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="news.html" title="news package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="events.html" title="events package"
+             >previous</a> |</li>
         <li><a href="index.html">eestec 1 documentation</a> &raquo;</li> 
       </ul>
     </div>

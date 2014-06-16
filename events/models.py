@@ -43,12 +43,15 @@ class Event(models.Model):
     organizing_committee = models.ManyToManyField(Member)
     """ Defines the Organizing Members of the event. May be more than one. Only
      those Members can be selected, the editor is a priviledged member of."""
-    organizers = models.ManyToManyField(Eestecer, blank=True, null=True, related_name='organizers')
+    def OC(self):
+        """Helper function to display the names of organizing committees of an event"""
+        return " ".join([c.name for c in self.organizing_committee.all()])
+    organizers = models.ManyToManyField(Eestecer, blank=True, null=True, related_name='events_organized')
     """ A list of all Users currently connected to the event as Organizers.
     Usually the head Organizers of the event."""
     participation_fee = models.PositiveIntegerField(blank=True, null=True)
     """Optional: Participation Fee for the event. """
-    participants=models.ManyToManyField(Eestecer, blank=True, null=True, related_name='participants')
+    participants=models.ManyToManyField(Eestecer, blank=True, null=True, related_name='events')
 
     def participant_count(self):
         """Number of participants"""

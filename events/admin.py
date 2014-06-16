@@ -21,8 +21,9 @@ class ApplicationForm(forms.ModelForm):
 class ApplicationInline(admin.TabularInline):
     model = Application
     form = ApplicationForm
-    readonly_fields = ["priority", "letter", "member_in", "applicant"]
-
+    readonly_fields = ["priority", "letter", "member_in", "applicant","gender"]
+    def gender(self):
+        return self.applicant.gender
     def has_add_permission(self, request):
         return False
 
@@ -55,6 +56,7 @@ class MyEventAdminForm(forms.ModelForm):
 class MyEventAdmin(admin.ModelAdmin):
     """ Custom interface to administrate Events from the django admin interface. """
     form = MyEventAdminForm
+    list_display = ['OC','name']
     inlines = [ApplicationInline, ParticipantInline]
     """ Inline interface for displaying the applications to an event and making it possible to accept them"""
     """Interface to manage accepted participants, you can kick them out here again. TODO: penalties for leaving"""

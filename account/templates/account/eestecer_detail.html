@@ -1,1 +1,25 @@
-{{ object.email }}
+<div class="eestecerprofile">
+    <h1>Profile}</h1>
+    <div class="personal">
+        <h2>Personal Information</h2>
+        <ul>
+            <li>{{ object.get_full_name }}</li>
+            <li>{{ object.date_of_birth }}</li>
+            <li>{}</li>
+        </ul>
+
+    </div>
+    <div class="lcteams">
+        <h2>LC and Teams</h2>
+        <ul>
+            {% for mmbr in object.members %}
+                <li>{{ mmbr.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="events">
+        <h2>Last events</h2>
+        {% include  'events/event_list.html' with object_list=object.participants.all %}
+    </div>
+
+</div>

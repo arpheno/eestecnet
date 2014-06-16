@@ -11,8 +11,7 @@ from django.db import models
 
 
 class EestecerManager(BaseUserManager):
-    """ A manager taking care of creating :class:`Eestecer`objects.
-    """
+    """ A manager taking care of creating :class:`Eestecer`objects. """
     def _create_user(self, email, password,
                      is_staff, is_superuser, **extra_fields):
         """
@@ -40,10 +39,13 @@ class EestecerManager(BaseUserManager):
 
 FOOD_CHOICES = (
     ('none', 'None'),
-    ('nopork', 'No Pork'),
+    ('kosher', 'Kosher'),
+    ('halal', 'Halal'),
+    ('nofish', 'Pescarian'),
     ('veggie', 'Vegetarian'),
     ('vegan', 'Vegan'),
-
+    ('insects', 'Only Insects'),
+    ('fruit', 'Fruitarian'),
 )
 GENDER_CHOICES = (('m', 'Male'), ('f', 'Female'), ('x', 'Other'), )
 TSHIRT_SIZE = (('mxs', 'Male XS'), ('ms', 'Male S'), ('mm', 'Male M'), ('ml', 'Male L'),
@@ -96,17 +98,19 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     """Should be set by the user to the time they joined eestec. For new users it will be the moment they register with the website"""
     def events_participated(self):
+        """ Returns the number of :class:`Events <Event>` a :class:`User <account.models.Eestecer>` has been to"""
         try:
-            ownevents = self.event_set.all()
+            ownevents = self.events.all()
             return len(ownevents)
         except:
             return 0
 
     def last_event(self):
+        """ Returns the Date of the last :class:`Event` a :class:`User <account.models.Eestecer>` has been to"""
         try:
-            ownevents = self.event_set.all()
+            ownevents = self.events.all()
             if ownevents:
-                return self.event_set.all().order_by('-start_date')[0].start_date
+                return self.events.all().order_by('-start_date')[0].start_date
             else:
                 return 0
         except:
@@ -134,12 +138,18 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = _('users')
 
     def get_full_name(self):
-        """
-        Returns the first_name plus the last_name, with a space in between.
-        """
+        """ Returns the first_name plus the last_name, with a space in between. """
         full_name = '%s%s' % (self.first_name, self.last_name)
         return full_name.strip()
 
     def get_short_name(self):
         "Returns the short name for the user."
         return self.first_name
+
+class Position(models.Model):
+    name=models.CharField(max_length=40,unique=True)
+    description=models.TextField()
+
+class Achievement(models.Model):
+    person = models.ForeignKey(Eestecer,related_name='achievements')
+    position= models.ForeignKey(Position)
