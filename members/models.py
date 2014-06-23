@@ -1,4 +1,3 @@
-from autoslug import AutoSlugField
 from django.contrib.auth.models import User, Group, Permission
 from django.db import models
 from account.models import Eestecer
@@ -20,7 +19,13 @@ class Member(models.Model):
     event, registered users can become part of one or more members."""
 
     #General
+    """ The name of the :class:`Member`"""
+    name = models.CharField(max_length=50,unique=True)
     """The type of the :class:`Member`"""
+    type = models.CharField(
+        max_length=30,
+        choices=TYPE_CHOICES,
+        default='lc')
     thumbnail=models.ImageField(blank=True,null=True,upload_to="memberthumbs")
     """The picture that should appear in the :class:`Member` list"""
     description= models.TextField(blank= True, null=True)
@@ -68,17 +73,7 @@ class Member(models.Model):
 
 class MemberImage(models.Model):
     """ Helper class used to associate an arbitrary number of images with a :class:`Member` """
+
     property = models.ForeignKey(Member, related_name='images')
     image = models.ImageField(upload_to="memberimages")
     """An Image"""
-class Commitment(Member):
-    location=models.CharField(max_length=30,unique=True)
-    slug=AutoSlugField(populate_from='location')
-    rank = models.CharField(
-        max_length=30,
-        choices=TYPE_CHOICES,
-        default='observer')
-class Team(Member):
-    name = models.CharField(max_length=50,unique=True)
-    slug=AutoSlugField(populate_from='name')
-    """ The name of the :class:`Member`"""
