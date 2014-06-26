@@ -59,15 +59,11 @@ class Member(models.Model):
         return self.name
     def member_count(self):
         """ The amount of members currently in the :class:`Member` """
-        return len(self.members.all())
+        return len(self.members.all()-1)
     def last_event(self):
         """  The date of the last :class:`~events.models.Event` organized by the :class:`Member` """
         try:
-            ownevents=self.event_set.all()
-            if ownevents:
-                return self.event_set.all().order_by('-start_date')[0].start_date
-            else:
-                return None
+            return self.event_set.all().exclude(name='Recruitment').order_by('-start_date')[0].start_date
         except:
             return 0
 

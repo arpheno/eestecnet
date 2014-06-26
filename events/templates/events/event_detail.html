@@ -1,5 +1,8 @@
-<article class="event">
+{% extends "enet/index.html" %}
+{% block content %}
+    <article class="event">
         <div class="pictures"></div>
+        {% block application %}{% endblock %}
         <div class="information">
             <h3>General</h3>
             <ul>
@@ -25,3 +28,4 @@
     </ul>
 
 </article>
+{% endblock %}

@@ -7,7 +7,7 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.models import User, Group, Permission
 from account.models import Eestecer
 from events.models import Event
-from members.models import Member, MemberImage, Commitment, Team
+from members.models import Member, MemberImage
 
 
 class MemberInline(admin.TabularInline):
@@ -93,5 +93,4 @@ class MyMemberAdmin(admin.ModelAdmin):
             return qs
         return qs.filter(priviledged=request.user)
 
-admin.site.register(Commitment,MyMemberAdmin)
-admin.site.register(Team,MyMemberAdmin)
+admin.site.register(Member,MyMemberAdmin)

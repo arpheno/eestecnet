@@ -1,3 +1,4 @@
+from autoslug import AutoSlugField
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -26,9 +27,11 @@ CATEGORY_CHOICES = (
 )
 class Event(models.Model):
     """Event objects encapsulate all information that is necessary to describe an event. """
-
+    class Meta:
+        verbose_name="Event"
+        verbose_name_plural="Events"
     #General
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
     """Name of the event. Examples: bEErSTEC, Trainers' Meeting, RISEX."""
     category = models.CharField(max_length=40, choices=CATEGORY_CHOICES, default='workshop')
     """Category of the event, for choices see :attr:`CATEGORY_CHOICES` ."""
@@ -36,7 +39,8 @@ class Event(models.Model):
     """Scope of the event, an event can be local or international.
     The main event list will only contain International Events by default. Also see
     :attr:`SCOPE_CHOICES`."""
-
+    slug=AutoSlugField(populate_from='name')
+    thumbnail=models.ImageField(upload_to='event_thumbnails')
     #Participants and Organizers
     max_participants = models.IntegerField(blank=True, null=True)
     """ Optional: Maximum amount of participants that will be admitted to the event """
@@ -49,10 +53,10 @@ class Event(models.Model):
     organizers = models.ManyToManyField(Eestecer, blank=True, null=True, related_name='events_organized')
     """ A list of all Users currently connected to the event as Organizers.
     Usually the head Organizers of the event."""
-    participation_fee = models.PositiveIntegerField(blank=True, null=True)
+    participation_fee = models.PositiveIntegerField(default=0)
     """Optional: Participation Fee for the event. """
-    participants=models.ManyToManyField(Eestecer, blank=True, null=True, related_name='events')
-
+    participants=models.ManyToManyField(Eestecer, blank=True, null=True, related_name='events',through= 'Participation')
+    applicants = models.ManyToManyField(Eestecer,blank=True,null=True, related_name='applications',through='Application')
     def participant_count(self):
         """Number of participants"""
         return len(self.participants.all())
@@ -81,6 +85,23 @@ class Event(models.Model):
     def __unicode__(self):
         return self.name
 
+class Participation(models.Model):
+    class Meta:
+        verbose_name="Participant"
+        verbose_name_plural="Participants"
+    participant = models.ForeignKey(Eestecer)
+    """ The User issuing this application"""
+    target = models.ForeignKey(Event)
+    """ The :class:`Event` the User is applying for."""
+    confirmed = models.BooleanField(default=False)
+    arrival=models.DateTimeField(blank=True, null=True)
+    arrival_notes=models.TextField(blank=True, null=True)
+    departure=models.DateTimeField(blank=True, null=True)
+    departure_notes=models.TextField(blank=True, null=True)
+    def __unicode__(self):
+        return self.participant.get_full_name()
+
+
 
 class Application(models.Model):
     """Application objects link Users to :class:`Event` objects and provide additional information"""
@@ -95,6 +116,7 @@ class Application(models.Model):
     priority = models.IntegerField(blank=True, null=True)
     """Optional: Priority of the application as issued by the corresponding LC"""
     accepted = models.BooleanField(default=False)
+
     """If this field is set to true, the application is accepted and the User
     becomes a Participant of the :class:`Event`"""
     def member_in(self):
@@ -106,6 +128,17 @@ class Application(models.Model):
 
     def __unicode__(self):
         return self.applicant.get_full_name()
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        if self.accepted:
+            if self.target.name == "Recruitment":
+                self.target.organizing_committee.all()[0].members.add(self.applicant)
+            else:
+                Participation.objects.create(target=self.target, participant=self.applicant).save()
+            self.delete()
+        else:
+            super(Application,self).save()
 
 class EventImage(models.Model):
     property = models.ForeignKey(Event, related_name='images')

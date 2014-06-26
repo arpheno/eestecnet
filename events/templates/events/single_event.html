@@ -1,0 +1,24 @@
+{% load thumbnail %}
+<a href="{% url 'event' event.slug %}">
+            <div class="event">
+                <div class="thumbnail">
+                    {% thumbnail event.thumbnail "190x125" crop="center" as im %}
+                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                    {% endthumbnail %}
+                    <div class="comment">
+                        <ul>
+                            <li>{{ event.summary }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="event-meta">
+                    <h1><b>{{ event.name }}</b><br>
+                        {% for oc in event.organizing_committee.all %}
+                            {% if oc.type == "jlc" or oc.type == "lc" or oc.type == "observer" %}{{ oc.type.capitalize }}{% endif %}
+                            {{ oc.name }}
+                        {% endfor %}</h1>
+                    <h2>Application Deadline<br>
+                        {{ event.deadline }}</h2>
+                </div>
+            </div>
+        </a>

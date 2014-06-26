@@ -1,3 +1,4 @@
+import random
 from django.forms import ModelForm
 from django.forms import widgets
 from django.http import HttpResponseRedirect, HttpResponse
@@ -7,14 +8,25 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, View
 from events.models import Event, Application
 
+def featuredevent():
+    random_idx = random.randint(0, Event.objects.count() - 1)
+    return Event.objects.all()[random_idx]
 
 class InternationalEvents(ListView):
     model = Event
-    def get_queryset(self):
-        return Event.objects.filter(scope="international")
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(InternationalEvents, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['workshop_list'] = [event for event in Event.objects.filter(scope="international",category="workshop") for i in range(2)]
+        context['exchange_list'] = [event for event in Event.objects.filter(scope="international",category="workshop") for i in range(2)]
+        context['training_list'] = [event for event in Event.objects.filter(scope="international",category="workshop") for i in range(2)]
+        context['other_list'] = [event for event in Event.objects.filter(scope="international",category="workshop") for i in range(2)]
+        return context
 
 class EventDetail(DetailView):
     model = Event
+    template_name = "events/event_detail.html"
 
 class ApplyForm(ModelForm):
     class Meta:
@@ -27,14 +39,16 @@ class ApplyForm(ModelForm):
             'applicant': widgets.HiddenInput(),
             }
 
+
 class ApplyToEvent(View):
     form_class = ApplyForm
     initial = {'key': 'value'}
     template_name = 'events/application_form.html'
 
     def get(self, request, *args, **kwargs):
-        form = self.form_class(initial={'target':kwargs['pk'],'applicant':request.user})
-        return render(request, self.template_name, {'form': form,'target':kwargs['pk']})
+        e = Event.objects.get(slug=kwargs['slug'])
+        form = self.form_class(initial={'target':e.pk,'applicant':request.user})
+        return render(request, self.template_name, {'form': form,'target':e.pk})
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)

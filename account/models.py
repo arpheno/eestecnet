@@ -41,6 +41,7 @@ FOOD_CHOICES = (
     ('none', 'None'),
     ('kosher', 'Kosher'),
     ('halal', 'Halal'),
+    ('nopork', 'No Pork'),
     ('nofish', 'Pescarian'),
     ('veggie', 'Vegetarian'),
     ('vegan', 'Vegan'),
@@ -77,9 +78,13 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
                                   'Please provide your phone number in +XX XXX XXXXXX format'))
     """Mobile Phone number of the user. Mostly used for contact during events."""
     #Personal Information
-    first_name = models.CharField(_('first name'), max_length=30, blank=True)
+    first_name = models.CharField(_('first name'), max_length=30)
     """First name"""
-    last_name = models.CharField(_('last name'), max_length=30, blank=True)
+    middle_name = models.CharField(_('middle name'), max_length=30, blank=True)
+    """First name"""
+    last_name = models.CharField(_('last name'), max_length=30)
+    """Last name """
+    second_last_name = models.CharField(_('second clast name'), max_length=30, blank=True)
     """Last name """
     date_of_birth = models.DateField(blank=True,null=True)
     """ Date of birth"""
@@ -111,8 +116,6 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
             ownevents = self.events.all()
             if ownevents:
                 return self.events.all().order_by('-start_date')[0].start_date
-            else:
-                return 0
         except:
             return 0
 
@@ -129,22 +132,28 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     """Designates whether this user should be treated as active. Unselect this instead of deleting accounts"""
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['first_name','last_name','gender']
 
     objects = EestecerManager()
 
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
+        unique_together=(('first_name','middle_name','last_name'),)
 
     def get_full_name(self):
         """ Returns the first_name plus the last_name, with a space in between. """
-        full_name = '%s%s' % (self.first_name, self.last_name)
+        full_name = '%s %s %s %s' % (self.first_name.capitalize(),
+                               self.middle_name.capitalize(),
+                               self.last_name.capitalize(),
+                               self.second_last_name.capitalize())
         return full_name.strip()
 
     def get_short_name(self):
         "Returns the short name for the user."
-        return self.first_name
+        return '%s %s' % (self.first_name,self.last_name)
+    def __unicode__(self):
+        return self.get_full_name()
 
 class Position(models.Model):
     name=models.CharField(max_length=40,unique=True)

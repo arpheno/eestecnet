@@ -5,43 +5,34 @@
 		<title>EESTEC Training Team Platform</title>
 		<meta charset="utf-8"/>
 		<link rel="shortcut icon" href="http://eestec.net/wp-content/themes/neutral/favicon.ico">
-		<link rel="stylesheet" href="{% static 'enet/jquery-ui.css' %}" />
 		<link rel="stylesheet" href="{% static 'enet/loader.css' %}" />
 		<link rel="stylesheet" type="text/css" href="{% static 'enet/style.css' %}" />
 		<script src="{% static 'enet/js/jquery.min.js' %}" ></script>
 		<script src="{% static 'enet/js/prefixfree.min.js' %}" ></script>
 		<script src="{% static 'enet/js/trt.js' %}" ></script>
-		<style>
-			{% if user.is_authenticated %}
-			.authed{ display:inline; }
-			{% if user.is_staff %}
-			.staffed{display:inline;}
-			{% endif %}
-			{% else %}
-			.anon{ display:inline; }
-			{% endif %}
-		</style>
-
-	</head>
-	<body>
-		<header class="toplevel">
-		<img src="{% static "enet/img/banner.png" %}" alt="EESTEC International" title="EESTEC International" />
-		<nav>
-		{% include "enet/international_header.html" %}
-		</nav>
-		</header>
-		<main class="clearfix">
-		<section class="news"></section>
-		<section class="application"></section>
-        <section class="events"></section>
-		<section class="account"></section>
-		<section class="members"></section>
-		<section class="profile"></section>
-		</main>
-		<footer class="toplevel">
-		<ul id="copyright">
-			<li style="background:none;"><a href="/">EESTEC Training Team</a></li>
-		</ul>
-		</footer>
-	</body>
+    </head>
+    <body>
+    <header class="toplevel">
+        <div class="content">
+            <img src="{% static 'enet/images/logo.png' %}" width="113px" height="48px">
+            <nav>
+                <button href="">Home</button>
+                <button>News</button>
+                <button>About</button>
+                <button><a href="{% url 'events' %}">Events</a></button>
+                <button><a href="{% url 'cities' %}">Cities</a></button>
+                <button>Teams</button>
+            </nav>
+        </div>
+    </header>
+    <div class="wrapper">
+        <main>
+            <div class="grad"></div>
+            {% block content %}{% endblock %}
+        </main>
+        <aside>{% include 'enet/sidebar.html' %}</aside>
+        <footer class="clear">
+        </footer>
+    </div>
+    </body>
 </html>

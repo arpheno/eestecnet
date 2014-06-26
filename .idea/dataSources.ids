@@ -4,23 +4,40 @@
     <database-info product="SQLite" version="3.7.6.3" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native"/>
     <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed"/>
     <schema name="" catalog=""/>
+    <table name="account_achievement" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
+      <column name="person_id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
+      <column name="position_id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_account_achievement_1" columns="position_id" ref-table="account_position" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_account_achievement_2" columns="person_id" ref-table="account_eestecer" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="account_achievement_1f456125" unique="true" columns="position_id"/>
+      <index name="account_achievement_16f39487" unique="true" columns="person_id"/>
+    </table>
     <table name="account_eestecer" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
       <column name="password" sqlType="VARCHAR(128)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
       <column name="last_login" sqlType="DATETIME" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
       <column name="is_superuser" sqlType="BOOL" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
       <column name="email" sqlType="VARCHAR(254)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
+      <column name="skype" sqlType="VARCHAR(30)" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
+      <column name="hangouts" sqlType="VARCHAR(30)" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
+      <column name="mobile" sqlType="VARCHAR(30)" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
       <column name="first_name" sqlType="VARCHAR(30)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
+      <column name="middle_name" sqlType="VARCHAR(30)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
       <column name="last_name" sqlType="VARCHAR(30)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
-      <column name="is_staff" sqlType="BOOL" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
-      <column name="is_active" sqlType="BOOL" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
-      <column name="date_joined" sqlType="DATETIME" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
-      <column name="still_active" sqlType="BOOL" length="2000000000" precision="10" nullable="true" jdbcType="4"/>
+      <column name="second_last_name" sqlType="VARCHAR(30)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
+      <column name="date_of_birth" sqlType="DATE" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
       <column name="profile_picture" sqlType="VARCHAR(100)" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
       <column name="gender" sqlType="VARCHAR(15)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
-      <column name="food_preferences" sqlType="VARCHAR(15)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
+      <column name="tshirt_size" sqlType="VARCHAR(15)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
       <column name="passport_number" sqlType="VARCHAR(20)" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
+      <column name="food_preferences" sqlType="VARCHAR(15)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
+      <column name="date_joined" sqlType="DATETIME" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
+      <column name="is_staff" sqlType="BOOL" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
+      <column name="is_active" sqlType="BOOL" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
       <primary-key columns="id"/>
+      <exported-key name="#FAKE_account_achievement_2" table="account_achievement" schema="" catalog="" columns="person_id"/>
     </table>
     <table name="account_eestecer_groups" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
@@ -39,6 +56,13 @@
       <foreign-key name="#FAKE_account_eestecer_user_permissions_1" columns="permission_id" ref-table="auth_permission" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <index name="account_eestecer_user_permissions_83d7f98b" unique="true" columns="permission_id"/>
       <index name="account_eestecer_user_permissions_4833f34c" unique="true" columns="eestecer_id"/>
+    </table>
+    <table name="account_position" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR(40)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="TEXT" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
+      <primary-key columns="id"/>
+      <exported-key name="#FAKE_account_achievement_1" table="account_achievement" schema="" catalog="" columns="position_id"/>
     </table>
     <table name="auth_group" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
@@ -110,6 +134,7 @@
       <column name="name" sqlType="VARCHAR(50)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
       <column name="category" sqlType="VARCHAR(40)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
       <column name="scope" sqlType="VARCHAR(15)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
+      <column name="slug" sqlType="VARCHAR(50)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
       <column name="max_participants" sqlType="INTEGER" length="2000000000" precision="10" nullable="true" jdbcType="4"/>
       <column name="participation_fee" sqlType="INTEGER UNSIGNED" length="2000000000" precision="10" nullable="true" jdbcType="4"/>
       <column name="location" sqlType="VARCHAR(30)" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
@@ -123,6 +148,8 @@
       <primary-key columns="id"/>
       <exported-key name="#FAKE_events_application_1" table="events_application" schema="" catalog="" columns="target_id"/>
       <exported-key name="#FAKE_events_eventimage_1" table="events_eventimage" schema="" catalog="" columns="property_id"/>
+      <exported-key name="#FAKE_events_participation_1" table="events_participation" schema="" catalog="" columns="target_id"/>
+      <index name="events_event_f52cfca0" unique="true" columns="slug"/>
     </table>
     <table name="events_event_organizers" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
@@ -140,14 +167,6 @@
       <index name="events_event_organizing_committee_b3c09425" unique="true" columns="member_id"/>
       <index name="events_event_organizing_committee_a41e20fe" unique="true" columns="event_id"/>
     </table>
-    <table name="events_event_participants" schema="" catalog="" type="TABLE">
-      <column name="id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
-      <column name="event_id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
-      <column name="eestecer_id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
-      <primary-key columns="id"/>
-      <index name="events_event_participants_4833f34c" unique="true" columns="eestecer_id"/>
-      <index name="events_event_participants_a41e20fe" unique="true" columns="event_id"/>
-    </table>
     <table name="events_eventimage" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
       <column name="property_id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
@@ -156,15 +175,35 @@
       <foreign-key name="#FAKE_events_eventimage_1" columns="property_id" ref-table="events_event" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <index name="events_eventimage_8d69009c" unique="true" columns="property_id"/>
     </table>
+    <table name="events_participation" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
+      <column name="participant_id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
+      <column name="target_id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
+      <column name="confirmed" sqlType="BOOL" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_events_participation_1" columns="target_id" ref-table="events_event" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="events_participation_70bfdfd1" unique="true" columns="target_id"/>
+      <index name="events_participation_90a2f7f7" unique="true" columns="participant_id"/>
+    </table>
     <table name="members_member" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
       <column name="name" sqlType="VARCHAR(50)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
       <column name="type" sqlType="VARCHAR(30)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
       <column name="thumbnail" sqlType="VARCHAR(100)" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
+      <column name="description" sqlType="TEXT" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
+      <column name="facebook" sqlType="VARCHAR(200)" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
       <column name="founded" sqlType="DATE" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
       <primary-key columns="id"/>
       <exported-key name="#FAKE_members_memberimage_1" table="members_memberimage" schema="" catalog="" columns="property_id"/>
       <exported-key name="#FAKE_news_entry_author_1" table="news_entry_author" schema="" catalog="" columns="member_id"/>
+    </table>
+    <table name="members_member_board" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
+      <column name="member_id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
+      <column name="eestecer_id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <index name="members_member_board_4833f34c" unique="true" columns="eestecer_id"/>
+      <index name="members_member_board_b3c09425" unique="true" columns="member_id"/>
     </table>
     <table name="members_member_members" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>

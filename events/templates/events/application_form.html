@@ -1,14 +1,9 @@
-<script type="text/javascript">
-$(function(){
-    $('#apply').submit(function(){
-        $.post('{% url 'events' %}{{ target }}/apply/', $( '#apply' ).serialize());
-        $('.application').hide();
-        alert("Thank you for your application");
-        return false;
-    });
-});
-</script>
-<form id="apply" action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Create" />
-</form>
+{% extends 'events/event_detail.html' %}
+{% block application %}
+<div class="application">
+    <form id="apply" action="" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Create" />
+    </form>
+</div>
+{% endblock %}
