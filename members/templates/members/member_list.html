@@ -1,13 +1,12 @@
+{% extends 'enet/index.html' %}
 {% load thumbnail %}
 {% block content %}
+    <div class="members">
     <h2>Members</h2>
-    <ul>
+    <ul class="picturelist">
         {% for mmbr in object_list %}
-            <li onclick="$('section.members').empty();$('section.members').load('{{ mmbr.pk }}')">
-                {% thumbnail mmbr.thumbnail "200x200" crop="center" as im %}
-                    <img src="{{ im.url }}" height="{{ im.height }}" width="{{ im.width }}">
-                {% endthumbnail %}
-            </li>
+            {% include 'members/member.html' with member=mmbr %}
         {% endfor %}
     </ul>
+    </div>
 {% endblock %}

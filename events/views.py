@@ -27,6 +27,9 @@ class InternationalEvents(ListView):
 class EventDetail(DetailView):
     model = Event
     template_name = "events/event_detail.html"
+    def get_context_data(self, **kwargs):
+       # import pdb;pdb.set_trace()
+        return super(EventDetail,self).get_context_data(**kwargs)
 
 class ApplyForm(ModelForm):
     class Meta:

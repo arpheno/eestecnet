@@ -188,6 +188,7 @@
     <table name="members_member" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>
       <column name="name" sqlType="VARCHAR(50)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
+      <column name="slug" sqlType="VARCHAR(50)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
       <column name="type" sqlType="VARCHAR(30)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
       <column name="thumbnail" sqlType="VARCHAR(100)" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
       <column name="description" sqlType="TEXT" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
@@ -196,6 +197,7 @@
       <primary-key columns="id"/>
       <exported-key name="#FAKE_members_memberimage_1" table="members_memberimage" schema="" catalog="" columns="property_id"/>
       <exported-key name="#FAKE_news_entry_author_1" table="news_entry_author" schema="" catalog="" columns="member_id"/>
+      <index name="members_member_f52cfca0" unique="true" columns="slug"/>
     </table>
     <table name="members_member_board" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" length="2000000000" precision="10" nullable="false" jdbcType="4"/>

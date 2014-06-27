@@ -2,20 +2,22 @@
 {% block content %}
     <h1>Events organized by EESTEC</h1>
     <p>EESTEC workshops are <b>free</b>. On a list below you can see all current and past events. Click button to show event by status.</p>
-    <div class="eventlist">
+    <div class="events">
+    <div class="picturelist">
         <h2>Workshops</h2>
         {% include 'events/events.html' with object_list=workshop_list %}
     </div>
-    <div class="eventlist">
+    <div class="picturelist">
         <h2>Exchanges</h2>
         {% include 'events/events.html' with object_list=exchange_list %}
     </div>
-    <div class="eventlist">
+    <div class="picturelist">
         <h2>Training</h2>
         {% include 'events/events.html' with object_list=training_list %}
     </div>
-    <div class="eventlist">
+    <div class="picturelist">
         <h2>Special Events</h2>
         {% include 'events/events.html' with object_list=other_list %}
+    </div>
     </div>
 {% endblock %}

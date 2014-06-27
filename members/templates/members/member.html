@@ -1,0 +1,14 @@
+{% load thumbnail %}
+<a href="{% url 'member' member.slug %}">
+
+    <div class="picture">
+        <div class="thumbnail">
+            {% thumbnail member.thumbnail "190x125" crop="center" as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+            {% endthumbnail %}
+        </div>
+        <div class="picture-meta">
+            <h1><b>{{ member }}</b></h1>
+        </div>
+    </div>
+</a>

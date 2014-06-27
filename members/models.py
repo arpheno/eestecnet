@@ -1,3 +1,4 @@
+from autoslug import AutoSlugField
 from django.contrib.auth.models import User, Group, Permission
 from django.db import models
 from account.models import Eestecer
@@ -21,6 +22,7 @@ class Member(models.Model):
     #General
     """ The name of the :class:`Member`"""
     name = models.CharField(max_length=50,unique=True)
+    slug=AutoSlugField(populate_from='name')
     """The type of the :class:`Member`"""
     type = models.CharField(
         max_length=30,
@@ -56,7 +58,9 @@ class Member(models.Model):
     founded=models.DateField(null=True, blank=True)
     """When the :class:`Member` was first established"""
     def __unicode__(self):
-        return self.name
+        if self.type not in ['jlc','lc','observer']:
+            return self.name
+        return self.type.upper() + " " + self.name
     def member_count(self):
         """ The amount of members currently in the :class:`Member` """
         return len(self.members.all()-1)
