@@ -1,31 +1,32 @@
 {% extends "enet/index.html" %}
+{% load thumbnail %}
 {% block content %}
-    <article class="event">
-        <div class="pictures"></div>
-        {% block application %}{% endblock %}
-        <div class="information">
-            <h3>General</h3>
-            <ul>
-                <li>{{ object.name }} </li>
-                <li>{% for oc in object.organizing_committee.all %}{{ oc.name }}{% endfor %}</li>
-                <li>{{ object.location }}</li>
-                <li>From {{ object.start_date }} - {{ object.end_date }}</li>
-            </ul>
-            <h3>Participants</h3>
-            <ul>
-                <li>Maximum of {{ object.max_participants }} participants</li>
-                <li>Currently {{ object.participant_count }} participants</li>
-            </ul>
-        </div>
-        <h3>Summary</h3>
-        {{ object.summary }}
-        <h3>Description</h3>
-        {{ object.description }}
-    <ul>
-        {%  for participant in object.participants.all %}
-            <li>{{ participant.get_full_name }}</li>
+<article class="event_detail">
+    <div class="pictures cycle-slideshow">
+        {% for imf in object.images.all %}
+            {% thumbnail imf.image "375x225" crop="center" as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+            {% endthumbnail %}
         {% endfor %}
-    </ul>
+    </div>
+    <table class="information">
+        <tr><td class="first"><h2>Event Name</h2></td><td class="second">{{ object.name }} </td></tr>
+        <tr><td class="first"><h2>Organizer</h2></td><td class="second">{% for oc in object.organizing_committee.all %}{{ oc.name }}{% endfor %}</td></tr>
+        <tr><td class="first"><h2>Date</h2></td><td class="second"> {{ object.start_date }} - {{ object.end_date }}</td></tr>
+        <tr><td class="first"><h2>Deadline</h2></td><td class="second">{{ object.deadline }}</td></tr>
+        <tr><td class="first"><h2>Maximum participants</h2></td><td class="second">{{ object.max_participants }}</td></tr>
+    </table>
+
+    <div class="application">
+    {% block application %}<a href="{% url 'eventapplication' object.slug %}" class="action-button shadow animate red">Apply to event</a>{% endblock %}
+</div>
+
+    <h3 class="clear">Description</h3>
+    {{ object.description }}
+<h1>Organizers</h1>
+    {% include 'account/eestecers.html' with object_list=object.organizers.all %}
+    <h1>Participants</h1>
+    {% include 'account/eestecers.html' with object_list=object.participants.all %}
 
 </article>
 {% endblock %}

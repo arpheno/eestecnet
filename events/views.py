@@ -33,8 +33,7 @@ class ApplyForm(ModelForm):
         model = Application
         fields=('letter','target','applicant')
         widgets = {
-            'letter': widgets.TextInput(
-                attrs={"placeholder": "Optional: Motivational Letter?"}),
+            'letter': widgets.Textarea(attrs={'rows':3,'cols':30,'placeholder':'Write a motivational Letter!'}),
             'target': widgets.HiddenInput(),
             'applicant': widgets.HiddenInput(),
             }
@@ -44,11 +43,10 @@ class ApplyToEvent(View):
     form_class = ApplyForm
     initial = {'key': 'value'}
     template_name = 'events/application_form.html'
-
     def get(self, request, *args, **kwargs):
         e = Event.objects.get(slug=kwargs['slug'])
         form = self.form_class(initial={'target':e.pk,'applicant':request.user})
-        return render(request, self.template_name, {'form': form,'target':e.pk})
+        return render(request, self.template_name, {'form': form,'target':e.pk,'object':e})
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)

@@ -1,165 +1,239 @@
 /*
- * Globals
+Theme Name:neutral
+Theme URI:
+Description:This theme supports widget, threaded-comments, theme-options,and translation is ready. Also including page-navigation and multi level dropdown menu.You can see live demo including more information here http://www.mono-lab.net/demo2/
+Author:mono-lab
+Author URI:http://www.mono-lab.net
+Version:1.0
+Tags: white, simple, three-columns, fixed-width, theme-options, threaded-comments, translation-ready
  */
 
+
+/* ----- basic --------------------------------------------------------------------------------------------------------------------------------- */
+
+h1{
+    font-family: 'verdana';
+    font-weight: bold;
+    margin: 0px;
+    font-size:17px;
+    line-height:100%;
+    color:#af2b1d;
+    text-align: left;
+}
+h2{
+    font-family: 'verdana';
+    margin: 0px;
+    font-weight: bold;
+    font-size:14px;
+    line-height:100%;
+    color:#af2b1d;
+    text-align: left;
+
+}
+html{
+    height:100%;
+}
+.clear{clear:both;}
 body {
-  font-family: Verdana, "Times New Roman", Times, serif;
-  color: #555;
+    background-image: url(../images/bg.jpg);
+    font-family:"Century Gothic", Verdana, Helvetica, sans-serif;
+    font-size:12px;
+    height:100%;
+    margin:0px;
+    color:#555;
 }
+header {
+    background-color: #ffffff;
+    height:55px;
+    width:100%;
+    z-index:3;
+    position:relative;
+}
+header .content {
+    margin:0 auto;
+    width:1280px;
+}
+header .content nav{
+    display: inline;
+}
+.wrapper{
+    margin:auto;
+    display:flex;
+    width:1283px;
+    flex-flow: row wrap;
+}
+.wrapper button{
+    flex:1 auto;
+}
+main aside footer{
+    flex:1 100%;
+}
+main {
+    width:885px;
+    padding-top:35px;
+    padding-left:30px;
+    float:left;
+    background-color:#fcfcfc;
+    box-shadow:
+        0px 0px 200px 100px rgba(0,0,0,0.1),
+        -0px 0px 200px 100px rgba(0,0,0,0.1);
+    border-style:solid;
+    border-width: 0px 1px 0px 1px;
+    border-color: #a2a0a0;
+    z-index: 2;
+}
+.grad {
+    height:340px;
+    margin-top:-35px;
+    margin-left:-30px;
+    width:100%;
+    top:0px;
+    left:0px;
+    position:absolute;
+    z-index: 0;
+    background:linear-gradient(to top ,rgba(0,0,0,0), rgba(0,0,0,0.04));
+}
+aside {
+    width:300px;
+    background-color:#5f6a6d;
+    border-width: 0px 65px 0px 0px;
+    border-style:solid;
+    border-color:#3f4749;
+    z-index: 1;
+}
+aside .event{
+    margin:30px auto;
+}
+footer{
+   background-color:#465052;
+    height:125px;
+    width: 100%;
+    background-image:url(../images/map.png);
+    background-repeat: no-repeat;
+}
+.application{
+    position: relative;
+    z-index: 5;
+    float:left;
+    margin:-5px 0px 0px 15px;
+}
+.application input,textarea{
+    float:left;
+}
+.application form{
 
-h1, .h1,
-h2, .h2,
-h3, .h3,
-h4, .h4,
-h5, .h5,
-h6, .h6 {
-  margin-top: 0;
-  font-family: "Verdana", Helvetica, Arial, sans-serif;
-  font-weight: normal;
 }
-h1,h2,h3{
+header .content img{position:relative;float:left;display:inline-block;margin:auto;}
+header .content nav button{
+    cursor: pointer;
+    float:left;
+    padding:0 15px;
+    top:2px;
+    font-size:20px;
+    width: 70px;
+    height:48px;
+    margin:0;
     font-weight:bold;
+    position:relative;
+    vertical-align: middle;
+    border:0px;
+    line-height:48px;
+    background-color:transparent;
+    display:inline-block;
+    color:#464646;
 }
 
-/*
- * Override Bootstrap's default container.
- */
+ul { list-style-type:none; margin:0 0 1em 0; padding:0; line-height:0%; }
+ul li { margin:0; padding:0; line-height:normal; zoom:1; }
+.thumbnail {
+        display: inline-block;
+        padding: 0 !important;
+        margin: 0;
+        transition: all .25s;
+        cursor: pointer;
+        z-index: 0;
+        position: relative;
+    }
+    .thumbnail:hover {
+        transform: scale(1.2);
+        outline-color: transparent;
+        z-index: 1;
+    }
+    .thumbnail:hover .comment {
+        opacity: 1;
 
-@media (min-width: 1200px) {
-  .container {
-    width: 970px;
-  }
+    }
+    .thumbnail .comment {
+        opacity: 0.3;
+        overflow: visible;
+        margin: 0px 0px 4px 0px;
+        position: absolute;
+        top: 15%;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.5);
+        text-align: left;
+        transition: all .5s;
+    }
+    .event {
+        width: 190px;
+        height: 215px;
+        background-color: #354040;
+        padding: 5px;
+        margin: 11px 11px;
+    }
+    .eventlist h2{
+        text-align: center;
+    }
+    .event h1 {
+        font-family: 'verdana';
+        font-weight: normal;
+        font-size:17px;
+        margin:0px 2px;
+        border-width: 1px 0px;
+        border-style:  solid;
+        border-color: #ffffff;
+        line-height:18px;
+        padding:2px 0px 8px 0px;
+        color:#ffffff;
+    }
+    .event  h2{
+        font-family: 'verdana';
+        font-weight: normal;
+        font-size:12px;
+        margin:7px 2px;
+        line-height:100%;
+        color:#ffffff;
+    }
+    .eventlist {
+        text-align: center;
+        float:left;
+        width: 200px;
+        margin: 0px 8px;
+        height: 225;
+    }
+    .event_detail .pictures{
+        height:225px;
+        width: 375px;
+        float: left;
+    }
+.event_detail .information{
+    position:relative;
+    float: left;
 }
-
-
-/*
- * Masthead for nav
- */
-
-.blog-masthead {
-  background-color: #428bca;
-  box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
+.event_detail table{
+    border-spacing: 0px 10px;
+    margin: 0px 15px 20px 15px;
+    width: 465px;
 }
-
-/* Nav links */
-.blog-nav-item {
-  position: relative;
-  display: inline-block;
-  padding: 10px;
-  font-weight: 500;
-  color: #cdddeb;
+.event_detail .information td{
+    border-width: 0px 0px 1px 0px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-bottom:0px;
+    border-bottom: 1px solid #af2b1d;
 }
-.blog-nav-item:hover,
-.blog-nav-item:focus {
-  color: #fff;
-  text-decoration: none;
-}
-
-/* Active state gets a caret at the bottom */
-.blog-nav .active {
-  color: #fff;
-}
-.blog-nav .active:after {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 0;
-  margin-left: -5px;
-  vertical-align: middle;
-  content: " ";
-  border-right:  5px solid transparent;
-  border-bottom: 5px solid;
-  border-left:   5px solid transparent;
-}
-
-
-/*
- * Blog name and description
- */
-
-.blog-header {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-.blog-title {
-  margin-top: 30px;
-  margin-bottom: 0;
-  font-size: 60px;
-  font-weight: normal;
-}
-.blog-description {
-  font-size: 20px;
-  color: #999;
-}
-
-
-/*
- * Main column and sidebar layout
- */
-
-.blog-main {
-  font-size: 18px;
-    width:905px;
-  line-height: 1.5;
-}
-
-/* Sidebar modules for boxing content */
-.sidebar-module {
-  padding: 15px;
-  margin: 0 -15px 15px;
-}
-.sidebar-module-inset {
-  padding: 15px;
-  background-color: #f5f5f5;
-  border-radius: 4px;
-}
-.sidebar-module-inset p:last-child,
-.sidebar-module-inset ul:last-child,
-.sidebar-module-inset ol:last-child {
-  margin-bottom: 0;
-}
-
-
-
-/* Pagination */
-.pager {
-  margin-bottom: 60px;
-  text-align: left;
-}
-.pager > li > a {
-  width: 140px;
-  padding: 10px 20px;
-  text-align: center;
-  border-radius: 30px;
-}
-
-
-/*
- * Blog posts
- */
-
-.blog-post {
-  margin-bottom: 60px;
-}
-.blog-post-title {
-  margin-bottom: 5px;
-  font-size: 40px;
-}
-.blog-post-meta {
-  margin-bottom: 20px;
-  color: #999;
-}
-
-
-/*
- * Footer
- */
-
-.blog-footer {
-  padding: 40px 0;
-  color: #999;
-  text-align: center;
-  background-color: #f9f9f9;
-  border-top: 1px solid #e5e5e5;
+.event_detail .information .second{
+    border-width: 0px 0px 1px 0px;
+    text-align: right;
+    border-bottom: 1px solid #af2b1d;
 }

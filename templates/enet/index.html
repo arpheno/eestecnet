@@ -5,24 +5,23 @@
 		<title>EESTEC Training Team Platform</title>
 		<meta charset="utf-8"/>
 		<link rel="shortcut icon" href="http://eestec.net/wp-content/themes/neutral/favicon.ico">
-		<link rel="stylesheet" href="{% static 'enet/loader.css' %}" />
-		<link rel="stylesheet" type="text/css" href="{% static 'enet/style.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'enet/css/buttons.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'enet/css/style.css' %}" />
 		<script src="{% static 'enet/js/jquery.min.js' %}" ></script>
 		<script src="{% static 'enet/js/prefixfree.min.js' %}" ></script>
 		<script src="{% static 'enet/js/trt.js' %}" ></script>
+        <script src="{% static 'enet/js/jquery.cycle2.js' %}" ></script>
     </head>
     <body>
     <header class="toplevel">
-        <div class="content">
+        <div class="wrapper">
             <img src="{% static 'enet/images/logo.png' %}" width="113px" height="48px">
-            <nav>
                 <button href="">Home</button>
                 <button>News</button>
                 <button>About</button>
                 <button><a href="{% url 'events' %}">Events</a></button>
                 <button><a href="{% url 'cities' %}">Cities</a></button>
                 <button>Teams</button>
-            </nav>
         </div>
     </header>
     <div class="wrapper">
@@ -31,8 +30,7 @@
             {% block content %}{% endblock %}
         </main>
         <aside>{% include 'enet/sidebar.html' %}</aside>
-        <footer class="clear">
-        </footer>
+        <footer> lol </footer>
     </div>
     </body>
 </html>

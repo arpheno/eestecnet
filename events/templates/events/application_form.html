@@ -1,9 +1,9 @@
 {% extends 'events/event_detail.html' %}
 {% block application %}
-<div class="application">
     <form id="apply" action="" method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Create" />
+        {{ form.letter }}
+        {{ form.applicant }}
+        {{ form.target }}
+        <input class="action-button red" type="submit" value="apply" />
     </form>
-</div>
 {% endblock %}

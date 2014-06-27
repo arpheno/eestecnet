@@ -31,7 +31,7 @@ class Event(models.Model):
         verbose_name="Event"
         verbose_name_plural="Events"
     #General
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50,unique=True)
     """Name of the event. Examples: bEErSTEC, Trainers' Meeting, RISEX."""
     category = models.CharField(max_length=40, choices=CATEGORY_CHOICES, default='workshop')
     """Category of the event, for choices see :attr:`CATEGORY_CHOICES` ."""

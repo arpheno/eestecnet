@@ -7,7 +7,8 @@ from django.contrib.auth.models import User
 from django.db.models import ManyToManyField
 from django.forms import Textarea
 from account.models import Eestecer
-from events.models import Event, Application
+from events.models import Event, Application, EventImage
+
 
 class ApplicationInline(admin.TabularInline):
     model = Application
@@ -34,7 +35,8 @@ class ParticipantInline(admin.TabularInline):
     def has_add_permission(self, request):
         return False
 
-
+class ImageInline(admin.TabularInline):
+    model=EventImage
 class MyEventAdminForm(forms.ModelForm):
     class Meta:
         model = Event
@@ -47,7 +49,7 @@ class MyEventAdmin(admin.ModelAdmin):
     """ Custom interface to administrate Events from the django admin interface. """
     form = MyEventAdminForm
     list_display = ['OC','name']
-    inlines = [ApplicationInline, ParticipantInline]
+    inlines = [ApplicationInline, ParticipantInline,ImageInline]
     """ Inline interface for displaying the applications to an event and making it possible to accept them"""
     """Interface to manage accepted participants, you can kick them out here again. TODO: penalties for leaving"""
     exclude = ['participants',"participant_count"]
@@ -64,17 +66,13 @@ class MyEventAdmin(admin.ModelAdmin):
         ('Dates', {
             'fields': (('start_date','end_date','deadline'),)
         }),
-        ('Images', {
-            'classes':('collapse',),
-            'fields': ('images')
-        }),
         ('Reports', {
             'classes':('collapse',),
             'fields': (('organizer_report','pax_report'),)
         })
     )
     add_inlines = []
-    add_fieldsets = fieldsets = (
+    add_fieldsets = (
         ('Basic Event Information', {
             'fields': (
                 ('name','category','scope'),('summary','description'),
