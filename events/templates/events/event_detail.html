@@ -1,7 +1,7 @@
 {% extends "enet/index.html" %}
 {% load thumbnail %}
 {% block content %}
-<article class="event_detail">
+<article class="detail">
     <div class="pictures cycle-slideshow">
         {% for imf in object.images.all %}
             {% thumbnail imf.image "375x225" crop="center" as im %}
@@ -24,9 +24,9 @@
     <h3 class="clear">Description</h3>
     {{ object.description }}
 <h1>Organizers</h1>
-    {% include 'account/eestecers.html' with object_list=object.organizers.all %}
+    {% include 'account/eestecers.html' with object_list=object.board.all %}
     <h1>Participants</h1>
-    {% include 'account/eestecers.html' with object_list=object.participants.all %}
+    {% include 'account/eestecers.html' with object_list=object.members.all %}
 
 </article>
 {% endblock %}

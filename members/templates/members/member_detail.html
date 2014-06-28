@@ -1,37 +1,36 @@
+{% extends "enet/index.html" %}
 {% load thumbnail %}
-<article class="member">
-    <h1>{{ object.name }}
-            {% if user.is_authenticated and user not in object.members.all %}
-                {% for event in object.event_set.all %}
-                    {% if event.name == "Recruitment" %}
-                        <div class="actions">
-                        <button onclick="$('.application').load('{% url 'events' %}{{ event.pk }}/apply/');$('.application').show();history.pushState({asd:'asd'},'asdaf', '{% url 'events' %}{{ event.pk }}/apply/');">
-                            Join us!
-                        </button>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-</h1>
-    <div class="pictures alignleft" style="width:330px">
-        {% for im in object.images.all %}
-            {% thumbnail im.image "150x150" crop="center" as imq %}
-                <img src="{{ imq.url }}" width="{{ imq.width }}" height="{{ imq.height }}">
-            {% endthumbnail %}
-        {% endfor %}
-    </div>
-    <div class="information alignright" style="width:300px">
-        <ul>
-            <li class="lc_info">Currently {{ object.member_count }} Members</li>
-            <li class="lc_info">Last event {{ object.last_event }}</li>
+{% block content %}
+    <article class="detail">
+    <h1>{{ object }}</h1>
+        <div class="pictures cycle-slideshow">
+            {% for imf in object.images.all %}
+                {% thumbnail imf.image "375x225" crop="center" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                {% endthumbnail %}
+            {% endfor %}
+        </div>
+        <table class="information">
+            <tr><td class="first"><h2>LC Name</h2></td><td class="second">{{ object.name }} </td></tr>
+            <tr><td class="first"><h2>Founded:</h2></td><td class="second"> {{ object.founded_on }}</td></tr>
+            <tr><td class="first"><h2>Number of Members</h2></td><td class="second">{{ object.membercount }}</td></tr>
+        </table>
 
-        </ul>
-    </div>
-    <div class="people clear">
-        {% include  'account/eestecer_list.html' with object_list=object.members.all %}
-    </div>
-    <div class="events">
-        <h2>Last events</h2>
-        {% include  'events/event_list.html' with object_list=object.event_set.all %}
-    </div>
-</article>
+        <div class="application">
+            {% block application %}<a href="{% url 'eventapplication' object.slug %}" class="action-button shadow animate red">Apply to event</a>{% endblock %}
+        </div>
+
+        <h3 class="clear">Description</h3>
+        {{ object.description }}
+    <h2>Last Events</h2>
+    <div class="picturelist">
+    {% include 'events/events.html' with object_list=object.event_set.all %}
+        </div>
+        <h2 class="clear" >Board</h2>
+        {% include 'account/eestecers.html' with object_list=object.organizers.all %}
+        <h2>Members</h2>
+        {% include 'account/eestecers.html' with object_list=object.participants.all %}
+
+    </article>
+{% endblock %}
+{% load thumbnail %}

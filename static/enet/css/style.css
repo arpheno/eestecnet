@@ -222,29 +222,34 @@ ul li { margin:0; padding:0; line-height:normal; zoom:1; }
     margin: 0px 8px;
     height: 225;
 }
-.event_detail .pictures{
+.detail .pictures{
     height:225px;
     width: 375px;
     float: left;
 }
-.event_detail .information{
+.detail .information{
     position:relative;
     float: left;
 }
-.event_detail table{
+.detail table{
     border-spacing: 0px 10px;
     margin: 0px 15px 20px 15px;
     width: 465px;
 }
-.event_detail .information td{
+.detail .information td{
     border-width: 0px 0px 1px 0px;
     padding-left:10px;
     padding-right:10px;
     padding-bottom:0px;
     border-bottom: 1px solid #af2b1d;
 }
-.event_detail .information .second{
+.detail .information .second{
     border-width: 0px 0px 1px 0px;
     text-align: right;
     border-bottom: 1px solid #af2b1d;
+}
+.detail h1{
+    width:100%;
+    border-bottom:1px red solid;
+    padding:0px 0px 3px 20px;
 }

@@ -76,9 +76,9 @@ class MyMemberAdmin(admin.ModelAdmin):
         obj.save()
         if not change:
             a=Event.objects.create(
-                name="Recruitment"+str(obj.name),
+                name=str(obj.name),
                 scope="local",
-                category="operational",
+                category="recruitment",
                 summary="Interested in joining? Apply here or click for more information",
                 description="We are always recruiting and welcoming new people.",
                 start_date=datetime.now()

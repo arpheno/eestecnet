@@ -24,6 +24,7 @@ CATEGORY_CHOICES = (
         ('congress', 'Congress'),
         ('ecm', 'EESTEC Chairpersons\' Meeting'),
         ('training', 'Training'),
+        ('recruitment','recruitment'),
 )
 class Event(models.Model):
     """Event objects encapsulate all information that is necessary to describe an event. """

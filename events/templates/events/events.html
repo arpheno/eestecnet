@@ -1,5 +1,5 @@
 {% for event in object_list %}
-    {% if event.name != "recruitment" %}
+    {% if event.category != "recruitment" %}
         {% include 'events/single_event.html' with event=event %}
     {% endif %}
 {% endfor %}
