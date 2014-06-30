@@ -13,7 +13,7 @@ def create_eestec_lcs(sender,**kwargs):
         Member.objects.create(name='Aachen',
                               founded=1986,
                               website="http://www.eestec.rwth-aachen.de",
-                              address="Karmansr. 9\n52056 Aachen\nGermany")
+                              address="Karmansr. 9\n52056 Aachen\nGermany", )
         Member.objects.create(name='Ankara',
                               founded=2006,
                               website="http://eestectr.org/ankara",
@@ -42,7 +42,7 @@ def create_eestec_lcs(sender,**kwargs):
                               founded=1986,
                               website="http://www.eestec.hu/pages/home.php",
                               address=u"Eszék utca 9-11\nH-1114 Budapest\nHungary")
-        Member.objects.create(name='Cosenza',
+        Member.objects.create(name='Consenza',
                               founded=1998,
                               website="http://www.asiunical.org",
                               address="ASI-UNICAL\nvia Pietro Bucci, Cubo 42D, piano terra\nUniversita della Calabria\n87036 Arcavacata di Rende Cosenza)\nItaly")
@@ -134,7 +134,7 @@ def create_eestec_lcs(sender,**kwargs):
                               founded=2003,
                               website="http://www.eestec-sk.org.mk",
                               address="Fakultet za Elektrotehnika i informaciski tehnologii\nul. Rugjer Boshkovikj b.b\n1000 Skopje\nMacedonia")
-        Member.objects.create(name='Talinn',
+        Member.objects.create(name='Tallinn',
                               founded=2005,
                               website="http://www.eestec.ee",
                               address="EESTEC LC Tallinn\nEhitajate tee 5\n19086 Tallinn\nEstonia")
@@ -162,7 +162,9 @@ def create_eestec_lcs(sender,**kwargs):
                               founded=1986,
                               website="http://eestec.ch",
                               address=u"AMIV an der ETH Zuerich\nEESTEC LC Zurich\nCAB E37\nUniversitätsstrasse 6\n8092 Zürich\nSwitzerland")
-
+        for lc in Member.objects.all():
+            lc.description=open("eestecnet/lc/"+lc.slug+".txt").read()
+            lc.save()
 def create_local_admins(sender, **kwargs):
 
     """

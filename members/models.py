@@ -78,7 +78,7 @@ class Member(models.Model):
             a.save()
             a.organizing_committee=[self]
         else:
-            super(Member.save(*args,**kwargs))
+            super(Member,self).save(*args,**kwargs)
     def __unicode__(self):
         if self.type not in ['jlc','lc','observer']:
             return self.name

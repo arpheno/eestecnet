@@ -8,7 +8,7 @@ from members.models import Member
 
 class EventTestCase(TestCase):
     def setUp(self):
-        self.lc=Member.objects.create(name="Skopje", type='commitment')
+        self.lc=Member.objects.get(name="Skopje")
         self.ev=Event.objects.create(name="T4T",
                              summary="Nice event",
                              description="Cool thing",
