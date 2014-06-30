@@ -1,13 +1,14 @@
 from autoslug import AutoSlugField
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.datetime_safe import datetime
 from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 from django.db import models
 from account.models import Eestecer
 from eestecnet import settings
-from members.models import Member
+from events.widgets import ChoiceWithOtherField
 
 
 SCOPE_CHOICES = (
@@ -45,7 +46,7 @@ class Event(models.Model):
     #Participants and Organizers
     max_participants = models.IntegerField(blank=True, null=True)
     """ Optional: Maximum amount of participants that will be admitted to the event """
-    organizing_committee = models.ManyToManyField(Member)
+    organizing_committee = models.ManyToManyField('members.Member')
     """ Defines the Organizing Members of the event. May be more than one. Only
      those Members can be selected, the editor is a priviledged member of."""
     def OC(self):
@@ -86,6 +87,7 @@ class Event(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class Participation(models.Model):
     class Meta:
         verbose_name="Participant"
@@ -95,17 +97,32 @@ class Participation(models.Model):
     target = models.ForeignKey(Event)
     """ The :class:`Event` the User is applying for."""
     confirmed = models.BooleanField(default=False)
-    arrival=models.DateTimeField(blank=True, null=True)
-    arrival_notes=models.TextField(blank=True, null=True)
-    departure=models.DateTimeField(blank=True, null=True)
-    departure_notes=models.TextField(blank=True, null=True)
+
     def __unicode__(self):
         return self.participant.get_full_name()
 
+class Transportation(models.Model):
+    event= models.OneToOneField(Participation)
+    arrival=models.DateTimeField()
+    arrive_by=ChoiceWithOtherField(choices=[(0,'Plane'),
+                                            (1,'Bus'),
+                                            (2,'Train'),
+                                            (3,'Car'),
+                                            (4,'Other, please specify')])
+    arrival_number=models.CharField(_('Bus/Train/Plane Number'),max_length=15,blank=True, null=True)
+    departure=models.DateTimeField(blank=True, null=True)
+    depart_by=ChoiceWithOtherField(choices=[(0,'Plane'),
+                                            (1,'Bus'),
+                                            (2,'Train'),
+                                            (3,'Car'),
+                                            (4,'Other, please specify')],
+                                   )
 
 
 class Application(models.Model):
     """Application objects link Users to :class:`Event` objects and provide additional information"""
+    class Meta:
+        unique_together=(('applicant','target'),)
     applicant = models.ForeignKey(Eestecer)
     """ The User issuing this application"""
     target = models.ForeignKey(Event)
@@ -132,14 +149,28 @@ class Application(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        if self.accepted:
-            if self.target.name == "Recruitment":
-                self.target.organizing_committee.all()[0].members.add(self.applicant)
-            else:
-                Participation.objects.create(target=self.target, participant=self.applicant).save()
-            self.delete()
-        else:
-            super(Application,self).save()
+                if self.target.category == "recruitment":
+                    if self.accepted:
+                        self.target.organizing_committee.all()[0].members.add(self.applicant)
+                        self.delete()
+                    else:
+                        super(Application,self).save()
+                else:
+                    if self.pk==None:
+                        if datetime.now() > self.target.deadline:
+                            return
+                    if self.accepted:
+                        Participation.objects.create(target=self.target, participant=self.applicant).save()
+                        self.delete()
+                    else:
+                        super(Application,self).save()
+
+class ApplicationByMember(Application):
+    class Meta:
+        proxy=True
+class ApplicationByEvent(Application):
+    class Meta:
+        proxy=True
 
 class EventImage(models.Model):
     property = models.ForeignKey(Event, related_name='images')

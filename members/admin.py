@@ -47,18 +47,7 @@ class MemberForm(forms.ModelForm):
         priviledged = list(self.cleaned_data['priviledged'])
         for usr in priviledged:
             usr.is_staff=True
-            mygroup, created = Group.objects.get_or_create(name='Local Admins')
-            if created:
-                #TODO put this in initial data for DB
-                """If the group does not exist, create it"""
-                for perm in [
-                    'add_entry', 'change_entry', 'delete_entry',
-                    'add_event', 'change_event', 'delete_event',
-                    'add_application', 'change_application', 'delete_application',
-                    'add_eestecer', # This is necessary so local admins can see their members
-                    'change_member']:
-                    mygroup.permissions.add(Permission.objects.get(codename=perm))
-                mygroup.save()
+
             usr.groups.add(mygroup)
             usr.save()
         return self.cleaned_data
@@ -71,20 +60,6 @@ class MyMemberAdmin(admin.ModelAdmin):
     readonly_fields = ['member_count',]
     exclude = ['members']
     inlines = [MemberImageInline, MemberInline,]
-    def save_model(self, request, obj, form, change):
-        """ If the Member was just created, create a recruitment Event for it"""
-        obj.save()
-        if not change:
-            a=Event.objects.create(
-                name=str(obj.name),
-                scope="local",
-                category="recruitment",
-                summary="Interested in joining? Apply here or click for more information",
-                description="We are always recruiting and welcoming new people.",
-                start_date=datetime.now()
-            )
-            a.save()
-            a.organizing_committee=[obj]
 
     def get_queryset(self, request):
         """If the modifying User is not an Admin, only show them their own Members"""

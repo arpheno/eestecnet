@@ -1,8 +1,11 @@
 from autoslug import AutoSlugField
 from django.contrib.auth.models import User, Group, Permission
 from django.db import models
+from django.utils.datetime_safe import datetime
 from account.models import Eestecer
 from eestecnet import settings
+from events.models import Event
+
 TYPE_CHOICES = (
         ('body', 'Body'),
         ('team', 'International Team'),
@@ -34,6 +37,10 @@ class Member(models.Model):
     """ LC info text"""
     facebook = models.URLField(blank=True, null=True)
     """ Facebook page for the member"""
+    website = models.URLField(blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+
+    """ website  for the member"""
     #Members
     members = models.ManyToManyField(
         Eestecer,
@@ -55,8 +62,23 @@ class Member(models.Model):
         null=True,
         related_name='board')
     """The board of the :class:`Member`"""
-    founded=models.DateField(null=True, blank=True)
+    founded=models.PositiveIntegerField(null=True, blank=True)
     """When the :class:`Member` was first established"""
+    def save(self, *args,**kwargs):
+        if self.pk==None:
+            super(Member,self).save(*args,**kwargs)
+            a=Event.objects.create(
+                name=str(self.slug+" recruitment"),
+                scope="local",
+                category="recruitment",
+                summary="Interested in joining? Apply here or click for more information",
+                description="We are always recruiting and welcoming new people.",
+                start_date=datetime.now()
+            )
+            a.save()
+            a.organizing_committee=[self]
+        else:
+            super(Member.save(*args,**kwargs))
     def __unicode__(self):
         if self.type not in ['jlc','lc','observer']:
             return self.name
@@ -70,7 +92,6 @@ class Member(models.Model):
             return self.event_set.all().exclude(name='Recruitment').order_by('-start_date')[0].start_date
         except:
             return 0
-
 class MemberImage(models.Model):
     """ Helper class used to associate an arbitrary number of images with a :class:`Member` """
 
