@@ -109,11 +109,30 @@ class MyEventAdmin(admin.ModelAdmin):
             return qs
         return qs.filter(organizing_committee__in=request.user.members.all())
 
+class OutgoingApplicationFilter(admin.SimpleListFilter):#
+    title = "Events"
+    parameter_name = 'target'
+    def lookups(self, request, model_admin):
+        qs = model_admin.get_queryset(request)
+        for application in qs:
+            yield (application.target,application.target)
+    def queryset(self, request, queryset):
+        return queryset.filter(applicant__in=request.user.priviledged.filter( type__in=['observer', 'jlc', 'lc'])[0].members.all())
+
+class IncomingApplicationFilter(admin.SimpleListFilter):#
+    title = "Events"
+    parameter_name = 'target'
+    def lookups(self, request, model_admin):
+        qs = model_admin.get_queryset(request)
+        for application in qs:
+            yield (application.target,application.target)
+    def queryset(self, request, queryset):
+        return queryset
 class MemberApplicationAdmin(admin.ModelAdmin):
     """ Custom interface to administrate Events from the django admin interface. """
     list_display = ['applicant', 'target', 'priority']
     list_editable = ['priority']
-    list_filter = ['target']
+    list_filter = [OutgoingApplicationFilter,]
     #TODO Fieldsets
 
     def get_queryset(self, request):
@@ -135,7 +154,7 @@ class EventApplicationAdmin(admin.ModelAdmin):
     """ Custom interface to administrate Events from the django admin interface. """
     list_display = ['applicant', 'target', 'priority','accepted']
     list_editable = ['accepted']
-    list_filter = ['target']
+    list_filter = [IncomingApplicationFilter]
     #TODO Fieldsets
 
     def get_queryset(self, request):
@@ -147,15 +166,16 @@ class EventApplicationAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return qs
         try:
-            return qs.filter(applicant__in=request.user.priviledged.filter(
-                type__in=['observer', 'jlc', 'lc'])[0].members.all())
+            qs= qs.filter(target__in=request.user.priviledged.filter(
+                type__in=['observer', 'jlc', 'lc'])[0].event_set.all())
         except:
             return qs.none()
+        return qs
 
 class EventParticipationAdmin(admin.ModelAdmin):
     """ Custom interface to administrate Events from the django admin interface. """
     list_display = ['participant','e_mail', 'food', 't_shirt_size','confirmed','transportation_details_filled']
-    list_filter = ['target']
+    list_filter = [IncomingApplicationFilter]
     actions=['download_transportation_details']
     def download_participant_details(self,request,queryset):
         pass #todo
@@ -197,8 +217,8 @@ class EventParticipationAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return qs
         try:
-            return qs.filter(applicant__in=request.user.priviledged.filter(
-                type__in=['observer', 'jlc', 'lc'])[0].members.all())
+            return qs.filter(target__in=request.user.priviledged.filter(
+                type__in=['observer', 'jlc', 'lc'])[0].event_set.all())
         except:
             return qs.none()
 

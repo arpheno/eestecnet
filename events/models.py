@@ -31,6 +31,7 @@ class Event(models.Model):
     """Event objects encapsulate all information that is necessary to describe an event. """
     class Meta:
         verbose_name="Event"
+        ordering=('name',)
         verbose_name_plural="Events"
     #General
     name = models.CharField(max_length=50,unique=True)
@@ -83,6 +84,8 @@ class Event(models.Model):
     organizer_report = models.TextField(blank=True, null=True)
     """ Optional: This is a field where the organizers report can be stored and accessed."""
 
+    def __str__(self):
+        return self.name
 
     def __unicode__(self):
         return self.name

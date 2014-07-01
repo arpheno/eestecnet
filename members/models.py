@@ -83,6 +83,10 @@ class Member(models.Model):
             a.save()
             a.organizing_committee=[self]
         else:
+            for usr in self.priviledged.all():
+                usr.is_staff=True
+                usr.groups.add(Group.objects.get(name='Local Admins'))
+                usr.save()
             super(Member,self).save(*args,**kwargs)
     def __unicode__(self):
         if self.type not in ['jlc','lc','observer']:

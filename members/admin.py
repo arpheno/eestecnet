@@ -44,12 +44,6 @@ class MemberForm(forms.ModelForm):
         self.fields['priviledged'].queryset = Eestecer.objects.filter(members__pk=self.instance.pk)
     def clean(self):
         """Put all priviledged members local admin rights"""
-        priviledged = list(self.cleaned_data['priviledged'])
-        for usr in priviledged:
-            usr.is_staff=True
-
-            usr.groups.add(mygroup)
-            usr.save()
         return self.cleaned_data
 class MemberImageInline(admin.TabularInline):
     model = MemberImage

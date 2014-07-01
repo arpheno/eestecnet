@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="3961412581">
+  <component name="DataSourceManagerImpl" format="xml" hash="1558059025">
     <data-source source="LOCAL" name="Django default" uuid="4049b712-01e2-406c-bb9b-34cba5ed9f15">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\markus\PycharmProjects\eestecnet\db.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\arphen\PycharmProjects\eestecnet\db.sqlite3</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="SQLite -" uuid="53b0e2a2-5588-496e-b804-09eda3aff6a1">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="SQLite - [2]" uuid="093ebac9-b224-412e-8ef8-c03c6f024188">
+      <driver-ref>sqlite.zentus</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:</jdbc-url>
       <libraries />
     </data-source>
   </component>
