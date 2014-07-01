@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 from django.contrib.auth.models import Group, Permission
+from django.core.files import File
 from django.db.models.signals import post_syncdb
 from django.utils.datetime_safe import datetime
 from eestecnet import settings
@@ -42,7 +43,7 @@ def create_eestec_lcs(sender,**kwargs):
                               founded=1986,
                               website="http://www.eestec.hu/pages/home.php",
                               address=u"Eszék utca 9-11\nH-1114 Budapest\nHungary")
-        Member.objects.create(name='Consenza',
+        Member.objects.create(name='Cosenza',
                               founded=1998,
                               website="http://www.asiunical.org",
                               address="ASI-UNICAL\nvia Pietro Bucci, Cubo 42D, piano terra\nUniversita della Calabria\n87036 Arcavacata di Rende Cosenza)\nItaly")
@@ -164,7 +165,18 @@ def create_eestec_lcs(sender,**kwargs):
                               address=u"AMIV an der ETH Zuerich\nEESTEC LC Zurich\nCAB E37\nUniversitätsstrasse 6\n8092 Zürich\nSwitzerland")
         for lc in Member.objects.all():
             lc.description=open("eestecnet/lc/"+lc.slug+".txt").read()
+            try:
+                with open('eestecnet/lc/'+lc.slug+'.jpg', 'rb') as doc_file:
+                    lc.thumbnail.save(lc.slug+".jpg", File(doc_file), save=True)
+            except:
+                with open('eestecnet/lc/test.png', 'rb') as doc_file:
+                        lc.thumbnail.save(lc.slug+".png", File(doc_file), save=True)
+            try:
+                lc.thumbsource=open("eestecnet/lc/"+lc.slug+"-credit.txt").read()
+            except:
+                pass
             lc.save()
+
 def create_local_admins(sender, **kwargs):
 
     """
@@ -175,7 +187,10 @@ def create_local_admins(sender, **kwargs):
         for perm in [
             'add_entry', 'change_entry', 'delete_entry',
             'add_event', 'change_event', 'delete_event',
-            'add_application', 'change_application', 'delete_application',
+            'change_incomingapplication', 'delete_incomingapplication',
+            'change_incomingapplication', 'delete_incomingapplication',
+            'change_outgoingapplication',
+            'change_participation','delete_participation',
             'add_eestecer', # This is necessary so local admins can see their members
             'change_member']:
             admins.permissions.add(Permission.objects.get(codename=perm))

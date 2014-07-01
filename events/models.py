@@ -165,10 +165,10 @@ class Application(models.Model):
                     else:
                         super(Application,self).save()
 
-class ApplicationByMember(Application):
+class IncomingApplication(Application):
     class Meta:
         proxy=True
-class ApplicationByEvent(Application):
+class OutgoingApplication(Application):
     class Meta:
         proxy=True
 

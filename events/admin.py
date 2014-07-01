@@ -9,8 +9,8 @@ from django.db.models import ManyToManyField
 from django.forms import Textarea
 from django.http import HttpResponse
 from account.models import Eestecer
-from events.models import Event, Application, EventImage, ApplicationByMember, \
-    ApplicationByEvent, Participation
+from events.models import Event, Application, EventImage, \
+  Participation, IncomingApplication, OutgoingApplication
 
 
 class ApplicationInline(admin.TabularInline):
@@ -204,6 +204,6 @@ class EventParticipationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Event, MyEventAdmin)
-admin.site.register(ApplicationByMember, MemberApplicationAdmin)
-admin.site.register(ApplicationByEvent, EventApplicationAdmin)
+admin.site.register(OutgoingApplication, MemberApplicationAdmin)
+admin.site.register(IncomingApplication, EventApplicationAdmin)
 admin.site.register(Participation, EventParticipationAdmin)

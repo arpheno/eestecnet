@@ -1,5 +1,6 @@
 from autoslug import AutoSlugField
 from django.contrib.auth.models import User, Group, Permission
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.datetime_safe import datetime
 from account.models import Eestecer
@@ -32,6 +33,7 @@ class Member(models.Model):
         choices=TYPE_CHOICES,
         default='lc')
     thumbnail=models.ImageField(blank=True,null=True,upload_to="memberthumbs")
+    thumbsource=models.CharField(max_length=50,blank=True,null=True)
     """The picture that should appear in the :class:`Member` list"""
     description= models.TextField(blank= True, null=True)
     """ LC info text"""
@@ -39,8 +41,11 @@ class Member(models.Model):
     """ Facebook page for the member"""
     website = models.URLField(blank=True, null=True)
     address = models.TextField(blank=True, null=True)
+    def clean(self):
+        # Don't allow draft entries to have a pub_date.
+        if self.thumbnail and not self.thumbsource:
+            raise ValidationError('Please provide the source for the image')
 
-    """ website  for the member"""
     #Members
     members = models.ManyToManyField(
         Eestecer,
