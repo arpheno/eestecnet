@@ -99,12 +99,16 @@ header .content nav{
 #sidebar .event{
     margin:30px auto;
 }
-footer{
+#footer{
    background-color:#465052;
     height:125px;
-    width: 100%;
+    width:1280px;
     background-image:url(../images/map.png);
     background-repeat: no-repeat;
+}
+#sponsors{
+    background-color: #ffffff;
+    width:1280px;
 }
 .application{
     position: relative;
