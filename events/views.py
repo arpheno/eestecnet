@@ -10,7 +10,8 @@ from events.models import Event, Application
 
 def featuredevent():
     random_idx = random.randint(0, Event.objects.count() - 1)
-    return Event.objects.all()[random_idx]
+    return Event.objects.all()[random_idx]#todo
+    return Event.objects.all().exclude(category='recruitment')[random_idx]
 
 class InternationalEvents(ListView):
     model = Event

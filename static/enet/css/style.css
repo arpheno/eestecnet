@@ -65,14 +65,10 @@ header .content nav{
 .wrapper button{
     flex:1 auto;
 }
-main aside footer{
-    flex:1 100%;
-}
-main {
-    width:885px;
-    padding-top:35px;
-    padding-left:30px;
+#page {
+    width:1280px;
     float:left;
+    display:flex;
     background-color:#fcfcfc;
     box-shadow:
         0px 0px 200px 100px rgba(0,0,0,0.1),
@@ -93,15 +89,14 @@ main {
     z-index: 0;
     background:linear-gradient(to top ,rgba(0,0,0,0), rgba(0,0,0,0.04));
 }
-aside {
-    width:300px;
+#sidebar {
     background-color:#5f6a6d;
     border-width: 0px 65px 0px 0px;
     border-style:solid;
     border-color:#3f4749;
     z-index: 1;
 }
-aside .event{
+#sidebar .event{
     margin:30px auto;
 }
 footer{
@@ -189,7 +184,7 @@ ul li { margin:0; padding:0; line-height:normal; zoom:1; }
 .picture {
     background-color: #354040;
     padding: 5px;
-    margin: 11px 11px;
+    margin: 11px 8px;
     flex:1 100%;
     width:192px;
 }
@@ -211,7 +206,7 @@ ul li { margin:0; padding:0; line-height:normal; zoom:1; }
     font-family: 'verdana';
     font-weight: normal;
     font-size:12px;
-    margin:7px 2px;
+    margin:7px 0px;
     line-height:100%;
     color:#ffffff;
 }
@@ -219,8 +214,8 @@ ul li { margin:0; padding:0; line-height:normal; zoom:1; }
     text-align: center;
     float:left;
     display:flex;
-    margin: 0px 8px;
-    height: 225;
+    flex-wrap:wrap;
+    margin: 0px 6px;
 }
 .detail .pictures{
     height:225px;

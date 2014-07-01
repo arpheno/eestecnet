@@ -52,8 +52,8 @@
                         <li class="active"><a href="/bootstrap">Home</a></li>
                         <li><a href="#news">News</a></li>
                         <li><a href="#about">About</a></li>
-                        <li><a href="{% url 'bootstrap-events' %}">Events</a></li>
-                        <li><a href="#cities">Cities</a></li>
+                        <li><a href="{% url 'events' %}">Events</a></li>
+                        <li><a href="{% url 'cities' %}">Cities</a></li>
                         <li><a href="#about">Teams</a></li>
                     </ul>
                     <form class="navbar-form navbar-left navbar-right" role="search">
@@ -67,22 +67,11 @@
         </div>
 
         <div class="container">
-            {% block content %}
-                <div class="row" id="page">
-                    <div class="col-md-9" id="content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate est ac ante gravida egestas lacinia non lorem. Etiam non nulla faucibus, rhoncus nibh ac, sodales nibh. Curabitur interdum mi mauris, quis dictum libero mollis non. Nam tempor nulla nec pharetra adipiscing. Suspendisse laoreet nunc et turpis auctor, ac laoreet tortor varius. Suspendisse scelerisque diam quis justo eleifend, in tincidunt magna volutpat. Curabitur a suscipit leo. Vestibulum scelerisque feugiat ullamcorper. Cras non dapibus sem. Nunc et eleifend felis. Proin mauris ante, gravida non imperdiet id, eleifend eget justo.</p>
-                        <p>Phasellus varius ante diam, non dapibus turpis ultricies at. In imperdiet, nulla porttitor volutpat convallis, nisi leo volutpat risus, at viverra tortor odio a arcu. Aliquam vitae nulla massa. Fusce eu leo nulla. Cras a nisi eu felis condimentum lobortis. Pellentesque fermentum accumsan turpis. Nunc tortor massa, placerat non diam a, blandit sodales lacus. Proin eget magna tincidunt ante facilisis consectetur at vel justo. Cras volutpat justo sed sodales commodo. Curabitur in lorem vel quam auctor blandit. Sed commodo massa magna, at suscipit nulla fermentum id.</p>
-                        <p>Nulla non venenatis nisi, quis luctus urna. Nulla quis dolor euismod, feugiat sem eget, volutpat orci. Nam tincidunt eu neque at condimentum. Praesent eget arcu imperdiet, volutpat nulla et, dignissim purus. Maecenas nisl tellus, porta sit amet rhoncus ac, auctor vel est. Aenean ut arcu tempus massa pulvinar bibendum et a massa. Cras congue tortor vel lacus sagittis pellentesque.</p>
-                        <p>Sed consectetur magna lacus, vel viverra nisl rutrum non. Morbi enim velit, viverra et odio non, condimentum scelerisque quam. Nullam gravida in nisi sed consequat. Sed dictum, eros rutrum ullamcorper convallis, magna lectus interdum tortor, nec dignissim ligula quam quis nisl. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed elementum pellentesque tellus, sed commodo metus. Curabitur porttitor sed diam eget iaculis. Maecenas arcu leo, suscipit a condimentum a, luctus at enim. Aliquam neque felis, auctor quis vehicula ac, porttitor id tortor. Cras elementum, augue eget dapibus iaculis, nulla justo blandit massa, vehicula sodales augue ipsum in ipsum. Donec enim leo, bibendum vitae pharetra nec, vulputate eu dui. Curabitur vehicula metus quis lectus laoreet semper ac sed ante. Suspendisse potenti.</p>
-                        <p>Nunc nec egestas leo. Nullam iaculis vitae dui at vehicula. Pellentesque pulvinar mauris id elementum elementum. Morbi faucibus ante sed quam sollicitudin iaculis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris vitae eros nunc. Mauris feugiat arcu non iaculis laoreet. Etiam tellus ipsum, lobortis sed molestie id, tincidunt vel sapien. Suspendisse potenti. Proin vitae varius justo, tempus ullamcorper odio. Cras at sapien elit. Nunc nec congue mi. Integer vitae ornare tortor.</p>
-                    </div>
-                    <div class="col-md-3" id="sidebar">
-                        {% block sidebar %}
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vulputate est ac ante gravida egestas lacinia non lorem. Etiam non nulla faucibus, rhoncus nibh ac, sodales nibh. Curabitur interdum mi mauris, quis dictum libero mollis non. Nam tempor nulla nec pharetra adipiscing. Suspendisse laoreet nunc et turpis auctor, ac laoreet tortor varius. Suspendisse scelerisque diam quis justo eleifend, in tincidunt magna volutpat. Curabitur a suscipit leo. Vestibulum scelerisque feugiat ullamcorper. Cras non dapibus sem. Nunc et eleifend felis. Proin mauris ante, gravida non imperdiet id, eleifend eget justo.</p>
-                        {% endblock %}
-                    </div>
-                </div>
-            {% endblock %}
+            <div class="row" id="page">
+                {% block content %}
+                    {% include 'bootstrap/sidebar.html' %}
+                {% endblock %}
+            </div>
             <div class="row" id="foote">
                 <div class="col-sm-2"><img src="/static/bootstrap/img/sponsor5.png" class="img-responsive" /></div>
                 <div class="col-sm-2"><img src="/static/bootstrap/img/sponsor1.png" class="img-responsive" /></div>
