@@ -74,9 +74,11 @@ In the window Packages below, select install and install
 * django
 * gunicorn
 * setuptools
+* django-bootstrap3-datetimepicker
+* django-autoslug
 * sorl-thumbnail
 
-Additionally install Pillow, but you have to check the “options” checkbox and provide --wheel as options.
+Additionally install Pillow, but you have to check the “options” checkbox and provide --use-wheel as options.
 
 Import EESTECNET
 ################
