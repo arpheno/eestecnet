@@ -38,18 +38,26 @@ INSTALLED_APPS = (
     'news',
     'account',
     'gunicorn',
+    'bootstrap3_datetime',
     'sorl.thumbnail',
 )
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'eestecnet@gmail.com'
+EMAIL_HOST_PASSWORD = 'eeStec4ever'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
-"django.core.context_processors.debug",
-"django.core.context_processors.i18n",
-"django.core.context_processors.media",
-"django.core.context_processors.static",
-"django.core.context_processors.tz",
-"django.contrib.messages.context_processors.messages",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
     'eestecnet.context_processors.random_event_processor',
 )
 MIDDLEWARE_CLASSES = (

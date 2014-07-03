@@ -1,0 +1,7 @@
+{% extends 'events/event_detail.html' %}
+{% block application %}
+    <form id="transport" action="" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input class="action-button red" type="submit" value="send transportation details" />
+    </form>
+{% endblock %}

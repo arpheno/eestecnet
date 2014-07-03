@@ -1,5 +1,7 @@
+{% extends 'enet/split.html' %}
+{% block main %}
 <div class="eestecerprofile">
-    <h1>Profile}</h1>
+    <h1>Profile</h1>
     <div class="personal">
         <h2>Personal Information</h2>
         <ul>
@@ -12,14 +14,18 @@
     <div class="lcteams">
         <h2>LC and Teams</h2>
         <ul>
-            {% for mmbr in object.members %}
+            {% for mmbr in object.members.all %}
                 <li>{{ mmbr.name }}</li>
             {% endfor %}
         </ul>
     </div>
-    <div class="events">
         <h2>Last events</h2>
-        {% include  'events/event_list.html' with object_list=object.participants.all %}
+        {% include  'events/events.html' with object_list=object.events.all %}
+        <h2>Last events participated</h2>
+        {% include  'events/events.html' with object_list=object.events_organized.all %}
+    <div class="achievements">
+        <h2>Last events</h2>
+        {% include  'account/achievement_list.html' with object_list=object.achievement_set.all %}
     </div>
-
 </div>
+{% endblock %}

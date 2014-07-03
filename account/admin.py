@@ -11,7 +11,10 @@ from django.contrib.auth.models import User
 # Define an inline admin descriptor for Employee model
 # which acts a bit like a singleton
 from account.forms import EestecerChangeForm, EestecerCreationForm
-from account.models import Eestecer
+from account.models import Eestecer, Achievement
+from events.admin import get_own_members
+
+
 class EestecerAdmin(UserAdmin):
     # The forms to add and change user instances
 
@@ -42,7 +45,9 @@ class EestecerAdmin(UserAdmin):
         qs = super(EestecerAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(first_name='big_fat_penis')# todo need something sane here
+        return qs.None()
+
 
 # Re-register UserAdmin
 admin.site.register(Eestecer, EestecerAdmin)
+admin.site.register(Achievement)

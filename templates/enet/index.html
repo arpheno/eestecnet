@@ -1,36 +1,87 @@
-{% load staticfiles %}
-<!DOCTYPE html>
+{% load staticfiles %}<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>EESTEC Training Team Platform</title>
-		<meta charset="utf-8"/>
-		<link rel="shortcut icon" href="http://eestec.net/wp-content/themes/neutral/favicon.ico">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="http://eestec.net/wp-content/themes/neutral/favicon.ico">
+
+        <title>EESTEC</title>
+
+        <!-- Custom styles for this template -->
+        <link href="/static/bootstrap/css/eestec-template.css" rel="stylesheet">
+
+        <link rel="stylesheet"
+              href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.css">
+        <link rel="stylesheet"
+              href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.css">
         <link rel="stylesheet" type="text/css" href="{% static 'enet/css/buttons.css' %}" />
         <link rel="stylesheet" type="text/css" href="{% static 'enet/css/style.css' %}" />
-		<script src="{% static 'enet/js/jquery.min.js' %}" ></script>
-		<script src="{% static 'enet/js/prefixfree.min.js' %}" ></script>
-		<script src="{% static 'enet/js/trt.js' %}" ></script>
+        <script src="{% static 'enet/js/prefixfree.min.js' %}" ></script>
+        <script src="{% static 'enet/js/trt.js' %}" ></script>
         <script src="{% static 'enet/js/jquery.cycle2.js' %}" ></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js">
+        </script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.js">
+        </script>       <script src="{% static 'bootstrap/js/bootstrap.js' %}" ></script>
+        {{ form.media }}
     </head>
+
     <body>
-    <header class="toplevel">
-        <div class="wrapper">
-            <img src="{% static 'enet/images/logo.png' %}" width="113px" height="48px">
-                <button href="">Home</button>
-                <button>News</button>
-                <button>About</button>
-                <button><a href="{% url 'events' %}">Events</a></button>
-                <button><a href="{% url 'cities' %}">Cities</a></button>
-                <button>Teams</button>
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-header col-md-2">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/bootstrap"><img src="{% static 'enet/images/logo.png' %}" width="113px" height="48px"></a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="main-navbar-collapse">
+                    <ul class="nav navbar-nav col-md-7">
+                        <li class="active"><a href="/bootstrap">Home</a></li>
+                        <li><a href="#news">News</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="{% url 'events' %}">Events</a></li>
+                        <li><a href="{% url 'cities' %}">Cities</a></li>
+                        <li><a href="#about">Teams</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-left col-md-3 navbar-right" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </header>
-    <div class="wrapper">
-        <main>
-            <div class="grad"></div>
-            {% block content %}{% endblock %}
-        </main>
-        <aside>{% include 'enet/sidebar.html' %}</aside>
-        <footer> lol </footer>
-    </div>
+
+        <div class="container">
+            <div class="row" id="page">
+                {% block content %}
+                    {% include 'bootstrap/sidebar.html' %}
+                {% endblock %}
+            </div>
+            <div class="row" id="sponsors">
+                <div class="col-sm-2"><img src="/static/bootstrap/img/sponsor5.png" class="img-responsive" /></div>
+                <div class="col-sm-2"><img src="/static/bootstrap/img/sponsor1.png" class="img-responsive" /></div>
+                <div class="col-sm-2"><img src="/static/bootstrap/img/sponsor2.png" class="img-responsive" /></div>
+                <div class="col-sm-2"><img src="/static/bootstrap/img/sponsor3.png" class="img-responsive" /></div>
+                <div class="col-sm-2"><img src="/static/bootstrap/img/sponsor4.png" class="img-responsive" /></div>
+                <div class="col-sm-2"><img src="/static/bootstrap/img/sponsor2.png" class="img-responsive" /></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" id="footer">
+                    <p>Nulla non venenatis nisi, quis luctus urna. Nulla quis dolor euismod, feugiat sem eget, volutpat orci. Nam tincidunt eu neque at condimentum. Praesent eget arcu imperdiet, volutpat nulla et, dignissim purus. Maecenas nisl tellus, porta sit amet rhoncus ac, auctor vel est. Aenean ut arcu tempus massa pulvinar bibendum et a massa. Cras congue tortor vel lacus sagittis pellentesque.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript -->
     </body>
 </html>

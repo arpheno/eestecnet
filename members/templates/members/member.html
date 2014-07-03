@@ -1,5 +1,9 @@
 {% load thumbnail %}
-<a href="{% url 'member' member.slug %}">
+{% if member.category == 'jlc' or membery.category == 'lc' or member.category == 'observer' %}
+    <a href="{% url 'city' member.slug %}">
+{% else %}
+    <a href="{% url 'team' member.slug %}">
+{% endif %}
 
     <div class="picture">
         <div class="thumbnail">

@@ -54,7 +54,6 @@ class MyEventAdmin(admin.ModelAdmin):
     list_display = ['OC','name']
     inlines = [ApplicationInline, ParticipantInline,ImageInline]
     """ Inline interface for displaying the applications to an event and making it possible to accept them"""
-    """Interface to manage accepted participants, you can kick them out here again. TODO: penalties for leaving"""
     exclude = ['participants',"participant_count"]
     fieldsets = (
         ('Basic Event Information', {
@@ -74,7 +73,6 @@ class MyEventAdmin(admin.ModelAdmin):
             'fields': (('organizer_report','pax_report'),)
         })
     )
-    add_inlines = []
     add_fieldsets = (
         ('Basic Event Information', {
             'fields': (
@@ -114,43 +112,44 @@ class OutgoingApplicationFilter(admin.SimpleListFilter):#
     parameter_name = 'target'
     def lookups(self, request, model_admin):
         qs = model_admin.get_queryset(request)
-        for application in qs:
-            yield (application.target,application.target)
+        events=set([application.target for application in qs])
+        for event in events:
+            yield (event,event)
     def queryset(self, request, queryset):
-        return queryset.filter(applicant__in=request.user.priviledged.filter( type__in=['observer', 'jlc', 'lc'])[0].members.all())
+        return queryset
 
 class IncomingApplicationFilter(admin.SimpleListFilter):#
     title = "Events"
     parameter_name = 'target'
     def lookups(self, request, model_admin):
         qs = model_admin.get_queryset(request)
-        for application in qs:
-            yield (application.target,application.target)
+        events=set([application.target for application in qs])
+        for event in events:
+            yield (event,event)
     def queryset(self, request, queryset):
         return queryset
-class MemberApplicationAdmin(admin.ModelAdmin):
+
+def get_own_members(request):
+    return request.user.priviledged.filter( type__in=['observer', 'jlc', 'lc'])[0].members.all()
+
+class OutgoingApplicationAdmin(admin.ModelAdmin):
     """ Custom interface to administrate Events from the django admin interface. """
     list_display = ['applicant', 'target', 'priority']
     list_editable = ['priority']
     list_filter = [OutgoingApplicationFilter,]
-    #TODO Fieldsets
-
     def get_queryset(self, request):
         """ A Local admin will only be able to modify applications issued by members from their LC
         Admins still get to see all applications"""
-        qs = super(MemberApplicationAdmin, self).get_queryset(request)
-        #if request.user.is_superuser:
-        #TODO sanity check
+        qs = super(OutgoingApplicationAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
         try:
-            return qs.filter(applicant__in=request.user.priviledged.filter(
-                type__in=['observer', 'jlc', 'lc'])[0].members.all())
+            return qs.filter(applicant__in=get_own_members(request))
         except:
             return qs.none()
 
 
-class EventApplicationAdmin(admin.ModelAdmin):
+class IncomingApplicationAdmin(admin.ModelAdmin):
     """ Custom interface to administrate Events from the django admin interface. """
     list_display = ['applicant', 'target', 'priority','accepted']
     list_editable = ['accepted']
@@ -158,11 +157,9 @@ class EventApplicationAdmin(admin.ModelAdmin):
     #TODO Fieldsets
 
     def get_queryset(self, request):
-        """ A Local admin will only be able to modify applications issued by members from their LC
+        """ A Local admin will only be able to modify applications applying to an event by their LC
         Admins still get to see all applications"""
-        qs = super(EventApplicationAdmin, self).get_queryset(request)
-        #if request.user.is_superuser:
-        #TODO sanity check
+        qs = super(IncomingApplicationAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
         try:
@@ -193,8 +190,7 @@ class EventParticipationAdmin(admin.ModelAdmin):
 
         return response
     def transportation_details_filled(self,instance):
-        return False
-        if instance.transportation:#TODO parentheses
+        if instance.transportation:
             return True
         return False
     #TODO Fieldsets
@@ -206,8 +202,6 @@ class EventParticipationAdmin(admin.ModelAdmin):
         return instance.participant.food_preferences
     def t_shirt_size(self, instance):
         return instance.participant.tshirt_size
-
-
     def get_queryset(self, request):
         """ A Local admin will only be able to modify applications issued by members from their LC
         Admins still get to see all applications"""
@@ -224,6 +218,6 @@ class EventParticipationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Event, MyEventAdmin)
-admin.site.register(OutgoingApplication, MemberApplicationAdmin)
-admin.site.register(IncomingApplication, EventApplicationAdmin)
+admin.site.register(OutgoingApplication, OutgoingApplicationAdmin)
+admin.site.register(IncomingApplication, IncomingApplicationAdmin)
 admin.site.register(Participation, EventParticipationAdmin)

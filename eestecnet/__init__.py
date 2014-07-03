@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group, Permission
 from django.core.files import File
 from django.db.models.signals import post_syncdb
 from django.utils.datetime_safe import datetime
-from account.models import Eestecer
+from account.models import Eestecer, Position
 from eestecnet import settings
 
 from django.db.models.signals import post_syncdb
@@ -179,62 +179,16 @@ def create_eestec_lcs(sender,**kwargs):
             except:
                 pass
             lc.save()
-        Eestecer.objects.create_superuser(
-            "admin@eestec.net",
-            "test",
-            first_name="specific")
-        user=Eestecer.objects.create_user(
-            "user@eestec.net",
-            "test",
-            first_name="random")
-        user.save()
-        outg=Eestecer.objects.create_user(
-            "outgoing@eestec.net",
-            "outgoing",
-            first_name="outgoing")
-        outg.save()
-        inc=Eestecer.objects.create_user(
-            "incoming@eestec.net",
-            "incoming",
-            first_name="incoming")
-        inc.save()
-        tm=Member.objects.create(name='test',
-                              founded=1986,
-                              website="http://eestec.ch",
-                              address=u"AMIV an der ETH Zuerich\nEESTEC LC Zurich\nCAB E37\nUniversitätsstrasse 6\n8092 Zürich\nSwitzerland")
-        tm.save()
-        tm.members.add(inc)
-        tm.priviledged.add(inc)
-        tm.save()
-        to=Member.objects.create(name='outtest',
-                                 founded=1986,
-                                 website="http://eestec.ch",
-                                 address=u"AMIV an der ETH Zuerich\nEESTEC LC Zurich\nCAB E37\nUniversitätsstrasse 6\n8092 Zürich\nSwitzerland")
-        to.save()
-        to.members.add(user,outg)
-        to.priviledged.add(outg)
-        to.save()
-        ev=Event.objects.create(name="T4T",
-                                 summary="Nice event",
-                                 description="Cool thing",
-                                 start_date=datetime.now(),
-                                 category="workshop",
-                                 scope="international",
-                                 deadline=datetime.now()+timedelta(days=1),
-                                 )
-        ev.save()
-        ev.organizing_committee.add(tm)
-        ap=Application.objects.create(target=ev,applicant=user)
-        ap.save()
+
 def setup_event_tests(sender, **kwargs):
     if kwargs['app'].__name__ == settings.INSTALLED_APPS[-1] + ".models":
         Eestecer.objects.create_superuser(
             "admin@eestec.net",
-            password="test",
+            "test",
             first_name="specific")
         user=Eestecer.objects.create_user(
             "user@eestec.net",
-            password="test",
+            "test",
             first_name="random")
         user.save()
         outg=Eestecer.objects.create_user(
@@ -248,12 +202,13 @@ def setup_event_tests(sender, **kwargs):
             first_name="incoming")
         inc.save()
         tm=Member.objects.create(name='test',
-                              founded=1986,
-                              website="http://eestec.ch",
-                              address=u"AMIV an der ETH Zuerich\nEESTEC LC Zurich\nCAB E37\nUniversitätsstrasse 6\n8092 Zürich\nSwitzerland")
+                                 founded=1986,
+                                 website="http://eestec.ch",
+                                 address=u"AMIV an der ETH Zuerich\nEESTEC LC Zurich\nCAB E37\nUniversitätsstrasse 6\n8092 Zürich\nSwitzerland")
         tm.save()
         tm.members.add(inc)
         tm.priviledged.add(inc)
+        tm.save()
         to=Member.objects.create(name='outtest',
                                  founded=1986,
                                  website="http://eestec.ch",
@@ -261,18 +216,32 @@ def setup_event_tests(sender, **kwargs):
         to.save()
         to.members.add(user,outg)
         to.priviledged.add(outg)
+        to.save()
         ev=Event.objects.create(name="T4T",
-                                 summary="Nice event",
-                                 description="Cool thing",
-                                 start_date=datetime.now(),
-                                 category="workshop",
-                                 scope="international",
-                                 deadline=datetime.now()+timedelta(days=1),
-                                 )
+                                summary="Nice event",
+                                description="Cool thing",
+                                start_date=datetime.now(),
+                                category="workshop",
+                                scope="international",
+                                deadline=datetime.now()+timedelta(days=1),
+                                )
         ev.save()
         ev.organizing_committee.add(tm)
         ap=Application.objects.create(target=ev,applicant=user)
         ap.save()
+
+def create_positions_for_achievements(sender, **kwargs):
+    if kwargs['app'].__name__ == settings.INSTALLED_APPS[-1] + ".models":
+        Position.objects.create(name='Main Organizer',description="Was majorly responsible for the organization of an Event.").save()
+        Position.objects.create(name='Trainer Status',description="Acquired the status of \"Certified EESTEC Trainer\".").save()
+        Position.objects.create(name='International Team Coordinator',description="Coordinated the efforts of an International Team during a mandate.").save()
+        Position.objects.create(name='Chairperson',description="Held the Chaiperson position in a commitment.").save()
+        Position.objects.create(name='Contact person',description="Held the Contact Person position in a commitment.").save()
+        Position.objects.create(name='Treasurer',description="Held the Treasurer position in a commitment.").save()
+        Position.objects.create(name='Public Relations responsible',description="Was responsible for the public relations in a commitment.").save()
+        Position.objects.create(name='IT responsible',description="Was responsible for the IT department in a commitment.").save()
+        Position.objects.create(name='Fundraising responsible',description="Was responsible for the Fundraising department in a commitment.").save()
+        Position.objects.create(name='Publication and Administration responsible',description="Was responsible for the Publications and Administrations department in a commitment.").save()
 
 def create_local_admins(sender, **kwargs):
 
@@ -294,3 +263,5 @@ def create_local_admins(sender, **kwargs):
             admins.save()
 post_syncdb.connect(create_local_admins)
 post_syncdb.connect(create_eestec_lcs)
+post_syncdb.connect(create_positions_for_achievements)
+post_syncdb.connect(setup_event_tests)

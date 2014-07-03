@@ -1,12 +1,19 @@
 import random
+from bootstrap3_datetime.widgets import DateTimePicker
+from django.core.urlresolvers import reverse
 from django.forms import ModelForm
 from django.forms import widgets
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
 from django.views.generic import ListView, DetailView, CreateView, View
-from events.models import Event, Application
+from events.models import Event, Application, Participation, Transportation
+
+class HTML5Input(widgets.Input):
+    def __init__(self, type, attrs):
+        self.input_type = type
+        super(HTML5Input, self).__init__(attrs)
 
 def featuredevent():
     random_idx = random.randint(0, Event.objects.count() - 1)
@@ -25,13 +32,26 @@ class InternationalEvents(ListView):
         context['other_list'] = [event for event in Event.objects.filter(scope="international",category="workshop") for i in range(2)]
         return context
 
+def confirm_event(request,slug):
+    try:
+        pa=Participation.objects.get(target__slug=slug,participant=request.user)
+    except:
+        return redirect(reverse('event',kwargs={'slug':slug}))
+    pa.confirmed=True
+    pa.confirmation=0
+    pa.save()
+    return redirect(reverse('event',kwargs={'slug':slug}))
 class EventDetail(DetailView):
     model = Event
     template_name = "events/event_detail.html"
     def get_context_data(self, **kwargs):
-       # import pdb;pdb.set_trace()
-        return super(EventDetail,self).get_context_data(**kwargs)
 
+        context= super(EventDetail,self).get_context_data(**kwargs)
+        try:
+            context['participation']=Participation.objects.get(target__slug=self.kwargs['slug'],participant=self.request.user)
+        except:
+            context['participation']=None
+        return context
 class ApplyForm(ModelForm):
     class Meta:
         model = Application
@@ -56,6 +76,35 @@ class ApplyToEvent(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse()
-
+            return redirect(reverse('event',kwargs={'slug':self.kwargs['slug']}))
         return render(request, self.template_name, {'form': form})
+class TransportForm(ModelForm):
+    class Meta:
+        model = Transportation
+        fields=('arrival','arrive_by','arrival_number','departure','depart_by')
+        widgets = {
+            'arrival': DateTimePicker(options={"format": "YYYY-MM-DD HH:mm",
+                                       "pickSeconds": False}),
+            'departure': DateTimePicker(options={"format": "YYYY-MM-DD HH:mm",
+                                               "pickSeconds": False}),
+            }
+
+class FillInTransport(CreateView):
+    form_class = TransportForm
+    template_name = 'events/transportation_form.html'
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(FillInTransport, self).get_context_data(**kwargs)
+        # Add in a QuerySet of all the books
+        context['object'] = Event.objects.get(slug=self.kwargs['slug'])
+        return context
+    def post(self, request, *args, **kwargs):
+
+        form = self.form_class(request.POST)
+        pax=get_object_or_404(Participation,participant=request.user,target__slug=self.kwargs['slug'])
+        trans=form.save()
+        pax.transportation=trans
+        pax.save()
+        return redirect(reverse('event',kwargs={'slug':self.kwargs['slug']}))
+

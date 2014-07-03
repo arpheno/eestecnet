@@ -1,3 +1,4 @@
+from autoslug import AutoSlugField
 from django.db import models
 from django.utils import timezone
 from django.utils.http import urlquote
@@ -54,8 +55,11 @@ TSHIRT_SIZE = (('mxs', 'Male XS'), ('ms', 'Male S'), ('mm', 'Male M'), ('ml', 'M
                ('fxs', 'Female XS'), ('fs', 'Female S'), ('fm', 'Female M'),
                ('fl', 'Female L'), ('fxl', 'Female XL'), ('fxxl', 'Female XXL'),
                ('fxxxl', 'Female XXXL'), )
-
-
+def get_eestecer_slug(instance):
+    if instance.middle_name:
+        return "%s-%s-%s" % (instance.first_name,instance.middle_name,instance.last_name)
+    else:
+        return "%s-%s-%s" % (instance.first_name,instance.middle_name,instance.last_name)
 class Eestecer(AbstractBaseUser, PermissionsMixin):
     """
     A fully featured User model with admin-compliant permissions that uses
@@ -83,6 +87,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     middle_name = models.CharField(_('middle name'), max_length=30, blank=True)
     """First name"""
     last_name = models.CharField(_('last name'), max_length=30)
+    slug = AutoSlugField(populate_from=get_eestecer_slug)
     """Last name """
     second_last_name = models.CharField(_('second clast name'), max_length=30, blank=True)
     """Last name """
@@ -158,7 +163,11 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
 class Position(models.Model):
     name=models.CharField(max_length=40,unique=True)
     description=models.TextField()
-
+    def __unicode__(self):
+        return self.name
 class Achievement(models.Model):
     person = models.ForeignKey(Eestecer,related_name='achievements')
     position= models.ForeignKey(Position)
+    member = models.ForeignKey('members.Member')
+    date = models.DateField(auto_now_add=True)
+    event = models.ForeignKey('events.Event',null=True,blank=True)

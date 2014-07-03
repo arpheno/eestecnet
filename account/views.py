@@ -69,7 +69,6 @@ def auth(request):
         return HttpResponse(json.dumps(data), content_type="application/json")
 class EestecerProfile(DetailView):
     model = Eestecer
-    slug_field= "last_name"
     template_name= "account/eestecer_detail.html"
 
 

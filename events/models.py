@@ -1,7 +1,13 @@
+import random
+import sha
 from autoslug import AutoSlugField
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils import timezone
 from django.utils.datetime_safe import datetime
+from django.utils.timezone import make_aware
 from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
@@ -100,26 +106,34 @@ class Participation(models.Model):
     target = models.ForeignKey(Event)
     """ The :class:`Event` the User is applying for."""
     confirmed = models.BooleanField(default=False)
+    confirmation = models.TextField(editable=False,null=True, blank=True)
+    transportation = models.OneToOneField('Transportation',blank=True,null=True)
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        salt = sha.new(str(random.random())).hexdigest()[:5]
+        self.confirmation = sha.new(salt+self.participant.get_full_name()).hexdigest()
+        super(Participation,self).save()
 
     def __unicode__(self):
         return self.participant.get_full_name()
 
 class Transportation(models.Model):
-    event= models.OneToOneField(Participation)
     arrival=models.DateTimeField()
-    arrive_by=ChoiceWithOtherField(choices=[(0,'Plane'),
-                                            (1,'Bus'),
-                                            (2,'Train'),
-                                            (3,'Car'),
-                                            (4,'Other, please specify')])
+    arrive_by=models.CharField(max_length=20,choices=[('plane','Plane'),
+                                            ('bus','Bus'),
+                                            ('train','Train'),
+                                            ('car','Car'),
+                                            ('other','other'),
+                                            ('own','Own arrival')])
     arrival_number=models.CharField(_('Bus/Train/Plane Number'),max_length=15,blank=True, null=True)
     departure=models.DateTimeField(blank=True, null=True)
-    depart_by=ChoiceWithOtherField(choices=[(0,'Plane'),
-                                            (1,'Bus'),
-                                            (2,'Train'),
-                                            (3,'Car'),
-                                            (4,'Other, please specify')],
-                                   )
+    depart_by=models.CharField(max_length=20,choices=[('plane','Plane'),
+                                            ('bus','Bus'),
+                                            ('train','Train'),
+                                            ('car','Car'),
+                                            ('other','other'),
+                                            ('own','Own departure')])
+
 
 
 class Application(models.Model):
@@ -155,15 +169,23 @@ class Application(models.Model):
                 if self.target.category == "recruitment":
                     if self.accepted:
                         self.target.organizing_committee.all()[0].members.add(self.applicant)
+
                         self.delete()
                     else:
                         super(Application,self).save()
                 else:
                     if self.pk==None:
-                        if datetime.now() > self.target.deadline:
-                            return
+                        pass
+                        #if timezone.now() > make_aware(self.target.deadline):#todo
+                         #   return
                     if self.accepted:
-                        Participation.objects.create(target=self.target, participant=self.applicant).save()
+                        participation = Participation.objects.create(target=self.target, participant=self.applicant)
+                        participation.save()
+                        send_mail(
+                            "Congratulations! You were accepted to " + participation.target.name,
+                            "Dear " +participation.participant.first_name + "\nPlease visit "+ reverse('eventconfirmation',kwargs={'slug':participation.target.slug})+"to confirm your participation to the event.\n Thank you.",
+                            "eestecnet@gmail.com",
+                            [self.applicant.email])
                         self.delete()
                     else:
                         super(Application,self).save()
