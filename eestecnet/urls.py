@@ -42,7 +42,6 @@ urlpatterns = patterns('',
     url(r'^login/', Login.as_view(), name='login'),
     url(r'^logout/', Logout.as_view(), name='logout'),
     url(r'^register/', EestecerCreate.as_view(), name='register'),
-    url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
     url(r'^admin/', include(admin.site.urls)),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root':MEDIA_ROOT}),
