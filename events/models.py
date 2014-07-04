@@ -81,7 +81,7 @@ class Event(models.Model):
     """Deadline until no more applications will be accepted."""
 
     #Content
-    summary = models.TextField(help_text=_("Please provide a short summary which will interest people in your Event."))
+    summary = models.TextField()
     """ A summary of the event. This will be displayed on the events page."""
     description = models.TextField(help_text=_("Please provide a detailed description for interesed readers"))
     """ A detailed description of the event. Pictures and videos can be included here"""

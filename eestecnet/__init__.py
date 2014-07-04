@@ -243,7 +243,7 @@ def create_eestec_people(sender,**kwargs):
                                 password="test",
                                 first_name="andreas",
                                 last_name="albrecht")
-        ab=Eestecer.objects.create(email="aslihanbener@gmail.com",
+        ab=Eestecer.objects.create_superuser(email="aslihanbener@gmail.com",
                                 password="test",
                                 first_name="aslihan",
                                 last_name="bener")
@@ -275,7 +275,7 @@ def create_eestec_people(sender,**kwargs):
                                 password="test",
                                 first_name="rupert",
                                 last_name="amann")
-        sw=Eestecer.objects.create(email="arpheno@gmail.com@gmail.com",
+        sw=Eestecer.objects.create_superuser(email="arpheno@gmail.com",
                                 password="test",
                                 first_name="sebastian",
                                 middle_name='stanislaw',
@@ -320,9 +320,6 @@ def create_inktronics(sender,**kwargs):
         ink.organizing_committee.add(Member.objects.get(slug='munich'))
         ink.organizers.add(Eestecer.objects.get(first_name='sebastian'))
         ink.organizers.add(Eestecer.objects.get(first_name='andreas'))
-        ink.participants.add(Eestecer.objects.get(first_name='bartosz'))
-        ink.participants.add(Eestecer.objects.get(first_name='aslihan'))
-        ink.participants.add(Eestecer.objects.get(first_name='marta'))
         ink.save()
 
 def create_positions_for_achievements(sender, **kwargs):

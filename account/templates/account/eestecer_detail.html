@@ -20,15 +20,13 @@
     <div class="lcteams">
         <h2>LC and Teams</h2>
         <ul>
-            {% for mmbr in object.members.all %}
-                <li>{{ mmbr.name }}</li>
-            {% endfor %}
+            {% include 'members/members.html' with object_list=object.members.all %}
         </ul>
     </div>
-        <h2>Last events</h2>
-        {% include  'events/events.html' with object_list=object.events.all %}
-        <h2>Last events participated</h2>
+        <h2>Last events Organized</h2>
         {% include  'events/events.html' with object_list=object.events_organized.all %}
+        <h2>Last events participated</h2>
+        {% include  'events/events.html' with object_list=object.events.all %}
     <div class="achievements">
         <h2>Achievements in EESTEC</h2>
         {% include  'account/achievement_list.html' with object_list=object.achievement_set.all %}

@@ -1,7 +1,8 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
-from django.views.generic import UpdateView, DetailView, CreateView, FormView, View
+from django.views.generic import UpdateView, DetailView, CreateView, FormView, View, \
+    ListView
 from django.contrib.auth.models import Group
 from django.forms import ModelForm
 import json
@@ -64,7 +65,9 @@ class EestecerUpdate(UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
-
+class EestecerList(ListView):
+    model=Eestecer
+    template_name = 'account/all_eestecers.html'
 class EestecerCreate(CreateView):
     model=Eestecer
     form_class = EestecerCreationForm

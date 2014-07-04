@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
 import account
 from account.views import EestecerProfile,  EestecerUpdate, EestecerCreate, \
-    Login, Logout
+    Login, Logout, EestecerList
 from eestecnet.settings import MEDIA_ROOT
 from events.models import Event, Application
 from events.views import EventDetail, ApplyToEvent, InternationalEvents, confirm_event, \
@@ -36,11 +36,13 @@ urlpatterns = patterns('',
     url(r'^events/(?P<slug>[-\w]+)/transportation/$', FillInTransport.as_view(), name='eventtransportation'),
     url(r'^cities/(?P<slug>[-\w]+)/$', DetailView.as_view(model=Member), name='city'),
     url(r'^teams/(?P<slug>[-\w]+)/$', DetailView.as_view(model=Member), name='team'),
+    url(r'^people/$', EestecerList.as_view(), name='people'),
     url(r'^people/me/$', EestecerUpdate.as_view(), name='userupdate'),
     url(r'^people/(?P<slug>[-\w]+)/$', EestecerProfile.as_view(), name='user'),
     url(r'^login/', Login.as_view(), name='login'),
     url(r'^logout/', Logout.as_view(), name='logout'),
     url(r'^register/', EestecerCreate.as_view(), name='register'),
+    url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
     url(r'^admin/', include(admin.site.urls)),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root':MEDIA_ROOT}),

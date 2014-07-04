@@ -38,9 +38,11 @@
 </div>
 
     <h3 class="clear">Description</h3>
+{% autoescape off %}
     {{ object.description }}
+{% endautoescape %}
 <h1>Organizers</h1>
-    {% include 'account/eestecers.html' with object_list=object.board.all %}
+    {% include 'account/eestecers.html' with object_list=object.organizers.all %}
     <h1>Participants</h1>
     {% include 'account/eestecers.html' with object_list=object.participants.all %}
 

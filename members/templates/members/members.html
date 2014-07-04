@@ -1,0 +1,6 @@
+{% load thumbnail %}
+<ul class="picturelist">
+    {% for mmbr in object_list %}
+        {% include 'members/member.html' with member=mmbr %}
+    {% endfor %}
+</ul>

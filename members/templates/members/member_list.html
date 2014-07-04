@@ -1,12 +1,7 @@
 {% extends 'enet/split.html' %}
-{% load thumbnail %}
 {% block main %}
     <div class="members">
     <h2>Members</h2>
-    <ul class="picturelist">
-        {% for mmbr in object_list %}
-            {% include 'members/member.html' with member=mmbr %}
-        {% endfor %}
-    </ul>
+    {% include 'members/members.html' with object_list=object_list %}
     </div>
 {% endblock %}

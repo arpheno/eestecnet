@@ -94,7 +94,7 @@ class Member(models.Model):
         return self.type.upper() + " " + self.name
     def member_count(self):
         """ The amount of members currently in the :class:`Member` """
-        return len(self.members.all()-1)
+        return len(self.members.all())-1
     def last_event(self):
         """  The date of the last :class:`~events.models.Event` organized by the :class:`Member` """
         try:

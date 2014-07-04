@@ -53,6 +53,7 @@ class MyMemberAdmin(admin.ModelAdmin):
     form=MemberForm
     readonly_fields = ['member_count',]
     exclude = ['members']
+    filter_horizontal = ['board','priviledged']
     inlines = [MemberImageInline, MemberInline,]
 
     def get_queryset(self, request):

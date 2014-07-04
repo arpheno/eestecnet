@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.db.models import ManyToManyField
 from django.forms import Textarea
 from django.http import HttpResponse
+from suit_redactor.widgets import RedactorWidget
 from account.models import Eestecer
 from events.models import Event, Application, EventImage, \
   Participation, IncomingApplication, OutgoingApplication
@@ -45,20 +46,20 @@ class MyEventAdminForm(forms.ModelForm):
         model = Event
         widgets = {
             'summary': Textarea(attrs={'cols': 50, 'rows': 8}),
-            'description': Textarea(attrs={'cols': 50, 'rows': 8}),
+            'description': RedactorWidget(editor_options={'lang':'en'}),
         }
 
 class MyEventAdmin(admin.ModelAdmin):
     """ Custom interface to administrate Events from the django admin interface. """
     form = MyEventAdminForm
     list_display = ['OC','name']
-    inlines = [ApplicationInline, ParticipantInline,ImageInline]
+    inlines = [ImageInline]
     """ Inline interface for displaying the applications to an event and making it possible to accept them"""
     exclude = ['participants',"participant_count"]
     fieldsets = (
         ('Basic Event Information', {
             'fields': (
-                ('name','category','scope'),('summary','description'),
+                ('name'),('category'),('scope'),('summary','description'),
                 ('participation_fee','max_participants'),'thumbnail'
             )
         }),
