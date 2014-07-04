@@ -1,4 +1,5 @@
 {% extends 'enet/split.html' %}
+{% load thumbnail %}
 {% block main %}
 <div class="eestecerprofile">
     <h1>Profile</h1>
@@ -7,10 +8,15 @@
         <ul>
             <li>{{ object.get_full_name }}</li>
             <li>{{ object.date_of_birth }}</li>
-            <li>{}</li>
         </ul>
-
     </div>
+<div class="image">
+
+        {% thumbnail object.profile_picture "250x250" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+    {% endthumbnail %}
+
+</div>
     <div class="lcteams">
         <h2>LC and Teams</h2>
         <ul>
@@ -24,7 +30,7 @@
         <h2>Last events participated</h2>
         {% include  'events/events.html' with object_list=object.events_organized.all %}
     <div class="achievements">
-        <h2>Last events</h2>
+        <h2>Achievements in EESTEC</h2>
         {% include  'account/achievement_list.html' with object_list=object.achievement_set.all %}
     </div>
 </div>

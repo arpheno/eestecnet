@@ -3,7 +3,6 @@ from bootstrap3_datetime.widgets import DateTimePicker
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm
 from django.forms import widgets
-from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
@@ -16,8 +15,7 @@ class HTML5Input(widgets.Input):
         super(HTML5Input, self).__init__(attrs)
 
 def featuredevent():
-    random_idx = random.randint(0, Event.objects.count() - 1)
-    return Event.objects.all()[random_idx]#todo
+    random_idx = random.randint(0, Event.objects.all().exclude(category='recruitment').count() - 1)
     return Event.objects.all().exclude(category='recruitment')[random_idx]
 
 class InternationalEvents(ListView):

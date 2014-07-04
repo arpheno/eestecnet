@@ -1,6 +1,6 @@
-{% extends "enet/index.html" %}
+{% extends "enet/split.html" %}
 {% load thumbnail %}
-{% block content %}
+{% block main %}
     <article class="detail">
     <h1>{{ object }}</h1>
         <div class="pictures cycle-slideshow">
@@ -18,7 +18,7 @@
         </table>
 
         <div class="application">
-            {% block application %}<a href="{% url 'eventapplication' object.slug %}" class="action-button shadow animate red">Apply to event</a>{% endblock %}
+            {% block application %}<a href="{% url 'eventapplication' object.slug %}" class="action-button shadow animate red">Join this Commitment</a>{% endblock %}
         </div>
 
         <h3 class="clear">Description</h3>
@@ -28,9 +28,9 @@
     {% include 'events/events.html' with object_list=object.event_set.all %}
         </div>
         <h2 class="clear" >Board</h2>
-        {% include 'account/eestecers.html' with object_list=object.organizers.all %}
+        {% include 'account/eestecers.html' with object_list=object.board.all %}
         <h2>Members</h2>
-        {% include 'account/eestecers.html' with object_list=object.participants.all %}
+        {% include 'account/eestecers.html' with object_list=object.members.all %}
 
     </article>
 {% endblock %}

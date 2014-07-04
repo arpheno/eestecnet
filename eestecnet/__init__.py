@@ -3,13 +3,14 @@ from datetime import timedelta
 from django.contrib.auth.models import Group, Permission
 from django.core.files import File
 from django.db.models.signals import post_syncdb
+from django.utils import timezone
 from django.utils.datetime_safe import datetime
 from account.models import Eestecer, Position
 from eestecnet import settings
 
 from django.db.models.signals import post_syncdb
-from events.models import Event, Application
-from members.models import Member
+from events.models import Event, Application, EventImage
+from members.models import Member, MemberImage
 
 
 def create_eestec_lcs(sender,**kwargs):
@@ -230,6 +231,100 @@ def setup_event_tests(sender, **kwargs):
         ap=Application.objects.create(target=ev,applicant=user)
         ap.save()
 
+def create_eestec_people(sender,**kwargs):
+
+    if kwargs['app'].__name__ == settings.INSTALLED_APPS[-1] + ".models":
+        ag=Eestecer.objects.create(email="random1@gmail.com",
+                                password="test",
+                                first_name="alexis",
+                                last_name="gonzales",
+                                second_last_name="arguello")
+        aa=Eestecer.objects.create(email="random2@gmail.com",
+                                password="test",
+                                first_name="andreas",
+                                last_name="albrecht")
+        ab=Eestecer.objects.create(email="aslihanbener@gmail.com",
+                                password="test",
+                                first_name="aslihan",
+                                last_name="bener")
+        bk=Eestecer.objects.create(email="random4@gmail.com",
+                                password="test",
+                                first_name="bartosz",
+                                last_name="kawlatow")
+        cm=Eestecer.objects.create(email="random5@gmail.com",
+                                password="test",
+                                first_name="clemens",
+                                last_name="mattersdorfer")
+        mp=Eestecer.objects.create(email="random7@gmail.com",
+                                password="test",
+                                first_name="marcus",
+                                last_name="pforte")
+        map=Eestecer.objects.create(email="martapolec@gmail.com",
+                                   password="test",
+                                   first_name="marta",
+                                   last_name="polec")
+        ez=Eestecer.objects.create(email="random6@gmail.com",
+                                password="test",
+                                first_name="elzbieta",
+                                last_name="zimolag")
+        ma=Eestecer.objects.create(email="random8@gmail.com",
+                                password="test",
+                                first_name="melis",
+                                last_name="aca")
+        ra=Eestecer.objects.create(email="randomrupter@gmail.com",
+                                password="test",
+                                first_name="rupert",
+                                last_name="amann")
+        sw=Eestecer.objects.create(email="arpheno@gmail.com@gmail.com",
+                                password="test",
+                                first_name="sebastian",
+                                middle_name='stanislaw',
+                                last_name="wozny")
+        for user in Eestecer.objects.all():
+            with open('eestecnet/people/'+user.slug+'.jpg', 'rb') as doc_file:
+                user.profile_picture.save(user.slug+".jpg", File(doc_file), save=True)
+            user.save()
+        mb=[cm,mp,ma,ra]
+        for user in mb:
+            Member.objects.get(slug='munich').board.add(user)
+        mm=[ag,aa,cm,ez,mp,ma,ra,sw]
+        Member.objects.get(slug='munich').priviledged.add(sw)
+        for user in mm:
+            Member.objects.get(slug='munich').members.add(user)
+        Member.objects.get(slug='munich').save()
+        munich= Member.objects.get(slug='munich')
+        for i in range(1,3):
+            a=MemberImage.objects.create(property=munich)
+            with open('eestecnet/lc/munich/'+str(i)+'.jpg', 'rb') as doc_file:
+                a.image.save(str(i)+".jpg", File(doc_file), save=True)
+            a.save()
+def create_inktronics(sender,**kwargs):
+    if kwargs['app'].__name__ == settings.INSTALLED_APPS[-1] + ".models":
+        ink=Event.objects.create(name='Inktronics',
+        deadline=timezone.now()+timedelta(days=10),
+        start_date=timezone.now(),
+        end_date=timezone.now(),
+        category="workshop",
+        max_participants=16,
+        description=open('eestecnet/event/inktronics/desc.txt').read(),
+        summary="Learn everything about printed and flexible electronics in Munich!",
+        scope="international")
+        with open('eestecnet/event/inktronics.jpg', 'rb') as doc_file:
+            ink.thumbnail.save('inktronics.jpg',File(doc_file),save=True)
+        ink.save()
+        for i in range(1,4):
+            a=EventImage.objects.create(property=ink)
+            with open('eestecnet/event/inktronics/'+str(i)+'.jpg', 'rb') as doc_file:
+                a.image.save(str(i)+".jpg", File(doc_file), save=True)
+            a.save()
+        ink.organizing_committee.add(Member.objects.get(slug='munich'))
+        ink.organizers.add(Eestecer.objects.get(first_name='sebastian'))
+        ink.organizers.add(Eestecer.objects.get(first_name='andreas'))
+        ink.participants.add(Eestecer.objects.get(first_name='bartosz'))
+        ink.participants.add(Eestecer.objects.get(first_name='aslihan'))
+        ink.participants.add(Eestecer.objects.get(first_name='marta'))
+        ink.save()
+
 def create_positions_for_achievements(sender, **kwargs):
     if kwargs['app'].__name__ == settings.INSTALLED_APPS[-1] + ".models":
         Position.objects.create(name='Main Organizer',description="Was majorly responsible for the organization of an Event.").save()
@@ -263,5 +358,6 @@ def create_local_admins(sender, **kwargs):
             admins.save()
 post_syncdb.connect(create_local_admins)
 post_syncdb.connect(create_eestec_lcs)
+post_syncdb.connect(create_eestec_people)
+post_syncdb.connect(create_inktronics)
 post_syncdb.connect(create_positions_for_achievements)
-post_syncdb.connect(setup_event_tests)

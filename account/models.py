@@ -88,7 +88,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(_('last name'), max_length=30)
     slug = AutoSlugField(populate_from=get_eestecer_slug)
     """Last name """
-    second_last_name = models.CharField(_('second clast name'), max_length=30, blank=True)
+    second_last_name = models.CharField(_('second last name'), max_length=30, blank=True)
     """Last name """
     date_of_birth = models.DateField(blank=True,null=True)
     """ Date of birth"""
@@ -96,14 +96,16 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     """A profile picture to be used on the website. Without a Profile picture the user will not appear in lists"""
     gender = models.CharField(max_length=15, choices=GENDER_CHOICES)
     "Gender of the applicant. Useful for overview on Gender balance."
-    tshirt_size = models.CharField(max_length=15, choices=TSHIRT_SIZE)
+    tshirt_size = models.CharField(max_length=15, choices=TSHIRT_SIZE, blank=True,null=True)
     """T-shirt size. Used for events"""
+    allergies = models.CharField(max_length=50,blank=True,null=True)
     passport_number = models.CharField(max_length=20, blank=True, null=True)
     """Passport number required by many hostels. Makes it easier for organizers."""
     food_preferences = models.CharField(max_length=15, choices=FOOD_CHOICES,
                                         default='none')
     """ Food preferences, for example vegetarian or no pork. """
     #EESTEC information
+    curriculum_vitae=models.FileField(upload_to="cvs",blank=True,null=True)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     """Should be set by the user to the time they joined eestec. For new users it will be the moment they register with the website"""
     def events_participated(self):
