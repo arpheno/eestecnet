@@ -18,7 +18,15 @@
         </table>
 
         <div class="application">
-            {% block application %}<a href="{% url 'eventapplication' object.slug %}" class="action-button shadow animate red">Join this Commitment</a>{% endblock %}
+        {% if user.is_authenticated %}
+            {% block application %}
+                {% for event in object.event_set.all %}
+                    {% if event.category == "recruitment" %}
+                        <a href="{% url 'eventapplication' event.slug %}" class="action-button shadow animate red">Join this Commitment</a>
+                    {% endif %}
+                {% endfor %}
+            {% endblock %}
+        {% endif %}
         </div>
 
         <h3 class="clear">Description</h3>
