@@ -15,8 +15,9 @@ from members.views import CommitmentList, TeamList, MemberDetail
 from news.models import Entry
 
 import random
+from news.views import home
+
 admin.autodiscover()
-view = TemplateView.as_view(template_name='enet/home.html',)
 
 
 
@@ -25,8 +26,9 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'eestecnet.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-    url(r'^$',view,name='home'),
+    url(r'^$',home.as_view(),name='home'),
     url(r'^news/$', ListView.as_view(model=Entry)),
+    url(r'^about/$', home.as_view(),name='about'),
     url(r'^news/(?P<pk>[-_\w]+)/$', DetailView.as_view(model=Entry)),
     url(r'^events/$',  InternationalEvents.as_view(),  name='events',),
     url(r'^teams/$', TeamList.as_view(),name='teams'),

@@ -159,7 +159,7 @@ STATICFILES_FINDERS = (
 
 ELFINDER_CONNECTOR_OPTION_SETS = {
     'admin': {
-        'debug': False,
+        'debug': True,
         'roots': [
             {
                 'alias': 'Resources',

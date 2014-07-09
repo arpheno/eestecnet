@@ -8,14 +8,14 @@ ELFINDER_JS_URLS = {
     'b_jqueryui' : '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/jquery-ui.min.js',
     'c_elfinder' : '%selfinder/js/elfinder.full.js' % settings.STATIC_URL,
 }
-#allow to override any key in the project settings file   
+#allow to override any key in the project settings file
 ELFINDER_JS_URLS.update(getattr(settings, 'ELFINDER_JS_URLS', {}))
 
 ELFINDER_CSS_URLS = {
     'a_jqueryui' : '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.22/themes/smoothness/jquery-ui.css',
     'b_elfinder' : '%selfinder/css/elfinder.min.css' % settings.STATIC_URL
 }
-#allow to override any key in the project settings file   
+#allow to override any key in the project settings file
 ELFINDER_CSS_URLS.update(getattr(settings, 'ELFINDER_CSS_URLS', {}))
 
 ELFINDER_WIDGET_JS_URL = '%sjs/jquery.elfinder-widget.full.js' % settings.STATIC_URL
@@ -23,15 +23,15 @@ ELFINDER_WIDGET_CSS_URL = '%scss/jquery.elfinder-widget.full.css' % settings.STA
 
 ELFINDER_LANGUAGES_ROOT_URL = getattr(settings, 'ELFINDER_LANGUAGES_ROOT_URL', '%selfinder/js/i18n/' % settings.STATIC_URL)
 
-#The available language codes. A corresponding ELFINDER_LANGUAGES_ROOT_URL/elfinder.{ext}.js url must be available  
+#The available language codes. A corresponding ELFINDER_LANGUAGES_ROOT_URL/elfinder.{ext}.js url must be available
 ELFINDER_LANGUAGES = getattr(settings, 'ELFINDER_LANGUAGES', ['ar', 'bg', 'ca', 'cs', 'de', 'el', 'es', 'fa', 'fr', 'hu', 'it', 'jp', 'ko', 'nl', 'no', 'pl', 'pt_BR', 'ru', 'tr', 'zh_CN'])
 
 ELFINDER_CONNECTOR_OPTION_SETS = {
     #the default keywords demonstrates all possible configuration options
     #it allowes all file types, except from hidden files
     'default' : {
-        'debug' : False, #optionally set debug to True for additional debug messages
-        'roots' : [ 
+        'debug' : True, #optionally set debug to True for additional debug messages
+        'roots' : [
             #{
             #    'driver' : ElfinderVolumeLocalFileSystem,
             #    'path'  : join(settings.MEDIA_ROOT, 'files'),
@@ -101,7 +101,7 @@ ELFINDER_CONNECTOR_OPTION_SETS = {
                         'hidden' : True,
                         'locked' : True
                     },
-                    #{   
+                    #{
                     #    'pattern' : r'\/my-inaccessible-folder$',
                     #    'write' : False,
                     #    'read' : False,
@@ -124,7 +124,7 @@ ELFINDER_CONNECTOR_OPTION_SETS = {
                     #for more information see http://docs.python.org/library/tarfile.html
                     #'extract' : { 'ext' : 'rar', 'archiver' : MyRarExtractor },
                 },
-                #seconds to cache the file and dir data used by the driver 
+                #seconds to cache the file and dir data used by the driver
                 #'cache' : 600
             }
         ]
@@ -155,7 +155,7 @@ ELFINDER_CONNECTOR_OPTION_SETS = {
                     },
                 ],
             }
-        ]  
+        ]
     }
 }
 

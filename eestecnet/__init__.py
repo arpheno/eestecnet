@@ -11,8 +11,24 @@ from eestecnet import settings
 from django.db.models.signals import post_syncdb
 from events.models import Event, Application, EventImage
 from members.models import Member, MemberImage
+from news.models import Entry
 
 
+def create_eestec_news(sender,**kwargs):
+    if kwargs['app'].__name__ == settings.INSTALLED_APPS[-1] + ".models":
+        cng=Entry.objects.create(headline="Congress in athens",
+                             content =open("eestecnet/news/congress.txt").read())
+        mw=Entry.objects.create(headline="Mw in Munich",
+                             content =open("eestecnet/news/mw.txt").read())
+
+        with open('eestecnet/news/congress.jpg', 'rb') as doc_file:
+            cng.entry_image.save("cng.jpg", File(doc_file), save=True)
+        with open('eestecnet/news/mw.jpg', 'rb') as doc_file:
+            mw.entry_image.save("mw.jpg", File(doc_file), save=True)
+        cng.save()
+        mw.save()
+        mw.author.add(Member.objects.get(slug='munich'))
+        cng.author.add(Member.objects.get(slug='athens'))
 def create_eestec_lcs(sender,**kwargs):
     if kwargs['app'].__name__ == settings.INSTALLED_APPS[-1] + ".models":
         Member.objects.create(name='Aachen',
@@ -355,6 +371,7 @@ def create_local_admins(sender, **kwargs):
             admins.save()
 post_syncdb.connect(create_local_admins)
 post_syncdb.connect(create_eestec_lcs)
+post_syncdb.connect(create_eestec_news)
 post_syncdb.connect(create_eestec_people)
 post_syncdb.connect(create_inktronics)
 post_syncdb.connect(create_positions_for_achievements)

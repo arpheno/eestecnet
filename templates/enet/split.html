@@ -1,12 +1,5 @@
 {% extends 'enet/index.html' %}
 {% block content %}
-    <div class="col-md-9" id="content">
-        {% block main %}    {% endblock %}
-    </div>
-    <div class="col-md-3" id="sidebar">
-        {% block sidebar %}
-        {% endblock %}
-        {% include 'enet/sidebar.html' %}
-    </div>
-
+    <main><div class="grad"></div> {% block main %} {% endblock %} </main>
+    {% block aside %}<aside>{% include 'enet/sidebar.html' %} </aside>{% endblock %}
 {% endblock %}

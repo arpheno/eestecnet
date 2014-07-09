@@ -31,9 +31,11 @@
     <img src="{% static 'enet/images/logo.png' %}" />
     <nav>
         <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'people' %}">People</a>
+        <a href="{% url 'about' %}">About</a>
         <a href="{% url 'events' %}">Events</a>
         <a href="{% url 'cities' %}">Cities</a>
+        <a href="{% url 'teams' %}">Teams</a>
+        <a href="{% url 'materials' %}">Files</a>
 
     </nav>
     <form >
@@ -47,10 +49,8 @@
     {% endif %}
 
 </header>
-
-<main><div class="grad"></div> {% block main %} {% endblock %} </main>
-{% block aside %}<aside>a </aside>{% endblock %}
-
+{% block content %}
+{% endblock %}
 <div id="sponsors"> {% include 'enet/sponsors.html' %} </div>
 <footer>
     <img src="{% static 'enet/images/map.png' %}" id="map"/>

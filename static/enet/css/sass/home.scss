@@ -1,0 +1,118 @@
+main.home{
+  display:flex;
+  flex-wrap: wrap;
+  background:none;
+  padding:0px 1px 0px 0px;
+  box-shadow: none;
+  justify-content: center;
+  max-width:1280px;
+#donate{
+  flex:1 0 45%;
+  min-height:100px;
+    .wrapper{
+    text-align: center;
+   padding:30px;
+    width:150px;
+    a{
+    display:block;
+    background-color: $darkeestec;
+    color:white;
+      font-size:18px;
+    text-decoration: none;
+    padding:4px 10px;
+    font-weight: bolder;
+  }
+  }
+
+}
+  #newsletter{
+    flex:1 0 45%;
+    min-height:100px;
+    position:relative;
+    .wrapper{
+      text-align: center;
+      padding:30px 0px;
+      width:450px;
+      position:absolute;
+      right:0px;
+      bottom:0px;
+      a{
+        background-color: $darkeestec;
+        color:white;
+        font-size:16px;
+        text-decoration: none;
+        padding:4px 10px;
+        font-weight: bolder;
+      }
+    }
+  }
+  #selector{
+    flex:1 1 15%;
+    min-height:100px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap:wrap;
+    position:relative;
+    h1{
+      color:#fff;
+      text-align: center;
+      position:absolute;
+      width:100%;
+      background-color:rgba(0,0,0,0.5);
+      top:0;
+    }
+    img{padding:50px;}
+    background-color: $eestecgreylight;
+  }
+  #preview{
+    flex:1 0 85%;
+    height:480px;
+    position:relative;
+    >h1{
+      color:#fff;
+      text-align: center;
+      position:absolute;
+      width:100%;
+      z-index:101;
+      background-color:rgba(0,0,0,0.5);
+      top:0;
+    }
+    footer{
+      position:absolute;
+      bottom:0px;
+      right:0px;
+      display:flex;
+      height:80px ;
+      overflow:hidden;
+      background-color:rgba(0,0,0,0.5);
+      color:#fff;
+      main{
+        h1{
+          font-size: 18px;
+          color:#fff;
+          border-bottom:1px solid #fff;
+          margin-bottom:3px;
+          padding-bottom:3px;
+
+        }
+        flex:1 1 70%;
+        display:flex;
+        flex-direction: column;
+      }
+      aside{
+        display:flex;
+        flex-direction: column;
+        align-items:flex-start;
+        flex:1 1 30%;
+        background-color:rgba($darkeestec,0.75);
+        margin:10px;
+      }
+    }
+    img,.pictures,#news{
+      position:relative;
+      width:1087px;
+      height:480px;
+    }
+  }
+}
