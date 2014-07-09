@@ -9,6 +9,7 @@ from eestecnet.settings import MEDIA_ROOT
 from events.models import Event, Application
 from events.views import EventDetail, ApplyToEvent, InternationalEvents, confirm_event, \
     FillInTransport
+from materials.views import connector, index
 from members.models import Member
 from members.views import CommitmentList, TeamList, MemberDetail
 from news.models import Entry
@@ -43,6 +44,8 @@ urlpatterns = patterns('',
     url(r'^logout/', Logout.as_view(), name='logout'),
     url(r'^register/', EestecerCreate.as_view(), name='register'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^materials/$', index, name='materials'),
+    url(r'^materials/connector/', connector, name='trtconnector'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root':MEDIA_ROOT}),
     )

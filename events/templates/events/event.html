@@ -1,0 +1,21 @@
+{% extends 'enet/figure.html'%}
+{% load thumbnail %}
+{% block class %}event{% endblock %}
+{% block url %}{% url 'event' object.slug %}{% endblock %}
+{% block picture %}
+    {% thumbnail object.thumbnail "150x110" crop="center" as im %}
+        <img src="{{ im.url }}"  class="thumbnail">
+    {% endthumbnail %}
+{% endblock %}
+{% block comment %}
+    {{ object.summary }}
+{% endblock %}
+{% block caption %}
+    <b>{{ object.name }}</b><br>
+    {% for oc in object.organizing_committee.all %}
+        {{ oc }}
+    {% endfor %}
+    <hr>
+    Application Deadline<br>
+    {{ object.deadline }}
+{% endblock %}

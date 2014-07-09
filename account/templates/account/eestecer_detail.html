@@ -1,35 +1,35 @@
-{% extends 'enet/split.html' %}
+{% extends 'enet/detail.html' %}
 {% load thumbnail %}
-{% block main %}
-<div class="eestecerprofile">
-    <h1>Profile</h1>
-    <div class="personal">
-        <h2>Personal Information</h2>
-        <ul>
-            <li>{{ object.get_full_name }}</li>
-            <li>{{ object.date_of_birth }}</li>
-        </ul>
-    </div>
-<div class="image">
 
-        {% thumbnail object.profile_picture "250x250" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+{% block class %}eestecer{% endblock %}
+{% block pictures %}
+    {% thumbnail object.profile_picture "375x225" crop="center" as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
     {% endthumbnail %}
+{% endblock %}
 
-</div>
-    <div class="lcteams">
-        <h2>LC and Teams</h2>
-        <ul>
-            {% include 'members/members.html' with object_list=object.members.all %}
-        </ul>
-    </div>
+{% block details %}
+    <h2>Name:</h2><h3>{{ object.get_full_name }}</h3>
+    <h2>Gender:</h2><h3>{{ object.gender }}</h3>
+    <h2>Date of Birth:</h2><h3>{{ object.date_of_birth }}</h3>
+    <h2>Date Joined:</h2><h3>{{ object.joined }}</h3>
+{% endblock %}
+
+{% block more %}
+    <details open>
+        <summary>LC and Teams</summary>
+        {% include 'members/members.html' with object_list=object.members.all %}
+    </details>
+    <details open>
         <h2>Last events Organized</h2>
         {% include  'events/events.html' with object_list=object.events_organized.all %}
-        <h2>Last events participated</h2>
+    </details>
+    <details open>
+        <summary>Last events participated</summary>
         {% include  'events/events.html' with object_list=object.events.all %}
-    <div class="achievements">
-        <h2>Achievements in EESTEC</h2>
+    </details>
+    <details open>
+        <summary>Achievements in EESTEC</summary>
         {% include  'account/achievement_list.html' with object_list=object.achievement_set.all %}
-    </div>
-</div>
+    </details>
 {% endblock %}

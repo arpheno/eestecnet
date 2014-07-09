@@ -1,0 +1,27 @@
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+@import 'reset.scss';
+@import 'globals.scss';
+@import 'header.scss';
+@import 'buttons.scss';
+@import 'figure.scss';
+@import 'article.scss';
+
+@import 'members.scss';
+@import "eestecers.scss";
+
+.picturelist {
+    display:flex;
+    justify-content: flex-start;
+    flex-wrap:wrap;
+
+}
+.detail .pictures{
+    height:225px;
+    width: 375px;
+    float: left;
+
+}

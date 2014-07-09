@@ -1,50 +1,38 @@
-{% extends "enet/split.html" %}
+{% extends "enet/detail.html" %}
 {% load thumbnail %}
-{% block main %}
-<article class="detail">
-    <div class="pictures cycle-slideshow">
-        {% for imf in object.images.all %}
-            {% thumbnail imf.image "375x225" crop="center" as im %}
-                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-            {% endthumbnail %}
-        {% endfor %}
-    </div>
-    <table class="information">
-        <tr><td class="first"><h2>Event Name</h2></td><td class="second">{{ object.name }} </td></tr>
-        <tr><td class="first"><h2>Organizer</h2></td><td class="second">{% for oc in object.organizing_committee.all %}{{ oc.name }}{% endfor %}</td></tr>
-        <tr><td class="first"><h2>Date</h2></td><td class="second"> {{ object.start_date }} - {{ object.end_date }}</td></tr>
-        <tr><td class="first"><h2>Deadline</h2></td><td class="second">{{ object.deadline }}</td></tr>
-        <tr><td class="first"><h2>Maximum participants</h2></td><td class="second">{{ object.max_participants }}</td></tr>
-    </table>
-    <div class="application">
-        {% block application %}
-            {% if user in event.applicants.all %}
-                <a href="#" class="action-button shadow animate yellow">Application Pending</a>
-            {% elif participation != None %}
-                {% if participation.confirmed %}
-                    {% if participation.transportation.arrival != None %}
-                        <a href="#" class="action-button shadow animate green">Confirmed</a>
-                    {% else %}
-                        <a href="{% url 'eventtransportation' object.slug %}" class="action-button shadow animate green">Fill in your transportation details</a>
-                    {% endif %}
-                {% else %}
-                    <a href="{% url 'eventconfirmation' object.slug %}" class="action-button shadow animate yellow">Confirm your Participation</a>
-                {% endif %}
-
-            {% elif user.is_authenticated %}
-                <a href="{% url 'eventapplication' object.slug %}" class="action-button shadow animate red">Apply to event</a>
-            {% endif %}
+{% block class %}event{% endblock %}
+{% block pictures %}
+    {% for imf in object.images.all %}
+        {% thumbnail imf.image "375x225" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+        {% endthumbnail %}
+    {% endfor %}
+{% endblock %}
+{% block details %}
+    <h2>Event Name</h2><h3>{{ object.name }} </h3>
+    <h2>Organizer</h2><h3>{% for oc in object.organizing_committee.all %}{{ oc }}{% endfor %}</h3>
+    <h2>Date</h2> <h3>{{ object.start_date }} - {{ object.end_date }}</h3>
+    <h2>Deadline</h2><h3>{{ object.deadline }}</h3>
+    <h2>Maximum participants</h2> <h3>{{ object.max_participants }} </h3>
+    <div class="actions">
+        {% block actions %}
+            {% include 'events/actions.html' %}
         {% endblock %}
-</div>
-
-    <h3 class="clear">Description</h3>
-{% autoescape off %}
-    {{ object.description }}
-{% endautoescape %}
-<h1>Organizers</h1>
-    {% include 'account/eestecers.html' with object_list=object.organizers.all %}
-    <h1>Participants</h1>
-    {% include 'account/eestecers.html' with object_list=object.participants.all %}
-
-</article>
+    </div>
+{% endblock %}
+{% block more %}
+    <details open>
+        <summary>Description</summary>
+        {% autoescape off %}
+            {{ object.description }}
+        {% endautoescape %}
+    </details>
+    <details>
+        <summary>Organizers</summary>
+        {% include 'account/eestecers.html' with object_list=object.organizers.all %}
+    </details>
+    <details>
+        <summary>Participants</summary>
+        {% include 'account/eestecers.html' with object_list=object.participants.all %}
+    </details>
 {% endblock %}

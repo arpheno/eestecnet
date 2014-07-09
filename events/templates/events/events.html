@@ -1,5 +1,7 @@
+<ul>
 {% for event in object_list %}
     {% if event.category != "recruitment" %}
-        {% include 'events/single_event.html' with event=event %}
+        <li>{% include 'events/event.html' with object=event %}</li>
     {% endif %}
 {% endfor %}
+</ul>

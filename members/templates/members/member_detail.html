@@ -1,23 +1,19 @@
-{% extends "enet/split.html" %}
+{% extends "enet/detail.html" %}
 {% load thumbnail %}
-{% block main %}
-    <article class="detail">
-    <h1>{{ object }}</h1>
-        <div class="pictures cycle-slideshow">
-            {% for imf in object.images.all %}
-                {% thumbnail imf.image "375x225" crop="center" as im %}
-                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-                {% endthumbnail %}
-            {% endfor %}
-        </div>
-        <table class="information">
-            <tr><td class="first"><h2>LC Name</h2></td><td class="second">{{ object.name }} </td></tr>
-            <tr><td class="first"><h2>Founded:</h2></td><td class="second"> {{ object.founded}}</td></tr>
-            <tr><td class="first"><h2>Website:</h2></td><td class="second"> {{ object.website}}</td></tr>
-            <tr><td class="first"><h2>Number of Members</h2></td><td class="second">{{ object.membercount }}</td></tr>
-        </table>
-
-        <div class="application">
+{% block class %}member{% endblock %}
+{% block pictures %}
+    {% for imf in object.images.all %}
+        {% thumbnail imf.image "375x225" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+        {% endthumbnail %}
+    {% endfor %}
+{% endblock %}
+{% block details %}
+    <h2>LC Name</h2><h3>{{ object.name }} </h3>
+    <h2>Founded:</h2><h3> {{ object.founded}}</h3>
+    <h2>Website:</h2> <h3>{{ object.website}}</h3>
+    <h2>Number of Members</h2><h3>{{ object.membercount }}</h3>
+    <div class="actions">
         {% if user.is_authenticated %}
             {% block application %}
                 {% for event in object.event_set.all %}
@@ -27,19 +23,21 @@
                 {% endfor %}
             {% endblock %}
         {% endif %}
-        </div>
-
-        <h3 class="clear">Description</h3>
-        {{ object.description }}
-    <h2>Last Events</h2>
-    <div class="picturelist">
-    {% include 'events/events.html' with object_list=object.event_set.all %}
-        </div>
-        <h2 class="clear" >Board</h2>
-        {% include 'account/eestecers.html' with object_list=object.board.all %}
-        <h2>Members</h2>
-        {% include 'account/eestecers.html' with object_list=object.members.all %}
-
-    </article>
+    </div>
 {% endblock %}
-{% load thumbnail %}
+{% block more %}
+    <details open>
+        <summary>Description</summary>
+        {% autoescape off %}
+            {{ object.description }}
+        {% endautoescape %}
+    </details>
+    <details>
+        <summary>Last Events</summary>
+        {% include 'events/events.html' with object_list=object.event_set.all %}
+    </details>
+    <details>
+        <summary>Members</summary>
+        {% include 'account/eestecers.html' with object_list=object.members.all %}
+    </details>
+{% endblock %}

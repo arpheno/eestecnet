@@ -11,9 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from settings_local import *
-#from settings_deploy import *
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -38,12 +36,15 @@ INSTALLED_APPS = (
     'events',
     'members',
     'news',
+    'elfinder',
+    'materials',
     'account',
     'gunicorn',
     'bootstrap3_datetime',
     'sorl.thumbnail',
 )
 
+#from settings_deploy import *
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
@@ -155,3 +156,18 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+ELFINDER_CONNECTOR_OPTION_SETS = {
+    'admin': {
+        'debug': False,
+        'roots': [
+            {
+                'alias': 'Resources',
+                'id': 'lfr',
+                'path': os.path.join(MEDIA_ROOT, u'resources'),
+                'URL': '%sresources/' % MEDIA_URL,
+            },
+        ]
+    },
+    }
+

@@ -1,5 +1,5 @@
 {% extends 'events/event_detail.html' %}
-{% block application %}
+{% block actions %}
     <form id="apply" action="" method="post">{% csrf_token %}
         {{ form.letter }}
         {{ form.applicant }}

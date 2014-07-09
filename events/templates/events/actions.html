@@ -1,0 +1,16 @@
+{% if user in event.applicants.all %}
+    <a href="#" class="action-button shadow animate yellow">Application Pending</a>
+{% elif participation != None %}
+    {% if participation.confirmed %}
+        {% if participation.transportation.arrival != None %}
+            <a href="#" class="action-button shadow animate green">Confirmed</a>
+        {% else %}
+            <a href="{% url 'eventtransportation' object.slug %}" class="action-button shadow animate green">Fill in your transportation details</a>
+        {% endif %}
+    {% else %}
+        <a href="{% url 'eventconfirmation' object.slug %}" class="action-button shadow animate yellow">Confirm your Participation</a>
+    {% endif %}
+
+{% elif user.is_authenticated %}
+    <a href="{% url 'eventapplication' object.slug %}" class="action-button shadow animate red">Apply to event</a>
+{% endif %}

@@ -1,0 +1,19 @@
+{% extends "enet/split.html" %}
+{% load thumbnail %}
+{% block main %}
+    <article class="{% block class  %}{% endblock %}">
+        <header>
+            <div class="pictures cycle-slideshow">
+                {% block pictures %}
+                {% endblock %}
+            </div>
+            <div class="details">
+                {% block details %}
+                    {% block actions %}{% endblock %}
+                {% endblock %}
+            </div>
+        </header>
+        {% block more %}
+        {% endblock %}
+    </article>
+{% endblock %}

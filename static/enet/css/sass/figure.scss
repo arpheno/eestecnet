@@ -1,0 +1,32 @@
+figure {
+  margin:1px;
+  background-color: #354040;
+  padding: 3px;
+  flex:1 100%;
+  width:150px;
+  position:relative;
+  transition: all .25s;
+  .comment {
+    opacity: 0;
+    color:white;
+    padding:2px;
+    position: absolute;
+    top:0px;
+    width:90%;
+    background-color: #000000;
+    text-align: center;
+    transition: all .5s;
+  }
+  &:hover  {
+    z-index: 10;
+    transform: scale(1.2);
+    .comment { opacity: 0.6; }
+  }
+  figcaption{
+    font-size:12px;
+    line-height:100%;
+    color:#ffffff;
+  }
+}
+
+

@@ -1,18 +1,19 @@
+{% extends 'enet/figure.html' %}
 {% load thumbnail %}
-{% if member.category == 'jlc' or membery.category == 'lc' or member.category == 'observer' %}
-    <a href="{% url 'city' member.slug %}">
-{% else %}
-    <a href="{% url 'team' member.slug %}">
-{% endif %}
 
-    <div class="picture">
-        <div class="thumbnail">
-            {% thumbnail member.thumbnail "190x125" crop="center" as im %}
+{% block class %}member{% endblock %}
+{% block url %}
+{% if object.category == 'jlc' or objecty.category == 'lc' or object.category == 'observer' %}
+    {% url 'city' object.slug %}
+{% else %}
+   {% url 'team' object.slug %}
+{% endif %}
+{% endblock %}
+{% block picture %}
+            {% thumbnail object.thumbnail "190x125" crop="center" as im %}
                 <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
             {% endthumbnail %}
-        </div>
-        <div class="picture-meta">
-            <h1><b>{{ member }}</b></h1>
-        </div>
-    </div>
-</a>
+{% endblock %}
+{% block caption %}
+           {{ object }}
+{% endblock %}
