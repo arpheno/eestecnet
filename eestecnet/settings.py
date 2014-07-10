@@ -157,17 +157,4 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-ELFINDER_CONNECTOR_OPTION_SETS = {
-    'admin': {
-        'debug': True,
-        'roots': [
-            {
-                'alias': 'Resources',
-                'id': 'lfr',
-                'path': os.path.join(MEDIA_ROOT, u'resources'),
-                'URL': '%sresources/' % MEDIA_URL,
-            },
-        ]
-    },
-    }
 

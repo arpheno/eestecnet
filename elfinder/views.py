@@ -1,11 +1,15 @@
 import json
+import os
 from django.http import HttpResponse, Http404
 from django.utils.decorators import method_decorator
 from django.views.generic.base import View
 from django.views.decorators.csrf import csrf_exempt
+from eestecnet.settings import MEDIA_ROOT, MEDIA_URL
+from elfinder.volumes.filesystem import ElfinderVolumeLocalFileSystem
 from exceptions import ElfinderErrorMessages
 from elfinder.connector import ElfinderConnector
 from elfinder.conf import settings as ls
+from members.models import Member
 
 
 class ElfinderConnectorView(View):
@@ -99,12 +103,33 @@ class ElfinderConnectorView(View):
         if not kwargs['optionset'] in ls.ELFINDER_CONNECTOR_OPTION_SETS:
             raise Http404
         return super(ElfinderConnectorView, self).dispatch(*args, **kwargs)
+    def root(self,name):
+        return {
+            'alias': name,
+            'id': name,
+            'driver': ElfinderVolumeLocalFileSystem,
+            'path': os.path.join(MEDIA_ROOT, unicode(name)),
+            'URL': '%s%s/' % (MEDIA_URL,name),
+            'uploadMaxSize': '128m',
+            }
+
+    def get_optionset_for_user(self,request):
+        if request.user.is_superuser:
+            roots=[self.root(member.name) for member in Member.objects.all()]
+        elif request.user.is_authenticated():
+            roots=[ self.root(member.name) for member in request.user.priviledged.all()]
+            roots.append(self.root('internal'))
+        else:
+            roots=[]
+        roots.append(self.root("public"))
+        return {  'debug': False,  'roots': roots }
 
     def get(self, request, *args, **kwargs):
         """
         used in get method calls
         """
-        self.elfinder = ElfinderConnector(self.get_optionset(**kwargs), request.session)
+
+        self.elfinder = ElfinderConnector(self.get_optionset_for_user(request), request.session)
         return self.output(self.get_command(request.GET), request.GET)
 
     def post(self, request, *args, **kwargs):
