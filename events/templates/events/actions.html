@@ -7,8 +7,10 @@
         {% else %}
             <a href="{% url 'eventtransportation' object.slug %}" class="action-button shadow animate green">Fill in your transportation details</a>
         {% endif %}
-    {% else %}
+    {% elif request.user.tshirt_size != None and request.user.profile_picture != None %}
         <a href="{% url 'eventconfirmation' object.slug %}" class="action-button shadow animate yellow">Confirm your Participation</a>
+    {% else %}
+        <a href="{% url 'userupdate'  %}" class="action-button shadow animate yellow">Complete your User Profile</a>
     {% endif %}
 
 {% elif user.is_authenticated %}

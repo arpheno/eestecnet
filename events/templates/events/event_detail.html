@@ -1,6 +1,7 @@
 {% extends "enet/detail.html" %}
 {% load thumbnail %}
 {% block class %}event{% endblock %}
+{% block title %}{{ event }}{% endblock %}
 {% block pictures %}
     {% for imf in object.images.all %}
         {% thumbnail imf.image "375x225" crop="center" as im %}

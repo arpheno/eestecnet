@@ -1,24 +1,41 @@
 body > header{
-    flex:1 0 100%;
+    flex:1 1 100%;
     background-color: #fff;
     align-items:center;
   z-index: 3;
-    justify-content: space-around;
+    justify-content: flex-start;
     height:55px;
+  padding-left:50px;
+  img{
+    height:55px;
+    margin:0px 10px;
+  }
+
 }
-body > header img{ height:55px; }
-nav {
+body >nav {
     align-self:center;
-    flex:1;
-}
-nav a{
-    text-align:center;
-    padding:20px 1px;
-    flex:1;
-    text-decoration: none;
-    font-weight: bold;
-    font-size:16px;
-    color:dimgrey;
-    background-color:#fff;
-}
-nav a:hover{ background-color:darkgrey; color:#fff; }
+    flex:1 1 100%;
+    z-index:10;
+    a{
+      text-align:center;
+      padding:20px 1px;
+      flex:1;
+      text-decoration: none;
+      font-weight: bold;
+      font-size:16px;
+      color:dimgrey;
+      background-color:#fff;
+      &:hover{ background-color:darkgrey; color:#fff; }
+    }
+  .profile{padding:0px;}
+    form{padding:20px 1px;
+      background-color:#fff;
+    }
+    #login{padding:0px 20px;
+      background-color:#fff;
+      cursor: pointer;
+      &:hover{
+        background-color:red;
+      }
+    }
+  }

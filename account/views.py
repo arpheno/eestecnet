@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.generic import UpdateView, DetailView, CreateView, FormView, View, \
     ListView
 from django.contrib.auth.models import Group
-from django.forms import ModelForm
+from django.forms import ModelForm, TextInput
 import json
 import string
 import random
@@ -57,6 +57,11 @@ class EestecerUpdateForm(ModelForm):
         fields=('first_name','middle_name','last_name','second_last_name','date_of_birth',
         'profile_picture','gender','tshirt_size','passport_number','food_preferences','allergies',
         'skype','hangouts','mobile',)
+        widgets = {
+            'date_of_birth': TextInput(attrs={'class': 'date'}),
+            'departure': TextInput(attrs={'class': 'date'}),
+            }
+
 class EestecerUpdate(UpdateView):
     model=Eestecer
     form_class = EestecerUpdateForm
@@ -72,7 +77,7 @@ class EestecerCreate(CreateView):
     model=Eestecer
     form_class = EestecerCreationForm
     template_name = 'account/eestecer_create.html'
-    success_url = '/people/me'
+    success_url = '/'
 class Login(FormView):
     template_name = 'account/login.html'
     form_class = AuthenticationForm

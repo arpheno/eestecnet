@@ -11,7 +11,7 @@
 {% endblock %}
 {% block picture %}
             {% thumbnail object.thumbnail "190x125" crop="center" as im %}
-                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ object.thumbsource }}">
             {% endthumbnail %}
 {% endblock %}
 {% block caption %}

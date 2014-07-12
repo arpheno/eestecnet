@@ -13,7 +13,8 @@
 @import 'members.scss';
 @import "eestecers.scss";
 @import "home.scss";
-
+@import "datetimepicker.scss";
+#elfinder{width:100%;}
 .picturelist {
     display:flex;
     justify-content: flex-start;
@@ -24,5 +25,4 @@
     height:225px;
     width: 375px;
     float: left;
-
 }

@@ -46,7 +46,7 @@ class MyEventAdminForm(forms.ModelForm):
         model = Event
         widgets = {
             'summary': Textarea(attrs={'cols': 50, 'rows': 8}),
-            'description': RedactorWidget(editor_options={'lang':'en'}),
+            'description': RedactorWidget(editor_options={'lang':'en','iframe':'true','css':"/static/enet/css/wysiwyg.css"}),
         }
 
 class MyEventAdmin(admin.ModelAdmin):

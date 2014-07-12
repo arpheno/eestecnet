@@ -14,7 +14,7 @@ class EestecerCreationForm(UserCreationForm):
 
     class Meta:
         model = Eestecer
-        fields = ("email","first_name","middle_name","last_name","second_last_name")
+        fields = ("email","first_name","middle_name","gender","last_name","second_last_name")
 
 class EestecerChangeForm(UserChangeForm):
     """A form for updating users. Includes all the fields on

@@ -1,7 +1,7 @@
 import random
 from bootstrap3_datetime.widgets import DateTimePicker
 from django.core.urlresolvers import reverse
-from django.forms import ModelForm
+from django.forms import ModelForm, TextInput
 from django.forms import widgets
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -79,13 +79,11 @@ class ApplyToEvent(View):
 class TransportForm(ModelForm):
     class Meta:
         model = Transportation
-        fields=('arrival','arrive_by','arrival_number','departure','depart_by')
+        fields=('arrival','departure','arrive_by','depart_by','arrival_number')
         widgets = {
-            'arrival': DateTimePicker(options={"format": "YYYY-MM-DD HH:mm",
-                                       "pickSeconds": False}),
-            'departure': DateTimePicker(options={"format": "YYYY-MM-DD HH:mm",
-                                               "pickSeconds": False}),
-            }
+            'arrival': TextInput(attrs={'class': 'datetime'}),
+            'departure': TextInput(attrs={'class': 'datetime'}),
+        }
 
 class FillInTransport(CreateView):
     form_class = TransportForm
@@ -98,7 +96,8 @@ class FillInTransport(CreateView):
         context['object'] = Event.objects.get(slug=self.kwargs['slug'])
         return context
     def post(self, request, *args, **kwargs):
-
+        if not request.user.tshirt_size or not request.user.profile_picture:
+            return redirect(reverse('event',kwargs={'slug':self.kwargs['slug']}))
         form = self.form_class(request.POST)
         pax=get_object_or_404(Participation,participant=request.user,target__slug=self.kwargs['slug'])
         trans=form.save()

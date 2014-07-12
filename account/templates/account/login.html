@@ -1,8 +1,4 @@
-{% extends 'enet/split.html' %}
-{% block sidebar %}
-    <form method="post" id="signin" action="">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Login">
+    <form method="post" id="signin" action="{% url 'login' %}">{% csrf_token %}
+        {{ loginform }}
+        <input type="submit" value="Login"><a href="{% url 'register' %}">Set up new Account</a>
     </form>
-
-{% endblock %}

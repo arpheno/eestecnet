@@ -9,6 +9,9 @@ main.home{
 #donate{
   flex:1 0 45%;
   min-height:100px;
+  @media (max-width:1200px){
+    order:3;
+  }
     .wrapper{
     text-align: center;
    padding:30px;
@@ -29,14 +32,18 @@ main.home{
     flex:1 0 45%;
     min-height:100px;
     position:relative;
-    .wrapper{
+    @media (max-width:1200px){
+      order:4;
+    }
+    form{
       text-align: center;
       padding:30px 0px;
       width:450px;
       position:absolute;
       right:0px;
       bottom:0px;
-      a{
+      input.submit{
+        border:none;
         background-color: $darkeestec;
         color:white;
         font-size:16px;
@@ -46,7 +53,7 @@ main.home{
       }
     }
   }
-  #selector{
+  nav{
     flex:1 1 15%;
     min-height:100px;
     display:flex;
@@ -58,12 +65,16 @@ main.home{
       color:#fff;
       text-align: center;
       position:absolute;
+      left:0;
       width:100%;
       background-color:rgba(0,0,0,0.5);
       top:0;
     }
     img{padding:50px;}
     background-color: $eestecgreylight;
+    @media screen and (max-width: 1200px) {
+      flex:1 1 100%;
+    }
   }
   #preview{
     flex:1 0 85%;
@@ -77,6 +88,7 @@ main.home{
       z-index:101;
       background-color:rgba(0,0,0,0.5);
       top:0;
+      left:0;
     }
     footer{
       position:absolute;
@@ -111,7 +123,7 @@ main.home{
     }
     img,.pictures,#news{
       position:relative;
-      width:1087px;
+      width:100%;
       height:480px;
     }
   }

@@ -23,16 +23,13 @@ h1,h2{
 h1{ font-size:17px; }
 h2{ font-size:14px; }
 h3{text-align: right;}
-body {
+html>body, header, #sponsors, footer,nav,aside,main{ display:flex; position:relative;}
+
+html>body{
   max-width: 1280px;
   margin:0px auto;
-  display:flex;
   flex-direction: row;
   flex-wrap: wrap;
-}
-body, header, #sponsors, footer,nav,aside,main{ display:flex; position:relative;}
-
-body{
   >main{
     padding: 30px;
     border-width: 0px 1px 0px 1px;
@@ -41,9 +38,30 @@ body{
     border-color: #a2a0a0;
     position:relative;
     background-color:white;
+    flex-wrap:wrap;
     box-shadow:
       0px 0px 20px 10px rgba(0,0,0,0.1),
       -0px 0px 20px 10px rgba(0,0,0,0.1);
+    justify-content: center;
+    >h1{
+      flex:1 0 100%;
+    }
+    >form{
+      width:480px;
+      display:flex;
+      background-color: rgba(0,0,0,0.1);
+      position:relative;
+      z-index:10;
+      flex-wrap: wrap;
+      p{
+        flex:1 1 100%;
+        display: flex;
+        flex-wrap:wrap;
+        input{flex:1 1 40%;}
+        label{flex:1 1 40%;}
+        justify-content: space-between;
+      }
+    }
   }
   .grad {
     height:340px;
@@ -59,17 +77,28 @@ body{
     border-width: 0px 57px 0px 0px;
     width:253px;
     flex:0 0 253x;
+    padding-top:30px;
     border-style:solid;
     border-color:#3f4749;
     z-index: 1;
+    justify-content:center;
     @media screen and (max-width: 1200px) {
       display:none;
     }
     @media screen and (min-width: 1200px) {
-      display:block;
+      display:flex;
     }
   }
 
+#signin{
+  display:flex;
+  background-color: rgba(0,0,0,0.1);
+  margin:10px;
+  flex-wrap: wrap;
+  input,label{
+    flex:0 0 40%;
+  }
+}
   #sponsors{
     flex:1 0 100%;
     justify-content: space-around;

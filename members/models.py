@@ -33,7 +33,7 @@ class Member(models.Model):
         choices=TYPE_CHOICES,
         default='lc')
     thumbnail=models.ImageField(blank=True,null=True,upload_to="memberthumbs")
-    thumbsource=models.CharField(max_length=50,blank=True,null=True)
+    thumbsource=models.CharField(max_length=100,blank=True,null=True)
     """The picture that should appear in the :class:`Member` list"""
     description= models.TextField(blank= True, null=True)
     """ LC info text"""
@@ -106,4 +106,5 @@ class MemberImage(models.Model):
 
     property = models.ForeignKey(Member, related_name='images')
     image = models.ImageField(upload_to="memberimages")
+    source = models.CharField(max_length=100,blank=True, null=True)
     """An Image"""

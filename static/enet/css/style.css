@@ -82,89 +82,127 @@ h2 {
 h3 {
   text-align: right; }
 
-body {
-  max-width: 1280px;
-  margin: 0px auto;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap; }
-
-body, header, #sponsors, footer, nav, aside, main {
+html > body, header, #sponsors, footer, nav, aside, main {
   display: flex;
   position: relative; }
 
-body > main {
-  padding: 30px;
-  border-width: 0px 1px 0px 1px;
-  flex: 1 1;
-  z-index: 2;
-  border-color: #a2a0a0;
-  position: relative;
-  background-color: white;
-  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.1), 0px 0px 20px 10px rgba(0, 0, 0, 0.1); }
-body .grad {
-  height: 340px;
-  width: 100%;
-  top: 0px;
-  left: 0px;
-  position: absolute;
-  z-index: 0;
-  background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.04)); }
-body > aside {
-  background-color: #5f6a6d;
-  border-width: 0px 57px 0px 0px;
-  width: 253px;
-  flex: 0 0 253x;
-  border-style: solid;
-  border-color: #3f4749;
-  z-index: 1; }
-  @media screen and (max-width: 1200px) {
-    body > aside {
-      display: none; } }
-  @media screen and (min-width: 1200px) {
-    body > aside {
-      display: block; } }
-body #sponsors {
-  flex: 1 0 100%;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  border: red solid;
-  border-right: 2px;
-  border-left: 2px;
-  background-color: #fff; }
-body footer {
-  background-color: #465052; }
-body footer #map {
-  flex: 1 1 100%; }
+html > body {
+  max-width: 1280px;
+  margin: 0px auto;
+  flex-direction: row;
+  flex-wrap: wrap; }
+  html > body > main {
+    padding: 30px;
+    border-width: 0px 1px 0px 1px;
+    flex: 1 1;
+    z-index: 2;
+    border-color: #a2a0a0;
+    position: relative;
+    background-color: white;
+    flex-wrap: wrap;
+    box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.1), 0px 0px 20px 10px rgba(0, 0, 0, 0.1);
+    justify-content: center; }
+    html > body > main > h1 {
+      flex: 1 0 100%; }
+    html > body > main > form {
+      width: 480px;
+      display: flex;
+      background-color: rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 10;
+      flex-wrap: wrap; }
+      html > body > main > form p {
+        flex: 1 1 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; }
+        html > body > main > form p input {
+          flex: 1 1 40%; }
+        html > body > main > form p label {
+          flex: 1 1 40%; }
+  html > body .grad {
+    height: 340px;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    z-index: 0;
+    background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.04)); }
+  html > body > aside {
+    background-color: #5f6a6d;
+    border-width: 0px 57px 0px 0px;
+    width: 253px;
+    flex: 0 0 253x;
+    padding-top: 30px;
+    border-style: solid;
+    border-color: #3f4749;
+    z-index: 1;
+    justify-content: center; }
+    @media screen and (max-width: 1200px) {
+      html > body > aside {
+        display: none; } }
+    @media screen and (min-width: 1200px) {
+      html > body > aside {
+        display: flex; } }
+  html > body #signin {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    flex-wrap: wrap; }
+    html > body #signin input, html > body #signin label {
+      flex: 0 0 40%; }
+  html > body #sponsors {
+    flex: 1 0 100%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    border: red solid;
+    border-right: 2px;
+    border-left: 2px;
+    background-color: #fff; }
+  html > body footer {
+    background-color: #465052; }
+  html > body footer #map {
+    flex: 1 1 100%; }
 
 body > header {
-  flex: 1 0 100%;
+  flex: 1 1 100%;
   background-color: #fff;
   align-items: center;
   z-index: 3;
-  justify-content: space-around;
-  height: 55px; }
+  justify-content: flex-start;
+  height: 55px;
+  padding-left: 50px; }
+  body > header img {
+    height: 55px;
+    margin: 0px 10px; }
 
-body > header img {
-  height: 55px; }
-
-nav {
+body > nav {
   align-self: center;
-  flex: 1; }
-
-nav a {
-  text-align: center;
-  padding: 20px 1px;
-  flex: 1;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 16px;
-  color: dimgrey;
-  background-color: #fff; }
-
-nav a:hover {
-  background-color: darkgrey;
-  color: #fff; }
+  flex: 1 1 100%;
+  z-index: 10; }
+  body > nav a {
+    text-align: center;
+    padding: 20px 1px;
+    flex: 1;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    color: dimgrey;
+    background-color: #fff; }
+    body > nav a:hover {
+      background-color: darkgrey;
+      color: #fff; }
+  body > nav .profile {
+    padding: 0px; }
+  body > nav form {
+    padding: 20px 1px;
+    background-color: #fff; }
+  body > nav #login {
+    padding: 0px 20px;
+    background-color: #fff;
+    cursor: pointer; }
+    body > nav #login:hover {
+      background-color: red; }
 
 .animate {
   transition: all 0.1s;
@@ -236,6 +274,9 @@ article {
   flex-direction: column;
   align-items: center; }
 
+article h1 {
+  font-size: 20px;
+  align-self: flex-start; }
 article header {
   flex-wrap: wrap;
   justify-content: space-around;
@@ -255,10 +296,12 @@ article header {
       margin-bottom: 15px;
       padding: 1px 10px;
       border-bottom: 1px #af2b1d solid; }
-    article header .details form {
-      display: flex; }
-  article header .actions {
-    align-self: center; }
+article .actions {
+  align-self: center; }
+  article .actions form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; }
 article details {
   align-self: flex-start; }
 
@@ -282,6 +325,9 @@ main.home {
   main.home #donate {
     flex: 1 0 45%;
     min-height: 100px; }
+    @media (max-width: 1200px) {
+      main.home #donate {
+        order: 3; } }
     main.home #donate .wrapper {
       text-align: center;
       padding: 30px;
@@ -298,21 +344,25 @@ main.home {
     flex: 1 0 45%;
     min-height: 100px;
     position: relative; }
-    main.home #newsletter .wrapper {
+    @media (max-width: 1200px) {
+      main.home #newsletter {
+        order: 4; } }
+    main.home #newsletter form {
       text-align: center;
       padding: 30px 0px;
       width: 450px;
       position: absolute;
       right: 0px;
       bottom: 0px; }
-      main.home #newsletter .wrapper a {
+      main.home #newsletter form input.submit {
+        border: none;
         background-color: #af2b1d;
         color: white;
         font-size: 16px;
         text-decoration: none;
         padding: 4px 10px;
         font-weight: bolder; }
-  main.home #selector {
+  main.home nav {
     flex: 1 1 15%;
     min-height: 100px;
     display: flex;
@@ -321,15 +371,19 @@ main.home {
     flex-wrap: wrap;
     position: relative;
     background-color: #465052; }
-    main.home #selector h1 {
+    main.home nav h1 {
       color: #fff;
       text-align: center;
       position: absolute;
+      left: 0;
       width: 100%;
       background-color: rgba(0, 0, 0, 0.5);
       top: 0; }
-    main.home #selector img {
+    main.home nav img {
       padding: 50px; }
+    @media screen and (max-width: 1200px) {
+      main.home nav {
+        flex: 1 1 100%; } }
   main.home #preview {
     flex: 1 0 85%;
     height: 480px;
@@ -341,7 +395,8 @@ main.home {
       width: 100%;
       z-index: 101;
       background-color: rgba(0, 0, 0, 0.5);
-      top: 0; }
+      top: 0;
+      left: 0; }
     main.home #preview footer {
       position: absolute;
       bottom: 0px;
@@ -370,8 +425,49 @@ main.home {
         margin: 10px; }
     main.home #preview img, main.home #preview .pictures, main.home #preview #news {
       position: relative;
-      width: 1087px;
+      width: 100%;
       height: 480px; }
+
+/* css for timepicker */
+.ui-timepicker-div .ui-widget-header {
+  margin-bottom: 8px; }
+
+.ui-timepicker-div dl {
+  text-align: left; }
+
+.ui-timepicker-div dl dt {
+  float: left;
+  clear: left;
+  padding: 0 0 0 5px; }
+
+.ui-timepicker-div dl dd {
+  margin: 0 10px 10px 45%; }
+
+.ui-timepicker-div td {
+  font-size: 90%; }
+
+.ui-tpicker-grid-label {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0; }
+
+.ui-timepicker-rtl {
+  direction: rtl; }
+
+.ui-timepicker-rtl dl {
+  text-align: right;
+  padding: 0 5px 0 0; }
+
+.ui-timepicker-rtl dl dt {
+  float: right;
+  clear: right; }
+
+.ui-timepicker-rtl dl dd {
+  margin: 0 45% 10px 10px; }
+
+#elfinder {
+  width: 100%; }
 
 .picturelist {
   display: flex;
