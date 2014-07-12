@@ -1,7 +1,12 @@
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from django.core.validators import validate_email
-from django.shortcuts import redirect
+from django.forms import forms
+from django.shortcuts import redirect, render_to_response
+from gmapi import maps
+from gmapi.forms.widgets import GoogleMap
+from gmapi.maps import Geocoder
+from members.models import Member
 
 
 def newsletter(request):
@@ -13,3 +18,5 @@ def newsletter(request):
               "eestecnet@gmail.com",
               "vc-ia@eestec.net")
     return redirect("/")
+
+

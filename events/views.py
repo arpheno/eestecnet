@@ -6,6 +6,7 @@ from django.forms import widgets
 from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
+from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, View
 from events.models import Event, Application, Participation, Transportation
 
@@ -24,10 +25,10 @@ class InternationalEvents(ListView):
         # Call the base implementation first to get a context
         context = super(InternationalEvents, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
-        context['workshop_list'] = [event for event in Event.objects.filter(scope="international",category="workshop") for i in range(2)]
-        context['exchange_list'] = [event for event in Event.objects.filter(scope="international",category="workshop") for i in range(2)]
-        context['training_list'] = [event for event in Event.objects.filter(scope="international",category="workshop") for i in range(2)]
-        context['other_list'] = [event for event in Event.objects.filter(scope="international",category="workshop") for i in range(2)]
+        events=context['object_list'].filter(scope="international")
+        context['active_list'] = [event for event in events if event.deadline >timezone.now()]
+        context['pending_list'] = [event for event in events if event.deadline< timezone.now() and event.end_date> timezone.now().date()]
+        context['over_list'] = [event for event in events if event.end_date < timezone.now().date()]
         return context
 
 def confirm_event(request,slug):

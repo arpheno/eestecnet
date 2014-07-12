@@ -12,7 +12,7 @@ from events.views import EventDetail, ApplyToEvent, InternationalEvents, confirm
     FillInTransport
 from materials.views import connector, index
 from members.models import Member
-from members.views import CommitmentList, TeamList, MemberDetail
+from members.views import CommitmentList, TeamList, MemberDetail, emap
 from news.models import Entry
 
 import random
@@ -47,6 +47,7 @@ urlpatterns = patterns('',
     url(r'^logout/', Logout.as_view(), name='logout'),
     url(r'^register/', EestecerCreate.as_view(), name='register'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^maps/', emap),
     url(r'^materials/$', index, name='materials'),
     url(r'^newsletter/$', newsletter, name='newsletter'),
     url(r'^materials/connector/', connector, name='trtconnector'),

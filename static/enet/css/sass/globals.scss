@@ -18,9 +18,11 @@ h1,h2{
   line-height:100%;
   text-align: left;
   color: $darkeestec;
-  margin: 0px;
+  margin: 4px;
+  padding:0px 30px 4px 30px;
+  border-bottom: 1px solid $darkeestec;
 }
-h1{ font-size:17px; }
+h1{ font-size:20px; }
 h2{ font-size:14px; }
 h3{text-align: right;}
 html>body, header, #sponsors, footer,nav,aside,main{ display:flex; position:relative;}
@@ -31,7 +33,7 @@ html>body{
   flex-direction: row;
   flex-wrap: wrap;
   >main{
-    padding: 30px;
+    padding: 1px;
     border-width: 0px 1px 0px 1px;
     flex:1 1;
     z-index:2;
@@ -43,6 +45,7 @@ html>body{
       0px 0px 20px 10px rgba(0,0,0,0.1),
       -0px 0px 20px 10px rgba(0,0,0,0.1);
     justify-content: center;
+    section{flex:1 0 100%;}
     >h1{
       flex:1 0 100%;
     }

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, Group, Permission
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.datetime_safe import datetime
+from gmapi.maps import Geocoder
 from account.models import Eestecer
 from eestecnet import settings
 from events.models import Event
@@ -41,6 +42,8 @@ class Member(models.Model):
     """ Facebook page for the member"""
     website = models.URLField(blank=True, null=True)
     address = models.TextField(blank=True, null=True)
+    lat = models.FloatField(blank=True, null=True)
+    lng = models.FloatField(blank=True, null=True)
     def clean(self):
         # Don't allow draft entries to have a pub_date.
         if self.thumbnail and not self.thumbsource:
@@ -70,6 +73,13 @@ class Member(models.Model):
     founded=models.PositiveIntegerField(null=True, blank=True)
     """When the :class:`Member` was first established"""
     def save(self, *args,**kwargs):
+        try:
+            geocoder = Geocoder()
+            address = self.address
+            results, status_code = geocoder.geocode({'address': self.name })
+            self.lat, self.lng = results[0]['geometry']['location']['arg']
+        except:
+            pass
         if self.pk==None:
             super(Member,self).save(*args,**kwargs)
             a=Event.objects.create(

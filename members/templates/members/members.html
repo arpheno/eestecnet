@@ -1,5 +1,5 @@
 {% load thumbnail %}
-<ul class="picturelist">
+<ul class="members figure">
     {% for mmbr in object_list %}
         {% include 'members/member.html' with object=mmbr %}
     {% endfor %}

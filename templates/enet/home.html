@@ -31,9 +31,9 @@
                             <p>{{ object.content }}</p>
                         </main>
                         <aside>
-                            <b>Other top Stories:</b>
+                            <h2>Other top Stories:</h2>
                             {% for object in object_list %}
-                                <p>{{   object }}</p><br/>
+                                <a href="#">{{   object }}</a>
                             {% endfor %}
                         </aside>
                     </footer>

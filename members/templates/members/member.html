@@ -10,10 +10,12 @@
 {% endif %}
 {% endblock %}
 {% block picture %}
-            {% thumbnail object.thumbnail "190x125" crop="center" as im %}
-                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" title="{{ object.thumbsource }}">
-            {% endthumbnail %}
+    {% thumbnail object.thumbnail "190x125" crop="center" as im %}
+            <img src="{{ im.url }}" style="width:{{ im.width }}px;height:{{ im.height }}px;" title="{{ object.thumbsource }} ">
+    {% endthumbnail %}
 {% endblock %}
 {% block caption %}
-           {{ object }}
+{{ object }}
+{% endblock %}
+{% block comment %}
 {% endblock %}

@@ -35,6 +35,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'events',
     'members',
+    'gmapi',
+    'leaflet',
     'news',
     'elfinder',
     'materials',
@@ -64,6 +66,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     'eestecnet.context_processors.random_event_processor',
     'eestecnet.context_processors.login_processor',
+    'eestecnet.context_processors.date_now',
 )
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

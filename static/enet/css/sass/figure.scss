@@ -1,33 +1,48 @@
-figure {
+ul.figure{
+  justify-content: center;
+a{
   margin:1px;
+  text-decoration: none;
   background-color: #354040;
-  padding: 3px;
-  flex:1 100%;
-  width:150px;
-  position:relative;
-  transition: all .25s;
-  .comment {
-    opacity: 0;
-    color:white;
-    padding:2px;
-    position: absolute;
-    top:0px;
-    width:90%;
-    background-color: #000000;
-    text-align: center;
-    transition: all .5s;
+  padding:2px;
+
+  figure {
+    flex:1 100%;
+    position:relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .25s;
+    img{
+      margin:1px;
+      position:absolute;
+      top:0px;left:0px;
+    }
+    figcaption {
+      opacity:0.9 ;
+      flex:1 1 100%;
+      text-align: center;
+      color:white;
+      font-weight: bold;
+      font-family:"Century Gothic";
+      padding:20px;
+      font-size: 20px;
+      background-color: rgba(0,0,0,0.1);
+      transition: all .5s;
+    }
+    &:hover  {
+      z-index: 10;
+      transform: scale(1.2);
+      figcaption {
+        background-color: rgba(0,0,0,0.5);
+      }
+    }
   }
-  &:hover  {
-    z-index: 10;
-    transform: scale(1.2);
-    .comment { opacity: 0.6; }
-  }
-  figcaption{
+  .comment{
     font-size:12px;
     line-height:100%;
     color:#ffffff;
   }
-
 }
 
-
+}

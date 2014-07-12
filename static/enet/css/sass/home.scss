@@ -6,6 +6,18 @@ main.home{
   box-shadow: none;
   justify-content: center;
   max-width:1280px;
+  h1{
+      color:#fff;
+      text-align: center;
+      left:0px;
+    height:20px;
+      width:100%;
+      background-color:rgba(0,0,0,0.5);
+      top:0;
+      border:0px;
+      padding:0px;
+      margin:0px;
+    }
 #donate{
   flex:1 0 45%;
   min-height:100px;
@@ -57,19 +69,10 @@ main.home{
     flex:1 1 15%;
     min-height:100px;
     display:flex;
-    justify-content: center;
-    align-items: center;
     flex-wrap:wrap;
+    justify-content: center;
     position:relative;
-    h1{
-      color:#fff;
-      text-align: center;
-      position:absolute;
-      left:0;
-      width:100%;
-      background-color:rgba(0,0,0,0.5);
-      top:0;
-    }
+
     img{padding:50px;}
     background-color: $eestecgreylight;
     @media screen and (max-width: 1200px) {
@@ -80,10 +83,9 @@ main.home{
     flex:1 0 85%;
     height:480px;
     position:relative;
-    >h1{
+    >h1,h2{
       color:#fff;
       text-align: center;
-      position:absolute;
       width:100%;
       z-index:101;
       background-color:rgba(0,0,0,0.5);
@@ -99,26 +101,36 @@ main.home{
       overflow:hidden;
       background-color:rgba(0,0,0,0.5);
       color:#fff;
-      main{
-        h1{
-          font-size: 18px;
-          color:#fff;
-          border-bottom:1px solid #fff;
-          margin-bottom:3px;
-          padding-bottom:3px;
+      h1,h2{
+        text-align: left;
+        border-bottom:1px solid #fff;
+        margin-bottom:3px;
+        padding-bottom:3px;
 
-        }
+      }
+      main{
         flex:1 1 70%;
         display:flex;
         flex-direction: column;
       }
       aside{
-        display:flex;
-        flex-direction: column;
-        align-items:flex-start;
         flex:1 1 30%;
         background-color:rgba($darkeestec,0.75);
         margin:10px;
+        padding:5px;
+        display:inline;
+        h2{
+          background:none;
+          padding:0px;
+        margin:0px;
+        }
+        a{
+          padding-left:2px;
+          display:block;
+          text-decoration: none;
+          color:#fff;
+          font-weight: bold;
+        }
       }
     }
     img,.pictures,#news{

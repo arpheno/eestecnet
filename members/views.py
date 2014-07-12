@@ -1,9 +1,12 @@
 from datetime import datetime
+from django.forms import forms
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 
 # Create your views here.
 from django.views.generic import ListView, DetailView
+from gmapi import maps
+from gmapi.forms.widgets import GoogleMap
 from events.models import Event
 from members.models import Member
 
@@ -18,6 +21,8 @@ class TeamList(ListView):
     def get_queryset(self):
         return Member.objects.filter(type='team')
 
+class MapForm(forms.Form):
+    map = forms.Field(widget=GoogleMap(attrs={'width':510, 'height':510}))
 class CommitmentList(ListView):
     model = Member
     def get_queryset(self):
@@ -29,3 +34,6 @@ def create_eestec(self,request):
         return HttpResponse(html)
 
 
+def emap(request):
+    context={}
+    return render_to_response('enet/maps.html')
