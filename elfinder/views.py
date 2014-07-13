@@ -139,7 +139,7 @@ class ElfinderConnectorView(View):
         called in post method calls.
         It only allows for the 'upload' command
         """
-        self.elfinder = ElfinderConnector(self.get_optionset(**kwargs), request.session)
+        self.elfinder = ElfinderConnector(self.get_optionset_for_user(request), request.session)
         cmd = self.get_command(request.POST)
 
         if not cmd in ['upload']:
