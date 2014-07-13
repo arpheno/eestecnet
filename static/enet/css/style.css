@@ -331,6 +331,10 @@ a.member {
 section.members {
   margin: 3px; }
 
+#map {
+  width: 80%;
+  height: 350px; }
+
 a.event {
   width: 151; }
   a.event figure {
