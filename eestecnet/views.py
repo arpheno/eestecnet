@@ -6,9 +6,18 @@ from django.shortcuts import redirect, render_to_response
 from gmapi import maps
 from gmapi.forms.widgets import GoogleMap
 from gmapi.maps import Geocoder
+from eestecnet import *
 from members.models import Member
 
 
+def init(request):
+    create_local_admins()
+    create_eestec_lcs()
+    create_eestec_news()
+    create_eestec_people()
+    create_inktronics()
+    create_positions_for_achievements()
+    return redirect("/")
 def newsletter(request):
     try:
         validate_email( request.POST['mailsub'] )
