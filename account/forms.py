@@ -1,4 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from account.views import id_generator
 
 from models import Eestecer
 
@@ -15,7 +16,10 @@ class EestecerCreationForm(UserCreationForm):
     class Meta:
         model = Eestecer
         fields = ("email","first_name","middle_name","gender","last_name","second_last_name")
-
+    def save(self, commit=True):
+        user= super(EestecerCreationForm,self).save(commit=False)
+        user.is_active=False
+        user.activation_link=id_generator(30)
 class EestecerChangeForm(UserChangeForm):
     """A form for updating users. Includes all the fields on
     the user, but replaces the password field with admin's

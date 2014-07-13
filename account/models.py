@@ -112,6 +112,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     """T-shirt size. Used for events"""
     allergies = models.CharField(max_length=50,blank=True,null=True)
     passport_number = models.CharField(max_length=20, blank=True, null=True)
+    activation_link = models.CharField(max_length=50, blank=True, null=True)
     """Passport number required by many hostels. Makes it easier for organizers."""
     field_of_study = models.CharField(max_length=50, choices=FIELDS_OF_STUDY)
     food_preferences = models.CharField(max_length=15, choices=FOOD_CHOICES,
