@@ -22,7 +22,7 @@ class Root(dict):
         self['driver'] = ElfinderVolumeLocalFileSystem
         self['path'] = os.path.join(MEDIA_ROOT, unicode(name))
         self['id'] = name
-        self['id'] = name
+        self['alias'] = name
         self['URL'] = '%s%s/' % (MEDIA_URL, name)
         if not priv:
             self['attributes'] = []
