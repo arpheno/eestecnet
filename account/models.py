@@ -34,7 +34,21 @@ class EestecerManager(BaseUserManager):
         return self._create_user(email, password, True, True,
                                  **extra_fields)
 
-
+FIELDS_OF_STUDY = (
+    ("ee","Electrical Engineering"),
+    ("it","Information Technology"),
+    ("cs","Computer Science"),
+    ("bm","Biomedical Engineering"),
+    ("tc","Telecommunications"),
+    ("pe","Power Engineering"),
+    ("se","Software Engineering"),
+    ("au","Automatics"),
+    ("ns","Natural Sciences"),
+    ("ss","Social Sciences"),
+    ("ec","Economy"),
+    ("oe","Other engineering subjects"),
+    ("oo","Other"),
+)
 FOOD_CHOICES = (
     ('none', 'None'),
     ('kosher', 'Kosher'),
@@ -98,8 +112,8 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     """T-shirt size. Used for events"""
     allergies = models.CharField(max_length=50,blank=True,null=True)
     passport_number = models.CharField(max_length=20, blank=True, null=True)
-    test = models.CharField(max_length=20, blank=True, null=True)
     """Passport number required by many hostels. Makes it easier for organizers."""
+    field_of_study = models.CharField(max_length=50, choices=FIELDS_OF_STUDY)
     food_preferences = models.CharField(max_length=15, choices=FOOD_CHOICES,
                                         default='none')
     """ Food preferences, for example vegetarian or no pork. """
