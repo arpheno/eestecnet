@@ -5,9 +5,7 @@ from django.shortcuts import render, render_to_response
 
 # Create your views here.
 from django.views.generic import ListView, DetailView
-from gmapi import maps
 from gmapi.forms.widgets import GoogleMap
-from events.models import Event
 from members.models import Member
 
 class MemberDetail(DetailView):

@@ -3,13 +3,9 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import UpdateView, DetailView, CreateView, FormView, View, \
     ListView
-from django.contrib.auth.models import Group
 from django.forms import ModelForm, TextInput
-import json
 import string
 import random
-from django.http import HttpResponse
-from django.core.mail import send_mail
 from account.forms import EestecerCreationForm
 from account.models import Eestecer
 
@@ -27,26 +23,6 @@ def complete(request, ida):
     user.save()
     return redirect('/')
 
-
-def out(request):
-    logout(request)
-    return redirect('/')
-
-
-def auth(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(email=username, password=password)
-    data = {}
-    if user is not None:
-        if user.is_active:
-            login(request, user)
-        else:
-            data['status'] = 'inactive'
-            return HttpResponse(json.dumps(data), content_type="application/json")
-    else:
-        data['status'] = 'invalid'
-        return HttpResponse(json.dumps(data), content_type="application/json")
 
 class EestecerProfile(DetailView):
     model = Eestecer

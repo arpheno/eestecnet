@@ -1,20 +1,13 @@
 import random
 import sha
 from autoslug import AutoSlugField
-from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
-from django.db import models
-from django.utils import timezone
-from django.utils.datetime_safe import datetime
-from django.utils.timezone import make_aware
 from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 from django.db import models
 from account.models import Eestecer
-from eestecnet import settings
-from events.widgets import ChoiceWithOtherField
 
 
 SCOPE_CHOICES = (

@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'gunicorn',
     'bootstrap3_datetime',
     'sorl.thumbnail',
+    'south',
 )
 
 #from settings_deploy import *

@@ -1,10 +1,8 @@
 from autoslug import AutoSlugField
 from django.db import models
 from django.utils import timezone
-from django.utils.http import urlquote
 from django.utils.translation import ugettext_lazy as _
-from django.core.mail import send_mail
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin
 
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager)
@@ -100,6 +98,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     """T-shirt size. Used for events"""
     allergies = models.CharField(max_length=50,blank=True,null=True)
     passport_number = models.CharField(max_length=20, blank=True, null=True)
+    test = models.CharField(max_length=20, blank=True, null=True)
     """Passport number required by many hostels. Makes it easier for organizers."""
     food_preferences = models.CharField(max_length=15, choices=FOOD_CHOICES,
                                         default='none')
@@ -162,7 +161,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
         return self.get_full_name()
 
 class Position(models.Model):
-    name=models.CharField(max_length=40,unique=True)
+    name=models.CharField(max_length=60,unique=True)
     description=models.TextField()
     def __unicode__(self):
         return self.name

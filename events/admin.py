@@ -1,15 +1,9 @@
 import csv
 from django import forms
 from django.contrib import admin
-from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import User
-
-from django.db.models import ManyToManyField
 from django.forms import Textarea
 from django.http import HttpResponse
 from suit_redactor.widgets import RedactorWidget
-from account.models import Eestecer
 from events.models import Event, Application, EventImage, \
   Participation, IncomingApplication, OutgoingApplication
 

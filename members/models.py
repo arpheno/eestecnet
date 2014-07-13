@@ -5,7 +5,6 @@ from django.db import models
 from django.utils.datetime_safe import datetime
 from gmapi.maps import Geocoder
 from account.models import Eestecer
-from eestecnet import settings
 from events.models import Event
 
 TYPE_CHOICES = (
