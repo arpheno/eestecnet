@@ -5,6 +5,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic.base import View
 from django.views.decorators.csrf import csrf_exempt
 from eestecnet.settings import MEDIA_ROOT, MEDIA_URL
+from elfinder.models import roots_for_user
 from elfinder.volumes.filesystem import ElfinderVolumeLocalFileSystem
 from exceptions import ElfinderErrorMessages
 from elfinder.connector import ElfinderConnector
@@ -115,14 +116,15 @@ class ElfinderConnectorView(View):
 
     def get_optionset_for_user(self,request):
         if request.user.is_superuser:
-            roots=[self.root(member.name) for member in Member.objects.all()]
+            roots=[self.root(member.slug) for member in Member.objects.all()]
         elif request.user.is_authenticated():
             roots=[ self.root(member.name) for member in request.user.priviledged.all()]
             roots.append(self.root('internal'))
         else:
             roots=[]
         roots.append(self.root("public"))
-        return {  'debug': False,  'roots': roots }
+        rootsn=roots_for_user(request.user)
+        return {  'debug': False,  'roots': rootsn }
 
     def get(self, request, *args, **kwargs):
         """
