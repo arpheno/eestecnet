@@ -369,9 +369,10 @@ def create_local_admins(sender, **kwargs):
             'change_member']:
             admins.permissions.add(Permission.objects.get(codename=perm))
             admins.save()
-post_syncdb.connect(create_local_admins)
-post_syncdb.connect(create_eestec_lcs)
-post_syncdb.connect(create_eestec_news)
-post_syncdb.connect(create_eestec_people)
-post_syncdb.connect(create_inktronics)
-post_syncdb.connect(create_positions_for_achievements)
+if not len(Member.objects.all()):
+    post_syncdb.connect(create_local_admins)
+    post_syncdb.connect(create_eestec_lcs)
+    post_syncdb.connect(create_eestec_news)
+    post_syncdb.connect(create_eestec_people)
+    post_syncdb.connect(create_inktronics)
+    post_syncdb.connect(create_positions_for_achievements)
