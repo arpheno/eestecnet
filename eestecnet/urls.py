@@ -9,8 +9,8 @@ from eestecnet.views import newsletter, init
 from events.views import EventDetail, ApplyToEvent, InternationalEvents, confirm_event, \
     FillInTransport
 from materials.views import connector, index
-from members.models import Member
-from members.views import CommitmentList, TeamList, emap
+from teams.models import Team
+from teams.views import CommitmentList, TeamList, emap
 from news.models import Entry
 from news.views import home
 
@@ -38,9 +38,9 @@ urlpatterns = patterns('',
                        url(r'^events/(?P<slug>[-\w]+)/transportation/$',
                            FillInTransport.as_view(), name='eventtransportation'),
                        url(r'^cities/(?P<slug>[-\w]+)/$',
-                           DetailView.as_view(model=Member), name='city'),
+                           DetailView.as_view(model=Team), name='city'),
                        url(r'^teams/(?P<slug>[-\w]+)/$',
-                           DetailView.as_view(model=Member), name='team'),
+                           DetailView.as_view(model=Team), name='team'),
                        url(r'^people/$', EestecerList.as_view(), name='people'),
                        url(r'^people/me/$', EestecerUpdate.as_view(), name='userupdate'),
                        url(r'^people/(?P<slug>[-\w]+)/$', EestecerProfile.as_view(),

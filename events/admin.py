@@ -1,9 +1,11 @@
 import csv
+
 from django import forms
 from django.contrib import admin
 from django.forms import Textarea
 from django.http import HttpResponse
 from suit_redactor.widgets import RedactorWidget
+
 from events.models import Event, Application, EventImage, \
   Participation, IncomingApplication, OutgoingApplication
 
@@ -39,7 +41,7 @@ class MyEventAdminForm(forms.ModelForm):
     class Meta:
         model = Event
         widgets = {
-            'summary': Textarea(attrs={'cols': 50, 'rows': 8}),
+            'summary': Textarea(attrs={'cols': 9, 'rows': 1}),
             'description': RedactorWidget(editor_options={'lang':'en','iframe':'true','css':"/static/enet/css/wysiwyg.css"}),
         }
 
@@ -53,7 +55,7 @@ class MyEventAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Basic Event Information', {
             'fields': (
-                ('name'),('category'),('scope'),('summary','description'),
+                ('name', 'category'), ('scope'), ('summary'), ('description'),
                 ('participation_fee','max_participants'),'thumbnail'
             )
         }),
@@ -76,13 +78,12 @@ class MyEventAdmin(admin.ModelAdmin):
             )
         }),
         ('Organizers', {
-            'fields': (('organizing_committee','organizers'),)
+            'fields': (('organizing_committee',), ('organizers'),)
         }),
         ('Dates', {
             'fields': (('start_date','end_date','deadline'),)
         }),
     )
-
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         """ A Local admin will only be able to create :class:`Event`s for
          :class:`Member`s that he has privileges for. Admins still get to see all events"""
@@ -90,7 +91,7 @@ class MyEventAdmin(admin.ModelAdmin):
             return super(MyEventAdmin, self).formfield_for_manytomany(db_field, request,
                                                                       **kwargs)
         if db_field.name == "organizing_committee":
-            kwargs["queryset"] = request.user.priviledged.all()
+            kwargs["queryset"] = request.user.teams_administered()
         return super(MyEventAdmin, self).formfield_for_manytomany(db_field, request,
                                                                   **kwargs)
 
@@ -100,7 +101,8 @@ class MyEventAdmin(admin.ModelAdmin):
         qs = super(MyEventAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(organizing_committee__in=request.user.members.all())
+        return qs.filter(organizing_committee__in=request.user.teams_administered)
+
 
 class OutgoingApplicationFilter(admin.SimpleListFilter):#
     title = "Events"
@@ -125,7 +127,9 @@ class IncomingApplicationFilter(admin.SimpleListFilter):#
         return queryset
 
 def get_own_members(request):
-    return request.user.priviledged.filter( type__in=['observer', 'jlc', 'lc'])[0].members.all()
+    return request.user.privileged.filter(type__in=['observer', 'jlc', 'lc'])[
+        0].users.all()
+
 
 class OutgoingApplicationAdmin(admin.ModelAdmin):
     """ Custom interface to administrate Events from the django admin interface. """
@@ -133,7 +137,8 @@ class OutgoingApplicationAdmin(admin.ModelAdmin):
     list_editable = ['priority']
     list_filter = [OutgoingApplicationFilter,]
     def get_queryset(self, request):
-        """ A Local admin will only be able to modify applications issued by members from their LC
+        """ A Local admin will only be able to modify applications issued by teams
+        from their LC
         Admins still get to see all applications"""
         qs = super(OutgoingApplicationAdmin, self).get_queryset(request)
         if request.user.is_superuser:
@@ -158,7 +163,7 @@ class IncomingApplicationAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return qs
         try:
-            qs= qs.filter(target__in=request.user.priviledged.filter(
+            qs = qs.filter(target__in=request.user.privileged.filter(
                 type__in=['observer', 'jlc', 'lc'])[0].event_set.all())
         except:
             return qs.none()
@@ -198,7 +203,8 @@ class EventParticipationAdmin(admin.ModelAdmin):
     def t_shirt_size(self, instance):
         return instance.participant.tshirt_size
     def get_queryset(self, request):
-        """ A Local admin will only be able to modify applications issued by members from their LC
+        """ A Local admin will only be able to modify applications issued by teams
+        from their LC
         Admins still get to see all applications"""
         qs = super(EventParticipationAdmin, self).get_queryset(request)
         #if request.user.is_superuser:
@@ -206,7 +212,7 @@ class EventParticipationAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return qs
         try:
-            return qs.filter(target__in=request.user.priviledged.filter(
+            return qs.filter(target__in=request.user.privileged.filter(
                 type__in=['observer', 'jlc', 'lc'])[0].event_set.all())
         except:
             return qs.none()

@@ -33,12 +33,16 @@
             {{ object.description }}
         {% endautoescape %}
     </details>
-    <details>
-        <summary>Last Events</summary>
+    <details open>
+    <summary>Last Events</summary>
         {% include 'events/events.html' with object_list=object.event_set.all %}
     </details>
-    <details>
+    <details open>
+        <summary>Board</summary>
+        {% include 'account/eestecers.html' with object_list=object.board %}
+    </details>
+    <details open>
         <summary>Members</summary>
-        {% include 'account/eestecers.html' with object_list=object.members.all %}
+        {% include 'account/eestecers.html' with object_list=object.users.all %}
     </details>
 {% endblock %}

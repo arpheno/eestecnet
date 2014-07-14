@@ -94,14 +94,10 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     """Mobile Phone number of the user. Mostly used for contact during events."""
     #Personal Information
     first_name = models.CharField(_('first name'), max_length=30)
-    """First name"""
     middle_name = models.CharField(_('middle name'), max_length=30, blank=True)
-    """First name"""
     last_name = models.CharField(_('last name'), max_length=30)
     slug = AutoSlugField(populate_from=get_eestecer_slug)
-    """Last name """
     second_last_name = models.CharField(_('second last name'), max_length=30, blank=True)
-    """Last name """
     date_of_birth = models.DateField(blank=True,null=True)
     """ Date of birth"""
     profile_picture = models.ImageField(upload_to="users", blank=True, null=True)
@@ -118,7 +114,6 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     food_preferences = models.CharField(max_length=15, choices=FOOD_CHOICES,
                                         default='none')
     """ Food preferences, for example vegetarian or no pork. """
-    #EESTEC information
     curriculum_vitae=models.FileField(upload_to="cvs",blank=True,null=True)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     """Should be set by the user to the time they joined eestec. For new users it will be the moment they register with the website"""
@@ -139,17 +134,19 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
         except:
             return 0
 
+    def teams_administered(self):
+        return self.teams.filter(membership__privileged=True)
 
     #Django information
-    is_staff = models.BooleanField(_('staff status'), default=False,
-                                   help_text=_(
-                                       'Designates whether the user can log into this admin site.'))
-    """Designates whether the user can log into this admin site"""
+    is_staff = models.BooleanField(_('active'), default=False)
     is_active = models.BooleanField(_('active'), default=True,
                                     help_text=_(
                                         'Designates whether this user should be treated as '
                                         'active. Unselect this instead of deleting accounts.'))
     """Designates whether this user should be treated as active. Unselect this instead of deleting accounts"""
+
+    def lc(self):
+        return self.teams_administered().filter(type__in=['jlc', 'lc', 'observer'])
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','last_name','gender']
@@ -183,6 +180,6 @@ class Position(models.Model):
 class Achievement(models.Model):
     person = models.ForeignKey(Eestecer,related_name='achievements')
     position= models.ForeignKey(Position)
-    member = models.ForeignKey('members.Member')
+    member = models.ForeignKey('teams.Team')
     date = models.DateField(auto_now_add=True)
     event = models.ForeignKey('events.Event',null=True,blank=True)

@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
 from settings_local import *
 
 # Quick-start development settings - unsuitable for production
@@ -32,7 +31,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'events',
-    'members',
+    'teams',
     'gmapi',
     'news',
     'elfinder',

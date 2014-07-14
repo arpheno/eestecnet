@@ -1,17 +1,20 @@
 {% extends 'enet/split.html' %}
 {% load staticfiles %}
 {% block main %}
-    <style>#map{width:80%;height:350px;}</style>
-    <link rel="stylesheet" href="{% static 'enet/leaflet.css' %}" />
+    <style>#map {
+        width: 80%;
+        height: 350px;
+    }</style>
+    <link rel="stylesheet" href="{% static 'enet/leaflet.css' %}"/>
     <script src="{% static 'enet/leaflet.js' %}"></script>
     <script src="{% static 'enet/testleaf.js' %}"></script>
     <script>
-        $(function(){
+        $(function () {
             {% for object in object_list %}
-                var mark=new L.Marker(new L.LatLng({{ object.lat }}, {{  object.lng}}),{title:"{{ object }}"} );
+                var mark = new L.Marker(new L.LatLng({{ object.lat }}, {{  object.lng}}), {title: "{{ object }}"});
                 mark.on('click',
-                        function(){
-                            window.location="{% url 'city' object.slug %}";
+                        function () {
+                            window.location = "{% url 'city' object.slug %}";
                         });
                 map.addLayer(mark);
             {% endfor %}
@@ -21,6 +24,6 @@
     <div id="map">
     </div>
     <section class="members">
-    {% include 'members/members.html' with object_list=object_list %}
+        {% include 'teams/teams.html' with object_list=object_list %}
     </section>
 {% endblock %}

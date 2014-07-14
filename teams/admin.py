@@ -1,20 +1,17 @@
-from django import forms
 from django.contrib import admin
 
 # Register your models here.
-from django.contrib.admin.widgets import FilteredSelectMultiple
-from account.models import Eestecer
-from members.models import Member, MemberImage
+from teams.models import Team, MemberImage
+from news.models import Membership
 
 
 class MemberInline(admin.TabularInline):
     """ Inline Widget to display the Members of the Member with relevant information"""
-    model = Member.members.through
+    model = Membership
     """ The model that is used"""
-    readonly_fields = ['name', 'number_of_events', 'last_event']
+    readonly_fields = ['user', 'number_of_events', 'last_event']
+    fields = ['user', 'privileged', 'board', 'number_of_events', 'last_event']
     """The fields we want to display"""
-    exclude = ['eestecer']
-    """Exclude eestecer, or we end up being able to change things which we should not"""
     verbose_name_plural = "Members"
     """The title of the widget"""
     verbose_name = "pax"
@@ -37,21 +34,6 @@ class MemberInline(admin.TabularInline):
         return False
 
 
-class MemberForm(forms.ModelForm):
-    class Meta:
-        widgets = {'members': FilteredSelectMultiple('members', is_stacked=False)}
-
-    def __init__(self, *args, **kwargs):
-        """Make sure only members of the Member can get privileges"""
-        super(MemberForm, self).__init__(*args, **kwargs)
-        self.fields['priviledged'].queryset = Eestecer.objects.filter(
-            members__pk=self.instance.pk)
-        self.fields['board'].queryset = Eestecer.objects.filter(
-            members__pk=self.instance.pk)
-
-    def clean(self):
-        """Put all priviledged members local admin rights"""
-        return self.cleaned_data
 
 
 class MemberImageInline(admin.TabularInline):
@@ -60,10 +42,8 @@ class MemberImageInline(admin.TabularInline):
 
 class MyMemberAdmin(admin.ModelAdmin):
     """A custom Admin displaying additional Member specific information"""
-    form = MemberForm
     readonly_fields = ['member_count', ]
-    exclude = ['members']
-    filter_horizontal = ['board', 'priviledged']
+    exclude = ['teams']
     inlines = [MemberImageInline, MemberInline, ]
 
     def get_queryset(self, request):
@@ -71,7 +51,7 @@ class MyMemberAdmin(admin.ModelAdmin):
         qs = super(MyMemberAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(priviledged=request.user)
+        return qs.filter(users=request.user, membership__privileged=True)
 
 
-admin.site.register(Member, MyMemberAdmin)
+admin.site.register(Team, MyMemberAdmin)

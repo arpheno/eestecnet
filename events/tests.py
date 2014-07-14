@@ -7,7 +7,7 @@ from django.test import TestCase
 from account.models import Eestecer
 from events.admin import MyEventAdmin
 from events.models import Event, Application
-from members.models import Member
+from teams.models import Team
 
 
 class MockRequest(object):
@@ -25,7 +25,7 @@ request.user = MockSuperUser()
 
 class EventTestCase(TestCase):
     def setUp(self):
-        self.lc = Member.objects.get(name="skopje")
+        self.lc = Team.objects.get(name="skopje")
         self.ev = Event.objects.create(name="T4T",
                                        summary="Nice event",
                                        description="Cool thing",
@@ -74,7 +74,7 @@ class EventTestCase(TestCase):
         ap.accepted = True
         ap.save()
         self.assertFalse(len(self.ev.applicants.all()))
-        self.assertEqual(self.lc.members.all()[0], self.user)
+        self.assertEqual(self.lc.users.all()[0], self.user)
 
     def test_cant_apply_after_deadline(self):
         ap = Application.objects.create(

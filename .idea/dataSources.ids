@@ -205,11 +205,13 @@
       <column name="slug" sqlType="VARCHAR(50)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
       <column name="type" sqlType="VARCHAR(30)" length="2000000000" precision="10" nullable="false" jdbcType="12"/>
       <column name="thumbnail" sqlType="VARCHAR(100)" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
-      <column name="thumbsource" sqlType="VARCHAR(50)" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
+      <column name="thumbsource" sqlType="VARCHAR(100)" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
       <column name="description" sqlType="TEXT" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
       <column name="facebook" sqlType="VARCHAR(200)" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
       <column name="website" sqlType="VARCHAR(200)" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
       <column name="address" sqlType="TEXT" length="2000000000" precision="10" nullable="true" jdbcType="12"/>
+      <column name="lat" sqlType="REAL" length="2000000000" precision="10" nullable="true" jdbcType="6"/>
+      <column name="lng" sqlType="REAL" length="2000000000" precision="10" nullable="true" jdbcType="6"/>
       <column name="founded" sqlType="INTEGER UNSIGNED" length="2000000000" precision="10" nullable="true" jdbcType="4"/>
       <primary-key columns="id"/>
       <exported-key name="#FAKE_members_memberimage_1" table="members_memberimage" schema="" catalog="" columns="property_id"/>

@@ -1,14 +1,17 @@
 import random
 import sha
+
 from autoslug import AutoSlugField
-from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
+
+
+
 
 # Create your models here.
 from django.db import models
 from mailqueue.models import MailerMessage
-from account.models import Eestecer
+from news.models import Membership
 
 
 SCOPE_CHOICES = (
@@ -47,19 +50,26 @@ class Event(models.Model):
     #Participants and Organizers
     max_participants = models.IntegerField(blank=True, null=True)
     """ Optional: Maximum amount of participants that will be admitted to the event """
-    organizing_committee = models.ManyToManyField('members.Member')
+    organizing_committee = models.ManyToManyField('teams.Team')
     """ Defines the Organizing Members of the event. May be more than one. Only
-     those Members can be selected, the editor is a priviledged member of."""
+     those Members can be selected, the editor is a privileged member of."""
+
     def OC(self):
         """Helper function to display the names of organizing committees of an event"""
         return " ".join([c.name for c in self.organizing_committee.all()])
-    organizers = models.ManyToManyField(Eestecer, blank=True, null=True, related_name='events_organized')
+
+    organizers = models.ManyToManyField('account.Eestecer', blank=True, null=True,
+                                        related_name='events_organized')
     """ A list of all Users currently connected to the event as Organizers.
     Usually the head Organizers of the event."""
     participation_fee = models.PositiveIntegerField(default=0)
     """Optional: Participation Fee for the event. """
-    participants=models.ManyToManyField(Eestecer, blank=True, null=True, related_name='events',through= 'Participation')
-    applicants = models.ManyToManyField(Eestecer,blank=True,null=True, related_name='applications',through='Application')
+    participants = models.ManyToManyField('account.Eestecer', blank=True, null=True,
+                                          related_name='events', through='Participation')
+    applicants = models.ManyToManyField('account.Eestecer', blank=True, null=True,
+                                        related_name='applications',
+                                        through='Application')
+
     def participant_count(self):
         """Number of participants"""
         return len(self.participants.all())
@@ -95,7 +105,8 @@ class Participation(models.Model):
     class Meta:
         verbose_name="Participant"
         verbose_name_plural="Participants"
-    participant = models.ForeignKey(Eestecer)
+
+    participant = models.ForeignKey('account.Eestecer')
     """ The User issuing this application"""
     target = models.ForeignKey(Event)
     """ The :class:`Event` the User is applying for."""
@@ -134,24 +145,18 @@ class Application(models.Model):
     """Application objects link Users to :class:`Event` objects and provide additional information"""
     class Meta:
         unique_together=(('applicant','target'),)
-    applicant = models.ForeignKey(Eestecer)
-    """ The User issuing this application"""
+
+    applicant = models.ForeignKey('account.Eestecer')
     target = models.ForeignKey(Event)
-    """ The :class:`Event` the User is applying for."""
     date = models.DateTimeField(auto_now_add=True)
-    """ Auto: The date when the application is created. """
     letter = models.TextField(blank=True, null=True)
-    """ Optional: Motivational letter, if the event requires one."""
     priority = models.IntegerField(blank=True, null=True)
-    """Optional: Priority of the application as issued by the corresponding LC"""
     accepted = models.BooleanField(default=False)
 
-    """If this field is set to true, the application is accepted and the User
-    becomes a Participant of the :class:`Event`"""
     def member_in(self):
         """ returns a String containing all :class:`Member`s the applicant is part of """
         try:
-            return ",".join(map(lambda c: c.name, self.applicant.members.all()))
+            return ",".join(map(lambda c: c.name, self.applicant.teams.all()))
         except Exception, e:
             return "Error:%s" % str(e)
 
@@ -162,8 +167,9 @@ class Application(models.Model):
              update_fields=None):
                 if self.target.category == "recruitment":
                     if self.accepted:
-                        self.target.organizing_committee.all()[0].members.add(self.applicant)
-
+                        Membership.objects.create(
+                            team=self.target.organizing_committee.all()[0],
+                            user=self.applicant).save()
                         self.delete()
                     else:
                         super(Application,self).save()

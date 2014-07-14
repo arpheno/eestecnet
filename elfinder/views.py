@@ -1,16 +1,18 @@
 import json
 import os
+
 from django.http import HttpResponse, Http404
 from django.utils.decorators import method_decorator
 from django.views.generic.base import View
 from django.views.decorators.csrf import csrf_exempt
+
 from eestecnet.settings import MEDIA_ROOT, MEDIA_URL
 from elfinder.models import roots_for_user
 from elfinder.volumes.filesystem import ElfinderVolumeLocalFileSystem
 from exceptions import ElfinderErrorMessages
 from elfinder.connector import ElfinderConnector
 from elfinder.conf import settings as ls
-from members.models import Member
+from teams.models import Team
 
 
 class ElfinderConnectorView(View):
@@ -40,15 +42,16 @@ class ElfinderConnectorView(View):
         if not 'content_type' in kwargs:
             kwargs['content_type'] = 'application/json'
 
-        if 'pointer' in context: #return file
+        if 'pointer' in context:  #return file
             context['pointer'].seek(0)
             kwargs['content'] = context['pointer'].read()
             context['volume'].close(context['pointer'], context['info']['hash'])
-        elif 'raw' in context and context['raw'] and 'error' in context and context['error']: #raw error, return only the error list
+        elif 'raw' in context and context['raw'] and 'error' in context and context[
+            'error']:  #raw error, return only the error list
             kwargs['content'] = context['error']
-        elif kwargs['content_type'] == 'application/json': #return json
+        elif kwargs['content_type'] == 'application/json':  #return json
             kwargs['content'] = json.dumps(context)
-        else: #return context as is!
+        else:  #return context as is!
             kwargs['content'] = context
 
         response = HttpResponse(**kwargs)
@@ -104,34 +107,36 @@ class ElfinderConnectorView(View):
         if not kwargs['optionset'] in ls.ELFINDER_CONNECTOR_OPTION_SETS:
             raise Http404
         return super(ElfinderConnectorView, self).dispatch(*args, **kwargs)
-    def root(self,name):
+
+    def root(self, name):
         return {
             'alias': name,
             'id': name,
             'driver': ElfinderVolumeLocalFileSystem,
             'path': os.path.join(MEDIA_ROOT, unicode(name)),
-            'URL': '%s%s/' % (MEDIA_URL,name),
+            'URL': '%s%s/' % (MEDIA_URL, name),
             'uploadMaxSize': '128m',
-            }
+        }
 
-    def get_optionset_for_user(self,request):
+    def get_optionset_for_user(self, request):
         if request.user.is_superuser:
-            roots=[self.root(member.slug) for member in Member.objects.all()]
+            roots = [self.root(member.slug) for member in Team.objects.all()]
         elif request.user.is_authenticated():
-            roots=[ self.root(member.name) for member in request.user.priviledged.all()]
+            roots = [self.root(member.name) for member in request.user.privileged.all()]
             roots.append(self.root('internal'))
         else:
-            roots=[]
+            roots = []
         roots.append(self.root("public"))
-        rootsn=roots_for_user(request.user)
-        return {  'debug': False,  'roots': rootsn }
+        rootsn = roots_for_user(request.user)
+        return {'debug': False, 'roots': rootsn}
 
     def get(self, request, *args, **kwargs):
         """
         used in get method calls
         """
 
-        self.elfinder = ElfinderConnector(self.get_optionset_for_user(request), request.session)
+        self.elfinder = ElfinderConnector(self.get_optionset_for_user(request),
+                                          request.session)
         return self.output(self.get_command(request.GET), request.GET)
 
     def post(self, request, *args, **kwargs):
@@ -139,10 +144,14 @@ class ElfinderConnectorView(View):
         called in post method calls.
         It only allows for the 'upload' command
         """
-        self.elfinder = ElfinderConnector(self.get_optionset_for_user(request), request.session)
+        self.elfinder = ElfinderConnector(self.get_optionset_for_user(request),
+                                          request.session)
         cmd = self.get_command(request.POST)
 
         if not cmd in ['upload']:
-            self.render_to_response({'error' : self.elfinder.error(ElfinderErrorMessages.ERROR_UPLOAD, ElfinderErrorMessages.ERROR_UPLOAD_TOTAL_SIZE)})
+            self.render_to_response({
+                'error': self.elfinder.error(ElfinderErrorMessages.ERROR_UPLOAD,
+                                             ElfinderErrorMessages
+                                             .ERROR_UPLOAD_TOTAL_SIZE)})
 
         return self.output(cmd, request.POST)
