@@ -1,9 +1,10 @@
 import random
-from bootstrap3_datetime.widgets import DateTimePicker
+
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm, TextInput
 from django.forms import widgets
 from django.shortcuts import render, redirect, get_object_or_404
+
 
 # Create your views here.
 from django.utils import timezone
@@ -26,9 +27,16 @@ class InternationalEvents(ListView):
         context = super(InternationalEvents, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         events=context['object_list'].filter(scope="international")
-        context['active_list'] = [event for event in events if event.deadline >timezone.now()]
-        context['pending_list'] = [event for event in events if event.deadline< timezone.now() and event.end_date> timezone.now().date()]
-        context['over_list'] = [event for event in events if event.end_date < timezone.now().date()]
+        for event in events:
+            if not event.deadline or not event.end_date:
+                context['active_list'].append(event)
+            elif event.deadline > timezone.now():
+                context['active_list'].append(event)
+            elif event.deadline < timezone.now() and event.end_date > timezone.now()\
+                    .date():
+                context['pending_list'].append(event)
+            elif event.end_date < timezone.now().date():
+                context['over_list'].append(event)
         return context
 
 def confirm_event(request,slug):
