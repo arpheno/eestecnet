@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.views.generic import TemplateView, ListView, DetailView, CreateView
 import account
 from account.views import EestecerProfile,  EestecerUpdate, EestecerCreate, \
-    Login, Logout, EestecerList
+    Login, Logout, EestecerList, complete
 from eestecnet.settings import MEDIA_ROOT
 from eestecnet.views import newsletter, init
 from events.models import Event, Application
@@ -44,6 +44,7 @@ urlpatterns = patterns('',
     url(r'^people/me/$', EestecerUpdate.as_view(), name='userupdate'),
     url(r'^people/(?P<slug>[-\w]+)/$', EestecerProfile.as_view(), name='user'),
     url(r'^login/', Login.as_view(), name='login'),
+    url(r'^complete/(?P<ida>[-\w]+)/', complete, name='complete'),
     url(r'^logout/', Logout.as_view(), name='logout'),
     url(r'^register/', EestecerCreate.as_view(), name='register'),
     url(r'^admin/', include(admin.site.urls)),

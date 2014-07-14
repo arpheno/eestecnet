@@ -16,7 +16,7 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 
 def complete(request, ida):
     try:
-        user = Eestecer.objects.get(registration=ida)
+        user = Eestecer.objects.get(activation_link=ida)
     except:
         return redirect('/')
     user.is_active = True
@@ -54,6 +54,8 @@ class EestecerCreate(CreateView):
     form_class = EestecerCreationForm
     template_name = 'account/eestecer_create.html'
     success_url = '/'
+    def get_success_url(self):
+        return "/"
 class Login(FormView):
     template_name = 'account/login.html'
     form_class = AuthenticationForm
