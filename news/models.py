@@ -1,12 +1,15 @@
+from autoslug import AutoSlugField
 from django.db import models
+
 from members.models import Member
 
 
 class Entry(models.Model):
     author = models.ManyToManyField(Member)
     """ The :class:`Members <members.models.Member>` authoring the news"""
-    headline = models.CharField(max_length=50)
+    headline = models.CharField(max_length=50, unique=True)
     """ The headline"""
+    slug = AutoSlugField(populate_from='headline')
     content = models.TextField()
     """The Content of the message"""
     pub_date = models.DateTimeField(auto_now_add=True)

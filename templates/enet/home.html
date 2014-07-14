@@ -27,13 +27,17 @@
                     </div>
                     <footer>
                         <main>
+                            <a href="{% url 'news' object.slug %}">
                             <h1>{{ object.headline }}</h1>
                             <p>{{ object.content }}</p>
+                            </a>
                         </main>
                         <aside>
                             <h2>Other top Stories:</h2>
-                            {% for object in object_list %}
-                                <a href="#">{{   object }}</a>
+                            {% for other_object in object_list %}
+                                {% if other_object != object %}
+                                    <a href="#">{{ other_object }}</a>
+                                {% endif %}
                             {% endfor %}
                         </aside>
                     </footer>

@@ -83,6 +83,10 @@ main.home{
     flex:1 0 85%;
     height:480px;
     position:relative;
+    a {
+      color: white;
+      text-decoration: none;
+    }
     >h1,h2{
       color:#fff;
       text-align: center;

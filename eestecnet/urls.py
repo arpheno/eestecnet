@@ -14,6 +14,7 @@ from members.views import CommitmentList, TeamList, emap
 from news.models import Entry
 from news.views import home
 
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -23,7 +24,8 @@ urlpatterns = patterns('',
                        url(r'^$', home.as_view(), name='home'),
                        url(r'^news/$', ListView.as_view(model=Entry)),
                        url(r'^about/$', home.as_view(), name='about'),
-                       url(r'^news/(?P<pk>[-_\w]+)/$', DetailView.as_view(model=Entry)),
+                       url(r'^news/(?P<slug>[-_\w]+)/$', DetailView.as_view(model=Entry),
+                           name='news'),
                        url(r'^events/$', InternationalEvents.as_view(), name='events', ),
                        url(r'^teams/$', TeamList.as_view(), name='teams'),
                        url(r'^cities/$', CommitmentList.as_view(), name='cities'),

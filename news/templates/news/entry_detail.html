@@ -1,0 +1,10 @@
+{% extends 'enet/split.html' %}
+{% block main %}
+    <article class="news">
+        <h1>{{ entry.headline }}</h1>
+
+        <h3>{{ entry.pub_date }}</h3>
+
+        <p class="post_content">{{ entry.content }}</p>
+    </article>
+{% endblock %}
