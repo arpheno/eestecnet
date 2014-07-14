@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 
 # Create your models here.
 from django.db import models
+from mailqueue.models import MailerMessage
 from account.models import Eestecer
 
 
@@ -174,11 +175,13 @@ class Application(models.Model):
                     if self.accepted:
                         participation = Participation.objects.create(target=self.target, participant=self.applicant)
                         participation.save()
-                        send_mail(
-                            "Congratulations! You were accepted to " + participation.target.name,
-                            "Dear " +participation.participant.first_name + "\nPlease visit "+ reverse('eventconfirmation',kwargs={'slug':participation.target.slug})+"to confirm your participation to the event.\n Thank you.",
-                            "eestecnet@gmail.com",
-                            [self.applicant.email])
+                        message=MailerMessage()
+                        message.subject = "Congratulations! You were accepted to " + participation.target.name
+                        message.content="Dear " +participation.participant.first_name + "\nPlease visit "+ reverse('eventconfirmation',kwargs={'slug':participation.target.slug})+"to confirm your participation to the event.\n Thank you."
+                        message.from_address="eestecnet@gmail.com",
+                        message.to_address = self.applicant.email
+                        message.save()
+
                         self.delete()
                     else:
                         super(Application,self).save()

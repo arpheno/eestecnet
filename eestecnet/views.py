@@ -6,6 +6,7 @@ from django.shortcuts import redirect, render_to_response
 from gmapi import maps
 from gmapi.forms.widgets import GoogleMap
 from gmapi.maps import Geocoder
+from mailqueue.models import MailerMessage
 from eestecnet import *
 from members.models import Member
 
@@ -23,9 +24,12 @@ def newsletter(request):
         validate_email( request.POST['mailsub'] )
     except ValidationError:
         return redirect("/")
-    send_mail("Dear VC-IA, please kindly add "+request.POST['mailsub']+"to the newsletter list.",
-              "eestecnet@gmail.com",
-              "vc-ia@eestec.net")
+    message=MailerMessage()
+    message.subject = "add to newsletter"
+    message.content="Dear VC-IA, please kindly add "+request.POST['mailsub']+"to the newsletter list."
+    message.from_address="eestecnet@gmail.com",
+    message.to_address = "vc-ia@eestec.net"
+    message.save()
     return redirect("/")
 
 
