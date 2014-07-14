@@ -28,15 +28,16 @@ class InternationalEvents(ListView):
         # Add in a QuerySet of all the books
         events=context['object_list'].filter(scope="international")
         for event in events:
-            if not event.deadline or not event.end_date:
+            try:
+                if event.deadline > timezone.now():
+                    context['active_list'].append(event)
+                if event.deadline < timezone.now() and event.end_date > timezone.now() \
+                        .date():
+                    context['pending_list'].append(event)
+                if event.end_date < timezone.now().date():
+                    context['over_list'].append(event)
+            except:
                 context['active_list'].append(event)
-            elif event.deadline > timezone.now():
-                context['active_list'].append(event)
-            elif event.deadline < timezone.now() and event.end_date > timezone.now()\
-                    .date():
-                context['pending_list'].append(event)
-            elif event.end_date < timezone.now().date():
-                context['over_list'].append(event)
         return context
 
 def confirm_event(request,slug):
