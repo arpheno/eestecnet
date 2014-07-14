@@ -27,6 +27,9 @@ class InternationalEvents(ListView):
         context = super(InternationalEvents, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         events=context['object_list'].filter(scope="international")
+        context['active_list'] = []
+        context['pending_list'] = []
+        context['over_list'] = []
         for event in events:
             try:
                 if event.deadline > timezone.now():
