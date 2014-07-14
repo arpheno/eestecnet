@@ -214,8 +214,15 @@ html > body footer {
     background-color: #465052;
 }
 
-html > body footer #map {
+html > body footer #europe {
     flex: 1 1 100%;
+}
+
+#copyright {
+    text-align: center;
+    background-color: #465052;
+    color: white;
+    width: 100%;
 }
 
 body > header {
@@ -575,7 +582,6 @@ main.home #preview {
 main.home #preview a {
     color: white;
     text-decoration: none;
-    font-weight: bolder;
 }
 
 main.home #preview > h1, main.home #preview h2 {
@@ -696,6 +702,10 @@ main.home #preview img, main.home #preview .pictures, main.home #preview #news {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
+}
+
+a {
+    text-decoration: none;
 }
 
 .detail .pictures {

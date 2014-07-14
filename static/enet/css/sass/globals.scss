@@ -114,10 +114,16 @@ html>body{
   footer{
     background-color:$eestecgreylight;
   }
-  footer #map{
+  footer #europe {
     flex:1 1 100%;
   }
 }
 
+#copyright {
+  text-align: center;
+  background-color: $eestecgreylight;
+  color: white;
+  width: 100%;
+}
 
 
