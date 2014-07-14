@@ -1,11 +1,13 @@
 from autoslug import AutoSlugField
-from django.contrib.auth.models import User, Group, Permission
+from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.datetime_safe import datetime
 from gmapi.maps import Geocoder
+
 from account.models import Eestecer
 from events.models import Event
+
 
 TYPE_CHOICES = (
         ('body', 'Body'),
@@ -96,7 +98,8 @@ class Member(models.Model):
                 usr.is_staff=True
                 usr.groups.add(Group.objects.get(name='Local Admins'))
                 usr.save()
-            super(Member,self).save(*args,**kwargs)
+        super(Member, self).save(*args, **kwargs)
+
     def __unicode__(self):
         if self.type not in ['jlc','lc','observer']:
             return self.name
