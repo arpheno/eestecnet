@@ -14,7 +14,7 @@ class Entry(models.Model):
     """The Content of the message"""
     pub_date = models.DateTimeField(auto_now_add=True)
     """ The publication date"""
-    entry_image = models.ImageField(blank=True, null=True,upload_to="entryimages")
+    entry_image = models.ImageField(upload_to="entryimages")
     """ Optionally, an image to add"""
     def __unicode__(self):
         return self.headline
