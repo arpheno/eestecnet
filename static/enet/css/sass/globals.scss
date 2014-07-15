@@ -126,4 +126,10 @@ html>body{
   width: 100%;
 }
 
-
+.messages {
+  flex: 1 1 100%;
+  padding: 30px;
+  background-color: rgba(lightblue, 0.5);
+  font-weight: bold;
+  font-size: 18px;
+}

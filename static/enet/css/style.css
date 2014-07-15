@@ -225,6 +225,14 @@ html > body footer #europe {
     width: 100%;
 }
 
+.messages {
+    flex: 1 1 100%;
+    padding: 30px;
+    background-color: rgba(173, 216, 230, 0.5);
+    font-weight: bold;
+    font-size: 18px;
+}
+
 body > header {
     flex: 1 1 100%;
     background-color: #fff;

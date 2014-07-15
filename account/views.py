@@ -1,11 +1,14 @@
+import string
+import random
+
+from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import redirect, render
-from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import redirect
+from django.contrib.auth import login, logout
 from django.views.generic import UpdateView, DetailView, CreateView, FormView, View, \
     ListView
 from django.forms import ModelForm, TextInput
-import string
-import random
+
 from account.forms import EestecerCreationForm
 from account.models import Eestecer
 
@@ -44,6 +47,14 @@ class EestecerUpdate(UpdateView):
     success_url = "/people/me"
     template_name = 'account/eestecer_form.html'
 
+    def form_valid(self, form):
+        messages.add_message(
+            self.request,
+            messages.INFO,
+            'Your information has been updated.')
+        return super(EestecerUpdate, self).form_valid(form)
+
+
     def get_object(self, queryset=None):
         return self.request.user
 class EestecerList(ListView):
@@ -56,11 +67,25 @@ class EestecerCreate(CreateView):
     success_url = '/'
     def get_success_url(self):
         return "/"
+
+    def form_valid(self, form):
+        messages.add_message(
+            self.request,
+            messages.INFO,
+            'Registration successful. Please check your email to complete the process.')
+        return super(EestecerCreate, self).form_valid(form)
+
+
 class Login(FormView):
     template_name = 'account/login.html'
     form_class = AuthenticationForm
     def form_valid(self, form):
         login(self.request,form.get_user())
+        messages.add_message(
+            self.request,
+            messages.INFO,
+            'You\'re now logged in as ' + unicode(form.get_user())
+        )
         return redirect("/")
     def form_invalid(self, form):
         return self.render_to_response(self.get_context_data(form=form))
@@ -68,4 +93,5 @@ class Login(FormView):
 class Logout(View):
     def get(self, request, *args, **kwargs):
         logout(request)
+        messages.add_message(request, messages.INFO, 'You\'re now logged out')
         return redirect("/")

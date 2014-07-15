@@ -1,9 +1,11 @@
 import random
 
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm, TextInput
 from django.forms import widgets
 from django.shortcuts import render, redirect, get_object_or_404
+
 
 
 # Create your views here.
@@ -87,6 +89,10 @@ class ApplyToEvent(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
+            messages.add_message(
+                self.request,
+                messages.INFO,
+                'Thank you for your application. You will be notified upon acceptance.')
             return redirect(reverse('event',kwargs={'slug':self.kwargs['slug']}))
         return render(request, self.template_name, {'form': form})
 class TransportForm(ModelForm):
@@ -116,5 +122,9 @@ class FillInTransport(CreateView):
         trans=form.save()
         pax.transportation=trans
         pax.save()
+        messages.add_message(
+            self.request,
+            messages.INFO,
+            'Thank you for filling in your transportation details.')
         return redirect(reverse('event',kwargs={'slug':self.kwargs['slug']}))
 
