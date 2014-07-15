@@ -8,7 +8,6 @@ from eestecnet.settings import MEDIA_ROOT
 from eestecnet.views import newsletter, init
 from events.views import EventDetail, ApplyToEvent, InternationalEvents, confirm_event, \
     FillInTransport
-from materials.views import connector, index
 from teams.models import Team
 from teams.views import CommitmentList, TeamList, emap
 from news.models import Entry
@@ -53,9 +52,8 @@ urlpatterns = patterns('',
                        url(r'^maps/', emap),
                        url(r'^init/', init),
                        url(r'^mail-queue/$', include('mailqueue.urls')),
-                       url(r'^materials/$', index, name='materials'),
                        url(r'^newsletter/$', newsletter, name='newsletter'),
-                       url(r'^materials/connector/', connector, name='trtconnector'),
+                       url(r'^materials/', include('elfinder.urls')),
                        url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
                            {'document_root': MEDIA_ROOT}),
 )

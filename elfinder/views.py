@@ -2,6 +2,7 @@ import json
 import os
 
 from django.http import HttpResponse, Http404
+from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic.base import View
 from django.views.decorators.csrf import csrf_exempt
@@ -13,6 +14,18 @@ from exceptions import ElfinderErrorMessages
 from elfinder.connector import ElfinderConnector
 from elfinder.conf import settings as ls
 from teams.models import Team
+
+
+def index(request):
+    if request.is_ajax():
+        return render(request, 'elfinder/elfinder-partial.html')
+    return render(request, 'elfinder/elfinder.html')
+
+
+def connector(request):
+    connector_view = ElfinderConnectorView.as_view()
+    response = connector_view(request, optionset="default", start_path="default")
+    return response
 
 
 class ElfinderConnectorView(View):

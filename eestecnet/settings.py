@@ -37,7 +37,6 @@ INSTALLED_APPS = (
     'news',
     'elfinder',
     'mailqueue',
-    'materials',
     'account',
     'gunicorn',
     'sorl.thumbnail',
@@ -78,7 +77,8 @@ LOGGING = {
     'disable_existing_loggers': True,
     'formatters': {
         'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %('
+                      'message)s'
         },
         'simple': {
             'format': '%(levelname)s %(message)s'
@@ -89,7 +89,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.NullHandler',
         },
-        'console':{
+        'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
@@ -140,8 +140,8 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',)
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'), )
 
-MEDIA_URL='/media/'
-MEDIA_ROOT= os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'serve', 'static')

@@ -14,23 +14,7 @@
 @import "home.scss";
 @import "datetimepicker.scss";
 
-#elfinder {
-  width: 100%;
-}
-
-.picturelist {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-
-}
-
 a {
   text-decoration: none;
 }
 
-.detail .pictures {
-  height: 225px;
-  width: 375px;
-  float: left;
-}

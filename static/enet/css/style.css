@@ -702,22 +702,6 @@ main.home #preview img, main.home #preview .pictures, main.home #preview #news {
     margin: 0 45% 10px 10px;
 }
 
-#elfinder {
-    width: 100%;
-}
-
-.picturelist {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-}
-
 a {
     text-decoration: none;
-}
-
-.detail .pictures {
-    height: 225px;
-    width: 375px;
-    float: left;
 }
