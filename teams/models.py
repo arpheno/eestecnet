@@ -70,8 +70,8 @@ class Team(models.Model):
             self.lat, self.lng = results[0]['geometry']['location']['arg']
         except:
             pass
-        super(Team, self).save(*args, **kwargs)
         if self.pk==None:
+            super(Team, self).save(*args, **kwargs)
             a=Event.objects.create(
                 name=str(self.slug + " recruitment"),
                 scope="local",
@@ -84,6 +84,7 @@ class Team(models.Model):
             a.save()
             a.organizing_committee=[self]
         else:
+            super(Team, self).save(*args, **kwargs)
             for usr in self.privileged().all():
                 usr.is_staff=True
                 usr.save()
