@@ -1,4 +1,5 @@
 from autoslug import AutoSlugField
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -33,4 +34,9 @@ class Entry(models.Model):
     """ Optionally, an image to add"""
     def __unicode__(self):
         return self.headline
+
+    def clean(self):
+        if not len(self.headline.strip()):
+            raise ValidationError("Headline may not be empty.")
+
 # Create your models here.

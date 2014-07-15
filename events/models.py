@@ -2,8 +2,10 @@ import random
 import sha
 
 from autoslug import AutoSlugField
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
+
 
 
 
@@ -48,7 +50,7 @@ class Event(models.Model):
     slug=AutoSlugField(populate_from='name')
     thumbnail=models.ImageField(upload_to='event_thumbnails')
     #Participants and Organizers
-    max_participants = models.IntegerField(blank=True, null=True)
+    max_participants = models.PositiveIntegerField(blank=True, null=True)
     """ Optional: Maximum amount of participants that will be admitted to the event """
     organizing_committee = models.ManyToManyField('teams.Team')
     """ Defines the Organizing Members of the event. May be more than one. Only
@@ -60,10 +62,7 @@ class Event(models.Model):
 
     organizers = models.ManyToManyField('account.Eestecer', blank=True, null=True,
                                         related_name='events_organized')
-    """ A list of all Users currently connected to the event as Organizers.
-    Usually the head Organizers of the event."""
     participation_fee = models.PositiveIntegerField(default=0)
-    """Optional: Participation Fee for the event. """
     participants = models.ManyToManyField('account.Eestecer', blank=True, null=True,
                                           related_name='events', through='Participation')
     applicants = models.ManyToManyField('account.Eestecer', blank=True, null=True,
@@ -93,6 +92,13 @@ class Event(models.Model):
     """ Optional: This is a field where the participants report can be stored and accessed."""
     organizer_report = models.TextField(blank=True, null=True)
     """ Optional: This is a field where the organizers report can be stored and accessed."""
+
+    def clean(self):
+        if self.end_date:
+            if self.start_date > self.end_date:
+                raise ValidationError("The event may not begin after it ends.")
+            if self.end_date > self.start_date:
+                raise ValidationError("The event may not end before it starts.")
 
     def __str__(self):
         return self.name
@@ -130,15 +136,17 @@ class Transportation(models.Model):
                                             ('car','Car'),
                                             ('other','other'),
                                             ('own','Own arrival')])
-    arrival_number=models.CharField(_('Bus/Train/Plane Number'),max_length=15,blank=True, null=True)
+    arrival_number = models.CharField(_('Bus/Train/Plane Number'), max_length=30,
+                                      blank=True, null=True)
     departure=models.DateTimeField(blank=True, null=True)
     depart_by=models.CharField(max_length=20,choices=[('plane','Plane'),
                                             ('bus','Bus'),
                                             ('train','Train'),
                                             ('car','Car'),
                                             ('other','other'),
-                                            ('own','Own departure')])
-
+                                            ('own', 'Own departure')], blank=True,
+                               null=True)
+    comment = models.TextField(blank=True, null=True)
 
 
 class Application(models.Model):

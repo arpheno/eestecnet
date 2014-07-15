@@ -57,7 +57,6 @@ class Team(models.Model):
         # Don't allow draft entries to have a pub_date.
         if self.thumbnail and not self.thumbsource:
             raise ValidationError('Please provide the source for the image')
-
     #Members
     users = models.ManyToManyField('account.Eestecer', related_name='teams',
                                    through='news.Membership')

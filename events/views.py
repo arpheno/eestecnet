@@ -2,7 +2,7 @@ import random
 
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-from django.forms import ModelForm, TextInput
+from django.forms import ModelForm, TextInput, Textarea
 from django.forms import widgets
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -98,10 +98,12 @@ class ApplyToEvent(View):
 class TransportForm(ModelForm):
     class Meta:
         model = Transportation
-        fields=('arrival','departure','arrive_by','depart_by','arrival_number')
+        fields = (
+        'arrival', 'departure', 'arrive_by', 'depart_by', 'arrival_number', 'comment')
         widgets = {
             'arrival': TextInput(attrs={'class': 'datetime'}),
             'departure': TextInput(attrs={'class': 'datetime'}),
+            'comment': Textarea(attrs={'rows': '1'}),
         }
 
 class FillInTransport(CreateView):
@@ -114,11 +116,12 @@ class FillInTransport(CreateView):
         # Add in a QuerySet of all the books
         context['object'] = Event.objects.get(slug=self.kwargs['slug'])
         return context
-    def post(self, request, *args, **kwargs):
-        if not request.user.tshirt_size or not request.user.profile_picture:
+
+    def form_valid(self, form):
+        if not self.request.user.tshirt_size or not self.request.user.profile_picture:
             return redirect(reverse('event',kwargs={'slug':self.kwargs['slug']}))
-        form = self.form_class(request.POST)
-        pax=get_object_or_404(Participation,participant=request.user,target__slug=self.kwargs['slug'])
+        pax = get_object_or_404(Participation, participant=self.request.user,
+                                target__slug=self.kwargs['slug'])
         trans=form.save()
         pax.transportation=trans
         pax.save()
