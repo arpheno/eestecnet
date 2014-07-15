@@ -1,0 +1,8 @@
+{% extends 'enet/split.html' %}
+{% load thumbnail %}
+{% block main %}
+    {% autoescape off %}
+        {{ object.content }}
+    {% endautoescape %}
+{% endblock %}
+

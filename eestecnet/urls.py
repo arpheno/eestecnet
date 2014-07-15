@@ -56,4 +56,5 @@ urlpatterns = patterns('',
                        url(r'^materials/', include('elfinder.urls')),
                        url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
                            {'document_root': MEDIA_ROOT}),
+                       url(r'', include('pages.urls')),
 )

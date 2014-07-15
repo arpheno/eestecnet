@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'elfinder',
     'mailqueue',
     'account',
+    'pages',
     'gunicorn',
     'sorl.thumbnail',
     'south',
