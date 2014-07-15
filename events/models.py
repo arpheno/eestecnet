@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 
+
 # Create your models here.
 from django.db import models
 from mailqueue.models import MailerMessage
@@ -55,18 +56,17 @@ class Event(models.Model):
     organizing_committee = models.ManyToManyField('teams.Team')
     """ Defines the Organizing Members of the event. May be more than one. Only
      those Members can be selected, the editor is a privileged member of."""
+    participation_fee = models.PositiveIntegerField(default=0)
 
     def OC(self):
         """Helper function to display the names of organizing committees of an event"""
         return " ".join([c.name for c in self.organizing_committee.all()])
 
-    organizers = models.ManyToManyField('account.Eestecer', blank=True, null=True,
+    organizers = models.ManyToManyField('account.Eestecer',
                                         related_name='events_organized')
-    participation_fee = models.PositiveIntegerField(default=0)
-    participants = models.ManyToManyField('account.Eestecer', blank=True, null=True,
-                                          related_name='events', through='Participation')
-    applicants = models.ManyToManyField('account.Eestecer', blank=True, null=True,
-                                        related_name='applications',
+    participants = models.ManyToManyField('account.Eestecer', related_name='events',
+                                          through='Participation')
+    applicants = models.ManyToManyField('account.Eestecer', related_name='applications',
                                         through='Application')
 
     def participant_count(self):
