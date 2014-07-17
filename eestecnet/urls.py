@@ -5,11 +5,11 @@ from django.views.generic import ListView, DetailView
 from account.views import EestecerProfile, EestecerUpdate, EestecerCreate, \
     Login, Logout, EestecerList, complete
 from eestecnet.settings import MEDIA_ROOT
-from eestecnet.views import newsletter, init
+from eestecnet.views import newsletter
 from events.views import EventDetail, ApplyToEvent, InternationalEvents, confirm_event, \
     FillInTransport
 from teams.models import Team
-from teams.views import CommitmentList, TeamList, emap
+from teams.views import CommitmentList, TeamList, appoint_new_board
 from news.models import Entry
 from news.views import home
 
@@ -49,8 +49,7 @@ urlpatterns = patterns('',
                        url(r'^logout/', Logout.as_view(), name='logout'),
                        url(r'^register/', EestecerCreate.as_view(), name='register'),
                        url(r'^admin', include(admin.site.urls)),
-                       url(r'^maps/', emap),
-                       url(r'^init/', init),
+                       url(r'^test/', appoint_new_board.as_view()),
                        url(r'^mail-queue/$', include('mailqueue.urls')),
                        url(r'^newsletter/$', newsletter, name='newsletter'),
                        url(r'^materials/', include('elfinder.urls')),

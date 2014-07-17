@@ -1,14 +1,10 @@
-from datetime import datetime
-
-from django.forms import forms
-from django.http import HttpResponse
-from django.shortcuts import render_to_response
+from django.forms import ModelForm
 
 
 # Create your views here.
-from django.views.generic import ListView, DetailView
-from gmapi.forms.widgets import GoogleMap
+from django.views.generic import ListView, DetailView, FormView
 from teams.models import Team
+from teams.widgets import MultiSelectWidget
 
 
 class MemberDetail(DetailView):
@@ -25,8 +21,6 @@ class TeamList(ListView):
         return Team.objects.filter(type='team')
 
 
-class MapForm(forms.Form):
-    map = forms.Field(widget=GoogleMap(attrs={'width':510, 'height':510}))
 class CommitmentList(ListView):
     model = Team
 
@@ -34,13 +28,14 @@ class CommitmentList(ListView):
         return Team.objects.filter(type__in=["lc", "jlc", "observer"])
 
 
-def create_eestec(self,request):
-    now = datetime.now()
-    html = "<html><body>It is now %s.</body></html>" % now
-    if not request.user.is_superuser():
-        return HttpResponse(html)
+class BoardForm(ModelForm):
+    class Meta:
+        model = Team
+        fields = (('users'),)
+        widgets = {'users': MultiSelectWidget()}
 
 
-def emap(request):
-    context={}
-    return render_to_response('enet/maps.html')
+class appoint_new_board(FormView):
+    form_class = BoardForm
+    template_name = 'teams/board_form.html'
+
