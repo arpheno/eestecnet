@@ -1,8 +1,13 @@
 {% extends 'enet/split.html' %}
 {% block main %}
-    <form action="" enctype="multipart/form-data" method="post">
+    <form action="" id="boardform" enctype="multipart/form-data" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Update Information">
+        <input type="submit" value="Choose new boad">
     </form>
+    <script type="text/javascript">
+        $(function () {
+            $("input[type=submit]").button();
+        });
+    </script>
 {% endblock %}

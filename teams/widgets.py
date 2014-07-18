@@ -24,11 +24,34 @@ class MultiSelectWidget(forms.SelectMultiple):
 
     def render(self, name, value, attrs=None):
         rendered = super(MultiSelectWidget, self).render(name, value, attrs)
-        predialog = rendered + mark_safe(u'''<script type="text/javascript">
+        filter = mark_safe(
+            '<input type="text" id="personpicker_filter_%(name)s">' % {'name': name})
+        predialog = filter + rendered
+        postdialog = mark_safe(u'''<div id="personpicker_%(name)s">''' % {
+        'name': name}) + predialog + '</div>'
+        javascript = mark_safe(u'''<script type="text/javascript">
             $(document).ready(function afterReady() {
                 var elem = $('#id_%(name)s');
-                elem.imagepicker();
+                elem.imagepicker({"show_label":true});
                 $(".image_picker_image").attr({"height":"100px","width":"100px"})
+                $(".thumbnail p").hide();
+                $("#personpicker_%(name)s").dialog({create:function(){
+                    refresh=setInterval(function(){
+                        $("#personpicker_%(name)s li").hide();
+                        var filt=$('#personpicker_filter_%(name)s').val();
+                        $("#personpicker_%(name)s li:contains("+filt+")").show();
+                    },500);
+                 }});
+            $("#personpicker_%(name)s").dialog("option","width",550);
+            acsrc= $("#personpicker_%(name)s .thumbnail p").contents();
+            ac=[];
+            acsrc.each(function(item){ac.push(acsrc[item].data);});
+            $("#personpicker_filter_%(name)s").keypress(function(event) {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                }
             });
+            $("#personpicker_filter_%(name)s").autocomplete({source:ac});
+        });
             </script>''' % {'name': name})
-        return predialog
+        return postdialog + javascript
