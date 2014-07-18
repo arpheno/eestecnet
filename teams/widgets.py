@@ -15,10 +15,10 @@ class MultiSelectWidget(forms.SelectMultiple):
                 selected_choices.remove(option_value)
         else:
             selected_html = ''
-
-        imgsrc = self.choices.queryset[int(option_value) - 1].profile_picture.url
+        eestecer = self.choices.queryset.get(id=option_value)
+        base = render_to_string('widgets/option.html', {'object': eestecer})
         return format_html(
-            '<option data-img-src=' + imgsrc + ' value="{0}"{1}>{2}</option>',
+            base,
             option_value,
             selected_html,
             force_text(option_label))

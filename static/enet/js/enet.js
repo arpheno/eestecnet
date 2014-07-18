@@ -12,31 +12,43 @@ $(function () {
     $(".datetime").datetimepicker();
 
 });
-function PersonPicker(wrapper) {
+function PersonDialog(wrapper) {
     var self = this;
     this.wrapper = wrapper;
-    this.imgpicker = this.wrapper.find("select");
-    this.imgpicker.imagepicker({"show_label": true});
-    this.wrapper.find("img").attr({"height": "100px", "width": "100px"});
     this.filter = this.wrapper.find('.filter');
     this.labels = this.wrapper.find(".thumbnail p");
     this.imgs = this.wrapper.find("li");
     this.labels.hide();
-    this.wrapper.dialog();
-    refresh = setInterval(function () {
-        self.imgs.hide();
-        self.imgs.filter(":contains('" + self.filter.val() + "')").show();
-    }, 500);
+    this.chosen = function () {
+        return this.imgs.find(".selected img");
+    }
+
+    //Create the dialog window
+    this.wrapper.dialog({
+        appendTo: self.wrapper.parent(),
+        create: self.timer = refresh = setInterval(function () {
+            console.log("running")
+            self.imgs.hide();
+            self.imgs.filter(":contains('" + self.filter.val() + "')").show();
+        }, 500),
+        close: function () {
+            clearInterval(self.timer);
+        }
+    });
     this.wrapper.dialog("option", "width", 550);
+
+    //Initiate the autocomplete plugin
     var acsrc = this.labels.contents();
     this.ac = [];
     acsrc.each(function (item) {
         self.ac.push(acsrc[item].data);
     });
+    this.filter.autocomplete({source: self.ac});
+
+    // Prevent Enter Keypresses from submitting the form
     this.filter.keypress(function (event) {
         if (event.keyCode == 13) {
             event.preventDefault();
         }
     });
-    this.filter.autocomplete({source: self.ac});
 }

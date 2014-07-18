@@ -4,8 +4,9 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function afterReady() {
+        this.imgpicker = $("#personpicker_{{ name }}").find("select");
+        this.imgpicker.imagepicker({"show_label": true});
 
-        boardpicker = new PersonPicker($("#personpicker_{{ name }}"));
     });
 
 </script>
