@@ -4,32 +4,8 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function afterReady() {
-        var elem = $('#id_{{ name }}');
-        elem.imagepicker({"show_label": true});
-        $(".image_picker_image").attr({"height": "100px", "width": "100px"})
-        var wrapper = $("#personpicker_{{ name }}");
-        var filter = wrapper.find('.filter');
-        var labels = wrapper.find(".thumbnail p");
-        var imgs = wrapper.find("li");
 
-        labels.hide();
-        wrapper.dialog({create: function () {
-            refresh = setInterval(function () {
-                imgs.hide();
-                imgs.filter(":contains('" + filter.val() + "')").show();
-            }, 500);
-        }});
-        wrapper.dialog("option", "width", 550);
-        acsrc = labels.contents();
-        ac = [];
-        acsrc.each(function (item) {
-            ac.push(acsrc[item].data);
-        });
-        filter.keypress(function (event) {
-            if (event.keyCode == 13) {
-                event.preventDefault();
-            }
-        });
-        filter.autocomplete({source: ac});
+        boardpicker = new PersonPicker($("#personpicker_{{ name }}"));
     });
+
 </script>
