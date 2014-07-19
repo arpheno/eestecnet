@@ -1,6 +1,7 @@
-{% extends 'enet/split.html' %}
-{% block main %}
-    <form action="" id="boardform" enctype="multipart/form-data" method="post">
+{% extends 'teams/team_detail.html' %}
+{% block board %}
+    <form action="{% url 'board' object.slug %}" id="boardform"
+          enctype="multipart/form-data" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Choose new boad">

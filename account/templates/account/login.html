@@ -1,4 +1,12 @@
+{% extends 'enet/index.html' %}
+{% block login %}
     <form method="post" id="signin" action="{% url 'login' %}">{% csrf_token %}
         {{ loginform }}
         <input type="submit" value="Login"><a href="{% url 'register' %}">Set up new Account</a>
     </form>
+    <script type="text/javascript">
+        $(function () {
+            $("form#signin").dialog({ show: {duration: 500}});
+        });
+    </script>
+{% endblock %}

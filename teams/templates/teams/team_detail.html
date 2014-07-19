@@ -1,7 +1,7 @@
 {% extends "enet/detail.html" %}
 {% load thumbnail %}
 {% block class %}member{% endblock %}
-{% block title %}{{ member }}{% endblock %}
+{% block title %}{{ object }}{% endblock %}
 {% block pictures %}
     {% for imf in object.images.all %}
         {% thumbnail imf.image "375x225" crop="center" as im %}
@@ -17,11 +17,14 @@
     <div class="actions">
         {% if user.is_authenticated %}
             {% block application %}
-                {% for event in object.event_set.all %}
+                {% if not user in object.users.all %}
+                    {% for event in object.event_set.all %}
                     {% if event.category == "recruitment" %}
                         <a href="{% url 'eventapplication' event.slug %}" class="action-button shadow animate red">Join this Commitment</a>
                     {% endif %}
                 {% endfor %}
+                {% else %}
+                {% endif %}
             {% endblock %}
         {% endif %}
     </div>
@@ -45,4 +48,17 @@
         <summary>Members</summary>
         {% include 'account/eestecers.html' with object_list=object.users.all %}
     </details>
+    {% block board %}{% endblock %}
 {% endblock %}
+
+{% if object in user.request.pivileged %}
+    {% block aside %}
+        <h2> Admin Actions</h2>
+        <a href="{% url 'board' object.slug %}" id="board">Choose new board</a>
+        <a href="{% url 'board' object.slug %}" id="board">Change Description</a>
+        <script type="text/javascript">
+            $("a#board").button();
+            $("a#description").button();
+        </script>
+    {% endblock %}
+{% endif %}

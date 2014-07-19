@@ -33,10 +33,7 @@
 <h1>Electrical Engineering Students' European Association</h1>
 
 </header>
-<dialog class="login">
-    {% include 'account/login.html' %}
-
-</dialog>
+{% block login %}{% endblock %}
 <nav>
     <a href="{% url 'home' %}">Home</a>
     <a href="{% url 'about' %}">About</a>
@@ -47,7 +44,8 @@
     {% if user.is_authenticated %}
         <a class="profile" href="{% url 'userupdate' %}"><img src="{% static 'enet/images/login.png' %}"></a>
     {% else %}
-        <img id="login"  src="{% static 'enet/images/login.png' %}">
+        <a class="login" href="{% url 'login' %}"
+           src="{% static 'enet/images/login.png' %}"></a>
     {% endif %}
 </nav>
 
@@ -59,8 +57,7 @@
         {% endfor %}
     </ul>
 {% endif %}
-{% block content %}
-{% endblock %}
+{% block content %}{% include 'enet/home.html' %}{% endblock %}
 <div id="sponsors"> {% include 'enet/sponsors.html' %} </div>
 <footer>
     <img src="{% static 'enet/images/map.png' %}" id="europe"/>

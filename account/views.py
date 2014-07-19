@@ -79,16 +79,24 @@ class EestecerCreate(CreateView):
 class Login(FormView):
     template_name = 'account/login.html'
     form_class = AuthenticationForm
+
+    def form_invalid(self, form):
+        messages.add_message(
+            self.request,
+            messages.INFO,
+            'The user you specified does not exist, or the password provied was '
+            'incorrect'
+        )
+        return redirect("/")
+
     def form_valid(self, form):
-        login(self.request,form.get_user())
         messages.add_message(
             self.request,
             messages.INFO,
             'You\'re now logged in as ' + unicode(form.get_user())
         )
+        login(self.request, form.get_user())
         return redirect("/")
-    def form_invalid(self, form):
-        return self.render_to_response(self.get_context_data(form=form))
 
 class Logout(View):
     def get(self, request, *args, **kwargs):

@@ -168,24 +168,32 @@ html > body .grad {
 html > body > aside {
     background-color: #5f6a6d;
     border-width: 0px 57px 0px 0px;
+    align-content: flex-start;
     width: 253px;
-    flex: 0 0 253x;
     padding-top: 30px;
     border-style: solid;
     border-color: #3f4749;
     z-index: 1;
-    justify-content: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+html > body > aside h2 {
+    flex: 1 1 100%;
+    border-bottom-color: white;
+    text-align: center;
+    color: white;
 }
 
 @media screen and (max-width: 1200px) {
     html > body > aside {
-        display: none;
+        flex: 1 0 100%;
     }
 }
 
 @media screen and (min-width: 1200px) {
     html > body > aside {
-        display: flex;
+        flex: 0 0 253px;
     }
 }
 
@@ -231,6 +239,11 @@ html > body footer #europe {
     background-color: rgba(173, 216, 230, 0.5);
     font-weight: bold;
     font-size: 18px;
+}
+
+.ui-button {
+    height: 30px;
+    flex: 1 1 100%;
 }
 
 body > header {

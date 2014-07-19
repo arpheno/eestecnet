@@ -1,5 +1,6 @@
 {% extends 'enet/index.html' %}
 {% block content %}
     <main><div class="grad"></div> {% block main %} {% endblock %} </main>
-    {% block aside %}<aside>{% include 'enet/sidebar.html' %} </aside>{% endblock %}
+    <aside>{% block aside %}{% include 'enet/sidebar.html' %}{% endblock %}
+    </aside>
 {% endblock %}
