@@ -1,0 +1,18 @@
+{% extends 'teams/team_detail.html' %}
+{% block managemembers %}
+    <form action="{% url 'managemembers' object.slug %}" id="managemembersform"
+          enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% for inline in inlines %}
+            {{ inline.as_table }}
+        {% endfor %}
+        <input type="submit" value="Update Members">
+    </form>
+    <script type="text/javascript">
+        $(function () {
+            $("#managemembersform").dialog({width: 500, height: 500});
+            $("input[type=submit]").button();
+        });
+    </script>
+{% endblock %}

@@ -47,7 +47,7 @@ html>body{
     justify-content: center;
     section{flex:1 0 100%;}
     >h1{
-      flex:1 0 100%;
+      flex: 1 1 100%;
     }
     >form{
       width:480px;
@@ -116,6 +116,7 @@ html>body{
     border: red solid;
     border-right:2px;
     border-left: 2px;
+    padding: 10px 0px;
     background-color:#fff;
   }
   footer{

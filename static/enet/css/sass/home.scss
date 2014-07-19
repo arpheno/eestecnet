@@ -15,11 +15,14 @@ main.home{
       background-color:rgba(0,0,0,0.5);
       top:0;
       border:0px;
-      padding:0px;
-      margin:0px;
-    }
-#donate{
-  flex:1 0 45%;
+    padding: 5px;
+    margin: 0px;
+  }
+  p {
+    padding: 5px;
+  }
+  #donate {
+    flex:1 0 45%;
   min-height:100px;
   @media (max-width:1200px){
     order:3;

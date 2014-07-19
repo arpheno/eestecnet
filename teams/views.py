@@ -4,8 +4,10 @@ from django.forms import Form, ModelMultipleChoiceField, ModelForm
 
 # Create your views here.
 from django.views.generic import ListView, FormView, UpdateView
+from extra_views import UpdateWithInlinesView, InlineFormSet
 from suit_redactor.widgets import RedactorWidget
 from account.models import Eestecer
+from news.models import Membership
 from teams.models import Team
 from teams.widgets import MultiSelectWidget
 
@@ -43,6 +45,19 @@ class DescriptionForm(ModelForm):
         widgets = {'description': RedactorWidget(
             editor_options={'lang': 'en', 'iframe': 'true',
                             'css': "/static/enet/css/wysiwyg.css"})}
+
+
+class MembershipInline(InlineFormSet):
+    model = Membership
+
+
+class ManageMembers(UpdateWithInlinesView):
+    model = Team
+    template_name = 'teams/manage_members_form.html'
+    inlines = [MembershipInline]
+
+    def get_success_url(self):
+        return reverse("city", kwargs=self.kwargs)
 
 
 class ChangeDetails(UpdateView):

@@ -128,7 +128,7 @@ html > body > main section {
 }
 
 html > body > main > h1 {
-    flex: 1 0 100%;
+    flex: 1 1 100%;
 }
 
 html > body > main > form {
@@ -215,6 +215,7 @@ html > body #sponsors {
     border: red solid;
     border-right: 2px;
     border-left: 2px;
+    padding: 10px 0px;
     background-color: #fff;
 }
 
@@ -512,8 +513,12 @@ main.home h1 {
     background-color: rgba(0, 0, 0, 0.5);
     top: 0;
     border: 0px;
-    padding: 0px;
+    padding: 5px;
     margin: 0px;
+}
+
+main.home p {
+    padding: 5px;
 }
 
 main.home #donate {
