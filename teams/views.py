@@ -1,9 +1,10 @@
 from django.core.urlresolvers import reverse
-from django.forms import Form, ModelMultipleChoiceField
+from django.forms import Form, ModelMultipleChoiceField, CharField
 
 
 # Create your views here.
 from django.views.generic import ListView, FormView
+from suit_redactor.widgets import RedactorWidget
 from account.models import Eestecer
 from teams.models import Team
 from teams.widgets import MultiSelectWidget
@@ -33,6 +34,31 @@ class BoardForm(Form):
         super(BoardForm, self).__init__(*args, **kwargs)
         self.fields['board_members'].queryset = Eestecer.objects.filter(
             membership__team=team)
+
+
+class DescriptionForm(Form):
+    description = CharField(widget=RedactorWidget(
+        editor_options={'lang': 'en', 'iframe': 'true',
+                        'css': "/static/enet/css/wysiwyg.css"}))
+
+
+class ChangeDescription(FormView):
+    template_name = 'teams/description_form.html'
+    form_class = DescriptionForm
+
+    def get_context_data(self, **kwargs):
+        context = super(ChangeDescription, self).get_context_data(**kwargs)
+        context['object'] = Team.objects.get(slug=self.kwargs['slug'])
+        return context
+
+    def get_success_url(self):
+        return reverse("city", kwargs=self.kwargs)
+
+    def form_valid(self, form):
+        team = Team.objects.get(slug=self.kwargs['slug'])
+        team.description = form.cleaned_data['description']
+        team.save()
+        return super(ChangeDescription, self).form_valid(form)
 
 
 class SelectBoard(FormView):
