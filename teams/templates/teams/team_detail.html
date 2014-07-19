@@ -50,6 +50,7 @@
     </details>
     {% block board %}{% endblock %}
     {% block description %}{% endblock %}
+    {% block changedetails %}{% endblock %}
 {% endblock %}
 
 {% if object in user.request.pivileged %}
@@ -57,9 +58,9 @@
         <h2> Admin Actions</h2>
         <a href="{% url 'board' object.slug %}" id="board">Choose new board</a>
         <a href="{% url 'description' object.slug %}" id="board">Change Description</a>
+        <a href="{% url 'changedetails' object.slug %}" id="board">Change Details</a>
         <script type="text/javascript">
             $("a#board").button();
-            $("a#description").button();
         </script>
     {% endblock %}
 {% endif %}

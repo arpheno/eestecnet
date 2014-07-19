@@ -9,7 +9,8 @@ from eestecnet.views import newsletter
 from events.views import EventDetail, ApplyToEvent, InternationalEvents, confirm_event, \
     FillInTransport
 from teams.models import Team
-from teams.views import CommitmentList, TeamList, SelectBoard, ChangeDescription
+from teams.views import CommitmentList, TeamList, SelectBoard, ChangeDescription, \
+    ChangeDetails
 from news.models import Entry
 from news.views import home
 
@@ -42,6 +43,8 @@ urlpatterns = patterns('',
                            SelectBoard.as_view(), name='board'),
                        url(r'^cities/(?P<slug>[-\w]+)/description$',
                            ChangeDescription.as_view(), name='description'),
+                       url(r'^cities/(?P<slug>[-\w]+)/details$',
+                           ChangeDetails.as_view(), name='changedetails'),
                        url(r'^teams/(?P<slug>[-\w]+)/$',
                            DetailView.as_view(model=Team), name='team'),
                        url(r'^people/$', EestecerList.as_view(), name='people'),
