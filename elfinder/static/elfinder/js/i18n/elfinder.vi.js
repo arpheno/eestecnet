@@ -1,34 +1,27 @@
 /**
- * elFinder translation template
- * use this file to create new translation
- * submit new translation via https://github.com/Studio-42/elFinder/issues
- * or make a pull request
- */
-
-/**
- * XXXXX translation
- * @author Translator Name <translator@email.tld>
- * @version 201x-xx-xx
+ * Vietnamese translation
+ * @author Chung Thủy f <chungthuyf@gmail.com>
+ * @version 16-01-2013
  */
 if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object') {
-    elFinder.prototype.i18.REPLACE_WITH_xx_OR_xx_YY_LANG_CODE = {
-        translator: 'Translator name &lt;translator@email.tld&gt;',
-        language: 'Language of translation in your language',
+    elFinder.prototype.i18.vi = {
+        translator: 'Chung Thủy f &lt;chungthuyf@gmail.com&gt;',
+        language: 'Ngôn ngữ Việt Nam',
         direction: 'ltr',
         dateFormat: 'd.m.Y H:i',
         fancyDateFormat: '$1 H:i',
         messages: {
 
             /********************************** errors **********************************/
-            'error': 'Error',
-            'errUnknown': 'Unknown error.',
-            'errUnknownCmd': 'Unknown command.',
+            'error': 'Lỗi',
+            'errUnknown': 'Lỗi không xác định được.',
+            'errUnknownCmd': 'Lỗi không rõ lệnh.',
             'errJqui': 'Invalid jQuery UI configuration. Selectable, draggable and droppable components must be included.',
             'errNode': 'elFinder requires DOM Element to be created.',
-            'errURL': 'Invalid elFinder configuration! URL option is not set.',
-            'errAccess': 'Access denied.',
+            'errURL': 'Cấu elFinder không hợp lệ! URL không được thiết lập tùy chọn.',
+            'errAccess': 'Truy cập bị từ chối.',
             'errConnect': 'Unable to connect to backend.',
-            'errAbort': 'Connection aborted.',
+            'errAbort': 'Kết nối bị hủy bỏ.',
             'errTimeout': 'Connection timeout.',
             'errNotFound': 'Backend not found.',
             'errResponse': 'Invalid backend response.',
@@ -75,77 +68,72 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'errNoArchive': 'File is not archive or has unsupported archive type.',
             'errCmdNoSupport': 'Backend does not support this command.',
             'errReplByChild': 'The folder “$1” can’t be replaced by an item it contains.',
-            'errArcSymlinks': 'For security reason denied to unpack archives contains symlinks or files with not allowed names.', // edited 24.06.2012
+            'errArcSymlinks': 'For security reason denied to unpack archives contains symlinks.',
             'errArcMaxSize': 'Archive files exceeds maximum allowed size.',
             'errResize': 'Unable to resize "$1".',
             'errUsupportType': 'Unsupported file type.',
-            'errNotUTF8Content': 'File "$1" is not in UTF-8 and cannot be edited.',  // added 9.11.2011
-            'errNetMount': 'Unable to mount "$1".',     // added 17.04.2012
-            'errNetMountNoDriver': 'Unsupported protocol.',     // added 17.04.2012
-            'errNetMountFailed': 'Mount failed.',             // added 17.04.2012
-            'errNetMountHostReq': 'Host required.', // added 18.04.2012
+
             /******************************* commands names ********************************/
-            'cmdarchive': 'Create archive',
-            'cmdback': 'Back',
-            'cmdcopy': 'Copy',
-            'cmdcut': 'Cut',
-            'cmddownload': 'Download',
-            'cmdduplicate': 'Duplicate',
-            'cmdedit': 'Edit file',
-            'cmdextract': 'Extract files from archive',
-            'cmdforward': 'Forward',
-            'cmdgetfile': 'Select files',
-            'cmdhelp': 'About this software',
+            'cmdarchive': 'Tạo tập tin nén',
+            'cmdback': 'Trở lại',
+            'cmdcopy': 'Sao chép',
+            'cmdcut': 'Cắt',
+            'cmddownload': 'Tải về',
+            'cmdduplicate': 'Bản sao',
+            'cmdedit': 'Sửa tập tin',
+            'cmdextract': 'Giải nén tập tin',
+            'cmdforward': 'Trước',
+            'cmdgetfile': 'Chọn tập tin',
+            'cmdhelp': 'Giới thiệu phần mềm',
             'cmdhome': 'Home',
-            'cmdinfo': 'Get info',
-            'cmdmkdir': 'New folder',
-            'cmdmkfile': 'New text file',
-            'cmdopen': 'Open',
+            'cmdinfo': 'Thông tin',
+            'cmdmkdir': 'Thư mục',
+            'cmdmkfile': 'Tạo tập tin Text',
+            'cmdopen': 'Mở',
             'cmdpaste': 'Paste',
-            'cmdquicklook': 'Preview',
-            'cmdreload': 'Reload',
-            'cmdrename': 'Rename',
-            'cmdrm': 'Delete',
-            'cmdsearch': 'Find files',
+            'cmdquicklook': 'Xem trước',
+            'cmdreload': 'Nạp lại',
+            'cmdrename': 'Đổi tên',
+            'cmdrm': 'Xóa',
+            'cmdsearch': 'Tìm tập tin',
             'cmdup': 'Go to parent directory',
-            'cmdupload': 'Upload files',
-            'cmdview': 'View',
+            'cmdupload': 'Tải tập tin lên',
+            'cmdview': 'Xem',
             'cmdresize': 'Resize image',
-            'cmdsort': 'Sort',
+            'cmdsort': 'Sắp xếp',
 
             /*********************************** buttons ***********************************/
-            'btnClose': 'Close',
-            'btnSave': 'Save',
-            'btnRm': 'Remove',
-            'btnApply': 'Apply',
-            'btnCancel': 'Cancel',
-            'btnNo': 'No',
-            'btnYes': 'Yes',
+            'btnClose': 'Đóng',
+            'btnSave': 'Lưu',
+            'btnRm': 'Gỡ bỏ',
+            'btnApply': 'Áp dụng',
+            'btnCancel': 'Hủy bỏ',
+            'btnNo': 'Không',
+            'btnYes': 'Đồng ý',
 
             /******************************** notifications ********************************/
-            'ntfopen': 'Open folder',
-            'ntffile': 'Open file',
-            'ntfreload': 'Reload folder content',
-            'ntfmkdir': 'Creating directory',
-            'ntfmkfile': 'Creating files',
-            'ntfrm': 'Delete files',
-            'ntfcopy': 'Copy files',
-            'ntfmove': 'Move files',
-            'ntfprepare': 'Prepare to copy files',
-            'ntfrename': 'Rename files',
-            'ntfupload': 'Uploading files',
-            'ntfdownload': 'Downloading files',
-            'ntfsave': 'Save files',
-            'ntfarchive': 'Creating archive',
-            'ntfextract': 'Extracting files from archive',
-            'ntfsearch': 'Searching files',
+            'ntfopen': 'Mở thư mục',
+            'ntffile': 'Mở tập tin',
+            'ntfreload': 'Nạp lại nội dung thư mục',
+            'ntfmkdir': 'Tạo thư mục',
+            'ntfmkfile': 'Tạo tập tin',
+            'ntfrm': 'Xóa tập tin',
+            'ntfcopy': 'Sao chép tập tin',
+            'ntfmove': 'Di chuyển tập tin',
+            'ntfprepare': 'Chuẩn bị để sao chép các tập tin',
+            'ntfrename': 'Đổi tên tập tin',
+            'ntfupload': 'Tải tập tin lên',
+            'ntfdownload': 'Tải tập tin',
+            'ntfsave': 'Lưu tập tin',
+            'ntfarchive': 'Tạo tập tin nén',
+            'ntfextract': 'Giải nén tập tin',
+            'ntfsearch': 'Tìm kiếm tập tin',
             'ntfsmth': 'Doing something >_<',
-            'ntfloadimg': 'Loading image',
-            'ntfnetmount': 'Mounting network volume', // added 18.04.2012
+            'ntfloadimg': 'Đang tải hình ảnh',
 
             /************************************ dates **********************************/
-            'dateUnknown': 'unknown',
-            'Today': 'Today',
+            'dateUnknown': 'Chưa biết',
+            'Today': 'Hôm nay',
             'Yesterday': 'Yesterday',
             'Jan': 'Jan',
             'Feb': 'Feb',
@@ -186,11 +174,14 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'Fri': 'Fri',
             'Sat': 'Sat',
             /******************************** sort variants ********************************/
+            'sortnameDirsFirst': 'by name (folders first)',
+            'sortkindDirsFirst': 'by kind (folders first)',
+            'sortsizeDirsFirst': 'by size (folders first)',
+            'sortdateDirsFirst': 'by date (folders first)',
             'sortname': 'by name',
             'sortkind': 'by kind',
             'sortsize': 'by size',
             'sortdate': 'by date',
-            'sortFoldersFirst': 'Folders first', // added 22.06.2012
 
             /********************************** messages **********************************/
             'confirmReq': 'Confirmation required',
@@ -232,7 +223,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'help': 'Help',
             'webfm': 'Web file manager',
             'ver': 'Version',
-            'protocolver': 'protocol version',
+            'protocol': 'protocol version',
             'homepage': 'Project home',
             'docs': 'Documentation',
             'github': 'Fork us on Github',
@@ -266,12 +257,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'rotate-cw': 'Rotate 90 degrees CW',
             'rotate-ccw': 'Rotate 90 degrees CCW',
             'degree': 'Degree',
-            'netMountDialogTitle': 'Mount network volume', // added 18.04.2012
-            'protocol': 'Protocol', // added 18.04.2012
-            'host': 'Host', // added 18.04.2012
-            'port': 'Port', // added 18.04.2012
-            'user': 'User', // added 18.04.2012
-            'pass': 'Password', // added 18.04.2012
+
             /********************************** mimetypes **********************************/
             'kindUnknown': 'Unknown',
             'kindFolder': 'Folder',
@@ -352,4 +338,3 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
         }
     }
 }
-
