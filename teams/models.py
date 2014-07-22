@@ -2,6 +2,7 @@ from autoslug import AutoSlugField
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.template.loader import render_to_string
 from django.utils.datetime_safe import datetime
 from gmapi.maps import Geocoder
 
@@ -98,6 +99,9 @@ class Team(models.Model):
         """ The amount of teams currently in the :class:`Member` """
         return len(self.users.all()) - 1
 
+    def pending_applications(self):
+        return len(self.event_set.get(category='recuitment').application_set)
+
     def last_event(self):
         try:
             return self.event_set.all().exclude(name='Recruitment').order_by('-start_date')[0].start_date
@@ -112,4 +116,8 @@ class MemberImage(models.Model):
     property = models.ForeignKey(Team, related_name='images')
     image = models.ImageField(upload_to="memberimages")
     source = models.CharField(max_length=100,blank=True, null=True)
+
+    def __unicode__(self):
+        return render_to_string('teams/thumbnailed_image.html', {'object': self})
+
     """An Image"""

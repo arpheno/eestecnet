@@ -11,6 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 
+
 # Create your models here.
 from django.db import models
 from mailqueue.models import MailerMessage
@@ -154,10 +155,10 @@ class Application(models.Model):
     class Meta:
         unique_together=(('applicant','target'),)
 
-    applicant = models.ForeignKey('account.Eestecer')
-    target = models.ForeignKey(Event)
-    date = models.DateTimeField(auto_now_add=True)
-    letter = models.TextField(blank=True, null=True)
+    applicant = models.ForeignKey('account.Eestecer', editable=False)
+    target = models.ForeignKey(Event, editable=False)
+    date = models.DateTimeField(auto_now_add=True, editable=False)
+    letter = models.TextField(blank=True, null=True, editable=False)
     priority = models.IntegerField(blank=True, null=True)
     accepted = models.BooleanField(default=False)
 

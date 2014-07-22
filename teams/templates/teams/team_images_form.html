@@ -1,0 +1,42 @@
+{% extends 'teams/team_detail.html' %}
+{% block teamimages %}
+    <form action="{% url 'teamimages' object.slug %}" id="teamimagesform"
+          enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% for inline in inlines %}
+            <table style="width:100%;">
+                <tr>
+                    <th>Image</th>
+                    {% for field in inline.0.visible_fields %}
+                        <th>
+                            {{ field.label }}
+                        </th>
+                    {% endfor %}
+                </tr>
+                {% for inform in inline %}
+                    {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+                    <tr><!-- Read only fields first-->
+                        <td>
+                            {{ inform.instance }}
+                        </td>
+                        {% for field in inform.visible_fields %}
+                            <td>
+                                {{ field }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endfor %}
+        <input type="submit" value="Update Images">
+    </form>
+    <script type="text/javascript">
+        $(function () {
+            $("#teamimagesform").dialog({width: 600, height: 500});
+            $("input[type=submit]").button();
+        });
+    </script>
+{% endblock %}

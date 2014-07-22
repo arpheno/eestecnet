@@ -52,6 +52,8 @@
     {% block description %}{% endblock %}
     {% block changedetails %}{% endblock %}
     {% block managemembers %}{% endblock %}
+    {% block teamimages %}{% endblock %}
+    {% block teamapplications %}{% endblock %}
 {% endblock %}
 
 {% if object in user.request.pivileged %}
@@ -61,6 +63,11 @@
         <a href="{% url 'description' object.slug %}" id="board">Change Description</a>
         <a href="{% url 'changedetails' object.slug %}" id="board">Change Details</a>
         <a href="{% url 'managemembers' object.slug %}" id="board">Manage members</a>
+        <a href="{% url 'teamimages' object.slug %}" id="board"> Images </a>
+        {% if object.pending_applications %}
+            <a href="{% url 'teamapplications' object.slug %}"
+               id="board">View {{ object.pending_applications }}Applications </a>
+        {% endif %}
         <script type="text/javascript">
             $("a#board").button();
         </script>

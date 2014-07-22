@@ -10,7 +10,7 @@ from events.views import EventDetail, ApplyToEvent, InternationalEvents, confirm
     FillInTransport
 from teams.models import Team
 from teams.views import CommitmentList, TeamList, SelectBoard, ChangeDescription, \
-    ChangeDetails, ManageMembers
+    ChangeDetails, ManageMembers, TeamImages, TeamApplications
 from news.models import Entry
 from news.views import home
 
@@ -43,6 +43,10 @@ urlpatterns = patterns('',
                            SelectBoard.as_view(), name='board'),
                        url(r'^cities/(?P<slug>[-\w]+)/description$',
                            ChangeDescription.as_view(), name='description'),
+                       url(r'^cities/(?P<slug>[-\w]+)/images$',
+                           TeamImages.as_view(), name='teamimages'),
+                       url(r'^cities/(?P<slug>[-\w]+)/applications',
+                           TeamApplications.as_view(), name='teamapplications'),
                        url(r'^cities/(?P<slug>[-\w]+)/members$',
                            ManageMembers.as_view(), name='managemembers'),
                        url(r'^cities/(?P<slug>[-\w]+)/details$',

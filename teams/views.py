@@ -7,8 +7,9 @@ from django.views.generic import ListView, FormView, UpdateView
 from extra_views import UpdateWithInlinesView, InlineFormSet
 from suit_redactor.widgets import RedactorWidget
 from account.models import Eestecer
+from events.models import Event, Application
 from news.models import Membership
-from teams.models import Team
+from teams.models import Team, MemberImage
 from teams.widgets import MultiSelectWidget
 
 
@@ -52,6 +53,10 @@ class MembershipInline(InlineFormSet):
     extra = 0
 
 
+class MemberImageInline(InlineFormSet):
+    model = MemberImage
+
+
 class ManageMembers(UpdateWithInlinesView):
     model = Team
     template_name = 'teams/manage_members_form.html'
@@ -59,6 +64,44 @@ class ManageMembers(UpdateWithInlinesView):
     inlines = [MembershipInline]
     def get_success_url(self):
         return reverse("city", kwargs=self.kwargs)
+
+
+class ApplicationInline(InlineFormSet):
+    model = Application
+    extra = 0
+
+
+class TeamApplications(UpdateWithInlinesView):
+    model = Event
+    template_name = 'teams/team_applications_form.html'
+    fields = ()
+    inlines = [ApplicationInline]
+
+    def get_context_data(self, **kwargs):
+        context = super(TeamApplications, self).get_context_data(**kwargs)
+        context['object'] = context['object'].organizing_committee.first()
+        return context
+
+    def get_object(self, queryset=None):
+        return Event.objects.get(category='recruitment',
+                                 organizing_committee__slug=self.kwargs['slug'])
+
+    def get_success_url(self):
+        return reverse("city", kwargs=self.kwargs)
+
+
+class TeamImages(UpdateWithInlinesView):
+    model = Team
+    template_name = 'teams/team_images_form.html'
+    fields = ('thumbnail',)
+    inlines = [MemberImageInline]
+
+    def get_success_url(self):
+        return reverse("city", kwargs=self.kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(TeamImages, self).get_context_data(**kwargs)
+        return context
 
 
 class ChangeDetails(UpdateView):
