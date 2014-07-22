@@ -49,13 +49,14 @@ class DescriptionForm(ModelForm):
 
 class MembershipInline(InlineFormSet):
     model = Membership
+    extra = 0
 
 
 class ManageMembers(UpdateWithInlinesView):
     model = Team
     template_name = 'teams/manage_members_form.html'
+    fields = ()
     inlines = [MembershipInline]
-
     def get_success_url(self):
         return reverse("city", kwargs=self.kwargs)
 

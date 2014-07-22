@@ -197,6 +197,19 @@ html > body > aside h2 {
     }
 }
 
+html > body td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+html > body td:first-child {
+    text-align: left;
+}
+
+html > body td:last-child {
+    text-align: right;
+}
+
 html > body #signin {
     display: flex;
     background-color: rgba(0, 0, 0, 0.1);

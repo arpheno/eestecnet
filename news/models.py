@@ -10,8 +10,8 @@ class Membership(models.Model):
     class Meta:
         unique_together = (('user', 'team'),)
 
-    user = models.ForeignKey('account.Eestecer')
-    team = models.ForeignKey('teams.Team')
+    user = models.ForeignKey('account.Eestecer', editable=False)
+    team = models.ForeignKey('teams.Team', editable=False)
     date_joined = models.DateTimeField(auto_now_add=True)
     privileged = models.BooleanField(default=False)
     board = models.BooleanField(default=False)
