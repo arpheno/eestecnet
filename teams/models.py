@@ -102,6 +102,9 @@ class Team(models.Model):
     def pending_applications(self):
         return len(self.event_set.get(category='recuitment').application_set)
 
+    def is_lc(self):
+        return self.type in ['jlc', 'lc', 'observer']
+
     def last_event(self):
         try:
             return self.event_set.all().exclude(name='Recruitment').order_by('-start_date')[0].start_date
@@ -120,4 +123,3 @@ class MemberImage(models.Model):
     def __unicode__(self):
         return render_to_string('teams/thumbnailed_image.html', {'object': self})
 
-    """An Image"""

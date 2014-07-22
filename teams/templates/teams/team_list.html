@@ -21,8 +21,10 @@
         });
     </script>
     <h1>Members</h1>
-    <div id="map">
+    {% if object_list.first.is_lc %}
+        <div id="map">
     </div>
+    {% endif %}
     <section class="members">
         {% include 'teams/teams.html' with object_list=object_list %}
     </section>
