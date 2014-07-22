@@ -12,6 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 
+
 # Create your models here.
 from django.db import models
 from mailqueue.models import MailerMessage
@@ -100,6 +101,9 @@ class Event(models.Model):
                 raise ValidationError("The event may not begin after it ends.")
             if self.end_date > self.start_date:
                 raise ValidationError("The event may not end before it starts.")
+            if self.deadline > self.end_date:
+                raise ValidationError(
+                    "The event deadline must be before the event ends.")
 
     def __str__(self):
         return self.name

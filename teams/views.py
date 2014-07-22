@@ -1,17 +1,12 @@
 from django.core.urlresolvers import reverse
-from django.forms import Form, ModelMultipleChoiceField, ModelForm
 
 
 # Create your views here.
 from django.views.generic import ListView, FormView, UpdateView
 from extra_views import UpdateWithInlinesView, InlineFormSet
-from suit_redactor.widgets import RedactorWidget
-from account.models import Eestecer
 from events.models import Event, Application
-from news.models import Membership
-from teams.models import Team, MemberImage
-from teams.widgets import MultiSelectWidget
-
+from teams.forms import MembershipInline, MemberImageInline, DescriptionForm, BoardForm
+from teams.models import Team
 
 
 class TeamList(ListView):
@@ -26,35 +21,6 @@ class CommitmentList(ListView):
 
     def get_queryset(self):
         return Team.objects.filter(type__in=["lc", "jlc", "observer"])
-
-
-class BoardForm(Form):
-    board_members = ModelMultipleChoiceField(queryset=Eestecer.objects.none(),
-                                             widget=MultiSelectWidget)
-
-    def __init__(self, *args, **kwargs):
-        team = kwargs.pop('team')
-        super(BoardForm, self).__init__(*args, **kwargs)
-        self.fields['board_members'].queryset = Eestecer.objects.filter(
-            membership__team=team)
-
-
-class DescriptionForm(ModelForm):
-    class Meta:
-        model = Team
-        fields = ('description',)
-        widgets = {'description': RedactorWidget(
-            editor_options={'lang': 'en', 'iframe': 'true',
-                            'css': "/static/enet/css/wysiwyg.css"})}
-
-
-class MembershipInline(InlineFormSet):
-    model = Membership
-    extra = 0
-
-
-class MemberImageInline(InlineFormSet):
-    model = MemberImage
 
 
 class ManageMembers(UpdateWithInlinesView):

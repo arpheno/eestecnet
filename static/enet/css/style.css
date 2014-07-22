@@ -393,8 +393,8 @@ ul.figure a figure figcaption {
     text-align: center;
     color: white;
     font-weight: bold;
+    padding: 20px 0px;
     font-family: "Century Gothic";
-    padding: 20px;
     font-size: 20px;
     background-color: rgba(0, 0, 0, 0.1);
     transition: all .5s;

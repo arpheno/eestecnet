@@ -1,48 +1,49 @@
-ul.figure{
+ul.figure {
   justify-content: center;
-a{
-  margin:1px;
-  text-decoration: none;
-  background-color: #354040;
-  padding:2px;
+  a {
+    margin: 1px;
+    text-decoration: none;
+    background-color: #354040;
+    padding: 2px;
 
-  figure {
-    flex:1 100%;
-    position:relative;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    transition: all .25s;
-    img{
-      margin:1px;
-      position:absolute;
-      top:0px;left:0px;
-    }
-    figcaption {
-      opacity:0.9 ;
-      flex:1 1 100%;
-      text-align: center;
-      color:white;
-      font-weight: bold;
-      font-family:"Century Gothic";
-      padding:20px;
-      font-size: 20px;
-      background-color: rgba(0,0,0,0.1);
-      transition: all .5s;
-    }
-    &:hover  {
-      z-index: 10;
-      transform: scale(1.2);
+    figure {
+      flex: 1 100%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all .25s;
+      img {
+        margin: 1px;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
       figcaption {
-        background-color: rgba(0,0,0,0.5);
+        opacity: 0.9;
+        flex: 1 1 100%;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        padding: 20px 0px;
+        font-family: "Century Gothic";
+        font-size: 20px;
+        background-color: rgba(0, 0, 0, 0.1);
+        transition: all .5s;
+      }
+      &:hover {
+        z-index: 10;
+        transform: scale(1.2);
+        figcaption {
+          background-color: rgba(0, 0, 0, 0.5);
+        }
       }
     }
+    .comment {
+      font-size: 12px;
+      line-height: 100%;
+      color: #ffffff;
+    }
   }
-  .comment{
-    font-size:12px;
-    line-height:100%;
-    color:#ffffff;
-  }
-}
 
 }
