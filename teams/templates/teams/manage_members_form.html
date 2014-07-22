@@ -8,6 +8,8 @@
             <table style="width:100%;">
                 <tr>
                     <th>User</th>
+                    <th>Last Event</th>
+                    <th>Total Events</th>
                     {% for field in inline.0.visible_fields %}
                         <th>
                             {{ field.label }}
@@ -18,11 +20,10 @@
                     {% for hidden in form.hidden_fields %}
                         {{ hidden }}
                     {% endfor %}
-
-                    <tr>
-                        <td>
-                            {{ inform.instance }}
-                        </td>
+                    <tr><!-- Read only fields first-->
+                        <td> {{ inform.instance }} </td>
+                        <td> {{ inform.instance.user.last_event.start_date }} </td>
+                        <td> {{ inform.instance.user.events_participated }} </td>
                         {% for field in inform.visible_fields %}
                             <td>
                                 {{ field }}

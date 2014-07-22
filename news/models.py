@@ -14,7 +14,7 @@ class Membership(models.Model):
     team = models.ForeignKey('teams.Team', editable=False)
     date_joined = models.DateTimeField(auto_now_add=True)
     privileged = models.BooleanField(default=False)
-    board = models.BooleanField(default=False)
+    board = models.BooleanField(default=False, editable=False)
 
     def __unicode__(self):
         return self.user.get_full_name()

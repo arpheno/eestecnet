@@ -119,20 +119,11 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     """Should be set by the user to the time they joined eestec. For new users it will be the moment they register with the website"""
     def events_participated(self):
         """ Returns the number of :class:`Events <Event>` a :class:`User <account.models.Eestecer>` has been to"""
-        try:
-            ownevents = self.events.all()
-            return len(ownevents)
-        except:
-            return 0
+        return len(self.events.all())
 
     def last_event(self):
         """ Returns the Date of the last :class:`Event` a :class:`User <account.models.Eestecer>` has been to"""
-        try:
-            ownevents = self.events.all()
-            if ownevents:
-                return self.events.all().order_by('-start_date')[0].start_date
-        except:
-            return 0
+        return self.events.all().order_by('-start_date').first()
 
     def teams_administered(self):
         return self.teams.filter(membership__privileged=True)
