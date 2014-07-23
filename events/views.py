@@ -71,12 +71,28 @@ class ApplyToEvent(CreateView):
     model = Application
     template_name = 'events/application_form.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        thisapp = Application.objects.get(
+            applicant=request.user,
+            target=Event.objects.get(slug=self.kwargs['slug']))
+        if thisapp:
+            return redirect(self.get_success_url())
+        return super(ApplyToEvent, self).dispatch(request, *args, **kwargs)
+
+
+    def get_success_url(self):
+        return reverse('event', kwargs=self.kwargs)
+
     def form_valid(self, form):
+        application = form.save(commit=False)
+        application.applicant = self.request.user
+        application.target = Event.objects.get(slug=self.kwargs['slug'])
+        application.save()
         messages.add_message(
             self.request,
             messages.INFO,
             'Thank you for your application. You will be notified upon acceptance.')
-        return super(ApplyToEvent, self).form_valid(form)
+        return redirect(self.get_success_url())
 
 
 class TransportForm(ModelForm):
@@ -103,7 +119,7 @@ class FillInTransport(CreateView):
 
     def form_valid(self, form):
         if not self.request.user.tshirt_size or not self.request.user.profile_picture:
-            return redirect(reverse('event',kwargs={'slug':self.kwargs['slug']}))
+            return redirect(reverse('event', kwargs=self.kwargs))
         pax = get_object_or_404(Participation, participant=self.request.user,
                                 target__slug=self.kwargs['slug'])
         trans=form.save()
@@ -113,5 +129,5 @@ class FillInTransport(CreateView):
             self.request,
             messages.INFO,
             'Thank you for filling in your transportation details.')
-        return redirect(reverse('event',kwargs={'slug':self.kwargs['slug']}))
+        return redirect(reverse('event', kwargs=self.kwargs))
 
