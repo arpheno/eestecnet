@@ -137,7 +137,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     """Designates whether this user should be treated as active. Unselect this instead of deleting accounts"""
 
     def lc(self):
-        return self.teams_administered().filter(type__in=['jlc', 'lc', 'observer'])
+        return self.teams.filter(type__in=['jlc', 'lc', 'observer'])
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','last_name','gender']

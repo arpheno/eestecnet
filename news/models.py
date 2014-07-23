@@ -21,6 +21,9 @@ class Membership(models.Model):
 
 
 class Entry(models.Model):
+    class Meta:
+        verbose_name_plural = "entries"
+
     author = models.ManyToManyField('teams.Team')
     """ The :class:`Members <teams.models.Team>` authoring the news"""
     headline = models.CharField(max_length=50, unique=True)
@@ -34,7 +37,6 @@ class Entry(models.Model):
     """ Optionally, an image to add"""
     def __unicode__(self):
         return self.headline
-
     def clean(self):
         if not len(self.headline.strip()):
             raise ValidationError("Headline may not be empty.")

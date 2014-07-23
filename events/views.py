@@ -10,7 +10,7 @@ from django.shortcuts import redirect, get_object_or_404
 
 # Create your views here.
 from django.utils import timezone
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from events.models import Event, Application, Participation, Transportation
 
 class HTML5Input(widgets.Input):
@@ -105,6 +105,16 @@ class TransportForm(ModelForm):
             'departure': TextInput(attrs={'class': 'datetime'}),
             'comment': Textarea(attrs={'rows': '1'}),
         }
+
+
+class UpdateTransport(UpdateView):
+    form_class = TransportForm
+
+    def get_object(self, queryset=None):
+        return Participation.objects.get(applicant=self.request.user,
+                                         target=Event.objects.get(
+                                             slug=self.kwargs['slug'])).transportation
+
 
 class FillInTransport(CreateView):
     form_class = TransportForm
