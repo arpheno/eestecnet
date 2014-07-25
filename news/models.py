@@ -1,4 +1,5 @@
 from autoslug import AutoSlugField
+from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.db import models
 
@@ -15,6 +16,13 @@ class Membership(models.Model):
     date_joined = models.DateTimeField(auto_now_add=True)
     privileged = models.BooleanField(default=False)
     board = models.BooleanField(default=False)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        if self.privileged:
+            self.user.is_staff = True
+            self.user.save()
+            self.user.groups.add(Group.objects.get(name='Local Admins'))
 
     def __unicode__(self):
         return self.user.get_full_name()

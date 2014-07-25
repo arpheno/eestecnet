@@ -1,5 +1,4 @@
 from autoslug import AutoSlugField
-from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -93,10 +92,6 @@ class Team(models.Model):
             a.organizing_committee=[self]
         else:
             super(Team, self).save(*args, **kwargs)
-            for usr in self.privileged().all():
-                usr.is_staff=True
-                usr.save()
-                usr.groups.add(Group.objects.get(name='Local Admins'))
 
     def __unicode__(self):
         if self.type not in ['jlc','lc','observer']:
