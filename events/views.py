@@ -42,7 +42,7 @@ class InternationalEvents(ListView):
                 if event.end_date < timezone.now().date():
                     context['over_list'].append(event)
             except:
-                context['active_list'].append(event)
+                pass
         return context
 
 def confirm_event(request,slug):
