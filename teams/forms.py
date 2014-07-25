@@ -28,9 +28,16 @@ class DescriptionForm(ModelForm):
                             'css': "/static/enet/css/wysiwyg.css"})}
 
 
+class MembershipForm(ModelForm):
+    class Meta:
+        model = Membership
+        exclude = ('board',)
+
+
 class MembershipInline(InlineFormSet):
     model = Membership
     extra = 0
+    form_class = MembershipForm
 
 
 class MemberImageInline(InlineFormSet):
