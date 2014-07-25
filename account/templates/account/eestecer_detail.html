@@ -2,6 +2,7 @@
 {% load thumbnail %}
 
 {% block class %}eestecer{% endblock %}
+{% block title %}{{ object }}{% endblock %}
 {% block pictures %}
     {% thumbnail object.profile_picture "375x225" crop="center" as im %}
         <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
@@ -18,18 +19,24 @@
 {% block more %}
     <details open>
         <summary>LC and Teams</summary>
-        {% include 'teams/teams.html' with object_list=object.members.all %}
+        {% include 'teams/teams.html' with object_list=object.teams.all %}
     </details>
-    <details open>
+    {% if object.events_organized.all %}
+        <details open>
         <h2>Last events Organized</h2>
         {% include  'events/events.html' with object_list=object.events_organized.all %}
     </details>
-    <details open>
+    {% endif %}
+    {% if object.events.all %}
+        <details open>
         <summary>Last events participated</summary>
         {% include  'events/events.html' with object_list=object.events.all %}
     </details>
-    <details open>
+    {% endif %}
+    {% if object.achievements.all %}
+        <details open>
         <summary>Achievements in EESTEC</summary>
         {% include  'account/achievement_list.html' with object_list=object.achievement_set.all %}
     </details>
+    {% endif %}
 {% endblock %}

@@ -109,12 +109,12 @@ class TransportForm(ModelForm):
 
 class UpdateTransport(UpdateView):
     form_class = TransportForm
+    template_name = 'events/transportation_form.html'
 
     def get_object(self, queryset=None):
         return Participation.objects.get(applicant=self.request.user,
                                          target=Event.objects.get(
                                              slug=self.kwargs['slug'])).transportation
-
 
 class FillInTransport(CreateView):
     form_class = TransportForm
