@@ -71,6 +71,11 @@ class ApplyToEvent(CreateView):
     model = Application
     template_name = 'events/application_form.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(ApplyToEvent, self).get_context_data(**kwargs)
+        context['object'] = Event.objects.get(slug=self.kwargs['slug'])
+        return context
+
     def dispatch(self, request, *args, **kwargs):
         try:
             Application.objects.get(
