@@ -59,13 +59,13 @@
 {% if object in user.request.pivileged %}
     {% block aside %}
         <h2> Admin Actions</h2>
-        <a href="{% url 'board' object.slug %}" id="board">Choose new board</a>
-        <a href="{% url 'description' object.slug %}" id="board">Change Description</a>
-        <a href="{% url 'changedetails' object.slug %}" id="board">Change Details</a>
-        <a href="{% url 'managemembers' object.slug %}" id="board">Manage members</a>
-        <a href="{% url 'teamimages' object.slug %}" id="board"> Images </a>
+        <a href="{{ object.as_url }}board" id="board">Choose new board</a>
+        <a href="{{ object.as_url }}description" id="board">Change Description</a>
+        <a href="{{ object.as_url }}details" id="board">Change Details</a>
+        <a href="{{ object.as_url }}members" id="board">Manage members</a>
+        <a href="{{ object.as_url }}images" id="board"> Images </a>
         {% if object.pending_applications %}
-            <a href="{% url 'teamapplications' object.slug %}"
+            <a href="{{ object.as_url }}/teamapplications"
                id="board">View {{ object.pending_applications }}Applications </a>
         {% endif %}
         <script type="text/javascript">

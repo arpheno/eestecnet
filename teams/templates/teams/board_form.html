@@ -1,6 +1,6 @@
 {% extends 'teams/team_detail.html' %}
 {% block board %}
-    <form action="{% url 'board' object.slug %}" id="boardform"
+    <form action="{{ object.as_url }}board" id="boardform"
           enctype="multipart/form-data" method="post">
         {% csrf_token %}
         {{ form.as_p }}

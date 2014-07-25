@@ -14,7 +14,7 @@
                 var mark = new L.Marker(new L.LatLng({{ object.lat }}, {{  object.lng}}), {title: "{{ object }}"});
                 mark.on('click',
                         function () {
-                            window.location = "{% url 'city' object.slug %}";
+                            window.location = "{{ object.as_url }}";
                         });
                 map.addLayer(mark);
             {% endfor %}

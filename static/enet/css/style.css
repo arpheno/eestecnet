@@ -423,6 +423,7 @@ article {
 
 article h1 {
     font-size: 20px;
+    flex: 1 1 100%;
     align-self: flex-start;
 }
 

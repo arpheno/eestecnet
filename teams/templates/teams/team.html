@@ -2,13 +2,7 @@
 {% load thumbnail %}
 
 {% block class %}member{% endblock %}
-{% block url %}
-    {% if object.category == 'jlc' or objecty.category == 'lc' or object.category == 'observer' %}
-        {% url 'city' object.slug %}
-    {% else %}
-        {% url 'team' object.slug %}
-    {% endif %}
-{% endblock %}
+{% block url %} {{ object.as_url }}{% endblock %}
 {% block picture %}
     {% thumbnail object.thumbnail "190x125" crop="center" as im %}
         <img src="{{ im.url }}" style="width:{{ im.width }}px;height:{{ im.height }}px;"

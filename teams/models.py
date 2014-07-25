@@ -1,6 +1,7 @@
 from autoslug import AutoSlugField
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.loader import render_to_string
 from django.utils.datetime_safe import datetime
@@ -53,6 +54,11 @@ class Team(models.Model):
 
     def privileged(self):
         return self.users.filter(membership__privileged=True)
+
+    def as_url(self):
+        if self.is_lc():
+            return reverse('cities:detail', kwargs={'slug': self.slug})
+        return reverse('teams:detail', kwargs={'slug': self.slug})
 
     def clean(self):
         # Don't allow draft entries to have a pub_date.

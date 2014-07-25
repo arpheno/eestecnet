@@ -6,9 +6,7 @@ from account.views import EestecerProfile, EestecerUpdate, EestecerCreate, \
     Login, Logout, EestecerList, complete
 from eestecnet.settings import MEDIA_ROOT
 from eestecnet.views import newsletter
-from teams.models import Team
-from teams.views import CommitmentList, TeamList, SelectBoard, ChangeDescription, \
-    ChangeDetails, ManageMembers, TeamImages, TeamApplications
+from teams.views import CommitmentList, TeamList
 from news.models import Entry
 from news.views import home
 
@@ -17,9 +15,6 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    # Examples:
-    # url(r'^$', 'eestecnet.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
     url(r'^$', home.as_view(), name='home'),
     url(r'^news/$', ListView.as_view(model=Entry)),
     url(r'^about/$', home.as_view(), name='about'),
@@ -28,22 +23,8 @@ urlpatterns = patterns(
     url(r'^events/', include('events.urls')),
     url(r'^teams/$', TeamList.as_view(), name='teams'),
     url(r'^cities/$', CommitmentList.as_view(), name='cities'),
-    url(r'^cities/(?P<slug>[-\w]+)/$',
-        DetailView.as_view(model=Team), name='city'),
-    url(r'^cities/(?P<slug>[-\w]+)/board$',
-        SelectBoard.as_view(), name='board'),
-    url(r'^cities/(?P<slug>[-\w]+)/description$',
-        ChangeDescription.as_view(), name='description'),
-    url(r'^cities/(?P<slug>[-\w]+)/images$',
-        TeamImages.as_view(), name='teamimages'),
-    url(r'^cities/(?P<slug>[-\w]+)/applications',
-        TeamApplications.as_view(), name='teamapplications'),
-    url(r'^cities/(?P<slug>[-\w]+)/members$',
-        ManageMembers.as_view(), name='managemembers'),
-    url(r'^cities/(?P<slug>[-\w]+)/details$',
-        ChangeDetails.as_view(), name='changedetails'),
-    url(r'^teams/(?P<slug>[-\w]+)/$',
-        DetailView.as_view(model=Team), name='team'),
+    url(r'^cities/', include('teams.urls', namespace="cities")),
+    url(r'^teams/', include('teams.urls', namespace="teams")),
     url(r'^people/$', EestecerList.as_view(), name='people'),
     url(r'^people/me/$', EestecerUpdate.as_view(), name='userupdate'),
     url(r'^people/(?P<slug>[-\w]+)/$', EestecerProfile.as_view(),

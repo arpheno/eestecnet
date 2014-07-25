@@ -1,6 +1,6 @@
 {% extends 'teams/team_detail.html' %}
 {% block managemembers %}
-    <form action="{% url 'teamapplications' object.slug %}" id="teamapplicationsform"
+    <form action="{{ object.as_url }}teamapplications" id="teamapplicationsform"
           enctype="multipart/form-data" method="post">
         {% csrf_token %}
         {{ form.as_p }}
