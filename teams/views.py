@@ -2,11 +2,18 @@ from django.core.urlresolvers import reverse
 
 
 # Create your views here.
-from django.views.generic import ListView, FormView, UpdateView
+from django.views.generic import ListView, FormView, UpdateView, View
 from extra_views import UpdateWithInlinesView, InlineFormSet
 from events.models import Event, Application
 from teams.forms import MembershipInline, MemberImageInline, DescriptionForm, BoardForm
 from teams.models import Team
+
+
+class TeamMixin(View):
+    def get_success_url(self):
+        if Team.objects.get(slug=self.kwargs['slug']).is_lc():
+            return reverse("cities:detail", kwargs=self.kwargs)
+        return reverse("teams:detail", kwargs=self.kwargs)
 
 
 class TeamList(ListView):
@@ -23,13 +30,11 @@ class CommitmentList(ListView):
         return Team.objects.filter(type__in=["lc", "jlc", "observer"])
 
 
-class ManageMembers(UpdateWithInlinesView):
+class ManageMembers(TeamMixin, UpdateWithInlinesView):
     model = Team
     template_name = 'teams/manage_members_form.html'
     fields = ()
     inlines = [MembershipInline]
-    def get_success_url(self):
-        return reverse("city", kwargs=self.kwargs)
 
 
 class ApplicationInline(InlineFormSet):
@@ -37,7 +42,7 @@ class ApplicationInline(InlineFormSet):
     extra = 0
 
 
-class TeamApplications(UpdateWithInlinesView):
+class TeamApplications(TeamMixin, UpdateWithInlinesView):
     model = Event
     template_name = 'teams/team_applications_form.html'
     fields = ()
@@ -52,43 +57,31 @@ class TeamApplications(UpdateWithInlinesView):
         return Event.objects.get(category='recruitment',
                                  organizing_committee__slug=self.kwargs['slug'])
 
-    def get_success_url(self):
-        return reverse("city", kwargs=self.kwargs)
 
-
-class TeamImages(UpdateWithInlinesView):
+class TeamImages(TeamMixin, UpdateWithInlinesView):
     model = Team
     template_name = 'teams/team_images_form.html'
     fields = ('thumbnail',)
     inlines = [MemberImageInline]
-
-    def get_success_url(self):
-        return reverse("city", kwargs=self.kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(TeamImages, self).get_context_data(**kwargs)
         return context
 
 
-class ChangeDetails(UpdateView):
+class ChangeDetails(TeamMixin, UpdateView):
     template_name = 'teams/change_details_form.html'
     model = Team
     fields = ('name', 'website', 'address', 'founded', 'facebook')
 
-    def get_success_url(self):
-        return reverse("city", kwargs=self.kwargs)
 
-
-class ChangeDescription(UpdateView):
+class ChangeDescription(TeamMixin, UpdateView):
     template_name = 'teams/description_form.html'
     form_class = DescriptionForm
     model = Team
 
-    def get_success_url(self):
-        return reverse("city", kwargs=self.kwargs)
 
-
-class SelectBoard(FormView):
+class SelectBoard(TeamMixin, FormView):
     form_class = BoardForm
     template_name = 'teams/board_form.html'
 
@@ -101,9 +94,6 @@ class SelectBoard(FormView):
         kwargs = super(SelectBoard, self).get_form_kwargs()
         kwargs['team'] = Team.objects.get(slug=self.kwargs['slug'])
         return kwargs
-
-    def get_success_url(self):
-        return reverse("city", kwargs=self.kwargs)
 
     def form_valid(self, form):
         team = Team.objects.get(slug=self.kwargs['slug'])

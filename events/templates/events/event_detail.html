@@ -10,16 +10,35 @@
     {% endfor %}
 {% endblock %}
 {% block details %}
-    <h2>Event Name</h2><h3>{{ object.name }} </h3>
-    <h2>Organizer</h2><h3>{% for oc in object.organizing_committee.all %}{{ oc }}{% endfor %}</h3>
-    <h2>Date</h2> <h3>{{ object.start_date }} - {{ object.end_date }}</h3>
-    <h2>Deadline</h2><h3>{{ object.deadline }}</h3>
-    <h2>Maximum participants</h2> <h3>{{ object.max_participants }} </h3>
-    <div class="actions">
-        {% block actions %}
+    <tr>
+        <td>Event Name</td>
+        <td>{{ object.name }} </td>
+    </tr>
+    <tr>
+        <td>Organizer</td>
+        <td>{% for oc in object.organizing_committee.all %}{{ oc }}{% endfor %}</td>
+    </tr>
+    <tr>
+        <td>Date</td>
+        <td>{{ object.start_date }} - {{ object.end_date }}</td>
+    </tr>
+    <tr>
+        <td>Deadline</td>
+        <td>{{ object.deadline }}</td>
+    </tr>
+    <tr>
+        <td>Maximum participants</td>
+        <td>{{ object.max_participants }} </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div class="actions">
+            {% block actions %}
             {% include 'events/actions.html' %}
         {% endblock %}
     </div>
+        </td>
+    </tr>
 {% endblock %}
 {% block more %}
     <details open>

@@ -72,12 +72,13 @@ class ApplyToEvent(CreateView):
     template_name = 'events/application_form.html'
 
     def dispatch(self, request, *args, **kwargs):
-        thisapp = Application.objects.get(
-            applicant=request.user,
-            target=Event.objects.get(slug=self.kwargs['slug']))
-        if thisapp:
+        try:
+            Application.objects.get(
+                applicant=request.user,
+                target=Event.objects.get(slug=self.kwargs['slug']))
             return redirect(self.get_success_url())
-        return super(ApplyToEvent, self).dispatch(request, *args, **kwargs)
+        except:
+            return super(ApplyToEvent, self).dispatch(request, *args, **kwargs)
 
 
     def get_success_url(self):

@@ -10,14 +10,28 @@
     {% endfor %}
 {% endblock %}
 {% block details %}
-    <h2>LC Name</h2><h3>{{ object.name }} </h3>
-    <h2>Founded:</h2><h3> {{ object.founded}}</h3>
-    <h2>Website:</h2> <h3>{{ object.website}}</h3>
-    <h2>Number of Members</h2><h3>{{ object.membercount }}</h3>
-    <div class="actions">
-        {% if user.is_authenticated %}
+    <tr>
+        <td>LC Name</td>
+        <td>{{ object.name }} </td>
+    </tr>
+    <tr>
+        <td>Founded:</td>
+        <td> {{ object.founded }}</td>
+    </tr>
+    <tr>
+        <td>Website:</td>
+        <td>{{ object.website }}</td>
+    </tr>
+    <tr>
+        <td>Number of Members</td>
+        <td>{{ object.membercount }}</td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div class="actions">
+                {% if user.is_authenticated %}
             {% block application %}
-                {% if not user in object.users.all %}
+                {% if not user in object.users.all and not user in object.pending_applications %}
                     {% for event in object.event_set.all %}
                     {% if event.category == "recruitment" %}
                         <a href="{% url 'eventapplication' event.slug %}" class="action-button shadow animate red">Join this Commitment</a>
@@ -27,7 +41,10 @@
                 {% endif %}
             {% endblock %}
         {% endif %}
-    </div>
+            </div>
+        </td>
+    </tr>
+
 {% endblock %}
 {% block more %}
     <details open>
@@ -56,9 +73,9 @@
     {% block teamapplications %}{% endblock %}
 {% endblock %}
 
-{% if object in user.request.pivileged %}
     {% block aside %}
-        <h2> Admin Actions</h2>
+        {% if user in object.privileged %}
+            <h2> Admin Actions</h2>
         <a href="{{ object.as_url }}board" id="board">Choose new board</a>
         <a href="{{ object.as_url }}description" id="board">Change Description</a>
         <a href="{{ object.as_url }}details" id="board">Change Details</a>
@@ -66,10 +83,10 @@
         <a href="{{ object.as_url }}images" id="board"> Images </a>
         {% if object.pending_applications %}
             <a href="{{ object.as_url }}/teamapplications"
-               id="board">View {{ object.pending_applications }}Applications </a>
+               id="board">View {{ object.pending_applications.count }}Applications </a>
         {% endif %}
         <script type="text/javascript">
             $("a#board").button();
         </script>
+        {% endif %}
     {% endblock %}
-{% endif %}

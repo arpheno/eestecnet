@@ -6,8 +6,6 @@ article {
 }
 article {
   h1{
-    font-size:20px;
-    flex: 1 1 100%;
     align-self:flex-start;
   }
   header{
@@ -20,22 +18,31 @@ article {
       height:225px;
     }
     .details{
-      display:flex;
-      flex-flow:wrap row;
-      justify-content: space-around;
-      flex:1 1;
       min-width:375px;
       padding: 30px 0px 30px 30px;
-      h2,h3{
-        flex:1 0 40%;
+      tr {
+        td {
+          &:first-child {
+            font-size: 18px;
+            font-weight: bold;
+            color: $darkeestec;
+            font-family: "Century Gothic";
+
+          }
+        }
         margin-bottom:15px;
-        padding:1px 10px;
         border-bottom: 1px $darkeestec solid;
+        &:last-child {
+          height: 55px;
+          border: none;
+
+        }
       }
+
     }
   }
   .actions{
-    align-self: center;
+    text-align: center;
     form{
       display:flex;
       flex-wrap:wrap;

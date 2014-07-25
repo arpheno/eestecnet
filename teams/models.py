@@ -53,7 +53,8 @@ class Team(models.Model):
         return self.users.filter(membership__board=True)
 
     def privileged(self):
-        return self.users.filter(membership__privileged=True)
+        result = self.users.filter(membership__privileged=True)
+        return result
 
     def as_url(self):
         if self.is_lc():
@@ -106,7 +107,8 @@ class Team(models.Model):
         return len(self.users.all()) - 1
 
     def pending_applications(self):
-        return len(self.event_set.get(category='recuitment').application_set)
+        result = self.event_set.get(category='recruitment').applicants.all()
+        return result
 
     def is_lc(self):
         return self.type in ['jlc', 'lc', 'observer']

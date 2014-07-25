@@ -12,18 +12,24 @@ html{
   font-size:12px;
   color:#555;
 }
-h1,h2{
+
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Century Gothic';
   font-weight: bold;
   line-height:100%;
   text-align: left;
   color: $darkeestec;
   margin: 4px;
-  padding:0px 30px 4px 30px;
+  padding: 0% 0% 0.5% 5%;
+  flex: 1 1 100%;
   border-bottom: 1px solid $darkeestec;
 }
 h1{ font-size:20px; }
-h2{ font-size:14px; }
+
+h2 {
+  font-size: 18px;
+}
+
 h3{text-align: right;}
 html>body, header, #sponsors, footer,nav,aside,main{ display:flex; position:relative;}
 
@@ -46,9 +52,6 @@ html>body{
       -0px 0px 20px 10px rgba(0,0,0,0.1);
     justify-content: center;
     section{flex:1 0 100%;}
-    >h1{
-      flex: 1 1 100%;
-    }
     >form{
       width:480px;
       display:flex;
@@ -79,15 +82,13 @@ html>body{
     background-color:#5f6a6d;
     border-width: 0px 57px 0px 0px;
     align-content: flex-start;
-    width:253px;
     padding-top:30px;
     border-style:solid;
     border-color:#3f4749;
     z-index: 1;
-    justify-content: flex-start;
+    justify-content: center;
     flex-wrap: wrap;
     h2 {
-      flex: 1 1 100%;
       border-bottom-color: white;
       text-align: center;
       color: white;
