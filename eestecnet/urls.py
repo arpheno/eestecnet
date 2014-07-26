@@ -16,7 +16,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^$', home.as_view(), name='home'),
-    url(r'^news/$', ListView.as_view(model=Entry)),
+    url(r'^news/$', ListView.as_view(model=Entry), name='news'),
     url(r'^about/$', home.as_view(), name='about'),
     url(r'^news/(?P<slug>[-_\w]+)/$', DetailView.as_view(model=Entry),
         name='news'),

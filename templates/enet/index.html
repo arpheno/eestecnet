@@ -29,25 +29,16 @@
 </head>
 <body>
 <header>
-    <img src="{% static 'enet/images/logo.png' %}" />
-<h1>Electrical Engineering Students' European Association</h1>
+    <img src="{% static 'enet/img/EESTEC_logo.svg' %}"/>
+    <img id="eestec-text" src="{% static 'enet/images/stretched.svg' %}"/>
+    {% if not user.is_authenticated %}
+        {% include 'account/login.html' %}
+    {% else %}
+        Hello, {{ user }}
+    {% endif %}
 
 </header>
-{% block login %}{% endblock %}
-<nav>
-    <a href="{% url 'home' %}">Home</a>
-    <a href="{% url 'about' %}">About</a>
-    <a href="{% url 'events' %}">Events</a>
-    <a href="{% url 'cities' %}">Cities</a>
-    <a href="{% url 'teams' %}">Teams</a>
-    <a href="{% url 'materials' %}">Files</a>
-    {% if user.is_authenticated %}
-        <a class="profile" href="{% url 'userupdate' %}"><img src="{% static 'enet/images/login.png' %}"></a>
-    {% else %}
-        <a class="login" href="{% url 'login' %}"
-           src="{% static 'enet/images/login.png' %}"></a>
-    {% endif %}
-</nav>
+{% include 'enet/navigation.html' %}
 
 {% if messages %}
     <ul class="messages">
