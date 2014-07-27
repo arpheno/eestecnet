@@ -34,29 +34,48 @@ body > header {
 }
 
 #nav {
-  @media only screen and (max-width: 45em) /* 640 */
-  {
-    &:not( :target ) > a:first-of-type,
-    &:target > a:last-of-type {
-      display: block;
-    }
-    &:target > ul {
-      display: block;
-    }
-  }
   align-self: center;
   flex: 1 1 100%;
   z-index: 10;
   a {
     color: #fff;
   }
+
+  @media only screen and (max-width: 45em) /* 640 */
+  {
+    &:not( :target ) > a:first-of-type,
+    &:target > a:last-of-type {
+      display: block;
+    }
+    &:target {
+      > ul {
+        display: block;
+      }
+      > a {
+        display: none;
+      }
+    }
+  }
   > a {
+    @media only screen and (max-width: 45em) /* 640 */
+    {
+      position: fixed;
+      top: 0px;
+      right: 0px;
+      font-size: 30px;
+      color: #fff;
+      background-color: $eestec;
+      padding: 5px;
+    }
     display: none;
   }
   > ul {
     @media only screen and (max-width: 45em) /* 640 */
     {
       display: none;
+      position: fixed;
+      top: 0px;
+      left: 0px;
     }
     @media only screen and (min-width: 45em) /* 640 */
     {
@@ -133,4 +152,3 @@ body > header {
     }
   }
 }
-

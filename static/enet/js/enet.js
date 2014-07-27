@@ -1,7 +1,8 @@
 $(function () {
     $(".date").datepicker({changeYear: true, yearRange: "-30:-18"});
     $(".datetime").datetimepicker();
-
+    $("a[href^=#]").click(function (e) {
+    });
 });
 function PersonDialog(wrapper) {
     var self = this;
