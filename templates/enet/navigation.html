@@ -1,5 +1,7 @@
 {% load staticfiles %}
-<nav>
+<nav id="nav">
+    <a href="#nav" title="Show navigation">Show navigation</a>
+        <a href="#" title="Hide navigation">Hide navigation</a>
     <ul>
         <li>
             <a href="{% url 'home' %}">Home</a>
@@ -41,8 +43,10 @@
         <li>
             <a href="/contact">Contact</a>
         </li>
+        <li>
+            <form>
+                <input value="Search">
+            </form>
+        </li>
     </ul>
-    <form>
-        <input value="Search">
-    </form>
 </nav>

@@ -1,13 +1,13 @@
-body > header{
-    flex:1 1 100%;
-    background-color: #fff;
+body > header {
+  flex: 1 1 100%;
+  background-color: #fff;
   z-index: 3;
   justify-content: space-around;
   align-items: center;
   align-content: center;
   flex-wrap: wrap;
   padding: 1%;
-  img{
+  img {
     height: 100px;
     width: auto;
   }
@@ -21,7 +21,7 @@ body > header{
     input[role=button] {
       text-align: center;
       width: 138px;
-      font-size:16px;
+      font-size: 16px;
       padding: 1px;
       color: #fff;
       font-family: "Century Gothic";
@@ -33,22 +33,48 @@ body > header{
   }
 }
 
-body > nav {
+#nav {
+  @media only screen and (max-width: 45em) /* 640 */
+  {
+    &:not( :target ) > a:first-of-type,
+    &:target > a:last-of-type {
+      display: block;
+    }
+    &:target > ul {
+      display: block;
+    }
+  }
   align-self: center;
   flex: 1 1 100%;
   z-index: 10;
-  display: flex;
-  align-content: center;
-  justify-content: space-between;
   a {
     color: #fff;
   }
+  > a {
+    display: none;
+  }
   > ul {
-    flex: 1 1 67%;
-    height: 100%;
+    @media only screen and (max-width: 45em) /* 640 */
+    {
+      display: none;
+    }
+    @media only screen and (min-width: 45em) /* 640 */
+    {
+      height: 55px;
+    }
+
+    border-bottom: 1px solid $eestec;
+    border-top: 1px solid $eestec;
+    align-items: center;
+    font-family: "Century Gothic";
     > li {
+      @media only screen and (max-width: 45em) /* 640 */
+      {
+        width: 100%;
+      }
+      background-color: $darkeestec;
+      position: relative;
       > a {
-        text-align: center;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -57,58 +83,54 @@ body > nav {
         font-weight: bold;
         font-size: 16px;
         height: 100%;
-        color: #fff;
         &:hover {
           background-color: $eestec;
-          color: #fff;
         }
       }
-      position: relative;
-      &:hover{
+      &:hover {
         ul {
+          @media only screen and (max-width: 45em) /* 640 */
+          {
+            display: none;
+          }
           display: block;
         }
       }
-      ul {
+      ul /*second level list*/  {
         display: none;
         top: 55px;
         position: absolute;
         left: 0px;
-        right: 0px;
-        li {
+        li /*second level elements*/  {
           display: block;
           padding: 5px;
           background-color: $brighteestec;
           &:hover {
             background-color: $brightereestec;
           }
-          color: white;
         }
       }
     }
-    border-bottom: 1px solid $eestec;
-    border-top: 1px solid $eestec;
-    display: flex;
-    align-items: center;
-    height: 55px;
-    background-color: $darkeestec;
-    font-family: "Century Gothic";
-
-  }
-  form {
-    flex: 1 1 200px;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-    background-color: $darkeestec;
-    input {
-      height: 30px;
-      font-size: 25px;
-      padding: 3px;
-      background-color: $darkereestec;
-      border-radius: 5px;
-      border: none;
+    form {
+      @media only screen and (max-width: 45em) /* 640 */
+      {
+        display: none;
+      }
+      flex: 1 1 200px;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+      background-color: $darkeestec;
+      input {
+        height: 30px;
+        font-size: 25px;
+        padding: 3px;
+        background-color: $darkereestec;
+        border-radius: 5px;
+        border: none;
+      }
     }
   }
 }
+
