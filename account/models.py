@@ -1,5 +1,6 @@
 from autoslug import AutoSlugField
 from django.db import models
+from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import PermissionsMixin
@@ -138,6 +139,9 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
 
     def lc(self):
         return self.teams.filter(type__in=['jlc', 'lc', 'observer'])
+
+    def as_html(self):
+        return render_to_string('account/eestecer.html', {'object': self})
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','last_name','gender']

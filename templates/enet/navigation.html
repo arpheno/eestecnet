@@ -40,8 +40,13 @@
         <li>
             <a href="/contact">Contact</a>
         </li>
+        {% if user.is_authenticated %}
+            <li>
+                <a href="/materials">Files</a>
+            </li>
+        {% endif %}
         <li>
-            <form>
+        <form>
                 <input value="Search">
             </form>
         </li>

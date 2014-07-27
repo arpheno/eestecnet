@@ -46,7 +46,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0.4rem;
   padding: 0% 0% 0.5% 5%;
   flex: 1 1 100%;
-  border-bottom: .1rem solid $darkeestec;
+  border-bottom: 1px solid $darkeestec;
 }
 
 h1 {
@@ -123,10 +123,10 @@ html>body{
       text-align: center;
       color: white;
     }
-    @media screen and (max-width: 120.0rem) {
+    @media screen and (max-width: 100.0rem) {
       flex: 1 0 100%;
     }
-    @media screen and (min-width: 120.0rem) {
+    @media screen and (min-width: 100.0rem) {
       flex: 0 0 25.3rem;
     }
   }
