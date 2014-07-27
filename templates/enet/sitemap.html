@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<ul>
+    <li>
+        <a href="/about">About EESTEC</a>
+        <ul>
+            <li><a href="{% url 'news' %}">News</a></li>
+            <li><a href="/history">History</a></li>
+            <li><a href="{% url 'cities' %}">Map of Commitments</a></li>
+            <li><a href="/documents">Official Documents</a></li>
+            <li><a href="/governance">Governing Bodies</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/activities">Activities</a>
+        <ul>
+            <li><a href="{% url 'teams' %}">International Teams</a></li>
+            <li><a href="{% url 'events' %}">Events</a></li>
+            <li><a href="/conference">EESTEC Conference</a></li>
+            <li><a href="/androidcompetition">Android Competition</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/students">For Students</a>
+        <ul>
+            <li><a href="/students/join">Become a Member</a></li>
+            <li><a href="{% url 'cities' %}">EESTEC in your city</a></li>
+            <li><a href="/students/observer">Found an Observer</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/partners">Partners</a>
+        <ul>
+            <li><a href="/partners/cooperations">Cooperations</a></li>
+            <li><a href="/partners/start">Become a Partner</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="/contact">Contact</a>
+    </li>
+</ul>

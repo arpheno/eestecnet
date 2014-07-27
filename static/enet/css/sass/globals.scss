@@ -140,6 +140,32 @@ html>body{
   }
 
   #sponsors{
+    a {
+      @media only screen and (max-width: 45em) /* 640 */
+      {
+        flex: 1 1 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          height: 30px;
+        }
+        p {
+          display: inline;
+          font-family: "Century Gothic";
+          font-weight: bold;
+        }
+        height: 30px;
+        width: auto;
+      }
+    }
+    p {
+      @media only screen and (max-width: 45em) /* 640 */
+      {
+        display: inline-block;
+      }
+      display: none;
+    }
     flex:1 0 100%;
     justify-content: space-around;
     flex-wrap:wrap;
@@ -150,13 +176,76 @@ html>body{
     background-color:#fff;
   }
   footer{
+    font-family: "Century Gothic";
     background-color:$eestecgreylight;
-  }
-  footer #europe {
+    height: 130px;
+    position: relative;
     flex:1 1 100%;
+    div.social {
+      flex-wrap: wrap;
+      align-self: center;
+      display: flex;
+      flex: 1 1 33%;
+      justify-content: space-around;
+      svg.social {
+        @media only screen and (max-width: 45em) /* 640 */
+        {
+          height: 50px;
+          width: 50px;
+        }
+        height: 30px;
+        width: 30px;
+        fill: white;
+        padding: 10px;
+        background-color: $darkeestec;
+      }
+      p {
+        flex: 1 1 100%;
+        color: #fff;
+        padding: 10px;
+      }
+    }
+    img {
+      height: 130px;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+    nav {
+      flex: 0 1 66%;
+      z-index: 10;
+      a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      @media only screen and (max-width: 45em) /* 640 */
+      {
+        display: none;
+      }
+      > ul {
+        padding-top: 30px;
+        justify-content: flex-start;
+        > li {
+          position: relative;
+          > a {
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            height: 100%;
+          }
+          ul /*second level list*/   {
+            top: 20px;
+            position: absolute;
+            display: block;
+            left: 0px;
+            right: 0px;
+          }
+        }
+      }
+    }
   }
 }
-
 #copyright {
   text-align: center;
   background-color: $eestecgreylight;

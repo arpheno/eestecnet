@@ -38,7 +38,12 @@
     {% endif %}
 
 </header>
-{% include 'enet/navigation.html' %}
+
+<nav id="nav">
+    <a id="shownav" href="#nav" title="Show navigation">&#9776;</a>
+    <a id="hidenav" href="#" title="Hide navigation">&#9776;</a>
+    {% include 'enet/navigation.html' %}
+</nav>
 
 {% if messages %}
     <ul class="messages">
@@ -51,9 +56,21 @@
 {% block content %}{% include 'enet/home.html' %}{% endblock %}
 <div id="sponsors"> {% include 'enet/sponsors.html' %} </div>
 <footer>
+    <nav>
+        {% include 'enet/sitemap.html' %}
+    </nav>
     <img src="{% static 'enet/images/map.png' %}" id="europe"/>
 
-    <p>Nulla non venenatis nisi, quis luctus urna. Nulla quis dolor euismod, feugiat sem eget, volutpat orci. Nam tincidunt eu neque at condimentum. Praesent eget arcu imperdiet, volutpat nulla et, dignissim purus. Maecenas nisl tellus, porta sit amet rhoncus ac, auctor vel est. Aenean ut arcu tempus massa pulvinar bibendum et a massa. Cras congue tortor vel lacus sagittis pellentesque.</p>
+    <div class="social">
+        <p>
+            Follow us on:
+        </p>
+        {% include 'icons/twitter.svg' %}
+        {% include 'icons/youtube.svg' %}
+        {% include 'icons/facebook.svg' %}
+        {% include 'icons/linkedin.svg' %}
+        {% include 'icons/google.svg' %}
+    </div>
 </footer>
 <div id="copyright">Copyright Sebastian Wozny LC Munich</div>
 </body>

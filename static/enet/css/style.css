@@ -224,12 +224,119 @@ html > body #sponsors {
     background-color: #fff;
 }
 
-html > body footer {
-    background-color: #465052;
+@media only screen and (max-width: 45em) {
+    html > body #sponsors a {
+        flex: 1 1 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 30px;
+        width: auto;
+    }
+
+    html > body #sponsors a img {
+        height: 30px;
+    }
+
+    html > body #sponsors a p {
+        display: inline;
+        font-family: "Century Gothic";
+        font-weight: bold;
+    }
 }
 
-html > body footer #europe {
+html > body #sponsors p {
+    display: none;
+}
+
+@media only screen and (max-width: 45em) {
+    html > body #sponsors p {
+        display: inline-block;
+    }
+}
+
+html > body footer {
+    font-family: "Century Gothic";
+    background-color: #465052;
+    height: 130px;
+    position: relative;
     flex: 1 1 100%;
+}
+
+html > body footer div.social {
+    flex-wrap: wrap;
+    align-self: center;
+    display: flex;
+    flex: 1 1 33%;
+    justify-content: space-around;
+}
+
+html > body footer div.social svg.social {
+    height: 30px;
+    width: 30px;
+    fill: white;
+    padding: 10px;
+    background-color: #c30811;
+}
+
+@media only screen and (max-width: 45em) {
+    html > body footer div.social svg.social {
+        height: 50px;
+        width: 50px;
+    }
+}
+
+html > body footer div.social p {
+    flex: 1 1 100%;
+    color: #fff;
+    padding: 10px;
+}
+
+html > body footer img {
+    height: 130px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+html > body footer nav {
+    flex: 0 1 66%;
+    z-index: 10;
+}
+
+html > body footer nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 45em) {
+    html > body footer nav {
+        display: none;
+    }
+}
+
+html > body footer nav > ul {
+    padding-top: 30px;
+    justify-content: flex-start;
+}
+
+html > body footer nav > ul > li {
+    position: relative;
+}
+
+html > body footer nav > ul > li > a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    height: 100%;
+}
+
+html > body footer nav > ul > li ul {
+    top: 20px;
+    position: absolute;
+    display: block;
+    left: 0px;
+    right: 0px;
 }
 
 #copyright {
