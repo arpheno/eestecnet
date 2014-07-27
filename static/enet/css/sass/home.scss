@@ -2,89 +2,91 @@ main.home{
   display:flex;
   flex-wrap: wrap;
   background:none;
-  padding:0px 1px 0px 0px;
+  padding: .0rem .1rem .0rem .0rem;
   box-shadow: none;
   justify-content: center;
-  max-width:1280px;
+  max-width: 128.0rem;
   h1{
       color:#fff;
       text-align: center;
-      left:0px;
-    height:20px;
-      width:100%;
+    left: .0rem;
+    height: 2.0rem;
+    width:100%;
       background-color:rgba(0,0,0,0.5);
       top:0;
-      border:0px;
-    padding: 5px;
-    margin: 0px;
+    border: .0rem;
+    padding: .5rem;
+    margin: .0rem;
   }
   p {
-    padding: 5px;
+    padding: .5rem;
   }
   #donate {
     flex:1 0 45%;
-  min-height:100px;
-  @media (max-width:1200px){
-    order:3;
+    min-height: 10.0rem;
+    @media (max-width: 120.0rem) {
+      order:3;
   }
     .wrapper{
     text-align: center;
-   padding:30px;
-    width:150px;
-    a{
+      padding: 3.0rem;
+      width: 15.0rem;
+      a{
     display:block;
     background-color: $darkeestec;
     color:white;
-      font-size:18px;
-    text-decoration: none;
-    padding:4px 10px;
-    font-weight: bolder;
+        font-size: 1.8rem;
+        text-decoration: none;
+        padding: .4rem 1.0rem;
+        font-weight: bolder;
   }
   }
 
 }
   #newsletter{
     flex:1 0 45%;
-    min-height:100px;
+    min-height: 10.0rem;
     position:relative;
-    @media (max-width:1200px){
+    @media (max-width: 120.0rem) {
       order:4;
     }
     form{
       text-align: center;
-      padding:30px 0px;
-      width:450px;
+      padding: 3.0rem .0rem;
+      width: 45.0rem;
       position:absolute;
-      right:0px;
-      bottom:0px;
+      right: .0rem;
+      bottom: .0rem;
       input.submit{
         border:none;
         background-color: $darkeestec;
         color:white;
-        font-size:16px;
+        font-size: 1.6rem;
         text-decoration: none;
-        padding:4px 10px;
+        padding: .4rem 1.0rem;
         font-weight: bolder;
       }
     }
   }
   nav{
     flex:1 1 15%;
-    min-height:100px;
+    min-height: 10.0rem;
     display:flex;
     flex-wrap:wrap;
     justify-content: center;
     position:relative;
 
-    img{padding:50px;}
+    img {
+      padding: 5.0rem;
+    }
     background-color: $eestecgreylight;
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 120.0rem) {
       flex:1 1 100%;
     }
   }
   #preview{
     flex:1 0 85%;
-    height:480px;
+    height: 48.0rem;
     position:relative;
     a {
       color: white;
@@ -101,18 +103,18 @@ main.home{
     }
     footer{
       position:absolute;
-      bottom:0px;
-      right:0px;
+      bottom: .0rem;
+      right: .0rem;
       display:flex;
-      height:80px ;
+      height: 8.0rem;
       overflow:hidden;
       background-color:rgba(0,0,0,0.5);
       color:#fff;
       h1,h2{
         text-align: left;
-        border-bottom:1px solid #fff;
-        margin-bottom:3px;
-        padding-bottom:3px;
+        border-bottom: .1rem solid #fff;
+        margin-bottom: .3rem;
+        padding-bottom: .3rem;
 
       }
       main{
@@ -123,16 +125,16 @@ main.home{
       aside{
         flex:1 1 30%;
         background-color:rgba($darkeestec,0.75);
-        margin:10px;
-        padding:5px;
+        margin: 1.0rem;
+        padding: .5rem;
         display:inline;
         h2{
           background:none;
-          padding:0px;
-        margin:0px;
+          padding: .0rem;
+          margin: .0rem;
         }
         a{
-          padding-left:2px;
+          padding-left: .2rem;
           display:block;
           text-decoration: none;
           color:#fff;
@@ -143,7 +145,7 @@ main.home{
     img,.pictures,#news{
       position:relative;
       width:100%;
-      height:480px;
+      height: 48.0rem;
     }
   }
 }

@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 
 from account.views import EestecerProfile, EestecerUpdate, EestecerCreate, \
     Login, Logout, EestecerList, complete
@@ -17,7 +17,8 @@ urlpatterns = patterns(
     '',
     url(r'^$', home.as_view(), name='home'),
     url(r'^news/$', ListView.as_view(model=Entry), name='news'),
-    url(r'^about/$', home.as_view(), name='about'),
+    url(r'^androidcompetition/$',
+        TemplateView.as_view(template_name='android/home.html')),
     url(r'^news/(?P<slug>[-_\w]+)/$', DetailView.as_view(model=Entry),
         name='news'),
     url(r'^events/', include('events.urls')),

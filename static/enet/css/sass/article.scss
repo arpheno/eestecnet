@@ -14,25 +14,25 @@ article {
     flex-direction: row;
 
     .pictures,img{
-      width:375px;
-      height:225px;
+      width: 37.5rem;
+      height: 22.5rem;
     }
     .details{
-      min-width: 400px;
+      min-width: 40.0rem;
       tr {
         td {
           &:first-child {
-            font-size: 18px;
+            font-size: 1.8rem;
             font-weight: bold;
             color: $darkeestec;
             font-family: "Century Gothic";
 
           }
         }
-        margin-bottom:15px;
-        border-bottom: 1px $darkeestec solid;
+        margin-bottom: 1.5rem;
+        border-bottom: .1rem $darkeestec solid;
         &:last-child {
-          height: 55px;
+          height: 5.5rem;
           border: none;
 
         }

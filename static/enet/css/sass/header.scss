@@ -8,24 +8,24 @@ body > header {
   flex-wrap: wrap;
   padding: 1%;
   img {
-    height: 100px;
+    height: 10.0rem;
     width: auto;
   }
   #eestec-text {
-    height: 50px;
+    height: 5.0rem;
   }
   #signin {
     td {
-      padding: 5px;
+      padding: .5rem;
     }
     input[role=button] {
       text-align: center;
-      width: 138px;
-      font-size: 16px;
-      padding: 1px;
+      width: 13.8rem;
+      font-size: 1.6rem;
+      padding: .1rem;
       color: #fff;
       font-family: "Century Gothic";
-      border-radius: 4px;
+      border-radius: .4rem;
       border: none;
       display: block;
       background-color: $darkereestec;
@@ -60,12 +60,12 @@ body > header {
     @media only screen and (max-width: 45em) /* 640 */
     {
       position: fixed;
-      top: 0px;
-      right: 0px;
-      font-size: 30px;
+      top: .0rem;
+      right: .0rem;
+      font-size: 3.0rem;
       color: #fff;
       background-color: $eestec;
-      padding: 5px;
+      padding: .5rem;
     }
     display: none;
   }
@@ -74,16 +74,16 @@ body > header {
     {
       display: none;
       position: fixed;
-      top: 0px;
-      left: 0px;
+      top: .0rem;
+      left: .0rem;
     }
     @media only screen and (min-width: 45em) /* 640 */
     {
-      height: 55px;
+      height: 5.5rem;
     }
 
-    border-bottom: 1px solid $eestec;
-    border-top: 1px solid $eestec;
+    border-bottom: .1rem solid $eestec;
+    border-top: .1rem solid $eestec;
     align-items: center;
     font-family: "Century Gothic";
     > li {
@@ -100,7 +100,7 @@ body > header {
         flex: 1;
         text-decoration: none;
         font-weight: bold;
-        font-size: 16px;
+        font-size: 1.6rem;
         height: 100%;
         &:hover {
           background-color: $eestec;
@@ -117,12 +117,12 @@ body > header {
       }
       ul /*second level list*/  {
         display: none;
-        top: 55px;
+        top: 5.5rem;
         position: absolute;
-        left: 0px;
+        left: .0rem;
         li /*second level elements*/  {
           display: block;
-          padding: 5px;
+          padding: .5rem;
           background-color: $brighteestec;
           &:hover {
             background-color: $brightereestec;
@@ -135,18 +135,18 @@ body > header {
       {
         display: none;
       }
-      flex: 1 1 200px;
+      flex: 1 1 20.0rem;
       display: flex;
       align-content: center;
       justify-content: center;
       align-items: center;
       background-color: $darkeestec;
       input {
-        height: 30px;
-        font-size: 25px;
-        padding: 3px;
+        height: 3.0rem;
+        font-size: 2.5rem;
+        padding: .3rem;
         background-color: $darkereestec;
-        border-radius: 5px;
+        border-radius: .5rem;
         border: none;
       }
     }

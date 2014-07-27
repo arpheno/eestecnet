@@ -28,12 +28,13 @@ ul li {
 html{
   background-image: url(../images/bg.jpg);
   font-family: Helvetica, Verdana sans-serif;
-  font-size:12px;
+  font-size: 10px;
   color:#555;
 }
 
 a {
   text-decoration: none;
+  color: #fff;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -42,15 +43,18 @@ h1, h2, h3, h4, h5, h6 {
   line-height:100%;
   text-align: left;
   color: $darkereestec;
-  margin: 4px;
+  margin: 0.4rem;
   padding: 0% 0% 0.5% 5%;
   flex: 1 1 100%;
-  border-bottom: 1px solid $darkeestec;
+  border-bottom: .1rem solid $darkeestec;
 }
-h1{ font-size:20px; }
+
+h1 {
+  font-size: 2.0rem;
+}
 
 h2 {
-  font-size: 18px;
+  font-size: 1.8rem;
 }
 
 h3{text-align: right;}
@@ -61,26 +65,25 @@ html > body, header, #sponsors, footer, aside, main {
 }
 
 html>body{
-  max-width: 1280px;
-  margin:0px auto;
+  max-width: 128.0rem;
+  margin: 0rem auto;
   flex-direction: row;
   flex-wrap: wrap;
   >main{
-    padding: 1px;
-    border-width: 0px 1px 0px 1px;
+    padding: .1rem;
+    border-width: .0rem 0.1rem .0rem 0.1rem;
     flex:1 1;
     z-index:2;
     border-color: #a2a0a0;
     position:relative;
     background-color:white;
     flex-wrap:wrap;
-    box-shadow:
-      0px 0px 20px 10px rgba(0,0,0,0.1),
-      -0px 0px 20px 10px rgba(0,0,0,0.1);
+    box-shadow: .0rem .0rem 2.0rem 1.0rem rgba(0, 0, 0, 0.1),
+    -.0rem .0rem 2.0rem 1.0rem rgba(0, 0, 0, 0.1);
     justify-content: center;
     section{flex:1 0 100%;}
     >form{
-      width:480px;
+      width: 48.0rem;
       display:flex;
       background-color: rgba(0,0,0,0.1);
       position:relative;
@@ -97,19 +100,19 @@ html>body{
     }
   }
   .grad {
-    height:340px;
+    height: 34.0rem;
     width:100%;
-    top:0px;
-    left:0px;
+    top: .0rem;
+    left: .0rem;
     position:absolute;
     z-index: 0;
     background:linear-gradient(to top ,rgba(0,0,0,0), rgba(0,0,0,0.04));
   }
   >aside {
     background-color:#5f6a6d;
-    border-width: 0px 57px 0px 0px;
+    border-width: .0rem 5.7rem .0rem .0rem;
     align-content: flex-start;
-    padding-top:30px;
+    padding-top: 3.0rem;
     border-style:solid;
     border-color:#3f4749;
     z-index: 1;
@@ -120,11 +123,11 @@ html>body{
       text-align: center;
       color: white;
     }
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 120.0rem) {
       flex: 1 0 100%;
     }
-    @media screen and (min-width: 1200px) {
-      flex: 0 0 253px;
+    @media screen and (min-width: 120.0rem) {
+      flex: 0 0 25.3rem;
     }
   }
 
@@ -148,14 +151,14 @@ html>body{
         align-items: center;
         justify-content: center;
         img {
-          height: 30px;
+          height: 3.0rem;
         }
         p {
           display: inline;
           font-family: "Century Gothic";
           font-weight: bold;
         }
-        height: 30px;
+        height: 3.0rem;
         width: auto;
       }
     }
@@ -170,15 +173,15 @@ html>body{
     justify-content: space-around;
     flex-wrap:wrap;
     border: red solid;
-    border-right:2px;
-    border-left: 2px;
-    padding: 10px 0px;
+    border-right: .2rem;
+    border-left: .2rem;
+    padding: 1.0rem .0rem;
     background-color:#fff;
   }
   footer{
     font-family: "Century Gothic";
     background-color:$eestecgreylight;
-    height: 130px;
+    height: 13.0rem;
     position: relative;
     flex:1 1 100%;
     div.social {
@@ -190,26 +193,26 @@ html>body{
       svg.social {
         @media only screen and (max-width: 45em) /* 640 */
         {
-          height: 50px;
-          width: 50px;
+          height: 5.0rem;
+          width: 5.0rem;
         }
-        height: 30px;
-        width: 30px;
+        height: 3.0rem;
+        width: 3.0rem;
         fill: white;
-        padding: 10px;
+        padding: 1.0rem;
         background-color: $darkeestec;
       }
       p {
         flex: 1 1 100%;
         color: #fff;
-        padding: 10px;
+        padding: 1.0rem;
       }
     }
     img {
-      height: 130px;
+      height: 13.0rem;
       position: absolute;
-      top: 0px;
-      left: 0px;
+      top: .0rem;
+      left: .0rem;
     }
     nav {
       flex: 0 1 66%;
@@ -224,22 +227,22 @@ html>body{
         display: none;
       }
       > ul {
-        padding-top: 30px;
+        padding-top: 3.0rem;
         justify-content: flex-start;
         > li {
           position: relative;
           > a {
             text-decoration: none;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 1.6rem;
             height: 100%;
           }
           ul /*second level list*/   {
-            top: 20px;
+            top: 2.0rem;
             position: absolute;
             display: block;
-            left: 0px;
-            right: 0px;
+            left: .0rem;
+            right: .0rem;
           }
         }
       }
@@ -255,13 +258,13 @@ html>body{
 
 .messages {
   flex: 1 1 100%;
-  padding: 30px;
+  padding: 3.0rem;
   background-color: rgba(lightblue, 0.5);
   font-weight: bold;
-  font-size: 18px;
+  font-size: 1.8rem;
 }
 
 .ui-button {
-  height: 30px;
+  height: 3.0rem;
   flex: 1 1 100%;
 }
