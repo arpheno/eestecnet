@@ -105,7 +105,7 @@ h2 {
 }
 
 h3 {
-    text-align: right;
+    font-size: 1.6rem;
 }
 
 html > body, header, #sponsors, footer, aside, main {
@@ -584,14 +584,14 @@ ul.figure {
     justify-content: center;
 }
 
-ul.figure a {
+a.figure {
     margin: 1px;
     text-decoration: none;
     background-color: #354040;
     padding: 2px;
 }
 
-ul.figure a figure {
+a.figure figure {
     flex: 1 100%;
     position: relative;
     display: flex;
@@ -600,14 +600,14 @@ ul.figure a figure {
     transition: all .25s;
 }
 
-ul.figure a figure img {
+a.figure figure img {
     margin: 1px;
     position: absolute;
     top: 0px;
     left: 0px;
 }
 
-ul.figure a figure figcaption {
+a.figure figure figcaption {
     opacity: 0.9;
     flex: 1 1 100%;
     text-align: center;
@@ -620,16 +620,16 @@ ul.figure a figure figcaption {
     transition: all .5s;
 }
 
-ul.figure a figure:hover {
+a.figure figure:hover {
     z-index: 10;
     transform: scale(1.2);
 }
 
-ul.figure a figure:hover figcaption {
+a.figure figure:hover figcaption {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-ul.figure a .comment {
+a.figure .comment {
     font-size: 12px;
     line-height: 100%;
     color: #ffffff;
@@ -723,8 +723,9 @@ section.events {
     margin: 3px;
 }
 
-figure.eestecer {
+a.eestecer {
     width: 10.0rem;
+    height: 10.0rem;
 }
 
 article.eestecer .details {

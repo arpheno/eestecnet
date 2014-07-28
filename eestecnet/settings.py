@@ -31,6 +31,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'haystack',
     'events',
     'teams',
     'gmapi',
@@ -52,6 +53,13 @@ EMAIL_HOST_USER = 'eestecnet@gmail.com'
 EMAIL_HOST_PASSWORD = 'eeStec4ever'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
@@ -64,6 +72,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'eestecnet.context_processors.random_event_processor',
     'eestecnet.context_processors.login_processor',
     'eestecnet.context_processors.date_now',
+    'eestecnet.context_processors.my_search',
 )
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

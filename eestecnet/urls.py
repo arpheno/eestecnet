@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.views.generic import ListView, DetailView, TemplateView
+from haystack.forms import SearchForm
+from haystack.views import SearchView
 
 from account.views import EestecerProfile, EestecerUpdate, EestecerCreate, \
     Login, Logout, EestecerList, complete
@@ -35,6 +37,7 @@ urlpatterns = patterns(
     url(r'^logout/', Logout.as_view(), name='logout'),
     url(r'^register/', EestecerCreate.as_view(), name='register'),
     url(r'^admin', include(admin.site.urls)),
+    url(r'^search/', SearchView(form_class=SearchForm)),
     url(r'^mail-queue/$', include('mailqueue.urls')),
     url(r'^newsletter/$', newsletter, name='newsletter'),
     url(r'^materials/', include('elfinder.urls')),
