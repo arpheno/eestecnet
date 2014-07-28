@@ -5,9 +5,7 @@
         <h3>Results</h3>
 
         {% for result in page.object_list %}
-            <p>
-                {{ result.object.as_html }}
-            </p>
+            {{ result.object.as_html }}
         {% empty %}
             <p>No results found.</p>
         {% endfor %}

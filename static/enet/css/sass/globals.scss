@@ -125,10 +125,10 @@ html>body{
       text-align: center;
       color: white;
     }
-    @media screen and (max-width: 100.0rem) {
+    @media screen and (max-width: 1200px) {
       flex: 1 0 100%;
     }
-    @media screen and (min-width: 100.0rem) {
+    @media screen and (min-width: 1200px) {
       flex: 0 0 25.3rem;
     }
   }
@@ -167,7 +167,8 @@ html>body{
     p {
       @media only screen and (max-width: 45em) /* 640 */
       {
-        display: inline-block;
+        display: inline;
+        color: #000;
       }
       display: none;
     }

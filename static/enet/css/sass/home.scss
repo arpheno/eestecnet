@@ -80,7 +80,7 @@ main.home{
       padding: 5.0rem;
     }
     background-color: $eestecgreylight;
-    @media screen and (max-width: 100.0rem) {
+    @media screen and (max-width: 1000px) {
       flex:1 1 100%;
     }
   }
@@ -89,7 +89,7 @@ main.home{
     height: 48.0rem;
     position:relative;
 
-    @media screen and (max-width: 100.0rem) {
+    @media screen and (max-width: 1000px) {
       flex: 1 1 100%;
     }
     >h1,h2{

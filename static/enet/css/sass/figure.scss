@@ -6,10 +6,14 @@ a.figure {
   margin: 1px;
     text-decoration: none;
     background-color: #354040;
-    padding: 2px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
 
-    figure {
-      flex: 1 100%;
+  figure {
+    margin: 2px;
+    flex: 1 100%;
       position: relative;
       display: flex;
       justify-content: center;

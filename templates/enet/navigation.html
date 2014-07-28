@@ -47,8 +47,7 @@
         {% endif %}
         <li>
             <form action="/search/" method="get">
-                {{ mysearchform.as_p }}
-                <input type="submit" value="Search"/>
+                {{ mysearchform.q }}
             </form>
         </li>
     </ul>

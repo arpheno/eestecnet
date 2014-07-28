@@ -189,13 +189,13 @@ html > body > aside h2 {
     color: white;
 }
 
-@media screen and (max-width: 100rem) {
+@media screen and (max-width: 1200px) {
     html > body > aside {
         flex: 1 0 100%;
     }
 }
 
-@media screen and (min-width: 100rem) {
+@media screen and (min-width: 1200px) {
     html > body > aside {
         flex: 0 0 25.3rem;
     }
@@ -252,7 +252,8 @@ html > body #sponsors p {
 
 @media only screen and (max-width: 45em) {
     html > body #sponsors p {
-        display: inline-block;
+        display: inline;
+        color: #000;
     }
 }
 
@@ -397,8 +398,27 @@ body > header #signin input[role=button] {
     background-color: #9a0008;
 }
 
+@media only screen and (max-width: 45em) {
+    body > header #userarea {
+        width: 4rem;
+        position: fixed;
+        top: 0px;
+        right: 4.5rem;
+        height: 4rem;
+    }
+
+    body > header #userarea figure, body > header #userarea a, body > header #userarea img {
+        background-color: #fff;
+        width: 4rem;
+        height: 4rem;
+    }
+
+    body > header #userarea figcaption {
+        display: none;
+    }
+}
+
 #nav {
-    align-self: center;
     flex: 1 1 100%;
     z-index: 10;
 }
@@ -462,6 +482,11 @@ body > header #signin input[role=button] {
 #nav > ul > li {
     background-color: #c30811;
     position: relative;
+    flex: 1;
+}
+
+#nav > ul > li:last-child {
+    flex: 2;
 }
 
 @media only screen and (max-width: 45em) {
@@ -513,12 +538,13 @@ body > header #signin input[role=button] {
 }
 
 #nav > ul form {
-    flex: 1 1 20.0rem;
+    flex: 2 1 20.0rem;
     display: flex;
     align-content: center;
     justify-content: center;
     align-items: center;
     background-color: #c30811;
+    margin: 30px;
 }
 
 @media only screen and (max-width: 45em) {
@@ -588,10 +614,14 @@ a.figure {
     margin: 1px;
     text-decoration: none;
     background-color: #354040;
-    padding: 2px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 
 a.figure figure {
+    margin: 2px;
     flex: 1 100%;
     position: relative;
     display: flex;
@@ -831,7 +861,7 @@ main.home nav img {
     padding: 5.0rem;
 }
 
-@media screen and (max-width: 100rem) {
+@media screen and (max-width: 1000px) {
     main.home nav {
         flex: 1 1 100%;
     }
@@ -843,7 +873,7 @@ main.home #preview {
     position: relative;
 }
 
-@media screen and (max-width: 100rem) {
+@media screen and (max-width: 1000px) {
     main.home #preview {
         flex: 1 1 100%;
     }
