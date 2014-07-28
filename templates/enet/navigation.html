@@ -42,7 +42,7 @@
         </li>
         {% if user.is_authenticated %}
             <li>
-                <a href="/materials">Files</a>
+                <a href="{% url 'materials' %}">Files</a>
             </li>
         {% endif %}
         <li>
