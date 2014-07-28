@@ -611,17 +611,17 @@ ul.figure {
 }
 
 a.figure {
+    padding: 2px;
     margin: 1px;
     text-decoration: none;
     background-color: #354040;
     display: flex;
+    flex-wrap: wrap;
     align-content: center;
-    justify-content: center;
     align-items: center;
 }
 
 a.figure figure {
-    margin: 2px;
     flex: 1 100%;
     position: relative;
     display: flex;
@@ -631,7 +631,6 @@ a.figure figure {
 }
 
 a.figure figure img {
-    margin: 1px;
     position: absolute;
     top: 0px;
     left: 0px;
@@ -741,10 +740,10 @@ section.members {
 }
 
 a.event {
-    width: 151;
+    width: 151px;
 }
 
-a.event figure {
+a.event figure, a.event img {
     width: 151px;
     height: 111px;
 }
