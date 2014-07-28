@@ -65,7 +65,7 @@ ul li {
     padding: 0;
     line-height: normal;
     zoom: 1;
-    flex: 1;
+    flex: 1 1 1;
     height: 100%;
     display: flex;
     align-items: center;
@@ -617,8 +617,6 @@ a.figure {
     background-color: #354040;
     display: flex;
     flex-wrap: wrap;
-    align-content: center;
-    align-items: center;
 }
 
 a.figure figure {
