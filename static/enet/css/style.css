@@ -118,6 +118,7 @@ html > body {
     margin: 0rem auto;
     flex-direction: row;
     flex-wrap: wrap;
+    font-size: 1.2rem;
 }
 
 html > body > main {
@@ -564,6 +565,7 @@ body > header #signin input[role=button] {
     top: 5.5rem;
     position: absolute;
     left: .0rem;
+    right: .0rem;
 }
 
 #nav > ul > li ul li {
@@ -875,6 +877,7 @@ main.home #donate .wrapper a {
 
 main.home #newsletter {
     flex: 1 0 45%;
+    font-family: "Century Gothic";
     min-height: 10.0rem;
     position: relative;
 }
@@ -890,6 +893,7 @@ main.home #newsletter {
 }
 
 main.home #newsletter form {
+    font-family: "Century Gothic";
     text-align: center;
     padding: 3.0rem .0rem;
     width: 45.0rem;
@@ -908,6 +912,7 @@ main.home #newsletter form {
     }
 
     main.home #newsletter form input {
+        font-family: "Century Gothic";
         flex: 1;
     }
 }
@@ -915,6 +920,7 @@ main.home #newsletter form {
 main.home #newsletter form input.submit {
     border: none;
     background-color: #c30811;
+    font-family: "Century Gothic";
     color: white;
     font-size: 1.6rem;
     text-decoration: none;

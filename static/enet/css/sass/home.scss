@@ -60,6 +60,7 @@ main.home{
   }
   #newsletter{
     flex:1 0 45%;
+    font-family: "Century Gothic";
     min-height: 10.0rem;
     position:relative;
     @media (max-width: 1000px) {
@@ -70,6 +71,7 @@ main.home{
       padding: 10px;
     }
     form{
+      font-family: "Century Gothic";
       text-align: center;
       padding: 3.0rem .0rem;
       width: 45.0rem;
@@ -80,6 +82,7 @@ main.home{
         position: initial;
         display: flex;
         input {
+          font-family: "Century Gothic";
           flex: 1;
         }
       }
@@ -89,6 +92,7 @@ main.home{
       input.submit{
         border:none;
         background-color: $darkeestec;
+        font-family: "Century Gothic";
         color:white;
         font-size: 1.6rem;
         text-decoration: none;
