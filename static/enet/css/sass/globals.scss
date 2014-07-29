@@ -144,6 +144,40 @@ html>body{
     }
   }
 
+  .contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      flex: initial;
+      align-self: flex-start;
+      width: 100%;
+    }
+    p {
+      font-size: 1.6rem;
+    }
+    address {
+      padding: 10px;
+    }
+    table {
+      tr {
+        td {
+          padding: 5px;
+          &:first-child {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: $darkeestec;
+            font-family: "Century Gothic";
+          }
+          &:last-child {
+            font-size: 1.8rem;
+            border: none;
+          }
+        }
+      }
+    }
+  }
   #sponsors{
     a {
       @media only screen and (max-width: 45em) /* 640 */

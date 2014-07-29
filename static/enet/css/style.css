@@ -214,6 +214,43 @@ html > body td:last-child {
     text-align: right;
 }
 
+html > body .contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+html > body .contact h1 {
+    flex: initial;
+    align-self: flex-start;
+    width: 100%;
+}
+
+html > body .contact p {
+    font-size: 1.6rem;
+}
+
+html > body .contact address {
+    padding: 10px;
+}
+
+html > body .contact table tr td {
+    padding: 5px;
+}
+
+html > body .contact table tr td:first-child {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #c30811;
+    font-family: "Century Gothic";
+}
+
+html > body .contact table tr td:last-child {
+    font-size: 1.8rem;
+    border: none;
+}
+
 html > body #sponsors {
     flex: 1 0 100%;
     justify-content: space-around;

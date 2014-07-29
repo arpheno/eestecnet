@@ -1,18 +1,42 @@
-<div class="post">
-    <h1 class="post_title">Contact</h1>
-    <ul class="post_info">
-    <div class="post_content">
-        <p>Interested in our Soft Skills trainings?</p> 
-        <p>Please don't hesitate to contact the eestec Training Team if you would like to request trainings for your organization!<br>
-        Also have a look at the materials section. You can find information on what we offer.<br>
-        We hope to hear from you soon</p>
-        <p>Interested in joining the Training team?</p> 
-        <p>The training team is always looking for eestec members who are willing to go beyond and who would like to commit themselves to the cause of educating people and sharing their knowledge. <br>
-        If you are interested in joining the training team, you can find more information in the Materials section.</p> 
-        <p>Having trouble with the website?</p> 
-        <p>The training team constantly strives for improvement and every feedback on this trt will help us. Please don't hesitate to report anything that doesn't work as you think it should.<br>
-        If you have an idea how to make this trt even better, please let us know!</p> 
-        <p>Training Team Coordinator: trainings-coordinator@eestec.net</p>
-        <p>Plaform Coordinator: s.s.wozny@gmail.com</p>
-    </div>
-</div>
+{% extends 'enet/split.html' %}
+{% block main %}
+    <section class="contact">
+        <h1>Contact information: </h1>
+        <table>
+            <tr>
+                <td>Interested in becoming a member of EESTEC?</td>
+                <td>vc-ea[at]eestec[dot]net</td>
+            </tr>
+
+            <tr>
+                <td>Interested in becoming our projects’ partner?</td>
+                <td>chairwoman[at]eestec[dot]net</td>
+            </tr>
+            <tr>
+                <td>Interested in sponsorship?</td>
+                <td>treasurer[at]eestec[dot]net</td>
+            </tr>
+            <tr>
+                <td>Interested in our Soft Skills Trainings?</td>
+                <td>trainings-coordinator[at]eestec[dot]net</td>
+            </tr>
+            <tr>
+                <td>Technical questions or problems with this page?</td>
+                <td>it-coordinator[at]eestec[dot]net</td>
+            </tr>
+        </table>
+
+        <h1>Postal Address</h1>
+        <address>
+            <p>EESTEC International</p>
+
+            <p> Electrical Engineering STudents' European assoCiation</p>
+
+            <p>Mekelweg 4, 2628 CD Delft, The Netherlands</p>
+
+            <p>web: eestec.net</p>
+
+            <p>email: board@eestec.net</p>
+        </address>
+    </section>
+{% endblock %}
