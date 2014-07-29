@@ -1,22 +1,19 @@
-{% for entry in object_list %}
-<article>
-    <h2>{{ entry.headline }}</h2>
+{% extends 'enet/split.html' %}
+{% load thumbnail %}
+{% block main %}
+    {% for entry in object_list %}
+        <section class="news">
+            <h1>{{ entry.headline }}</h1>
 
-    <ul>
-        <li>{{ entry.pub_date }}</li>
-    </ul>
-
-    <p class="post_content">{{ entry.content }}</p>
-
-    <div class="post_meta">
-        <div class="post_meta">
-            <ul class="clearfix">
-                <li class="post_category">Published in <a href="#" rel=
-                        "category tag" title="View all posts in News">News</a>,
-                    <a href="#" rel="category tag" title=
-                        "View all posts in TrainingTeam">Training Team</a></li>
+            <ul>
+                <li>{{ entry.pub_date }}</li>
             </ul>
-        </div>
-    </div>
-</article>
-{% endfor %}
+            {% thumbnail entry.entry_image "200x200" crop="center" as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+            {% endthumbnail %}
+
+            <p class="post_content">{{ entry.content }}</p>
+
+        </section>
+    {% endfor %}
+{% endblock %}

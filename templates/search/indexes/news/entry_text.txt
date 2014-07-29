@@ -1,0 +1,5 @@
+{{object.headline}}
+{{object.content}}
+{% for author in object.author.all%}
+{{author}}
+{% endfor %}

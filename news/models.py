@@ -2,6 +2,7 @@ from autoslug import AutoSlugField
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.template.loader import render_to_string
 
 
 class Membership(models.Model):
@@ -43,6 +44,10 @@ class Entry(models.Model):
     """ The publication date"""
     entry_image = models.ImageField(upload_to="entryimages")
     """ Optionally, an image to add"""
+
+    def as_html(self):
+        return render_to_string('news/entry.html', {'object': self})
+
     def __unicode__(self):
         return self.headline
     def clean(self):

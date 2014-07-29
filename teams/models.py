@@ -55,6 +55,9 @@ class Team(models.Model):
         result = self.users.filter(membership__privileged=True)
         return result
 
+    def as_html(self):
+        return render_to_string('teams/team.html', {'object': self})
+
     def as_url(self):
         if self.is_lc():
             return reverse('cities:detail', kwargs={'slug': self.slug})

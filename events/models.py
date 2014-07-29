@@ -4,7 +4,9 @@ import sha
 from autoslug import AutoSlugField
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
+from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
+
 
 
 
@@ -95,6 +97,9 @@ class Event(models.Model):
     """ Optional: This is a field where the participants report can be stored and accessed."""
     organizer_report = models.TextField(blank=True, null=True)
     """ Optional: This is a field where the organizers report can be stored and accessed."""
+
+    def as_html(self):
+        return render_to_string('events/event.html', {'object': self})
 
     def clean(self):
         if self.end_date:
