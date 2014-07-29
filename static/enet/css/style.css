@@ -264,7 +264,7 @@ html > body #sponsors {
 
 @media only screen and (max-width: 45em) {
     html > body #sponsors a {
-        flex: 1 1 100%;
+        flex: 1 1 40%;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -277,6 +277,8 @@ html > body #sponsors {
     }
 
     html > body #sponsors a p {
+        color: #465052;
+        font-size: 2rem;
         display: inline;
         font-family: "Century Gothic";
         font-weight: bold;
@@ -806,6 +808,12 @@ main.home {
     max-width: 128.0rem;
 }
 
+@media (max-width: 1000px) {
+    main.home {
+        padding: 10px;
+    }
+}
+
 main.home h1 {
     color: #fff;
     text-align: center;
@@ -824,20 +832,35 @@ main.home p {
 }
 
 main.home #donate {
+    font-family: "Century Gothic";
     flex: 1 0 45%;
     min-height: 10.0rem;
 }
 
-@media (max-width: 120rem) {
+@media (max-width: 1000px) {
     main.home #donate {
         order: 3;
+        flex: 1 1 100%;
+        min-height: 0;
+        padding: 10px;
     }
 }
 
 main.home #donate .wrapper {
+    flex: 1 1 100%;
+    width: initial;
+    padding: initial;
     text-align: center;
     padding: 3.0rem;
     width: 15.0rem;
+}
+
+@media (max-width: 1000px) {
+    main.home #donate .wrapper {
+        flex: 1 1 100%;
+        width: initial;
+        padding: initial;
+    }
 }
 
 main.home #donate .wrapper a {
@@ -856,9 +879,13 @@ main.home #newsletter {
     position: relative;
 }
 
-@media (max-width: 120rem) {
+@media (max-width: 1000px) {
     main.home #newsletter {
         order: 4;
+        flex: 1 1 100%;
+        width: initial;
+        min-height: 0;
+        padding: 10px;
     }
 }
 
@@ -869,6 +896,20 @@ main.home #newsletter form {
     position: absolute;
     right: .0rem;
     bottom: .0rem;
+}
+
+@media (max-width: 1000px) {
+    main.home #newsletter form {
+        flex: 1 1 100%;
+        width: initial;
+        padding: initial;
+        position: initial;
+        display: flex;
+    }
+
+    main.home #newsletter form input {
+        flex: 1;
+    }
 }
 
 main.home #newsletter form input.submit {
@@ -883,21 +924,30 @@ main.home #newsletter form input.submit {
 
 main.home nav {
     flex: 1 1 15%;
+    color: white;
     min-height: 10.0rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.3rem;
+    font-family: "Century Gothic";
     background-color: #465052;
 }
 
-main.home nav img {
-    padding: 5.0rem;
+main.home nav p {
+    display: flex;
+    text-align: justify;
+    padding: 15px;
+}
+
+main.home nav h1 {
+    flex: initial;
 }
 
 @media screen and (max-width: 1000px) {
     main.home nav {
         flex: 1 1 100%;
+        margin: 10px;
     }
 }
 
@@ -910,6 +960,7 @@ main.home #preview {
 @media screen and (max-width: 1000px) {
     main.home #preview {
         flex: 1 1 100%;
+        height: initial;
     }
 }
 
@@ -930,8 +981,15 @@ main.home #preview footer {
     display: flex;
     height: 8.0rem;
     overflow: hidden;
+    width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
+}
+
+@media screen and (max-width: 1000px) {
+    main.home #preview footer {
+        height: initial;
+    }
 }
 
 main.home #preview footer h1, main.home #preview footer h2 {
@@ -939,6 +997,12 @@ main.home #preview footer h1, main.home #preview footer h2 {
     border-bottom: .1rem solid #fff;
     margin-bottom: .3rem;
     padding-bottom: .3rem;
+}
+
+@media screen and (max-width: 1000px) {
+    main.home #preview footer p {
+        display: none;
+    }
 }
 
 main.home #preview footer main {
@@ -953,6 +1017,12 @@ main.home #preview footer aside {
     margin: 1.0rem;
     padding: .5rem;
     display: inline;
+}
+
+@media screen and (max-width: 1000px) {
+    main.home #preview footer aside {
+        display: none;
+    }
 }
 
 main.home #preview footer aside h2 {
@@ -973,6 +1043,12 @@ main.home #preview img, main.home #preview .pictures, main.home #preview #news {
     position: relative;
     width: 100%;
     height: 48.0rem;
+}
+
+@media screen and (max-width: 1000px) {
+    main.home #preview img, main.home #preview .pictures, main.home #preview #news {
+        height: initial;
+    }
 }
 
 section.news {

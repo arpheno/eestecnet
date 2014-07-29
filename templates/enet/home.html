@@ -4,7 +4,7 @@
 {% block content %}
     <main class="home">
         <div id="donate">
-            <div class="wrapper">Like our Idea? <a href="#">DONATE !</a></div>
+            <div class="wrapper"><p>Like our Idea?</p> <a href="#">DONATE !</a></div>
         </div>
         <div id="newsletter">
             <form action="{% url 'newsletter' %}" method="POST">{% csrf_token %}<input
@@ -14,15 +14,17 @@
         </div>
         </div>
         <nav>
-            <h1>Are you a?</h1>
-            <a href="/students">
-                <img src="{% static 'enet/images/student.jpg' %}" width="95px"
-                     height="95px">
-            </a>
-            <a href="/companies">
-                <img src="{% static 'enet/images/company.jpg' %}" width="95px"
-                     height="95px">
-            </a>
+            <h1>About Us</h1>
+
+            <p>Electrical Engineering Students' European Association is an apolitical,
+                non-governmental and non-profit organization which targets and trains
+                through i's activities students from electrical profile Universities,
+                Institutes and Technical Schools in Europe. </p>
+            <hr>
+            <p>The association was founded in The Netherlands, in 1986. Nowadays, EESTEC
+                is present in 28 countries and 53 universities across Europe with over
+                6000 members of whom 3000 are currently active, and indirectly, EESTEC is
+                addressing all students in the faculties that EESTEC exists.</p>
         </nav>
         <div id="preview" class="cycle-slideshow" data-cycle-slides="li">
             {% for object in object_list %}
