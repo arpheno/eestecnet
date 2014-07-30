@@ -85,7 +85,7 @@ body > header {
       right: .0rem;
       font-size: 3.0rem;
       color: #fff;
-      background-color: $darkeestec;
+      background-color: $eestec;
       padding: .5rem;
     }
     display: none;
@@ -114,6 +114,13 @@ body > header {
       }
       @media only screen and (max-width: 45em) /* 640 */
       {
+        &:first-child {
+          > a {
+            display: block;
+            background-color: $eestec;
+            border-bottom: 3px white solid;
+          }
+        }
         width: 100%;
       }
       background-color: $darkeestec;
@@ -123,6 +130,7 @@ body > header {
         @media only screen and (max-width: 45em) /* 640 */
         {
           padding: 11px;
+          justify-content: flex-start;
           border-bottom: 1px white solid;
         }
         display: flex;

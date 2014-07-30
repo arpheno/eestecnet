@@ -498,7 +498,7 @@ body > header #signin input[role=button] {
         right: .0rem;
         font-size: 3.0rem;
         color: #fff;
-        background-color: #c30811;
+        background-color: #ee1f29;
         padding: .5rem;
     }
 }
@@ -540,6 +540,12 @@ body > header #signin input[role=button] {
     #nav > ul > li {
         width: 100%;
     }
+
+    #nav > ul > li:first-child > a {
+        display: block;
+        background-color: #ee1f29;
+        border-bottom: 3px white solid;
+    }
 }
 
 #nav > ul > li > a {
@@ -556,6 +562,7 @@ body > header #signin input[role=button] {
 @media only screen and (max-width: 45em) {
     #nav > ul > li > a {
         padding: 11px;
+        justify-content: flex-start;
         border-bottom: 1px white solid;
     }
 }
