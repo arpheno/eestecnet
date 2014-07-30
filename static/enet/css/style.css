@@ -441,6 +441,7 @@ body > header #signin input[role=button] {
 @media only screen and (max-width: 45em) {
     body > header #userarea {
         width: 4rem;
+        z-index: 100;
         position: fixed;
         top: 0px;
         right: 4.5rem;
@@ -465,9 +466,14 @@ body > header #signin input[role=button] {
 
 #nav a {
     color: #fff;
+    z-index: 100;
 }
 
 @media only screen and (max-width: 45em) {
+    #nav {
+        order: -1;
+    }
+
     #nav:not(:target) > a:first-of-type, #nav:target > a:last-of-type {
         display: block;
     }
@@ -492,7 +498,7 @@ body > header #signin input[role=button] {
         right: .0rem;
         font-size: 3.0rem;
         color: #fff;
-        background-color: #ee1f29;
+        background-color: #c30811;
         padding: .5rem;
     }
 }
@@ -508,8 +514,9 @@ body > header #signin input[role=button] {
     #nav > ul {
         display: none;
         position: fixed;
-        top: .0rem;
+        top: 0rem;
         left: .0rem;
+        right: 0px;
     }
 }
 
@@ -544,6 +551,13 @@ body > header #signin input[role=button] {
     font-weight: bold;
     font-size: 1.6rem;
     height: 100%;
+}
+
+@media only screen and (max-width: 45em) {
+    #nav > ul > li > a {
+        padding: 11px;
+        border-bottom: 1px white solid;
+    }
 }
 
 #nav > ul > li > a:hover {

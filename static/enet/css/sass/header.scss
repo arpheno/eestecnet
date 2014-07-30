@@ -35,6 +35,7 @@ body > header {
     @media only screen and (max-width: 45em) /* 640 */
     {
       width: 4rem;
+      z-index: 100;
       position: fixed;
       top: 0px;
       right: 4.5rem;
@@ -57,10 +58,12 @@ body > header {
   z-index: 10;
   a {
     color: #fff;
+    z-index: 100;
   }
 
   @media only screen and (max-width: 45em) /* 640 */
   {
+    order: -1;
     &:not( :target ) > a:first-of-type,
     &:target > a:last-of-type {
       display: block;
@@ -82,7 +85,7 @@ body > header {
       right: .0rem;
       font-size: 3.0rem;
       color: #fff;
-      background-color: $eestec;
+      background-color: $darkeestec;
       padding: .5rem;
     }
     display: none;
@@ -92,8 +95,9 @@ body > header {
     {
       display: none;
       position: fixed;
-      top: .0rem;
+      top: 0rem;
       left: .0rem;
+      right: 0px;
     }
     @media only screen and (min-width: 45em) /* 640 */
     {
@@ -116,6 +120,11 @@ body > header {
       position: relative;
       flex: 1;
       > a {
+        @media only screen and (max-width: 45em) /* 640 */
+        {
+          padding: 11px;
+          border-bottom: 1px white solid;
+        }
         display: flex;
         align-items: center;
         justify-content: center;
