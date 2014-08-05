@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+from __future__ import absolute_import
 from datetime import timedelta
 
 from django.contrib.auth.models import Group, Permission
@@ -376,3 +377,8 @@ def create_local_admins():
         'change_team']:
         admins.permissions.add(Permission.objects.get(codename=perm))
         admins.save()
+
+
+# This will make sure the app is always imported when
+# Django starts so that shared_task will use this app.
+from .celery import app as celery_app

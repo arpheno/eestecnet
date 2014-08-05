@@ -35,9 +35,11 @@ INSTALLED_APPS = (
     'events',
     'teams',
     'gmapi',
+    'kombu.transport.django',
+    'djcelery',
+    'mailqueue',
     'news',
     'elfinder',
-    'mailqueue',
     'account',
     'pages',
     'gunicorn',
@@ -52,6 +54,9 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'eestecnet@gmail.com'
 EMAIL_HOST_PASSWORD = 'eeStec4ever'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+MAILQUEUE_CELERY = True
+BROKER_URL = 'django://'
 
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 HAYSTACK_CONNECTIONS = {
