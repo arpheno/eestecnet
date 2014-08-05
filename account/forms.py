@@ -1,7 +1,7 @@
 import random
 import string
+
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from django.core.mail import send_mail
 from mailqueue.models import MailerMessage
 
 
@@ -28,7 +28,8 @@ class EestecerCreationForm(UserCreationForm):
         user.activation_link=id_generator(30)
         message=MailerMessage()
         message.subject = "Registration"
-        message.content= "Register at eestecnet!\nGo to\n http://test.eestec.net/complete/"+user.activation_link
+        message.content = "Register at eestecnet!\nGo to\n http://test.eestec" \
+                          ".net/complete/" + user.activation_link + "/"
         message.from_address="eestecnet@gmail.com",
         message.to_address = user.email
         message.save()
