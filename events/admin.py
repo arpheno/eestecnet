@@ -19,21 +19,11 @@ class ApplicationInline(admin.TabularInline):
     def gender(self,instance):
         return self.instace.applicant.gender
 
-class ParticipantInline(admin.TabularInline):
-    model = Event.participants.through
-    readonly_fields = ['e_mail', 'food', 't_shirt_size','confirmed']
-    fields = ['e_mail', 'food', 't_shirt_size','confirmed']
-    ordering = ['-confirmed']
-    verbose_name_plural = "Participants"
-    def e_mail(self, instance):
-        return instance.participant.email
-    def food(self, instance):
-        return instance.participant.food_preferences
-    def t_shirt_size(self, instance):
-        return instance.participant.tshirt_size
 
-    def has_add_permission(self, request):
-        return False
+class ParticipationInline(admin.TabularInline):
+    model = Participation
+    verbose_name_plural = "Participants"
+
 
 class ImageInline(admin.TabularInline):
     model=EventImage
@@ -49,7 +39,7 @@ class MyEventAdmin(admin.ModelAdmin):
     """ Custom interface to administrate Events from the django admin interface. """
     form = MyEventAdminForm
     list_display = ['OC','name']
-    inlines = [ImageInline]
+    inlines = [ImageInline, ParticipationInline]
     """ Inline interface for displaying the applications to an event and making it possible to accept them"""
     exclude = ['participants',"participant_count"]
     fieldsets = (

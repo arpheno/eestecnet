@@ -21,6 +21,8 @@ urlpatterns = patterns(
     url(r'^news/$', ListView.as_view(model=Entry), name='news'),
     url(r'^androidcompetition/$',
         TemplateView.as_view(template_name='android/home.html')),
+    url(r'^conference/$',
+        TemplateView.as_view(template_name='conference/home.html')),
     url(r'^news/(?P<slug>[-_\w]+)/$', DetailView.as_view(model=Entry),
         name='news'),
     url(r'^events/', include('events.urls')),
