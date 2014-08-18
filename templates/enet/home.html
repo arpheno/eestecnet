@@ -36,11 +36,10 @@
                     </div>
                     <footer>
                         <main>
-                            <a href="{% url 'news' object.slug %}">
                                 <h1>{{ object.headline }}</h1>
 
-                                <p>{{ object.content }}</p>
-                            </a>
+                            <p>{{ object.content|truncatewords:50 }}
+                                <a href="{% url 'news' object.slug %}">Read more</a></p>
                         </main>
                         <aside>
                             <h2>Other top Stories:</h2>
