@@ -15,6 +15,11 @@
 @import "news.scss";
 @import "datetimepicker.scss";
 
+@font-face {
+  font-family: "helvetica neue"; /*'Helvetica Neue Pro lite'*/
+  src: url("../HelveticaNeueLTPro-Lt.otf");
+}
+
 a {
   text-decoration: none;
 }
