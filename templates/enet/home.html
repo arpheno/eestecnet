@@ -39,7 +39,8 @@
                                 <h1>{{ object.headline }}</h1>
 
                             <p>{{ object.content|truncatewords:50 }}
-                                <a href="{% url 'news' object.slug %}">Read more</a></p>
+                                <a href="{% url 'news' object.slug %}"
+                                   style="font-weight: bold;"> Read more</a></p>
                         </main>
                         <aside>
                             <h2>Other top Stories:</h2>
