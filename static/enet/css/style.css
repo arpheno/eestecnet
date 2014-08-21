@@ -856,7 +856,7 @@ main.home h1 {
 }
 
 main.home p {
-    padding: .5rem;
+    padding: 0.1rem .5rem;
 }
 
 main.home #donate {
@@ -960,20 +960,34 @@ main.home nav {
     min-height: 10.0rem;
     position: relative;
     display: flex;
+    align-items: center;
     flex-direction: column;
     font-size: 1.3rem;
-    font-family: "Century Gothic";
     background-color: #465052;
 }
 
 main.home nav p {
     display: flex;
     text-align: justify;
-    padding: 15px;
+    padding: 10px;
+}
+
+@media screen and (min-width: 1200px) {
+    main.home nav p {
+        flex: 1 1 100%;
+        padding: 20px;
+    }
 }
 
 main.home nav h1 {
     flex: initial;
+    width: 93%;
+}
+
+@media screen and (max-width: 1000px) {
+    main.home nav h1 {
+        width: 99%;
+    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -984,7 +998,7 @@ main.home nav h1 {
 }
 
 main.home #preview {
-    flex: 1 0 85%;
+    flex: 1 1 85%;
     height: 48.0rem;
     position: relative;
 }
@@ -1011,7 +1025,7 @@ main.home #preview footer {
     bottom: .0rem;
     right: .0rem;
     display: flex;
-    height: 8.0rem;
+    height: 20%;
     overflow: hidden;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
@@ -1040,11 +1054,10 @@ main.home #preview footer h1, main.home #preview footer h2 {
 main.home #preview footer main {
     flex: 1 1 50%%;
     display: flex;
-    flex-direction: column;
 }
 
 main.home #preview footer aside {
-    flex: 1 1 30%;
+    flex: 1 1 20%;
     background-color: rgba(195, 8, 17, 0.75);
     margin: 1.0rem;
     padding: .2rem;
