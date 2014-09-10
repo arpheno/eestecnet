@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from teams.models import Team, MemberImage
+from teams.models import Team, MemberImage, Board
 from news.models import Membership
 
 
@@ -55,3 +55,4 @@ class MyMemberAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Team, MyMemberAdmin)
+admin.site.register(Board)

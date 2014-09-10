@@ -118,6 +118,16 @@ class Team(models.Model):
             return 0
 
 
+class Board(models.Model):
+    year = models.PositiveIntegerField()
+    treasurer = models.OneToOneField("account.Eestecer",
+                                     related_name="treasurer_in_board")
+    vcia = models.OneToOneField("account.Eestecer", related_name="ia_in_board")
+    vcea = models.OneToOneField("account.Eestecer", related_name="ea_in_board")
+    vcpa = models.OneToOneField("account.Eestecer", related_name="pa_in_board")
+    cp = models.OneToOneField("account.Eestecer", related_name="cp_in_board")
+
+
 class MemberImage(models.Model):
     """ Helper class used to associate an arbitrary number of images with a
     :class:`Member` """

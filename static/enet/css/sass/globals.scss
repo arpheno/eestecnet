@@ -42,7 +42,7 @@ a {
   color: #fff;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3 {
   font-family: 'Century Gothic';
   font-weight: bold;
   line-height:100%;
@@ -52,6 +52,15 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0% 0% 0.5% 5%;
   flex: 1 1 100%;
   border-bottom: 1px solid $darkeestec;
+}
+
+h4, h5, h6 {
+  font-family: 'Century Gothic';
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.6rem;
+
 }
 
 h1 {
@@ -70,10 +79,6 @@ body, header, #sponsors, footer, aside, main {
   display: flex;
   position: relative;
   flex-wrap: wrap;
-}
-
-b {
-  font-weight: bold;
 }
 
 .static {

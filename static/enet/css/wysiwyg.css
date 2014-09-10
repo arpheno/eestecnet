@@ -20,30 +20,37 @@ time, mark, audio, video {
     border: 0;
     font-size: 100%;
     font: inherit;
-    vertical-align: baseline; }
+    vertical-align: baseline;
+}
 
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-    display: block; }
+    display: block;
+}
 
 body {
-    line-height: 1; }
+    line-height: 1;
+}
 
 ol, ul {
-    list-style: none; }
+    list-style: none;
+}
 
 blockquote, q {
-    quotes: none; }
+    quotes: none;
+}
 
 blockquote:before, blockquote:after,
 q:before, q:after {
     content: '';
-    content: none; }
+    content: none;
+}
 
 table {
     border-collapse: collapse;
-    border-spacing: 0; }
+    border-spacing: 0;
+}
 
 ul {
     list-style-type: none;
@@ -51,13 +58,15 @@ ul {
     padding: 0;
     line-height: 0%;
     display: flex;
-    flex-wrap: wrap; }
+    flex-wrap: wrap;
+}
 
 ul li {
     margin: 0;
     padding: 0;
     line-height: normal;
-    zoom: 1; }
+    zoom: 1;
+}
 
 @font-face {
     font-family: "helvetica neue"; /*'Helvetica Neue Pro lite'*/
@@ -78,24 +87,26 @@ h1, h2 {
     text-align: left;
     color: #af2b1d;
     margin: 0px;
-    padding:0px 10px 4px 10px;
-    border-bottom:1px solid #af2b1d;
+    padding: 0px 10px 4px 10px;
+    border-bottom: 1px solid #af2b1d;
 }
 
 h1 {
     font-size: 17px;
-margin-bottom:5px;
+    margin-bottom: 5px;
 }
 
 b {
-    font-weight: bold;
+    font-weight: 300;
 }
 
 h2 {
-    font-size: 14px; }
+    font-size: 14px;
+}
 
 h3 {
-    text-align: right; }
+    text-align: right;
+}
 
 body {
     padding: 30px;

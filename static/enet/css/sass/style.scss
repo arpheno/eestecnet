@@ -19,3 +19,20 @@ a {
   text-decoration: none;
 }
 
+.board {
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 20px;
+  a {
+    margin: auto;
+  }
+  h4 {
+    height: 50px;
+  }
+  div {
+    p {
+      padding-top: 5px;
+    }
+    flex: 1 1 20%;
+  }
+}

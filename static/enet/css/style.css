@@ -70,7 +70,7 @@ a {
     color: #fff
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3 {
     font-family: 'Century Gothic';
     font-weight: bold;
     line-height: 100%;
@@ -80,6 +80,14 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0% 0% 0.5% 5%;
     flex: 1 1 100%;
     border-bottom: 1px solid #c30811
+}
+
+h4, h5, h6 {
+    font-family: 'Century Gothic';
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.6rem
 }
 
 h1 {
@@ -98,10 +106,6 @@ body, header, #sponsors, footer, aside, main {
     display: flex;
     position: relative;
     flex-wrap: wrap
-}
-
-b {
-    font-weight: bold
 }
 
 .static {
@@ -1160,4 +1164,26 @@ a.news {
 
 a {
     text-decoration: none
+}
+
+.board {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 20px
+}
+
+.board a {
+    margin: auto
+}
+
+.board h4 {
+    height: 50px
+}
+
+.board div {
+    flex: 1 1 20%
+}
+
+.board div p {
+    padding-top: 5px
 }

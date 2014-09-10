@@ -2,11 +2,11 @@ from django.core.urlresolvers import reverse
 
 
 # Create your views here.
-from django.views.generic import ListView, FormView, UpdateView, View
+from django.views.generic import ListView, FormView, UpdateView, View, TemplateView
 from extra_views import UpdateWithInlinesView, InlineFormSet
 from events.models import Event, Application
 from teams.forms import MembershipInline, MemberImageInline, DescriptionForm, BoardForm
-from teams.models import Team
+from teams.models import Team, Board
 
 
 class TeamMixin(View):
@@ -21,6 +21,18 @@ class TeamList(ListView):
 
     def get_queryset(self):
         return Team.objects.filter(type='team')
+
+
+class Governance(TemplateView):
+    template_name = "teams/governance.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(Governance, self).get_context_data(**kwargs)
+        try:
+            context["current_board"] = Board.objects.order_by('-year')[0]
+        except:
+            pass
+        return context
 
 
 class CommitmentList(ListView):
