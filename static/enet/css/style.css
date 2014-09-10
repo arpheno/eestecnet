@@ -1,55 +1,36 @@
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
     font-size: 100%;
     font: inherit;
-    vertical-align: baseline;
+    vertical-align: baseline
 }
 
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-    display: block;
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block
 }
 
 body {
-    line-height: 1;
+    line-height: 1
 }
 
 ol, ul {
-    list-style: none;
+    list-style: none
 }
 
 blockquote, q {
-    quotes: none;
+    quotes: none
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before, blockquote:after, q:before, q:after {
     content: '';
-    content: none;
+    content: none
 }
 
 table {
     border-collapse: collapse;
-    border-spacing: 0;
+    border-spacing: 0
 }
 
 ul {
@@ -57,7 +38,7 @@ ul {
     flex-wrap: wrap;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center
 }
 
 ul li {
@@ -69,25 +50,24 @@ ul li {
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center
 }
 
 @font-face {
     font-family: "helvetica neue";
-    /*'Helvetica Neue Pro lite'*/
-    src: url("../HelveticaNeueLTPro-Lt.otf");
+    src: url("../HelveticaNeueLTPro-Lt.otf")
 }
 
 html {
     background-image: url(../images/bg.jpg);
     font-family: "Helvetica Neue", Helvetica, Verdana sans-serif;
     font-size: 10px;
-    color: #555;
+    color: #555
 }
 
 a {
     text-decoration: none;
-    color: #fff;
+    color: #fff
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -99,31 +79,40 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0.4rem;
     padding: 0% 0% 0.5% 5%;
     flex: 1 1 100%;
-    border-bottom: 1px solid #c30811;
+    border-bottom: 1px solid #c30811
 }
 
 h1 {
-    font-size: 2.0rem;
+    font-size: 2.0rem
 }
 
 h2 {
-    font-size: 1.8rem;
+    font-size: 1.8rem
 }
 
 h3 {
-    font-size: 1.6rem;
+    font-size: 1.6rem
 }
 
 body, header, #sponsors, footer, aside, main {
     display: flex;
     position: relative;
-    flex-wrap: wrap;
+    flex-wrap: wrap
+}
+
+b {
+    font-weight: bold
+}
+
+.static {
+    flex: 1 1 100%;
+    display: block
 }
 
 html > body {
     max-width: 128.0rem;
     margin: 0rem auto;
-    font-size: 1.2rem;
+    font-size: 1.2rem
 }
 
 html > body > main {
@@ -136,11 +125,11 @@ html > body > main {
     background-color: white;
     flex-wrap: wrap;
     box-shadow: 0rem 0rem 2rem 1rem rgba(0, 0, 0, 0.1), 0rem 0rem 2rem 1rem rgba(0, 0, 0, 0.1);
-    justify-content: center;
+    justify-content: center
 }
 
 html > body > main section {
-    flex: 1 0 100%;
+    flex: 1 0 100%
 }
 
 html > body > main > form {
@@ -149,22 +138,22 @@ html > body > main > form {
     background-color: rgba(0, 0, 0, 0.1);
     position: relative;
     z-index: 10;
-    flex-wrap: wrap;
+    flex-wrap: wrap
 }
 
 html > body > main > form p {
     flex: 1 1 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-between
 }
 
 html > body > main > form p input {
-    flex: 1 1 40%;
+    flex: 1 1 40%
 }
 
 html > body > main > form p label {
-    flex: 1 1 40%;
+    flex: 1 1 40%
 }
 
 html > body .grad {
@@ -174,7 +163,7 @@ html > body .grad {
     left: .0rem;
     position: absolute;
     z-index: 0;
-    background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.04));
+    background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.04))
 }
 
 html > body > aside {
@@ -186,75 +175,75 @@ html > body > aside {
     border-color: #3f4749;
     z-index: 1;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: wrap
 }
 
 html > body > aside h2 {
     border-bottom-color: white;
     text-align: center;
-    color: white;
+    color: white
 }
 
 @media screen and (max-width: 1200px) {
     html > body > aside {
-        flex: 1 0 100%;
+        flex: 1 0 100%
     }
 }
 
 @media screen and (min-width: 1200px) {
     html > body > aside {
-        flex: 0 0 25.3rem;
+        flex: 0 0 25.3rem
     }
 }
 
 html > body td {
     text-align: center;
-    vertical-align: middle;
+    vertical-align: middle
 }
 
 html > body td:first-child {
-    text-align: left;
+    text-align: left
 }
 
 html > body td:last-child {
-    text-align: right;
+    text-align: right
 }
 
 html > body .contact {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center
 }
 
 html > body .contact h1 {
     flex: initial;
     align-self: flex-start;
-    width: 100%;
+    width: 100%
 }
 
 html > body .contact p {
-    font-size: 1.6rem;
+    font-size: 1.6rem
 }
 
 html > body .contact address {
-    padding: 10px;
+    padding: 10px
 }
 
 html > body .contact table tr td {
-    padding: 5px;
+    padding: 5px
 }
 
 html > body .contact table tr td:first-child {
     font-size: 1.8rem;
     font-weight: bold;
     color: #c30811;
-    font-family: "Century Gothic";
+    font-family: "Century Gothic"
 }
 
 html > body .contact table tr td:last-child {
     font-size: 1.8rem;
-    border: none;
+    border: none
 }
 
 html > body #sponsors {
@@ -265,7 +254,7 @@ html > body #sponsors {
     border-right: .2rem;
     border-left: .2rem;
     padding: 1.0rem .0rem;
-    background-color: #fff;
+    background-color: #fff
 }
 
 @media only screen and (max-width: 45em) {
@@ -275,11 +264,11 @@ html > body #sponsors {
         align-items: center;
         justify-content: center;
         height: 3.0rem;
-        width: auto;
+        width: auto
     }
 
     html > body #sponsors a img {
-        height: 3.0rem;
+        height: 3.0rem
     }
 
     html > body #sponsors a p {
@@ -287,18 +276,18 @@ html > body #sponsors {
         font-size: 2rem;
         display: inline;
         font-family: "Century Gothic";
-        font-weight: bold;
+        font-weight: bold
     }
 }
 
 html > body #sponsors p {
-    display: none;
+    display: none
 }
 
 @media only screen and (max-width: 45em) {
     html > body #sponsors p {
         display: inline;
-        color: #000;
+        color: #000
     }
 }
 
@@ -307,7 +296,7 @@ html > body footer {
     background-color: #465052;
     height: 13.0rem;
     position: relative;
-    flex: 1 1 100%;
+    flex: 1 1 100%
 }
 
 html > body footer div.social {
@@ -315,7 +304,7 @@ html > body footer div.social {
     align-self: center;
     display: flex;
     flex: 1 1 33%;
-    justify-content: space-around;
+    justify-content: space-around
 }
 
 html > body footer div.social svg.social {
@@ -323,59 +312,59 @@ html > body footer div.social svg.social {
     width: 3.0rem;
     fill: white;
     padding: 1.0rem;
-    background-color: #c30811;
+    background-color: #c30811
 }
 
 @media only screen and (max-width: 45em) {
     html > body footer div.social svg.social {
         height: 5.0rem;
-        width: 5.0rem;
+        width: 5.0rem
     }
 }
 
 html > body footer div.social p {
     flex: 1 1 100%;
     color: #fff;
-    padding: 1.0rem;
+    padding: 1.0rem
 }
 
 html > body footer img {
     height: 13.0rem;
     position: absolute;
     top: .0rem;
-    left: .0rem;
+    left: .0rem
 }
 
 html > body footer nav {
     flex: 0 1 66%;
-    z-index: 10;
+    z-index: 10
 }
 
 html > body footer nav a {
     color: #fff;
-    text-decoration: none;
+    text-decoration: none
 }
 
 @media only screen and (max-width: 45em) {
     html > body footer nav {
-        display: none;
+        display: none
     }
 }
 
 html > body footer nav > ul {
     padding-top: 3.0rem;
-    justify-content: space-around;
+    justify-content: space-around
 }
 
 html > body footer nav > ul > li {
-    position: relative;
+    position: relative
 }
 
 html > body footer nav > ul > li > a {
     text-decoration: none;
     font-weight: bold;
     font-size: 1.6rem;
-    height: 100%;
+    height: 100%
 }
 
 html > body footer nav > ul > li ul {
@@ -383,14 +372,14 @@ html > body footer nav > ul > li ul {
     position: absolute;
     display: block;
     left: .0rem;
-    right: .0rem;
+    right: .0rem
 }
 
 #copyright {
     text-align: center;
     background-color: #465052;
     color: white;
-    width: 100%;
+    width: 100%
 }
 
 .messages {
@@ -398,12 +387,12 @@ html > body footer nav > ul > li ul {
     padding: 3.0rem;
     background-color: rgba(173, 216, 230, 0.5);
     font-weight: bold;
-    font-size: 1.8rem;
+    font-size: 1.8rem
 }
 
 .ui-button {
     height: 3.0rem;
-    flex: 1 1 100%;
+    flex: 1 1 100%
 }
 
 body > header {
@@ -414,20 +403,20 @@ body > header {
     align-items: center;
     align-content: center;
     flex-wrap: wrap;
-    padding: 1%;
+    padding: 1%
 }
 
 body > header img {
     height: 10.0rem;
-    width: auto;
+    width: auto
 }
 
 body > header #eestec-text {
-    height: 5.0rem;
+    height: 5.0rem
 }
 
 body > header #signin td {
-    padding: .5rem;
+    padding: .5rem
 }
 
 body > header #signin input[role=button] {
@@ -440,7 +429,7 @@ body > header #signin input[role=button] {
     border-radius: .4rem;
     border: none;
     display: block;
-    background-color: #9a0008;
+    background-color: #9a0008
 }
 
 @media only screen and (max-width: 45em) {
@@ -450,50 +439,50 @@ body > header #signin input[role=button] {
         position: fixed;
         top: 0px;
         right: 4.5rem;
-        height: 4rem;
+        height: 4rem
     }
 
     body > header #userarea figure, body > header #userarea a, body > header #userarea img {
         background-color: #fff;
         width: 4rem;
-        height: 4rem;
+        height: 4rem
     }
 
     body > header #userarea figcaption {
-        display: none;
+        display: none
     }
 }
 
 #nav {
     flex: 1 1 100%;
-    z-index: 10;
+    z-index: 10
 }
 
 #nav a {
     color: #fff;
-    z-index: 100;
+    z-index: 100
 }
 
 @media only screen and (max-width: 45em) {
     #nav {
-        order: -1;
+        order: -1
     }
 
     #nav:not(:target) > a:first-of-type, #nav:target > a:last-of-type {
-        display: block;
+        display: block
     }
 
     #nav:target > ul {
-        display: block;
+        display: block
     }
 
     #nav:target > a {
-        display: none;
+        display: none
     }
 }
 
 #nav > a {
-    display: none;
+    display: none
 }
 
 @media only screen and (max-width: 45em) {
@@ -504,7 +493,7 @@ body > header #signin input[role=button] {
         font-size: 3.0rem;
         color: #fff;
         background-color: #ee1f29;
-        padding: .5rem;
+        padding: .5rem
     }
 }
 
@@ -512,7 +501,7 @@ body > header #signin input[role=button] {
     border-bottom: 0.1rem solid #ee1f29;
     border-top: 0.1rem solid #ee1f29;
     align-items: center;
-    font-family: "Century Gothic";
+    font-family: "Century Gothic"
 }
 
 @media only screen and (max-width: 45em) {
@@ -521,35 +510,35 @@ body > header #signin input[role=button] {
         position: fixed;
         top: 0rem;
         left: .0rem;
-        right: 0px;
+        right: 0px
     }
 }
 
 @media only screen and (min-width: 45em) {
     #nav > ul {
-        height: 5.5rem;
+        height: 5.5rem
     }
 }
 
 #nav > ul > li {
     background-color: #c30811;
     position: relative;
-    flex: 1;
+    flex: 1
 }
 
 #nav > ul > li:last-child {
-    flex: 2;
+    flex: 2
 }
 
 @media only screen and (max-width: 45em) {
     #nav > ul > li {
-        width: 100%;
+        width: 100%
     }
 
     #nav > ul > li:first-child > a {
         display: block;
         background-color: #ee1f29;
-        border-bottom: 3px white solid;
+        border-bottom: 3px white solid
     }
 }
 
@@ -561,28 +550,28 @@ body > header #signin input[role=button] {
     text-decoration: none;
     font-weight: bold;
     font-size: 1.6rem;
-    height: 100%;
+    height: 100%
 }
 
 @media only screen and (max-width: 45em) {
     #nav > ul > li > a {
         padding: 11px;
         justify-content: flex-start;
-        border-bottom: 1px white solid;
+        border-bottom: 1px white solid
     }
 }
 
 #nav > ul > li > a:hover {
-    background-color: #ee1f29;
+    background-color: #ee1f29
 }
 
 #nav > ul > li:hover ul {
-    display: block;
+    display: block
 }
 
 @media only screen and (max-width: 45em) {
     #nav > ul > li:hover ul {
-        display: none;
+        display: none
     }
 }
 
@@ -591,17 +580,17 @@ body > header #signin input[role=button] {
     top: 5.5rem;
     position: absolute;
     left: .0rem;
-    right: .0rem;
+    right: .0rem
 }
 
 #nav > ul > li ul li {
     display: block;
     padding: .5rem;
-    background-color: #fa4b54;
+    background-color: #fa4b54
 }
 
 #nav > ul > li ul li:hover {
-    background-color: #fc737a;
+    background-color: #fc737a
 }
 
 #nav > ul form {
@@ -611,12 +600,12 @@ body > header #signin input[role=button] {
     justify-content: center;
     align-items: center;
     background-color: #c30811;
-    margin: 30px;
+    margin: 30px
 }
 
 @media only screen and (max-width: 45em) {
     #nav > ul form {
-        display: none;
+        display: none
     }
 }
 
@@ -626,12 +615,12 @@ body > header #signin input[role=button] {
     padding: .3rem;
     background-color: #9a0008;
     border-radius: .5rem;
-    border: none;
+    border: none
 }
 
 .animate {
     transition: all 0.1s;
-    -webkit-transition: all 0.1s;
+    -webkit-transition: all 0.1s
 }
 
 .action-button {
@@ -640,41 +629,41 @@ body > header #signin input[role=button] {
     border-radius: 1.0rem;
     font-size: 2.5rem;
     color: #FFF;
-    text-decoration: none;
+    text-decoration: none
 }
 
 .action-button:active {
     transform: translate(0rem, 0.5rem);
     -webkit-transform: translate(0rem, 0.5rem);
-    border-bottom: .1rem solid;
+    border-bottom: .1rem solid
 }
 
 .blue {
     background-color: #3498DB;
     border-bottom: .5rem solid #2980B9;
-    text-shadow: .0rem -.2rem #2980B9;
+    text-shadow: .0rem -.2rem #2980B9
 }
 
 .red {
     background-color: #E74C3C;
     border-bottom: .5rem solid #BD3E31;
-    text-shadow: .0rem -.2rem #BD3E31;
+    text-shadow: .0rem -.2rem #BD3E31
 }
 
 .green {
     background-color: #82BF56;
     border-bottom: .5rem solid #669644;
-    text-shadow: .0rem -.2rem #669644;
+    text-shadow: .0rem -.2rem #669644
 }
 
 .yellow {
     background-color: #F2CF66;
     border-bottom: .5rem solid #D1B358;
-    text-shadow: .0rem -.2rem #D1B358;
+    text-shadow: .0rem -.2rem #D1B358
 }
 
 ul.figure {
-    justify-content: center;
+    justify-content: center
 }
 
 a.figure {
@@ -683,7 +672,7 @@ a.figure {
     text-decoration: none;
     background-color: #354040;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap
 }
 
 a.figure figure {
@@ -692,13 +681,13 @@ a.figure figure {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all .25s;
+    transition: all .25s
 }
 
 a.figure figure img {
     position: absolute;
     top: 0px;
-    left: 0px;
+    left: 0px
 }
 
 a.figure figure figcaption {
@@ -711,119 +700,119 @@ a.figure figure figcaption {
     font-family: "Century Gothic";
     font-size: 20px;
     background-color: rgba(0, 0, 0, 0.1);
-    transition: all .5s;
+    transition: all .5s
 }
 
 a.figure figure:hover {
     z-index: 10;
-    transform: scale(1.2);
+    transform: scale(1.2)
 }
 
 a.figure figure:hover figcaption {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5)
 }
 
 a.figure .comment {
     font-size: 12px;
     line-height: 100%;
-    color: #ffffff;
+    color: #ffffff
 }
 
 article {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center
 }
 
 article h1 {
-    align-self: flex-start;
+    align-self: flex-start
 }
 
 article header {
     flex-wrap: wrap;
     justify-content: space-around;
-    flex-direction: row;
+    flex-direction: row
 }
 
 article header .pictures, article header img {
     width: 37.5rem;
-    height: 22.5rem;
+    height: 22.5rem
 }
 
 article header .details {
-    min-width: 40.0rem;
+    min-width: 40.0rem
 }
 
 article header .details tr {
     margin-bottom: 1.5rem;
-    border-bottom: 0.1rem #c30811 solid;
+    border-bottom: 0.1rem #c30811 solid
 }
 
 article header .details tr td:first-child {
     font-size: 1.8rem;
     font-weight: bold;
     color: #c30811;
-    font-family: "Century Gothic";
+    font-family: "Century Gothic"
 }
 
 article header .details tr:last-child {
     height: 5.5rem;
-    border: none;
+    border: none
 }
 
 article .actions {
-    text-align: center;
+    text-align: center
 }
 
 article .actions form {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-between
 }
 
 article details {
-    align-self: flex-start;
+    align-self: flex-start
 }
 
 a.member {
     width: 19.1rem;
-    height: 12.6rem;
+    height: 12.6rem
 }
 
 a.member figure {
     width: 19.1rem;
-    height: 12.6rem;
+    height: 12.6rem
 }
 
 section.members {
-    margin: .3rem;
+    margin: .3rem
 }
 
 #map {
     width: 80%;
-    height: 35.0rem;
+    height: 35.0rem
 }
 
 a.event {
-    width: 151px;
+    width: 151px
 }
 
 a.event figure, a.event img {
     width: 151px;
-    height: 111px;
+    height: 111px
 }
 
 section.events {
-    margin: 3px;
+    margin: 3px
 }
 
 a.eestecer {
     width: 10.0rem;
-    height: 10.0rem;
+    height: 10.0rem
 }
 
 article.eestecer .details {
-    justify-content: flex-start;
+    justify-content: flex-start
 }
 
 main.home {
@@ -833,12 +822,12 @@ main.home {
     padding: .0rem .1rem .0rem .0rem;
     box-shadow: none;
     justify-content: center;
-    max-width: 128.0rem;
+    max-width: 128.0rem
 }
 
 @media (max-width: 1000px) {
     main.home {
-        padding: 10px;
+        padding: 10px
     }
 }
 
@@ -852,17 +841,17 @@ main.home h1 {
     top: 0;
     border: .0rem;
     padding: .5rem;
-    margin: .0rem;
+    margin: .0rem
 }
 
 main.home p {
-    padding: 0.1rem .5rem;
+    padding: 0.1rem .5rem
 }
 
 main.home #donate {
     font-family: "Century Gothic";
     flex: 1 0 45%;
-    min-height: 10.0rem;
+    min-height: 10.0rem
 }
 
 @media (max-width: 1000px) {
@@ -870,7 +859,7 @@ main.home #donate {
         order: 3;
         flex: 1 1 100%;
         min-height: 0;
-        padding: 10px;
+        padding: 10px
     }
 }
 
@@ -880,14 +869,14 @@ main.home #donate .wrapper {
     padding: initial;
     text-align: center;
     padding: 3.0rem;
-    width: 15.0rem;
+    width: 15.0rem
 }
 
 @media (max-width: 1000px) {
     main.home #donate .wrapper {
         flex: 1 1 100%;
         width: initial;
-        padding: initial;
+        padding: initial
     }
 }
 
@@ -898,14 +887,14 @@ main.home #donate .wrapper a {
     font-size: 1.8rem;
     text-decoration: none;
     padding: .4rem 1.0rem;
-    font-weight: bolder;
+    font-weight: bolder
 }
 
 main.home #newsletter {
     flex: 1 0 45%;
     font-family: "Century Gothic";
     min-height: 10.0rem;
-    position: relative;
+    position: relative
 }
 
 @media (max-width: 1000px) {
@@ -914,7 +903,7 @@ main.home #newsletter {
         flex: 1 1 100%;
         width: initial;
         min-height: 0;
-        padding: 10px;
+        padding: 10px
     }
 }
 
@@ -925,7 +914,7 @@ main.home #newsletter form {
     width: 45.0rem;
     position: absolute;
     right: .0rem;
-    bottom: .0rem;
+    bottom: .0rem
 }
 
 @media (max-width: 1000px) {
@@ -934,12 +923,12 @@ main.home #newsletter form {
         width: initial;
         padding: initial;
         position: initial;
-        display: flex;
+        display: flex
     }
 
     main.home #newsletter form input {
         font-family: "Century Gothic";
-        flex: 1;
+        flex: 1
     }
 }
 
@@ -951,7 +940,7 @@ main.home #newsletter form input.submit {
     font-size: 1.6rem;
     text-decoration: none;
     padding: .4rem 1.0rem;
-    font-weight: bolder;
+    font-weight: bolder
 }
 
 main.home nav {
@@ -963,50 +952,50 @@ main.home nav {
     align-items: center;
     flex-direction: column;
     font-size: 1.3rem;
-    background-color: #465052;
+    background-color: #465052
 }
 
 main.home nav p {
     display: flex;
     text-align: justify;
-    padding: 10px;
+    padding: 10px
 }
 
 @media screen and (min-width: 1200px) {
     main.home nav p {
         flex: 1 1 100%;
-        padding: 20px;
+        padding: 20px
     }
 }
 
 main.home nav h1 {
     flex: initial;
-    width: 93%;
+    width: 93%
 }
 
 @media screen and (max-width: 1000px) {
     main.home nav h1 {
-        width: 99%;
+        width: 99%
     }
 }
 
 @media screen and (max-width: 1000px) {
     main.home nav {
         flex: 1 1 100%;
-        margin: 10px;
+        margin: 10px
     }
 }
 
 main.home #preview {
     flex: 1 1 85%;
     height: 48.0rem;
-    position: relative;
+    position: relative
 }
 
 @media screen and (max-width: 1000px) {
     main.home #preview {
         flex: 1 1 100%;
-        height: initial;
+        height: initial
     }
 }
 
@@ -1017,7 +1006,7 @@ main.home #preview > h1, main.home #preview h2 {
     z-index: 101;
     background-color: rgba(0, 0, 0, 0.5);
     top: 0;
-    left: 0;
+    left: 0
 }
 
 main.home #preview footer {
@@ -1029,12 +1018,12 @@ main.home #preview footer {
     overflow: hidden;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
+    color: #fff
 }
 
 @media screen and (max-width: 1000px) {
     main.home #preview footer {
-        height: initial;
+        height: initial
     }
 }
 
@@ -1042,18 +1031,18 @@ main.home #preview footer h1, main.home #preview footer h2 {
     text-align: left;
     border-bottom: .1rem solid #fff;
     margin-bottom: .3rem;
-    padding-bottom: .3rem;
+    padding-bottom: .3rem
 }
 
 @media screen and (max-width: 1000px) {
     main.home #preview footer p {
-        display: none;
+        display: none
     }
 }
 
 main.home #preview footer main {
-    flex: 1 1 50%%;
-    display: flex;
+    flex: 1 1 50%;
+    display: flex
 }
 
 main.home #preview footer aside {
@@ -1061,19 +1050,19 @@ main.home #preview footer aside {
     background-color: rgba(195, 8, 17, 0.75);
     margin: 1.0rem;
     padding: .2rem;
-    display: inline;
+    display: inline
 }
 
 @media screen and (max-width: 1000px) {
     main.home #preview footer aside {
-        display: none;
+        display: none
     }
 }
 
 main.home #preview footer aside h2 {
     background: none;
     padding: .0rem;
-    margin: .0rem;
+    margin: .0rem
 }
 
 main.home #preview footer aside a {
@@ -1081,95 +1070,94 @@ main.home #preview footer aside a {
     display: block;
     text-decoration: none;
     color: #fff;
-    font-weight: bold;
+    font-weight: bold
 }
 
 main.home #preview img, main.home #preview .pictures, main.home #preview #news {
     position: relative;
     width: 100%;
-    height: 48.0rem;
+    height: 48.0rem
 }
 
 @media screen and (max-width: 1000px) {
     main.home #preview img, main.home #preview .pictures, main.home #preview #news {
-        height: initial;
+        height: initial
     }
 }
 
 section.news {
     display: flex;
     flex-wrap: wrap;
-    padding: 5px;
+    padding: 5px
 }
 
 section.news > ul {
     flex: 1 1 100%;
-    justify-content: flex-start;
+    justify-content: flex-start
 }
 
 section.news img {
     flex: 1 1 20%;
-    padding: 0px 30px 0px 30px;
+    padding: 0px 30px 0px 30px
 }
 
 section.news p {
     font-size: 1.2rem;
-    flex: 1 1 70%;
+    flex: 1 1 70%
 }
 
 a.news {
     width: 150px;
-    height: 150px;
+    height: 150px
 }
 
-/* css for timepicker */
 .ui-timepicker-div .ui-widget-header {
-    margin-bottom: .8rem;
+    margin-bottom: .8rem
 }
 
 .ui-timepicker-div dl {
-    text-align: left;
+    text-align: left
 }
 
 .ui-timepicker-div dl dt {
     float: left;
     clear: left;
-    padding: 0 0 0 .5rem;
+    padding: 0 0 0 .5rem
 }
 
 .ui-timepicker-div dl dd {
-    margin: 0 1.0rem 1.0rem 45%;
+    margin: 0 1.0rem 1.0rem 45%
 }
 
 .ui-timepicker-div td {
-    font-size: 90%;
+    font-size: 90%
 }
 
 .ui-tpicker-grid-label {
     background: none;
     border: none;
     margin: 0;
-    padding: 0;
+    padding: 0
 }
 
 .ui-timepicker-rtl {
-    direction: rtl;
+    direction: rtl
 }
 
 .ui-timepicker-rtl dl {
     text-align: right;
-    padding: 0 .5rem 0 0;
+    padding: 0 .5rem 0 0
 }
 
 .ui-timepicker-rtl dl dt {
     float: right;
-    clear: right;
+    clear: right
 }
 
 .ui-timepicker-rtl dl dd {
-    margin: 0 45% 1.0rem 1.0rem;
+    margin: 0 45% 1.0rem 1.0rem
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none
 }

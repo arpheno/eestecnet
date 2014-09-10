@@ -1,41 +1,42 @@
-main.home{
+main.home {
   @media (max-width: 1000px) {
     padding: 10px;
   }
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
-  background:none;
+  background: none;
   padding: .0rem .1rem .0rem .0rem;
   box-shadow: none;
   justify-content: center;
   max-width: 128.0rem;
-  h1{
-      color:#fff;
-      text-align: center;
+  h1 {
+    color: #fff;
+    text-align: center;
     left: .0rem;
     height: 2.0rem;
-    width:100%;
-      background-color:rgba(0,0,0,0.5);
-      top:0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
     border: .0rem;
     padding: .5rem;
     margin: .0rem;
   }
   p {
     padding: 0.1rem .5rem;
+
   }
   #donate {
     font-family: "Century Gothic";
-    flex:1 0 45%;
+    flex: 1 0 45%;
     min-height: 10.0rem;
     @media (max-width: 1000px) {
-      order:3;
+      order: 3;
       flex: 1 1 100%;
       min-height: 0;
       padding: 10px;
 
     }
-    .wrapper{
+    .wrapper {
       flex: 1 1 100%;
       width: initial;
       padding: initial;
@@ -47,7 +48,7 @@ main.home{
       text-align: center;
       padding: 3.0rem;
       width: 15.0rem;
-      a{
+      a {
         display: block;
         background-color: $darkeestec;
         color: white;
@@ -58,19 +59,19 @@ main.home{
       }
     }
   }
-  #newsletter{
-    flex:1 0 45%;
+  #newsletter {
+    flex: 1 0 45%;
     font-family: "Century Gothic";
     min-height: 10.0rem;
-    position:relative;
+    position: relative;
     @media (max-width: 1000px) {
-      order:4;
+      order: 4;
       flex: 1 1 100%;
       width: initial;
       min-height: 0;
       padding: 10px;
     }
-    form{
+    form {
       font-family: "Century Gothic";
       text-align: center;
       padding: 3.0rem .0rem;
@@ -86,14 +87,14 @@ main.home{
           flex: 1;
         }
       }
-      position:absolute;
+      position: absolute;
       right: .0rem;
       bottom: .0rem;
-      input.submit{
-        border:none;
+      input.submit {
+        border: none;
         background-color: $darkeestec;
         font-family: "Century Gothic";
-        color:white;
+        color: white;
         font-size: 1.6rem;
         text-decoration: none;
         padding: .4rem 1.0rem;
@@ -101,11 +102,11 @@ main.home{
       }
     }
   }
-  nav{
-    flex:1 1 15%;
+  nav {
+    flex: 1 1 15%;
     color: white;
     min-height: 10.0rem;
-    position:relative;
+    position: relative;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -128,11 +129,11 @@ main.home{
     }
     background-color: $eestecgreylight;
     @media screen and (max-width: 1000px) {
-      flex:1 1 100%;
+      flex: 1 1 100%;
       margin: 10px;
     }
   }
-  #preview{
+  #preview {
 
     @media screen and (max-width: 1000px) {
       flex: 1 1 100%;
@@ -142,29 +143,29 @@ main.home{
     height: 48.0rem;
     position: relative;
 
-    >h1,h2{
-      color:#fff;
+    > h1, h2 {
+      color: #fff;
       text-align: center;
-      width:100%;
-      z-index:101;
-      background-color:rgba(0,0,0,0.5);
-      top:0;
-      left:0;
+      width: 100%;
+      z-index: 101;
+      background-color: rgba(0, 0, 0, 0.5);
+      top: 0;
+      left: 0;
     }
-    footer{
+    footer {
       @media screen and (max-width: 1000px) {
         height: initial;
       }
-      position:absolute;
+      position: absolute;
       bottom: .0rem;
       right: .0rem;
-      display:flex;
+      display: flex;
       height: 20%;
-      overflow:hidden;
+      overflow: hidden;
       width: 100%;
-      background-color:rgba(0,0,0,0.5);
-      color:#fff;
-      h1,h2{
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      h1, h2 {
         text-align: left;
         border-bottom: .1rem solid #fff;
         margin-bottom: .3rem;
@@ -175,40 +176,40 @@ main.home{
           display: none;
         }
       }
-      main{
-        flex: 1 1 50%%;
-        display:flex;
+      main {
+        flex: 1 1 50%;
+        display: flex;
       }
-      aside{
+      aside {
         @media screen and (max-width: 1000px) {
           display: none;
         }
         flex: 1 1 20%;
-        background-color:rgba($darkeestec,0.75);
+        background-color: rgba($darkeestec, 0.75);
         margin: 1.0rem;
         padding: .2rem;
-        display:inline;
-        h2{
-          background:none;
+        display: inline;
+        h2 {
+          background: none;
           padding: .0rem;
           margin: .0rem;
         }
-        a{
+        a {
           padding-left: .2rem;
-          display:block;
+          display: block;
           text-decoration: none;
-          color:#fff;
+          color: #fff;
           font-weight: bold;
         }
 
       }
     }
-    img,.pictures,#news{
+    img, .pictures, #news {
       @media screen and (max-width: 1000px) {
         height: initial;
       }
-      position:relative;
-      width:100%;
+      position: relative;
+      width: 100%;
       height: 48.0rem;
     }
   }

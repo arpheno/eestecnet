@@ -30,6 +30,8 @@ def complete(request, ida):
 class EestecerProfile(DetailView):
     model = Eestecer
     template_name= "account/eestecer_detail.html"
+
+
 class EestecerUpdateForm(ModelForm):
     class Meta:
         model=Eestecer

@@ -72,6 +72,15 @@ body, header, #sponsors, footer, aside, main {
   flex-wrap: wrap;
 }
 
+b {
+  font-weight: bold;
+}
+
+.static {
+  flex: 1 1 100%;
+  display: block;
+}
+
 html>body{
   max-width: 128.0rem;
   margin: 0rem auto;
