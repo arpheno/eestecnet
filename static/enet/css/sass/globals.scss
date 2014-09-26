@@ -88,6 +88,11 @@ body, header, #sponsors, footer, aside, main {
   display: block;
 }
 
+#elfinder {
+  z-index: 1;
+
+}
+
 html>body{
   max-width: 128.0rem;
   margin: 0rem auto;
