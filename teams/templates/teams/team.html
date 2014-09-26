@@ -1,7 +1,7 @@
 {% extends 'enet/figure.html' %}
 {% load thumbnail %}
 
-{% block class %}member{% endblock %}
+{% block class %}member {{ object.type }}{% endblock %}
 {% block url %} {{ object.as_url }}{% endblock %}
 {% block picture %}
     {% thumbnail object.thumbnail "190x125" crop="center" as im %}
@@ -13,4 +13,5 @@
     {{ object }}
 {% endblock %}
 {% block comment %}
+    {{ object.teamstub }}
 {% endblock %}

@@ -39,6 +39,7 @@ class Team(models.Model):
     thumbnail=models.ImageField(blank=True,null=True,upload_to="memberthumbs")
     thumbsource=models.CharField(max_length=100,blank=True,null=True)
     """The picture that should appear in the :class:`Member` list"""
+    teamstub = models.TextField(blank=True, null=True)
     description= models.TextField(blank= True, null=True)
     """ LC info text"""
     facebook = models.URLField(blank=True, null=True)
