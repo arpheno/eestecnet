@@ -83,6 +83,8 @@ body, header, #sponsors, footer, aside, main {
 
 .static {
   flex: 1 1 100%;
+  z-index: 1;
+
   display: block;
 }
 
