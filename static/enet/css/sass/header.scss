@@ -188,13 +188,26 @@ body > header {
       align-items: center;
       background-color: $darkeestec;
       margin: 30px;
-      input {
+      div {
         height: 3.0rem;
-        font-size: 2.5rem;
         padding: .3rem;
         background-color: $darkereestec;
+        display: flex;
         border-radius: .5rem;
-        border: none;
+        input {
+          background-color: $darkereestec;
+          color: #fff;
+          border: none;
+          width: 200px;
+          font-size: 2.5rem;
+        }
+      }
+      svg {
+        align-self: center;
+        height: 2.5rem;
+        width: 2.5rem;
+        background-color: $darkereestec;
+        fill: #fff;
       }
     }
   }

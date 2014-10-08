@@ -47,7 +47,10 @@
         {% endif %}
         <li>
             <form action="/search/" method="get">
-                {{ mysearchform.q }}
+                <div>
+                    {{ mysearchform.q }}
+                    {% include 'icons/magnifying.svg' %}
+                </div>
             </form>
         </li>
     </ul>
