@@ -210,6 +210,9 @@ html > body {
     }
   }
   #sponsors {
+    img:not(:hover) {
+      filter: grayscale(100%);
+    }
     a {
       @media only screen and (max-width: 45em) /* 640 */
       {

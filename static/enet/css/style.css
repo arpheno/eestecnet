@@ -266,6 +266,14 @@ html > body #sponsors {
     background-color: #fff
 }
 
+html > body #sponsors img :hover {
+    background-color: red
+}
+
+html > body #sponsors img:not(:hover) {
+    filter: grayscale(100%)
+}
+
 @media only screen and (max-width: 45em) {
     html > body #sponsors a {
         flex: 1 1 40%;
@@ -691,6 +699,26 @@ body > header #signin input[role=button] {
     background-color: #F2CF66;
     border-bottom: .5rem solid #D1B358;
     text-shadow: .0rem -.2rem #D1B358
+}
+
+#twitter svg:hover {
+    background-color: #00aced
+}
+
+#youtube svg:hover {
+    background-color: #bb0000
+}
+
+#facebook svg:hover {
+    background-color: #3b5998
+}
+
+#linkedin svg:hover {
+    background-color: #007bb6
+}
+
+#googleplus svg:hover {
+    background-color: #dd4b39
 }
 
 ul.figure {
