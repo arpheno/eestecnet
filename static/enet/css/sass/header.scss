@@ -29,6 +29,7 @@ body > header {
       border: none;
       display: block;
       background-color: $darkereestec;
+      cursor: pointer;
     }
   }
   #userarea {
@@ -83,10 +84,15 @@ body > header {
       position: fixed;
       top: .0rem;
       right: .0rem;
-      font-size: 3.0rem;
+      height: 24px;
       color: #fff;
       background-color: $eestec;
-      padding: .5rem;
+      padding: .3rem;
+      svg {
+        margin: auto;
+        height: 26px;
+        fill: #fff;
+      }
     }
     display: none;
   }

@@ -5,7 +5,7 @@ $darkeestec: rgba(195, 8, 17, 1);
 $darkereestec: rgba(154, 0, 8, 1);
 $eestecgreylight: #465052;
 
-ul{
+ul {
   list-style-type: none;
   flex-wrap: wrap;
   display: flex;
@@ -30,11 +30,11 @@ ul li {
   src: url("../HelveticaNeueLTPro-Lt.otf");
 }
 
-html{
+html {
   background-image: url(../images/bg.jpg);
   font-family: "Helvetica Neue", Helvetica, Verdana sans-serif;
   font-size: 10px;
-  color:#555;
+  color: #555;
 }
 
 a {
@@ -45,7 +45,7 @@ a {
 h1, h2, h3 {
   font-family: 'Century Gothic';
   font-weight: bold;
-  line-height:100%;
+  line-height: 100%;
   text-align: left;
   color: $darkereestec;
   margin: 0.4rem;
@@ -90,61 +90,64 @@ body, header, #sponsors, footer, aside, main {
 
 #elfinder {
   z-index: 1;
-
 }
 
-html>body{
+html > body {
   max-width: 128.0rem;
   margin: 0rem auto;
   font-size: 1.2rem;
-  p {
-  }
-  >main{
+  > main {
     padding: .1rem;
     border-width: .0rem 0.1rem .0rem 0.1rem;
-    flex:1 1;
-    z-index:2;
+    flex: 1 1;
+    z-index: 2;
     border-color: #a2a0a0;
-    position:relative;
-    background-color:white;
-    flex-wrap:wrap;
+    position: relative;
+    background-color: white;
+    flex-wrap: wrap;
     box-shadow: .0rem .0rem 2.0rem 1.0rem rgba(0, 0, 0, 0.1),
     -.0rem .0rem 2.0rem 1.0rem rgba(0, 0, 0, 0.1);
     justify-content: center;
-    section{flex:1 0 100%;}
-    >form{
+    section {
+      flex: 1 0 100%;
+    }
+    > form {
       width: 48.0rem;
-      display:flex;
-      background-color: rgba(0,0,0,0.1);
-      position:relative;
-      z-index:10;
+      display: flex;
+      background-color: rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 10;
       flex-wrap: wrap;
-      p{
-        flex:1 1 100%;
+      p {
+        flex: 1 1 100%;
         display: flex;
-        flex-wrap:wrap;
-        input{flex:1 1 40%;}
-        label{flex:1 1 40%;}
+        flex-wrap: wrap;
+        input {
+          flex: 1 1 40%;
+        }
+        label {
+          flex: 1 1 40%;
+        }
         justify-content: space-between;
       }
     }
   }
   .grad {
     height: 34.0rem;
-    width:100%;
+    width: 100%;
     top: .0rem;
     left: .0rem;
-    position:absolute;
+    position: absolute;
     z-index: 0;
-    background:linear-gradient(to top ,rgba(0,0,0,0), rgba(0,0,0,0.04));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.04));
   }
-  >aside {
-    background-color:#5f6a6d;
+  > aside {
+    background-color: #5f6a6d;
     border-width: .0rem 5.7rem .0rem .0rem;
     align-content: flex-start;
     padding-top: 3.0rem;
-    border-style:solid;
-    border-color:#3f4749;
+    border-style: solid;
+    border-color: #3f4749;
     z-index: 1;
     justify-content: center;
     flex-wrap: wrap;
@@ -206,7 +209,7 @@ html>body{
       }
     }
   }
-  #sponsors{
+  #sponsors {
     a {
       @media only screen and (max-width: 45em) /* 640 */
       {
@@ -237,21 +240,21 @@ html>body{
       }
       display: none;
     }
-    flex:1 0 100%;
+    flex: 1 0 100%;
     justify-content: space-around;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     border: red solid;
     border-right: .2rem;
     border-left: .2rem;
     padding: 1.0rem .0rem;
-    background-color:#fff;
+    background-color: #fff;
   }
-  footer{
+  footer {
     font-family: "Century Gothic";
-    background-color:$eestecgreylight;
+    background-color: $eestecgreylight;
     height: 13.0rem;
     position: relative;
-    flex:1 1 100%;
+    flex: 1 1 100%;
     div.social {
       flex-wrap: wrap;
       align-self: center;
@@ -305,7 +308,7 @@ html>body{
             font-size: 1.6rem;
             height: 100%;
           }
-          ul /*second level list*/   {
+          ul /*second level list*/    {
             top: 2.0rem;
             position: absolute;
             display: block;
@@ -317,6 +320,7 @@ html>body{
     }
   }
 }
+
 #copyright {
   text-align: center;
   background-color: $eestecgreylight;
