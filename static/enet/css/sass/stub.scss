@@ -1,0 +1,24 @@
+div.stub {
+  height: 208px;
+  margin: 15px;
+  width: 410px;
+  h1 {
+    background-color: $darkereestec;
+    color: white;
+    padding: 10px;
+    margin: 0px;
+  }
+  img {
+    height: 50%;
+    width: 100%;
+    margin: 0px;
+    border: 0px;
+  }
+
+  p {
+    padding: 10px;
+    color: white;
+    background-color: $darkeestec;
+  }
+
+}

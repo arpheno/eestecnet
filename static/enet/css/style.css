@@ -781,7 +781,8 @@ a.figure .comment {
 article {
     display: flex;
     flex-direction: column;
-    align-items: center
+    align-items: center;
+    z-index: 10
 }
 
 article h1 {
@@ -1230,6 +1231,39 @@ a.news {
 
 .ui-timepicker-rtl dl dd {
     margin: 0 45% 1.0rem 1.0rem
+}
+
+div.stub {
+    height: 208px;
+    margin: 15px;
+    width: 410px
+}
+
+div.stub h1 {
+    background-color: #9a0008;
+    color: white;
+    padding: 10px;
+    margin: 0px
+}
+
+div.stub img {
+    height: 50%;
+    width: 100%;
+    margin: 0px;
+    border: 0px
+}
+
+div.stub p {
+    padding: 10px;
+    color: white;
+    background-color: #c30811
+}
+
+article.activities {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 40px
 }
 
 a {

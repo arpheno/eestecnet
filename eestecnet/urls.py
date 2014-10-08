@@ -43,6 +43,7 @@ urlpatterns = patterns(
     url(r'^search/', SearchView(form_class=SearchForm)),
     url(r'^mail-queue/$', include('mailqueue.urls')),
     url(r'^contact', TemplateView.as_view(template_name='enet/contact.html')),
+    url(r'^activities/*$', TemplateView.as_view(template_name='enet/activities.html')),
     url(r'^newsletter/$', newsletter, name='newsletter'),
     url(r'^materials/', include('elfinder.urls')),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
