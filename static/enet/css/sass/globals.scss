@@ -211,7 +211,12 @@ html > body {
   }
   #sponsors {
     img:not(:hover) {
-      filter: grayscale(100%);
+      -webkit-filter: grayscale(100%);
+      -webkit-filter: -webkit-grayscale(100%);
+      filter: -moz-grayscale(100%);
+      -moz-filter: -moz-grayscale(100%);
+      -moz-filter: -moz-grayscale(100%);
+      filter: gray(100%);
     }
     a {
       @media only screen and (max-width: 45em) /* 640 */

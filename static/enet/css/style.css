@@ -266,12 +266,13 @@ html > body #sponsors {
     background-color: #fff
 }
 
-html > body #sponsors img :hover {
-    background-color: red
-}
-
 html > body #sponsors img:not(:hover) {
-    filter: grayscale(100%)
+    -webkit-filter: grayscale(100%);
+    -webkit-filter: -webkit-grayscale(100%);
+    filter: -moz-grayscale(100%);
+    -moz-filter: -moz-grayscale(100%);
+    -moz-filter: -moz-grayscale(100%);
+    filter: gray(100%)
 }
 
 @media only screen and (max-width: 45em) {
