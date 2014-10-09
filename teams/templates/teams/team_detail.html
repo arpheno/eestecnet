@@ -34,7 +34,9 @@
                 {% if not user in object.users.all and not user in object.pending_applications %}
                     {% for event in object.event_set.all %}
                     {% if event.category == "recruitment" %}
-                        <a href="{% url 'eventapplication' event.slug %}" class="action-button shadow animate red">Join this Commitment</a>
+                        <a href="{% url 'eventapplication' event.slug %}"
+                           class="action-button shadow animate red">Join this
+                            Committment</a>
                     {% endif %}
                 {% endfor %}
                 {% else %}
