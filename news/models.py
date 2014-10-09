@@ -24,6 +24,7 @@ class Membership(models.Model):
             self.user.is_staff = True
             self.user.save()
             self.user.groups.add(Group.objects.get(name='Local Admins'))
+        super(Membership, self).save()
 
     def __unicode__(self):
         return self.user.get_full_name()
