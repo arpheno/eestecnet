@@ -136,7 +136,7 @@ class ElfinderConnectorView(View):
             roots = [self.root(member.slug) for member in Team.objects.all()]
         elif request.user.is_authenticated():
             roots = [self.root(member.name) for member in
-                     request.user.teams_administered]
+                     request.user.teams_administered()]
             roots.append(self.root('internal'))
         else:
             roots = []
