@@ -1,4 +1,39 @@
 {% load staticfiles %}
+{% if user.is_authenticated %}
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'news' %}">News</a></li>
+        <li><a href="{% url 'cities' %}">Commitments</a></li>
+        <li><a href="{% url 'teams' %}">Teams</a></li>
+        <li><a href="{% url 'events' %}">Events </a></li>
+        <li><a href="{% url 'materials' %}">Files</a></li>
+        <li>
+            <a href="/about">Sitemap </a>
+            <ul>
+                <li><a href="/history">History</a></li>
+                <li><a href="/documents">Official Documents</a></li>
+                <li><a href="/governance">Governing Bodies</a></li>
+                <li><a href="/conference/">EESTEC Conference</a></li>
+                <li><a href="/androidcompetition/">EESTEC Competition for Android</a>
+                </li>
+                <li><a href="/students/join">Become a Member</a></li>
+                <li><a href="{% url 'cities' %}">EESTEC in your city</a></li>
+                <li><a href="/students/observer">Found an Observer</a></li>
+                <li><a href="/partners/cooperations">Cooperations</a></li>
+                <li><a href="/partners/start">Become a Partner</a></li>
+            </ul>
+        </li>
+        <li><a href="logout/">Log Out</a></li>
+        <li>
+            <form action="/search/" method="get">
+                <div>
+                    {{ mysearchform.q }}
+                    {% include 'icons/magnifying.svg' %}
+                </div>
+            </form>
+        </li>
+    </ul>
+{% else %}
     <ul>
         <li>
             <a href="{% url 'home' %}">Home</a>
@@ -19,7 +54,8 @@
                 <li><a href="{% url 'teams' %}">International Teams</a></li>
                 <li><a href="{% url 'events' %}">Events</a></li>
                 <li><a href="/conference/">EESTEC Conference</a></li>
-                <li><a href="/androidcompetition/">Android Competition</a></li>
+                <li><a href="/androidcompetition/">EESTEC Competition for Android</a>
+                </li>
             </ul>
         </li>
         <li>
@@ -54,3 +90,4 @@
             </form>
         </li>
     </ul>
+{% endif %}

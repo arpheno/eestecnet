@@ -1,7 +1,7 @@
 {% extends 'enet/split.html' %}
 {% block main %}
-    <form action="" enctype="multipart/form-data" method="post">
-        {% csrf_token %}
+    <form id="userupdate" action="" enctype="multipart/form-data" method="post">
+    {% csrf_token %}
     {{ form.as_p }}
         <input type="submit" value="Update Information">
     </form>

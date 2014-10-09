@@ -413,6 +413,15 @@ html > body footer nav > ul > li ul {
     flex: 1 1 100%
 }
 
+form#userupdate {
+    padding: 15px;
+    width: 100%
+}
+
+form#userupdate p {
+    padding: 5px
+}
+
 div.stub {
     height: 208px;
     margin: 15px;
@@ -597,6 +606,7 @@ body > header #signin input[role=button] {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     flex: 1;
     text-decoration: none;
     font-weight: bold;

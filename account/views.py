@@ -56,7 +56,6 @@ class EestecerUpdate(UpdateView):
             'Your information has been updated.')
         return super(EestecerUpdate, self).form_valid(form)
 
-
     def get_object(self, queryset=None):
         return self.request.user
 class EestecerList(ListView):

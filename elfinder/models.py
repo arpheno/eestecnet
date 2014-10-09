@@ -45,7 +45,7 @@ def roots_for_user(user):
         for team in user.privileged.all():
             roots.append(Root(team.slug,True))
         for team in user.teams.all():
-            if not team in user.privileged.all():
+            if not team in user.teams_administered.all():
                 roots.append(Root(team.slug))
         for event in user.events_organized.all():
             roots.append(Root(event.slug),True)
