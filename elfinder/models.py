@@ -42,10 +42,10 @@ def roots_for_user(user):
         roots.append(Root("Public",True))
         return roots
     elif user.is_authenticated():
-        for team in user.teams_administered.all():
+        for team in user.teams_administered():
             roots.append(Root(team.slug,True))
         for team in user.teams.all():
-            if not team in user.teams_administered.all():
+            if not team in user.teams_administered():
                 roots.append(Root(team.slug))
         for event in user.events_organized.all():
             roots.append(Root(event.slug),True)
