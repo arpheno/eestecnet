@@ -23,9 +23,18 @@
     <h1>Members</h1>
     {% if object_list.first.is_lc %}
         <div id="map">
-    </div>
+        </div>
+        <article class="members">
+            {% include 'teams/teams.html' with object_list=object_list %}
+        </article>
+    {% else %}
+
+        <article class="members">
+            <ul>
+                {% for object in object_list %}
+                    <li>{% include 'teams/international_team.html' with object=object %}</li>
+                {% endfor %}
+            </ul>
+        </article>
     {% endif %}
-    <section class="members">
-        {% include 'teams/teams.html' with object_list=object_list %}
-    </section>
 {% endblock %}

@@ -7,15 +7,6 @@ from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
-
-
-
-
-
-
-
-
-
 # Create your models here.
 from django.db import models
 from mailqueue.models import MailerMessage
@@ -83,9 +74,9 @@ class Event(models.Model):
     """Optional: Location of the event."""
     start_date = models.DateField(help_text=_("When does your Event start?"))
     """Start of the event."""
-    end_date = models.DateField(blank=True, null=True,help_text=_("When does your Event end? (If ever ;) )"))
-    """Optional: End of the event."""
-    deadline = models.DateTimeField(blank=True, null=True,)
+    end_date = models.DateField(help_text=_("When does your Event end?"))
+    """End of the event."""
+    deadline = models.DateTimeField(help_text=_("Until when can participants apply?"))
     """Deadline until no more applications will be accepted."""
 
     #Content
@@ -105,7 +96,7 @@ class Event(models.Model):
         if self.end_date:
             if self.start_date > self.end_date:
                 raise ValidationError("The event may not begin after it ends.")
-            if self.end_date > self.start_date:
+            if self.end_date < self.start_date:
                 raise ValidationError("The event may not end before it starts.")
             if self.deadline > self.end_date:
                 raise ValidationError(

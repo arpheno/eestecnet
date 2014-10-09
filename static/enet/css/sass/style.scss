@@ -4,6 +4,7 @@
 */
 @import 'reset.scss';
 @import 'globals.scss';
+@import "stub.scss";
 @import 'header.scss';
 @import 'buttons.scss';
 @import 'figure.scss';
@@ -14,7 +15,6 @@
 @import "home.scss";
 @import "news.scss";
 @import "datetimepicker.scss";
-@import "stub.scss";
 @import "activities.scss";
 
 a {
