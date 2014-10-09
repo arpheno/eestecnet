@@ -23,6 +23,10 @@ class ApplicationInline(admin.TabularInline):
 class ParticipationInline(admin.TabularInline):
     model = Participation
     verbose_name_plural = "Participants"
+    readonly_fields = ["participant", "confirmed", "transportation"]
+
+    def has_add_permission(self, request):
+        return False
 
 
 class ImageInline(admin.TabularInline):
@@ -40,6 +44,7 @@ class MyEventAdmin(admin.ModelAdmin):
     form = MyEventAdminForm
     list_display = ['OC','name']
     inlines = [ImageInline, ParticipationInline]
+    filter_horizontal = ["organizers", "organizing_committee"]
     """ Inline interface for displaying the applications to an event and making it possible to accept them"""
     exclude = ['participants',"participant_count"]
     fieldsets = (
@@ -50,7 +55,10 @@ class MyEventAdmin(admin.ModelAdmin):
             )
         }),
         ('Organizers', {
-            'fields': (('organizing_committee','organizers'),)
+            'fields': (('organizers'),)
+        }),
+        ('Organizing Committees', {
+            'fields': (('organizing_committee'),)
         }),
         ('Dates', {
             'fields': (('start_date','end_date','deadline'),)
