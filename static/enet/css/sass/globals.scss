@@ -138,7 +138,7 @@ html > body {
     top: .0rem;
     left: .0rem;
     position: absolute;
-    z-index: 0;
+    z-index: -1;
     background: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.04));
   }
   > aside {

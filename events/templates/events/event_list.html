@@ -2,8 +2,8 @@
 {% block main %}
     <h1>Events organized by EESTEC</h1>
     <p>EESTEC workshops are <b>free</b>. On a list below you can see all current and past events. Click button to show event by status.</p>
-    <section class="events">
-        <h2>Open for Application</h2>
+    <ection class="events">
+    <h2>Open for Application</h2>
         {% include 'events/events.html' with object_list=active_list%}
         <h2>Pending</h2>
         {% include 'events/events.html' with object_list=pending_list %}

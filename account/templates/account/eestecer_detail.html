@@ -10,10 +10,18 @@
 {% endblock %}
 
 {% block details %}
-    <h2>Name:</h2><h3>{{ object.get_full_name }}</h3>
-    <h2>Gender:</h2><h3>{{ object.gender }}</h3>
-    <h2>Date of Birth:</h2><h3>{{ object.date_of_birth }}</h3>
-    <h2>Date Joined:</h2><h3>{{ object.joined }}</h3>
+    <tr>
+        <td>Name:</td>
+        <td>{{ object.get_full_name }}</td>
+    </tr>
+    <tr>
+        <td>Date of Birth:</td>
+        <td>{{ object.date_of_birth }}</td>
+    </tr>
+    <tr>
+        <td>Date Joined:</td>
+        <td>{{ object.joined }}</td>
+    </tr>
 {% endblock %}
 
 {% block more %}

@@ -14,5 +14,10 @@
     {% endif %}
 
 {% elif user.is_authenticated %}
-    <a href="{% url 'eventapplication' object.slug %}" class="action-button shadow animate red">Apply to event</a>
+    {% if object.category == "recruitment" %}
+        <a href="{% url 'eventapplication' object.slug %}"
+           class="action-button shadow animate red">Apply to this committment</a>
+    {% else %}
+        <a href="{% url 'eventapplication' object.slug %}" class="action-button shadow animate red">Apply to event</a>
+    {% endif %}
 {% endif %}
