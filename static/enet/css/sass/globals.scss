@@ -259,7 +259,7 @@ html > body {
   footer {
     font-family: "Century Gothic";
     background-color: $eestecgreylight;
-    height: 14.2rem;
+    height: 15.2rem;
     position: relative;
     flex: 1 1 100%;
     div.social {
@@ -287,7 +287,7 @@ html > body {
       }
     }
     img {
-      height: 13.0rem;
+      height: 100%;
       position: absolute;
       top: .0rem;
       left: .0rem;
@@ -305,7 +305,7 @@ html > body {
         display: none;
       }
       > ul {
-        padding-top: 3.0rem;
+        padding-top: 1.0rem;
         justify-content: space-around;
         > li {
           position: relative;
@@ -321,6 +321,9 @@ html > body {
             display: block;
             left: .0rem;
             right: .0rem;
+            li {
+              text-align: center;
+            }
           }
         }
       }

@@ -311,7 +311,7 @@ html > body #sponsors p {
 html > body footer {
     font-family: "Century Gothic";
     background-color: #465052;
-    height: 14.2rem;
+    height: 15.2rem;
     position: relative;
     flex: 1 1 100%
 }
@@ -346,7 +346,7 @@ html > body footer div.social p {
 }
 
 html > body footer img {
-    height: 13.0rem;
+    height: 100%;
     position: absolute;
     top: .0rem;
     left: .0rem
@@ -369,7 +369,7 @@ html > body footer nav a {
 }
 
 html > body footer nav > ul {
-    padding-top: 3.0rem;
+    padding-top: 1.0rem;
     justify-content: space-around
 }
 
@@ -390,6 +390,10 @@ html > body footer nav > ul > li ul {
     display: block;
     left: .0rem;
     right: .0rem
+}
+
+html > body footer nav > ul > li ul li {
+    text-align: center
 }
 
 #copyright {
