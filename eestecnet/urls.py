@@ -18,6 +18,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^$', home.as_view(), name='home'),
+    url(r'^reset/', include('password_reset.urls')),
     url(r'^news/*$', ListView.as_view(model=Entry), name='news'),
     url(r'^androidcompetition/*$',
         TemplateView.as_view(template_name='android/home.html')),
@@ -39,7 +40,7 @@ urlpatterns = patterns(
     url(r'^complete/(?P<ida>[-\w]+)/', complete, name='complete'),
     url(r'^logout/*', Logout.as_view(), name='logout'),
     url(r'^register/*', EestecerCreate.as_view(), name='register'),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/*', include(admin.site.urls)),
     url(r'^search/', SearchView(form_class=SearchForm)),
     url(r'^mail-queue/*$', include('mailqueue.urls')),
     url(r'^contact/*$', TemplateView.as_view(template_name='enet/contact.html')),

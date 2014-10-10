@@ -5,12 +5,16 @@
         {% if participation.transportation.arrival != None %}
             <a href="#" class="action-button shadow animate green">Confirmed</a>
         {% else %}
-            <a href="{% url 'eventtransportation' object.slug %}" class="action-button shadow animate green">Fill in your transportation details</a>
+            <a href="{% url 'eventtransportation' object.slug %}"
+               class="action-button shadow animate green">Fill in your transportation
+                details</a>
         {% endif %}
     {% elif request.user.tshirt_size != None and request.user.profile_picture != None %}
-        <a href="{% url 'eventconfirmation' object.slug %}" class="action-button shadow animate yellow">Confirm your Participation</a>
+        <a href="{% url 'eventconfirmation' object.slug %}"
+           class="action-button shadow animate yellow">Confirm your Participation</a>
     {% else %}
-        <a href="{% url 'userupdate'  %}" class="action-button shadow animate yellow">Complete your User Profile</a>
+        <a href="{% url 'userupdate' %}" class="action-button shadow animate yellow">Complete
+            your User Profile</a>
     {% endif %}
 
 {% elif user.is_authenticated %}
@@ -18,6 +22,7 @@
         <a href="{% url 'eventapplication' object.slug %}"
            class="action-button shadow animate red">Apply to this committment</a>
     {% else %}
-        <a href="{% url 'eventapplication' object.slug %}" class="action-button shadow animate red">Apply to event</a>
+        <a href="{% url 'eventapplication' object.slug %}"
+           class="action-button shadow animate red">Apply to event</a>
     {% endif %}
 {% endif %}

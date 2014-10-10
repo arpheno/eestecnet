@@ -467,6 +467,16 @@ body > header #eestec-text {
     height: 5.0rem
 }
 
+body > header #signin td:last-child {
+    text-align: left
+}
+
+body > header #signin a {
+    color: blue;
+    text-align: left;
+    font-size: 1.0rem
+}
+
 body > header #signin td {
     padding: .5rem
 }
@@ -1085,14 +1095,13 @@ main.home nav h1 {
 
 @media screen and (max-width: 1000px) {
     main.home nav h1 {
-        width: 99%
+        width: 98%
     }
 }
 
 @media screen and (max-width: 1000px) {
     main.home nav {
-        flex: 1 1 100%;
-        margin: 10px
+        flex: 1 1 100%
     }
 }
 

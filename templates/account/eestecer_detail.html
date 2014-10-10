@@ -31,20 +31,20 @@
     </details>
     {% if object.events_organized.all %}
         <details open>
-        <h2>Last events Organized</h2>
-        {% include  'events/events.html' with object_list=object.events_organized.all %}
-    </details>
+            <h2>Last events Organized</h2>
+            {% include  'events/events.html' with object_list=object.events_organized.all %}
+        </details>
     {% endif %}
     {% if object.events.all %}
         <details open>
-        <summary>Last events participated</summary>
-        {% include  'events/events.html' with object_list=object.events.all %}
-    </details>
+            <summary>Last events participated</summary>
+            {% include  'events/events.html' with object_list=object.events.all %}
+        </details>
     {% endif %}
     {% if object.achievements.all %}
         <details open>
-        <summary>Achievements in EESTEC</summary>
-        {% include  'account/achievement_list.html' with object_list=object.achievement_set.all %}
-    </details>
+            <summary>Achievements in EESTEC</summary>
+            {% include  'account/achievement_list.html' with object_list=object.achievement_set.all %}
+        </details>
     {% endif %}
 {% endblock %}

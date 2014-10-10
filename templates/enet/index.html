@@ -32,7 +32,9 @@
     <img src="{% static 'enet/img/EESTEC_logo.svg' %}"/>
     <img id="eestec-text" src="{% static 'enet/images/stretched.svg' %}"/>
     {% if not user.is_authenticated %}
-        {% include 'account/login.html' %}
+        {% block authenticate %}
+            {% include 'account/login.html' %}
+        {% endblock %}
     {% else %}
         <div id="userarea">
             {{ user.as_self }}
@@ -55,7 +57,7 @@
         {% endfor %}
     </ul>
 {% endif %}
-{% block content %}{% include 'enet/home.html' %}{% endblock %}
+{% block maincontent %}{% include 'enet/home.html' %}{% endblock %}
 <div id="sponsors"> {% include 'enet/sponsors.html' %} </div>
 <footer>
     <nav>

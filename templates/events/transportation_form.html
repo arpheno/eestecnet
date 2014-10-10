@@ -2,6 +2,7 @@
 {% block actions %}
     <form id="transport" action="" method="post">{% csrf_token %}
         {{ form.as_p }}
-        <input class="action-button red" type="submit" value="send transportation details" />
+        <input class="action-button red" type="submit"
+               value="send transportation details"/>
     </form>
 {% endblock %}

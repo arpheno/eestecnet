@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'gunicorn',
     'sorl.thumbnail',
     'south',
+    'password_reset'
 )
 
 EMAIL_HOST = 'smtp.gmail.com'

@@ -1,10 +1,10 @@
-{% extends 'enet/figure.html'%}
+{% extends 'enet/figure.html' %}
 {% load thumbnail %}
 {% block class %}event{% endblock %}
 {% block url %}{% url 'event' object.slug %}{% endblock %}
 {% block picture %}
     {% thumbnail object.thumbnail "150x110" crop="center" as im %}
-        <img src="{{ im.url }}"  class="thumbnail">
+        <img src="{{ im.url }}" class="thumbnail">
     {% endthumbnail %}
 {% endblock %}
 {% block caption %}

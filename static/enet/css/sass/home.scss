@@ -123,14 +123,13 @@ main.home {
     h1 {
       flex: initial;
       @media screen and (max-width: 1000px) {
-        width: 99%;
+        width: 98%;
       }
       width: 93%;
     }
     background-color: $eestecgreylight;
     @media screen and (max-width: 1000px) {
       flex: 1 1 100%;
-      margin: 10px;
     }
   }
   #preview {

@@ -4,7 +4,7 @@
     <h1>Create an Account with EESTEC!</h1>
     <form action="" enctype="multipart/form-data" method="post">
         {% csrf_token %}
-    {{ form.as_p }}
+        {{ form.as_p }}
         <input type="submit" value="Create Account!">
     </form>
 {% endblock %}
