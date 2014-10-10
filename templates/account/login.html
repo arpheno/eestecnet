@@ -1,20 +1,17 @@
-    <form method="post" id="signin" action="{% url 'login' %}">{% csrf_token %}
-        Intranet
-        <table>
-            <tr>
-                {% for field in loginform %}
-                    <td>{{ field }}</td>
-                {% endfor %}
-            </tr>
-            <tr>
-                <td><input role="button" type="submit" value="Login"></td>
-                <td><a href="{% url 'register' %}"><input type="button" role="button"
-                                                          value="Register"></a>
-                </td>
-            </tr>
-            <tr>
-                <td><a href="{% url "password_reset_recover" %}">Forgot Password</a></td>
-            </tr>
-        </table>
-    </form>
+<form method="post" id="signin" action="{% url 'login' %}">{% csrf_token %}
+    Intranet
+    <table>
+        <tr>
+            {% for field in loginform %}
+                <td>{{ field }}</td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td><input role="button" type="submit" value="Login"></td>
+            <td><a href="{% url 'register' %}"><input type="button" role="button"
+                                                      value="Register"></a>
+            </td>
+        </tr>
+    </table>
+</form>
 

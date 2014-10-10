@@ -51,10 +51,12 @@
 
 {% if messages %}
     <ul class="messages">
-        {% for message in messages %}
+        {% autoescape off %}
+            {% for message in messages %}
             <li{% if message.tags %}
                 class="{{ message.tags }}"{% endif %}>{{ message }}</li>
         {% endfor %}
+        {% endautoescape %}
     </ul>
 {% endif %}
 {% block maincontent %}{% include 'enet/home.html' %}{% endblock %}

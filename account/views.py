@@ -3,6 +3,7 @@ import random
 
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
+from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.contrib.auth import login, logout
 from django.views.generic import UpdateView, DetailView, CreateView, FormView, View, \
@@ -89,8 +90,9 @@ class Login(FormView):
         messages.add_message(
             self.request,
             messages.INFO,
-            'The user you specified does not exist, or the password provied was '
-            'incorrect'
+            'The user you specified does not exist, or the password provided was '
+            'incorrect. If you have forgotten your password click <a href="' + reverse(
+                "password_reset_recover") + '">  here</a>.'
         )
         return redirect("/")
 
