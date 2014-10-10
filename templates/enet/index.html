@@ -53,13 +53,13 @@
     <ul class="messages">
         {% autoescape off %}
             {% for message in messages %}
-            <li{% if message.tags %}
-                class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
+                <li{% if message.tags %}
+                    class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
         {% endautoescape %}
     </ul>
 {% endif %}
-{% block maincontent %}{% include 'enet/home.html' %}{% endblock %}
+{% block maincontent %}{% endblock %}
 <div id="sponsors"> {% include 'enet/sponsors.html' %} </div>
 <footer>
     <nav>
