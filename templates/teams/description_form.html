@@ -1,0 +1,20 @@
+{% extends 'teams/team_detail.html' %}
+{% load staticfiles %}
+{% block description %}
+    <script type="text/javascript"
+            src="{% static 'suit-redactor/redactor/redactor.min.js' %}"></script>
+    <link href="{% static 'suit-redactor/redactor/redactor.css' %} " type="text/css"
+          media="all" rel="stylesheet">
+    <form action="{{ object.as_url }}description" id="descriptionform"
+          enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update Description">
+    </form>
+    <script type="text/javascript">
+        $(function () {
+            $("#descriptionform").dialog({width: 500, height: 500});
+            $("input[type=submit]").button();
+        });
+    </script>
+{% endblock %}

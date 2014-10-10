@@ -1,0 +1,94 @@
+{% extends "enet/detail.html" %}
+{% load thumbnail %}
+{% block class %}member{% endblock %}
+{% block title %}{{ object }}{% endblock %}
+{% block pictures %}
+    {% for imf in object.images.all %}
+        {% thumbnail imf.image "375x225" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+        {% endthumbnail %}
+    {% endfor %}
+{% endblock %}
+{% block details %}
+    <tr>
+        <td>LC Name</td>
+        <td>{{ object.name }} </td>
+    </tr>
+    <tr>
+        <td>Founded:</td>
+        <td> {{ object.founded }}</td>
+    </tr>
+    <tr>
+        <td>Website:</td>
+        <td>{{ object.website }}</td>
+    </tr>
+    <tr>
+        <td>Number of Members</td>
+        <td>{{ object.member_count }}</td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div class="actions">
+                {% if user.is_authenticated %}
+                    {% block application %}
+                        {% if not user in object.users.all and not user in object.pending_applications %}
+                            {% for event in object.event_set.all %}
+                                {% if event.category == "recruitment" %}
+                                    <a href="{% url 'eventapplication' event.slug %}"
+                                       class="action-button shadow animate red">Join this
+                                        Committment</a>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                        {% endif %}
+                    {% endblock %}
+                {% endif %}
+            </div>
+        </td>
+    </tr>
+
+{% endblock %}
+{% block more %}
+    <details open>
+        <summary>Description</summary>
+        {% autoescape off %}
+            {{ object.description }}
+        {% endautoescape %}
+    </details>
+    <details open>
+        <summary>Last Events</summary>
+        {% include 'events/events.html' with object_list=object.event_set.all %}
+    </details>
+    <details open>
+        <summary>Board</summary>
+        {% include 'account/eestecers.html' with object_list=object.board %}
+    </details>
+    <details open>
+        <summary>Members</summary>
+        {% include 'account/eestecers.html' with object_list=object.users.all %}
+    </details>
+    {% block board %}{% endblock %}
+    {% block description %}{% endblock %}
+    {% block changedetails %}{% endblock %}
+    {% block managemembers %}{% endblock %}
+    {% block teamimages %}{% endblock %}
+    {% block teamapplications %}{% endblock %}
+{% endblock %}
+
+{% block aside %}
+    {% if user in object.privileged %}
+        <h2> Admin Actions</h2>
+        <a href="{{ object.as_url }}board" id="board">Choose new board</a>
+        <a href="{{ object.as_url }}description" id="board">Change Description</a>
+        <a href="{{ object.as_url }}details" id="board">Change Details</a>
+        <a href="{{ object.as_url }}members" id="board">Manage members</a>
+        <a href="{{ object.as_url }}images" id="board"> Images </a>
+        {% if object.pending_applications %}
+            <a href="{{ object.as_url }}/teamapplications"
+               id="board">View {{ object.pending_applications.count }}Applications </a>
+        {% endif %}
+        <script type="text/javascript">
+            $("a#board").button();
+        </script>
+    {% endif %}
+{% endblock %}

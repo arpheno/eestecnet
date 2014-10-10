@@ -1,0 +1,40 @@
+{% extends 'enet/split.html' %}
+{% load staticfiles %}
+{% block main %}
+    <style>#map {
+        width: 80%;
+        height: 350px;
+    }</style>
+    <link rel="stylesheet" href="{% static 'enet/leaflet.css' %}"/>
+    <script src="{% static 'enet/leaflet.js' %}"></script>
+    <script src="{% static 'enet/testleaf.js' %}"></script>
+    <script>
+        $(function () {
+            {% for object in object_list %}
+                var mark = new L.Marker(new L.LatLng({{ object.lat }}, {{  object.lng}}), {title: "{{ object }}"});
+                mark.on('click',
+                        function () {
+                            window.location = "{{ object.as_url }}";
+                        });
+                map.addLayer(mark);
+            {% endfor %}
+        });
+    </script>
+    <h1>Members</h1>
+    {% if object_list.first.is_lc %}
+        <div id="map">
+        </div>
+        <article class="members">
+            {% include 'teams/teams.html' with object_list=object_list %}
+        </article>
+    {% else %}
+
+        <article class="members">
+            <ul>
+                {% for object in object_list %}
+                    <li>{% include 'teams/international_team.html' with object=object %}</li>
+                {% endfor %}
+            </ul>
+        </article>
+    {% endif %}
+{% endblock %}
