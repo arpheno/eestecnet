@@ -2,6 +2,8 @@ import random
 import string
 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.forms import ImageField
+from form_utils.widgets import ImageWidget
 from mailqueue.models import MailerMessage
 
 
@@ -40,6 +42,7 @@ class EestecerChangeForm(UserChangeForm):
     the user, but replaces the password field with admin's
     password hash display field.
     """
+    profile_picture = ImageField(widget=ImageWidget())
 
     def __init__(self, *args, **kargs):
         super(EestecerChangeForm, self).__init__(*args, **kargs)

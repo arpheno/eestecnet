@@ -7,7 +7,9 @@ from django.shortcuts import redirect
 from django.contrib.auth import login, logout
 from django.views.generic import UpdateView, DetailView, CreateView, FormView, View, \
     ListView
-from django.forms import ModelForm, TextInput
+from django.forms import TextInput
+from form_utils.forms import BetterModelForm
+from form_utils.widgets import ImageWidget
 
 from account.forms import EestecerCreationForm
 from account.models import Eestecer
@@ -32,7 +34,7 @@ class EestecerProfile(DetailView):
     template_name= "account/eestecer_detail.html"
 
 
-class EestecerUpdateForm(ModelForm):
+class EestecerUpdateForm(BetterModelForm):
     class Meta:
         model=Eestecer
         fields=('first_name','middle_name','last_name','second_last_name','date_of_birth',
@@ -41,7 +43,9 @@ class EestecerUpdateForm(ModelForm):
         widgets = {
             'date_of_birth': TextInput(attrs={'class': 'date'}),
             'departure': TextInput(attrs={'class': 'date'}),
-            }
+            'profile_picture': ImageWidget(
+                template='<span>%(image)s<br />%(input)s</span>'),
+        }
 
 class EestecerUpdate(UpdateView):
     model=Eestecer
