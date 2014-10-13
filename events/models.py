@@ -2,10 +2,12 @@ import random
 import sha
 
 from autoslug import AutoSlugField
+from autoslug.utils import slugify
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
+
 
 
 # Create your models here.
@@ -93,6 +95,11 @@ class Event(models.Model):
     def as_html(self):
         return render_to_string('events/event.html', {'object': self})
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.slug = slugify(self.name)
+        super(Event, self).save(force_insert, force_update, using, update_fields)
+
 
     def clean(self):
         if self.end_date:
@@ -177,32 +184,40 @@ class Application(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-                if self.target.category == "recruitment":
-                    if self.accepted:
-                        Membership.objects.create(
-                            team=self.target.organizing_committee.all()[0],
-                            user=self.applicant).save()
-                        self.delete()
-                    else:
-                        super(Application,self).save()
-                else:
-                    if self.pk==None:
-                        pass
-                        #if timezone.now() > make_aware(self.target.deadline):#todo
-                         #   return
-                    if self.accepted:
-                        participation = Participation.objects.create(target=self.target, participant=self.applicant)
-                        participation.save()
-                        message=MailerMessage()
-                        message.subject = "Congratulations! You were accepted to " + participation.target.name
-                        message.content="Dear " +participation.participant.first_name + "\nPlease visit "+ reverse('eventconfirmation',kwargs={'slug':participation.target.slug})+"to confirm your participation to the event.\n Thank you."
-                        message.from_address="eestecnet@gmail.com",
-                        message.to_address = self.applicant.email
-                        message.save()
+        if self.target.category == "recruitment":
+            if self.accepted:
+                Membership.objects.create(
+                    team=self.target.organizing_committee.all()[0],
+                    user=self.applicant).save()
+                self.delete()
+            else:
+                super(Application, self).save()
+        else:
+            if self.pk == None:
+                pass
+                #if timezone.now() > make_aware(self.target.deadline):#todo
+                #   return
+            if self.accepted:
+                participation = Participation.objects.create(target=self.target,
+                                                             participant=self.applicant)
+                participation.save()
+                message = MailerMessage()
+                message.subject = "Congratulations! You were accepted to " + \
+                                  participation.target.name
+                message.content = "Dear " + participation.participant.first_name + \
+                                  "\nPlease visit " + reverse(
+                    'eventconfirmation', kwargs={
+                    'slug': participation.target.slug}) + "to confirm your " \
+                                                          "participation to the event" \
+                                                          ".\n Thank you."
+                message.from_address = "eestecnet@gmail.com",
+                message.to_address = self.applicant.email
+                message.save()
 
-                        self.delete()
-                    else:
-                        super(Application,self).save()
+                self.delete()
+            else:
+                super(Application, self).save()
+
 
 class IncomingApplication(Application):
     class Meta:

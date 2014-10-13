@@ -1,4 +1,5 @@
 from autoslug import AutoSlugField
+from autoslug.utils import slugify
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -75,6 +76,7 @@ class Team(models.Model):
     """When the :class:`Member` was first established"""
     def save(self, *args,**kwargs):
         try:
+            self.slug = slugify(self.name)
             geocoder = Geocoder()
             address = self.address
             results, status_code = geocoder.geocode({'address': self.name })
