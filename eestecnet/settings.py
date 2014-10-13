@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'kombu.transport.django',
     'djcelery',
     'mailqueue',
+    'froala_editor',
     'news',
     'elfinder',
     'account',
@@ -169,4 +170,5 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+FROALA_INCLUDE_JQUERY = False
 

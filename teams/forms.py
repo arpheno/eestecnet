@@ -1,9 +1,9 @@
 from django.forms import Form, ModelMultipleChoiceField, ModelForm
 from extra_views import InlineFormSet
-from suit_redactor.widgets import RedactorWidget
 
 from account.models import Eestecer
 from news.models import Membership
+from news.widgets import EESTECEditor
 from teams.models import Team, MemberImage
 from teams.widgets import MultiSelectWidget
 
@@ -23,9 +23,8 @@ class DescriptionForm(ModelForm):
     class Meta:
         model = Team
         fields = ('description',)
-        widgets = {'description': RedactorWidget(
-            editor_options={'lang': 'en', 'iframe': 'true',
-                            'css': "/static/enet/css/wysiwyg.css"})}
+        widgets = {'description': EESTECEditor(include_jquery=False)}
+        #'css': "/static/enet/css/wysiwyg.css"})}
 
 
 class MembershipForm(ModelForm):

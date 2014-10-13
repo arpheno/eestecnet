@@ -47,6 +47,7 @@ urlpatterns = patterns(
     url(r'^activities/*$', TemplateView.as_view(template_name='enet/activities.html')),
     url(r'^about/*$', TemplateView.as_view(template_name='enet/about.html')),
     url(r'^newsletter/*$', newsletter, name='newsletter'),
+    url(r'^froala_editor/', include('froala_editor.urls')),
     url(r'^materials/', include('elfinder.urls')),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': MEDIA_ROOT}),

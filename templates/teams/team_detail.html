@@ -50,10 +50,12 @@
 {% endblock %}
 {% block more %}
     <details open>
-        <summary>Description</summary>
+        {% block description %}
+            <summary>Description</summary>
         {% autoescape off %}
             {{ object.description }}
         {% endautoescape %}
+        {% endblock %}
     </details>
     <details open>
         <summary>Last Events</summary>
@@ -68,7 +70,6 @@
         {% include 'account/eestecers.html' with object_list=object.users.all %}
     </details>
     {% block board %}{% endblock %}
-    {% block description %}{% endblock %}
     {% block changedetails %}{% endblock %}
     {% block managemembers %}{% endblock %}
     {% block teamimages %}{% endblock %}
