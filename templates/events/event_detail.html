@@ -42,10 +42,12 @@
 {% endblock %}
 {% block more %}
     <details open>
-        <summary>Description</summary>
+        {% block description %}
+            <summary>Description</summary>
         {% autoescape off %}
             {{ object.description }}
         {% endautoescape %}
+        {% endblock %}
     </details>
     <details>
         <summary>Organizers</summary>
@@ -55,4 +57,23 @@
         <summary>Participants</summary>
         {% include 'account/eestecers.html' with object_list=object.participants.all %}
     </details>
+    {% block changedetails %}{% endblock %}
+    {% block images %}{% endblock %}
+{% endblock %}
+{% block aside %}
+    {% if user in object.organizers.all %}
+        <h2> Admin Actions</h2>
+        <a href="{% url 'eventdescription' slug=object.slug %}" class="teamadmin">Change
+            Description</a>
+        <a href="{% url 'eventchangedetails' slug=object.slug %}" class="teamadmin">Change
+            Details</a>
+        <a href="{% url 'eventimages' slug=object.slug %}" class="teamadmin"> Images </a>
+        {% if object.pending_applications %}
+            <a href="{{ object.as_url }}/teamapplications"
+               class="teamadmin">View {{ object.pending_applications.count }}Applications </a>
+        {% endif %}
+        <script type="text/javascript">
+            $("a.teamadmin").button();
+        </script>
+    {% endif %}
 {% endblock %}

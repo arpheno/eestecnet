@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
+
 # Create your models here.
 from django.db import models
 from mailqueue.models import MailerMessage
@@ -92,13 +93,14 @@ class Event(models.Model):
     def as_html(self):
         return render_to_string('events/event.html', {'object': self})
 
+
     def clean(self):
         if self.end_date:
             if self.start_date > self.end_date:
                 raise ValidationError("The event may not begin after it ends.")
             if self.end_date < self.start_date:
                 raise ValidationError("The event may not end before it starts.")
-            if self.deadline > self.end_date:
+            if self.deadline.date() > self.end_date:
                 raise ValidationError(
                     "The event deadline must be before the event ends.")
 
@@ -212,3 +214,6 @@ class OutgoingApplication(Application):
 class EventImage(models.Model):
     property = models.ForeignKey(Event, related_name='images')
     image = models.ImageField(upload_to="eventimages")
+
+    def __unicode__(self):
+        return render_to_string('teams/thumbnailed_image.html', {'object': self})

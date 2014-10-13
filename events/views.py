@@ -10,8 +10,18 @@ from django.shortcuts import redirect, get_object_or_404
 
 # Create your views here.
 from django.utils import timezone
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, View
+from extra_views import UpdateWithInlinesView
+from form_utils.forms import BetterModelForm
+from form_utils.widgets import ImageWidget
+from events.forms import DescriptionForm, EventImageInline
 from events.models import Event, Application, Participation, Transportation
+
+
+class EventMixin(View):
+    def get_success_url(self):
+        return reverse("event", kwargs=self.kwargs)
+
 
 class HTML5Input(widgets.Input):
     def __init__(self, type, attrs):
@@ -147,3 +157,33 @@ class FillInTransport(CreateView):
             'Thank you for filling in your transportation details.')
         return redirect(reverse('event', kwargs=self.kwargs))
 
+
+class ChangeDetails(EventMixin, UpdateView):
+    template_name = 'teams/change_details_form.html'
+    model = Event
+    fields = (
+    'name', 'participation_fee', 'start_date', 'end_date', 'deadline', 'location',
+    'scope', 'category')
+
+
+class ChangeDescription(EventMixin, UpdateView):
+    template_name = 'events/description_form.html'
+    form_class = DescriptionForm
+    model = Event
+
+
+class EventImageForm(BetterModelForm):
+    class Meta:
+        model = Event
+        fields = ('thumbnail',)
+        widgets = {
+            'thumbnail': ImageWidget()
+        }
+
+
+class EventImages(EventMixin, UpdateWithInlinesView):
+    model = Event
+    template_name = 'events/event_images_form.html'
+    form_class = EventImageForm
+    #    widgets= {'thumbnail': ImageWidget()}
+    inlines = [EventImageInline]

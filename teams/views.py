@@ -4,6 +4,8 @@ from django.core.urlresolvers import reverse
 # Create your views here.
 from django.views.generic import ListView, FormView, UpdateView, View, TemplateView
 from extra_views import UpdateWithInlinesView, InlineFormSet
+from form_utils.forms import BetterModelForm
+from form_utils.widgets import ImageWidget
 from events.models import Event, Application
 from teams.forms import MembershipInline, MemberImageInline, DescriptionForm, BoardForm
 from teams.models import Team, Board
@@ -70,15 +72,21 @@ class TeamApplications(TeamMixin, UpdateWithInlinesView):
                                  organizing_committee__slug=self.kwargs['slug'])
 
 
+class TeamImageForm(BetterModelForm):
+    class Meta:
+        model = Team
+        fields = ('thumbnail',)
+        widgets = {
+            'thumbnail': ImageWidget()
+        }
+
+
 class TeamImages(TeamMixin, UpdateWithInlinesView):
     model = Team
     template_name = 'teams/team_images_form.html'
     fields = ('thumbnail',)
     inlines = [MemberImageInline]
-
-    def get_context_data(self, **kwargs):
-        context = super(TeamImages, self).get_context_data(**kwargs)
-        return context
+    form_class = TeamImageForm
 
 
 class ChangeDetails(TeamMixin, UpdateView):

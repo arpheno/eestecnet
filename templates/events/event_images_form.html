@@ -1,6 +1,6 @@
-{% extends 'teams/team_detail.html' %}
-{% block teamimages %}
-    <form action="{{ object.as_url }}images" id="teamimagesform"
+{% extends 'events/event_detail.html' %}
+{% block images %}
+    <form action="{% url 'eventimages' slug=object.slug %}" id="eventimagesform"
           enctype="multipart/form-data" method="post">
         {% csrf_token %}
         {{ form.as_p }}
@@ -36,7 +36,7 @@
     </form>
     <script type="text/javascript">
         $(function () {
-            $("#teamimagesform").dialog({width: 600, height: 500});
+            $("#eventimagesform").dialog({width: 600, height: 500});
             $("input[type=submit]").button();
         });
     </script>
