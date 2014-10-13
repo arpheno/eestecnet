@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 
+
 # Create your models here.
 from django.db import models
 from mailqueue.models import MailerMessage
@@ -77,9 +78,11 @@ class Event(models.Model):
     """Optional: Location of the event."""
     start_date = models.DateField(help_text=_("When does your Event start?"))
     """Start of the event."""
-    end_date = models.DateField(help_text=_("When does your Event end?"))
+    end_date = models.DateField(help_text=_("When does your Event end?"), null=True,
+                                blank=True)
     """End of the event."""
-    deadline = models.DateTimeField(help_text=_("Until when can participants apply?"))
+    deadline = models.DateTimeField(help_text=_("Until when can participants apply?"),
+                                    null=True, blank=True)
     """Deadline until no more applications will be accepted."""
 
     #Content
