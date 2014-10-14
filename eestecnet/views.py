@@ -9,6 +9,7 @@ from eestecnet import *
 def init(request):
     create_local_admins()
     create_eestec_lcs()
+    create_eestec_teams()
     create_eestec_news()
     create_eestec_people()
     create_inktronics()

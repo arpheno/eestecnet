@@ -20,15 +20,15 @@
             {% endfor %}
         });
     </script>
-    <h1>Members</h1>
     {% if object_list.first.is_lc %}
+        <h1>Members</h1>
         <div id="map">
         </div>
         <article class="members">
             {% include 'teams/teams.html' with object_list=object_list %}
         </article>
     {% else %}
-
+        <h1>International Teams and Bodies</h1>
         <article class="members">
             <ul>
                 {% for object in object_list %}

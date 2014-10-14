@@ -15,10 +15,10 @@ from news.models import Entry, Membership
 
 
 def create_eestec_news():
-    cng=Entry.objects.create(headline="Congress in athens",
-                         content =open("eestecnet/news/congress.txt").read())
-    mw=Entry.objects.create(headline="Mw in Munich",
-                         content =open("eestecnet/news/mw.txt").read())
+    cng = Entry.objects.create(headline="Congress in athens",
+                               content=open("eestecnet/news/congress.txt").read())
+    mw = Entry.objects.create(headline="Mw in Munich",
+                              content=open("eestecnet/news/mw.txt").read())
 
     with open('eestecnet/news/congress.jpg', 'rb') as doc_file:
         cng.entry_image.save("cng.jpg", File(doc_file), save=True)
@@ -28,6 +28,63 @@ def create_eestec_news():
     mw.save()
     mw.author.add(Team.objects.get(slug='munich'))
     cng.author.add(Team.objects.get(slug='athens'))
+
+
+def create_eestec_teams():
+    Team.objects.create(name='Training Team',
+                        type='team',
+                        teamstub='In our trainer division we lay the foundation for the \
+                        coming generations of EESTECers by educating and passing on the \
+                        experience and skills we acquired.',
+
+
+    )
+    Team.objects.create(name='Magazine Team',
+                        type='team',
+                        teamstub='Our Magazine Team is responsible for \
+                         publishing issues of  EESTEC Magazine twice a year, on the \
+                         occasion of EESTEC Chairpersons’ Meeting and the EESTEC '
+                                 'Annual Congress.',
+    )
+    Team.objects.create(name='Design Team',
+                        type='team',
+                        teamstub='Our Design Team is responsible for designing EESTEC '
+                                 'promotional\
+                         materials and also this very website, based  on the rules in '
+                                 'our Branding Guide.'
+    )
+    Team.objects.create(name='IT Team',
+                        type='team',
+                        teamstub='Our IT Team is responsible for providing IT '
+                                 'solutions for EESTEC needs.'
+                                 'It is responsible for providing the maintaining '
+                                 'resources such as the  \
+                                 EESTEC website and the mailing lists.'
+    )
+    Team.objects.create(name=' International Bureau',
+                        type='team',
+                        teamstub='The International Bureau is the body responsible for '
+                                 'keeping'
+                                 ' the history and records of the  Association. It '
+                                 'gathers reports and other data concerning all events '
+                                 'and activities, sent by the   Local Committees or '
+                                 'other'
+                                 ' bodies of the Association.'
+    )
+    Team.objects.create(name='Yearbook Committee',
+                        type='team',
+                        teamstub='Yearbook Committee is responsible for publishing '
+                                 'EESTEC'
+                                 ' Yearbook, a yearly publication   which gathers '
+                                 'information about all the events and activities '
+                                 'carried'
+                                 ' out in EESTEC during the year.'
+    )
+    for team in Team.objects.filter(type='team'):
+        team.description = open("eestecnet/team/" + team.slug + ".txt").read()
+        with open('eestecnet/team/' + team.slug + '.jpg', 'rb') as doc_file:
+            team.thumbnail.save(team.slug + ".jpg", File(doc_file), save=True)
+        team.save()
 
 
 def create_eestec_lcs():
@@ -196,37 +253,39 @@ def create_eestec_lcs():
     Team.objects.create(name='Zurich',
                         founded=1986,
                         website="http://eestec.ch",
-                        address=u"AMIV an der ETH Zuerich\nEESTEC LC Zurich\nCAB E37\nUniversitätsstrasse 6\n8092 Zürich\nSwitzerland")
-    for lc in Team.objects.all():
-        lc.description=open("eestecnet/lc/"+lc.slug+".txt").read()
+                        address=u"AMIV an der ETH Zuerich\nEESTEC LC Zurich\nCAB "
+                                u"E37\nUniversitätsstrasse 6\n8092 Zürich\nSwitzerland")
+    for lc in Team.objects.filter(type="lc"):
+        lc.description = open("eestecnet/lc/" + lc.slug + ".txt").read()
         try:
-            with open('eestecnet/lc/'+lc.slug+'.jpg', 'rb') as doc_file:
-                lc.thumbnail.save(lc.slug+".jpg", File(doc_file), save=True)
+            with open('eestecnet/lc/' + lc.slug + '.jpg', 'rb') as doc_file:
+                lc.thumbnail.save(lc.slug + ".jpg", File(doc_file), save=True)
         except:
             with open('eestecnet/lc/test.png', 'rb') as doc_file:
-                lc.thumbnail.save(lc.slug+".png", File(doc_file), save=True)
+                lc.thumbnail.save(lc.slug + ".png", File(doc_file), save=True)
         try:
-            lc.thumbsource=open("eestecnet/lc/"+lc.slug+"-credit.txt").read()
+            lc.thumbsource = open("eestecnet/lc/" + lc.slug + "-credit.txt").read()
         except:
             pass
         lc.save()
+
 
 def setup_event_tests():
     Eestecer.objects.create_superuser(
         "admin@eestec.net",
         "test",
         first_name="specific")
-    user=Eestecer.objects.create_user(
+    user = Eestecer.objects.create_user(
         "user@eestec.net",
         "test",
         first_name="random")
     user.save()
-    outg=Eestecer.objects.create_user(
+    outg = Eestecer.objects.create_user(
         "outgoing@eestec.net",
         "outgoing",
         first_name="outgoing")
     outg.save()
-    inc=Eestecer.objects.create_user(
+    inc = Eestecer.objects.create_user(
         "incoming@eestec.net",
         "incoming",
         first_name="incoming")
@@ -242,127 +301,152 @@ def setup_event_tests():
     to = Team.objects.create(name='outtest',
                              founded=1986,
                              website="http://eestec.ch",
-                             address=u"AMIV an der ETH Zuerich\nEESTEC LC Zurich\nCAB E37\nUniversitätsstrasse 6\n8092 Zürich\nSwitzerland")
+                             address=u"AMIV an der ETH Zuerich\nEESTEC LC Zurich\nCAB "
+                                     u"E37\nUniversitätsstrasse 6\n8092 "
+                                     u"Zürich\nSwitzerland")
     to.save()
     to.users.add(user, outg)
     to.privileged.add(outg)
     to.save()
-    ev=Event.objects.create(name="T4T",
-                            summary="Nice event",
-                            description="Cool thing",
-                            start_date=datetime.now(),
-                            category="workshop",
-                            scope="international",
-                            deadline=datetime.now()+timedelta(days=1),
-                            )
+    ev = Event.objects.create(name="T4T",
+                              summary="Nice event",
+                              description="Cool thing",
+                              start_date=datetime.now(),
+                              category="workshop",
+                              scope="international",
+                              deadline=datetime.now() + timedelta(days=1),
+    )
     ev.save()
     ev.organizing_committee.add(tm)
-    ap=Application.objects.create(target=ev,applicant=user)
+    ap = Application.objects.create(target=ev, applicant=user)
     ap.save()
 
+
 def create_eestec_people():
-        ag=Eestecer.objects.create(email="random1@gmail.com",
-                                password="test",
-                                first_name="alexis",
-                                last_name="gonzales",
-                                second_last_name="arguello")
-        aa=Eestecer.objects.create(email="random2@gmail.com",
-                                password="test",
-                                first_name="andreas",
-                                last_name="albrecht")
-        ab=Eestecer.objects.create_superuser(email="aslihanbener@gmail.com",
-                                password="test",
-                                first_name="aslihan",
-                                last_name="bener")
-        bk=Eestecer.objects.create(email="random4@gmail.com",
-                                password="test",
-                                first_name="bartosz",
-                                last_name="kawlatow")
-        cm=Eestecer.objects.create(email="random5@gmail.com",
-                                password="test",
-                                first_name="clemens",
-                                last_name="mattersdorfer")
-        mp=Eestecer.objects.create(email="random7@gmail.com",
-                                password="test",
-                                first_name="marcus",
-                                last_name="pforte")
-        map=Eestecer.objects.create(email="martapolec@gmail.com",
-                                   password="test",
-                                   first_name="marta",
-                                   last_name="polec")
-        ez=Eestecer.objects.create(email="random6@gmail.com",
-                                password="test",
-                                first_name="elzbieta",
-                                last_name="zimolag")
-        ma=Eestecer.objects.create(email="random8@gmail.com",
-                                password="test",
-                                first_name="melis",
-                                last_name="aca")
-        ra=Eestecer.objects.create(email="randomrupter@gmail.com",
-                                password="test",
-                                first_name="rupert",
-                                last_name="amann")
-        sw=Eestecer.objects.create_superuser(email="arpheno@gmail.com",
-                                password="test",
-                                first_name="sebastian",
-                                middle_name='stanislaw',
-                                last_name="wozny")
-        for user in Eestecer.objects.all():
-            with open('eestecnet/people/'+user.slug+'.jpg', 'rb') as doc_file:
-                user.profile_picture.save(user.slug+".jpg", File(doc_file), save=True)
-            user.save()
-        munich = Team.objects.get(slug='munich')
-        mm=[ag,aa,cm,ez,mp,ma,ra,sw]
-        for user in mm:
-            Membership.objects.create(team=munich, user=user).save()
-        mb = [cm, mp, ma, ra]
-        for membership in Membership.objects.filter(team=munich, user__in=mb):
-            membership.board = True
-            membership.save()
-        Team.objects.get(slug='munich').save()
-        munich = Team.objects.get(slug='munich')
-        for i in range(1,3):
-            a=MemberImage.objects.create(property=munich)
-            with open('eestecnet/lc/munich/'+str(i)+'.jpg', 'rb') as doc_file:
-                a.image.save(str(i)+".jpg", File(doc_file), save=True)
-            a.save()
+    ag = Eestecer.objects.create(email="random1@gmail.com",
+                                 password="test",
+                                 first_name="alexis",
+                                 last_name="gonzales",
+                                 second_last_name="arguello")
+    aa = Eestecer.objects.create(email="random2@gmail.com",
+                                 password="test",
+                                 first_name="andreas",
+                                 last_name="albrecht")
+    ab = Eestecer.objects.create_superuser(email="aslihanbener@gmail.com",
+                                           password="test",
+                                           first_name="aslihan",
+                                           last_name="bener")
+    bk = Eestecer.objects.create(email="random4@gmail.com",
+                                 password="test",
+                                 first_name="bartosz",
+                                 last_name="kawlatow")
+    cm = Eestecer.objects.create(email="random5@gmail.com",
+                                 password="test",
+                                 first_name="clemens",
+                                 last_name="mattersdorfer")
+    mp = Eestecer.objects.create(email="random7@gmail.com",
+                                 password="test",
+                                 first_name="marcus",
+                                 last_name="pforte")
+    map = Eestecer.objects.create(email="martapolec@gmail.com",
+                                  password="test",
+                                  first_name="marta",
+                                  last_name="polec")
+    ez = Eestecer.objects.create(email="random6@gmail.com",
+                                 password="test",
+                                 first_name="elzbieta",
+                                 last_name="zimolag")
+    ma = Eestecer.objects.create(email="random8@gmail.com",
+                                 password="test",
+                                 first_name="melis",
+                                 last_name="aca")
+    ra = Eestecer.objects.create(email="randomrupter@gmail.com",
+                                 password="test",
+                                 first_name="rupert",
+                                 last_name="amann")
+    sw = Eestecer.objects.create_superuser(email="arpheno@gmail.com",
+                                           password="test",
+                                           first_name="sebastian",
+                                           middle_name='stanislaw',
+                                           last_name="wozny")
+    for user in Eestecer.objects.all():
+        with open('eestecnet/people/' + user.slug + '.jpg', 'rb') as doc_file:
+            user.profile_picture.save(user.slug + ".jpg", File(doc_file), save=True)
+        user.save()
+    munich = Team.objects.get(slug='munich')
+    mm = [ag, aa, cm, ez, mp, ma, ra, sw]
+    for user in mm:
+        Membership.objects.create(team=munich, user=user).save()
+    mb = [cm, mp, ma, ra]
+    for membership in Membership.objects.filter(team=munich, user__in=mb):
+        membership.board = True
+        membership.save()
+    Team.objects.get(slug='munich').save()
+    munich = Team.objects.get(slug='munich')
+    for i in range(1, 3):
+        a = MemberImage.objects.create(property=munich)
+        with open('eestecnet/lc/munich/' + str(i) + '.jpg', 'rb') as doc_file:
+            a.image.save(str(i) + ".jpg", File(doc_file), save=True)
+        a.save()
+
+
 def create_inktronics():
-    ink=Event.objects.create(name='Inktronics',
-    deadline=timezone.now()+timedelta(days=10),
-    start_date=timezone.now(),
-    end_date=timezone.now(),
-    category="workshop",
-    max_participants=16,
-    description=open('eestecnet/event/inktronics/desc.txt').read(),
-    summary="Learn everything about printed and flexible electronics in Munich!",
-    scope="international")
+    ink = Event.objects.create(name='Inktronics',
+                               deadline=timezone.now() + timedelta(days=10),
+                               start_date=timezone.now(),
+                               end_date=timezone.now(),
+                               category="workshop",
+                               max_participants=16,
+                               description=open(
+                                   'eestecnet/event/inktronics/desc.txt').read(),
+                               summary="Learn everything about printed and flexible "
+                                       "electronics in Munich!",
+                               scope="international")
     with open('eestecnet/event/inktronics.jpg', 'rb') as doc_file:
-        ink.thumbnail.save('inktronics.jpg',File(doc_file),save=True)
+        ink.thumbnail.save('inktronics.jpg', File(doc_file), save=True)
     ink.save()
-    for i in range(1,4):
-        a=EventImage.objects.create(property=ink)
-        with open('eestecnet/event/inktronics/'+str(i)+'.jpg', 'rb') as doc_file:
-            a.image.save(str(i)+".jpg", File(doc_file), save=True)
+    for i in range(1, 4):
+        a = EventImage.objects.create(property=ink)
+        with open('eestecnet/event/inktronics/' + str(i) + '.jpg', 'rb') as doc_file:
+            a.image.save(str(i) + ".jpg", File(doc_file), save=True)
         a.save()
     ink.organizing_committee.add(Team.objects.get(slug='munich'))
     ink.organizers.add(Eestecer.objects.get(first_name='sebastian'))
     ink.organizers.add(Eestecer.objects.get(first_name='andreas'))
     ink.save()
 
+
 def create_positions_for_achievements():
-    Position.objects.create(name='Main Organizer',description="Was majorly responsible for the organization of an Event.").save()
-    Position.objects.create(name='Trainer Status',description="Acquired the status of \"Certified EESTEC Trainer\".").save()
-    Position.objects.create(name='International Team Coordinator',description="Coordinated the efforts of an International Team during a mandate.").save()
-    Position.objects.create(name='Chairperson',description="Held the Chaiperson position in a commitment.").save()
-    Position.objects.create(name='Contact person',description="Held the Contact Person position in a commitment.").save()
-    Position.objects.create(name='Treasurer',description="Held the Treasurer position in a commitment.").save()
-    Position.objects.create(name='Public Relations responsible',description="Was responsible for the public relations in a commitment.").save()
-    Position.objects.create(name='IT responsible',description="Was responsible for the IT department in a commitment.").save()
-    Position.objects.create(name='Fundraising responsible',description="Was responsible for the Fundraising department in a commitment.").save()
-    Position.objects.create(name='Publication and Administration responsible',description="Was responsible for the Publications and Administrations department in a commitment.").save()
+    Position.objects.create(name='Main Organizer',
+                            description="Was majorly responsible for the organization "
+                                        "of an Event.").save()
+    Position.objects.create(name='Trainer Status',
+                            description="Acquired the status of \"Certified EESTEC "
+                                        "Trainer\".").save()
+    Position.objects.create(name='International Team Coordinator',
+                            description="Coordinated the efforts of an International "
+                                        "Team during a mandate.").save()
+    Position.objects.create(name='Chairperson',
+                            description="Held the Chaiperson position in a commitment"
+                                        ".").save()
+    Position.objects.create(name='Contact person',
+                            description="Held the Contact Person position in a "
+                                        "commitment.").save()
+    Position.objects.create(name='Treasurer',
+                            description="Held the Treasurer position in a commitment"
+                                        ".").save()
+    Position.objects.create(name='Public Relations responsible',
+                            description="Was responsible for the public relations in a "
+                                        "commitment.").save()
+    Position.objects.create(name='IT responsible',
+                            description="Was responsible for the IT department in a commitment.").save()
+    Position.objects.create(name='Fundraising responsible',
+                            description="Was responsible for the Fundraising department in a commitment.").save()
+    Position.objects.create(name='Publication and Administration responsible',
+                            description="Was responsible for the Publications and Administrations department in a commitment.").save()
+
 
 def create_local_admins():
-
     """
     Creates the localadmin gruop
    """
@@ -373,8 +457,9 @@ def create_local_admins():
         'change_incomingapplication', 'delete_incomingapplication',
         'change_incomingapplication', 'delete_incomingapplication',
         'change_outgoingapplication',
-        'change_participation','delete_participation',
+        'change_participation', 'delete_participation',
         'change_team']:
+        print perm
         admins.permissions.add(Permission.objects.get(codename=perm))
         admins.save()
 
