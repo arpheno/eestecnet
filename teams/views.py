@@ -25,6 +25,10 @@ class TeamList(ListView):
         return Team.objects.filter(type='team')
 
 
+class History(TemplateView):
+    template_name = "enet/history.html"
+
+
 class Governance(TemplateView):
     template_name = "teams/governance.html"
 

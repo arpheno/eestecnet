@@ -8,7 +8,7 @@ from account.views import EestecerProfile, EestecerUpdate, EestecerCreate, \
     Login, Logout, EestecerList, complete
 from eestecnet.settings import MEDIA_ROOT
 from eestecnet.views import newsletter
-from teams.views import CommitmentList, TeamList, Governance
+from teams.views import CommitmentList, TeamList, Governance, History
 from news.models import Entry
 from news.views import home
 
@@ -28,6 +28,7 @@ urlpatterns = patterns(
         name='news'),
     url(r'^events/', include('events.urls')),
     url(r'^governance/*$', Governance.as_view()),
+    url(r'^history/*$', History.as_view()),
     url(r'^teams/$', TeamList.as_view(), name='teams'),
     url(r'^cities/*$', CommitmentList.as_view(), name='cities'),
     url(r'^cities/', include('teams.urls', namespace="cities")),
