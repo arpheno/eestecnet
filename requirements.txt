@@ -25,6 +25,7 @@ haystack==0.15
 kombu==3.0.23
 libmagic==1.0
 python-magic==0.4.6
+python-memcached==1.53
 python-ptrace==0.8
 pytz==2014.7
 six==1.5.2
