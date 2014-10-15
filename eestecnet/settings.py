@@ -45,7 +45,6 @@ INSTALLED_APPS = (
     'pages',
     'gunicorn',
     'sorl.thumbnail',
-    'south',
     'password_reset',
     'form_utils'
 )
