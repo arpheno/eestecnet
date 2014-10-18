@@ -134,6 +134,7 @@ LOGGING = {
 }
 AUTH_USER_MODEL = 'account.Eestecer'
 ROOT_URLCONF = 'eestecnet.urls'
+VERSION = 1
 
 WSGI_APPLICATION = 'eestecnet.wsgi.application'
 

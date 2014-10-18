@@ -8,7 +8,11 @@ https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 """
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "eestecnet.settings")
 
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "eestecnet.settings")
+import djcelery
+
+djcelery.setup_loader()
 from django.core.wsgi import get_wsgi_application
+
 application = get_wsgi_application()
