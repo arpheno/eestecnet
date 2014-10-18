@@ -4,14 +4,37 @@ from datetime import timedelta
 
 from django.contrib.auth.models import Group, Permission
 from django.core.files import File
+from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.utils.datetime_safe import datetime
 
 from account.models import Eestecer, Position
 from eestecnet import settings
 from events.models import Event, Application, EventImage
+from pages.models import Stub, Page
 from teams.models import Team, MemberImage
 from news.models import Entry, Membership
+
+
+def create_stubs():
+    for part in ['conference', 'teams', 'competition', 'events']:
+        stub = Stub.objects.create(
+            content=open("eestecnet/stub/" + part + ".txt").read(),
+            title=open("eestecnet/stub/" + part + "_head.txt").read(),
+            link=reverse(part),
+            group="activities"
+        )
+        with open('eestecnet/stub/' + part + '.jpg', 'rb') as doc_file:
+            stub.image.save(part + ".jpg", File(doc_file), save=True)
+    for part in ['news', 'history', 'cities', 'documents', 'governance']:
+        stub = Stub.objects.create(
+            content=open("eestecnet/stub/" + part + ".txt").read(),
+            title=open("eestecnet/stub/" + part + "_head.txt").read(),
+            link=reverse(part),
+            group="about"
+        )
+        with open('eestecnet/stub/' + part + '.jpg', 'rb') as doc_file:
+            stub.image.save(part + ".jpg", File(doc_file), save=True)
 
 
 def create_eestec_news():
@@ -85,6 +108,10 @@ def create_eestec_teams():
         with open('eestecnet/team/' + team.slug + '.jpg', 'rb') as doc_file:
             team.thumbnail.save(team.slug + ".jpg", File(doc_file), save=True)
         team.save()
+
+
+def create_pages():
+    Page.objects.create(url='documents', content="a")
 
 
 def create_eestec_lcs():

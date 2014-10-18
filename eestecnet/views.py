@@ -14,6 +14,8 @@ def init(request):
     create_eestec_people()
     create_inktronics()
     create_positions_for_achievements()
+    create_pages()
+    create_stubs()
     return redirect("/")
 def newsletter(request):
     try:

@@ -7,3 +7,11 @@ class Page(models.Model):
 
     def __unicode__(self):
         return self.url
+
+
+class Stub(models.Model):
+    title = models.CharField(max_length=50)
+    link = models.URLField()
+    content = models.TextField(max_length=140)
+    image = models.ImageField(upload_to="stubs")
+    group = models.CharField(max_length=20)

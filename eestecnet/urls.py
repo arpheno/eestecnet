@@ -8,6 +8,7 @@ from account.views import EestecerProfile, EestecerUpdate, EestecerCreate, \
     Login, Logout, EestecerList, complete
 from eestecnet.settings import MEDIA_ROOT
 from eestecnet.views import newsletter
+from pages.views import ActivityStubs, AboutStubs, Documents
 from teams.views import CommitmentList, TeamList, Governance, History
 from news.models import Entry
 from news.views import home
@@ -21,14 +22,17 @@ urlpatterns = patterns(
     url(r'^reset/', include('password_reset.urls')),
     url(r'^news/*$', ListView.as_view(model=Entry), name='news'),
     url(r'^androidcompetition/*$',
-        TemplateView.as_view(template_name='android/home.html')),
+        TemplateView.as_view(template_name='android/home.html'), name="competition"),
     url(r'^conference/*$',
-        TemplateView.as_view(template_name='conference/home.html')),
+        TemplateView.as_view(template_name='conference/home.html'),
+        name='conference'),
     url(r'^news/(?P<slug>[-_\w]+)/$', DetailView.as_view(model=Entry),
         name='news'),
     url(r'^events/', include('events.urls')),
-    url(r'^governance/*$', Governance.as_view()),
-    url(r'^history/*$', History.as_view()),
+    url(r'^governance/*$', Governance.as_view(), name='governance'),
+    url(r'^documents/*$', Documents.as_view(), name='documents'),
+
+    url(r'^history/*$', History.as_view(), name="history"),
     url(r'^teams/$', TeamList.as_view(), name='teams'),
     url(r'^cities/*$', CommitmentList.as_view(), name='cities'),
     url(r'^cities/', include('teams.urls', namespace="cities")),
@@ -45,8 +49,8 @@ urlpatterns = patterns(
     url(r'^search/', SearchView(form_class=SearchForm)),
     url(r'^mail-queue/*$', include('mailqueue.urls')),
     url(r'^contact/*$', TemplateView.as_view(template_name='enet/contact.html')),
-    url(r'^activities/*$', TemplateView.as_view(template_name='enet/activities.html')),
-    url(r'^about/*$', TemplateView.as_view(template_name='enet/about.html')),
+    url(r'^activities/*$', ActivityStubs.as_view(), name='activities'),
+    url(r'^about/*$', AboutStubs.as_view(), name='about'),
     url(r'^newsletter/*$', newsletter, name='newsletter'),
     url(r'^froala_editor/', include('froala_editor.urls')),
     url(r'^materials/', include('elfinder.urls')),
