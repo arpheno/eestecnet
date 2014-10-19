@@ -49,14 +49,6 @@ INSTALLED_APPS = (
     'form_utils'
 )
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-EMAIL_HOST_USER = 'eestecnet@gmail.com'
-EMAIL_HOST_PASSWORD = 'eeStec4ever'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
 MAILQUEUE_CELERY = True
 BROKER_URL = 'django://'
 

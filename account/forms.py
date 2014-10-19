@@ -32,7 +32,7 @@ class EestecerCreationForm(UserCreationForm):
         message.subject = "Registration"
         message.content = "Register at eestecnet!\nGo to\n http://test.eestec" \
                           ".net/complete/" + user.activation_link + "/"
-        message.from_address="eestecnet@gmail.com",
+        message.from_address = "noreply@eestec.net",
         message.to_address = user.email
         message.save()
         user.save()

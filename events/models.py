@@ -11,6 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 
+
 # Create your models here.
 from django.db import models
 from mailqueue.models import MailerMessage
@@ -213,7 +214,7 @@ class Application(models.Model):
                     'slug': participation.target.slug}) + "to confirm your " \
                                                           "participation to the event" \
                                                           ".\n Thank you."
-                message.from_address = "eestecnet@gmail.com",
+                message.from_address = "noreply@eestecnet",
                 message.to_address = self.applicant.email
                 message.save()
 

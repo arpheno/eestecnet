@@ -25,7 +25,7 @@ def newsletter(request):
     message=MailerMessage()
     message.subject = "add to newsletter"
     message.content="Dear VC-IA, please kindly add "+request.POST['mailsub']+"to the newsletter list."
-    message.from_address="eestecnet@gmail.com",
+    message.from_address = "noreply@eestec.net",
     message.to_address = "vc-ia@eestec.net"
     message.save()
     return redirect("/")
