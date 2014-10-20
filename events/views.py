@@ -2,7 +2,6 @@ import random
 
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-from django.forms import ModelForm, TextInput, Textarea
 from django.forms import widgets
 from django.shortcuts import redirect, get_object_or_404
 
@@ -14,8 +13,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, V
 from extra_views import UpdateWithInlinesView
 from form_utils.forms import BetterModelForm
 from form_utils.widgets import ImageWidget
-from events.forms import DescriptionForm, EventImageInline
-from events.models import Event, Application, Participation, Transportation
+from events.forms import DescriptionForm, EventImageInline, TransportForm
+from events.models import Event, Application, Participation
 
 
 class EventMixin(View):
@@ -28,17 +27,21 @@ class HTML5Input(widgets.Input):
         self.input_type = type
         super(HTML5Input, self).__init__(attrs)
 
+
 def featuredevent():
-    random_idx = random.randint(0, Event.objects.all().exclude(category='recruitment').count() - 1)
+    random_idx = random.randint(0, Event.objects.all().exclude(
+        category='recruitment').count() - 1)
     return Event.objects.all().exclude(category='recruitment')[random_idx]
+
 
 class InternationalEvents(ListView):
     model = Event
+
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super(InternationalEvents, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
-        events=context['object_list'].filter(scope="international")
+        events = context['object_list'].filter(scope="international")
         context['active_list'] = []
         context['pending_list'] = []
         context['over_list'] = []
@@ -55,25 +58,30 @@ class InternationalEvents(ListView):
                 pass
         return context
 
-def confirm_event(request,slug):
+
+def confirm_event(request, slug):
     try:
-        pa=Participation.objects.get(target__slug=slug,participant=request.user)
+        pa = Participation.objects.get(target__slug=slug, participant=request.user)
     except:
-        return redirect(reverse('event',kwargs={'slug':slug}))
-    pa.confirmed=True
-    pa.confirmation=0
+        return redirect(reverse('event', kwargs={'slug': slug}))
+    pa.confirmed = True
+    pa.confirmation = 0
     pa.save()
-    return redirect(reverse('event',kwargs={'slug':slug}))
+    return redirect(reverse('event', kwargs={'slug': slug}))
+
+
 class EventDetail(DetailView):
     model = Event
     template_name = "events/event_detail.html"
+
     def get_context_data(self, **kwargs):
 
-        context= super(EventDetail,self).get_context_data(**kwargs)
+        context = super(EventDetail, self).get_context_data(**kwargs)
         try:
-            context['participation']=Participation.objects.get(target__slug=self.kwargs['slug'],participant=self.request.user)
+            context['participation'] = Participation.objects.get(
+                target__slug=self.kwargs['slug'], participant=self.request.user)
         except:
-            context['participation']=None
+            context['participation'] = None
         return context
 
 
@@ -111,18 +119,6 @@ class ApplyToEvent(CreateView):
         return redirect(self.get_success_url())
 
 
-class TransportForm(ModelForm):
-    class Meta:
-        model = Transportation
-        fields = (
-        'arrival', 'departure', 'arrive_by', 'depart_by', 'arrival_number', 'comment')
-        widgets = {
-            'arrival': TextInput(attrs={'class': 'datetime'}),
-            'departure': TextInput(attrs={'class': 'datetime'}),
-            'comment': Textarea(attrs={'rows': '1'}),
-        }
-
-
 class UpdateTransport(UpdateView):
     form_class = TransportForm
     template_name = 'events/transportation_form.html'
@@ -131,6 +127,7 @@ class UpdateTransport(UpdateView):
         return Participation.objects.get(applicant=self.request.user,
                                          target=Event.objects.get(
                                              slug=self.kwargs['slug'])).transportation
+
 
 class FillInTransport(CreateView):
     form_class = TransportForm
@@ -148,8 +145,8 @@ class FillInTransport(CreateView):
             return redirect(reverse('event', kwargs=self.kwargs))
         pax = get_object_or_404(Participation, participant=self.request.user,
                                 target__slug=self.kwargs['slug'])
-        trans=form.save()
-        pax.transportation=trans
+        trans = form.save()
+        pax.transportation = trans
         pax.save()
         messages.add_message(
             self.request,
@@ -162,8 +159,8 @@ class ChangeDetails(EventMixin, UpdateView):
     template_name = 'teams/change_details_form.html'
     model = Event
     fields = (
-    'name', 'participation_fee', 'start_date', 'end_date', 'deadline', 'location',
-    'scope', 'category')
+        'name', 'participation_fee', 'start_date', 'end_date', 'deadline', 'location',
+        'scope', 'category')
 
 
 class ChangeDescription(EventMixin, UpdateView):

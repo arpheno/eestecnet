@@ -1,8 +1,19 @@
 {% extends 'events/event_detail.html' %}
 {% block actions %}
+    <div id="transport-wrapper">
     <form id="transport" action="" method="post">{% csrf_token %}
         {{ form.as_p }}
         <input class="action-button red" type="submit"
                value="send transportation details"/>
     </form>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $("#transport-wrapper").dialog({
+                title: "Please fill in your transportation details.",
+                width: 400,
+                height: 300
+            });
+        })
+    </script>
 {% endblock %}

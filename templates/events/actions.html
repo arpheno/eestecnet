@@ -1,4 +1,6 @@
-{% if user in event.applicants.all %}
+<td colspan="2">
+    <div class="actions">
+        {% if user in event.applicants.all %}
     <a href="#" class="action-button shadow animate yellow">Application Pending</a>
 {% elif participation != None %}
     {% if participation.confirmed %}
@@ -26,3 +28,5 @@
            class="action-button shadow animate red">Apply to event</a>
     {% endif %}
 {% endif %}
+    </div>
+</td>

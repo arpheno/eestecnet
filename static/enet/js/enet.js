@@ -1,6 +1,9 @@
 $(function () {
     $(".date").datepicker({changeYear: true, yearRange: "-30:-18"});
-    $(".datetime").datetimepicker();
+    $(".datetime").datetimepicker({
+        timeFormat: 'HH:mm',
+        dateFormat: 'dd.mm.yy'
+    });
     $("a[href^=#]").click(function (e) {
     });
 });

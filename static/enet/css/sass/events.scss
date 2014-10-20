@@ -8,3 +8,10 @@ a.event{
 section.events{
   margin:3px;
 }
+
+#transport-wrapper {
+  p {
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -31,13 +31,9 @@
         <td>{{ object.max_participants }} </td>
     </tr>
     <tr>
-        <td colspan="2">
-            <div class="actions">
-                {% block actions %}
-                    {% include 'events/actions.html' %}
-                {% endblock %}
-            </div>
-        </td>
+        {% block actions %}
+            {% include 'events/actions.html' %}
+        {% endblock %}
     </tr>
 {% endblock %}
 {% block more %}

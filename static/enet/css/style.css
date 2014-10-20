@@ -925,6 +925,11 @@ section.events {
     margin: 3px
 }
 
+#transport-wrapper p {
+    display: flex;
+    justify-content: space-between
+}
+
 a.eestecer {
     width: 10.0rem;
     height: 10.0rem
