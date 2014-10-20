@@ -80,13 +80,6 @@ body, header, #sponsors, footer, aside, main {
   flex-wrap: wrap;
 }
 
-.static {
-  flex: 1 1 100%;
-  z-index: 1;
-
-  display: block;
-}
-
 #elfinder {
   z-index: 1;
 }
@@ -315,7 +308,7 @@ html > body {
             font-size: 1.6rem;
             height: 100%;
           }
-          ul /*second level list*/      {
+          ul /*second level list*/       {
             top: 2.0rem;
             position: absolute;
             display: block;

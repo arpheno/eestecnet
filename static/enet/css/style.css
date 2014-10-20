@@ -107,12 +107,6 @@ body, header, #sponsors, footer, aside, main {
     flex-wrap: wrap
 }
 
-.static {
-    flex: 1 1 100%;
-    z-index: 1;
-    display: block
-}
-
 #elfinder {
     z-index: 1
 }
@@ -1311,6 +1305,26 @@ section.history details {
 
 section.history details p {
     padding: 10px
+}
+
+.static {
+    flex: 1 1 100%;
+    z-index: 1;
+    padding: 0 5%;
+    display: block
+}
+
+.static h1 {
+    margin: 10px 0px 5px 0px
+}
+
+.static h2 {
+    margin: 0 2% 3px 2%;
+    width: 60%
+}
+
+.static p {
+    padding: 0 5%
 }
 
 a {

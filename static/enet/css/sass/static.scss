@@ -1,0 +1,16 @@
+.static {
+  flex: 1 1 100%;
+  z-index: 1;
+  padding: 0 5%;
+  h1 {
+    margin: 10px 0px 5px 0px;
+  }
+  h2 {
+    margin: 0 2% 3px 2%;
+    width: 60%;
+  }
+  p {
+    padding: 0 5%;
+  }
+  display: block;
+}
