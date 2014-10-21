@@ -10,7 +10,7 @@ from django.contrib.auth.models import (
 
 
 class EestecerManager(BaseUserManager):
-    """ A manager taking care of creating :class:`Eestecer`objects. """
+    """ A manager taking care of creating :class:`Eestecer` objects. """
 
     def _create_user(self, email, password,
                      is_staff, is_superuser, **extra_fields):

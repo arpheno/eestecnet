@@ -8,28 +8,24 @@ eestecnet.settings module
 -------------------------
 
 .. automodule:: eestecnet.settings
-    :members:
+:members:
+
 eestecnet.settings_local module
 -------------------------------
 
 .. automodule:: eestecnet.settings_local
-    :members:
+:members:
 
-eestecnet.urls module
----------------------
-
-.. automodule:: eestecnet.urls
-    :members:
 
 eestecnet.wsgi module
 ---------------------
 
 .. automodule:: eestecnet.wsgi
-    :members:
+:members:
 
 
 Module contents
 ---------------
 
 .. automodule:: eestecnet
-    :members:
+:members:

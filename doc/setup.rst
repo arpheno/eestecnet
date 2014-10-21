@@ -72,6 +72,7 @@ In the window Packages below, select install and install
 * pip
 * virtualenv
 * setuptools
+
  Now use Tools => open terminal to open a terminal.
 
  pip install -r requirements.txt

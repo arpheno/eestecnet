@@ -60,7 +60,8 @@ of events as much as possible, and event management functionality should be a pr
 
 Managing an event is a process involving planning, preparation, communication, execution and evaluation.
 
-**Planning**
+Planning
+--------
 
 The decision of a group of people to organize an event is the first step in planning.
 The planning phase extends from this moment until far into the event itself, when last minute preparations are done.
@@ -74,7 +75,8 @@ Tasks in planning include:
 
 It is important that all members who wish to contribute to the planning phase have access to the relevant documents.
 
-**Preparation**
+Preparation
+-----------
 
 Preparations include specific actions that need to be carried out in order to run an event.
 Included are:
@@ -83,7 +85,8 @@ Included are:
 * T Shirt order
 * Badge order
 
-**Communication**
+Communication
+-------------
 
 Communication with the participants of the event, as well as within the group of organizers throughout the event is crucial
 to the success of an event. It creates good atmosphere and helps people get to know each other better.
@@ -94,11 +97,13 @@ Included are:
 * Communication with participants before the event
 * Internal communication between the organizers
 
-**Execution**
+Execution
+---------
 
 Live documentation during an event, especially photos can contribute much to the flair and spirit of an event.
 
-**Evaluation**
+Evaluation
+----------
 
 Evaluation and reflective learning are the best way to learn from experience. They provide the necessary information
 to conclude if the goals of an event were reached, and to which extend.

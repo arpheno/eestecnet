@@ -1,4 +1,3 @@
-from django.db.models import get_model
 from django.utils.translation import ugettext_lazy as _
 
 from django.contrib import admin
@@ -8,9 +7,7 @@ from django.contrib.auth.admin import UserAdmin
 # Define an inline admin descriptor for Employee model
 # which acts a bit like a singleton
 from account.forms import EestecerChangeForm, EestecerCreationForm
-
-Eestecer = get_model('account', 'Eestecer')
-Achievement = get_model('account', 'Achievement')
+from account.models import Eestecer, Achievement
 
 
 class EestecerAdmin(UserAdmin):

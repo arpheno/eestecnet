@@ -9,6 +9,7 @@ news.admin module
 
 .. automodule:: news.admin
     :members:
+
 news.models module
 ------------------
 
