@@ -1,0 +1,7 @@
+#!/bin/bash
+source /var/www/unstable/bin/activate
+python eestecnet/manage.py celery worker -l debug --workdir=. --pool=threads -f celery.log --pidfile=celery.pid &
+~
+~
+~
+~

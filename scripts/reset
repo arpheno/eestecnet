@@ -1,0 +1,11 @@
+#!/bin/bash
+source /var/www/unstable/bin/activate
+kill $(cat unstable.pid)
+kill $(cat memcached.pid)
+cd eestecnet
+git pull
+python manage.py collectstatic --noinput
+cd ..
+./startserver.sh
+./startcelery.sh
+./startcached.sh

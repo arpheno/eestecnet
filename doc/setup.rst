@@ -71,14 +71,45 @@ In the window Packages below, select install and install
 
 * pip
 * virtualenv
-* django
-* gunicorn
 * setuptools
-* django-bootstrap3-datetimepicker
-* django-autoslug
-* sorl-thumbnail
+ Now use Tools => open terminal to open a terminal.
 
-Additionally install Pillow, but you have to check the “options” checkbox and provide --use-wheel as options.
+ pip install -r requirements.txt
+
+ This command will install all dependencies.
+ Some python modules have to be compiled for your platform. Please install a C compiler like
+ Visual Studio or MinGW it's very difficult otherwise.
+
+A the time of writing (10/21/2014) to run the project on django 1.7 a couple of changes to the imported modules
+are necessary.
+Please go to your site-packages folder and in suit/config.py delete the line
+import VERSION
+and below change every occurence of VERSION to " "1" ".
+In gmapi/maps.py and gmapi/forms/widgets.py change
+from django.utils.simplejson
+to
+from json
+
+For the windows version you will have to install cygwin and add it to your path. Make sure the gnu file utility is installed
+and also the library cygmagic. In site-packages/magic.py on windows change "win32": XXXXX to "win32":"cygmagic-1.dll" .
+
+Server
+######
+To run in a production environment several programs are required to run as well.
+Memcached is a very efficient cache.
+Memcached should run on port 11212 as a daemon
+::memcached -d -P memcached.pid -p 11212
+
+Celery is a module that makes asynchronous processing of messages possible. It's important
+for sending e-mails without blocking the actual process. Otherwise sending e-mails can take
+a very long time.
+::python eestecnet/manage.py celery worker -l debug --workdir=. --pool=threads -f celery.log --pidfile=celery.pid &
+
+gunicorn is a webserver implemented in python that will be responsible to serve all dynamic requests (i.e. not static files or user data)
+it has to be configured with nginx, so nginx serves all static files.
+::gunicorn --env DJANGO_SETTINGS_MODULE=eestecnet.settings --settings eestecnet.settings eestecnet.wsgi -b 0.0.0.0:8003 -p ../unstable.pid -D
+
+There are some useful scripts in the scripts folder, however you will have to adjust them to your paths.(I'm assuming the old server burnt down or something)
 
 Import EESTECNET
 ################

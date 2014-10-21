@@ -1,5 +1,7 @@
 Django==1.7
+Markdown==2.5.1
 Pillow==2.6.1
+South==1.0
 Whoosh==2.6.0
 amqp==1.4.6
 anyjson==0.3.3
@@ -8,15 +10,20 @@ billiard==3.3.0.18
 celery==3.1.16
 django-autoslug==1.7.2
 django-celery==3.1.16
+django-classy-tags==0.5.1
 django-extra-views==0.6.5
 django-form-utils==1.0.2
 django-froala-editor==1.2.12
 django-gmapi==1.0.1
+django-grappelli==2.6.2
 django-gunicorn==0.1.1
 django-haystack==2.3.1
 django-kombu==0.9.4
 django-mail-queue==2.1.2
+django-mptt==0.6.1
+django-notify==1.1.2
 django-password-reset==0.7
+django-sekizai==0.7
 django-suit==0.2.11
 django-suit-redactor==0.0.2
 docutils==0.12
@@ -29,5 +36,6 @@ python-memcached==1.53
 python-ptrace==0.8
 pytz==2014.7
 six==1.5.2
-sorl-thumbnail==11.12
+sorl-thumbnail==11.12.1b
 suit==2.0.2
+wiki==0.0.23
