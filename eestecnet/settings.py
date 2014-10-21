@@ -12,6 +12,16 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 from settings_local import *
 #from settings_deploy import *
 
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
+
+# SECURITY WARNING: keep the secret key used in production secret!
+
+
+
+
+# Application definition
+
 INSTALLED_APPS = (
     'suit_redactor',
     'suit',
@@ -66,7 +76,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -129,6 +138,7 @@ WSGI_APPLICATION = 'eestecnet.wsgi.application'
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
