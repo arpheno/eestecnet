@@ -25,6 +25,11 @@
 {% endblock %}
 
 {% block more %}
+    <div>
+        {% autoescape off %}
+            {{ object.personal }}
+        {% endautoescape %}
+    </div>
     <details open>
         <summary>LC and Teams</summary>
         {% include 'teams/teams.html' with object_list=object.teams.all %}

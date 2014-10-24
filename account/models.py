@@ -107,14 +107,18 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     middle_name = models.CharField(_('middle name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30)
     slug = AutoSlugField(populate_from=get_eestecer_slug)
+    """ This field is used to determine urls"""
     second_last_name = models.CharField(_('second last name'), max_length=30, blank=True)
+    """ For our friends from the iberic peninsula"""
     date_of_birth = models.DateField(blank=True, null=True)
     """ Date of birth"""
+    personal = models.TextField(blank=True, null=True)
+    """Room for a personal note"""
     profile_picture = models.ImageField(upload_to="users", blank=True, null=True)
     """A profile picture to be used on the website. Without a Profile picture the user
     will not appear in lists"""
     gender = models.CharField(max_length=15, choices=GENDER_CHOICES)
-    "Gender of the applicant. Useful for overview on Gender balance."
+    "Gender of the applicant. Useful for getting an overview on Gender balance."
     tshirt_size = models.CharField(max_length=15, choices=TSHIRT_SIZE, blank=True,
                                    null=True)
     """T-shirt size. Used for events"""
@@ -127,6 +131,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
                                         default='none')
     """ Food preferences, for example vegetarian or no pork. """
     curriculum_vitae = models.FileField(upload_to="cvs", blank=True, null=True)
+    """ For the future incorporation of Lykeion """
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     """Should be set by the user to the time they joined eestec. For new users it will
     be the moment they register with the website"""

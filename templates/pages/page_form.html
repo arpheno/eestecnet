@@ -1,0 +1,9 @@
+{% extends 'pages/page_detail.html' %}
+{% block description %}
+    <form action="" id="descriptionform"
+          enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update Description">
+    </form>
+{% endblock %}

@@ -33,7 +33,6 @@ urlpatterns = patterns(
     url(r'^governance/*$', Governance.as_view(), name='governance'),
     url(r'^documents/*$', Documents.as_view(), name='documents'),
     url(r'^sitemap/*$', ListView.as_view(model=Stub), name='sitemap'),
-    url(r'^history/*$', History.as_view(), name="history"),
     url(r'^teams/$', TeamList.as_view(), name='teams'),
     url(r'^cities/*$', CommitmentList.as_view(), name='cities'),
     url(r'^cities/', include('teams.urls', namespace="cities")),
@@ -57,5 +56,6 @@ urlpatterns = patterns(
     url(r'^materials/', include('elfinder.urls')),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': MEDIA_ROOT}),
+    url(r'^history/*$', History.as_view(), name="history"),
     url(r'', include('pages.urls')),
 )

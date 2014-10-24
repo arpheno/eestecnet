@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 from django.contrib import admin
 
-from pages.views import StaticPage
+from pages.views import StaticPage, StaticPageEdit
 
 
 admin.autodiscover()
@@ -9,5 +9,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
                        # Examples:
                        # url(r'^$', 'eestecnet.views.home', name='home'),
+                       url(r'^edit/(?P<url>[-_/\w]+)', StaticPageEdit.as_view()),
                        url(r'^(?P<url>[-_/\w]+)', StaticPage.as_view()),
 )

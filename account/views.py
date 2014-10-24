@@ -14,6 +14,7 @@ from form_utils.widgets import ImageWidget
 
 from account.forms import EestecerCreationForm
 from account.models import Eestecer
+from news.widgets import EESTECEditor
 
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
@@ -40,10 +41,10 @@ class EestecerUpdateForm(BetterModelForm):
         model=Eestecer
         fields=('first_name','middle_name','last_name','second_last_name','date_of_birth',
         'profile_picture','gender','tshirt_size','passport_number','food_preferences','allergies',
-        'skype','hangouts','mobile',)
+        'skype', 'hangouts', 'mobile', 'personal')
         widgets = {
             'date_of_birth': TextInput(attrs={'class': 'date'}),
-            'departure': TextInput(attrs={'class': 'date'}),
+            'personal': EESTECEditor(include_jquery=False),
             'profile_picture': ImageWidget(
                 template='<span>%(image)s<br />%(input)s</span>'),
         }

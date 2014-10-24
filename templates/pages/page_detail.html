@@ -2,9 +2,11 @@
 {% load thumbnail %}
 {% block main %}
     <div class="static">
-        {% autoescape off %}
+        {% block description %}
+            {% autoescape off %}
             {{ object.content }}
         {% endautoescape %}
+        {% endblock %}
     </div>
 {% endblock %}
 
