@@ -20,7 +20,11 @@
     </tr>
     <tr>
         <td>Date Joined:</td>
-        <td>{{ object.joined }}</td>
+        <td>{{ object.date_joined }}</td>
+    </tr>
+    <tr>
+        <td>Field of Study:</td>
+        <td>{{ object.field_of_study|title }}</td>
     </tr>
 {% endblock %}
 
