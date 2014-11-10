@@ -39,7 +39,9 @@ class EestecerProfile(DetailView):
 class EestecerUpdateForm(BetterModelForm):
     class Meta:
         model=Eestecer
-        fields=('first_name','middle_name','last_name','second_last_name','date_of_birth',
+        fields = (
+        'first_name', 'middle_name', 'last_name', 'second_last_name', 'date_of_birth',
+        'field_of_studies',
         'profile_picture','gender','tshirt_size','passport_number','food_preferences','allergies',
         'skype', 'hangouts', 'mobile', 'personal')
         widgets = {
