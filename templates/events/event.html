@@ -19,6 +19,8 @@
     <hr>
     Start: {{ object.start_date }} <br>End: {{ object.end_date }}
     <hr>
-    Application Deadline<br>
+    {% if object.deadline %}
+        Application Deadline<br>
     {{ object.deadline }}
+    {% endif %}
 {% endblock %}
