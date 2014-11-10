@@ -26,6 +26,12 @@
         <td>Field of Study:</td>
         <td>{{ object.field_of_study|title }}</td>
     </tr>
+    {% if object.curriculum_vitae %}
+        <tr>
+            <td>Curriculum Vitae</td>
+            <td><a href="{{ object.curriculum_vitae.url }}">Download</a></td>
+        </tr>
+    {% endif %}
 {% endblock %}
 
 {% block more %}
