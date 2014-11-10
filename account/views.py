@@ -41,7 +41,7 @@ class EestecerUpdateForm(BetterModelForm):
         model=Eestecer
         fields = (
         'first_name', 'middle_name', 'last_name', 'second_last_name', 'date_of_birth',
-        'field_of_studies', 'curriculum_vitae',
+        'field_of_study', 'curriculum_vitae',
         'profile_picture','gender','tshirt_size','passport_number','food_preferences','allergies',
         'skype', 'hangouts', 'mobile', 'personal')
         widgets = {
