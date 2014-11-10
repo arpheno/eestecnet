@@ -11,7 +11,7 @@
     {{ object }}
 {% endblock %}
 {% block comment %}
-    {{ object.category }}
+    {{ object.category|title }}
     <hr>
     {% for oc in object.organizing_committee.all %}
         {{ oc }}
