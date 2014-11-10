@@ -47,11 +47,13 @@ class InternationalEvents(ListView):
         context['over_list'] = []
         for event in events:
             try:
-                if event.deadline > timezone.now():
-                    context['active_list'].append(event)
-                if event.deadline < timezone.now() and event.end_date > timezone.now() \
-                        .date():
-                    context['pending_list'].append(event)
+                if event.deadline:
+                    if event.deadline > timezone.now():
+                        context['active_list'].append(event)
+                    if event.deadline < timezone.now() and event.end_date > timezone\
+                            .now() \
+                            .date():
+                        context['pending_list'].append(event)
                 if event.end_date < timezone.now().date():
                     context['over_list'].append(event)
             except:
