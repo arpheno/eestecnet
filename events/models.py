@@ -13,6 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 
+
 # Create your models here.
 from django.db import models
 from mailqueue.models import MailerMessage
@@ -42,7 +43,7 @@ class Event(models.Model):
         ordering=('name',)
         verbose_name_plural="Events"
     #General
-    name = models.CharField(max_length=50,unique=True)
+    name = models.CharField(max_length=100, unique=True)
     """Name of the event. Examples: bEErSTEC, Trainers' Meeting, RISEX."""
     category = models.CharField(max_length=40, choices=CATEGORY_CHOICES, default='workshop')
     """Category of the event, for choices see :attr:`CATEGORY_CHOICES` ."""
@@ -107,6 +108,8 @@ class Event(models.Model):
 
 
     def clean(self):
+        if self.category == "training":
+            self.name = self.name + "-" + str(self.start_date)
         if self.end_date:
             if self.start_date > self.end_date:
                 raise ValidationError("The event may not begin after it ends.")
