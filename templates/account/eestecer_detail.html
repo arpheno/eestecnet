@@ -29,7 +29,8 @@
     {% if object.curriculum_vitae %}
         <tr>
             <td>Curriculum Vitae</td>
-            <td><a href="{{ object.curriculum_vitae.url }}">Download</a></td>
+            <td><a href="{{ object.curriculum_vitae.url }}"
+                   style="color:blue;">Download</a></td>
         </tr>
     {% endif %}
 {% endblock %}
