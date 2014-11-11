@@ -64,3 +64,10 @@
         </details>
     {% endif %}
 {% endblock %}
+{% block aside %}
+    <h2> Admin Actions</h2>
+    <a href="{% url 'batch_add_events' %}" id="add_events">Add events in CSV</a>
+    <script type="text/javascript">
+        $("a#add_events").button();
+    </script>
+{% endblock %}

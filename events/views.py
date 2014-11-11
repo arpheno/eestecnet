@@ -1,4 +1,6 @@
+import csv
 import random
+import datetime
 
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -7,14 +9,18 @@ from django.shortcuts import redirect, get_object_or_404
 
 
 
+
 # Create your views here.
 from django.utils import timezone
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, View
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, View, \
+    FormView
 from extra_views import UpdateWithInlinesView
 from form_utils.forms import BetterModelForm
 from form_utils.widgets import ImageWidget
-from events.forms import DescriptionForm, EventImageInline, TransportForm
+from events.forms import DescriptionForm, EventImageInline, TransportForm, \
+    UploadEventsForm
 from events.models import Event, Application, Participation
+from teams.models import Team
 
 
 class EventMixin(View):
@@ -29,9 +35,51 @@ class HTML5Input(widgets.Input):
 
 
 def featuredevent():
-    random_idx = random.randint(0, Event.objects.all().exclude(
-        category='recruitment').count() - 1)
-    return Event.objects.all().exclude(category='recruitment')[random_idx]
+    try:
+        random_idx = random.randint(0, Event.objects.filter(scope="international",
+                                                            start_date__gt=datetime
+                                                            .date.today()).exclude(
+            category='recruitment').count() - 1)
+        random_event = Event.objects.filter(scope="international",
+                                            start_date__gt=datetime.date.today())
+        .exclude(
+            category='recruitment')[random_idx]
+    except:
+        random_event = Event.objects.filter(category="workshop").latest('start_date')
+    return random_event
+
+
+class AddEvents(FormView):
+    form_class = UploadEventsForm
+
+    def form_valid(self, form):
+        self.handle_events(self.request.FILES['file'])
+        return super(AddEvents, self).form_valid(form)
+
+    def handle_events(self, f):
+        eventreader = csv.reader(f)
+        for event in eventreader:
+            t_oc = Team.objects.get(name=event[5])
+            new_event = Event.objects.create(
+                name=event[0] + "tempobject" + random.randint(500),
+                deadline=event[1],
+                start_date=event[2],
+                end_date=event[3],
+                category=event[4],
+                description=event[6],
+                summary=event[7],
+                scope=event[8],
+                max_participants=event[9],
+            )
+            new_event.save()
+            new_event.organizers = self.request.user
+            new_event.organizing_comittee = t_oc
+
+            if new_event.category == "training":
+                new_event.name = event[0] + "-" + str(new_event.start_date)
+            else:
+                new_event.name = event[0]
+            new_event.save()
 
 
 class InternationalEvents(ListView):

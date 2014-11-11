@@ -1,4 +1,4 @@
-from django.forms import ModelForm, Textarea, TextInput
+from django.forms import ModelForm, Textarea, TextInput, FileField, Form
 from extra_views import InlineFormSet
 
 from events.models import Event, EventImage, Transportation
@@ -16,6 +16,10 @@ class TransportForm(ModelForm):
             'departure': TextInput(attrs={'class': 'datetime'}),
             'comment': Textarea(attrs={'rows': '1'}),
         }
+
+
+class UploadEventsForm(Form):
+    file = FileField()
 
 
 class DescriptionForm(ModelForm):
