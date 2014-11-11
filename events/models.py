@@ -4,9 +4,11 @@ import sha
 from autoslug import AutoSlugField
 from autoslug.utils import slugify
 from django.core.exceptions import ValidationError
+from django.core.files import File
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
+
 
 
 
@@ -109,6 +111,35 @@ class Event(models.Model):
 
     def clean(self):
         if self.category == "training":
+            if not self.thumbnail:
+                if "ommunication" in self.name:
+                    thumbname = "communication-skills.jpg"
+                elif "motional" in self.name:
+                    thumbname = "emotional-intelligence.jpg"
+                elif "eedback" in self.name:
+                    thumbname = "feedback.jpg"
+                elif "resentation" in self.name:
+                    thumbname = "presentation-skills.jpg"
+                elif "rganizational" in self.name:
+                    thumbname = "organizational-management.jpg"
+                elif "eadership" in self.name:
+                    thumbname = "leadership.jpg"
+                elif "roject" in self.name:
+                    thumbname = "project-management.jpg"
+                elif "ime" in self.name and "anagement" in self.name:
+                    thumbname = "time-management.jpg"
+                elif "eambuilding" in self.name:
+                    thumbname = "teambuilding.JPG"
+                elif "acilitation" in self.name:
+                    thumbname = "facilitation.jpg"
+                elif "ynamics" in self.name:
+                    thumbname = "group-dynamics.jpg"
+                elif "ody" in self.name and "anguage" in self.name:
+                    thumbname = "body-language.jpg"
+                else:
+                    thumbname = "trtlogo.png"
+                with open('eestecnet/training/' + thumbname, 'rb') as doc_file:
+                    self.thumbnail.save("thumbname.jpg", File(doc_file), save=True)
             self.name = self.name + "-" + str(self.start_date)
         if self.end_date:
             if self.start_date > self.end_date:
