@@ -165,4 +165,5 @@ STATICFILES_FINDERS = (
 )
 
 FROALA_INCLUDE_JQUERY = False
+DEFAULT_FROM_EMAIL = "noreply@eestec.net"
 

@@ -20,8 +20,6 @@ class TransportForm(ModelForm):
 
 class UploadEventsForm(Form):
     file = FileField()
-
-
 class DescriptionForm(ModelForm):
     class Meta:
         model = Event
