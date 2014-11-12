@@ -12,6 +12,7 @@ from django.shortcuts import redirect, get_object_or_404
 
 
 
+
 # Create your views here.
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, View, \
@@ -42,9 +43,8 @@ def featuredevent():
                                                             start_date__gt=datetime
                                                             .date.today()).exclude(
             category='recruitment').count() - 1)
-        random_event = Event.objects.filter(scope="international",
-                                            start_date__gt=datetime.date.today())
-        .exclude(
+        random_event = Event.objects.filter(
+            scope="international", start_date__gt=datetime.date.today()).exclude(
             category='recruitment')[random_idx]
     except:
         random_event = Event.objects.filter(category="workshop").latest('start_date')
