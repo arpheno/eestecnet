@@ -51,6 +51,7 @@ class MyMemberAdmin(admin.ModelAdmin):
         qs = super(MyMemberAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
+        return qs
         return qs.filter(users=request.user, membership__privileged=True)
 
 
