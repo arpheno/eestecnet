@@ -30,8 +30,10 @@ class EestecerCreationForm(UserCreationForm):
         user.activation_link=id_generator(30)
         message=MailerMessage()
         message.subject = "Registration"
-        message.content = "Register at eestecnet!\nGo to\n http://test.eestec" \
-                          ".net/complete/" + user.activation_link + "/"
+        message.content = "Register at eestecnet!\nGo to\n http://unstable.eestec" \
+                          ".net/complete/" + user.activation_link + "/" \
+                                                                    "take the domain " \
+                                                                    "with a grain of salt, it's still in development."
         message.from_address = "noreply@eestec.net",
         message.to_address = user.email
         message.save()

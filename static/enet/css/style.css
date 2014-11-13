@@ -893,20 +893,6 @@ div.team {
     height: 300px
 }
 
-a.team {
-    width: 30rem;
-    height: auto
-}
-
-a.team img {
-    margin: auto
-}
-
-a.team figure {
-    width: 30rem;
-    height: 12.6rem
-}
-
 #map {
     width: 80%;
     height: 35.0rem
