@@ -2,6 +2,7 @@ import csv
 
 from django import forms
 from django.contrib import admin
+from django.db.models import Q
 from django.forms import Textarea
 from django.http import HttpResponse
 from suit_redactor.widgets import RedactorWidget
@@ -99,7 +100,8 @@ class MyEventAdmin(admin.ModelAdmin):
         qs = super(MyEventAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(organizing_committee__in=request.user.teams_administered)
+        return qs.filter(Q(organizing_committee__in=request.user.teams_administered) | Q(
+            organizers=request.user))
 
 
 class OutgoingApplicationFilter(admin.SimpleListFilter):#
