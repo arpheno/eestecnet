@@ -3,9 +3,11 @@ import random
 import datetime
 
 from django.contrib import messages
+from django.core.files import File
 from django.core.urlresolvers import reverse
 from django.forms import widgets
 from django.shortcuts import redirect, get_object_or_404
+
 
 
 
@@ -53,32 +55,77 @@ def featuredevent():
 
 class AddEvents(FormView):
     form_class = UploadEventsForm
+    template_name = "events/add_events.html"
+    success_url = "/"
 
     def form_valid(self, form):
         self.handle_events(self.request.FILES['file'])
         return super(AddEvents, self).form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super(AddEvents, self).get_context_data(**kwargs)
+        context['object'] = self.request.user
+        return context
+
     def handle_events(self, f):
         eventreader = csv.reader(f)
         for event in eventreader:
-            t_oc = Team.objects.get(name=event[5])
+            messages.success(self.request, " ".join([item for item in event]))
+            try:
+                t_oc = Team.objects.get(name=event[4])
+            except:
+                messages.success(self.request, "Cant find team " + event[4])
+            t_oc = Team.objects.get(name=event[4])
             new_event = Event.objects.create(
-                name=event[0] + "tempobject" + random.randint(500),
+                name=event[0] + "tempobject" + str(random.randint(1, 50000)),
                 deadline=event[1],
                 start_date=event[2],
                 end_date=event[3],
-                category=event[4],
+                category=event[5],
                 description=event[6],
                 summary=event[7],
                 scope=event[8],
                 max_participants=event[9],
             )
             new_event.save()
-            new_event.organizers = self.request.user
-            new_event.organizing_comittee = t_oc
-
+            new_event.organizers.add(self.request.user)
+            new_event.organizing_committee.add(t_oc)
             if new_event.category == "training":
-                new_event.name = event[0] + "-" + str(new_event.start_date)
+                if "ommunication" in new_event.name:
+                    thumbname = "communication-skills.jpg"
+                elif "motional" in new_event.name:
+                    thumbname = "emotional-intelligence.jpg"
+                elif "eedback" in new_event.name:
+                    thumbname = "feedback.jpg"
+                elif "resentation" in new_event.name:
+                    thumbname = "presentation-skills.jpg"
+                elif "rganizational" in new_event.name:
+                    thumbname = "organizational-management.jpg"
+                elif "eadership" in new_event.name:
+                    thumbname = "leadership.jpg"
+                elif "roject" in new_event.name:
+                    thumbname = "project-management.jpg"
+                elif "ime" in new_event.name and "anagement" in new_event.name:
+                    thumbname = "time-management.jpg"
+                elif "eambuilding" in new_event.name:
+                    thumbname = "teambuilding.JPG"
+                elif "acilitation" in new_event.name:
+                    thumbname = "facilitation.jpg"
+                elif "ynamics" in new_event.name:
+                    thumbname = "group-dynamics.jpg"
+                elif "ody" in new_event.name and "anguage" in new_event.name:
+                    thumbname = "body-language.jpg"
+                else:
+                    thumbname = "trtlogo.png"
+                with open('eestecnet/training/' + thumbname, 'rb') as doc_file:
+                    new_event.thumbnail.save("thumbname.jpg", File(doc_file), save=True)
+                randstring = ""
+                try:
+                    Event.objects.get(name=event[0] + "-" + str(new_event.start_date))
+                    randstring = str(random.randint(1, 500))
+                except:
+                    pass
+                new_event.name = event[0] + "-" + str(new_event.start_date) + randstring
             else:
                 new_event.name = event[0]
             new_event.save()

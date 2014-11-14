@@ -1,0 +1,15 @@
+{% extends 'account/eestecer_detail.html' %}
+{% block add_events %}
+    <form action="" id="addevents"
+          enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update Trainings">
+    </form>
+    <script type="text/javascript">
+        $(function () {
+            $("#changedetailsform").dialog({width: 500, height: 500});
+            $("input[type=submit]").button();
+        });
+    </script>
+{% endblock %}
