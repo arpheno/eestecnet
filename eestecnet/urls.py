@@ -5,7 +5,7 @@ from haystack.forms import SearchForm
 from haystack.views import SearchView
 
 from account.views import EestecerProfile, EestecerUpdate, EestecerCreate, \
-    Login, Logout, EestecerList, complete
+    Login, Logout, EestecerList, complete, TrainingList
 from eestecnet.settings import MEDIA_ROOT
 from eestecnet.views import newsletter
 from pages.models import Stub
@@ -41,6 +41,8 @@ urlpatterns = patterns(
     url(r'^people/me/*$', EestecerUpdate.as_view(), name='userupdate'),
     url(r'^people/(?P<slug>[-\w]+)/*$', EestecerProfile.as_view(),
         name='user'),
+    url(r'^people/(?P<slug>[-\w]+)/certificate/*$', TrainingList.as_view(),
+        name='certificate'),
     url(r'^login/*', Login.as_view(), name='login'),
     url(r'^complete/(?P<ida>[-\w]+)/', complete, name='complete'),
     url(r'^logout/*', Logout.as_view(), name='logout'),

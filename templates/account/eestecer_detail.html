@@ -66,9 +66,26 @@
 {% endblock %}
 {% block aside %}
     <h2> Admin Actions</h2>
-    <a href="{% url 'batch_add_events' %}" id="add_events">Add events in CSV</a>
-    <script type="text/javascript">
-        $("a#add_events").button();
-    </script>
+    {% if object == user %}
+        <a href="{% url 'userupdate' %}" id="updatedata">Update my Personal Data</a>
+        <script type="text/javascript">
+            $("a#updatedata").button();
+        </script>
+        {% if user.is_superuser %}
+            <a href="{% url 'batch_add_events' %}" id="add_events">Add events in CSV</a>
+            <script type="text/javascript">
+                $("a#add_events").button();
+            </script>
+        {% endif %}
+        {% for group in user.groups.all %}
+            {% if group.name == 'Local Admins' %}
+                <a href="{% url 'batch_add_events' %}" id="add_events">Add events in
+                    CSV</a>
+                <script type="text/javascript">
+                    $("a#add_events").button();
+                </script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
     {% block add_events %}{% endblock %}
 {% endblock %}

@@ -14,6 +14,7 @@ from form_utils.widgets import ImageWidget
 
 from account.forms import EestecerCreationForm
 from account.models import Eestecer
+from events.models import Event
 from news.widgets import EESTECEditor
 
 
@@ -50,6 +51,20 @@ class EestecerUpdateForm(BetterModelForm):
             'profile_picture': ImageWidget(
                 template='<span>%(image)s<br />%(input)s</span>'),
         }
+
+
+class TrainingList(DetailView):
+    template_name = "account/training_list.html"
+    model = Eestecer
+
+    def get_context_data(self, **kwargs):
+        context = super(TrainingList, self).get_context_data(**kwargs)
+        context['trainings'] = list(
+            Event.objects.filter(organizers=context['object'], category="training"))
+        for training in context['trainings']:
+            training.name = training.name.split("-" + str(training.start_date))[0]
+        return context
+
 
 class EestecerUpdate(UpdateView):
     model=Eestecer
