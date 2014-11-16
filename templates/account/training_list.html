@@ -3,7 +3,13 @@
 <html>
 <head>
     <style>
+        @font-face {
+            font-family: "helvetica neue"; /*'Helvetica Neue Pro lite'*/
+            src: url({% static 'enet/HelveticaNeueLTPro-Lt.otf' %});
+        }
+
         body {
+            font-family: "Helvetica Neue" Helvetica Monospace;
             height: 297mm;
             width: 210mm;
             margin-left: auto;
@@ -154,6 +160,10 @@
             background: #f2f2f2;
             background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
             background: -moz-linear-gradient(top, #f2f2f2, #f0f0f0);
+        }
+
+        footer {
+            text-align: center;
         }
     </style>
     <title></title>
