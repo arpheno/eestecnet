@@ -189,7 +189,8 @@
     </table>
     <footer>
         This document was generated automatically and is valid without signature.
-        it can be found at {{ request.get_host }}{{ request.get_full_path }}
+        it can be found
+        at {{ request.scheme }}://{{ request.get_host }}{{ request.get_full_path }}
     </footer>
 </main>
 </body>
