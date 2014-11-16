@@ -60,7 +60,7 @@
     {% if object.achievements.all %}
         <details open>
             <summary>Achievements in EESTEC</summary>
-            {% include  'account/achievement_list.html' with object_list=object.achievements %}
+            {% include  'account/achievement_list.html' with object_list=object.achievements.all %}
         </details>
     {% endif %}
 {% endblock %}
