@@ -43,7 +43,7 @@ class MyEventAdminForm(forms.ModelForm):
 class MyEventAdmin(admin.ModelAdmin):
     """ Custom interface to administrate Events from the django admin interface. """
     form = MyEventAdminForm
-    list_display = ['OC','name']
+    list_display = ['name', 'OC', 'start_date']
     inlines = [ImageInline, ParticipationInline]
     filter_horizontal = ["organizers", "organizing_committee"]
     """ Inline interface for displaying the applications to an event and making it possible to accept them"""
