@@ -16,6 +16,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 
+
 # Create your models here.
 from django.db import models
 from mailqueue.models import MailerMessage
@@ -173,7 +174,7 @@ class Participation(models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         salt = sha.new(str(random.random())).hexdigest()[:5]
-        self.confirmation = sha.new(salt+self.participant.get_full_name()).hexdigest()
+        self.confirmation = sha.new(salt + str(random.random())).hexdigest()
         super(Participation,self).save()
 
     def __unicode__(self):
