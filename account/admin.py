@@ -7,7 +7,7 @@ from django.contrib.auth.admin import UserAdmin
 # Define an inline admin descriptor for Employee model
 # which acts a bit like a singleton
 from account.forms import EestecerChangeForm, EestecerCreationForm
-from account.models import Eestecer, Achievement
+from account.models import Eestecer, Achievement, Position
 
 
 class EestecerAdmin(UserAdmin):
@@ -46,3 +46,4 @@ class EestecerAdmin(UserAdmin):
 # Re-register UserAdmin
 admin.site.register(Eestecer, EestecerAdmin)
 admin.site.register(Achievement)
+admin.site.register(Position)

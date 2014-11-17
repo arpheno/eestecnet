@@ -206,6 +206,6 @@ class Position(models.Model):
 class Achievement(models.Model):
     person = models.ForeignKey(Eestecer, related_name='achievements')
     position = models.ForeignKey(Position)
-    member = models.ForeignKey('teams.Team')
+    member = models.ForeignKey('teams.Team', blank=True, null=True)
     date = models.DateField(auto_now_add=True)
     event = models.ForeignKey('events.Event', null=True, blank=True)
