@@ -17,6 +17,7 @@ class Membership(models.Model):
     date_joined = models.DateTimeField(auto_now_add=True)
     privileged = models.BooleanField(default=False)
     board = models.BooleanField(default=False)
+    alumni = models.BooleanField(default=False)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):

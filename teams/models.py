@@ -53,6 +53,14 @@ class Team(models.Model):
     def board(self):
         return self.users.filter(membership__board=True)
 
+    def normal_members(self):
+        result = self.users.filter(membership__alumni=False)
+        return result
+
+    def alumni(self):
+        result = self.users.filter(membership__alumni=True)
+        return result
+
     def privileged(self):
         result = self.users.filter(membership__privileged=True)
         return result

@@ -67,8 +67,14 @@
     </details>
     <details open>
         <summary>Members</summary>
-        {% include 'account/eestecers.html' with object_list=object.users.all %}
+        {% include 'account/eestecers.html' with object_list=object.normal_members %}
     </details>
+    {% if object.alumni %}
+        <details open>
+            <summary>Members</summary>
+            {% include 'account/eestecers.html' with object_list=object.alumni %}
+        </details>
+    {% endif %}
     {% block board %}{% endblock %}
     {% block changedetails %}{% endblock %}
     {% block managemembers %}{% endblock %}
