@@ -113,7 +113,7 @@ class Team(models.Model):
         return self.type.upper() + " " + self.name
     def member_count(self):
         """ The amount of teams currently in the :class:`Member` """
-        return len(self.users.all()) - 1
+        return len(self.users.all())
 
     def pending_applications(self):
         result = self.event_set.get(category='recruitment').applicants.all()
