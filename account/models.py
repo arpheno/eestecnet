@@ -160,6 +160,9 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     """Designates whether this user should be treated as active. Unselect this instead
     of deleting accounts"""
 
+    def is_trainer(self):
+        return len(self.teams.filter(name="Training Team"))
+
     def lc(self):
         return self.teams.filter(type__in=['jlc', 'lc', 'observer'])
 

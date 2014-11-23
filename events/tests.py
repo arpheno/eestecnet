@@ -24,8 +24,12 @@ request.user = MockSuperUser()
 
 
 class EventTestCase(TestCase):
+    def tearDown(self):
+        Team.objects.get(name="skopje").delete()
+
     def setUp(self):
-        self.lc = Team.objects.get(name="skopje")
+        self.lc = Team.objects.create(
+            name="skopje")
         self.ev = Event.objects.create(name="T4T",
                                        summary="Nice event",
                                        description="Cool thing",

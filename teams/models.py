@@ -78,9 +78,9 @@ class Team(models.Model):
         if self.thumbnail and not self.thumbsource:
             raise ValidationError('Please provide the source for the image')
     #Members
-    users = models.ManyToManyField('account.Eestecer', related_name='teams',
-                                   through='news.Membership')
-    founded=models.PositiveIntegerField(null=True, blank=True)
+    users = models.ManyToManyField(
+        'account.Eestecer', related_name='teams', through='news.Membership')
+    founded = models.PositiveIntegerField(null=True, blank=True)
     """When the :class:`Member` was first established"""
     def save(self, *args,**kwargs):
         try:
@@ -91,9 +91,9 @@ class Team(models.Model):
             self.lat, self.lng = results[0]['geometry']['location']['arg']
         except:
             pass
-        if self.pk==None:
+        if not self.pk:
             super(Team, self).save(*args, **kwargs)
-            a=Event.objects.create(
+            a = Event.objects.create(
                 name=str(self.slug + " recruitment"),
                 scope="local",
                 category="recruitment",
@@ -103,7 +103,7 @@ class Team(models.Model):
                 start_date=datetime.now()
             )
             a.save()
-            a.organizing_committee=[self]
+            a.organizing_committee = [self]
         else:
             super(Team, self).save(*args, **kwargs)
 

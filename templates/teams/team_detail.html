@@ -35,8 +35,13 @@
                             {% for event in object.event_set.all %}
                                 {% if event.category == "recruitment" %}
                                     <a href="{% url 'eventapplication' event.slug %}"
-                                       class="action-button shadow animate red">Join this
-                                        Committment</a>
+                                       class="action-button shadow animate red">
+                                        {% if object.type == "team" %}
+                                            Apply to this Team
+                                        {% else %}
+                                            Join this Committment
+                                        {% endif %}
+                                    </a>
                                 {% endif %}
                             {% endfor %}
                         {% else %}

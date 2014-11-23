@@ -180,6 +180,12 @@ html > body > aside {
     flex-wrap: wrap
 }
 
+@media only screen and (max-width: 45em) {
+    html > body > aside {
+        border-width: 0px
+    }
+}
+
 html > body > aside h2 {
     border-bottom-color: white;
     text-align: center;
@@ -310,6 +316,12 @@ html > body footer {
     flex: 1 1 100%
 }
 
+@media only screen and (max-width: 45em) {
+    html > body footer {
+        height: 10.0rem
+    }
+}
+
 html > body footer div.social {
     flex-wrap: wrap;
     align-self: center;
@@ -319,8 +331,8 @@ html > body footer div.social {
 }
 
 html > body footer div.social svg.social {
-    height: 3.0rem;
-    width: 3.0rem;
+    height: 5.0rem;
+    width: 5.0rem;
     fill: white;
     padding: 1.0rem;
     background-color: #c30811
@@ -328,8 +340,8 @@ html > body footer div.social svg.social {
 
 @media only screen and (max-width: 45em) {
     html > body footer div.social svg.social {
-        height: 5.0rem;
-        width: 5.0rem
+        height: 3.0rem;
+        width: 3.0rem
     }
 }
 
@@ -344,6 +356,13 @@ html > body footer img {
     position: absolute;
     top: .0rem;
     left: .0rem
+}
+
+@media only screen and (max-width: 45em) {
+    html > body footer img {
+        height: initial;
+        width: 100%
+    }
 }
 
 html > body footer nav {
@@ -530,7 +549,9 @@ body > header #signin input[role=button] {
     }
 
     #nav:not(:target) > a:first-of-type, #nav:target > a:last-of-type {
-        display: block
+        display: flex;
+        justify-content: center;
+        align-items: center
     }
 
     #nav:target > ul {
@@ -551,15 +572,15 @@ body > header #signin input[role=button] {
         position: fixed;
         top: .0rem;
         right: .0rem;
-        height: 24px;
+        height: 41px;
+        width: 41px;
+        margin: 2px;
         color: #fff;
-        background-color: #ee1f29;
-        padding: .3rem
+        background-color: #ee1f29
     }
 
     #nav > a svg {
         margin: auto;
-        height: 26px;
         fill: #fff
     }
 }
@@ -835,7 +856,8 @@ article h1 {
 article header {
     flex-wrap: wrap;
     justify-content: space-around;
-    flex-direction: row
+    flex-direction: row;
+    margin-bottom: 10px
 }
 
 article header .pictures, article header img {
@@ -843,8 +865,22 @@ article header .pictures, article header img {
     height: 22.5rem
 }
 
+@media only screen and (max-width: 45em) {
+    article header .pictures, article header img {
+        width: 100%
+    }
+}
+
 article header .details {
     min-width: 40.0rem
+}
+
+@media only screen and (max-width: 45em) {
+    article header .details {
+        min-width: initial;
+        margin-top: 10px;
+        width: 100%
+    }
 }
 
 article header .details tr {

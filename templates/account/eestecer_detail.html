@@ -68,6 +68,10 @@
     <h2> Admin Actions</h2>
     {% if object == user %}
         <a href="{% url 'userupdate' %}" id="updatedata">Update my Personal Data</a>
+        {% if user.is_trainer %}
+            <a href="{% url 'certificate' %}" id="trainercert">Training Certificate
+                Supplement</a>
+        {% endif %}
         <script type="text/javascript">
             $("a#updatedata").button();
         </script>

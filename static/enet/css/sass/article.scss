@@ -13,12 +13,24 @@ article {
     flex-wrap:wrap;
     justify-content: space-around;
     flex-direction: row;
+    margin-bottom: 10px;
 
     .pictures,img{
+      @media only screen and (max-width: 45em) /* 640 */
+      {
+        width: 100%;
+      }
       width: 37.5rem;
       height: 22.5rem;
     }
     .details{
+      @media only screen and (max-width: 45em) /* 640 */
+      {
+        min-width: initial;
+        margin-top: 10px;
+        width: 100%;
+
+      }
       min-width: 40.0rem;
       tr {
         td {

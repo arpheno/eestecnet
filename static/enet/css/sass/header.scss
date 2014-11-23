@@ -76,7 +76,9 @@ body > header {
     order: -1;
     &:not( :target ) > a:first-of-type,
     &:target > a:last-of-type {
-      display: block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     &:target {
       > ul {
@@ -93,13 +95,14 @@ body > header {
       position: fixed;
       top: .0rem;
       right: .0rem;
-      height: 24px;
+      height: 41px;
+      width: 41px;
+
+      margin: 2px;
       color: #fff;
       background-color: $eestec;
-      padding: .3rem;
       svg {
         margin: auto;
-        height: 26px;
         fill: #fff;
       }
     }
