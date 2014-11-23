@@ -1,9 +1,24 @@
 from django.contrib import admin
+from django.forms import ModelForm
+from suit_redactor.widgets import RedactorWidget
 
 from news.models import Entry
 
 
+class MyEntryAdminForm(ModelForm):
+    class Meta:
+        model = Entry
+        widgets = {
+            'content': RedactorWidget(editor_options={'lang': 'en', 'iframe': 'true',
+                                                      'css':
+                                                          "/static/enet/css/wysiwyg"
+                                                          ".css"}),
+        }
+
+
 class MyEntryAdmin(admin.ModelAdmin):
+    form = MyEntryAdminForm
+
     def get_queryset(self, request):
         qs = super(MyEntryAdmin, self).get_queryset(request)
         if request.user.is_superuser:

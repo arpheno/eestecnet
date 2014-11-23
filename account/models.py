@@ -177,6 +177,18 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
 
     objects = EestecerManager()
 
+    def clean(self):
+        self.email = self.email.lower()
+        if self.first_name:
+            self.first_name = self.first_name.lower()
+        if self.middle_name:
+            self.middle_name = self.middle_name.lower()
+        if self.last_name:
+            self.last_name = self.last_name.lower()
+        if self.second_last_name:
+            self.second_last_name = self.second_last_name.lower()
+
+
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
