@@ -1,4 +1,9 @@
 div.stub {
+  @media only screen and (max-width: 45em) /* 640 */
+  {
+    width: 100%;
+    height: initial;
+  }
   height: 208px;
   margin: 15px;
   width: 410px;
@@ -9,6 +14,11 @@ div.stub {
     margin: 0px;
   }
   img {
+    @media only screen and (max-width: 45em) /* 640 */
+    {
+      width: 100%;
+      height: initial;
+    }
     height: 104px;
     width: 100%;
     margin: 0px;

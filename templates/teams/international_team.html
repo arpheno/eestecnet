@@ -4,7 +4,6 @@
         <h1> {{ object }} </h1>
         {% thumbnail object.thumbnail "410x104" crop="center" as im %}
             <img src="{{ im.url }}"
-                 style="width:{{ im.width }}px;height:{{ im.height }}px;"
                  title="{{ object.thumbsource }} ">
         {% endthumbnail %}
         <p> {{ object.teamstub }}</p>

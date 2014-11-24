@@ -3,7 +3,7 @@
     <div class="stub {{ metaclass }}">
         <h1>{{ object.title }}</h1>
         {% thumbnail object.image "375x225" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+            <img src="{{ im.url }}">
         {% endthumbnail %}
         <p>{{ object.content }}</p>
     </div>
