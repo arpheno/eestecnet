@@ -75,6 +75,7 @@
         {% endif %}
         <script type="text/javascript">
             $("a#updatedata").button();
+            $("a#trainercert").button();
         </script>
         {% if user.is_superuser %}
             <a href="{% url 'batch_add_events' %}" id="add_events">Add events in CSV</a>
