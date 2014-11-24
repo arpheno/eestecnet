@@ -69,7 +69,8 @@
     {% if object == user %}
         <a href="{% url 'userupdate' %}" id="updatedata">Update my Personal Data</a>
         {% if user.is_trainer %}
-            <a href="{% url 'certificate' %}" id="trainercert">Training Certificate
+            <a href="{% url 'certificate' object.slug %}" id="trainercert">Training
+                Certificate
                 Supplement</a>
         {% endif %}
         <script type="text/javascript">
