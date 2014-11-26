@@ -31,6 +31,11 @@ class Membership(models.Model):
         return self.user.get_full_name()
 
 
+class EntryManager(models.Manager):
+    def get_queryset(self):
+        return super(EntryManager, self).get_queryset().order_by('-pub_date')
+
+
 class Entry(models.Model):
     class Meta:
         verbose_name_plural = "entries"
@@ -46,6 +51,7 @@ class Entry(models.Model):
     """ The publication date"""
     entry_image = models.ImageField(upload_to="entryimages")
     """ Optionally, an image to add"""
+    objects = EntryManager()
 
     def as_html(self):
         return render_to_string('news/entry.html', {'object': self})
