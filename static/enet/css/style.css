@@ -1265,6 +1265,10 @@ section.news p, section.news div {
     flex: 1 1 70%
 }
 
+section.news a {
+    color: blue
+}
+
 a.news {
     width: 150px;
     height: 150px

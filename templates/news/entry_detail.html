@@ -5,12 +5,12 @@
 
         <h3>{{ entry.pub_date }}</h3>
 
-        <p class="post_content">
+        <div class="post_content">
 
-            {% autoescape off %}
+        {% autoescape off %}
                 {{ entry.content }}
             {% endautoescape %}
-        </p>
+        </div>
 
     </article>
 {% endblock %}
