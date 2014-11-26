@@ -11,17 +11,23 @@
 {% endblock %}
 {% block details %}
     <tr>
-        <td>LC Name</td>
+        {% if object.is_lc %}
+            <td>LC Name</td>
+        {% else %}
+            <td>Team Name</td>
+        {% endif %}
         <td>{{ object.name }} </td>
     </tr>
     <tr>
         <td>Founded:</td>
         <td> {{ object.founded }}</td>
     </tr>
-    <tr>
+    {% if object.is_lc %}
+        <tr>
         <td>Website:</td>
         <td>{{ object.website }}</td>
     </tr>
+    {% endif %}
     <tr>
         <td>Number of Members</td>
         <td>{{ object.member_count }}</td>
@@ -67,7 +73,11 @@
         {% include 'events/events.html' with object_list=object.event_set.all %}
     </details>
     <details open>
-        <summary>Board</summary>
+        {% if object.is_lc %}
+            <summary>Board</summary>
+        {% else %}
+            <summary>Coordinator</summary>
+        {% endif %}
         {% include 'account/eestecers.html' with object_list=object.board %}
     </details>
     <details open>
