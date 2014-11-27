@@ -52,7 +52,6 @@ class EestecerUpdateForm(BetterModelForm):
                 template='<span>%(image)s<br />%(input)s</span>'),
         }
 
-
 class TrainingList(DetailView):
     template_name = "account/training_list.html"
     model = Eestecer
@@ -71,6 +70,13 @@ class EestecerUpdate(UpdateView):
     form_class = EestecerUpdateForm
     success_url = "/people/me"
     template_name = 'account/eestecer_form.html'
+
+    def form_invalid(self, form):
+        messages.add_message(
+            self.request,
+            messages.ERROR,
+            'You forgot required fields')
+        return super(EestecerUpdate, self).form_invalid(form)
 
     def form_valid(self, form):
         messages.add_message(
