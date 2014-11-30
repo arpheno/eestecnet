@@ -224,3 +224,6 @@ class Achievement(models.Model):
     member = models.ForeignKey('teams.Team', blank=True, null=True)
     date = models.DateField(auto_now_add=True)
     event = models.ForeignKey('events.Event', null=True, blank=True)
+
+    def __unicode__(self):
+        return self.person + " - " + self.position
