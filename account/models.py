@@ -226,4 +226,4 @@ class Achievement(models.Model):
     event = models.ForeignKey('events.Event', null=True, blank=True)
 
     def __unicode__(self):
-        return self.person + " - " + self.position
+        return self.person.get_short_name() + " - " + self.position
