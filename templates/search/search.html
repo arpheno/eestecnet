@@ -3,9 +3,15 @@
 {% block maincontent %}
     {% if query %}
         <h3>Results</h3>
-
         {% for result in page.object_list %}
-            {{ result.object.as_html }}
+            {% ifequal result.model_name 'event' %}
+                {% if result.object.category == 'recruitment' %}
+                {% else %}
+                    {{ result.object.as_html }}
+                {% endif %}
+            {% else %}
+                {{ result.object.as_html }}
+            {% endifequal %}
         {% empty %}
             <p>No results found.</p>
         {% endfor %}
