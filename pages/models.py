@@ -10,6 +10,9 @@ class Page(models.Model):
 
 
 class Stub(models.Model):
+    def __unicode__(self):
+        return self.group + " - " + self.title
+
     title = models.CharField(max_length=50)
     link = models.URLField()
     content = models.TextField(max_length=140)
