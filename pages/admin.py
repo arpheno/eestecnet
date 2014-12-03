@@ -2,7 +2,8 @@ from django.contrib import admin
 from django import forms
 from suit_redactor.widgets import RedactorWidget
 
-from pages.models import Page
+from pages.models import Page, Stub
+
 
 
 
@@ -23,3 +24,4 @@ class PageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Page, PageAdmin)
+admin.site.register(Stub)
