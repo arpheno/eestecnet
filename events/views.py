@@ -8,10 +8,11 @@ from django.core.urlresolvers import reverse
 from django.forms import widgets
 from django.shortcuts import redirect, get_object_or_404
 
+
 # Create your views here.
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, View, \
-    FormView
+    FormView, DeleteView
 from extra_views import UpdateWithInlinesView
 from form_utils.forms import BetterModelForm
 from form_utils.widgets import ImageWidget
@@ -174,6 +175,37 @@ class EventDetail(DetailView):
                 target__slug=self.kwargs['slug'], participant=self.request.user)
         except:
             context['participation'] = None
+        return context
+
+
+class DeleteApplication(DeleteView):
+    model = Application
+
+    def get_object(self, queryset=None):
+        event = Event.objects.get(slug=self.kwargs['slug'])
+        return Application.objects.get(applicant=self.request.user, target=event)
+
+    def get_context_data(self, **kwargs):
+        context = super(DeleteApplication, self).get_context_data(**kwargs)
+        context['object'] = Event.objects.get(slug=self.kwargs['slug'])
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.get_object().delete()
+        return redirect(reverse('event', kwargs=self.kwargs))
+
+
+class EditApplication(UpdateView):
+    model = Application
+    template_name = "events/application_update.html"
+
+    def get_object(self, queryset=None):
+        event = Event.objects.get(slug=self.kwargs['slug'])
+        return Application.objects.get(applicant=self.request.user, target=event)
+
+    def get_context_data(self, **kwargs):
+        context = super(EditApplication, self).get_context_data(**kwargs)
+        context['object'] = Event.objects.get(slug=self.kwargs['slug'])
         return context
 
 

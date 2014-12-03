@@ -45,7 +45,7 @@ class CommitmentList(ListView):
     model = Team
 
     def get_queryset(self):
-        return Team.objects.filter(type__in=["lc", "jlc", "observer"])
+        return Team.objects.filter(type__in=["lc", "jlc", "observer"]).order_by('name')
 
 
 class ManageMembers(TeamMixin, UpdateWithInlinesView):

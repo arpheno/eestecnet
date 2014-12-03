@@ -57,6 +57,12 @@
     {% block images %}{% endblock %}
 {% endblock %}
 {% block aside %}
+    {% if user in object.applicants.all %}
+        <h2> Application Actions</h2>
+        <a href="{% url 'application-edit' slug=object.slug %}" class="teamadmin">Edit my
+            application</a>
+
+    {% endif %}
     {% if user in object.organizers.all %}
         <h2> Admin Actions</h2>
         <a href="{% url 'eventdescription' slug=object.slug %}" class="teamadmin">Change
@@ -68,8 +74,8 @@
             <a href="{{ object.as_url }}/teamapplications"
                class="teamadmin">View {{ object.pending_applications.count }}Applications </a>
         {% endif %}
-        <script type="text/javascript">
-            $("a.teamadmin").button();
-        </script>
     {% endif %}
+    <script type="text/javascript">
+        $("a.teamadmin").button();
+    </script>
 {% endblock %}

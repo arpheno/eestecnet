@@ -3,16 +3,20 @@ from django.contrib import admin
 
 from events.views import EventDetail, ApplyToEvent, InternationalEvents, confirm_event, \
     FillInTransport, UpdateTransport, ChangeDescription, ChangeDetails, EventImages, \
-    AddEvents
+    AddEvents, DeleteApplication, EditApplication
 
 
 admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^$', InternationalEvents.as_view(), name='events'),
+    url(r'^/*$', InternationalEvents.as_view(), name='events'),
     url(r'^add_batch/*$', AddEvents.as_view(), name='batch_add_events'),
     url(r'^(?P<slug>[-\w]+)/*$', EventDetail.as_view(), name='event'),
+    url(r'^(?P<slug>[-\w]+)/apply/delete/*', DeleteApplication.as_view(),
+        name='application-delete'),
+    url(r'^(?P<slug>[-\w]+)/apply/edit/*', EditApplication.as_view(),
+        name='application-edit'),
     url(r'^(?P<slug>[-\w]+)/apply/*', ApplyToEvent.as_view(), name='eventapplication'),
     url(r'^(?P<slug>[-\w]+)/confirm/*$', confirm_event, name='eventconfirmation'),
     url(r'^(?P<slug>[-\w]+)/description/*$',

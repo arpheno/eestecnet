@@ -1,0 +1,22 @@
+{% extends 'events/event_detail.html' %}
+{% block actions %}
+    <div id="apply">
+        <h1>Withdraw Application</h1>
+
+        <p>Are you sure you want to resign from the application to{{ object.name }}?</p>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+
+            <input type="submit" value="Yes, delete."/>
+            <a href="{% url "event" object.slug %}">No, cancel.</a>
+        </form>
+    </div>
+    <script>
+        $(function () {
+            $("#apply").dialog({
+                width: "330px",
+                title: "Your motivation for applying"});
+        });
+    </script>
+{% endblock %}
