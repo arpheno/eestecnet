@@ -13,6 +13,7 @@ from events.models import Event
 TYPE_CHOICES = (
         ('body', 'Body'),
         ('team', 'International Team'),
+        ('department', 'Board Department'),
         ('lc', 'Local Committee'),
         ('jlc', 'Junior Local Committee'),
         ('observer', 'Observer'),
