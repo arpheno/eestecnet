@@ -236,7 +236,7 @@ class EventParticipationAdmin(admin.ModelAdmin):
         if request.user.is_superuser:
             return qs
         try:
-            return qs.filter(target__in=request.user.privileged.filter(
+            return qs.filter(target__in=request.user.teams_administered().filter(
                 type__in=['observer', 'jlc', 'lc'])[0].event_set.all())
         except:
             return qs.none()
