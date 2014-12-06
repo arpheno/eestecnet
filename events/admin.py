@@ -134,7 +134,7 @@ class IncomingApplicationFilter(admin.SimpleListFilter):  #
 
 
 def get_own_members(request):
-    return request.user.teams_administered.filter(type__in=['observer', 'jlc', 'lc'])[
+    return request.user.teams_administered().filter(type__in=['observer', 'jlc', 'lc'])[
         0].users.all()
 
 
