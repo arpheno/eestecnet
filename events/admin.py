@@ -172,13 +172,12 @@ class IncomingApplicationAdmin(admin.ModelAdmin):
         try:
             qs = qs.filter(
                 # They're either for an event by a committee administered by the user
-                Q(target__in=request.user.privileged.filter(
+                Q(target__in=request.user.teams_administered.filter(
                     type__in=['observer', 'jlc', 'lc'])[0].event_set.all()) |
                 # Or directly for an event directly administered by the user
                 Q(target__in=request.user.events_organized.all())
             )
         except:
-            raise
             return qs.none()
         return qs
 
