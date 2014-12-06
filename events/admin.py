@@ -152,10 +152,7 @@ class OutgoingApplicationAdmin(admin.ModelAdmin):
         qs = super(OutgoingApplicationAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
-        try:
-            return qs.filter(applicant__in=get_own_members(request))
-        except:
-            return qs.none()
+        return qs.filter(applicant__in=get_own_members(request))
 
 
 class IncomingApplicationAdmin(admin.ModelAdmin):
@@ -181,6 +178,7 @@ class IncomingApplicationAdmin(admin.ModelAdmin):
                 Q(target__in=request.user.events_organized.all())
             )
         except:
+            raise
             return qs.none()
         return qs
 
