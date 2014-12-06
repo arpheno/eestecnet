@@ -99,7 +99,6 @@ class MyEventAdmin(admin.ModelAdmin):
         Admins still get to see all events. Organizers of events get to see their own
         evens. """
         qs = super(MyEventAdmin, self).get_queryset(request)
-        return qs
         if request.user.is_superuser:
             return qs
         return qs.filter(Q(organizing_committee__in=request.user.teams_administered) | Q(
@@ -178,6 +177,7 @@ class IncomingApplicationAdmin(admin.ModelAdmin):
                 Q(target__in=request.user.events_organized.all())
             )
         except:
+            raise
             return qs.none()
         return qs
 
