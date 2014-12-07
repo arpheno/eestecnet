@@ -153,7 +153,8 @@ class Event(models.Model):
                     thumbname = "trtlogo.png"
                 with open('eestecnet/training/' + thumbname, 'rb') as doc_file:
                     self.thumbnail.save("thumbname.jpg", File(doc_file), save=True)
-            self.name = self.name + "-" + str(self.start_date)
+            if not str(self.start_date) in self.name:
+                self.name = self.name + "-" + str(self.start_date)
         if self.end_date:
             if self.start_date > self.end_date:
                 raise ValidationError("The event may not begin after it ends.")
