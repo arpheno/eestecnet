@@ -204,6 +204,7 @@ class ElfinderConnector:
                 ``True``)
                 :error:        on failed
 
+
         This method should not be invoked
         directly, the :meth:`elfinder.connector.ElfinderConnector.execute`
         method must be used.

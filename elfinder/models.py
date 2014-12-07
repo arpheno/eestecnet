@@ -45,10 +45,10 @@ def roots_for_user(user):
         for team in user.teams_administered():
             roots.append(Root(team.slug,True))
         for team in user.teams.all():
-            if not team in user.teams_administered():
+            if not team in user.teams_adminiistered():
                 roots.append(Root(team.slug))
         for event in user.events_organized.all():
-            roots.append(Root(event.slug),True)
+            roots.append(Root(event.slug, True))
         for event in user.events.all():
             roots.append(Root(event.slug))
     roots.append(Root("Public"))
