@@ -133,11 +133,16 @@ class Team(models.Model):
 class Board(models.Model):
     year = models.PositiveIntegerField()
     treasurer = models.OneToOneField("account.Eestecer",
-                                     related_name="treasurer_in_board")
-    vcia = models.OneToOneField("account.Eestecer", related_name="ia_in_board")
-    vcea = models.OneToOneField("account.Eestecer", related_name="ea_in_board")
-    vcpa = models.OneToOneField("account.Eestecer", related_name="pa_in_board")
-    cp = models.OneToOneField("account.Eestecer", related_name="cp_in_board")
+                                     related_name="treasurer_in_board",
+                                     null=True, blank=True)
+    vcia = models.OneToOneField("account.Eestecer", related_name="ia_in_board",
+                                null=True, blank=True)
+    vcea = models.OneToOneField("account.Eestecer", related_name="ea_in_board",
+                                null=True, blank=True)
+    vcpa = models.OneToOneField("account.Eestecer", related_name="pa_in_board",
+                                null=True, blank=True)
+    cp = models.OneToOneField("account.Eestecer", related_name="cp_in_board",
+                              null=True, blank=True)
 
 
 class MemberImage(models.Model):
