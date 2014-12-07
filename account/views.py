@@ -29,7 +29,10 @@ def complete(request, ida):
         return redirect('/')
     user.is_active = True
     user.save()
-    return redirect('/')
+    messages.add_message(request, messages.SUCCESS,
+                         "Your account is active, please update your profile picture "
+                         "and additional info.")
+    return redirect('/people/me')
 
 
 class EestecerProfile(DetailView):
