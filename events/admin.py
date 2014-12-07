@@ -143,6 +143,7 @@ class OutgoingApplicationAdmin(admin.ModelAdmin):
     """ Custom interface to administrate Events from the django admin interface. """
     list_display = ['applicant', 'target', 'priority']
     list_editable = ['priority']
+    readonly_fields = ['letter', 'target', 'applicant', 'accepted']
     list_filter = [OutgoingApplicationFilter, ]
 
     def get_queryset(self, request):
@@ -160,6 +161,7 @@ class IncomingApplicationAdmin(admin.ModelAdmin):
     list_display = ['applicant', 'target', 'priority', 'accepted']
     list_editable = ['accepted']
     list_filter = [IncomingApplicationFilter]
+    readonly_fields = ['letter', 'target', 'applicant', 'priority']
     #TODO Fieldsets
 
     def get_queryset(self, request):
