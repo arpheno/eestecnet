@@ -9,6 +9,7 @@ from django.forms import widgets
 from django.shortcuts import redirect, get_object_or_404
 
 
+
 # Create your views here.
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, View, \
@@ -170,6 +171,7 @@ class EventDetail(DetailView):
     def get_context_data(self, **kwargs):
 
         context = super(EventDetail, self).get_context_data(**kwargs)
+        context['applicable'] = timezone.now() < self.get_object().deadline
         try:
             context['participation'] = Participation.objects.get(
                 target__slug=self.kwargs['slug'], participant=self.request.user)
@@ -235,6 +237,14 @@ class ApplyToEvent(CreateView):
         application = form.save(commit=False)
         application.applicant = self.request.user
         application.target = Event.objects.get(slug=self.kwargs['slug'])
+        if application.target.deadline:
+            if timezone.now() > application.target.deadline:
+                messages.add_message(
+                    self.request,
+                    messages.INFO,
+                    'We are sorry. The deadline for this event has passed.')
+                return redirect(self.get_success_url())
+
         application.save()
         messages.add_message(
             self.request,

@@ -248,6 +248,7 @@ class Application(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
+        #TODO PREVENT POSTMORTEM APPLICATION
         if self.target.category == "recruitment":
             if self.accepted:
                 Membership.objects.create(

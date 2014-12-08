@@ -19,8 +19,8 @@
             your User Profile</a>
     {% endif %}
 
-{% elif user.is_authenticated %}
-    {% if object.category == "recruitment" %}
+        {% elif user.is_authenticated and applicable %}
+            {% if object.category == "recruitment" %}
         <a href="{% url 'eventapplication' object.slug %}"
            class="action-button shadow animate red">Apply to this committment</a>
     {% else %}
