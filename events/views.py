@@ -10,6 +10,7 @@ from django.shortcuts import redirect, get_object_or_404
 
 
 
+
 # Create your views here.
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, View, \
@@ -171,7 +172,10 @@ class EventDetail(DetailView):
     def get_context_data(self, **kwargs):
 
         context = super(EventDetail, self).get_context_data(**kwargs)
-        context['applicable'] = timezone.now() < self.get_object().deadline
+        if self.get_object().deadline:
+            context['applicable'] = timezone.now() < self.get_object().deadline
+        else:
+            context['applicable'] = timezone.now().date() <= self.get_object().start_date
         try:
             context['participation'] = Participation.objects.get(
                 target__slug=self.kwargs['slug'], participant=self.request.user)
