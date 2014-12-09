@@ -24,9 +24,9 @@
     </tr>
     {% if object.is_lc %}
         <tr>
-        <td>Website:</td>
-        <td>{{ object.website }}</td>
-    </tr>
+            <td>Website:</td>
+            <td>{{ object.website }}</td>
+        </tr>
     {% endif %}
     <tr>
         <td>Number of Members</td>
@@ -45,7 +45,7 @@
                                         {% if object.type == "team" %}
                                             Apply to this Team
                                         {% else %}
-                                            Join this Committment
+                                            Join this Commitment
                                         {% endif %}
                                     </a>
                                 {% endif %}
@@ -63,9 +63,9 @@
     <details open>
         {% block description %}
             <summary>Description</summary>
-        {% autoescape off %}
-            {{ object.description }}
-        {% endautoescape %}
+            {% autoescape off %}
+                {{ object.description }}
+            {% endautoescape %}
         {% endblock %}
     </details>
     <details open>

@@ -22,8 +22,8 @@
         {% elif user.is_authenticated and applicable %}
             {% if object.category == "recruitment" %}
         <a href="{% url 'eventapplication' object.slug %}"
-           class="action-button shadow animate red">Apply to this committment</a>
-    {% else %}
+           class="action-button shadow animate red">Apply to this commitment</a>
+            {% else %}
         <a href="{% url 'eventapplication' object.slug %}"
            class="action-button shadow animate red">Apply to event</a>
     {% endif %}
