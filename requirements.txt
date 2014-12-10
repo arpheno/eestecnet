@@ -44,7 +44,6 @@ django-pagination==1.0.7
 django-password-reset==0.7
 django-registration==1.0
 django-sekizai==0.7
-django-simple-avatar==0.8.6
 django-suit==0.2.11
 django-suit-redactor==0.0.2
 docutils==0.12
