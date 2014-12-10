@@ -61,5 +61,6 @@ urlpatterns = patterns(
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': MEDIA_ROOT}),
     url(r'^history/*$', History.as_view(), name="history"),
+    url(r'^statistics/', include('statistics.urls')),
     url(r'', include('pages.urls')),
 )
