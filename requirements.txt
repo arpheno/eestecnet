@@ -14,7 +14,6 @@ amqp==1.4.6
 anyjson==0.3.3
 argparse==1.2.1
 bbcode==1.0.19
-billiard==3.3.0.18
 cairocffi==0.6
 celery==3.1.16
 cffi==0.8.6
@@ -48,9 +47,7 @@ django-suit==0.2.11
 django-suit-redactor==0.0.2
 docutils==0.12
 fpdf==1.7
-gevent==1.0.1
 greenlet==0.4.5
-grequests==0.2.0
 gunicorn==19.1.1
 haystack==0.15
 html5lib==0.999
