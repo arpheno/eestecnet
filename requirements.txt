@@ -69,4 +69,3 @@ six==1.5.2
 sorl-thumbnail==11.12.1b
 suit==2.0.2
 tinycss==0.3
-wiki==0.0.23
