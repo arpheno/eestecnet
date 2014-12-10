@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, url
 from django.contrib import admin
 
+from statistics.views import simpleStatistics
+
 
 admin.autodiscover()
 
