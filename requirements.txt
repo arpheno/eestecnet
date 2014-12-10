@@ -28,7 +28,7 @@ django-classy-tags==0.5.1
 django-common==0.1.51
 django-extra-views==0.6.5
 django-form-utils==1.0.2
-django-froala-editor==1.2.12
+django-froala-editor==1.2.4
 django-gmapi==1.0.1
 django-grappelli==2.6.2
 django-gunicorn==0.1.1
