@@ -26,8 +26,9 @@
                 6000 members of whom 3000 are currently active, and indirectly, EESTEC is
                 addressing all students in the faculties that EESTEC exists.</p>
         </nav>
-        <div id="preview" class="cycle-slideshow" data-cycle-slides="li">
-            {% for object in object_list %}
+        <div id="preview" class="cycle-slideshow" data-cycle-slides="li"
+             data-cycle-timeout="8000">
+        {% for object in object_list %}
                 <li class="news">
                     <div class="pictures">
                         {% thumbnail object.entry_image "1087x480" crop="center" as im %}
