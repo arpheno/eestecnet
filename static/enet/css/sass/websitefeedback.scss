@@ -1,0 +1,12 @@
+div.websitefeedback {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  p {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+  form {
+    text-align: center;
+  }
+}

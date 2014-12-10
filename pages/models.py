@@ -18,3 +18,18 @@ class Stub(models.Model):
     content = models.TextField(max_length=140)
     image = models.ImageField(upload_to="stubs")
     group = models.CharField(max_length=20)
+
+
+class WebsiteFeedback(models.Model):
+    def __unicode__(self):
+        return str(self.date)
+
+    date = models.DateTimeField(auto_created=True, editable=False, auto_now_add=True)
+    content = models.TextField()
+    user = models.ForeignKey('account.Eestecer', editable=False, blank=True, null=True)
+    read = models.BooleanField(default=False)
+
+
+class WebsiteFeedbackImage(models.Model):
+    image = models.ImageField(upload_to="userfeedback")
+    entity = models.ForeignKey('pages.WebsiteFeedback')

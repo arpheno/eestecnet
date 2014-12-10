@@ -1387,6 +1387,21 @@ section.history details p {
     color: blue
 }
 
+div.websitefeedback {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+div.websitefeedback p {
+    flex: 1 1 100%;
+    text-align: center
+}
+
+div.websitefeedback form {
+    text-align: center
+}
+
 a {
     text-decoration: none
 }

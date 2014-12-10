@@ -4,7 +4,8 @@
 {% block maincontent %}
     <main class="home">
         <div id="donate">
-            <div class="wrapper"><p>Like our Idea?</p> <a href="#">DONATE !</a></div>
+            <div class="wrapper"><p>Spot a bug?</p> <a
+                    href="{% url 'website-feedback' %}">Feedback Us!</a></div>
         </div>
         <div id="newsletter">
             <form action="{% url 'newsletter' %}" method="POST">{% csrf_token %}<input

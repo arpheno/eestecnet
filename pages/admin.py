@@ -2,7 +2,8 @@ from django.contrib import admin
 from django import forms
 from suit_redactor.widgets import RedactorWidget
 
-from pages.models import Page, Stub
+from pages.models import Page, Stub, WebsiteFeedback, WebsiteFeedbackImage
+
 
 
 
@@ -23,5 +24,20 @@ class PageAdmin(admin.ModelAdmin):
     form = PageForm
 
 
+class WebsiteFeedbackImageInlineAdmin(admin.TabularInline):
+    model = WebsiteFeedbackImage
+
+    def has_add_permission(self, request):
+        return False
+
+
+class WebsiteFeedbackAdmin(admin.ModelAdmin):
+    model = WebsiteFeedback
+    list_display = ['date', 'read']
+    list_filter = ['read']
+    inlines = [WebsiteFeedbackImageInlineAdmin]
+
+
 admin.site.register(Page, PageAdmin)
 admin.site.register(Stub)
+admin.site.register(WebsiteFeedback, WebsiteFeedbackAdmin)
