@@ -7,7 +7,6 @@ MarkupSafe==0.23
 Pillow==2.6.1
 Pygments==1.6
 Pyphen==0.9.1
-South==1.0.1
 Sphinx==1.2.3
 Whoosh==2.6.0
 amqp==1.4.6
@@ -16,7 +15,6 @@ argparse==1.2.1
 bbcode==1.0.19
 cairocffi==0.6
 celery==3.1.16
-cffi==0.8.6
 cssselect==0.9.1
 django-annoying==0.8.0
 django-appconf==0.6
@@ -46,7 +44,6 @@ django-sekizai==0.7
 django-suit==0.2.11
 django-suit-redactor==0.0.2
 docutils==0.12
-fpdf==1.7
 greenlet==0.4.5
 gunicorn==19.1.1
 haystack==0.15
@@ -54,17 +51,12 @@ html5lib==0.999
 kombu==3.0.23
 libmagic==1.0
 lxml==3.4.0
-pinax-theme-bootstrap==4.0
-pisa==3.0.33
 postmarkup==1.2.1
 pycparser==2.10
 python-magic==0.4.6
 python-memcached==1.53
 python-ptrace==0.8
-pytils==0.3
 pytz==2014.7
-recaptcha-client==1.0.6
-requests==2.5.0
 six==1.5.2
 sorl-thumbnail==11.12.1b
 suit==2.0.2
