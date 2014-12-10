@@ -50,7 +50,6 @@ haystack==0.15
 html5lib==0.999
 kombu==3.0.23
 libmagic==1.0
-lxml==3.4.0
 postmarkup==1.2.1
 pycparser==2.10
 python-magic==0.4.6
