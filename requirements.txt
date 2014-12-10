@@ -44,7 +44,6 @@ django-suit-redactor==0.0.2
 docutils==0.12
 greenlet==0.4.5
 gunicorn==19.1.1
-haystack==0.15
 html5lib==0.999
 kombu==3.0.23
 libmagic==1.0
