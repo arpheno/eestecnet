@@ -52,6 +52,10 @@ class Entry(models.Model):
     entry_image = models.ImageField(upload_to="entryimages")
     """ Optionally, an image to add"""
     objects = EntryManager()
+    published = models.BooleanField(default=False)
+
+    def authors(self):
+        return " ".join(str(a) for a in self.author.all())
 
     def as_html(self):
         return render_to_string('news/entry.html', {'object': self})

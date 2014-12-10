@@ -10,4 +10,11 @@ class home(ListView):
     template_name = 'enet/home.html'
 
     def get_queryset(self):
-        return Entry.objects.order_by('-pub_date')[:5]
+        return Entry.objects.filter(published=True).order_by('-pub_date')[:5]
+
+
+class NewsList(ListView):
+    model = Entry
+
+    def get_queryset(self):
+        return Entry.objects.filter(published=True).order_by('-pub_date')[:5]

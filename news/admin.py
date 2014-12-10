@@ -18,6 +18,22 @@ class MyEntryAdminForm(ModelForm):
 
 class MyEntryAdmin(admin.ModelAdmin):
     form = MyEntryAdminForm
+    readonly_fields = ['published']
+    list_display = ['pub_date', 'authors', 'headline', 'published']
+    actions = ['publish_selected']
+
+    def publish_selected(self, request, queryset):
+        if request.user.is_superuser:
+            rows_updated = queryset.update(published=True)
+            if rows_updated == 1:
+                message_bit = "1 story was"
+            else:
+                message_bit = "%s stories were" % rows_updated
+            self.message_user(request,
+                              "%s successfully marked as published." % message_bit)
+        else:
+            self.message_user(request,
+                              "You lack the privileges to publish the news. One of the admins will review it and publish it")
 
     def get_queryset(self, request):
         qs = super(MyEntryAdmin, self).get_queryset(request)
