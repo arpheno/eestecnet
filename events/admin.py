@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from suit_redactor.widgets import RedactorWidget
 
 from events.models import Event, Application, EventImage, \
-    Participation, IncomingApplication, OutgoingApplication
+    Participation, IncomingApplication, OutgoingApplication, Transportation
 
 
 class ApplicationInline(admin.TabularInline):
@@ -185,23 +185,125 @@ class IncomingApplicationAdmin(admin.ModelAdmin):
         return qs
 
 
+class TransportationInlineAdmin(admin.TabularInline):
+    model = Transportation
+
+
 class EventParticipationAdmin(admin.ModelAdmin):
     """ Custom interface to administrate Events from the django admin interface. """
     list_display = ['participant', 'e_mail', 'food', 't_shirt_size', 'confirmed',
                     'transportation_details_filled']
     list_filter = [IncomingApplicationFilter]
-    actions = ['download_transportation_details']
+    actions = ['download_transportation_details', 'download_participant_details']
 
     def download_participant_details(self, request, queryset):
-        pass  #todo
+        import xlwt
 
-    def download_transportation_details(self, request,
-                                        queryset):  #todo test  #todo pdf instead of csv
+        response = HttpResponse(content_type='application/ms-excel')
+        response['Content-Disposition'] = 'attachment; filename=' + queryset[
+            0].target.slug + 'ParticipantDetails.xls'
+        wb = xlwt.Workbook(encoding='utf-8')
+        ws = wb.add_sheet("TransportationDetails")
+
+        row_num = 0
+
+        columns = [
+            (u"Full Name", 8000),
+            (u"LC", 3000),
+            (u"Email", 3000),
+            (u"gender", 3000),
+            (u"T Shirt Size", 6000),
+            (u"Birthday", 6000),
+            (u"Allergies", 3000),
+            (u"Food Preferences", 4000),
+        ]
+
+        font_style = xlwt.XFStyle()
+        font_style.font.bold = True
+
+        for col_num in xrange(len(columns)):
+            ws.write(row_num, col_num, columns[col_num][0], font_style)
+            # set column width
+            ws.col(col_num).width = columns[col_num][1]
+
+        font_style = xlwt.XFStyle()
+        font_style.alignment.wrap = 1
+
+        for pax in queryset:
+            row_num += 1
+            row = [
+                pax.participant.get_full_name(),
+                ", ".join(str(person) for person in pax.participant.lc()),
+                pax.participant.email,
+                pax.participant.gender,
+                pax.participant.tshirt_size,
+                pax.participant.date_of_birth,
+                pax.participant.allergies,
+                pax.participant.food_preferences,
+            ]
+
+            for col_num in xrange(len(row)):
+                ws.write(row_num, col_num, row[col_num], font_style)
+
+        wb.save(response)
+        return response
+
+    def download_transportation_details(self, request, queryset):
+        import xlwt
+
+        response = HttpResponse(content_type='application/ms-excel')
+        response['Content-Disposition'] = 'attachment; filename=' + queryset[
+            0].target.slug + 'TransportationDetails.xls'
+        wb = xlwt.Workbook(encoding='utf-8')
+        ws = wb.add_sheet("TransportationDetails")
+
+        row_num = 0
+
+        columns = [
+            (u"Full Name", 8000),
+            (u"Arrival Date and Time", 6000),
+            (u"Arrival By", 3000),
+            (u"Arrival Number", 4000),
+            (u"Departure Date and Time", 6000),
+            (u"Depart By", 3000),
+            (u"Comment", 10000),
+        ]
+
+        font_style = xlwt.XFStyle()
+        font_style.font.bold = True
+
+        for col_num in xrange(len(columns)):
+            ws.write(row_num, col_num, columns[col_num][0], font_style)
+            # set column width
+            ws.col(col_num).width = columns[col_num][1]
+
+        font_style = xlwt.XFStyle()
+        font_style.alignment.wrap = 1
+
+        for pax in queryset:
+            row_num += 1
+            row = [
+                pax.participant.get_full_name(),
+                str(pax.transportation.arrival),
+                pax.transportation.arrive_by,
+                pax.transportation.arrival_number,
+                str(pax.transportation.departure),
+                pax.transportation.depart_by,
+            ]
+
+            for col_num in xrange(len(row)):
+                ws.write(row_num, col_num, row[col_num], font_style)
+
+        wb.save(response)
+        return response
+
+    def download_transportation_details_csv(self, request,
+                                            queryset):  #todo test  #todo pdf instead of csv
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
         writer = csv.writer(response)
         for pax in queryset:
-            writer.writerow([pax.get_full_name(),
+            writer.writerow([pax.participant.get_full_name(),
                              pax.transportation.arrival,
                              pax.transportation.arrive_by,
                              pax.transportation.arrival_number,
