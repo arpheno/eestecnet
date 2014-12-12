@@ -53,6 +53,7 @@ class Entry(models.Model):
     """ Optionally, an image to add"""
     objects = EntryManager()
     published = models.BooleanField(default=False)
+    front_page_news = models.BooleanField(default=False)
 
     def authors(self):
         return " ".join(str(a) for a in self.author.all())
