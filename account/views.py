@@ -29,11 +29,12 @@ def complete(request, ida):
         return redirect('/')
     user.is_active = True
     user.save()
-    #login(request, user)
+    user.backend = 'django.contrib.auth.backends.ModelBackend'
+    login(request, user)
     messages.add_message(request, messages.SUCCESS,
                          "Your account is active, please update your profile picture "
                          "and additional info.")
-    return redirect('/')
+    return redirect('/people/me')
 
 
 class EestecerProfile(DetailView):
