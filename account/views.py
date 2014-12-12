@@ -98,7 +98,7 @@ class EestecerList(ListView):
 
     def get_queryset(self):
         qs = super(EestecerList, self).get_queryset()
-        return qs.exclude(profile_picture=None)
+        return qs.exclude(profile_picture="")
 
 
 class EestecerCreate(CreateView):
