@@ -38,7 +38,10 @@
                     </div>
                     <footer>
                         <main>
-                                <h1>{{ object.headline }}</h1>
+                            <h1 style="display:flex;justify-content: space-between;">
+                                <span>{{ object.headline }}</span><span
+                                    style="font-size:10px;">{{ object.pub_date }}</span>
+                            </h1>
 
                             <p>
                                 {% autoescape off %}
@@ -52,7 +55,9 @@
                             <h2>Other top Stories:</h2>
                             {% for other_object in object_list %}
                                 {% if other_object != object %}
-                                    <a href="{% url 'news' %}">{{ other_object }}</a>
+                                    <a href="{% url 'news' other_object.slug %}"
+                                       style="display:flex;justify-content: space-between;"><span>{{ other_object.headline }}</span><span
+                                            style="font-size:10px;">{{ object.pub_date }}</span></a>
                                 {% endif %}
                             {% endfor %}
                         </aside>
