@@ -43,7 +43,7 @@
                             <p>
                                 {% autoescape off %}
                                     {{ object.content|truncatewords:50 }}
-                                    <a href="{% url "news" %}"
+                                    <a href="{% url "news" object.slug %}"
                                        style="font-weight: bold;"> Read more</a>
                                 {% endautoescape %}
                             </p>
