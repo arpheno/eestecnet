@@ -84,7 +84,7 @@ def create_eestec_teams():
                                  'resources such as the  \
                                  EESTEC website and the mailing lists.'
     )
-    Team.objects.create(name=' International Bureau',
+    Team.objects.create(name='International Bureau',
                         type='team',
                         teamstub='The International Bureau is the body responsible for '
                                  'keeping'
@@ -122,7 +122,9 @@ def create_eestec_lcs():
     Team.objects.create(name='Ankara',
                         founded=2006,
                         website="http://eestectr.org/ankara",
-                        address="Middle East Technical University\nDepartment of Electrical and Electronics Engineering\A-203 06531 Ankara\nTurkey")
+                        address="Middle East Technical University\nDepartment of "
+                                "Electrical and Electronics Engineering\A-203 06531 "
+                                "Ankara\nTurkey")
     Team.objects.create(name='Antwerp',
                         founded=2010,
                         website="http://www.eestec.be",
@@ -134,7 +136,8 @@ def create_eestec_lcs():
     Team.objects.create(name='Banja Luka',
                         founded=2004,
                         website="http://www.eestec.etfbl.net",
-                        address='Patre 5th\nFaculty of Electrical Engineering\n78 000\bBanja Luka\nBosnia')
+                        address='Patre 5th\nFaculty of Electrical Engineering\n78 '
+                                '000\bBanja Luka\nBosnia')
     Team.objects.create(name='Belgrade',
                         founded=2000,
                         website="http://www.eestec.etf.rs",
@@ -142,7 +145,8 @@ def create_eestec_lcs():
     Team.objects.create(name='Bucharest',
                         founded=2003,
                         website="http://www.eestec.ro",
-                        address="Splaiul Independentei nr.313\ncorp Rectorat\nAN 204bis\n060042 Bucharest\nRomania")
+                        address="Splaiul Independentei nr.313\ncorp Rectorat\nAN "
+                                "204bis\n060042 Bucharest\nRomania")
     Team.objects.create(name='Budapest',
                         founded=1986,
                         website="http://www.eestec.hu/pages/home.php",
@@ -150,11 +154,14 @@ def create_eestec_lcs():
     Team.objects.create(name='Cosenza',
                         founded=1998,
                         website="http://www.asiunical.org",
-                        address="ASI-UNICAL\nvia Pietro Bucci, Cubo 42D, piano terra\nUniversita della Calabria\n87036 Arcavacata di Rende Cosenza)\nItaly")
+                        address="ASI-UNICAL\nvia Pietro Bucci, Cubo 42D, "
+                                "piano terra\nUniversita della Calabria\n87036 "
+                                "Arcavacata di Rende Cosenza)\nItaly")
     Team.objects.create(name='Craiova',
                         founded=2006,
                         website="http://www.eestec.go.ro",
-                        address="B-dul Decebal Nr. 107, Sala N8\nCraiova 200440,Dolj\nRomania")
+                        address="B-dul Decebal Nr. 107, Sala N8\nCraiova 200440,"
+                                "Dolj\nRomania")
     Team.objects.create(name='Delft',
                         founded=1906,
                         website="http://www.etv.tudelft.nl",
@@ -162,11 +169,13 @@ def create_eestec_lcs():
     Team.objects.create(name='East Sarajevo',
                         founded=2005,
                         website="http://www.eestec-es.rs.ba",
-                        address="Vuka Karadzica 30, Istacno Sarajevo, Republika Srpska,\nBosna i Hercegovina")
+                        address="Vuka Karadzica 30, Istacno Sarajevo, Republika "
+                                "Srpska,\nBosna i Hercegovina")
     Team.objects.create(name='Eskisehir',
                         founded=2006,
                         website="http://www.eesteceskisehir.net",
-                        address="Anadolu University, Iki Eylul Campus, Electrical and Electronics Department\nTurkey")
+                        address="Anadolu University, Iki Eylul Campus, Electrical and "
+                                "Electronics Department\nTurkey")
     Team.objects.create(name='Famagusta',
                         founded=2006,
                         address="Electrical and Electronic Engineering "
@@ -198,7 +207,8 @@ def create_eestec_lcs():
     Team.objects.create(name='Krakow',
                         founded=1998,
                         website="http://www.eestec.agh.edu.pl",
-                        address="Akademia Gorniczo-Hutnicza im. Stanislawa Staszica w Krakowie\nAl. Mickiewicza 30\n30-059 Krakow")
+                        address="Akademia Gorniczo-Hutnicza im. Stanislawa Staszica w "
+                                "Krakowie\nAl. Mickiewicza 30\n30-059 Krakow")
     Team.objects.create(name='Lille',
                         founded=2010,
                         website="http://www.eesteclille.wordpress.com",
@@ -207,15 +217,19 @@ def create_eestec_lcs():
     Team.objects.create(name='Lisbon',
                         founded=2010,
                         address="Nucleo de Engenharia Electrotecnica e Computadores\n "
-                                "Dep. Engenharia Electrecnica\n Faculdade de Ciencias e Tecnologias\n 2829-516 Caparica\nPortugal")
+                                "Dep. Engenharia Electrecnica\n Faculdade de Ciencias "
+                                "e Tecnologias\n 2829-516 Caparica\nPortugal")
     Team.objects.create(name='Ljubljana',
                         founded=1986,
                         website="http://www.eestec-lj.org",
-                        address="EESTEC, drustvo studentov elektrotehnike in racunalnistva\n SOU - mednarodna pisarna\n Vojkova ulica 63\n1000 Ljubljana\nSlovenia")
+                        address="EESTEC, drustvo studentov elektrotehnike in "
+                                "racunalnistva\n SOU - mednarodna pisarna\n Vojkova "
+                                "ulica 63\n1000 Ljubljana\nSlovenia")
     Team.objects.create(name='Madrid',
                         founded=1986,
                         website="http://www.eestec.es",
-                        address=u"Eurielec - EESTEC LC Madrid\nETSI Telecomunicación UPM\nAvda.Complutense 30\n28040 - Madrid\n Spain")
+                        address=u"Eurielec - EESTEC LC Madrid\nETSI Telecomunicación "
+                                u"UPM\nAvda.Complutense 30\n28040 - Madrid\n Spain")
     Team.objects.create(name='Munich',
                         founded=1999,
                         website="http://eestec.tum.de",
@@ -252,11 +266,13 @@ def create_eestec_lcs():
                         founded=2003,
                         website="http://www.eestec-sk.org.mk",
                         address="Fakultet za Elektrotehnika i informaciski "
-                                "tehnologii\nul. Rugjer Boshkovikj b.b\n1000 Skopje\nMacedonia")
+                                "tehnologii\nul. Rugjer Boshkovikj b.b\n1000 "
+                                "Skopje\nMacedonia")
     Team.objects.create(name='Tallinn',
                         founded=2005,
                         website="http://www.eestec.ee",
-                        address="EESTEC LC Tallinn\nEhitajate tee 5\n19086 Tallinn\nEstonia")
+                        address="EESTEC LC Tallinn\nEhitajate tee 5\n19086 "
+                                "Tallinn\nEstonia")
     Team.objects.create(name='Tampere',
                         founded=1986,
                         website="http://tampere.eestec.net",
@@ -264,7 +280,8 @@ def create_eestec_lcs():
     Team.objects.create(name='Trieste',
                         founded=2006,
                         website="http://ts.eestec.it",
-                        address="EESTEC LC Trieste - via Fabio Severo, 154 - C.d.S. E3 - 34127 -Trieste\nItaly")
+                        address="EESTEC LC Trieste - via Fabio Severo, 154 - C.d.S. E3 "
+                                "- 34127 -Trieste\nItaly")
     Team.objects.create(name='Tuzla',
                         founded=2007,
                         website="http://www.eestec-tz.ba",
@@ -320,7 +337,9 @@ def setup_event_tests():
     tm = Team.objects.create(name='test',
                              founded=1986,
                              website="http://eestec.ch",
-                             address=u"AMIV an der ETH Zuerich\nEESTEC LC Zurich\nCAB E37\nUniversitätsstrasse 6\n8092 Zürich\nSwitzerland")
+                             address=u"AMIV an der ETH Zuerich\nEESTEC LC Zurich\nCAB "
+                                     u"E37\nUniversitätsstrasse 6\n8092 "
+                                     u"Zürich\nSwitzerland")
     tm.save()
     tm.users.add(inc)
     tm.privileged.add(inc)
@@ -466,11 +485,15 @@ def create_positions_for_achievements():
                             description="Was responsible for the public relations in a "
                                         "commitment.").save()
     Position.objects.create(name='IT responsible',
-                            description="Was responsible for the IT department in a commitment.").save()
+                            description="Was responsible for the IT department in a "
+                                        "commitment.").save()
     Position.objects.create(name='Fundraising responsible',
-                            description="Was responsible for the Fundraising department in a commitment.").save()
+                            description="Was responsible for the Fundraising "
+                                        "department in a commitment.").save()
     Position.objects.create(name='Publication and Administration responsible',
-                            description="Was responsible for the Publications and Administrations department in a commitment.").save()
+                            description="Was responsible for the Publications and "
+                                        "Administrations department in a commitment.")\
+        .save()
 
 
 def create_local_admins():

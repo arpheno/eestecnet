@@ -13,7 +13,7 @@ from pages.models import Stub
 from pages.views import ActivityStubs, AboutStubs, Documents
 from teams.views import CommitmentList, TeamList, Governance, History
 from news.models import Entry
-from news.views import home, NewsList
+from news.views import home
 
 
 admin.autodiscover()
@@ -22,7 +22,7 @@ urlpatterns = patterns(
     '',
     url(r'^$', home.as_view(), name='home'),
     url(r'^reset/', include('password_reset.urls')),
-    url(r'^news/*$', NewsList.as_view(), name='news'),
+    url(r'^news/', include('news.urls')),
     url(r'^androidcompetition/*$',
         TemplateView.as_view(template_name='android/home.html'), name="competition"),
     url(r'^conference/*$',

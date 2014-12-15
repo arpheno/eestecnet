@@ -1,16 +1,21 @@
 {% extends 'enet/split.html' %}
+{% load thumbnail %}
 {% block main %}
-    <article class="news">
+    <section class="news">
         <h1>{{ entry.headline }}</h1>
 
-        <h3>{{ entry.pub_date }}</h3>
+        <ul>
+            <li>{{ entry.pub_date }}</li>
+        </ul>
+        {% thumbnail entry.entry_image "200x200" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+        {% endthumbnail %}
 
         <div class="post_content">
-
-        {% autoescape off %}
+            {% autoescape off %}
                 {{ entry.content }}
             {% endautoescape %}
         </div>
 
-    </article>
+    </section>
 {% endblock %}
