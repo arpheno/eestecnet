@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, TemplateView
 from haystack.forms import SearchForm
 from haystack.views import SearchView
 
@@ -12,7 +12,6 @@ from events.views import InternationalEvents
 from pages.models import Stub
 from pages.views import ActivityStubs, AboutStubs, Documents
 from teams.views import CommitmentList, TeamList, Governance, History
-from news.models import Entry
 from news.views import home
 
 
@@ -28,8 +27,6 @@ urlpatterns = patterns(
     url(r'^conference/*$',
         TemplateView.as_view(template_name='conference/home.html'),
         name='conference'),
-    url(r'^news/(?P<slug>[-_\w]+)/*$', DetailView.as_view(model=Entry),
-        name='news'),
     url(r'^events/*$', InternationalEvents.as_view(), name='events'),
     url(r'^events/', include('events.urls')),
     url(r'^governance/*$', Governance.as_view(), name='governance'),

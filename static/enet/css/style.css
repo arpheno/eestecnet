@@ -81,6 +81,10 @@ h1, h2, h3 {
     border-bottom: 1px solid #c30811
 }
 
+h1 a, h2 a, h3 a {
+    color: #9a0008
+}
+
 h4, h5, h6 {
     font-family: 'Century Gothic';
     color: black;
