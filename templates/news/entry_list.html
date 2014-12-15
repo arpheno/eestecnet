@@ -3,7 +3,7 @@
 {% block main %}
     {% for entry in object_list %}
         <section class="news">
-            <a href="{% url 'news' entry.slug %}"><h1>{{ entry.headline }}</h1></a>
+            <h1>{{ entry.headline }}</h1>
 
             <ul>
                 <li>{{ entry.pub_date }}</li>
