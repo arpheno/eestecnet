@@ -46,7 +46,9 @@ INSTALLED_APPS = (
     'gunicorn',
     'sorl.thumbnail',
     'password_reset',
-    'form_utils'
+    'form_utils',
+    'wiki',
+    'reversion',
 )
 
 MAILQUEUE_CELERY = True

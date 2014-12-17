@@ -1406,6 +1406,35 @@ div.websitefeedback form {
     text-align: center
 }
 
+main.wiki {
+    padding: 0% 5% 5% 5%
+}
+
+main.wiki h1 {
+    display: flex;
+    justify-content: space-between
+}
+
+main.wiki h1 nav a {
+    color: #000000;
+    font-size: 12px;
+    padding: 0px 20px
+}
+
+main.wiki body, main.wiki span, main.wiki nav, main.wiki header, main.wiki main {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 100%
+}
+
+main.wiki nav {
+    flex: 1 1 25%
+}
+
+main.wiki main {
+    flex: 1 1 75%
+}
+
 a {
     text-decoration: none
 }

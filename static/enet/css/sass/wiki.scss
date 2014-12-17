@@ -1,0 +1,26 @@
+main.wiki {
+  padding: 0% 5% 5% 5%;
+  h1 {
+    display: flex;
+    justify-content: space-between;
+    nav {
+      a {
+        color: #000000;
+        font-size: 12px;
+        padding: 0px 20px;
+      }
+    }
+
+  }
+  body, span, nav, header, main {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 100%;
+  }
+  nav {
+    flex: 1 1 25%;
+  }
+  main {
+    flex: 1 1 75%;
+  }
+}

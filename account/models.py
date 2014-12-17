@@ -60,8 +60,6 @@ FOOD_CHOICES = (
     ('nofish', 'Pescarian'),
     ('veggie', 'Vegetarian'),
     ('vegan', 'Vegan'),
-    ('insects', 'Only Insects'),
-    ('fruit', 'Fruitarian'),
 )
 GENDER_CHOICES = (('m', 'Male'), ('f', 'Female'), ('x', 'Other'), )
 TSHIRT_SIZE = (('mxs', 'Male XS'), ('ms', 'Male S'), ('mm', 'Male M'), ('ml', 'Male L'),

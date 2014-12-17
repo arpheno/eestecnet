@@ -1,0 +1,18 @@
+{% extends 'enet/index.html' %}
+{% block maincontent %}
+    <main class="wiki">
+        <header>
+            {% block head %}
+                <h1>Welcome to the eestecnet wiki</h1>
+            {% endblock %}
+        </header>
+        <nav>
+            this is the navigation
+        </nav>
+        <main>
+            {% block main %}
+                and this is the content
+            {% endblock %}
+        </main>
+    </main>
+{% endblock %}

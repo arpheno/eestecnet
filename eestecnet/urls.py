@@ -59,5 +59,6 @@ urlpatterns = patterns(
         {'document_root': MEDIA_ROOT}),
     url(r'^history/*$', History.as_view(), name="history"),
     url(r'^statistics/', include('statistics.urls')),
+    url(r'^wiki/', include('wiki.urls')),
     url(r'', include('pages.urls')),
 )
