@@ -10,7 +10,7 @@ class MemberInline(admin.TabularInline):
     model = Membership
     """ The model that is used"""
     readonly_fields = ['user', 'number_of_events', 'last_event']
-    fields = ['user', 'privileged', 'board', 'number_of_events', 'last_event']
+    fields = ['user', 'privileged', 'board', 'number_of_events', 'last_event', 'alumni']
     """The fields we want to display"""
     verbose_name_plural = "Members"
     """The title of the widget"""
