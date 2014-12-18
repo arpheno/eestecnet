@@ -1,2 +1,2 @@
-<span>{{ object.name }}</span>
-<span>{{ object.content |truncatewords:20 }}</span>
+<span><a href="{% url 'wikipage' object.slug %}">{{ object.name }}</a></span>
+<span>{{ object.last_modified }}</span>
