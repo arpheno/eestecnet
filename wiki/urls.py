@@ -15,6 +15,7 @@ urlpatterns = patterns(
     url(r'^random/*$', login_required(PageRandom.as_view()), name='randomwikipage'),
     url(r'^latest/*$', login_required(PageLatest.as_view()), name='latestwikipage'),
     url(r'^(?P<slug>[-\w]+)/*$', login_required(PageDetail.as_view()), name='wikipage'),
+    url(r'^/*$', login_required(WikiHome.as_view()), name='wikipage'),
     url(r'^(?P<slug>[-\w]+)/update/*$', login_required(PageUpdate.as_view()),
         name='updatewikipage'),
 )
