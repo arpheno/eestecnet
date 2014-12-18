@@ -4,8 +4,10 @@
     <h1>
         <span>{{ object.name }}</span>
         <nav>
+            {% if object.slug %}
             <a href="{% url 'wikipage' object.slug %}">Read</a>
             <a href="{% url 'updatewikipage' object.slug %}">Update</a>
+            {% endif %}
         </nav>
     </h1>
 {% endblock %}
