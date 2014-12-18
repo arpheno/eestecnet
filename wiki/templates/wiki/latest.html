@@ -5,7 +5,7 @@
 {% block main %}
     <ul>
         {% for object in object_list %}
-            <li>
+            <li class="latest">
                 {% include 'wiki/stub.html' with object=object %}
             </li>
         {% endfor %}

@@ -2,7 +2,6 @@
 from django.views.generic import DetailView, UpdateView, CreateView, ListView
 
 from wiki.forms import WikiForm
-
 from wiki.models import WikiPage
 
 
@@ -31,6 +30,9 @@ class PageDetail(DetailView):
 
     def get_object(self, queryset=None):
         page, created = WikiPage.objects.get_or_create(slug=self.kwargs['slug'])
+        if created:
+            page.name = page.slug
+            page.save()
         return page
 
 

@@ -37,6 +37,14 @@ main.wiki {
       }
     }
   }
+  li.latest {
+    flex: 1 1 100%;
+
+    a {
+      color: blue;
+      font-size: 16px;
+    }
+  }
   main {
     flex: 1 1 75%;
     align-items: flex-start;
