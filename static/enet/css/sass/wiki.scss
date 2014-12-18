@@ -18,9 +18,29 @@ main.wiki {
     flex: 1 1 100%;
   }
   nav {
-    flex: 1 1 25%;
+    flex: 1 1 20%;
+    align-items: flex-start;
+    border-right: 1px solid $darkeestec;
+    ul {
+      justify-content: flex-start;
+      border-bottom: 1px solid black;
+      padding: 2px;
+      margin: 2px;
+      li {
+        flex: 1 1 100%;
+        justify-content: flex-start;
+        padding: 3px;
+        a {
+          font-size: 14px;
+          color: black;
+        }
+      }
+    }
   }
   main {
     flex: 1 1 75%;
+    align-items: flex-start;
+    min-height: 600px;
+    padding: 5px;
   }
 }

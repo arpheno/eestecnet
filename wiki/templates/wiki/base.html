@@ -7,7 +7,9 @@
             {% endblock %}
         </header>
         <nav>
-            this is the navigation
+            {% block nav %}
+                {% include 'wiki/nav.html' %}
+            {% endblock %}
         </nav>
         <main>
             {% block main %}

@@ -13,7 +13,8 @@
     <div class="wiki">
         <form action="" enctype="multipart/form-data" method="post">
             {% csrf_token %}
-            {{ form }}
+            {{ form.name }}
+            {{ form.content }}
             <input type="submit" value="Update Description">
         </form>
     </div>

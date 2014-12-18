@@ -10,10 +10,8 @@
     </h1>
 {% endblock %}
 {% block main %}
-    <div class="wiki">
         {% autoescape off %}
             {{ object.content }}
         {% endautoescape %}
-    </div>
 
 {% endblock %}

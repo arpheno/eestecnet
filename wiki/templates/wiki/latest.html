@@ -1,0 +1,12 @@
+{% block head %}
+    <h1>Latest Modifications</h1>
+{% endblock %}
+{% block main %}
+    <ul>
+        {% for object in object_list %}
+            <li>
+                {% include 'wiki/stub.html' with object=object %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
