@@ -10,7 +10,7 @@ from teams.views import SelectBoard, ChangeDescription, \
 admin.autodiscover()
 
 urlpatterns = patterns('',
-                       url(r'^(?P<slug>[-\w]+)/$', DetailView.as_view(model=Team),
+                       url(r'^(?P<slug>[-\w]+)/*$', DetailView.as_view(model=Team),
                            name='detail'),
                        url(r'^(?P<slug>[-\w]+)/board/*$', SelectBoard.as_view(),
                            name='board'),
