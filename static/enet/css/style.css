@@ -1451,18 +1451,29 @@ main.wiki nav ul li a {
     color: black
 }
 
-main.wiki li.latest {
+main.wiki ul.latest {
     flex: 1 1 100%
 }
 
-main.wiki li.latest a {
+main.wiki ul.latest li {
+    justify-content: space-between;
+    flex: 1 1 100%
+}
+
+main.wiki ul.latest li span {
+    flex: 1 1 30%;
+    justify-content: flex-end
+}
+
+main.wiki ul.latest li a {
     color: blue;
+    text-align: left;
     font-size: 16px
 }
 
 main.wiki main {
     flex: 1 1 75%;
-    align-items: flex-start;
+    display: block;
     min-height: 600px;
     padding: 5px
 }

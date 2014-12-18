@@ -3,9 +3,9 @@
     <h1>Latest Modifications</h1>
 {% endblock %}
 {% block main %}
-    <ul>
+    <ul class="latest">
         {% for object in object_list %}
-            <li class="latest">
+            <li>
                 {% include 'wiki/stub.html' with object=object %}
             </li>
         {% endfor %}

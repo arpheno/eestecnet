@@ -37,17 +37,26 @@ main.wiki {
       }
     }
   }
-  li.latest {
+  ul.latest {
     flex: 1 1 100%;
+    li {
+      justify-content: space-between;
+    flex: 1 1 100%;
+      span {
+        flex: 1 1 30%;
+        justify-content: flex-end;
+      }
 
     a {
       color: blue;
+      text-align: left;
       font-size: 16px;
+    }
     }
   }
   main {
     flex: 1 1 75%;
-    align-items: flex-start;
+    display: block;
     min-height: 600px;
     padding: 5px;
   }
