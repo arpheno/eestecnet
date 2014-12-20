@@ -349,4 +349,5 @@ class EventParticipationAdmin(admin.ModelAdmin):
 admin.site.register(Event, MyEventAdmin)
 admin.site.register(OutgoingApplication, OutgoingApplicationAdmin)
 admin.site.register(IncomingApplication, IncomingApplicationAdmin)
+admin.site.register(Application)
 admin.site.register(Participation, EventParticipationAdmin)
