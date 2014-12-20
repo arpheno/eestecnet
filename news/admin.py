@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.forms import ModelForm
 from suit_redactor.widgets import RedactorWidget
 
-from news.models import Entry
+from news.models import Entry, Membership
 
 
 class MyEntryAdminForm(ModelForm):
@@ -14,6 +14,20 @@ class MyEntryAdminForm(ModelForm):
                                                           "/static/enet/css/wysiwyg"
                                                           ".css"}),
         }
+
+
+class MembershipAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request):
+        return request.user.is_superuser
+
+    def get_queryset(self, request):
+        qs = super(MembershipAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        try:
+            return qs.filter(team__in=request.user.teams_administered)
+        except:
+            return qs.none()
 
 
 class MyEntryAdmin(admin.ModelAdmin):
@@ -56,5 +70,6 @@ class MyEntryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Entry,MyEntryAdmin)
+admin.site.register(Membership, MembershipAdmin)
 
 # Register your models here.
