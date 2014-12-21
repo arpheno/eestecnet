@@ -5,7 +5,14 @@
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\Arphen\PycharmProjects\eestecnet\db.sqlite3</jdbc-url>
-      <libraries />
+      <libraries>
+        <library>
+          <url>file://$USER_HOME$/.PyCharm30/config/jdbc-drivers/xerial-sqlite-license.txt</url>
+        </library>
+        <library>
+          <url>file://$USER_HOME$/.PyCharm30/config/jdbc-drivers/sqlite-jdbc-3.7.6.3-20110609.081603-3.jar</url>
+        </library>
+      </libraries>
     </data-source>
     <data-source source="LOCAL" name="SQLite -" uuid="53b0e2a2-5588-496e-b804-09eda3aff6a1">
       <driver-ref>sqlite.xerial</driver-ref>
@@ -23,4 +30,3 @@
     </data-source>
   </component>
 </project>
-

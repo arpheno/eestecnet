@@ -3,6 +3,12 @@
   <component name="CompassSettings">
     <option name="compassExecutableFilePath" value="C:\Ruby200\bin\compass.bat" />
     <option name="compassSupportEnabled" value="true" />
+    <option name="importPaths">
+      <list>
+        <option value="C:/ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.6/frameworks/blueprint/stylesheets" />
+        <option value="C:/ruby200/lib/ruby/gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets" />
+      </list>
+    </option>
   </component>
   <component name="FacetManager">
     <facet type="django" name="Django">
@@ -10,6 +16,7 @@
         <option name="rootFolder" value="$MODULE_DIR$" />
         <option name="settingsModule" value="eestecnet/settings.py" />
         <option name="manageScript" value="manage.py" />
+        <option name="environment" value="&lt;map/&gt;" />
       </configuration>
     </facet>
   </component>
@@ -37,4 +44,3 @@
     </option>
   </component>
 </module>
-
