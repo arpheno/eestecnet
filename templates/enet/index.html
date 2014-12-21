@@ -50,7 +50,7 @@
 </head>
 <body>
 <header>
-    <img src="{% static 'enet/img/EESTEC_logo.svg' %}"/>
+    <a href="{% url 'home' %}"><img src="{% static 'enet/img/EESTEC_logo.svg' %}"/></a>
     <img id="eestec-text" src="{% static 'enet/images/stretched.svg' %}"/>
     {% if not user.is_authenticated %}
         {% block authenticate %}
