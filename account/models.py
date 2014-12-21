@@ -109,6 +109,8 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     second_last_name = models.CharField(_('second last name'), max_length=30, blank=True)
     """ For our friends from the iberic peninsula"""
     date_of_birth = models.DateField(blank=True, null=True)
+    show_date_of_birth = models.BooleanField(default=True)
+    receive_eestec_active = models.BooleanField(default=True)
     """ Date of birth"""
     personal = models.TextField(blank=True, null=True)
     """Room for a personal note"""

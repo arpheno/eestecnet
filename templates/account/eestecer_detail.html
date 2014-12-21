@@ -14,10 +14,12 @@
         <td>Name:</td>
         <td>{{ object.get_full_name }}</td>
     </tr>
+    {% if object.show_date_of_birth %}
     <tr>
         <td>Date of Birth:</td>
         <td>{{ object.date_of_birth }}</td>
     </tr>
+    {% endif %}
     <tr>
         <td>Date Joined:</td>
         <td>{{ object.date_joined }}</td>
