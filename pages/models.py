@@ -23,8 +23,9 @@ class Stub(models.Model):
 class WebsiteFeedback(models.Model):
     def __unicode__(self):
         return str(self.date)
-
+    email=models.EmailField(null=True, blank=True)
     date = models.DateTimeField(auto_created=True, editable=False, auto_now_add=True)
+    subject = models.TextField(default="")
     content = models.TextField()
     user = models.ForeignKey('account.Eestecer', editable=False, blank=True, null=True)
     read = models.BooleanField(default=False)

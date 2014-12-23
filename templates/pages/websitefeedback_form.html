@@ -11,8 +11,10 @@
             <form action="" id="descriptionform"
                   enctype="multipart/form-data" method="post">
                 {% csrf_token %}
-                {{ form.content }}
+                <p>{{ form.email }}</p><p>{{ form.subject }}</p>
+                <p>{{ form.content }}</p>
                 {% for inline in inlines %}
+                    <p>
                     {{ inline.management_form }}
                     <table style="width:100%;">
                         <tr>
@@ -39,8 +41,9 @@
                             </tr>
                         {% endfor %}
                     </table>
+                    </p>
                 {% endfor %}
-                <input type="submit" value="Submit Feedback">
+                <p><input type="submit" value="Submit Feedback"></p>
             </form>
         </div>
     </main>
