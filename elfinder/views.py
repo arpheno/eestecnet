@@ -85,7 +85,7 @@ class ElfinderConnectorView(View):
             elif name == 'FILES':
                 args['FILES'] = self.request.FILES
             elif name == 'upload_path':
-                args[name] = src.getlist('upload_paths[]')
+                args[name] = src.getlist('upload_path[]')
             elif name == 'targets':
                 args[name] = src.getlist('targets[]')
             else:
