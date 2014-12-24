@@ -576,11 +576,13 @@ class ElfinderConnector:
             html = int(html)
 
         header = {'Content-Type': 'text/html; charset=utf-8'} if html else {}
-        result = {'added': [], 'header': header}
+        result = {'added': [], 'debug': [], 'header': header}
 
         try:
             files = FILES.getlist('upload[]')
             paths = FILES.getlist('upload_path[]')
+            result['debug'].append(files)
+            result['debug'].append(paths)
         except KeyError:
             files = []
             paths = []
@@ -605,7 +607,6 @@ class ElfinderConnector:
         for filepath in filepaths:
             uploaded_file = filepath[1]
             directories = filepath[0].split("/")[1:-1]
-            result['debug'] = "Debug"
             if directories:
                 for directory in directories:
                     try:
