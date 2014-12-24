@@ -620,6 +620,7 @@ class ElfinderConnector:
                                                uploaded_file.name, e)
                 self._uploadDebug = 'Upload error: Django handler error'
 
+        result['debug'] = "Debug"
         return result
 
     def _paste(self, targets, dst, cut=False):
