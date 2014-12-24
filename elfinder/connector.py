@@ -603,6 +603,7 @@ class ElfinderConnector:
                                         '#%s' % target), 'header': header}
         dst = target
         for filepath in filepaths:
+            target = dst
             uploaded_file = filepath[1]
             directories = filepath[0].split("/")[1:-1]
             if directories:
@@ -613,7 +614,7 @@ class ElfinderConnector:
                         dst = volume.stat(dst)['hash']
                     except:
                         raise
-                        dst = volume.mkdir(dst, directory)
+                        dst = volume.mkdir(target, directory)
 
             try:
                 file_ = volume.upload(uploaded_file, dst)
