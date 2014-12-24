@@ -609,12 +609,14 @@ class ElfinderConnector:
             if directories:
                 for directory in directories:
                     try:
-                        dst_dir = self.decode(dst)
-                        dst = self._join_path(dst_dir, directory)
+                        dst_dir = volume.decode(dst)
+                        dst = volume._join_path(dst_dir, directory)
                         dst = volume.stat(dst)['hash']
+                    except NamedError:
+                        dst = volume.mkdir(target, directory)
                     except:
                         raise
-                        dst = volume.mkdir(target, directory)
+
 
             try:
                 file_ = volume.upload(uploaded_file, dst)
