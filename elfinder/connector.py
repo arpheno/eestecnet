@@ -581,14 +581,10 @@ class ElfinderConnector:
         try:
             files = FILES.getlist('upload[]')
             paths = FILES.getlist('upload_path[]')
-            result['debug'].append(files)
             result['debug'].append(paths)
         except KeyError:
             files = []
             paths = []
-            return {'error': self.error(ElfinderErrorMessages.ERROR_UPLOAD,
-                                        ElfinderErrorMessages.ERROR_UPLOAD_NO_FILES),
-                    'header': header}
         finally:
             filepaths = zip(paths, files)
 
