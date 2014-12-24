@@ -602,6 +602,7 @@ class ElfinderConnector:
         for filepath in filepaths:
             uploaded_file = filepath[1]
             directories = filepath[0].split("/")[1:-1]
+            result['debug'] = "Debug"
             if directories:
                 for directory in directories:
                     try:
@@ -614,7 +615,6 @@ class ElfinderConnector:
             try:
                 file_ = volume.upload(uploaded_file, dst)
                 result['added'].append(file_)
-                result['added'].append("hello world")
             except Exception, e:
                 result['warning'] = self.error(ElfinderErrorMessages.ERROR_UPLOAD_FILE,
                                                uploaded_file.name, e)
