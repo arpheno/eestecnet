@@ -580,8 +580,12 @@ class ElfinderConnector:
 
         try:
             files = FILES.getlist('upload[]')
+            paths = FILES.getlist('upload_path[]')
         except KeyError:
             files = []
+            paths = []
+        finally:
+            filepaths = zip(paths, files)
 
         if not isinstance(files, list) or not files:
             return {'error': self.error(ElfinderErrorMessages.ERROR_UPLOAD,
@@ -594,10 +598,21 @@ class ElfinderConnector:
             return {'error': self.error(ElfinderErrorMessages.ERROR_UPLOAD,
                                         ElfinderErrorMessages.ERROR_TRGDIR_NOT_FOUND,
                                         '#%s' % target), 'header': header}
+        dst = target
+        for filepath in filepaths:
+            uploaded_file = filepath[1]
+            directories = filepath[0].split("/")[1:-1]
+            if directories:
+                for directory in directories:
+                    try:
+                        dst_dir = self.decode(dst)
+                        dst = self._join_path(dst_dir, directory)
+                        dst = volume.stat(dst)['hash']
+                    except:
+                        dst = volume.mkdir(target, directory)
 
-        for uploaded_file in files:
             try:
-                file_ = volume.upload(uploaded_file, target)
+                file_ = volume.upload(uploaded_file, dst)
                 result['added'].append(file_)
             except Exception, e:
                 result['warning'] = self.error(ElfinderErrorMessages.ERROR_UPLOAD_FILE,
