@@ -35,7 +35,8 @@ class ElfinderConnector:
         'rename': {'target': True, 'name': True, 'mimes': False},
         'duplicate': {'targets': True},
         'paste': {'dst': True, 'targets': True, 'cut': False, 'mimes': False},
-        'upload': {'target': True, 'FILES': True, 'mimes': False, 'html': False},
+        'upload': {'target': True, 'upload_path': True, 'FILES': True, 'mimes': False,
+                   'html': False},
         'get': {'target': True},
         'put': {'target': True, 'content': '', 'mimes': False},
         'archive': {'targets': True, 'type_': True, 'mimes': False},
@@ -566,7 +567,7 @@ class ElfinderConnector:
 
         return result
 
-    def _upload(self, target, FILES, html=False):
+    def _upload(self, target, upload_path, FILES, html=False):
         """
         **Command**: Save uploaded files. This method should not be invoked
         directly, the :meth:`elfinder.connector.ElfinderConnector.execute`
@@ -581,7 +582,7 @@ class ElfinderConnector:
 
         try:
             files = FILES.getlist('upload[]')
-            paths = FILES.getlist('upload_path[]')
+            paths = upload_path
             result['debug'].append(paths)
         except KeyError:
             files = []
