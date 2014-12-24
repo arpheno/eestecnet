@@ -1,4 +1,5 @@
 from asana.asana import AsanaAPI
+
 from django.contrib import messages
 from django.forms import ModelForm, TextInput, Textarea
 from django.shortcuts import get_object_or_404, redirect
@@ -8,6 +9,7 @@ from form_utils.forms import BetterModelForm
 
 from eestecnet.settings_deploy import ASANA_API_KEY, EESTEC_ITT_WORKSPACE_ID, \
     FEEDBACK_PROJECT_ID
+
 from news.widgets import EESTECEditor
 from pages.models import Page, Stub, WebsiteFeedback, WebsiteFeedbackImage
 
@@ -88,15 +90,24 @@ class NewWebsiteFeedback(CreateWithInlinesView):
             feedback.user = self.request.user
         asana_api = AsanaAPI(ASANA_API_KEY, debug=True)
 
-        asana_api.create_task(
+        task = asana_api.create_task(
             name = feedback.subject,
             notes = feedback.content+"\n"+feedback.email,
             workspace=EESTEC_ITT_WORKSPACE_ID,
             projects=[FEEDBACK_PROJECT_ID])
         feedback.save()
-        # for inline  in inlines:
-        #    for form in inline:
-        #        form.image
+        for inline in inlines:
+            for form in inline:
+                try:
+                    screenshot = form.save(commit=False)
+                    screenshot.entity = feedback
+                    screenshot.save()
+                    img = screenshot.image
+                    asana_api.upload_attachment(task_id=task['id'],
+                                                file_name="Screenshot.jpg",
+                                                stream=screenshot.image)
+                except:
+                    pass
         messages.add_message(
             self.request,
             messages.INFO,
