@@ -584,6 +584,9 @@ class ElfinderConnector:
         except KeyError:
             files = []
             paths = []
+            return {'error': self.error(ElfinderErrorMessages.ERROR_UPLOAD,
+                                        ElfinderErrorMessages.ERROR_UPLOAD_NO_FILES),
+                    'header': header}
         finally:
             filepaths = zip(paths, files)
 
