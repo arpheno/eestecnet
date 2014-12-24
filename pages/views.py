@@ -1,4 +1,3 @@
-import asana
 from asana.asana import AsanaAPI
 from django.contrib import messages
 from django.forms import ModelForm, TextInput, Textarea
@@ -6,9 +5,9 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView, UpdateView
 from extra_views import CreateWithInlinesView, InlineFormSet
 from form_utils.forms import BetterModelForm
+
 from eestecnet.settings_deploy import ASANA_API_KEY, EESTEC_ITT_WORKSPACE_ID, \
     FEEDBACK_PROJECT_ID
-
 from news.widgets import EESTECEditor
 from pages.models import Page, Stub, WebsiteFeedback, WebsiteFeedbackImage
 
@@ -73,6 +72,12 @@ class NewWebsiteFeedback(CreateWithInlinesView):
     inlines = [WebsiteFeedbackInline]
     form_class = WebsiteFeedbackForm
 
+    def get_initial(self):
+        initial = super(NewWebsiteFeedback, self).get_initial()
+        if self.request.user.is_authenticated():
+            initial["email"] = self.request.user.email
+        return initial
+
 
     def get_success_url(self):
         return ("/")
@@ -89,6 +94,9 @@ class NewWebsiteFeedback(CreateWithInlinesView):
             workspace=EESTEC_ITT_WORKSPACE_ID,
             projects=[FEEDBACK_PROJECT_ID])
         feedback.save()
+        # for inline  in inlines:
+        #    for form in inline:
+        #        form.image
         messages.add_message(
             self.request,
             messages.INFO,
