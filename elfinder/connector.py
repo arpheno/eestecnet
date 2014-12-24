@@ -35,7 +35,8 @@ class ElfinderConnector:
         'rename': {'target': True, 'name': True, 'mimes': False},
         'duplicate': {'targets': True},
         'paste': {'dst': True, 'targets': True, 'cut': False, 'mimes': False},
-        'upload': {'target': True, 'FILES': True, 'mimes': False, 'html': False},
+        'upload': {'target': True, 'upload_path': True, 'FILES': True, 'mimes': False,
+                   'html': False},
         'get': {'target': True},
         'put': {'target': True, 'content': '', 'mimes': False},
         'archive': {'targets': True, 'type_': True, 'mimes': False},
@@ -177,6 +178,7 @@ class ElfinderConnector:
 
         #call handlers for this command
         #TODO: a signal must be sent here
+        debug = True
 
         if debug:
             result['debug'] = {
@@ -565,7 +567,7 @@ class ElfinderConnector:
 
         return result
 
-    def _upload(self, target, FILES, html=False):
+    def _upload(self, target, upload_path, FILES, html=False):
         """
         **Command**: Save uploaded files. This method should not be invoked
         directly, the :meth:`elfinder.connector.ElfinderConnector.execute`
@@ -576,11 +578,12 @@ class ElfinderConnector:
             html = int(html)
 
         header = {'Content-Type': 'text/html; charset=utf-8'} if html else {}
-        result = {'added': [], 'header': header}
+        result = {'added': [], 'debug': [], 'header': header}
 
         try:
             files = FILES.getlist('upload[]')
-            paths = FILES.getlist('upload_path[]')
+            paths = upload_path
+            result['debug'].append(paths)
         except KeyError:
             files = []
             paths = []
@@ -600,16 +603,22 @@ class ElfinderConnector:
                                         '#%s' % target), 'header': header}
         dst = target
         for filepath in filepaths:
+            dst = target
             uploaded_file = filepath[1]
             directories = filepath[0].split("/")[1:-1]
             if directories:
                 for directory in directories:
                     try:
-                        dst_dir = self.decode(dst)
-                        dst = self._join_path(dst_dir, directory)
-                        dst = volume.stat(dst)['hash']
+                        dst_dir = volume.decode(dst)
+                        dst = volume._join_path(dst_dir, directory)
+                        dst = volume.stat(dst)
+                        result['added'].append(dst)
+                        dst = dst['hash']
+                    except OSError:
+                        dst = volume.mkdir(target, directory)['hash']
                     except:
-                        dst = volume.mkdir(target, directory)
+                        raise
+
 
             try:
                 file_ = volume.upload(uploaded_file, dst)
