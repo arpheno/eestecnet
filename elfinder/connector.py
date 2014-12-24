@@ -613,7 +613,7 @@ class ElfinderConnector:
                         dst = volume._join_path(dst_dir, directory)
                         dst = volume.stat(dst)['hash']
                     except OSError:
-                        dst = volume.mkdir(target, directory)
+                        dst = volume.mkdir(target, directory)['hash']
                     except:
                         raise
 
