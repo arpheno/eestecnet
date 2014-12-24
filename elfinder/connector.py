@@ -177,6 +177,7 @@ class ElfinderConnector:
 
         #call handlers for this command
         #TODO: a signal must be sent here
+        debug = True
 
         if debug:
             result['debug'] = {
