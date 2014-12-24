@@ -612,7 +612,8 @@ class ElfinderConnector:
                         dst = self._join_path(dst_dir, directory)
                         dst = volume.stat(dst)['hash']
                     except:
-                        dst = volume.mkdir(target, directory)
+                        raise
+                        dst = volume.mkdir(dst, directory)
 
             try:
                 file_ = volume.upload(uploaded_file, dst)
