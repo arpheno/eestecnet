@@ -603,7 +603,7 @@ class ElfinderConnector:
                                         '#%s' % target), 'header': header}
         dst = target
         for filepath in filepaths:
-            target = dst
+            dst = target
             uploaded_file = filepath[1]
             directories = filepath[0].split("/")[1:-1]
             if directories:
