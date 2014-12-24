@@ -611,7 +611,9 @@ class ElfinderConnector:
                     try:
                         dst_dir = volume.decode(dst)
                         dst = volume._join_path(dst_dir, directory)
-                        dst = volume.stat(dst)['hash']
+                        dst = volume.stat(dst)
+                        result['added'].append(dst)
+                        dst = dst['hash']
                     except OSError:
                         dst = volume.mkdir(target, directory)['hash']
                     except:
