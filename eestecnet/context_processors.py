@@ -4,6 +4,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from haystack.forms import SearchForm
 
 from events.views import featuredevent
+from pages.models import WebsiteFeedback
+from pages.views import WebsiteFeedbackForm, WebsiteFeedbackInline
 
 
 def date_now(request):
@@ -21,6 +23,13 @@ def random_event_processor(request):
     except:
         return {'None': None}
 
+
+def my_feedback(request):
+    form = WebsiteFeedbackForm()
+    feedback = WebsiteFeedback()
+    inlines = [
+        WebsiteFeedbackInline(WebsiteFeedback, request, feedback).construct_formset()]
+    return {'feedbackform': form, 'inlines': inlines}
 
 def my_search(request):
     form = SearchForm()

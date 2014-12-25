@@ -360,3 +360,17 @@ html > body {
   height: 3.0rem;
   flex: 1 1 100%;
 }
+
+#feedbackbutton {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  background-color: $darkeestec;
+  cursor: pointer;
+  border-right: white 1px solid;
+  border-bottom: white 1px solid;
+  color: white;
+  padding: 15px;
+  border-bottom-right-radius: 15px;
+}

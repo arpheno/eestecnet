@@ -3,6 +3,28 @@ $(function () {
     $(".datetime").datetimepicker();
     $("a[href^=#]").click(function (e) {
     });
+    $("#feedbackbutton").click(function () {
+        if ($("#feedbackform").dialog("isOpen")) {
+            $("#feedbackform").dialog("close");
+        } else {
+            $("#feedbackform").dialog("open");
+        }
+    });
+    $("#feedbackform form ").submit(function () {
+
+        var url = "/pages/feedback/"; // the script where you handle the form input.
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $("#feedbackform form").serialize(), // serializes the form's elements.
+            success: function (data) {
+                alert("Thank you for your feedback, we appreciate it.");
+            }
+        });
+        $("#feedbackform").dialog("close");
+        return false; // avoid to execute the actual submit of the form.
+    });
 });
 function PersonDialog(wrapper) {
     var self = this;

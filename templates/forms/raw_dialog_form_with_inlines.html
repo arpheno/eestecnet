@@ -1,0 +1,13 @@
+{% extends  "forms/raw_form_with_inlines.html" %}
+{% block formjavascript %}
+    <script type="text/javascript">
+        $(function () {
+            $("#{{ id }}").dialog({
+                width: 600,
+                title: "{{ title }}",
+                autoOpen: false
+            });
+            $("input[type=submit]").button();
+        });
+    </script>
+{% endblock %}

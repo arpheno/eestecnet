@@ -1,0 +1,43 @@
+<div id="{{ id }}">
+    <form action="{{ action }}" enctype="multipart/form-data"
+          method="post" class="dialogform">
+        {% csrf_token %}
+        {% block form %}
+            {% include 'forms/better_form.html' %}
+        {% endblock %}
+        {% for inline in inlines %}
+            {{ inline.management_form }}
+            <table style="width:100%;">
+                <tr>
+                    {% block readonly_labels %}
+                        {% for label in read_only %}
+                            <td>{{ label }}</td>
+                        {% endfor %}
+                    {% endblock %}
+                    {% for field in inline.0.visible_fields %}
+                        <th>
+                            {{ field.label }}
+                        </th>
+                    {% endfor %}
+                </tr>
+                {% for inform in inline %}
+                    {% for hidden in inform.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+                    <tr><!-- Read only fields first-->
+                        {% block readonly %} {% endblock %}
+                        {% for field in inform.visible_fields %}
+                            <td>
+                                {{ field.errors }}
+                                {{ field }}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endfor %}
+        <input type="submit" value="{{ submit }}">
+    </form>
+</div>
+{% block formjavascript %}
+{% endblock %}

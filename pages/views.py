@@ -9,7 +9,6 @@ from form_utils.forms import BetterModelForm
 
 from eestecnet.settings_deploy import ASANA_API_KEY, EESTEC_ITT_WORKSPACE_ID, \
     FEEDBACK_PROJECT_ID
-
 from news.widgets import EESTECEditor
 from pages.models import Page, Stub, WebsiteFeedback, WebsiteFeedbackImage
 
@@ -82,7 +81,7 @@ class NewWebsiteFeedback(CreateWithInlinesView):
 
 
     def get_success_url(self):
-        return ("/")
+        return ""
 
     def forms_valid(self, form,inlines):
         feedback = form.save(commit=False)
