@@ -1,4 +1,5 @@
 {% if form.non_field_errors %}{{ form.non_field_errors }}{% endif %}
+{% if form.fieldsets %}
 {% for fieldset in form.fieldsets %}
     <fieldset class="{{ fieldset.classes }}">
         {% if fieldset.legend %}
@@ -22,3 +23,14 @@
         </ul>
     </fieldset>
 {% endfor %}
+{% else %}
+    <ul>
+        {% for field in form %}
+            <li>
+                <label>{{ field.label }}</label>
+                <label>{{ field.errors }}</label>
+                <span>{{ field }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

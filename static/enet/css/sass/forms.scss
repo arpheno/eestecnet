@@ -21,36 +21,37 @@ form#userupdate {
   background-color: rgba(255, 255, 255, 0.9);
   display: flex;
   flex-wrap: wrap;
-  fieldset {
+  fieldset, ul {
     flex: 1 1 100%;
-    legend {
-      font-size: 17px;
-      color: $darkeestec;
-      display: block;
-      font-weight: bold;
-      border-bottom: 1px $darkeestec solid;
-      width: 100%;
-      padding: 1px 10px;
+  }
+  legend {
+    font-size: 17px;
+    color: $darkeestec;
+    display: block;
+    font-weight: bold;
+    border-bottom: 1px $darkeestec solid;
+    width: 100%;
+    padding: 1px 10px;
+  }
+  li {
+    padding: 0px 10px;
+    flex: 1 1 100%;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+  select, input, textarea {
+    border-radius: 15px;
+    border-style: none;
+    padding: 10px;
+    margin: 5px;
+    background-color: #ffffff;
+    &[type="submit"] {
+      background-colr: rgba(0, 0, 0, 0.05);
     }
-    li {
-      padding: 0px 10px;
-      flex: 1 1 100%;
-      align-items: center;
-      display: flex;
-      justify-content: space-between;
-    }
-    select, input, textarea {
-      border-radius: 15px;
-      border-style: none;
-      padding: 10px;
-      margin: 5px;
-      background-color: #ffffff;
-      &[type="submit"] {
-        background-colr: rgba(0, 0, 0, 0.05);
-      }
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.03);
-      }
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.03);
     }
   }
+
 }

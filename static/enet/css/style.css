@@ -458,11 +458,11 @@ form#userupdate p {
     flex-wrap: wrap
 }
 
-.dialogform fieldset {
+.dialogform fieldset, .dialogform ul {
     flex: 1 1 100%
 }
 
-.dialogform fieldset legend {
+.dialogform legend {
     font-size: 17px;
     color: #c30811;
     display: block;
@@ -472,7 +472,7 @@ form#userupdate p {
     padding: 1px 10px
 }
 
-.dialogform fieldset li {
+.dialogform li {
     padding: 0px 10px;
     flex: 1 1 100%;
     align-items: center;
@@ -480,7 +480,7 @@ form#userupdate p {
     justify-content: space-between
 }
 
-.dialogform fieldset select, .dialogform fieldset input, .dialogform fieldset textarea {
+.dialogform select, .dialogform input, .dialogform textarea {
     border-radius: 15px;
     border-style: none;
     padding: 10px;
@@ -488,11 +488,11 @@ form#userupdate p {
     background-color: #ffffff
 }
 
-.dialogform fieldset select[type="submit"], .dialogform fieldset input[type="submit"], .dialogform fieldset textarea[type="submit"] {
+.dialogform select[type="submit"], .dialogform input[type="submit"], .dialogform textarea[type="submit"] {
     background-colr: rgba(0, 0, 0, 0.05)
 }
 
-.dialogform fieldset select:hover, .dialogform fieldset input:hover, .dialogform fieldset textarea:hover {
+.dialogform select:hover, .dialogform input:hover, .dialogform textarea:hover {
     background-color: rgba(0, 0, 0, 0.03)
 }
 
