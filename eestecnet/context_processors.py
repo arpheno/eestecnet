@@ -29,7 +29,7 @@ def my_feedback(request):
     feedback = WebsiteFeedback()
     inlines = [
         WebsiteFeedbackInline(WebsiteFeedback, request, feedback).construct_formset()]
-    return {'feedbackform': form, 'inlines': inlines}
+    return {'feedbackform': form, 'feedbackinlines': inlines}
 
 def my_search(request):
     form = SearchForm()

@@ -16,6 +16,7 @@ from django.shortcuts import redirect, get_object_or_404
 
 
 
+
 # Create your views here.
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
@@ -27,8 +28,8 @@ from eestecnet.forms import DialogFormMixin
 from events.forms import DescriptionForm, EventImageInline, TransportForm, \
     UploadEventsForm, EventMixin, EventUpdateForm
 from events.models import Event, Application, Participation
+from teams.forms import ApplicationInline
 from teams.models import Team
-
 
 
 class HTML5Input(widgets.Input):
@@ -206,6 +207,7 @@ class DeleteApplication(DialogFormMixin, DeleteView):
 class EditApplication(EventMixin, DialogFormMixin, UpdateView):
     model = Application
     form_class = modelform_factory(Application, fields=["letter"])
+
     def get_object(self, queryset=None):
         event = Event.objects.get(slug=self.kwargs['slug'])
         return Application.objects.get(applicant=self.request.user, target=event)
@@ -296,6 +298,8 @@ class FillInTransport(EventMixin, DialogFormMixin, CreateView):
 class ChangeDetails(EventMixin, DialogFormMixin, UpdateView):
     model = Event
     form_class = EventUpdateForm
+
+
 class ChangeDescription(EventMixin, DialogFormMixin, UpdateView):
     form_class = DescriptionForm
     model = Event
@@ -306,3 +310,11 @@ class EventImages(EventMixin, DialogFormMixin, UpdateWithInlinesView):
     form_class = modelform_factory(Event, fields=('thumbnail',),
                                    widgets={'thumbnail': ImageWidget()})
     inlines = [EventImageInline]
+
+
+class IncomingApplications(EventMixin, DialogFormMixin, UpdateWithInlinesView):
+    model = Event
+    fields = ()
+    inlines = [ApplicationInline]
+    form_title = "These people want to participate in the event!"
+
