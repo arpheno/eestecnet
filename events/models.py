@@ -230,11 +230,14 @@ class Application(models.Model):
         unique_together = (('applicant', 'target'),)
 
     applicant = models.ForeignKey('account.Eestecer')
-    target = models.ForeignKey(Event, editable=False)
+    target = models.ForeignKey(Event)
     date = models.DateTimeField(auto_now_add=True, editable=False)
     letter = models.TextField(blank=True, null=True)
     priority = models.IntegerField(blank=True, null=True)
     accepted = models.BooleanField(default=False)
+
+    def outgoing(self):
+        return [team for team in self.applicant.teams if team.is_lc][0]
 
     def member_in(self):
         """ returns a String containing all :class:`Member`s the applicant is part of """

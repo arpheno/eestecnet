@@ -1,0 +1,12 @@
+{% extends  "forms/modelformset.html" %}
+{% block formjavascript %}
+    <script type="text/javascript">
+        $(function () {
+            $("#{{ id }}").dialog({
+                width: 600,
+                title: "{{ title }}"
+            });
+            $("input[type=submit]").button();
+        });
+    </script>
+{% endblock %}

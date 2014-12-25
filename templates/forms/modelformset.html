@@ -1,15 +1,15 @@
 {% extends  parent %}
 
 {% block dialogform %}
+    {% print %}
     <div id="{{ id }}">
         <form action="{{ action }}" enctype="multipart/form-data"
               method="post" class="dialogform">
-        {% csrf_token %}
+            {% csrf_token %}
             {% block form %}
                 {% include 'forms/better_form.html' %}
             {% endblock %}
-        {% for inline in inlines %}
-            {{ inline.management_form }}
+            {{ formset.management_form }}
             <table style="width:100%;">
                 <tr>
                     {% block readonly_labels %}
@@ -17,13 +17,13 @@
                             <td>{{ label }}</td>
                         {% endfor %}
                     {% endblock %}
-                    {% for field in inline.0.visible_fields %}
+                    {% for field in formset.0.visible_fields %}
                         <th>
                             {{ field.label }}
                         </th>
                     {% endfor %}
                 </tr>
-                {% for inform in inline %}
+                {% for inform in formset %}
                     {% for hidden in inform.hidden_fields %}
                         {{ hidden }}
                     {% endfor %}
@@ -38,9 +38,8 @@
                     </tr>
                 {% endfor %}
             </table>
-        {% endfor %}
             <input type="submit" value="{{ submit }}">
-    </form>
+        </form>
     </div>
     {% block formjavascript %}
     {% endblock %}

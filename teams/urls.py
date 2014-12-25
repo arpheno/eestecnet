@@ -4,7 +4,7 @@ from django.views.generic import DetailView
 
 from teams.models import Team
 from teams.views import SelectBoard, ChangeDescription, \
-    ChangeDetails, ManageMembers, TeamImages, TeamApplications
+    ChangeDetails, ManageMembers, TeamImages, TeamApplications, OutgoingApplications
 
 
 admin.autodiscover()
@@ -16,6 +16,8 @@ urlpatterns = patterns(
     url(r'^(?P<slug>[-\w]+)/description/?$', ChangeDescription.as_view(),
         name='description'),
     url(r'(?P<slug>[-\w]+)/images/?$', TeamImages.as_view(), name='teamimages'),
+    url(r'(?P<slug>[-\w]+)/outgoing/?', OutgoingApplications.as_view(),
+        name='outgoing'),
     url(r'(?P<slug>[-\w]+)/applications/?', TeamApplications.as_view(),
         name='teamapplications'),
     url(r'^(?P<slug>[-\w]+)/members/?$', ManageMembers.as_view(), name='managemembers'),
