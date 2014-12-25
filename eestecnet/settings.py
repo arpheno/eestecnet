@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'form_utils',
     'wiki',
     'reversion',
+    'debugtools',
 )
 
 MAILQUEUE_CELERY = True

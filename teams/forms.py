@@ -31,6 +31,23 @@ class DescriptionForm(ModelForm):
         # 'css': "/static/enet/css/wysiwyg.css"})}
 
 
+class OutgoingApplicationForm(ReadonlyModelForm):
+    class Meta:
+        model = Application
+        fields = ('applicant', 'target', 'letter', 'priority')
+
+    class NewMeta:
+        readonly = ('applicant', 'target', 'letter')
+
+class MembershipForm(ReadonlyModelForm):
+    class Meta:
+        model = Membership
+        fields = ('user', 'board', 'privileged', 'alumni')
+
+    class NewMeta:
+        readonly = ('user')
+
+
 class MembershipForm(ReadonlyModelForm):
     class Meta:
         model = Membership

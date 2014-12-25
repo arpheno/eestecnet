@@ -90,7 +90,6 @@
             {% include 'account/eestecers.html' with object_list=object.alumni %}
         </details>
     {% endif %}
-    {% block dialogform %}{% endblock %}
 {% endblock %}
 
 {% block aside %}
@@ -101,6 +100,7 @@
         <a href="{{ object.as_url }}details" id="board">Change Details</a>
         <a href="{{ object.as_url }}members" id="board">Manage members</a>
         <a href="{{ object.as_url }}images" id="board"> Images </a>
+        <a href="{{ object.as_url }}outgoing" id="board"> Outgoing </a>
         {% if object.pending_applications %}
             <a href="{{ object.as_url }}applications"
                id="board">View {{ object.pending_applications.count }}Applications </a>

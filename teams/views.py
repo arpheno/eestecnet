@@ -3,12 +3,12 @@ from django.core.urlresolvers import reverse
 
 # Create your views here.
 from django.views.generic import ListView, FormView, UpdateView, View, TemplateView
-from extra_views import UpdateWithInlinesView
+from extra_views import UpdateWithInlinesView, ModelFormSetView
 from eestecnet.forms import DialogFormMixin
-from events.models import Event
+from events.models import Event, Application
 from teams.forms import MembershipInline, MemberImageInline, DescriptionForm, \
     BoardForm, \
-    ApplicationInline, TeamImageForm
+    ApplicationInline, TeamImageForm, OutgoingApplicationForm
 from teams.models import Team, Board
 
 
@@ -55,6 +55,12 @@ class ManageMembers(TeamMixin, DialogFormMixin, UpdateWithInlinesView):
     fields = ()
     inlines = [MembershipInline]
 
+
+class OutgoingApplications(TeamMixin, DialogFormMixin, ModelFormSetView):
+    model = Application
+    template_name = "forms/dialog_modelformset.html"
+    extra = 0
+    form_class = OutgoingApplicationForm
 
 class TeamApplications(TeamMixin, DialogFormMixin, UpdateWithInlinesView):
     model = Event
