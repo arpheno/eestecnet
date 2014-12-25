@@ -37,7 +37,7 @@ class SpanWidget(forms.Widget):
     def render(self, name, value, attrs=None):
         final_attrs = self.build_attrs(attrs, name=name)
         return mark_safe(u'<span%s >%s</span>' % (
-            forms.util.flatatt(final_attrs), self.original_value))
+            forms.util.flatatt(final_attrs), self.display_value))
 
     def value_from_datadict(self, data, files, name):
         return self.original_value
@@ -73,7 +73,9 @@ class Readonly(object):
                 field.widget = SpanWidget()
             elif not isinstance(field, SpanField):
                 continue
-            field.widget.original_value = str(getattr(self.instance, name))
+            model_field = self.instance._meta.get_field_by_name(name)[0]
+            field.widget.original_value = model_field.value_from_object(self.instance)
+            field.widget.display_value = getattr(self.instance, name)
 
 
 class ReadonlyForm(Readonly, forms.Form):

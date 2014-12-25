@@ -30,6 +30,7 @@
                         {% block readonly %} {% endblock %}
                         {% for field in inform.visible_fields %}
                             <td>
+                                {{ field.errors }}
                                 {{ field }}
                             </td>
                         {% endfor %}
