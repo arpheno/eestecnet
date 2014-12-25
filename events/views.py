@@ -6,7 +6,9 @@ from django.contrib import messages
 from django.core.files import File
 from django.core.urlresolvers import reverse
 from django.forms import widgets
+from django.forms.models import modelform_factory
 from django.shortcuts import redirect, get_object_or_404
+
 
 
 
@@ -14,21 +16,17 @@ from django.shortcuts import redirect, get_object_or_404
 
 # Create your views here.
 from django.utils import timezone
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, View, \
-    FormView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
+    FormView, \
+    DeleteView
 from extra_views import UpdateWithInlinesView
-from form_utils.forms import BetterModelForm
 from form_utils.widgets import ImageWidget
 from eestecnet.forms import DialogFormMixin
 from events.forms import DescriptionForm, EventImageInline, TransportForm, \
-    UploadEventsForm
+    UploadEventsForm, EventMixin
 from events.models import Event, Application, Participation
 from teams.models import Team
 
-
-class EventMixin(View):
-    def get_success_url(self):
-        return reverse("event", kwargs=self.kwargs)
 
 
 class HTML5Input(widgets.Input):
@@ -186,7 +184,7 @@ class EventDetail(DetailView):
         return context
 
 
-class DeleteApplication(DeleteView):
+class DeleteApplication(DialogFormMixin, DeleteView):
     model = Application
 
     def get_object(self, queryset=None):
@@ -203,10 +201,9 @@ class DeleteApplication(DeleteView):
         return redirect(reverse('event', kwargs=self.kwargs))
 
 
-class EditApplication(UpdateView):
+class EditApplication(EventMixin, DialogFormMixin, UpdateView):
     model = Application
-    template_name = "events/application_update.html"
-
+    form_class = modelform_factory(Application, fields=["letter"])
     def get_object(self, queryset=None):
         event = Event.objects.get(slug=self.kwargs['slug'])
         return Application.objects.get(applicant=self.request.user, target=event)
@@ -217,9 +214,10 @@ class EditApplication(UpdateView):
         return context
 
 
-class ApplyToEvent(CreateView):
+class ApplyToEvent(EventMixin, DialogFormMixin, CreateView):
     model = Application
-    template_name = 'events/application_form.html'
+    form_class = modelform_factory(Application, fields=["letter"])
+    submit = "Apply"
 
     def get_context_data(self, **kwargs):
         context = super(ApplyToEvent, self).get_context_data(**kwargs)
@@ -259,9 +257,8 @@ class ApplyToEvent(CreateView):
         return redirect(self.get_success_url())
 
 
-class UpdateTransport(UpdateView):
+class UpdateTransport(EventMixin, DialogFormMixin, UpdateView):
     form_class = TransportForm
-    template_name = 'events/transportation_form.html'
 
     def get_object(self, queryset=None):
         return Participation.objects.get(applicant=self.request.user,
@@ -269,9 +266,8 @@ class UpdateTransport(UpdateView):
                                              slug=self.kwargs['slug'])).transportation
 
 
-class FillInTransport(CreateView):
+class FillInTransport(EventMixin, DialogFormMixin, CreateView):
     form_class = TransportForm
-    template_name = 'events/transportation_form.html'
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
@@ -302,24 +298,13 @@ class ChangeDetails(EventMixin, DialogFormMixin, UpdateView):
         'scope', 'category')
 
 
-class ChangeDescription(EventMixin, UpdateView):
-    template_name = 'events/description_form.html'
+class ChangeDescription(EventMixin, DialogFormMixin, UpdateView):
     form_class = DescriptionForm
     model = Event
 
 
-class EventImageForm(BetterModelForm):
-    class Meta:
-        model = Event
-        fields = ('thumbnail',)
-        widgets = {
-            'thumbnail': ImageWidget()
-        }
-
-
-class EventImages(EventMixin, UpdateWithInlinesView):
+class EventImages(EventMixin, DialogFormMixin, UpdateWithInlinesView):
     model = Event
-    template_name = 'events/event_images_form.html'
-    form_class = EventImageForm
-    #    widgets= {'thumbnail': ImageWidget()}
+    form_class = modelform_factory(Event, fields=('thumbnail',),
+                                   widgets={'thumbnail': ImageWidget()})
     inlines = [EventImageInline]

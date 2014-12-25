@@ -41,7 +41,10 @@
     {% block formjavascript %}
     <script type="text/javascript">
         $(function () {
-            $("#{{ id }}").dialog({width: 600, height: 500});
+            $("#{{ id }}").dialog({
+                width: 600,
+                title: "{{ title }}",
+            });
             $("input[type=submit]").button();
         });
     </script>

@@ -17,6 +17,7 @@ class DialogFormMixin(object):
         context = super(DialogFormMixin, self).get_context_data(**kwargs)
         context['parent'] = self.parent_template
         context['id'] = self.html_id
+        context['title'] = self.form_title
         context['submit'] = self.submit
         context.update(self.additional_context)
         return context

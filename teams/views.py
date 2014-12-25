@@ -14,7 +14,7 @@ from teams.models import Team, Board
 
 class TeamMixin(View):
     parent_template = "teams/team_detail.html"
-
+    form_title = "Please fill in the form"
     def get_success_url(self):
         if Team.objects.get(slug=self.kwargs['slug']).is_lc():
             return reverse("cities:detail", kwargs=self.kwargs)

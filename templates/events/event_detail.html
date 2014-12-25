@@ -53,8 +53,7 @@
         <summary>Participants</summary>
         {% include 'account/eestecers.html' with object_list=object.participants.all %}
     </details>
-    {% block changedetails %}{% endblock %}
-    {% block images %}{% endblock %}
+    {% block dialogform %}{% endblock %}
 {% endblock %}
 {% block aside %}
     {% if user in object.applicants.all %}
