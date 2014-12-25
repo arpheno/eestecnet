@@ -94,7 +94,7 @@
 {% endblock %}
 
 {% block aside %}
-    {% if user in object.privileged %}
+    {% if user in object.privileged or user.is_superuser %}
         <h2> Admin Actions</h2>
         <a href="{{ object.as_url }}board" id="board">Choose new board</a>
         <a href="{{ object.as_url }}description" id="board">Change Description</a>

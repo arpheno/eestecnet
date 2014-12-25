@@ -75,7 +75,7 @@ class Readonly(object):
                 continue
             model_field = self.instance._meta.get_field_by_name(name)[0]
             field.widget.original_value = model_field.value_from_object(self.instance)
-            field.widget.display_value = getattr(self.instance, name)
+            field.widget.display_value = unicode(getattr(self.instance, name))
 
 
 class ReadonlyForm(Readonly, forms.Form):
