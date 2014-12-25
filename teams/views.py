@@ -1,3 +1,4 @@
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 
 
@@ -15,6 +16,13 @@ from teams.models import Team, Board
 class TeamMixin(View):
     parent_template = "teams/team_detail.html"
     form_title = "Please fill in the form"
+
+    def dispatch(self, request, *args, **kwargs):
+        subject = Team.objects.get(slug=kwargs['slug'])
+        if request.user in subject.privileged() or request.user.is_superuser:
+            return super(TeamMixin, self).dispatch(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
     def get_success_url(self):
         if Team.objects.get(slug=self.kwargs['slug']).is_lc():
             return reverse("cities:detail", kwargs=self.kwargs)

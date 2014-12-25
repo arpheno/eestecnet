@@ -1,3 +1,5 @@
+from django.core.exceptions import PermissionDenied
+
 from django.core.urlresolvers import reverse
 from django.forms import Textarea, TextInput, FileField, Form
 from django.forms.models import modelform_factory
@@ -13,6 +15,15 @@ from news.widgets import EESTECEditor
 class EventMixin(View):
     parent_template = "events/event_detail.html"
     form_title = "Please fill in this form"
+
+    def dispatch(self, request, *args, **kwargs):
+        subject = Event.objects.get(slug=kwargs['slug'])
+        ocs = subject.organizing_committee.all()
+        for oc in ocs:
+            if request.user in oc.privileged() or request.user.is_superuser or \
+                            request.user in subject.organizers.all():
+                return super(EventMixin, self).dispatch(request, *args, **kwargs)
+        raise PermissionDenied
 
     def get_success_url(self):
         return reverse("event", kwargs=self.kwargs)
