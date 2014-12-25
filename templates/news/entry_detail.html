@@ -7,7 +7,7 @@
         <ul>
             <li>{{ entry.pub_date }}</li>
         </ul>
-        {% thumbnail entry.entry_image "200x200" crop="center" as im %}
+        {% thumbnail entry.entry_image "x200" crop="center" as im %}
             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
         {% endthumbnail %}
 
