@@ -27,6 +27,8 @@ class Membership(models.Model):
             self.user.groups.add(Group.objects.get(name='Local Admins'))
         super(Membership, self).save()
 
+    def profile_picture(self):
+        return self.user.profile_picture
     def __unicode__(self):
         return self.user.get_full_name()
 

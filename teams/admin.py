@@ -15,7 +15,7 @@ class MemberInline(admin.TabularInline):
     verbose_name_plural = "Members"
     """The title of the widget"""
     verbose_name = "pax"
-    #todo get rid of event_eestecer object
+    # todo get rid of event_eestecer object
     def name(self, instance):
         """ Returns the User's full name"""
         return instance.eestecer.first_name + instance.eestecer.last_name

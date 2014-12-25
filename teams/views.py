@@ -3,15 +3,18 @@ from django.core.urlresolvers import reverse
 
 # Create your views here.
 from django.views.generic import ListView, FormView, UpdateView, View, TemplateView
-from extra_views import UpdateWithInlinesView, InlineFormSet
-from form_utils.forms import BetterModelForm
-from form_utils.widgets import ImageWidget
-from events.models import Event, Application
-from teams.forms import MembershipInline, MemberImageInline, DescriptionForm, BoardForm
+from extra_views import UpdateWithInlinesView
+from eestecnet.forms import DialogFormMixin
+from events.models import Event
+from teams.forms import MembershipInline, MemberImageInline, DescriptionForm, \
+    BoardForm, \
+    ApplicationInline, TeamImageForm
 from teams.models import Team, Board
 
 
 class TeamMixin(View):
+    parent_template = "teams/team_detail.html"
+
     def get_success_url(self):
         if Team.objects.get(slug=self.kwargs['slug']).is_lc():
             return reverse("cities:detail", kwargs=self.kwargs)
@@ -43,26 +46,18 @@ class Governance(TemplateView):
 
 class CommitmentList(ListView):
     model = Team
-
     def get_queryset(self):
         return Team.objects.filter(type__in=["lc", "jlc", "observer"]).order_by('name')
 
 
-class ManageMembers(TeamMixin, UpdateWithInlinesView):
+class ManageMembers(TeamMixin, DialogFormMixin, UpdateWithInlinesView):
     model = Team
-    template_name = 'teams/manage_members_form.html'
     fields = ()
     inlines = [MembershipInline]
 
 
-class ApplicationInline(InlineFormSet):
-    model = Application
-    extra = 0
-
-
-class TeamApplications(TeamMixin, UpdateWithInlinesView):
+class TeamApplications(TeamMixin, DialogFormMixin, UpdateWithInlinesView):
     model = Event
-    template_name = 'teams/team_applications_form.html'
     fields = ()
     inlines = [ApplicationInline]
 
@@ -76,38 +71,25 @@ class TeamApplications(TeamMixin, UpdateWithInlinesView):
                                  organizing_committee__slug=self.kwargs['slug'])
 
 
-class TeamImageForm(BetterModelForm):
-    class Meta:
-        model = Team
-        fields = ('thumbnail',)
-        widgets = {
-            'thumbnail': ImageWidget()
-        }
-
-
-class TeamImages(TeamMixin, UpdateWithInlinesView):
+class TeamImages(TeamMixin, DialogFormMixin, UpdateWithInlinesView):
     model = Team
-    template_name = 'teams/team_images_form.html'
     fields = ('thumbnail',)
     inlines = [MemberImageInline]
     form_class = TeamImageForm
 
 
-class ChangeDetails(TeamMixin, UpdateView):
-    template_name = 'teams/change_details_form.html'
+class ChangeDetails(TeamMixin, DialogFormMixin, UpdateView):
     model = Team
     fields = ('name', 'website', 'address', 'founded', 'facebook')
 
 
-class ChangeDescription(TeamMixin, UpdateView):
-    template_name = 'teams/description_form.html'
+class ChangeDescription(TeamMixin, DialogFormMixin, UpdateView):
     form_class = DescriptionForm
     model = Team
 
 
-class SelectBoard(TeamMixin, FormView):
+class SelectBoard(TeamMixin, DialogFormMixin, FormView):
     form_class = BoardForm
-    template_name = 'teams/board_form.html'
 
     def get_context_data(self, **kwargs):
         context = super(SelectBoard, self).get_context_data(**kwargs)

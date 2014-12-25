@@ -11,6 +11,7 @@ from django.shortcuts import redirect, get_object_or_404
 
 
 
+
 # Create your views here.
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, View, \
@@ -18,6 +19,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, V
 from extra_views import UpdateWithInlinesView
 from form_utils.forms import BetterModelForm
 from form_utils.widgets import ImageWidget
+from eestecnet.forms import DialogFormMixin
 from events.forms import DescriptionForm, EventImageInline, TransportForm, \
     UploadEventsForm
 from events.models import Event, Application, Participation
@@ -293,8 +295,7 @@ class FillInTransport(CreateView):
         return redirect(reverse('event', kwargs=self.kwargs))
 
 
-class ChangeDetails(EventMixin, UpdateView):
-    template_name = 'teams/change_details_form.html'
+class ChangeDetails(EventMixin, DialogFormMixin, UpdateView):
     model = Event
     fields = (
         'name', 'participation_fee', 'start_date', 'end_date', 'deadline', 'location',

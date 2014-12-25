@@ -11,38 +11,42 @@ from events.models import Event
 
 
 TYPE_CHOICES = (
-        ('body', 'Body'),
-        ('team', 'International Team'),
-        ('department', 'Board Department'),
-        ('lc', 'Local Committee'),
-        ('jlc', 'Junior Local Committee'),
-        ('observer', 'Observer'),
-    )
+    ('body', 'Body'),
+    ('team', 'International Team'),
+    ('department', 'Board Department'),
+    ('lc', 'Local Committee'),
+    ('jlc', 'Junior Local Committee'),
+    ('observer', 'Observer'),
+)
 
 
 class Team(models.Model):
-    """Member objects are used to unify and abstract away from the internal entity of parts of our organization.
+    """Member objects are used to unify and abstract away from the internal entity of
+    parts of our organization.
 
-    Members can be Observers, LCs, Junior LCs, International Teams or Bodies of the association.
-    The goal using these objects is to unify the way how we handle interactions that are common to all five kinds of parts of eestec
+    Members can be Observers, LCs, Junior LCs, International Teams or Bodies of the
+    association.
+    The goal using these objects is to unify the way how we handle interactions that
+    are common to all five kinds of parts of eestec
 
-    When Members are created first, a local event called Recruitment is automatically created. By applying to
+    When Members are created first, a local event called Recruitment is automatically
+    created. By applying to
     event, registered users can become part of one or more teams."""
 
-    #General
+    # General
     """ The name of the :class:`Member`"""
-    name = models.CharField(max_length=50,unique=True)
-    slug=AutoSlugField(populate_from='name')
+    name = models.CharField(max_length=50, unique=True)
+    slug = AutoSlugField(populate_from='name')
     """The type of the :class:`Member`"""
     type = models.CharField(
         max_length=30,
         choices=TYPE_CHOICES,
         default='lc')
-    thumbnail=models.ImageField(blank=True,null=True,upload_to="memberthumbs")
-    thumbsource=models.CharField(max_length=100,blank=True,null=True)
+    thumbnail = models.ImageField(blank=True, null=True, upload_to="memberthumbs")
+    thumbsource = models.CharField(max_length=100, blank=True, null=True)
     """The picture that should appear in the :class:`Member` list"""
     teamstub = models.TextField(blank=True, null=True)
-    description= models.TextField(blank= True, null=True)
+    description = models.TextField(blank=True, null=True)
     """ LC info text"""
     facebook = models.URLField(blank=True, null=True)
     """ Facebook page for the member"""
@@ -78,17 +82,19 @@ class Team(models.Model):
         # Don't allow draft entries to have a pub_date.
         if self.thumbnail and not self.thumbsource:
             raise ValidationError('Please provide the source for the image')
+
     #Members
     users = models.ManyToManyField(
         'account.Eestecer', related_name='teams', through='news.Membership')
     founded = models.PositiveIntegerField(null=True, blank=True)
     """When the :class:`Member` was first established"""
-    def save(self, *args,**kwargs):
+
+    def save(self, *args, **kwargs):
         try:
             self.slug = slugify(self.name)
             geocoder = Geocoder()
             address = self.address
-            results, status_code = geocoder.geocode({'address': self.name })
+            results, status_code = geocoder.geocode({'address': self.name})
             self.lat, self.lng = results[0]['geometry']['location']['arg']
         except:
             pass
@@ -109,9 +115,10 @@ class Team(models.Model):
             super(Team, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        if self.type not in ['jlc','lc','observer']:
+        if self.type not in ['jlc', 'lc', 'observer']:
             return self.name
         return self.type.upper() + " " + self.name
+
     def member_count(self):
         """ The amount of teams currently in the :class:`Member` """
         return len(self.users.all())
@@ -125,7 +132,9 @@ class Team(models.Model):
 
     def last_event(self):
         try:
-            return self.event_set.all().exclude(name='Recruitment').order_by('-start_date')[0].start_date
+            return \
+                self.event_set.all().exclude(name='Recruitment').order_by('-start_date')[
+                    0].start_date
         except:
             return 0
 
@@ -151,7 +160,7 @@ class MemberImage(models.Model):
 
     property = models.ForeignKey(Team, related_name='images')
     image = models.ImageField(upload_to="memberimages")
-    source = models.CharField(max_length=100,blank=True, null=True)
+    source = models.CharField(max_length=100, blank=True, null=True)
 
     def __unicode__(self):
         return render_to_string('teams/thumbnailed_image.html', {'object': self})
