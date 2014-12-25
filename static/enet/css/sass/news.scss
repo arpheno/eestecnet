@@ -7,12 +7,11 @@ section.news {
     justify-content: flex-start;
   }
   img {
-    flex: 1 1 20%;
     padding: 0px 30px 0px 30px;
   }
   p, div {
     font-size: 1.2rem;
-    flex: 1 1 70%;
+    flex: 1 1;
   }
   a {
     color: blue;

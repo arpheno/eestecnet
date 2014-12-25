@@ -9,13 +9,13 @@
             <ul>
                 <li>{{ entry.pub_date }}</li>
             </ul>
-            {% thumbnail entry.entry_image "200x200" crop="center" as im %}
+            {% thumbnail entry.entry_image "x150" as im %}
                 <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
             {% endthumbnail %}
 
             <div class="post_content">
             {% autoescape off %}
-                    {{ entry.content | truncatewords:110}}
+                {{ entry.content | truncatewords:110|linebreaks }}
                 {% endautoescape %}
                 <a href="{% url "news" entry.slug %}"
                    style="font-weight: bold;"> Read more</a>
