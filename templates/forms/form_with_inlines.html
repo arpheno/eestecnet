@@ -1,14 +1,21 @@
-{% extends 'events/event_detail.html' %}
-{% block images %}
-    <form action="{% url 'eventimages' slug=object.slug %}" id="eventimagesform"
-          enctype="multipart/form-data" method="post">
+{% extends  parent %}
+{% block dialogform %}
+    <div id="{{ id }}">
+        <form action="{{ action }}" enctype="multipart/form-data"
+              method="post" class="dialogform">
         {% csrf_token %}
-        {{ form.as_p }}
+            {% block form %}
+                {% include 'forms/better_form.html' %}
+            {% endblock %}
         {% for inline in inlines %}
             {{ inline.management_form }}
             <table style="width:100%;">
                 <tr>
-                    <th>Image</th>
+                    {% block readonly_labels %}
+                        {% for label in read_only %}
+                            <td>{{ label }}</td>
+                        {% endfor %}
+                    {% endblock %}
                     {% for field in inline.0.visible_fields %}
                         <th>
                             {{ field.label }}
@@ -20,9 +27,7 @@
                         {{ hidden }}
                     {% endfor %}
                     <tr><!-- Read only fields first-->
-                        <td>
-                            {{ inform.instance }}
-                        </td>
+                        {% block readonly %} {% endblock %}
                         {% for field in inform.visible_fields %}
                             <td>
                                 {{ field }}
@@ -32,12 +37,9 @@
                 {% endfor %}
             </table>
         {% endfor %}
-        <input type="submit" value="Update Images">
+            <input type="submit" value="{{ submit }}">
     </form>
-    <script type="text/javascript">
-        $(function () {
-            $("#eventimagesform").dialog({width: 600, height: 500});
-            $("input[type=submit]").button();
-        });
-    </script>
+    </div>
+    {% block formjavascript %}
+    {% endblock %}
 {% endblock %}

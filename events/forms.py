@@ -1,8 +1,9 @@
 from django.core.urlresolvers import reverse
-from django.forms import ModelForm, Textarea, TextInput, FileField, Form
+from django.forms import Textarea, TextInput, FileField, Form
 from django.forms.models import modelform_factory
 from django.views.generic import View
 from extra_views import InlineFormSet
+from form_utils.forms import BetterModelForm
 from form_utils.widgets import ImageWidget
 
 from events.models import Event, EventImage, Transportation
@@ -17,7 +18,17 @@ class EventMixin(View):
         return reverse("event", kwargs=self.kwargs)
 
 
-class TransportForm(ModelForm):
+class EventUpdateForm(BetterModelForm):
+    class Meta:
+        model = Event
+        fieldsets = [
+            ('General Information', {'fields': ['name', 'scope', 'category']}),
+            ('Dates', {'fields': ['start_date', 'end_date', 'deadline']}),
+            ('Additional Information', {'fields': ['participation_fee', 'location']}),
+        ]
+
+
+class TransportForm(BetterModelForm):
     class Meta:
         model = Transportation
         fields = (
@@ -32,7 +43,9 @@ class TransportForm(ModelForm):
 
 class UploadEventsForm(Form):
     file = FileField()
-class DescriptionForm(ModelForm):
+
+
+class DescriptionForm(BetterModelForm):
     class Meta:
         model = Event
         fields = ('description',)

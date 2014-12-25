@@ -1,52 +1,12 @@
-{% extends  parent %}
-{% block dialogform %}
-    <form action="{{ action }}" id="{{ id }}" enctype="multipart/form-data"
-          method="post">
-        {% csrf_token %}
-        {% block form %}
-            {{ form.as_p }}
-        {% endblock %}
-        {% for inline in inlines %}
-            {{ inline.management_form }}
-            <table style="width:100%;">
-                <tr>
-                    {% block readonly_labels %}
-                        {% for label in read_only %}
-                            <td>{{ label }}</td>
-                        {% endfor %}
-                    {% endblock %}
-                    {% for field in inline.0.visible_fields %}
-                        <th>
-                            {{ field.label }}
-                        </th>
-                    {% endfor %}
-                </tr>
-                {% for inform in inline %}
-                    {% for hidden in inform.hidden_fields %}
-                        {{ hidden }}
-                    {% endfor %}
-                    <tr><!-- Read only fields first-->
-                        {% block readonly %} {% endblock %}
-                        {% for field in inform.visible_fields %}
-                            <td>
-                                {{ field }}
-                            </td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-            </table>
-        {% endfor %}
-        <input type="submit" value="{{ submit }}">
-    </form>
-    {% block formjavascript %}
+{% extends  "forms/form_with_inlines.html" %}
+{% block formjavascript %}
     <script type="text/javascript">
         $(function () {
             $("#{{ id }}").dialog({
                 width: 600,
-                title: "{{ title }}",
+                title: "{{ title }}"
             });
             $("input[type=submit]").button();
         });
     </script>
-    {% endblock %}
 {% endblock %}

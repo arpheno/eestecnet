@@ -49,7 +49,7 @@ class ApplicationForm(ReadonlyModelForm):
         model = Application
 
     class NewMeta:
-        readonly = ('letter', 'priority')
+        readonly = ('applicant', 'letter', 'priority')
 
 
 class ApplicationInline(InlineFormSet):

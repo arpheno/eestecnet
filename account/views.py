@@ -14,6 +14,7 @@ from form_utils.widgets import ImageWidget
 
 from account.forms import EestecerCreationForm
 from account.models import Eestecer
+from eestecnet.forms import DialogFormMixin
 from events.models import Event
 from news.widgets import EESTECEditor
 
@@ -45,12 +46,17 @@ class EestecerProfile(DetailView):
 class EestecerUpdateForm(BetterModelForm):
     class Meta:
         model=Eestecer
-        fields = (
-            'first_name', 'middle_name', 'last_name', 'second_last_name',
-            'date_of_birth', 'show_date_of_birth',
-        'field_of_study', 'curriculum_vitae',
-        'profile_picture','gender','tshirt_size','passport_number','food_preferences','allergies',
-        'skype', 'hangouts', 'mobile', 'personal')
+        fieldsets = [
+            ('Name',
+             {'fields': ['first_name', 'middle_name', 'last_name', 'second_last_name']}),
+            ('Additional Information', {'fields': [
+                'gender', 'date_of_birth', 'show_date_of_birth',
+                'profile_picture', 'field_of_study', 'curriculum_vitae']}),
+            ('Contact Information', {'fields': [
+                'hangouts', 'mobile', 'personal', 'skype']}),
+            ('Event Information', {'fields': [
+                'tshirt_size', 'passport_number', 'food_preferences', 'allergies']}),
+        ]
         widgets = {
             'date_of_birth': TextInput(attrs={'class': 'date'}),
             'personal': EESTECEditor(include_jquery=False),
@@ -71,11 +77,12 @@ class TrainingList(DetailView):
         return context
 
 
-class EestecerUpdate(UpdateView):
+class EestecerUpdate(DialogFormMixin, UpdateView):
     model=Eestecer
+    parent_template = "account/eestecer_detail.html"
     form_class = EestecerUpdateForm
+    form_title = "Update your personal info"
     success_url = "/people/me"
-    template_name = 'account/eestecer_form.html'
 
     def form_invalid(self, form):
         messages.add_message(

@@ -229,7 +229,7 @@ class Application(models.Model):
     class Meta:
         unique_together = (('applicant', 'target'),)
 
-    applicant = models.ForeignKey('account.Eestecer', editable=False)
+    applicant = models.ForeignKey('account.Eestecer')
     target = models.ForeignKey(Event, editable=False)
     date = models.DateTimeField(auto_now_add=True, editable=False)
     letter = models.TextField(blank=True, null=True)
