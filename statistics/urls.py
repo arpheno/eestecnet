@@ -8,5 +8,5 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^/*$', simpleStatistics, name='statistics')
+    url(r'^/?$', simpleStatistics, name='statistics')
 )
