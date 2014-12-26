@@ -22,7 +22,6 @@ import os.path
 import ctypes
 import ctypes.util
 import threading
-
 from ctypes import c_char_p, c_int, c_size_t, c_void_p
 
 
