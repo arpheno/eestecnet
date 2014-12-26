@@ -7,6 +7,7 @@ from django.views.generic import ListView, FormView, UpdateView, View, TemplateV
 from extra_views import UpdateWithInlinesView, ModelFormSetView
 from eestecnet.forms import DialogFormMixin
 from eestecnet.views import NeverCacheMixin
+from events.admin import get_own_members
 from events.models import Event, Application
 from teams.forms import MembershipInline, MemberImageInline, DescriptionForm, \
     BoardForm, \
@@ -70,6 +71,10 @@ class OutgoingApplications(TeamMixin, DialogFormMixin, ModelFormSetView):
     template_name = "forms/dialog_modelformset.html"
     extra = 0
     form_class = OutgoingApplicationForm
+
+    def get_queryset(self):
+        return super(OutgoingApplications, self).get_queryset().filter(
+            applicant__in=get_own_members(self.request))
 
 class TeamApplications(TeamMixin, DialogFormMixin, UpdateWithInlinesView):
     model = Event
