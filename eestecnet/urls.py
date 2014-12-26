@@ -5,7 +5,7 @@ from haystack.forms import SearchForm
 from haystack.views import SearchView
 
 from account.views import EestecerProfile, EestecerUpdate, EestecerCreate, \
-    Login, Logout, EestecerList, complete, TrainingList
+    Login, Logout, EestecerList, complete, TrainingList, MassCommunication
 from eestecnet.settings import MEDIA_ROOT
 from eestecnet.views import newsletter
 from events.views import InternationalEvents
@@ -60,5 +60,6 @@ urlpatterns = patterns(
     url(r'^history/?$', History.as_view(), name="history"),
     url(r'^statistics/', include('statistics.urls')),
     url(r'^wiki/', include('wiki.urls')),
+    url(r'^active/?$', MassCommunication.as_view(), name='masscommunication'),
     url(r'', include('pages.urls')),
 )

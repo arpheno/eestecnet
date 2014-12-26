@@ -8,7 +8,7 @@
             {% block form %}
                 {% include 'forms/better_form.html' %}
             {% endblock %}
-        {% for inline in inlines %}
+            {% for inline in rawinlines %}
             {{ inline.management_form }}
             <table style="width:100%;">
                 <tr>

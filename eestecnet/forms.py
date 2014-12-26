@@ -1,3 +1,6 @@
+from django.forms import Form, CharField, Textarea
+
+
 class AdditionalContextMixin(object):
     additional_context = {}
 
@@ -6,6 +9,10 @@ class AdditionalContextMixin(object):
         context.update(self.additional_context)
         return context
 
+
+class MassCommunicationForm(Form):
+    subject = CharField(max_length=255)
+    message = CharField(widget=Textarea)
 
 class DialogFormMixin(object):
     template_name = "forms/dialog_form_with_inlines.html"

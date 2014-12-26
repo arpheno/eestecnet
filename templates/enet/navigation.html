@@ -1,7 +1,17 @@
 {% load staticfiles %}
 {% if user.is_authenticated %}
     <ul>
-        <li><a href="{% url 'home' %}">Home</a></li>
+        {% if user.is_superuser %}
+            <li>
+                <a href="/admin">Admin </a>
+                <ul>
+                    <li><a href="{% url 'masscommunication' %}">Mass Communication</a>
+                    </li>
+                </ul>
+            </li>
+        {% else %}
+            <li><a href="{% url 'home' %}">Home</a></li>
+        {% endif %}
         <li><a href="{% url 'news' %}">News</a></li>
         <li><a href="{% url 'cities' %}">Commitments</a></li>
         <li><a href="{% url 'teams' %}">Teams</a></li>

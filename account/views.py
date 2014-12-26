@@ -3,6 +3,7 @@ import random
 
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
+from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.contrib.auth import login, logout
@@ -11,10 +12,11 @@ from django.views.generic import UpdateView, DetailView, CreateView, FormView, V
 from django.forms import TextInput
 from form_utils.forms import BetterModelForm
 from form_utils.widgets import ImageWidget
+from mailqueue.models import MailerMessage
 
 from account.forms import EestecerCreationForm
 from account.models import Eestecer
-from eestecnet.forms import DialogFormMixin
+from eestecnet.forms import DialogFormMixin, MassCommunicationForm
 from events.models import Event
 from news.widgets import EESTECEditor
 
@@ -56,6 +58,7 @@ class EestecerUpdateForm(BetterModelForm):
                 'hangouts', 'mobile', 'personal', 'skype']}),
             ('Event Information', {'fields': [
                 'tshirt_size', 'passport_number', 'food_preferences', 'allergies']}),
+            ('Administrative Information', {'fields': ['receive_eestec_active']}),
         ]
         widgets = {
             'date_of_birth': TextInput(attrs={'class': 'date'}),
@@ -153,3 +156,24 @@ class Logout(View):
         logout(request)
         messages.add_message(request, messages.INFO, 'You\'re now logged out')
         return redirect("/")
+
+
+class MassCommunication(DialogFormMixin, FormView):
+    parent_template = "enet/index.html"
+    form_class = MassCommunicationForm
+    form_title = "Send a message to all registered users"
+    submit = "Send message"
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_superuser:
+            return super(MassCommunication, self).dispatch(request, *args, **kwargs)
+        raise PermissionDenied
+
+    def form_valid(self, form):
+        message = MailerMessage()
+        message.subject = form.cleaned_data['subject']
+        message.content = form.cleaned_data['message']
+        message.from_address = "noreply@eestec.net"
+        message.to_address = "board@eestec.net"
+        message.bcc_address = ", ".join(
+            user.email for user in Eestecer.objects.filter(receive_eestec_active=True))

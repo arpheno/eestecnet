@@ -81,7 +81,8 @@
     </ul>
 {% endif %}
 {% block maincontent %}{% endblock %}
-{% include 'forms/raw_dialog_form_with_inlines.html' with action="/pages/feedback/" form=feedbackform id="feedbackform" submit="Feedback" inlines=feedbackinlines title="We're glad you have something to tell us!" %}
+{% block dialogform %}{% endblock %}
+{% include 'forms/raw_dialog_form_with_inlines.html' with action="/pages/feedback/" form=feedbackform id="feedbackform" submit="Feedback" rawinlines=feedbackinlines title="We're glad you have something to tell us!" %}
 <div id="feedbackbutton">
     Feedback
 </div>
