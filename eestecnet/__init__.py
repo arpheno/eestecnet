@@ -9,7 +9,6 @@ from django.utils import timezone
 from django.utils.datetime_safe import datetime
 
 from account.models import Eestecer, Position
-from eestecnet import settings
 from events.models import Event, Application, EventImage
 from pages.models import Stub, Page
 from teams.models import Team, MemberImage
