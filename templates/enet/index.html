@@ -82,7 +82,7 @@
 {% endif %}
 {% block maincontent %}{% endblock %}
 {% block dialogform %}{% endblock %}
-{% include 'forms/raw_dialog_form_with_inlines.html' with action="/pages/feedback/" form=feedbackform id="feedbackform" submit="Feedback" rawinlines=feedbackinlines title="We're glad you have something to tell us!" %}
+{% include 'forms/raw_dialog_form_with_inlines.html' with action="/pages/feedback/" rawform=feedbackform id="feedbackform" submit="Feedback" rawinlines=feedbackinlines title="We're glad you have something to tell us!" %}
 <div id="feedbackbutton">
     Feedback
 </div>

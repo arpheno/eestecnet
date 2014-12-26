@@ -1,0 +1,36 @@
+{% if rawform.non_field_errors %}{{ rawform.non_field_errors }}{% endif %}
+{% if rawform.fieldsets %}
+    {% for fieldset in rawform.fieldsets %}
+        <fieldset class="{{ fieldset.classes }}">
+            {% if fieldset.legend %}
+                <legend>{{ fieldset.legend }}</legend>
+            {% endif %}
+            {% if fieldset.description %}
+                <p class="description">{{ fieldset.description }}</p>
+            {% endif %}
+            <ul>
+                {% for field in fieldset %}
+                    {% if field.is_hidden %}
+                        {{ field }}
+                    {% else %}
+                        <li>
+                            <label>{{ field.label }}</label>
+                            <label>{{ field.errors }}</label>
+                            <span>{{ field }}</span>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </fieldset>
+    {% endfor %}
+{% else %}
+    <ul>
+        {% for field in rawform %}
+            <li>
+                <label>{{ field.label }}</label>
+                <label>{{ field.errors }}</label>
+                <span>{{ field }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

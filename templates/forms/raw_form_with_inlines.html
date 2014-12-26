@@ -3,7 +3,7 @@
           method="post" class="dialogform">
         {% csrf_token %}
         {% block form %}
-            {% include 'forms/better_form.html' %}
+            {% include 'forms/raw_better_form.html' %}
         {% endblock %}
         {% for inline in rawinlines %}
             {{ inline.management_form }}
