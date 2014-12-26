@@ -115,11 +115,12 @@ class EestecerList(ListView):
         return qs.exclude(profile_picture="")
 
 
-class EestecerCreate(CreateView):
+class EestecerCreate(DialogFormMixin, CreateView):
     model=Eestecer
+    form_title = "Almost done!"
+    submit = "Sign Up!"
+    parent_template = "enet/index.html"
     form_class = EestecerCreationForm
-    template_name = 'account/eestecer_create.html'
-    success_url = '/'
     def get_success_url(self):
         return "/"
 
