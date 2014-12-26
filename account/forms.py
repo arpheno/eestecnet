@@ -3,9 +3,7 @@ import string
 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.forms import ImageField
-from django.template.loader import render_to_string
 from form_utils.widgets import ImageWidget
-from mailqueue.models import MailerMessage
 
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
@@ -29,19 +27,7 @@ class EestecerCreationForm(UserCreationForm):
             "profile_picture",
             "email", "gender")
     def save(self, commit=True):
-        user= super(EestecerCreationForm,self).save(commit=False)
-        user.is_active=False
-        user.activation_link=id_generator(30)
-        message=MailerMessage()
-        message.subject = "Registration"
-        message.content = render_to_string(
-            "account/registration.html", {
-                "activation_link": user.activation_link
-            })
-        message.from_address = "noreply@eestec.net"
-        message.to_address = user.email
-        message.save()
-        user.save()
+        return super(EestecerCreationForm, self).save(commit=False)
 
 class EestecerChangeForm(UserChangeForm):
     """A form for updating users. Includes all the fields on

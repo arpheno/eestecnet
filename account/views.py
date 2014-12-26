@@ -3,16 +3,19 @@ import random
 
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.sites.models import RequestSite
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.contrib.auth import login, logout
+from django.template.loader import render_to_string
 from django.views.generic import UpdateView, DetailView, CreateView, FormView, View, \
     ListView
 from django.forms import TextInput
 from form_utils.forms import BetterModelForm
 from form_utils.widgets import ImageWidget
 from mailqueue.models import MailerMessage
+from password_reset.utils import get_username
 
 from account.forms import EestecerCreationForm
 from account.models import Eestecer
@@ -121,6 +124,23 @@ class EestecerCreate(CreateView):
         return "/"
 
     def form_valid(self, form):
+        user = form.save(commit=False)
+        user.is_active = False
+        user.activation_link = id_generator(30)
+        message = MailerMessage()
+        context = {
+            'site': RequestSite(self.request),
+            'user': user,
+            'username': get_username(user),
+            'secure': self.request.is_secure(),
+            "activation_link": user.activation_link
+        }
+        message.subject = "Registration"
+        message.content = render_to_string("account/registration.html", context)
+        message.from_address = "noreply@eestec.net"
+        message.to_address = user.email
+        message.save()
+        user.save()
         messages.add_message(
             self.request,
             messages.INFO,
