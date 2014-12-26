@@ -22,6 +22,7 @@ import os.path
 import ctypes
 import ctypes.util
 import threading
+import sys
 from ctypes import c_char_p, c_int, c_size_t, c_void_p
 
 
@@ -144,7 +145,6 @@ if dll:
     libmagic = ctypes.CDLL(dll)
 
 if not libmagic or not libmagic._name:
-    import sys
 
     platform_to_lib = {'darwin': ['/opt/local/lib/libmagic.dylib',
                                   '/usr/local/lib/libmagic.dylib'] +
