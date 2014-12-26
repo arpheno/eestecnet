@@ -3,6 +3,7 @@ import string
 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.forms import ImageField
+from django.template.loader import render_to_string
 from form_utils.widgets import ImageWidget
 from mailqueue.models import MailerMessage
 
@@ -23,18 +24,21 @@ class EestecerCreationForm(UserCreationForm):
 
     class Meta:
         model = Eestecer
-        fields = ("email","first_name","middle_name","gender","last_name","second_last_name")
+        fields = (
+            "first_name", "middle_name", "last_name", "second_last_name",
+            "profile_picture",
+            "email", "gender")
     def save(self, commit=True):
         user= super(EestecerCreationForm,self).save(commit=False)
         user.is_active=False
         user.activation_link=id_generator(30)
         message=MailerMessage()
         message.subject = "Registration"
-        message.content = "Register at eestecnet!\nGo to\n http://unstable.eestec" \
-                          ".net/complete/" + user.activation_link + "/" \
-                                                                    "take the domain " \
-                                                                    "with a grain of salt, it's still in development."
-        message.from_address = "noreply@eestec.net",
+        message.content = render_to_string(
+            "account/registration.html", {
+                "activation_link": user.activation_link
+            })
+        message.from_address = "noreply@eestec.net"
         message.to_address = user.email
         message.save()
         user.save()
