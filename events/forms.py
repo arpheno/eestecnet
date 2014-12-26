@@ -1,5 +1,4 @@
 from django.core.exceptions import PermissionDenied
-
 from django.core.urlresolvers import reverse
 from django.forms import Textarea, TextInput, FileField, Form
 from django.forms.models import modelform_factory
@@ -8,11 +7,12 @@ from extra_views import InlineFormSet
 from form_utils.forms import BetterModelForm
 from form_utils.widgets import ImageWidget
 
+from eestecnet.views import NeverCacheMixin
 from events.models import Event, EventImage, Transportation
 from news.widgets import EESTECEditor
 
 
-class EventMixin(View):
+class EventMixin(NeverCacheMixin, View):
     parent_template = "events/event_detail.html"
     form_title = "Please fill in this form"
 

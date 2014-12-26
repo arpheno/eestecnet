@@ -1,6 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.shortcuts import redirect
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import never_cache
 from mailqueue.models import MailerMessage
 
 from eestecnet import *
@@ -86,3 +88,9 @@ def nested_formset_factory(parent_model, child_model, grandchild_model):
     )
 
     return parent_child
+
+
+class NeverCacheMixin(object):
+    @method_decorator(never_cache)
+    def dispatch(self, *args, **kwargs):
+        return super(NeverCacheMixin, self).dispatch(*args, **kwargs)

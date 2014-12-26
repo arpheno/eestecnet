@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.views.generic import ListView, FormView, UpdateView, View, TemplateView
 from extra_views import UpdateWithInlinesView, ModelFormSetView
 from eestecnet.forms import DialogFormMixin
+from eestecnet.views import NeverCacheMixin
 from events.models import Event, Application
 from teams.forms import MembershipInline, MemberImageInline, DescriptionForm, \
     BoardForm, \
@@ -13,7 +14,7 @@ from teams.forms import MembershipInline, MemberImageInline, DescriptionForm, \
 from teams.models import Team, Board
 
 
-class TeamMixin(View):
+class TeamMixin(NeverCacheMixin, View):
     parent_template = "teams/team_detail.html"
     form_title = "Please fill in the form"
 
