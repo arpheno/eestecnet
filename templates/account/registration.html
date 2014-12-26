@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+Hey there,
 
-</body>
-</html>
+Thank you for registering at EESTEC.
+
+To finish the sign up process you need to activate your account by following the link below:
+http{% if secure %}s{% endif %}://{{ site.domain }}complete/{{ activation_link }}
+
+You can find the list of commitments at
+http{% if secure %}s{% endif %}://{{ site.domain }}{% url 'cities' %}
+
+Thank you
