@@ -26,6 +26,7 @@ django-suit
 django-suit-redactor
 docutils
 gunicorn
+haystack
 html5lib
 Jinja2
 kombu
