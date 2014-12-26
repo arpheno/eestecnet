@@ -7,6 +7,7 @@ from django.forms import Textarea
 from django.http import HttpResponse
 from suit_redactor.widgets import RedactorWidget
 
+from account.models import Eestecer
 from events.models import Event, Application, EventImage, \
     Participation, IncomingApplication, OutgoingApplication, Transportation
 
@@ -135,8 +136,12 @@ class IncomingApplicationFilter(admin.SimpleListFilter):  #
 
 
 def get_own_members(request):
-    return request.user.teams_administered().filter(type__in=['observer', 'jlc', 'lc'])[
+    try:
+        return \
+        request.user.teams_administered().filter(type__in=['observer', 'jlc', 'lc'])[
         0].users.all()
+    except IndexError:
+        return Eestecer.objects.none()
 
 
 class OutgoingApplicationAdmin(admin.ModelAdmin):

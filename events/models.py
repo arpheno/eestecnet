@@ -7,6 +7,7 @@ from django.core.exceptions import ValidationError
 from django.core.files import File
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from mailqueue.models import MailerMessage
@@ -251,22 +252,24 @@ class Application(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        #TODO PREVENT POSTMORTEM APPLICATION
+        if not self.date:
+            self.date = timezone.now()
+        if self.target.deadline:
+            if self.target.deadline < self.date:
+                return
         if self.target.category == "recruitment":
             if self.accepted:
-                Membership.objects.create(
+                membership, created = Membership.objects.get_or_create(
                     team=self.target.organizing_committee.all()[0],
                     user=self.applicant).save()
-                self.delete()
+                if not created:
+                    self.delete()
             else:
                 super(Application, self).save()
         else:
-            if self.pk == None:
-                pass
-                #if timezone.now() > make_aware(self.target.deadline):#todo
-                #   return
             if self.accepted:
-                participation = Participation.objects.create(target=self.target,
+                participation, created = Participation.objects.get_or_create(
+                    target=self.target,
                                                              participant=self.applicant)
                 participation.save()
                 message = MailerMessage()
@@ -283,7 +286,8 @@ class Application(models.Model):
                 message.to_address = self.applicant.email
                 message.save()
 
-                self.delete()
+                if not created:
+                    self.delete()
             else:
                 super(Application, self).save()
 
