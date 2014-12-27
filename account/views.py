@@ -162,7 +162,7 @@ class Login(FormView):
             'incorrect. If you have forgotten your password click <a href="' + reverse(
                 "password_reset_recover") + '">  here</a>.'
         )
-        return super(Login, self).form_invalid(form)
+        return redirect("/")
 
     def form_valid(self, form):
         messages.add_message(
