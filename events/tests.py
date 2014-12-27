@@ -1,14 +1,42 @@
 from datetime import timedelta
 
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.utils.timezone import now
 
-from events.models import Application
+from events.models import Application, Event
 from teams.tests import EESTECMixin
 
 
 class EventTestCase(EESTECMixin, TestCase):
+    def test_cant_apply_anonymously(self):
+        c = Client()
+        response = c.get("/events/inktronics/apply")
+        self.assertEqual(response.status_code, 403)
 
+    def test_can_get_apply_authenticated(self):
+        c = Client()
+        c.login(username="user@eestec.net", password="test")
+        response = c.get("/events/inktronics/apply")
+        self.assertEqual(response.status_code, 200)
+
+    def test_can_post_apply_authenticated(self):
+        c = Client()
+        c.login(username="user@eestec.net", password="test")
+        data = {"letter": "I'm motivated."}
+        response = c.post("/events/inktronics/apply", data=data)
+        Application.objects.get(applicant=self.user,
+                                target=Event.objects.get(slug="inktronics"))
+
+    def test_can_post_edit_application(self):
+        c = Client()
+        c.login(username="user@eestec.net", password="test")
+        data = {"letter": "I'm motivated."}
+        response = c.post("/events/inktronics/apply", data=data)
+        data = {"letter": "new"}
+        response = c.post("/events/inktronics/apply/edit", data=data)
+        self.assertEqual(Application.objects.get(applicant=self.user,
+                                                 target=Event.objects.get(
+                                                     slug="inktronics")).letter, "new")
     def test_event_application(self):
         """ assure that accepting applications will add participants"""
         ap = Application.objects.create(

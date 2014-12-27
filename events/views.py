@@ -10,6 +10,7 @@ from django.forms.models import modelform_factory
 from django.shortcuts import redirect, get_object_or_404
 
 
+
 # Create your views here.
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
@@ -181,7 +182,7 @@ class EventDetail(DetailView):
 
 
 class DeleteApplication(DialogFormMixin, DeleteView):
-    protected = 0
+    protected = 1
     model = Application
 
     def get_object(self, queryset=None):
@@ -199,7 +200,7 @@ class DeleteApplication(DialogFormMixin, DeleteView):
 
 
 class EditApplication(EventMixin, DialogFormMixin, UpdateView):
-    protected = 0
+    protected = 1
     model = Application
     form_class = modelform_factory(Application, fields=["letter"])
 
@@ -214,7 +215,7 @@ class EditApplication(EventMixin, DialogFormMixin, UpdateView):
 
 
 class ApplyToEvent(EventMixin, DialogFormMixin, CreateView):
-    protected = 0
+    protected = 1
     model = Application
     form_class = modelform_factory(Application, fields=["letter"])
     submit = "Apply"
