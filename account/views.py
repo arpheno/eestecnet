@@ -91,6 +91,11 @@ class EestecerUpdate(DialogFormMixin, UpdateView):
     success_url = "/people/me"
     action = "/people/me"
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated():
+            return super(EestecerUpdate, self).dispatch(request, *args, **kwargs)
+        raise PermissionDenied
+
     def form_invalid(self, form):
         messages.add_message(
             self.request,

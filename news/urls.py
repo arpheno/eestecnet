@@ -11,5 +11,5 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^$', NewsList.as_view(), name='news'),
-    url(r'^(?P<slug>[-\w]+)$', DetailView.as_view(model=Entry), name='news'),
+    url(r'^(?P<slug>[-\w]+)/$', DetailView.as_view(model=Entry), name='news'),
 )

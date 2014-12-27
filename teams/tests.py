@@ -72,6 +72,7 @@ class EESTECMixin(object):
             end_date=today + timezone.timedelta(days=15),
         )
         self.inktronics.save()
+        self.inktronics.organizing_committee.add(self.munich)
 
 
 class ManageTeamTestCase(EESTECMixin, TestCase):

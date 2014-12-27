@@ -12,7 +12,7 @@ from events.views import InternationalEvents
 from pages.models import Stub
 from pages.views import ActivityStubs, AboutStubs, Documents
 from teams.views import CommitmentList, TeamList, Governance, History
-from news.views import home
+from news.views import home, NewsList
 
 
 admin.autodiscover()
@@ -21,6 +21,7 @@ urlpatterns = patterns(
     '',
     url(r'^$', home.as_view(), name='home'),
     url(r'^reset/', include('password_reset.urls')),
+    url(r'^news/?$', NewsList.as_view(), name='news'),
     url(r'^news/', include('news.urls')),
     url(r'^androidcompetition/?$',
         TemplateView.as_view(template_name='android/home.html'), name="competition"),
@@ -54,7 +55,7 @@ urlpatterns = patterns(
     url(r'^about/?$', AboutStubs.as_view(), name='about'),
     url(r'^newsletter/?$', newsletter, name='newsletter'),
     url(r'^froala_editor/', include('froala_editor.urls')),
-    url(r'^materials/', include('elfinder.urls')),
+    url(r'^materials', include('elfinder.urls')),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': MEDIA_ROOT}),
     url(r'^history/?$', History.as_view(), name="history"),

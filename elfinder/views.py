@@ -1,6 +1,7 @@
 import json
 import os
 
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
@@ -17,12 +18,16 @@ from teams.models import Team
 
 
 def index(request):
+    if not request.user.is_authenticated():
+        raise PermissionDenied
     if request.is_ajax():
         return render(request, 'elfinder/elfinder-partial.html')
     return render(request, 'elfinder/elfinder.html')
 
 
 def connector(request):
+    if not request.user.is_authenticated():
+        raise PermissionDenied
     connector_view = ElfinderConnectorView.as_view()
     response = connector_view(request, optionset="default", start_path="default")
     return response
@@ -119,6 +124,8 @@ class ElfinderConnectorView(View):
 
     @method_decorator(csrf_exempt)
     def dispatch(self, *args, **kwargs):
+        if not self.request.user.is_authenticated():
+            raise PermissionDenied
         if not kwargs['optionset'] in ls.ELFINDER_CONNECTOR_OPTION_SETS:
             raise Http404
         return super(ElfinderConnectorView, self).dispatch(*args, **kwargs)

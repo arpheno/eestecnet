@@ -1,11 +1,12 @@
 # Create your views here.
 from django.views.generic import DetailView, UpdateView, CreateView, ListView
 
+from pages.views import Protected
 from wiki.forms import WikiForm
 from wiki.models import WikiPage
 
 
-class PageLatest(ListView):
+class PageLatest(Protected, ListView):
     model = WikiPage
     template_name = 'wiki/latest.html'
 
@@ -13,19 +14,21 @@ class PageLatest(ListView):
         return WikiPage.objects.order_by('-last_modified')[:5]
 
 
-class PageRandom(DetailView):
+class PageRandom(Protected, DetailView):
     model = WikiPage
 
     def get_object(self, queryset=None):
         return WikiPage.objects.order_by('?')[0]
 
-class WikiHome(DetailView):
+
+class WikiHome(Protected, DetailView):
     model = WikiPage
     def get_object(self, queryset=None):
-        return WikiPage.objects.get(name="home")
+        page, created = WikiPage.objects.get_or_create(name="home")
+        return page
 
 
-class PageDetail(DetailView):
+class PageDetail(Protected, DetailView):
     model = WikiPage
 
     def get_object(self, queryset=None):
@@ -36,11 +39,11 @@ class PageDetail(DetailView):
         return page
 
 
-class PageUpdate(UpdateView):
+class PageUpdate(Protected, UpdateView):
     model = WikiPage
     form_class = WikiForm
 
 
-class PageCreate(CreateView):
+class PageCreate(Protected, CreateView):
     model = WikiPage
     form_class = WikiForm

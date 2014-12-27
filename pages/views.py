@@ -1,6 +1,6 @@
 from asana.asana import AsanaAPI
-
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.forms import ModelForm, TextInput, Textarea
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView, UpdateView
@@ -112,3 +112,10 @@ class NewWebsiteFeedback(CreateWithInlinesView):
             messages.INFO,
             'Thank you for your feedback. We appreciate it.')
         return redirect("/")
+
+
+class Protected(object):
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated():
+            raise PermissionDenied
+        return super(Protected, self).dispatch(request, *args, **kwargs)
