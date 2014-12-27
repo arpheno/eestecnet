@@ -16,6 +16,7 @@ class EventMixin(NeverCacheMixin, View):
     parent_template = "events/event_detail.html"
     form_title = "Please fill in this form"
     protected = 1
+    action = ""
     def dispatch(self, request, *args, **kwargs):
         if not self.protected:
             return super(EventMixin, self).dispatch(request, *args, **kwargs)
