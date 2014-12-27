@@ -81,7 +81,6 @@ class TeamApplications(TeamMixin, DialogFormMixin, UpdateWithInlinesView):
     fields = ()
     inlines = [ApplicationInline]
     form_title = "These people want to join!"
-    action = reverse('teamapplications')
 
     def get_context_data(self, **kwargs):
         context = super(TeamApplications, self).get_context_data(**kwargs)
