@@ -43,7 +43,7 @@ urlpatterns = patterns(
     url(r'^people/(?P<slug>[-\w]+)/certificate/?$', TrainingList.as_view(),
         name='certificate'),
     url(r'^login/?', Login.as_view(), name='login'),
-    url(r'^complete/(?P<ida>[-\w]+)/', complete, name='complete'),
+    url(r'^complete/(?P<ida>[-\w]+)/?$', complete, name='complete'),
     url(r'^logout/?', Logout.as_view(), name='logout'),
     url(r'^register/?', EestecerCreate.as_view(), name='register'),
     url(r'^admin/?', include(admin.site.urls)),

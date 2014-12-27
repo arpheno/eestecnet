@@ -121,6 +121,7 @@ class EestecerCreate(DialogFormMixin, CreateView):
     submit = "Sign Up!"
     parent_template = "enet/index.html"
     form_class = EestecerCreationForm
+    action = "/register/"
     def get_success_url(self):
         return "/"
 

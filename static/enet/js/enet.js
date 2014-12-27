@@ -12,6 +12,7 @@ $(function () {
     });
     $("#feedbackform form ").submit(function () {
 
+
         var url = "/pages/feedback/"; // the script where you handle the form input.
 
         $.ajax({
@@ -25,6 +26,11 @@ $(function () {
         $("#feedbackform").dialog("close");
         return false; // avoid to execute the actual submit of the form.
     });
+    $("#registerbutton").click(function () {
+        $("#dialog").load("/register/");
+        return false;
+    });
+
 });
 function PersonDialog(wrapper) {
     var self = this;

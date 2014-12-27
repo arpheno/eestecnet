@@ -1,4 +1,5 @@
 from django.forms import Form, CharField, Textarea
+from django.http import JsonResponse
 
 
 class AdditionalContextMixin(object):
@@ -20,12 +21,39 @@ class DialogFormMixin(object):
     submit = "Update"
     additional_context = {}
 
+    def form_invalid(self, form):
+        response = super(DialogFormMixin, self).form_invalid(form)
+        if self.request.is_ajax():
+            response.render()
+            data = {
+                'content': response.content,
+            }
+            return JsonResponse(data, status=200)
+        else:
+            return response
+
+    def form_valid(self, form):
+        # We make sure to call the parent's form_valid() method because
+        # it might do some processing (in the case of CreateView, it will
+        # call form.save() for example).
+        response = super(DialogFormMixin, self).form_valid(form)
+        if self.request.is_ajax():
+            data = {
+                'pk': self.object.pk,
+            }
+            return JsonResponse(data, status=200)
+        else:
+            return response
     def get_context_data(self, **kwargs):
         context = super(DialogFormMixin, self).get_context_data(**kwargs)
-        context['parent'] = self.parent_template
+        if self.request.is_ajax():
+            context['parent'] = "enet/ajax.html"
+        else:
+            context['parent'] = self.parent_template
         context['id'] = self.html_id
         context['title'] = self.form_title
         context['submit'] = self.submit
+        context['action'] = self.action
         context.update(self.additional_context)
         return context
 
