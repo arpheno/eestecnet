@@ -21,6 +21,7 @@ $(function () {
             data: $("#feedbackform form").serialize(), // serializes the form's elements.
             success: function (data) {
                 alert("Thank you for your feedback, we appreciate it.");
+                $("#feedbackform form input[type=text], textarea").val("");
             }
         });
         $("#feedbackform").dialog("close");
