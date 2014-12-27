@@ -7,12 +7,13 @@
                 title: "{{ title }}"
             });
             $("input[type=submit]").button();
-            /*$("#
-            {{ id }} form").submit(function () {
+            $("#{{ id }} form").submit(function () {
                 $.ajax({
                     type: "POST",
                     url: $(this).attr("action"),
-                    data: $(this).serialize(), // serializes the form's elements.
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false,
                     statusCode: {
                         200: function (data) {
                             if (data.content) {
@@ -20,12 +21,13 @@
                             }
                             else {
                                 $("#{{ id }}").dialog("close");
+                                location.reload();
                             }
                         }
                     }
                 });
                 return false;
-             });*/
+            });
         });
     </script>
 {% endblock %}
