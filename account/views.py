@@ -89,6 +89,7 @@ class EestecerUpdate(DialogFormMixin, UpdateView):
     form_class = EestecerUpdateForm
     form_title = "Update your personal info"
     success_url = "/people/me"
+    action = "/people/me"
 
     def form_invalid(self, form):
         messages.add_message(

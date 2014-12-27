@@ -7,7 +7,8 @@
                 title: "{{ title }}"
             });
             $("input[type=submit]").button();
-            $("#{{ id }} form").submit(function () {
+            /*$("#
+            {{ id }} form").submit(function () {
                 $.ajax({
                     type: "POST",
                     url: $(this).attr("action"),
@@ -24,7 +25,7 @@
                     }
                 });
                 return false;
-            });
+             });*/
         });
     </script>
 {% endblock %}
