@@ -15,8 +15,10 @@ from news.widgets import EESTECEditor
 class EventMixin(NeverCacheMixin, View):
     parent_template = "events/event_detail.html"
     form_title = "Please fill in this form"
-
+    protected = 1
     def dispatch(self, request, *args, **kwargs):
+        if not self.protected:
+            return super(EventMixin, self).dispatch(request, *args, **kwargs)
         subject = Event.objects.get(slug=kwargs['slug'])
         ocs = subject.organizing_committee.all()
         for oc in ocs:
