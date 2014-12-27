@@ -18,7 +18,6 @@ from teams.models import Team, Board
 class TeamMixin(NeverCacheMixin, View):
     parent_template = "teams/team_detail.html"
     form_title = "Please fill in the form"
-    action = ""
     def dispatch(self, request, *args, **kwargs):
         subject = Team.objects.get(slug=kwargs['slug'])
         if request.user in subject.privileged() or request.user.is_superuser:

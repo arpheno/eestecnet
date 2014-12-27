@@ -19,6 +19,7 @@ class DialogFormMixin(object):
     template_name = "forms/dialog_form_with_inlines.html"
     html_id = "dialogform"
     submit = "Update"
+    action = ""
     additional_context = {}
 
     def form_invalid(self, form):
