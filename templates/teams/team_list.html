@@ -1,6 +1,7 @@
 {% extends 'enet/split.html' %}
 {% load staticfiles %}
 {% block main %}
+    {% if object_list.first.is_lc %}
     <style>#map {
         width: 80%;
         height: 350px;
@@ -20,7 +21,6 @@
             {% endfor %}
         });
     </script>
-    {% if object_list.first.is_lc %}
         <h1>Members</h1>
         <div id="map">
         </div>
