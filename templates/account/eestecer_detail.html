@@ -5,7 +5,7 @@
 {% block title %}{{ object }}{% endblock %}
 {% block pictures %}
     {% thumbnail object.profile_picture "375x225" crop="center" as im %}
-        <img alt="{{ object }} src="{{ im.url }}" width="{{ im.width }}" height="
+        <img alt="{{ object }}" src="{{ im.url }}" width="{{ im.width }}" height="
         {{ im.height }}">
     {% endthumbnail %}
 {% endblock %}

@@ -208,8 +208,8 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
 
     def __unicode__(self):
         return self.get_full_name()
-
-
+    def get_absolute_url(self):
+        return "/people/"+  self.slug
 class Position(models.Model):
     name = models.CharField(max_length=60, unique=True)
     description = models.TextField()

@@ -96,7 +96,9 @@ class EestecerUpdate(CapitalizeName,DialogFormMixin, UpdateView):
     parent_template = "account/eestecer_detail.html"
     form_class = EestecerUpdateForm
     form_title = "Update your personal info"
-    success_url = "/people/me"
+    def get_success_url(self):
+        return self.get_object().get_absolute_url()
+
     action = "/people/me"
 
     def dispatch(self, request, *args, **kwargs):
