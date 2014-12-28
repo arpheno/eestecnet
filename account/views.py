@@ -27,6 +27,15 @@ from news.widgets import EESTECEditor
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for x in range(size))
 
+class CapitalizeName(object):
+    def get_initial(self):
+        initial={}
+        user = self.get_object()
+        initial['first_name'] =user.first_name.title()
+        initial['middle_name'] =user.middle_name.title()
+        initial['last_name'] =user.last_name.title()
+        initial['second_last_name'] =user.second_last_name.title()
+        return initial
 
 def complete(request, ida):
     try:
@@ -82,8 +91,7 @@ class TrainingList(DetailView):
             training.name = training.name.split("-" + str(training.start_date))[0]
         return context
 
-
-class EestecerUpdate(DialogFormMixin, UpdateView):
+class EestecerUpdate(CapitalizeName,DialogFormMixin, UpdateView):
     model=Eestecer
     parent_template = "account/eestecer_detail.html"
     form_class = EestecerUpdateForm

@@ -261,9 +261,11 @@ class Application(models.Model):
             if self.accepted:
                 membership, created = Membership.objects.get_or_create(
                     team=self.target.organizing_committee.all()[0],
-                    user=self.applicant).save()
+                    user=self.applicant)
+                membership.save()
                 if not created:
                     self.delete()
+
             else:
                 super(Application, self).save()
         else:
