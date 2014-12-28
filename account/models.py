@@ -27,6 +27,7 @@ class EestecerManager(BaseUserManager):
                           date_joined=now, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
+        user.update_forum(password)
         return user
 
     def create_user(self, email, password=None, **extra_fields):
@@ -205,11 +206,36 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         "Returns the short name for the user."
         return '%s %s' % (self.first_name, self.last_name)
-
     def __unicode__(self):
         return self.get_full_name()
     def get_absolute_url(self):
         return "/people/"+  self.slug
+    def update_forum(self,password=None):
+        import urllib2
+        import urllib
+        url="http://forum.eestec.net/connector.php"
+        try:
+            from eestecnet.settings_deploy import  FORUM_PASSWORD
+        except:
+            FORUM_PASSWORD=""
+        values={
+            "secretpassword":FORUM_PASSWORD,
+            "uid":self.pk,
+            "username":self.email,
+            'skype':self.skype,
+            'google':self.hangouts,
+            'bday':self.date_of_birth,
+            'birthdayprivacy':self.show_date_of_birth,
+            }
+        if password:
+            values['password']=password
+        data=urllib.urlencode(values)
+        req=urllib2.Request(url+'?'+data)
+        opener = urllib2.build_opener()
+        opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+        response = opener.open(url+'?'+data)
+
+
 class Position(models.Model):
     name = models.CharField(max_length=60, unique=True)
     description = models.TextField()

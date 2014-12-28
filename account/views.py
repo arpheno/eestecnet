@@ -118,6 +118,8 @@ class EestecerUpdate(CapitalizeName,DialogFormMixin, UpdateView):
             self.request,
             messages.INFO,
             'Your information has been updated.')
+        user=form.save(commit=False)
+        user.update_forum()
         return super(EestecerUpdate, self).form_valid(form)
 
     def get_object(self, queryset=None):
