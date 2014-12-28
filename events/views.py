@@ -13,12 +13,14 @@ from django.shortcuts import redirect, get_object_or_404
 
 
 
+
+
 # Create your views here.
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
     FormView, \
     DeleteView
-from extra_views import UpdateWithInlinesView, CreateWithInlinesView
+from extra_views import UpdateWithInlinesView
 from form_utils.widgets import ImageWidget
 from eestecnet.forms import DialogFormMixin
 from events.forms import DescriptionForm, EventImageInline, TransportForm, \
@@ -340,10 +342,6 @@ class CreateEvent(DialogFormMixin, CreateView):
             raise PermissionDenied
         return super(CreateEvent, self).dispatch(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        context=super(CreateEvent,self).get_context_data(**kwargs)
-        context['object_list']=Event.objects.all()
-        return context
     def get_success_url(self):
         return reverse_lazy("events")
     def get_form_kwargs(self):
