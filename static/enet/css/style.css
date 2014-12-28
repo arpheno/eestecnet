@@ -707,6 +707,10 @@ ul.people li {
     flex: initial
 }
 
+#dialogform li {
+    height: initial
+}
+
 section.history ul {
     width: 100%;
     justify-content: flex-start
