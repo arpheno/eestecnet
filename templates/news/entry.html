@@ -6,7 +6,8 @@
 {% block url %}{% url 'news' object.slug %}{% endblock %}
 {% block picture %}
     {% thumbnail object.entry_image "150x150" crop="center" as im %}
-        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+        <img alt="{{ object.headline }}" src="{{ im.url }}" width="{{ im.width }}"
+             height="{{ im.height }}">
     {% endthumbnail %}
 {% endblock %}
 {% block caption %}

@@ -6,6 +6,7 @@
 {% block picture %}
     {% thumbnail object.thumbnail "190x125" crop="center" as im %}
         <img src="{{ im.url }}" style="width:{{ im.width }}px;height:{{ im.height }}px;"
+             alt="Picture of {{ object }}"
              title="{{ object.thumbsource }} ">
     {% endthumbnail %}
 {% endblock %}

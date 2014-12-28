@@ -27,7 +27,7 @@ body > header {
     td {
       padding: .5rem;
     }
-    input[role=button] {
+    input[role=button], a {
       text-align: center;
       width: 13.8rem;
       font-size: 1.6rem;
@@ -39,6 +39,9 @@ body > header {
       display: block;
       background-color: $darkereestec;
       cursor: pointer;
+    }
+    a {
+      padding: 4px;
     }
   }
   #userarea {

@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<footer>
+    <nav>
+        {% include 'enet/sitemap.html' %}
+    </nav>
+    <img src="{% static 'enet/images/map.png' %}" id="europe"/>
+
+    <div class="social">
+        <p>
+            Follow us on:
+        </p>
+        <a id="twitter"
+           href="https://twitter.com/eestec">{% include 'icons/twitter.svg' %}</a>
+        <a id="youtube"
+           href="https://www.youtube.com/channel/UCdGEsvqrZfNVbGcn9ns2RNA">{% include 'icons/youtube.svg' %}</a>
+        <a id="facebook"
+           href="https://www.facebook.com/EESTEC">{% include 'icons/facebook.svg' %}</a>
+        <a id="linkedin"
+           href="https://www.linkedin.com/groups?gid=66771&trk=vsrp_groups_cluster_name&trkInfo=VSRPsearchId%3A2421982511405028431050%2CVSRPtargetId%3A66771%2CVSRPcmpt%3Agroups_cluster">{% include 'icons/linkedin.svg' %}</a>
+        <a id="googleplus"
+           href="https://plus.google.com/u/0/107902810588904084368/posts">{% include 'icons/google.svg' %}</a>
+    </div>
+</footer>

@@ -4,7 +4,7 @@
 {% block url %}{% url 'event' object.slug %}{% endblock %}
 {% block picture %}
     {% thumbnail object.thumbnail "150x110" crop="center" as im %}
-        <img src="{{ im.url }}" class="thumbnail">
+        <img alt="{{ object.name }}" src="{{ im.url }}" class="thumbnail">
     {% endthumbnail %}
 {% endblock %}
 {% block caption %}

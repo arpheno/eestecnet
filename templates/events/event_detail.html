@@ -5,7 +5,8 @@
 {% block pictures %}
     {% for imf in object.images.all %}
         {% thumbnail imf.image "375x225" crop="center" as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+            <img alt="{{ object.name }}" src="{{ im.url }}" width="{{ im.width }}"
+                 height="{{ im.height }}">
         {% endthumbnail %}
     {% endfor %}
 {% endblock %}

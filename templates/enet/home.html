@@ -27,13 +27,13 @@
                 6000 members of whom 3000 are currently active, and indirectly, EESTEC is
                 addressing all students in the faculties that EESTEC exists.</p>
         </nav>
-        <div id="preview" class="cycle-slideshow" data-cycle-slides="li"
+        <div id="preview" class="cycle-slideshow" data-cycle-slides="article"
              data-cycle-timeout="8000">
         {% for object in object_list %}
-                <li class="news">
+            <article class="news">
                     <div class="pictures">
                         {% thumbnail object.entry_image "1087x480" crop="center" as im %}
-                            <img src="{{ im.url }}">
+                            <img {{ object.headline }} src="{{ im.url }}">
                         {% endthumbnail %}
                     </div>
                     <footer>
@@ -62,7 +62,7 @@
                             {% endfor %}
                         </aside>
                     </footer>
-                </li>
+            </article>
             {% endfor %}
         </div>
 

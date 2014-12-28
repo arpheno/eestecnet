@@ -50,8 +50,11 @@
 </head>
 <body>
 <header>
-    <a href="{% url 'home' %}"><img src="{% static 'enet/img/EESTEC_logo.svg' %}"/></a>
-    <img id="eestec-text" src="{% static 'enet/images/stretched.svg' %}"/>
+    <a href="{% url 'home' %}"><img
+            alt="Electrical Engineering Students' European Association"
+            src="{% static 'enet/img/EESTEC_logo.svg' %}"/></a>
+    <img id="eestec-text" alt="Electrical Engineering Students' European Association"
+         src="{% static 'enet/images/stretched.svg' %}"/>
     {% if not user.is_authenticated %}
         {% block authenticate %}
             {% include 'account/login.html' %}
@@ -81,6 +84,9 @@
     </ul>
 {% endif %}
 {% block maincontent %}{% endblock %}
+<div id="sponsors"> {% include 'enet/sponsors.html' %} </div>
+{% include 'enet/footer.html' %}
+<div id="copyright">Copyright EESTEC</div>
 {% block dialogform %}
     <div id="dialog"></div>
 {% endblock %}
@@ -88,29 +94,5 @@
 <div id="feedbackbutton">
     Feedback
 </div>
-<div id="sponsors"> {% include 'enet/sponsors.html' %} </div>
-<footer>
-    <nav>
-        {% include 'enet/sitemap.html' %}
-    </nav>
-    <img src="{% static 'enet/images/map.png' %}" id="europe"/>
-
-    <div class="social">
-        <p>
-            Follow us on:
-        </p>
-        <a id="twitter"
-           href="https://twitter.com/eestec">{% include 'icons/twitter.svg' %}</a>
-        <a id="youtube"
-           href="https://www.youtube.com/channel/UCdGEsvqrZfNVbGcn9ns2RNA">{% include 'icons/youtube.svg' %}</a>
-        <a id="facebook"
-           href="https://www.facebook.com/EESTEC">{% include 'icons/facebook.svg' %}</a>
-        <a id="linkedin"
-           href="https://www.linkedin.com/groups?gid=66771&trk=vsrp_groups_cluster_name&trkInfo=VSRPsearchId%3A2421982511405028431050%2CVSRPtargetId%3A66771%2CVSRPcmpt%3Agroups_cluster">{% include 'icons/linkedin.svg' %}</a>
-        <a id="googleplus"
-           href="https://plus.google.com/u/0/107902810588904084368/posts">{% include 'icons/google.svg' %}</a>
-    </div>
-</footer>
-<div id="copyright">Copyright EESTEC</div>
 </body>
 </html>
