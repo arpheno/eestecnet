@@ -21,7 +21,8 @@ class MultiSelectWidget(forms.SelectMultiple):
             base,
             option_value,
             selected_html,
-            force_text(option_label))
+            force_text(option_label)
+        )
 
     def render(self, name, value, attrs=None):
         rendered = super(MultiSelectWidget, self).render(name, value, attrs)

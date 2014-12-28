@@ -7,6 +7,7 @@ from django.contrib.auth.models import PermissionsMixin
 
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager)
+from teams.models import Team
 
 
 class EestecerManager(BaseUserManager):
@@ -148,6 +149,8 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
         return self.events.all().order_by('-start_date').first()
 
     def teams_administered(self):
+        if self.is_superuser:
+            return Team.objects.all()
         return self.teams.filter(membership__privileged=True)
 
     #Django information
@@ -222,6 +225,8 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
             "secretpassword":FORUM_PASSWORD,
             "uid":self.pk,
             "username":self.email,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
             'skype':self.skype,
             'google':self.hangouts,
             'bday':self.date_of_birth,

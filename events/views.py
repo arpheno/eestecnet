@@ -3,11 +3,13 @@ import random
 import datetime
 
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.core.files import File
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.forms import widgets
 from django.forms.models import modelform_factory
 from django.shortcuts import redirect, get_object_or_404
+
 
 
 
@@ -16,11 +18,11 @@ from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
     FormView, \
     DeleteView
-from extra_views import UpdateWithInlinesView
+from extra_views import UpdateWithInlinesView, CreateWithInlinesView
 from form_utils.widgets import ImageWidget
 from eestecnet.forms import DialogFormMixin
 from events.forms import DescriptionForm, EventImageInline, TransportForm, \
-    UploadEventsForm, EventMixin, EventUpdateForm
+    UploadEventsForm, EventMixin, EventUpdateForm, EventCreationForm
 from events.models import Event, Application, Participation
 from teams.forms import ApplicationInline
 from teams.models import Team
@@ -316,4 +318,40 @@ class IncomingApplications(EventMixin, DialogFormMixin, UpdateWithInlinesView):
     fields = ()
     inlines = [ApplicationInline]
     form_title = "These people want to participate in the event!"
+
+
+class CreateEvent(DialogFormMixin, CreateView):
+    model = Event
+    form_class = EventCreationForm
+    form_title = "Please fill in this form"
+    action = ""
+    form_id="createeventform"
+    parent_template = "events/event_list.html"
+    additional_context = {"appendix":""" <script type="text/javascript">
+        $(function () {
+            boarddialog = new PersonDialog($("#dialogform"));
+            $("input[type=submit]").button();
+        });
+    </script>"""}
+    submit = "Create Event"
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.has_perm('event.add_event'):
+            raise PermissionDenied
+        return super(CreateEvent, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context=super(CreateEvent,self).get_context_data(**kwargs)
+        context['object_list']=Event.objects.all()
+        return context
+    def get_success_url(self):
+        return reverse_lazy("events")
+    def get_form_kwargs(self):
+        kwargs = super(CreateEvent, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        kwargs['teams'] = self.request.user.teams_administered()
+        return kwargs
+
+
+
 

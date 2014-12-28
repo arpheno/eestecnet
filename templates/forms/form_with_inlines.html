@@ -1,7 +1,7 @@
 {% extends parent %}
 {% block dialogform %}
     <div id="{{ id }}">
-        <form action="{{ action }}" enctype="multipart/form-data"
+        <form action="{{ action }}" enctype="multipart/form-data" id="{{ form_id }}"
               method="post" class="dialogform">
         {% csrf_token %}
             {% block form %}

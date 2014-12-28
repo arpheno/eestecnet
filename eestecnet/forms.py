@@ -18,6 +18,7 @@ class MassCommunicationForm(Form):
 class DialogFormMixin(object):
     template_name = "forms/dialog_form_with_inlines.html"
     html_id = "dialogform"
+    form_id = "dialogformform"
     submit = "Update"
     action = ""
     additional_context = {}
@@ -52,6 +53,7 @@ class DialogFormMixin(object):
         else:
             context['parent'] = self.parent_template
         context['id'] = self.html_id
+        context['form_id'] = self.form_id
         context['title'] = self.form_title
         context['submit'] = self.submit
         context['action'] = self.action

@@ -1,4 +1,11 @@
 {% load thumbnail %}
-{% thumbnail object.profile_picture "100x102" crop="center" as im %}
-    <option data-img-src='{{ im.url }} ' value="{0}"{1}>{2}</option>
-{% endthumbnail %}
+{% if object.profile_picture %}
+    {% thumbnail object.profile_picture "100x102" crop="center" as im %}
+        <option data-img-src='{{ im.url }} ' value="{0}"{1}>{2}</option>
+    {% endthumbnail %}
+    {% else %}
+    {% thumbnail object.thumbnail "100x102" crop="center" as im %}
+        <option data-img-src='{{ im.url }} ' value="{0}"{1}>{2}</option>
+    {% endthumbnail %}
+{% endif %}
+

@@ -3,7 +3,7 @@ from django.contrib import admin
 
 from events.views import EventDetail, ApplyToEvent, confirm_event, \
     FillInTransport, UpdateTransport, ChangeDescription, ChangeDetails, EventImages, \
-    AddEvents, DeleteApplication, EditApplication, IncomingApplications
+    AddEvents, DeleteApplication, EditApplication, IncomingApplications, CreateEvent
 
 
 admin.autodiscover()
@@ -11,6 +11,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^add_batch/?$', AddEvents.as_view(), name='batch_add_events'),
+    url(r'^create/?$', CreateEvent.as_view(), name='create_event'),
     url(r'^(?P<slug>[-\w]+)/?$', EventDetail.as_view(), name='event'),
     url(r'^(?P<slug>[-\w]+)/applications/?$', IncomingApplications.as_view(),
         name='eventapplications'),
