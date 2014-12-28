@@ -96,6 +96,7 @@ class EestecerUpdate(CapitalizeName,DialogFormMixin, UpdateView):
     parent_template = "account/eestecer_detail.html"
     form_class = EestecerUpdateForm
     form_title = "Update your personal info"
+    additional_context={"appendix":render_to_string("enet/password_reset.html")}
     def get_success_url(self):
         return self.get_object().get_absolute_url()
 
