@@ -7,7 +7,8 @@
                 title: "{{ title }}"
             });
             $("#{{ id }} input[type=submit]").button();
-            $("#{{ id }} form").submit(function () {
+            /*$("#
+            {{ id }} form").submit(function () {
                 $.ajax({
                     type: "POST",
                     url: $(this).attr("action"),
@@ -23,11 +24,14 @@
                                 $("#{{ id }}").dialog("close");
                                 location.reload();
                             }
+             },
+             302:function(xhr,textstatus,error){
+             location.href = xhr.getResponseHeader("Location");
                         }
                     }
                 });
                 return false;
-            });
+             });*/
         });
     </script>
 {% endblock %}

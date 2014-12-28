@@ -199,6 +199,7 @@ class MassCommunication(DialogFormMixin, FormView):
     form_class = MassCommunicationForm
     form_title = "Send a message to all registered users"
     submit = "Send message"
+    success_url = "/"
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser:
@@ -213,4 +214,9 @@ class MassCommunication(DialogFormMixin, FormView):
         message.to_address = "board@eestec.net"
         message.bcc_address = ", ".join(
             user.email for user in Eestecer.objects.filter(receive_eestec_active=True))
-        return super(MassCommunication, self).form_valid(form)
+        message.save()
+        messages.add_message(
+            self.request,
+            messages.INFO, "Message will be sent now."
+        )
+        return redirect("/")
