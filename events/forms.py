@@ -1,13 +1,11 @@
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
-from django.forms import Textarea, TextInput, FileField, Form, ModelMultipleChoiceField, \
-    ModelForm
+from django.forms import Textarea, TextInput, FileField, Form, ModelMultipleChoiceField
 from django.forms.models import modelform_factory
 from django.views.generic import View
 from extra_views import InlineFormSet
 from form_utils.forms import BetterModelForm
 from form_utils.widgets import ImageWidget
-from account.models import Eestecer
 
 from eestecnet.views import NeverCacheMixin
 from events.models import Event, EventImage, Transportation
@@ -86,24 +84,26 @@ class EventCreationForm(BetterModelForm):
             ('General',
              {'fields': ['name','category','scope','thumbnail','location','summary','description',]}),
             ('Dates', {'fields': ['deadline','start_date','end_date']}),
-            ('Organizers', {'fields': ['organizing_committee','organizers' ]}),
+            ('Organizers', {'fields': ['organizing_committee', ]}),  # 'organizers' ]}),
             ('Participants', {'fields': [ 'max_participants','participation_fee']}),
         ]
-    organizers = ModelMultipleChoiceField(
-        queryset=Eestecer.objects.none(),
-        widget=MultiSelectWidget
-    )
+    #organizers = ModelMultipleChoiceField(
+    # queryset=Eestecer.objects.none(),
+    #    widget=MultiSelectWidget
+    #)
     organizing_committee = ModelMultipleChoiceField(
         queryset=Team.objects.none(),
         widget=MultiSelectWidget
     )
 
+
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
         teams = kwargs.pop('teams')
         super(EventCreationForm, self).__init__(*args, **kwargs)
-        self.fields['organizers'].queryset =Eestecer.objects.filter(membership__team__in=user.teams_administered())
-        self.fields['organizing_committee'].queryset =teams
+        #self.fields['organizers'].queryset =Eestecer.objects.filter(
+        # membership__team__in=user.teams_administered())
+        self.fields['organizing_committee'].queryset = teams
 
 
 

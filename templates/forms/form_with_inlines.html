@@ -4,8 +4,6 @@
         <form action="{{ action }}" enctype="multipart/form-data" id="{{ form_id }}"
               method="post" class="dialogform">
         {% csrf_token %}
-            a
-
             {% block form %}
                 {% include 'forms/better_form.html' %}
             {% endblock %}

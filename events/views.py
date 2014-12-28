@@ -15,6 +15,7 @@ from django.shortcuts import redirect, get_object_or_404
 
 
 
+
 # Create your views here.
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
@@ -331,7 +332,6 @@ class CreateEvent(DialogFormMixin, CreateView):
     parent_template = "events/event_list.html"
     additional_context = {"appendix":""" <script type="text/javascript">
         $(function () {
-            boarddialog = new PersonDialog($("#dialogform"));
             $("input[type=submit]").button();
         });
     </script>"""}
@@ -342,6 +342,10 @@ class CreateEvent(DialogFormMixin, CreateView):
             raise PermissionDenied
         return super(CreateEvent, self).dispatch(request, *args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        context = super(CreateEvent, self).get_context_data(**kwargs)
+        assert (context["form"])
+        return context
     def get_success_url(self):
         return reverse_lazy("events")
     def get_form_kwargs(self):
