@@ -38,7 +38,7 @@ function PersonDialog(wrapper) {
     this.wrapper = wrapper;
     this.filter = this.wrapper.find('.filter');
     this.labels = this.wrapper.find(".thumbnail p");
-    this.imgs = this.wrapper.find("li");
+    this.imgs = this.wrapper.find("img").parent().parent();
     this.labels.hide();
     this.chosen = function () {
         return this.imgs.find(".selected img");

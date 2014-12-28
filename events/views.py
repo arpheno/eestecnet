@@ -22,7 +22,7 @@ from extra_views import UpdateWithInlinesView, CreateWithInlinesView
 from form_utils.widgets import ImageWidget
 from eestecnet.forms import DialogFormMixin
 from events.forms import DescriptionForm, EventImageInline, TransportForm, \
-    UploadEventsForm, EventMixin, EventUpdateForm
+    UploadEventsForm, EventMixin, EventUpdateForm, EventCreationForm
 from events.models import Event, Application, Participation
 from teams.forms import ApplicationInline
 from teams.models import Team
@@ -320,42 +320,38 @@ class IncomingApplications(EventMixin, DialogFormMixin, UpdateWithInlinesView):
     form_title = "These people want to participate in the event!"
 
 
-class CreateEvent(DialogFormMixin, CreateWithInlinesView):
+class CreateEvent(DialogFormMixin, CreateView):
     model = Event
     form_class = EventCreationForm
     form_title = "Please fill in this form"
     action = ""
+    form_id="createeventform"
     parent_template = "events/event_list.html"
-    inlines = [EventImageInline]
+    additional_context = {"appendix":""" <script type="text/javascript">
+        $(function () {
+            boarddialog = new PersonDialog($("#dialogform"));
+            $("input[type=submit]").button();
+        });
+    </script>"""}
+    submit = "Create Event"
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.has_perm('event.add_event'):
             raise PermissionDenied
         return super(CreateEvent, self).dispatch(request, *args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        context=super(CreateEvent,self).get_context_data(**kwargs)
+        context['object_list']=Event.objects.all()
+        return context
     def get_success_url(self):
         return reverse_lazy("events")
-
-
-    def get_context_data(self, **kwargs):
-        context = super(SelectBoard, self).get_context_data(**kwargs)
-        context['object'] = Team.objects.get(slug=self.kwargs['slug'])
-        return context
-
     def get_form_kwargs(self):
-        kwargs = super(SelectBoard, self).get_form_kwargs()
-        kwargs['team'] = Team.objects.get(slug=self.kwargs['slug'])
+        kwargs = super(CreateEvent, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        kwargs['teams'] = self.request.user.teams_administered()
         return kwargs
 
-    def form_valid(self, form):
-        team = Team.objects.get(slug=self.kwargs['slug'])
-        for membership in team.membership_set.all():
-            membership.board = False
-            membership.save()
 
-        for user in form.cleaned_data['board_members']:
-            mmbrship = user.membership_set.get(team=team)
-            mmbrship.board = True
-            mmbrship.save()
-        return super(SelectBoard, self).form_valid(form)
+
 
