@@ -213,3 +213,4 @@ class MassCommunication(DialogFormMixin, FormView):
         message.to_address = "board@eestec.net"
         message.bcc_address = ", ".join(
             user.email for user in Eestecer.objects.filter(receive_eestec_active=True))
+        return super(MassCommunication, self).form_valid(form)
