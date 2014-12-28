@@ -18,8 +18,11 @@
             {% autoescape off %}
                 {{ entry.content | truncatewords:110|linebreaks }}
                 {% endautoescape %}
-                <a href="{% url "news" entry.slug %}"
-                   style="font-weight: bold;"> Read more</a>
+                {% ifnotequal entry.content|truncatewords:110|length entry.content|truncatewords:111|length %}
+                    <a href="{% url "news" entry.slug %}"
+                       style="font-weight: bold;"> Read more</a>
+                {% endifnotequal %}
+
             </div>
 
         </section>

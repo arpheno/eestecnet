@@ -46,8 +46,10 @@
                             <p>
                                 {% autoescape off %}
                                     {{ object.content|truncatewords:50 }}
-                                    <a href="{% url "news" object.slug %}"
-                                       style="font-weight: bold;"> Read more</a>
+                                    {% ifnotequal object.content|truncatewords:50|length object.content|truncatewords:51|length %}
+                                        <a href="{% url "news" object.slug %}"
+                                           style="font-weight: bold;"> Read more</a>
+                                    {% endifnotequal %}
                                 {% endautoescape %}
                             </p>
                         </main>
