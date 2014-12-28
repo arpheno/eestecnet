@@ -3,11 +3,13 @@ import random
 import datetime
 
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.core.files import File
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.forms import widgets
 from django.forms.models import modelform_factory
 from django.shortcuts import redirect, get_object_or_404
+
 
 
 
@@ -16,7 +18,7 @@ from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
     FormView, \
     DeleteView
-from extra_views import UpdateWithInlinesView
+from extra_views import UpdateWithInlinesView, CreateWithInlinesView
 from form_utils.widgets import ImageWidget
 from eestecnet.forms import DialogFormMixin
 from events.forms import DescriptionForm, EventImageInline, TransportForm, \
@@ -316,4 +318,44 @@ class IncomingApplications(EventMixin, DialogFormMixin, UpdateWithInlinesView):
     fields = ()
     inlines = [ApplicationInline]
     form_title = "These people want to participate in the event!"
+
+
+class CreateEvent(DialogFormMixin, CreateWithInlinesView):
+    model = Event
+    form_class = EventCreationForm
+    form_title = "Please fill in this form"
+    action = ""
+    parent_template = "events/event_list.html"
+    inlines = [EventImageInline]
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.has_perm('event.add_event'):
+            raise PermissionDenied
+        return super(CreateEvent, self).dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse_lazy("events")
+
+
+    def get_context_data(self, **kwargs):
+        context = super(SelectBoard, self).get_context_data(**kwargs)
+        context['object'] = Team.objects.get(slug=self.kwargs['slug'])
+        return context
+
+    def get_form_kwargs(self):
+        kwargs = super(SelectBoard, self).get_form_kwargs()
+        kwargs['team'] = Team.objects.get(slug=self.kwargs['slug'])
+        return kwargs
+
+    def form_valid(self, form):
+        team = Team.objects.get(slug=self.kwargs['slug'])
+        for membership in team.membership_set.all():
+            membership.board = False
+            membership.save()
+
+        for user in form.cleaned_data['board_members']:
+            mmbrship = user.membership_set.get(team=team)
+            mmbrship.board = True
+            mmbrship.save()
+        return super(SelectBoard, self).form_valid(form)
 

@@ -222,6 +222,8 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
             "secretpassword":FORUM_PASSWORD,
             "uid":self.pk,
             "username":self.email,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
             'skype':self.skype,
             'google':self.hangouts,
             'bday':self.date_of_birth,

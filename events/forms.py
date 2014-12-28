@@ -74,4 +74,16 @@ class EventImageInline(InlineFormSet):
     form_class = modelform_factory(EventImage, widgets={'image': ImageWidget()})
 
 
+class EventCreationForm(Form):
+    organizers = ModelMultipleChoiceField(queryset=Eestecer.objects.none(),
+                                          widget=MultiSelectWidget)
+
+    def __init__(self, *args, **kwargs):
+        team = kwargs.pop('team')
+        super(BoardForm, self).__init__(*args, **kwargs)
+        self.fields['organizers'].queryset = Eestecer.objects.filter(
+            membership__team=team)
+
+
+
 

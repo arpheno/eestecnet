@@ -110,7 +110,6 @@ class ChangeDescription(TeamMixin, DialogFormMixin, UpdateView):
 
 class SelectBoard(TeamMixin, DialogFormMixin, FormView):
     form_class = BoardForm
-
     def get_context_data(self, **kwargs):
         context = super(SelectBoard, self).get_context_data(**kwargs)
         context['object'] = Team.objects.get(slug=self.kwargs['slug'])
