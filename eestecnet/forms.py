@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.forms import Form, CharField, Textarea
 from django.http import JsonResponse
 
@@ -39,6 +40,9 @@ class DialogFormMixin(object):
         # it might do some processing (in the case of CreateView, it will
         # call form.save() for example).
         response = super(DialogFormMixin, self).form_valid(form)
+        messages.add_message(self.request, messages.SUCCESS,
+                             "Update successful. The changes might take a minute to "
+                             "become effective due to caching.")
         if self.request.is_ajax():
             data = {
                 'pk': self.object.pk,
