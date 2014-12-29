@@ -1,5 +1,5 @@
 $(function () {
-    $(".date").datepicker({changeYear: true, yearRange: "-30:-18"});
+    $(".date").datepicker({changeYear: true});
     $(".datetime").datetimepicker();
     $("a[href^=#]").click(function (e) {
     });
