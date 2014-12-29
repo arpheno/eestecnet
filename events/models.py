@@ -3,7 +3,6 @@ import sha
 
 from autoslug import AutoSlugField
 from autoslug.utils import slugify
-from django.core.exceptions import ValidationError
 from django.core.files import File
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
@@ -156,15 +155,15 @@ class Event(models.Model):
                     self.thumbnail.save("thumbname.jpg", File(doc_file), save=True)
             if not str(self.start_date) in self.name:
                 self.name = self.name + "-" + str(self.start_date)
-        if self.end_date:
-            if self.start_date > self.end_date:
-                raise ValidationError("The event may not begin after it ends.")
-            if self.end_date < self.start_date:
-                raise ValidationError("The event may not end before it starts.")
-            if self.deadline:
-                if self.deadline.date() > self.end_date:
-                    raise ValidationError(
-                        "The event deadline must be before the event ends.")
+        #if self.end_date:
+        #    if self.start_date > self.end_date:
+        #        raise ValidationError("The event may not begin after it ends.")
+        #    if self.end_date < self.start_date:
+        #        raise ValidationError("The event may not end before it starts.")
+        #    if self.deadline:
+        #        if self.deadline.date() > self.end_date:
+        #            raise ValidationError(
+        #                "The event deadline must be before the event ends.")
 
     def __str__(self):
         return self.name

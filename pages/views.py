@@ -7,6 +7,7 @@ from django.views.generic import DetailView, ListView, UpdateView
 from extra_views import CreateWithInlinesView, InlineFormSet
 from form_utils.forms import BetterModelForm
 
+from eestecnet.forms import DialogFormMixin
 from eestecnet.settings_deploy import ASANA_API_KEY, EESTEC_ITT_WORKSPACE_ID, \
     FEEDBACK_PROJECT_ID
 from news.widgets import EESTECEditor
@@ -67,11 +68,14 @@ class WebsiteFeedbackForm(BetterModelForm):
         exclude = ['read']
 
 
-
-class NewWebsiteFeedback(CreateWithInlinesView):
+class NewWebsiteFeedback(DialogFormMixin, CreateWithInlinesView):
     model = WebsiteFeedback
     inlines = [WebsiteFeedbackInline]
     form_class = WebsiteFeedbackForm
+    parent_template = "/"
+    form_title = "What's on your mind?"
+    submit = "Send feedback"
+    action = "/pages/feedback/"
 
     def get_initial(self):
         initial = super(NewWebsiteFeedback, self).get_initial()

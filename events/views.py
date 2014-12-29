@@ -3,6 +3,7 @@ import random
 import datetime
 
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.core.files import File
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.forms import widgets
@@ -19,12 +20,13 @@ from django.shortcuts import redirect, get_object_or_404
 
 
 
+
 # Create your views here.
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
     FormView, \
     DeleteView
-from extra_views import UpdateWithInlinesView
+from extra_views import UpdateWithInlinesView, CreateWithInlinesView
 from form_utils.widgets import ImageWidget
 from eestecnet.forms import DialogFormMixin
 from events.forms import DescriptionForm, EventImageInline, TransportForm, \
@@ -326,12 +328,13 @@ class IncomingApplications(EventMixin, DialogFormMixin, UpdateWithInlinesView):
     form_title = "These people want to participate in the event!"
 
 
-class CreateEvent(DialogFormMixin, CreateView):
+class CreateEvent(DialogFormMixin, CreateWithInlinesView):
     model = Event
     form_class = EventCreationForm
     form_title = "Please fill in this form"
     action = ""
     form_id="createeventform"
+    inlines = [EventImageInline]
     parent_template = "events/event_list.html"
     protected = 0
     additional_context = {"appendix":""" <script type="text/javascript">

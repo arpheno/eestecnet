@@ -2,7 +2,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.forms import Textarea, TextInput, FileField, Form, \
     ModelMultipleChoiceField, \
-    CharField
+    DateField, DateTimeField
 from django.forms.models import modelform_factory
 from django.views.generic import View
 from extra_views import InlineFormSet
@@ -99,9 +99,9 @@ class EventCreationForm(BetterModelForm):
         queryset=Team.objects.none(),
         widget=MultiSelectWidget
     )
-    start_date = CharField(max_length=25, widget=TextInput(attrs={"class": "date"}))
-    end_date = CharField(max_length=25, widget=TextInput(attrs={"class": "date"}))
-    deadline = CharField(max_length=25, widget=TextInput(attrs={"class": "datetime"}))
+    start_date = DateField(widget=TextInput(attrs={"class": "date"}))
+    end_date = DateField(widget=TextInput(attrs={"class": "date"}))
+    deadline = DateTimeField(widget=TextInput(attrs={"class": "datetime"}))
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')

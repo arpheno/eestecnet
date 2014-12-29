@@ -4,11 +4,7 @@ $(function () {
     $("a[href^=#]").click(function (e) {
     });
     $("#feedbackbutton").click(function () {
-        if ($("#feedbackform").dialog("isOpen")) {
-            $("#feedbackform").dialog("close");
-        } else {
-            $("#feedbackform").dialog("open");
-        }
+        $("#feedbackarea").load("/pages/feedback/");
     });
     $("#feedbackform form ").submit(function () {
 
