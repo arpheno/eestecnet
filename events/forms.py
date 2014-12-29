@@ -87,17 +87,20 @@ class EventCreationForm(BetterModelForm):
             ('General',
              {'fields': ['name','category','scope','thumbnail','location','summary','description',]}),
             ('Dates', {'fields': ['deadline','start_date','end_date']}),
-            ('Organizers', {'fields': ['organizing_committee', 'organizers']}),
+            ('Organizing Committee', {'fields': ['organizing_committee']}),
+            ('Head Organizers', {'fields': ['organizers']}),
             ('Participants', {'fields': [ 'max_participants','participation_fee']}),
         ]
 
     organizers = ModelMultipleChoiceField(
         queryset=Eestecer.objects.none(),
-        widget=MultiSelectWidget
+        widget=MultiSelectWidget,
+        label=""
     )
     organizing_committee = ModelMultipleChoiceField(
         queryset=Team.objects.none(),
-        widget=MultiSelectWidget
+        widget=MultiSelectWidget,
+        label=""
     )
     start_date = DateField(widget=TextInput(attrs={"class": "date"}))
     end_date = DateField(widget=TextInput(attrs={"class": "date"}))
