@@ -72,7 +72,7 @@ class NewWebsiteFeedback(DialogFormMixin, CreateWithInlinesView):
     model = WebsiteFeedback
     inlines = [WebsiteFeedbackInline]
     form_class = WebsiteFeedbackForm
-    parent_template = "/"
+    parent_template = "enet/index.html"
     form_title = "What would you like to tell us?"
     submit = "Send feedback"
     action = "/pages/feedback/"
