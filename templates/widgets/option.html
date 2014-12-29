@@ -5,7 +5,9 @@
     {% endthumbnail %}
 {% elif object.thumbnail %}
     {% thumbnail object.thumbnail "100x102" crop="center" as im %}
-        <option data-img-src='{{ im.url }} ' value="{0}"{1}>{2}</option>
+        <option data-img-alt="{{ object.get_full_name }}" data-img-src='{{ im.url }} '
+                value="{0}" {1}>{2}
+        </option>
     {% endthumbnail %}
 {% else %}
     <option value="{0}" {1}>{2}</option>

@@ -197,6 +197,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
         verbose_name = _('user')
         verbose_name_plural = _('users')
         unique_together = (('first_name', 'middle_name', 'last_name'),)
+        ordering = ["first_name", "last_name"]
 
     def get_full_name(self):
         """ Returns the first_name plus the last_name, with a space in between. """
