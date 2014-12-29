@@ -4,9 +4,9 @@ from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import PermissionsMixin
-
 from django.contrib.auth.models import (
     AbstractBaseUser, BaseUserManager)
+
 from teams.models import Team
 
 
@@ -223,19 +223,19 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
             FORUM_PASSWORD=""
         values={
             "secretpassword":FORUM_PASSWORD,
-            "uid":self.pk,
-            "username":self.email,
-            "first_name": self.first_name,
-            "last_name": self.last_name,
-            'skype':self.skype,
-            'google':self.hangouts,
-            'bday':self.date_of_birth,
-            'birthdayprivacy':self.show_date_of_birth,
+            u"uid": self.pk,
+            u"username": self.email,
+            u"first_name": self.first_name,
+            u"last_name": self.last_name,
+            u'skype': self.skype,
+            u'google': self.hangouts,
+            u'bday': self.date_of_birth,
+            u'birthdayprivacy': self.show_date_of_birth,
             }
         if password:
             values['password']=password
         data=urllib.urlencode(values)
-        req=urllib2.Request(url+'?'+data)
+        req = urllib2.Request(url + u'?' + data)
         opener = urllib2.build_opener()
         opener.addheaders = [('User-agent', 'Mozilla/5.0')]
         response = opener.open(url+'?'+data)
