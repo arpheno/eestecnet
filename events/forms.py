@@ -107,8 +107,11 @@ class EventCreationForm(BetterModelForm):
         user = kwargs.pop('user')
         teams = kwargs.pop('teams')
         super(EventCreationForm, self).__init__(*args, **kwargs)
-        self.fields['organizers'].queryset = Eestecer.objects.filter(
-            membership__team__in=user.teams_administered())
+        if user.is_superuser:
+            self.fields['organizers'].queryset = Eestecer.objects.all()
+        else:
+            self.fields['organizers'].queryset = Eestecer.objects.filter(
+                membership__team__in=user.teams_administered())
         self.fields['organizing_committee'].queryset = teams
 
 

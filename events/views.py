@@ -18,6 +18,7 @@ from django.shortcuts import redirect, get_object_or_404
 
 
 
+
 # Create your views here.
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
@@ -25,7 +26,6 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
     DeleteView
 from extra_views import UpdateWithInlinesView
 from form_utils.widgets import ImageWidget
-from account.models import Eestecer
 from eestecnet.forms import DialogFormMixin
 from events.forms import DescriptionForm, EventImageInline, TransportForm, \
     UploadEventsForm, EventMixin, EventUpdateForm, EventCreationForm
@@ -355,10 +355,7 @@ class CreateEvent(DialogFormMixin, CreateView):
     def get_form_kwargs(self):
         kwargs = super(CreateEvent, self).get_form_kwargs()
         kwargs['user'] = self.request.user
-        if self.request.user.is_superuser:
-            kwargs['teams'] = Eestecer.objects.all()
-        else:
-            kwargs['teams'] = self.request.user.teams_administered()
+        kwargs['teams'] = self.request.user.teams_administered()
         return kwargs
 
 
