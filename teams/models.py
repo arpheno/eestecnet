@@ -104,8 +104,6 @@ class Team(models.Model):
                 name=str(self.slug + " recruitment"),
                 scope="local",
                 category="recruitment",
-                summary="Interested in joining? Apply here or click for more "
-                        "information",
                 description="We are always recruiting and welcoming new people.",
                 start_date=datetime.now()
             )

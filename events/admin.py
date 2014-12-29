@@ -41,7 +41,6 @@ class MyEventAdminForm(forms.ModelForm):
     class Meta:
         model = Event
         widgets = {
-            'summary': Textarea(attrs={'cols': 9, 'rows': 1}),
             'description': RedactorWidget(editor_options={'lang': 'en', 'iframe': 'true',
                                                           'css':
                                                               "/static/enet/css/wysiwyg.css"}),
@@ -61,7 +60,7 @@ class MyEventAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Basic Event Information', {
             'fields': (
-                ('name', 'category'), ('scope'), ('summary'), ('description'),
+                ('name', 'category'), ('scope'),  ('description'),
                 ('participation_fee', 'max_participants'), 'thumbnail'
             )
         }),
@@ -82,7 +81,7 @@ class MyEventAdmin(admin.ModelAdmin):
     add_fieldsets = (
         ('Basic Event Information', {
             'fields': (
-                ('name', 'category', 'scope'), ('summary', 'description'),
+                ('name', 'category', 'scope'),( 'description',),
                 ('participation_fee', 'max_participants'), 'thumbnail'
             )
         }),

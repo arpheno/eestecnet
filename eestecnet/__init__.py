@@ -354,7 +354,6 @@ def setup_event_tests():
     to.privileged.add(outg)
     to.save()
     ev = Event.objects.create(name="T4T",
-                              summary="Nice event",
                               description="Cool thing",
                               start_date=datetime.now(),
                               category="workshop",
@@ -444,8 +443,6 @@ def create_inktronics():
                                max_participants=16,
                                description=open(
                                    'eestecnet/event/inktronics/desc.txt').read(),
-                               summary="Learn everything about printed and flexible "
-                                       "electronics in Munich!",
                                scope="international")
     with open('eestecnet/event/inktronics.jpg', 'rb') as doc_file:
         ink.thumbnail.save('inktronics.jpg', File(doc_file), save=True)

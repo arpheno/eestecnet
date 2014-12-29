@@ -1,4 +1,3 @@
 {{ object.name }}
 {{ object.category }}
-{{ object.summary }}
 {{ object.description }}

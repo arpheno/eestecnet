@@ -85,7 +85,7 @@ class EventCreationForm(BetterModelForm):
         model= Event
         fieldsets = [
             ('General',
-             {'fields': ['name','category','scope','thumbnail','location','summary','description',]}),
+             {'fields': ['name','category','scope','thumbnail','location','description',]}),
             ('Dates', {'fields': ['deadline','start_date','end_date']}),
             ('Organizing Committee', {'fields': ['organizing_committee']}),
             ('Head Organizers', {'fields': ['organizers']}),

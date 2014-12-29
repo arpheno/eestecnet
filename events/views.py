@@ -87,7 +87,6 @@ class AddEvents(FormView):
                 end_date=event[3],
                 category=event[5],
                 description=event[6],
-                summary=event[7],
                 scope=event[8],
                 max_participants=event[9],
             )
