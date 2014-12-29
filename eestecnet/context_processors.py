@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from haystack.forms import SearchForm
 
 from events.views import featuredevent
-from pages.models import WebsiteFeedback
+from pages.models import WebsiteFeedback, Stub
 from pages.views import WebsiteFeedbackForm, WebsiteFeedbackInline
 
 
@@ -33,4 +33,6 @@ def my_feedback(request):
 
 def my_search(request):
     form = SearchForm()
-    return {'mysearchform': form}
+    activities = Stub.objects.filter(group="activities")
+    about = Stub.objects.filter(group="about")
+    return {'mysearchform': form, "activitystubs": activities, "aboutstubs": about}
