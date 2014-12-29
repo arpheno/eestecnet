@@ -231,6 +231,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
             u'google': self.hangouts,
             u'bday': self.date_of_birth,
             u'birthdayprivacy': self.show_date_of_birth,
+            u'avatar': self.profile_picture.url,
             }
         if password:
             values['password']=password
