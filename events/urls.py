@@ -3,7 +3,8 @@ from django.contrib import admin
 
 from events.views import EventDetail, ApplyToEvent, confirm_event, \
     FillInTransport, UpdateTransport, ChangeDescription, ChangeDetails, EventImages, \
-    AddEvents, DeleteApplication, EditApplication, IncomingApplications, CreateEvent
+    AddEvents, DeleteApplication, EditApplication, IncomingApplications, CreateEvent, \
+    Participations
 
 
 admin.autodiscover()
@@ -15,6 +16,8 @@ urlpatterns = patterns(
     url(r'^(?P<slug>[-\w]+)/?$', EventDetail.as_view(), name='event'),
     url(r'^(?P<slug>[-\w]+)/applications/?$', IncomingApplications.as_view(),
         name='eventapplications'),
+    url(r'^(?P<slug>[-\w]+)/participants/?$', Participations.as_view(),
+        name='eventparticipation'),
     url(r'^(?P<slug>[-\w]+)/apply/delete/?', DeleteApplication.as_view(),
         name='application-delete'),
     url(r'^(?P<slug>[-\w]+)/apply/edit/?', EditApplication.as_view(),

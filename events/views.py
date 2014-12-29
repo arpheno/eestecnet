@@ -21,6 +21,7 @@ from django.shortcuts import redirect, get_object_or_404
 
 
 
+
 # Create your views here.
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
@@ -32,7 +33,7 @@ from eestecnet.forms import DialogFormMixin
 from events.forms import DescriptionForm, EventImageInline, TransportForm, \
     UploadEventsForm, EventMixin, EventUpdateForm, EventCreationForm
 from events.models import Event, Application, Participation
-from teams.forms import ApplicationInline
+from teams.forms import ApplicationInline, ParticipationInline
 from teams.models import Team
 
 
@@ -326,6 +327,14 @@ class IncomingApplications(EventMixin, DialogFormMixin, UpdateWithInlinesView):
     fields = ()
     inlines = [ApplicationInline]
     form_title = "These people want to participate in the event!"
+
+
+class Participations(EventMixin, DialogFormMixin, UpdateWithInlinesView):
+    model = Event
+    fields = ()
+    inlines = [ParticipationInline]
+    form_title = "These people want to participate in the event!"
+
 
 
 class CreateEvent(DialogFormMixin, CreateWithInlinesView):

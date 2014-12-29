@@ -5,7 +5,7 @@ from form_utils.widgets import ImageWidget
 
 from account.models import Eestecer
 from eestecnet.forms import ReadonlyModelForm
-from events.models import Application
+from events.models import Application, Participation
 from news.models import Membership
 from news.widgets import EESTECEditor
 from teams.models import Team, MemberImage
@@ -70,11 +70,22 @@ class ApplicationForm(ReadonlyModelForm):
         readonly = ('applicant', 'letter', 'priority' )
 
 
+class ParticipationForm(ReadonlyModelForm):
+    class Meta:
+        model = Participation
+        fields = ('participant', 'target')
+
+
 class ApplicationInline(InlineFormSet):
     model = Application
     extra = 0
     form_class = ApplicationForm
 
+
+class ParticipationInline(InlineFormSet):
+    model = Participation
+    extra = 20
+    form_class = ParticipationForm
 
 class MemberImageForm(BetterModelForm):
     class Meta:
