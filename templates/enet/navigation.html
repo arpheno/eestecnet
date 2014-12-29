@@ -21,14 +21,13 @@
         <li>
             <a href="/about">Sitemap </a>
             <ul>
-                <li><a href="/history">History</a></li>
-                <li><a href="/documents">Official Documents</a></li>
-                <li><a href="/governance">Governing Bodies</a></li>
-                <li><a href="/conference/">EESTEC Conference</a></li>
-                <li><a href="/androidcompetition/">EESTEC Competition for Android</a>
-                </li>
+                {% for stub in aboutstubs %}
+                    <li><a href="{{ stub.link }}">{{ stub.title }}</a></li>
+                {% endfor %}
+                {% for stub in activitystubs %}
+                    <li><a href="{{ stub.link }}">{{ stub.title }}</a></li>
+                {% endfor %}
                 <li><a href="/students/join">Become a Member</a></li>
-                <li><a href="{% url 'cities' %}">EESTEC in your city</a></li>
                 <li><a href="/students/observer">Found an Observer</a></li>
                 <li><a href="/partners/cooperations">Cooperations</a></li>
                 <li><a href="/partners/start">Become a Partner</a></li>
