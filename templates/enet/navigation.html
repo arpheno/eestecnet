@@ -19,7 +19,8 @@
         <li><a href="{% url 'materials' %}">Files</a></li>
         <li><a href="{% url 'wikihome' %}">Wiki</a></li>
         <li>
-            <a href="/about">Sitemap </a>
+            <a href="{% url 'sitemap' %}">Sitemap </a>
+
             <ul>
                 {% for stub in aboutstubs %}
                     <li><a href="{{ stub.link }}">{{ stub.title }}</a></li>

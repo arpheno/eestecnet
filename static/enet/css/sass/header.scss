@@ -15,17 +15,18 @@ body > header {
     height: 5.0rem;
   }
   #signin {
-
-    td:last-child {
-      text-align: left;
+    div {
+      display: flex;
+      justify-content: space-between;
     }
     a {
       color: blue;
       text-align: left;
       font-size: 1.0rem;
     }
-    td {
-      padding: .5rem;
+    input, a {
+      width: 95%;
+      margin: 0.5rem;
     }
     input[role=button], a {
       text-align: center;
@@ -44,26 +45,27 @@ body > header {
       padding: 4px;
     }
   }
-  #userarea {
-    @media only screen and (max-width: 45em) /* 640 */
-    {
-      width: 4rem;
-      z-index: 100;
-      position: fixed;
-      top: 0px;
-      right: 4.5rem;
-      height: 4rem;
-      figure, a, img {
-        background-color: #fff;
-        width: 4rem;
-        height: 4rem;
-      }
-      figcaption {
-        display: none;
-      }
-    }
+}
 
+#userarea {
+  @media only screen and (max-width: 45em) /* 640 */
+  {
+    width: 4rem;
+    z-index: 100;
+    position: fixed;
+    top: 0px;
+    right: 4.5rem;
+    height: 4rem;
+    figure, a, img {
+      background-color: #fff;
+      width: 4rem;
+      height: 4rem;
+    }
+    figcaption {
+      display: none;
+    }
   }
+
 }
 
 #nav {
@@ -72,7 +74,7 @@ body > header {
   a {
     color: #fff;
     z-index: 100;
-  }
+    }
 
   @media only screen and (max-width: 45em) /* 640 */
   {
@@ -82,7 +84,7 @@ body > header {
       display: flex;
       justify-content: center;
       align-items: center;
-    }
+      }
     &:target {
       > ul {
         display: block;
@@ -90,8 +92,8 @@ body > header {
       > a {
         display: none;
       }
+      }
     }
-  }
   > a {
     @media only screen and (max-width: 45em) /* 640 */
     {
@@ -108,9 +110,9 @@ body > header {
         margin: auto;
         fill: #fff;
       }
-    }
+      }
     display: none;
-  }
+    }
   > ul {
     @media only screen and (max-width: 45em) /* 640 */
     {
@@ -119,9 +121,9 @@ body > header {
       top: 0rem;
       left: .0rem;
       right: 0px;
-    }
+      }
     @media only screen and (min-width: 45em) /* 640 */
-    {
+      {
       height: 5.5rem;
     }
 
@@ -132,21 +134,21 @@ body > header {
     > li {
       &:last-child {
         flex: 2;
-      }
-      @media only screen and (max-width: 45em) /* 640 */
-      {
-        &:first-child {
-          > a {
-            display: block;
-            background-color: $eestec;
-            border-bottom: 3px white solid;
-          }
         }
-        width: 100%;
-      }
+        @media only screen and (max-width: 45em) /* 640 */
+        {
+          &:first-child {
+            > a {
+              display: block;
+              background-color: $eestec;
+              border-bottom: 3px white solid;
+            }
+          }
+          width: 100%;
+        }
       background-color: $darkeestec;
       position: relative;
-      flex: 1;
+        flex: 1;
       > a {
         @media only screen and (max-width: 45em) /* 640 */
         {
@@ -166,7 +168,7 @@ body > header {
         &:hover {
           background-color: $eestec;
         }
-      }
+        }
       &:hover {
         ul {
           @media only screen and (max-width: 45em) /* 640 */
@@ -174,31 +176,31 @@ body > header {
             display: none;
           }
           display: block;
+          }
         }
-      }
-      ul /*second level list*/  {
+      ul /*second level list*/   {
         display: none;
         top: 5.5rem;
         position: absolute;
         left: .0rem;
         right: .0rem;
-        li /*second level elements*/  {
+        li /*second level elements*/   {
           display: block;
           padding: .5rem;
           background-color: $brighteestec;
           &:hover {
             background-color: $brightereestec;
           }
+          }
         }
       }
-    }
     form {
       @media only screen and (max-width: 45em) /* 640 */
       {
         display: none;
       }
       flex: 2 1 20.0rem;
-      display: flex;
+        display: flex;
       align-content: center;
       justify-content: center;
       align-items: center;
@@ -207,7 +209,7 @@ body > header {
       div {
         height: 3.0rem;
         padding: .3rem;
-        background-color: $darkereestec;
+          background-color: $darkereestec;
         display: flex;
         border-radius: .5rem;
         input {
@@ -217,7 +219,7 @@ body > header {
           width: 200px;
           font-size: 2.5rem;
         }
-      }
+        }
       svg {
         align-self: center;
         height: 2.5rem;
@@ -225,6 +227,6 @@ body > header {
         background-color: $darkereestec;
         fill: #fff;
       }
+      }
     }
   }
-}

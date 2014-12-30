@@ -11,6 +11,11 @@ body > footer {
   justify-content: space-between;
   align-items: center;
   div.social {
+    @media only screen and (max-width: 45em) /* 640 */
+    {
+      margin: auto;
+
+    }
     margin-right: 100px;
     svg.social {
       @media only screen and (max-width: 45em) /* 640 */

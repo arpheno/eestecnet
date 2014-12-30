@@ -2,7 +2,7 @@
 <a href="{{ object.link }}">
     <div class="stub {{ metaclass }}">
         <h1>{{ object.title }}</h1>
-        {% thumbnail object.image "375x225" crop="center" as im %}
+        {% thumbnail object.image "410x104" crop="center" as im %}
             <img alt="{{ object.title }}" src="{{ im.url }}">
         {% endthumbnail %}
         <p>{{ object.content }}</p>

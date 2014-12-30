@@ -109,11 +109,10 @@ main.home {
     position: relative;
     display: flex;
     align-items: center;
-    flex-direction: column;
+    flex-wrap: wrap;
     font-size: 1.3rem;
     p {
       @media screen and (min-width: 1200px) {
-        flex: 1 1 100%;
         padding: 20px;
       }
       display: flex;
@@ -121,11 +120,7 @@ main.home {
       padding: 10px;
     }
     h1 {
-      flex: initial;
-      @media screen and (max-width: 1000px) {
-        width: 98%;
-      }
-      width: 93%;
+      flex: 1 1 100%;
     }
     background-color: $eestecgreylight;
     @media screen and (max-width: 1000px) {
