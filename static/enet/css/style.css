@@ -441,7 +441,8 @@ body > footer div.social svg.social {
 @media only screen and (max-width: 45em) {
     body > footer div.social svg.social {
         height: 2.0rem;
-        width: 2.0rem
+        width: 2.0rem;
+        margin: 1px
     }
 }
 

@@ -14,7 +14,7 @@ class Stub(models.Model):
         return self.group + " - " + self.title
 
     title = models.CharField(max_length=50)
-    link = models.URLField()
+    link = models.CharField(max_length=50)
     content = models.TextField(max_length=140)
     image = models.ImageField(upload_to="stubs")
     group = models.CharField(max_length=20)
