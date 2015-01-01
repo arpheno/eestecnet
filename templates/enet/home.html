@@ -32,9 +32,11 @@
         {% for object in object_list %}
             <article class="news">
                     <div class="pictures">
+                        <a href="{% url "news" object.slug %}">
                         {% thumbnail object.entry_image "1087x480" crop="center" as im %}
                             <img alt="{{ object.headline }}" src="{{ im.url }}">
                         {% endthumbnail %}
+                        </a>
                     </div>
                     <footer>
                         <main>
