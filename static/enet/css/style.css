@@ -1,4 +1,316 @@
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}ul{list-style-type:none;flex-wrap:wrap;display:flex;align-items:center;justify-content:center}ul li{margin:0;padding:0;line-height:normal;zoom:1;height:100%;display:flex;align-items:center}@font-face{font-family:"helvetica neue";src:url("../HelveticaNeueLTPro-Lt.otf")}html{background-image:url(../images/bg.jpg);font-family:"Helvetica Neue", Helvetica, Verdana sans-serif;font-size:10px;color:#555}a{text-decoration:none;color:#fff}h1,h2,h3{font-family:'Century Gothic';font-weight:bold;line-height:100%;text-align:left;color:#9a0008;margin:0.4rem;padding:0% 0% 0.5% 5%;flex:1 1 100%;border-bottom:1px solid #c30811}h1 a,h2 a,h3 a{color:#9a0008}h4,h5,h6{font-family:'Century Gothic';color:black;font-weight:bold;text-align:center;font-size:1.6rem}h1{font-size:2.0rem}h2{font-size:1.8rem}h3{font-size:1.6rem}body,header,#sponsors,footer,aside,main{display:flex;position:relative;flex-wrap:wrap}#elfinder{z-index:1}html>body{max-width:128.0rem;margin:0rem auto;font-size:1.2rem}html>body>main{padding:.1rem;border-width:.0rem 0.1rem .0rem 0.1rem;flex:1 1;z-index:2;border-color:#a2a0a0;position:relative;background-color:white;flex-wrap:wrap;box-shadow:0rem 0rem 2rem 1rem rgba(0,0,0,0.1),0rem 0rem 2rem 1rem rgba(0,0,0,0.1);justify-content:center}html>body>main section{flex:1 0 100%}html>body>main>form{width:48.0rem;display:flex;background-color:rgba(0,0,0,0.1);position:relative;z-index:10;flex-wrap:wrap}html>body>main>form p{flex:1 1 100%;display:flex;flex-wrap:wrap;justify-content:space-between}html>body>main>form p input{flex:1 1 40%}html>body>main>form p label{flex:1 1 40%}html>body .grad{height:34.0rem;width:100%;top:.0rem;left:.0rem;position:absolute;z-index:-1;background:linear-gradient(to top, transparent, rgba(0,0,0,0.04))}html>body>aside{background-color:#5f6a6d;border-width:.0rem 5.7rem .0rem .0rem;align-content:flex-start;padding-top:3.0rem;border-style:solid;border-color:#3f4749;z-index:1;justify-content:center;flex-wrap:wrap}@media only screen and (max-width: 45em){html>body>aside{border-width:0px}}html>body>aside h2{border-bottom-color:white;text-align:center;color:white}@media screen and (max-width: 1200px){html>body>aside{flex:1 0 100%}}@media screen and (min-width: 1200px){html>body>aside{flex:0 0 25.3rem}}html>body td{text-align:center;vertical-align:middle}html>body td:first-child{text-align:left}html>body td:last-child{text-align:right}html>body .contact{display:flex;flex-direction:column;justify-content:center;align-items:center}html>body .contact h1{flex:initial;align-self:flex-start;width:100%}html>body .contact p{font-size:1.6rem}html>body .contact address{padding:10px}html>body .contact table tr td{padding:5px}html>body .contact table tr td:first-child{font-size:1.8rem;font-weight:bold;color:#c30811;font-family:"Century Gothic"}html>body .contact table tr td:last-child{font-size:1.8rem;border:none}html>body #sponsors{flex:1 0 100%;justify-content:space-around;flex-wrap:wrap;border:red solid;border-right:.2rem;border-left:.2rem;padding:1.0rem .0rem;background-color:#fff}html>body #sponsors img:not(:hover){-webkit-filter:grayscale(100%);-webkit-filter:-webkit-grayscale(100%);filter:-moz-grayscale(100%);-moz-filter:-moz-grayscale(100%);-moz-filter:-moz-grayscale(100%);filter:gray(100%)}@media only screen and (max-width: 45em){html>body #sponsors a{flex:1 1 40%;display:flex;align-items:center;justify-content:center;height:3.0rem;width:auto}html>body #sponsors a img{height:3.0rem}html>body #sponsors a p{color:#465052;font-size:2rem;display:inline;font-family:"Century Gothic";font-weight:bold}}html>body #sponsors p{display:none}@media only screen and (max-width: 45em){html>body #sponsors p{display:inline;color:#000}}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block
+}
+
+body {
+    line-height: 1
+}
+
+ol, ul {
+    list-style: none
+}
+
+blockquote, q {
+    quotes: none
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+ul {
+    list-style-type: none;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+ul li {
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+    zoom: 1;
+    height: 100%;
+    display: flex;
+    align-items: center
+}
+
+@font-face {
+    font-family: "helvetica neue";
+    src: url("../HelveticaNeueLTPro-Lt.otf")
+}
+
+html {
+    background-image: url(../images/bg.jpg);
+    font-family: "Helvetica Neue", Helvetica, Verdana sans-serif;
+    font-size: 10px;
+    color: #555
+}
+
+a {
+    text-decoration: none;
+    color: #fff
+}
+
+h1, h2, h3 {
+    font-family: 'Century Gothic';
+    font-weight: bold;
+    line-height: 100%;
+    text-align: left;
+    color: #9a0008;
+    margin: 0.4rem;
+    padding: 0% 0% 0.5% 5%;
+    flex: 1 1 100%;
+    border-bottom: 1px solid #c30811
+}
+
+h1 a, h2 a, h3 a {
+    color: #9a0008
+}
+
+h4, h5, h6 {
+    font-family: 'Century Gothic';
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.6rem
+}
+
+h1 {
+    font-size: 2.0rem
+}
+
+h2 {
+    font-size: 1.8rem
+}
+
+h3 {
+    font-size: 1.6rem
+}
+
+body, header, #sponsors, footer, aside, main {
+    display: flex;
+    position: relative;
+    flex-wrap: wrap
+}
+
+#elfinder {
+    z-index: 1
+}
+
+html > body {
+    max-width: 128.0rem;
+    margin: 0rem auto;
+    font-size: 1.2rem
+}
+
+html > body > main {
+    padding: .1rem;
+    border-width: .0rem 0.1rem .0rem 0.1rem;
+    flex: 1 1;
+    z-index: 2;
+    border-color: #a2a0a0;
+    position: relative;
+    background-color: white;
+    flex-wrap: wrap;
+    padding-bottom: 45px;
+    box-shadow: 0rem 0rem 2rem 1rem rgba(0, 0, 0, 0.1), 0rem 0rem 2rem 1rem rgba(0, 0, 0, 0.1);
+    justify-content: center
+}
+
+html > body > main section {
+    flex: 1 0 100%
+}
+
+html > body > main > form {
+    width: 48.0rem;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 10;
+    flex-wrap: wrap
+}
+
+html > body > main > form p {
+    flex: 1 1 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between
+}
+
+html > body > main > form p input {
+    flex: 1 1 40%
+}
+
+html > body > main > form p label {
+    flex: 1 1 40%
+}
+
+html > body .grad {
+    height: 34.0rem;
+    width: 100%;
+    top: .0rem;
+    left: .0rem;
+    position: absolute;
+    z-index: -1;
+    background: linear-gradient(to top, transparent, rgba(0, 0, 0, 0.04))
+}
+
+html > body > aside {
+    background-color: #5f6a6d;
+    border-width: .0rem 5.7rem .0rem .0rem;
+    align-content: flex-start;
+    padding-top: 3.0rem;
+    border-style: solid;
+    border-color: #3f4749;
+    z-index: 1;
+    justify-content: center;
+    flex-wrap: wrap
+}
+
+@media only screen and (max-width: 45em) {
+    html > body > aside {
+        border-width: 0px
+    }
+}
+
+html > body > aside h2 {
+    border-bottom-color: white;
+    text-align: center;
+    color: white
+}
+
+@media screen and (max-width: 1200px) {
+    html > body > aside {
+        flex: 1 0 100%
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    html > body > aside {
+        flex: 0 0 25.3rem
+    }
+}
+
+html > body td {
+    text-align: center;
+    vertical-align: middle
+}
+
+html > body td:first-child {
+    text-align: left
+}
+
+html > body td:last-child {
+    text-align: right
+}
+
+html > body .contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+}
+
+html > body .contact h1 {
+    flex: initial;
+    align-self: flex-start;
+    width: 100%
+}
+
+html > body .contact p {
+    font-size: 1.6rem
+}
+
+html > body .contact address {
+    padding: 10px
+}
+
+html > body .contact table tr td {
+    padding: 5px
+}
+
+html > body .contact table tr td:first-child {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #c30811;
+    font-family: "Century Gothic"
+}
+
+html > body .contact table tr td:last-child {
+    font-size: 1.8rem;
+    border: none
+}
+
+html > body #sponsors {
+    flex: 1 0 100%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    border: red solid;
+    border-right: .2rem;
+    border-left: .2rem;
+    padding: 1.0rem .0rem;
+    background-color: #fff
+}
+
+html > body #sponsors img:not(:hover) {
+    -webkit-filter: grayscale(100%);
+    -webkit-filter: -webkit-grayscale(100%);
+    filter: -moz-grayscale(100%);
+    -moz-filter: -moz-grayscale(100%);
+    -moz-filter: -moz-grayscale(100%);
+    filter: gray(100%)
+}
+
+@media only screen and (max-width: 45em) {
+    html > body #sponsors a {
+        flex: 1 1 40%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 3.0rem;
+        width: auto
+    }
+
+    html > body #sponsors a img {
+        height: 3.0rem
+    }
+
+    html > body #sponsors a p {
+        color: #465052;
+        font-size: 2rem;
+        display: inline;
+        font-family: "Century Gothic";
+        font-weight: bold
+    }
+}
+
+html > body #sponsors p {
+    display: none
+}
+
+@media only screen and (max-width: 45em) {
+    html > body #sponsors p {
+        display: inline;
+        color: #000
+    }
+}
 
 #copyright {
     text-align: center;
@@ -730,6 +1042,16 @@ section.events {
     margin: 3px
 }
 
+section.events > form {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 30px
+}
+
+section.events > form > div {
+    text-align: center
+}
+
 #transport-wrapper p {
     display: flex;
     justify-content: space-between
@@ -1017,16 +1339,31 @@ section.news > ul {
 }
 
 section.news img {
-    padding: 0px 30px 0px 30px
+    margin: 0px 20px 0px 10px
 }
 
 section.news p, section.news div {
     font-size: 1.2rem;
-    flex: 1 1
+    margin: 10px 30px 0px 0px;
+    flex: 1 1;
+    text-align: justify
 }
 
 section.news a {
     color: blue
+}
+
+section.news h1 {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 30px;
+    align-content: center
+}
+
+section.news h1 span {
+    color: black;
+    font-size: 1.2rem;
+    font-weight: normal
 }
 
 a.news {

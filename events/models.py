@@ -22,12 +22,9 @@ CATEGORY_CHOICES = (
     ('ssa', 'Soft Skills Academy'),
     ('exchange', 'Exchange'),
     ('workshop', 'Workshop'),
-    ('advanced_workshop', 'Advanced Skills Workshop'),
-    ('exclusive_workshop', 'Exclusive Workshop'),
     ('operational', 'Operational Event'),
-    ('congress', 'Congress'),
-    ('ecm', 'EESTEC Chairpersons\' Meeting'),
     ('training', 'Training'),
+    ('imw', 'IMW'),
     ('recruitment', 'recruitment'),
 )
 

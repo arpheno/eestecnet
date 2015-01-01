@@ -1,6 +1,21 @@
 {% extends 'enet/figure.html' %}
 {% load thumbnail %}
-{% block class %}event{% endblock %}
+{% block class %}
+    event
+    {% if object.category == "ssa" %}
+        ssa
+    {% elif object.category == "workshop" %}
+        workshop
+    {% elif object.category == "exchange" %}
+        exchange
+    {% elif object.category == "operational" %}
+        operational
+    {% elif object.category == "imw" %}
+        imw
+    {% elif object.category == "training" %}
+        training
+    {% endif %}
+{% endblock %}
 {% block url %}{% url 'event' object.slug %}{% endblock %}
 {% block picture %}
     {% thumbnail object.thumbnail "150x110" crop="center" as im %}

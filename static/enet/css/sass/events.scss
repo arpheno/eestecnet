@@ -7,6 +7,14 @@ a.event{
 }
 section.events{
   margin:3px;
+  > form {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 30px;
+    > div {
+      text-align: center;
+    }
+  }
 }
 
 #transport-wrapper {

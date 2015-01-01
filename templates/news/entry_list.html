@@ -4,11 +4,9 @@
     {% for entry in object_list %}
         <section class="news">
             <h1><a style="color:#9a0008;"
-                   href="{% url 'news' entry.slug %}">{{ entry.headline }}</a></h1>
-
-            <ul>
-                <li>{{ entry.pub_date }}</li>
-            </ul>
+                   href="{% url 'news' entry.slug %}">
+                {{ entry.headline }}
+            </a><span>{{ entry.pub_date }}</span></h1>
             {% thumbnail entry.entry_image "x150" as im %}
                 <img alt="{{ object }}" src="{{ im.url }}" width="{{ im.width }}"
                      height="{{ im.height }}">

@@ -4,7 +4,29 @@
     <p>EESTEC workshops are <b>free</b>. On a list below you can see all current and past
         events. Click button to show event by status.</p>
     <section class="events">
+        <form action="">
+            <div><input type="checkbox" name="workshop" checked="True" value="workshop">
 
+                <div>Workshops</div>
+            </div>
+            <div><input type="checkbox" name="exchange" checked="True" value="exchange">
+
+                <div>Exchanges</div>
+            </div>
+            <div><input type="checkbox" name="operational" checked="True"
+                        value="operational">
+
+                <div>Operational Events</div>
+            </div>
+            <div><input type="checkbox" name="imw" checked="True" value="imw">
+
+                <div>International Motivational Weekends</div>
+            </div>
+            <div><input type="checkbox" name="training" value="training">
+
+                <div>Training Sessions</div>
+            </div>
+        </form>
         <h2>Open for Application</h2>
         {% include 'events/events.html' with object_list=active_list %}
         <h2>Events Pending</h2>
@@ -12,4 +34,16 @@
         <h2>Past Events</h2>
         {% include 'events/events.html' with object_list=over_list %}
     </section>
+    <script type="text/javascript">
+        $(function () {
+            $("section.events a.training").hide();
+        });
+        $("section.events input[type=checkbox]").change(function () {
+            if (this.checked) {
+                $("section.events a." + this.value).show();
+            } else {
+                $("section.events a." + this.value).hide();
+            }
+        });
+    </script>
 {% endblock %}
