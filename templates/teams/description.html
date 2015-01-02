@@ -1,0 +1,9 @@
+{% extends 'teams/team_detail.html' %}
+{% block description %}
+    <form action="{{ action }}" enctype="multipart/form-data" id="{{ form_id }}"
+          method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="{{ submit }}">
+    </form>
+{% endblock %}

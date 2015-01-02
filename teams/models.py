@@ -1,12 +1,11 @@
 from autoslug import AutoSlugField
 from autoslug.utils import slugify
-from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.loader import render_to_string
 from django.utils.datetime_safe import datetime
-from gmapi.maps import Geocoder
 
+from gmapi.maps import Geocoder
 from events.models import Event
 
 
@@ -78,10 +77,6 @@ class Team(models.Model):
             return reverse('cities:detail', kwargs={'slug': self.slug})
         return reverse('teams:detail', kwargs={'slug': self.slug})
 
-    def clean(self):
-        # Don't allow draft entries to have a pub_date.
-        if self.thumbnail and not self.thumbsource:
-            raise ValidationError('Please provide the source for the image')
 
     #Members
     users = models.ManyToManyField(

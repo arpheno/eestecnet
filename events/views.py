@@ -22,6 +22,7 @@ from django.shortcuts import redirect, get_object_or_404
 
 
 
+
 # Create your views here.
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
@@ -312,6 +313,7 @@ class ChangeDetails(EventMixin, DialogFormMixin, UpdateView):
 class ChangeDescription(EventMixin, DialogFormMixin, UpdateView):
     form_class = DescriptionForm
     model = Event
+    template_name = "events/description.html"
 
 
 class EventImages(EventMixin, DialogFormMixin, UpdateWithInlinesView):

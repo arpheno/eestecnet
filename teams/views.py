@@ -106,6 +106,7 @@ class ChangeDetails(TeamMixin, DialogFormMixin, UpdateView):
 class ChangeDescription(TeamMixin, DialogFormMixin, UpdateView):
     form_class = DescriptionForm
     model = Team
+    template_name = "teams/description.html"
 
 
 class SelectBoard(TeamMixin, DialogFormMixin, FormView):
