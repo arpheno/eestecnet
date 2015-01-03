@@ -1,4 +1,5 @@
 {% load staticfiles %} <!DOCTYPE html>
+{% load compress %}
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -16,10 +17,17 @@
 
     <title>EESTEC - Electrical Engineering Students' European Association</title>
     <link rel="image_src" href="{% static 'enet/img/logo_square.png' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'enet/css/style.css' %}"/>
-    <link rel="stylesheet" href="{% static 'enet/css/jquery-ui-1.11.0.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'enet/css/image-picker.css' %}"/>
-    <link rel="stylesheet" href="{% static 'elfinder/css/elfinder.min.css' %}">
+    {% compress css %}
+        <link rel="stylesheet" type="text/x-scss"
+              href={% static "enet/css/sass/style.scss" %}/>
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'enet/css/jquery-ui-1.11.0.min.css' %}"/>
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'enet/css/image-picker.css' %}"/>
+        <link rel="stylesheet" type="text/css"
+              href="{% static 'elfinder/css/elfinder.min.css' %}">
+    {% endcompress %}
+    {% compress js %}
     <script src="{% static 'enet/js/prefixfree.min.js' %}"></script>
     <script src="{% static 'enet/js/jquery-2.1.1.min.js' %}"></script>
     <script src="{% static 'enet/js/jquery-ui-1.11.0.min.js' %}"></script>
@@ -45,6 +53,7 @@
         ga('send', 'pageview');
 
     </script>
+    {% endcompress %}
     {{ form.media }}
 </head>
 <body>
