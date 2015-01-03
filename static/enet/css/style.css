@@ -741,17 +741,16 @@ body > footer div.social {
     }
 }
 
-body > footer div.social svg.social {
+body > footer div.social img {
     height: 3.0rem;
     width: 3.0rem;
-    fill: white;
     padding: 1.0rem;
     margin: 10px;
     background-color: #c30811
 }
 
 @media only screen and (max-width: 45em) {
-    body > footer div.social svg.social {
+    body > footer div.social img {
         height: 2.0rem;
         width: 2.0rem;
         margin: 1px
@@ -764,7 +763,7 @@ body > footer div.social p {
     padding: 1.0rem
 }
 
-body > footer img {
+body > footer #europe {
     height: 100%;
     position: absolute;
     top: .0rem;
@@ -772,7 +771,7 @@ body > footer img {
 }
 
 @media only screen and (max-width: 45em) {
-    body > footer img {
+    body > footer #europe {
         height: initial;
         width: 100%
     }

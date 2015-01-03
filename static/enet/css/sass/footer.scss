@@ -17,7 +17,7 @@ body > footer {
 
     }
     margin-right: 100px;
-    svg.social {
+    img {
       @media only screen and (max-width: 45em) /* 640 */
       {
         height: 2.0rem;
@@ -27,7 +27,6 @@ body > footer {
       }
       height: 3.0rem;
       width: 3.0rem;
-      fill: white;
       padding: 1.0rem;
       margin: 10px;
       background-color: $darkeestec;
@@ -38,7 +37,7 @@ body > footer {
       padding: 1.0rem;
     }
   }
-  img {
+  #europe {
     @media only screen and (max-width: 45em) /* 640 */
     {
       height: initial;
