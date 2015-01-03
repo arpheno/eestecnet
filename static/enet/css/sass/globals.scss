@@ -42,7 +42,7 @@ a {
 }
 
 h1, h2, h3 {
-  font-family: 'Century Gothic';
+  font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
   font-weight: bold;
   line-height: 100%;
   text-align: left;
@@ -57,7 +57,7 @@ h1, h2, h3 {
 }
 
 h4, h5, h6 {
-  font-family: 'Century Gothic';
+  font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
   color: black;
   font-weight: bold;
   text-align: center;
@@ -199,7 +199,7 @@ html > body {
             font-size: 1.8rem;
             font-weight: bold;
             color: $darkeestec;
-            font-family: "Century Gothic";
+            font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
           }
           &:last-child {
             font-size: 1.8rem;
@@ -233,7 +233,7 @@ html > body {
           color: $eestecgreylight;
           font-size: 2rem;
           display: inline;
-          font-family: "Century Gothic";
+          font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
           font-weight: bold;
         }
         height: 3.0rem;

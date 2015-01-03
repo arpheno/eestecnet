@@ -34,7 +34,7 @@ body > header {
       font-size: 1.6rem;
       padding: .1rem;
       color: #fff;
-      font-family: "Century Gothic";
+      font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
       border-radius: .4rem;
       border: none;
       display: block;
@@ -130,7 +130,7 @@ body > header {
     border-bottom: .1rem solid $eestec;
     border-top: .1rem solid $eestec;
     align-items: center;
-    font-family: "Century Gothic";
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
     > li {
       &:last-child {
         flex: 2;

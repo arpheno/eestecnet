@@ -250,7 +250,7 @@ html > body .contact table tr td:first-child {
     font-size: 1.8rem;
     font-weight: bold;
     color: #c30811;
-    font-family: "Century Gothic"
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 }
 
 html > body .contact table tr td:last-child {
@@ -493,7 +493,7 @@ body > header #signin input[role=button], body > header #signin a {
     font-size: 1.6rem;
     padding: .1rem;
     color: #fff;
-    font-family: "Century Gothic";
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
     border-radius: .4rem;
     border: none;
     display: block;
@@ -716,7 +716,6 @@ body > header #signin a {
 }
 
 body > footer {
-    font-family: "Century Gothic";
     font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
     background-color: #465052;
     height: 15.2rem;
@@ -1143,7 +1142,6 @@ main.home #donate .wrapper a {
 
 main.home #newsletter {
     flex: 1 0 45%;
-    font-family: "Century Gothic";
     font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
     min-height: 10.0rem;
     position: relative
