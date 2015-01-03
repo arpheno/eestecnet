@@ -81,7 +81,7 @@ html {
 }
 
 h1, h2 {
-    font-family: 'Century Gothic';
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
     font-weight: bold;
     line-height: 100%;
     text-align: left;
