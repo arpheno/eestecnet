@@ -50,7 +50,7 @@ def roots_for_user(user):
         for event in user.events.all():
             roots.append(Root(event.slug))
     if user.groups.all():
-        roots.append(Root("Contact Persons"))
+        roots.append(Root("Contact Persons", True))
     roots.append(Root("Public"))
 
     return roots
