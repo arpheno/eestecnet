@@ -76,8 +76,10 @@
 </header>
 
 <nav id="nav">
-    <a id="shownav" href="#nav" title="Show navigation">{% include 'enet/menu.svg' %}</a>
-    <a id="hidenav" href="#" title="Hide navigation">{% include 'enet/menu.svg' %}</a>
+    <a id="shownav" href="#nav" title="Show navigation"><img alt="Navigation"
+                                                             src="{% static 'enet/icons/menu.svg' %}"/></a>
+    <a id="hidenav" href="#" title="Hide navigation"><img alt="Navigation"
+                                                          src="{% static 'enet/icons/menu.svg' %}"/></a>
     {% include 'enet/navigation.html' %}
 </nav>
 

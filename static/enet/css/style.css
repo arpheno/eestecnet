@@ -250,7 +250,7 @@ html > body .contact table tr td:first-child {
     font-size: 1.8rem;
     font-weight: bold;
     color: #c30811;
-    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif
 }
 
 html > body .contact table tr td:last-child {
@@ -582,7 +582,7 @@ body > header #signin a {
     border-bottom: 0.1rem solid #ee1f29;
     border-top: 0.1rem solid #ee1f29;
     align-items: center;
-    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif
 }
 
 @media only screen and (max-width: 45em) {
@@ -707,7 +707,7 @@ body > header #signin a {
     font-size: 2.5rem
 }
 
-#nav > ul form svg {
+#nav > ul form img {
     align-self: center;
     height: 2.5rem;
     width: 2.5rem;
@@ -986,7 +986,7 @@ article header .details tr td:first-child {
     font-size: 1.8rem;
     font-weight: bold;
     color: #c30811;
-    font-family: "Century Gothic" font-family : 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+    font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif
 }
 
 article header .details tr:last-child {
@@ -1158,7 +1158,6 @@ main.home #newsletter {
 }
 
 main.home #newsletter form {
-
     font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
     text-align: center;
     padding: 3.0rem .0rem;
