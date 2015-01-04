@@ -28,7 +28,7 @@ def newsletter(request):
     messages.add_message(
         request,
         messages.INFO,
-        'You have been subscribed.')
+        'You have been subscribed. Please check your e-mail and also your spam folder.')
     message=MailerMessage()
     message.subject = ""
     message.content = ""
