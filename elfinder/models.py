@@ -51,6 +51,8 @@ def roots_for_user(user):
             roots.append(Root(event.slug, True))
         for event in user.events.all():
             roots.append(Root(event.slug))
+    if user.groups.all():
+        roots.append(Root("CP Area"))
     roots.append(Root("Public"))
 
     return roots

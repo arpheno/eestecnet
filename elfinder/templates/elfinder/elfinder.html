@@ -1,4 +1,8 @@
 {% extends 'enet/split.html' %}
+{% load static %}
+{% block header %}
+    <script src="{% static 'elfinder/js/elfinder.full.js' %}"></script>
+{% endblock %}
 {% block main %}
     {% include "elfinder/elfinder-partial.html" %}
 {% endblock %}
