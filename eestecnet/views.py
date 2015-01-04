@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.shortcuts import redirect
@@ -24,11 +25,15 @@ def newsletter(request):
         validate_email( request.POST['mailsub'] )
     except ValidationError:
         return redirect("/")
+    messages.add_message(
+        request,
+        messages.INFO,
+        'You have been subscribed.')
     message=MailerMessage()
-    message.subject = "add to newsletter"
-    message.content="Dear VC-IA, please kindly add "+request.POST['mailsub']+"to the newsletter list."
-    message.from_address = "noreply@eestec.net",
-    message.to_address = "vc-ia@eestec.net"
+    message.subject = ""
+    message.content = ""
+    message.from_address = request.POST['mailsub']
+    message.to_address = "newsletter-join@eestec.net"
     message.save()
     return redirect("/")
 

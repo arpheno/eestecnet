@@ -39,8 +39,6 @@ def roots_for_user(user):
             roots.append(Root(member.slug,True))
         for event in Event.objects.all().exclude(category="recruitment"):
             roots.append(Root(event.slug,True))
-        roots.append(Root("Public",True))
-        return roots
     elif user.is_authenticated():
         for team in user.teams_administered():
             roots.append(Root(team.slug,True))
@@ -52,7 +50,7 @@ def roots_for_user(user):
         for event in user.events.all():
             roots.append(Root(event.slug))
     if user.groups.all():
-        roots.append(Root("CP Area"))
+        roots.append(Root("Contact Persons"))
     roots.append(Root("Public"))
 
     return roots
