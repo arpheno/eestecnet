@@ -1,8 +1,8 @@
 {% load thumbnail %}
 <ul class="members figure">
-    <li>
     {% for mmbr in object_list %}
+        <li>
         {% include 'teams/team.html' with object=mmbr %}
+        </li>
     {% endfor %}
-    </li>
 </ul>
