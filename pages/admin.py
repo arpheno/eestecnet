@@ -8,6 +8,7 @@ from pages.models import Page, Stub, WebsiteFeedback, WebsiteFeedbackImage
 
 
 
+
 # Register your models here.
 class PageForm(forms.ModelForm):
     class Meta:
@@ -33,7 +34,6 @@ class WebsiteFeedbackImageInlineAdmin(admin.TabularInline):
 
 class WebsiteFeedbackAdmin(admin.ModelAdmin):
     model = WebsiteFeedback
-    list_display = ['date', 'read']
     list_filter = ['read']
     inlines = [WebsiteFeedbackImageInlineAdmin]
 
