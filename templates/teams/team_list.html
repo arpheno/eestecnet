@@ -2,11 +2,12 @@
 {% load staticfiles %}
 {% block main %}
     {% if object_list.first.is_lc %}
-    <style>#map {
+        <style scoped="scoped">#map {
         width: 80%;
         height: 350px;
     }</style>
-    <link rel="stylesheet" href="{% static 'enet/leaflet.css' %}"/>
+        <link property="stylesheet" rel="stylesheet"
+              href="{% static 'enet/leaflet.css' %}"/>
     <script src="{% static 'enet/leaflet.js' %}"></script>
     <script src="{% static 'enet/testleaf.js' %}"></script>
     <script>
