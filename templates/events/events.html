@@ -1,9 +1,9 @@
 <ul class="figure event">
-    <li>
     {% for event in object_list %}
+        <li>
         {% if event.category != "recruitment" %}
             {% include 'events/event.html' with object=event %}
         {% endif %}
+        </li>
     {% endfor %}
-    </li>
 </ul>
