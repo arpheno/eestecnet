@@ -39,10 +39,10 @@
                         </a>
                     </div>
                     <footer>
-                        <main>
+                        <div class="news_stub">
                             <h1 style="display:flex;justify-content: space-between;">
-                                <span>{{ object.headline }}</span><span
-                                    style="font-size:10px;">{{ object.pub_date }}</span>
+                                <span>{{ object.headline }}</span>
+                                <span style="font-size:10px;">{{ object.pub_date }}</span>
                             </h1>
 
                             <p>
@@ -54,8 +54,8 @@
                                     {% endifnotequal %}
                                 {% endautoescape %}
                             </p>
-                        </main>
-                        <aside>
+                        </div>
+                        <div class="other_stories">
                             <h2>Other top Stories:</h2>
                             {% for other_object in object_list %}
                                 {% if other_object != object %}
@@ -64,7 +64,7 @@
                                             style="font-size:10px;">{{ object.pub_date }}</span></a>
                                 {% endif %}
                             {% endfor %}
-                        </aside>
+                        </div>
                     </footer>
             </article>
             {% endfor %}

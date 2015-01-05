@@ -1281,12 +1281,13 @@ main.home #preview footer h1, main.home #preview footer h2 {
     }
 }
 
-main.home #preview footer main {
+main.home #preview footer div.news_stub {
     flex: 1 1 50%;
-    display: flex
+    display: flex;
+    flex-wrap: wrap
 }
 
-main.home #preview footer aside {
+main.home #preview footer div.other_stories {
     flex: 1 1 20%;
     background-color: rgba(195, 8, 17, 0.75);
     margin: 1.0rem;
@@ -1295,18 +1296,18 @@ main.home #preview footer aside {
 }
 
 @media screen and (max-width: 1000px) {
-    main.home #preview footer aside {
+    main.home #preview footer div.other_stories {
         display: none
     }
 }
 
-main.home #preview footer aside h2 {
+main.home #preview footer div.other_stories h2 {
     background: none;
     padding: .0rem;
     margin: .0rem
 }
 
-main.home #preview footer aside a {
+main.home #preview footer div.other_stories a {
     padding-left: .2rem;
     display: block;
     text-decoration: none;

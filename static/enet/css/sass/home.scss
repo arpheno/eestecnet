@@ -170,11 +170,12 @@ main.home {
           display: none;
         }
       }
-      main {
+      div.news_stub {
         flex: 1 1 50%;
         display: flex;
+        flex-wrap: wrap;
       }
-      aside {
+      div.other_stories {
         @media screen and (max-width: 1000px) {
           display: none;
         }
