@@ -24,7 +24,7 @@ class Membership(models.Model):
         if self.privileged:
             self.user.is_staff = True
             self.user.save()
-            created, local = Group.objects.get_or_create(name='Local Admins')
+            local, created = Group.objects.get_or_create(name='Local Admins')
             self.user.groups.add(local)
         super(Membership, self).save()
 
