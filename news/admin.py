@@ -18,6 +18,8 @@ class MyEntryAdminForm(ModelForm):
 
 class MembershipAdmin(admin.ModelAdmin):
     list_filter = ['user', ]
+    list_display = ('user', 'board', 'privileged', 'alumni')
+    list_editable = ('board', 'privileged', 'alumni')
     def has_add_permission(self, request):
         return request.user.is_superuser
 
