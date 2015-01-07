@@ -17,7 +17,6 @@ class MyEntryAdminForm(ModelForm):
 
 
 class MembershipAdmin(admin.ModelAdmin):
-    list_editable = ['board', 'privileged', 'alumni']
     list_filter = ['user', ]
     def has_add_permission(self, request):
         return request.user.is_superuser

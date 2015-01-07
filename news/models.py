@@ -4,7 +4,6 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.template.loader import render_to_string
 
-
 class Membership(models.Model):
     """Application objects link Users to :class:`Event` objects and provide additional
     information"""
