@@ -3,7 +3,6 @@ import csv
 from django import forms
 from django.contrib import admin
 from django.db.models import Q
-from django.forms import Textarea
 from django.http import HttpResponse
 from suit_redactor.widgets import RedactorWidget
 
@@ -148,7 +147,7 @@ class OutgoingApplicationAdmin(admin.ModelAdmin):
     list_display = ['applicant', 'target', 'priority']
     list_editable = ['priority']
     readonly_fields = ['letter', 'target', 'applicant', 'accepted']
-    list_filter = [OutgoingApplicationFilter, ]
+    list_filter = ['target', ]
 
     def get_queryset(self, request):
         """ A Local admin will only be able to modify applications issued by teams
