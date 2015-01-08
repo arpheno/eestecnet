@@ -1,7 +1,6 @@
 import csv
 
 from django import forms
-
 from django.contrib import admin
 from django.db.models import Q
 from django.http import HttpResponse
@@ -117,7 +116,7 @@ class OutgoingApplicationFilter(admin.SimpleListFilter):
             yield (event, event)
 
     def queryset(self, request, queryset):
-        return queryset
+        return queryset.filter(target__name=self.value())
 
 
 class IncomingApplicationFilter(admin.SimpleListFilter):  #
@@ -131,7 +130,7 @@ class IncomingApplicationFilter(admin.SimpleListFilter):  #
             yield (event, event)
 
     def queryset(self, request, queryset):
-        return queryset
+        return queryset.filter(target__name=self.value())
 
 
 def get_own_members(request):
