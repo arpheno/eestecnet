@@ -86,8 +86,8 @@
         {% include 'account/eestecers.html' with object_list=object.normal_members %}
     </details>
     {% if object.alumni %}
-        <details open>
-            <summary>Members</summary>
+        <details>
+            <summary>Alumni</summary>
             {% include 'account/eestecers.html' with object_list=object.alumni %}
         </details>
     {% endif %}
