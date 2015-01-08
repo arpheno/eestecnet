@@ -116,7 +116,10 @@ class OutgoingApplicationFilter(admin.SimpleListFilter):
             yield (event, event)
 
     def queryset(self, request, queryset):
-        return queryset.filter(target__name=self.value())
+        if self.value():
+            return queryset.filter(target__name=self.value())
+        else:
+            return queryset
 
 
 class IncomingApplicationFilter(admin.SimpleListFilter):  #
@@ -130,7 +133,10 @@ class IncomingApplicationFilter(admin.SimpleListFilter):  #
             yield (event, event)
 
     def queryset(self, request, queryset):
-        return queryset.filter(target__name=self.value())
+        if self.value():
+            return queryset.filter(target__name=self.value())
+        else:
+            return queryset
 
 
 def get_own_members(request):
