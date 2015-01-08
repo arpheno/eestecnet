@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, RedirectView
 from haystack.forms import SearchForm
 from haystack.views import SearchView
 
@@ -62,5 +62,6 @@ urlpatterns = patterns(
     url(r'^statistics/', include('statistics.urls')),
     url(r'^wiki/', include('wiki.urls')),
     url(r'^active/?$', MassCommunication.as_view(), name='masscommunication'),
+    url(r'^seminar/?', RedirectView.as_view(url="http://www.crowdcast.io/eestec1")),
     url(r'', include('pages.urls')),
 )
