@@ -6,8 +6,10 @@ celery
 Django
 django-appconf
 django-autoslug
+django-backbone
 django-celery
 django-common
+django-compressor
 django-debugtools
 django-extra-views
 django-form-utils
@@ -17,6 +19,7 @@ django-gunicorn
 django-haystack
 django-helper
 django-kombu
+django-libsass
 django-mail-queue
 django-mptt
 django-notify
@@ -31,6 +34,7 @@ html5lib
 Jinja2
 kombu
 libmagic
+libsass
 matplotlib
 Pillow
 Pygments

@@ -53,7 +53,7 @@ class DialogFormMixin(object):
     def get_context_data(self, **kwargs):
         context = super(DialogFormMixin, self).get_context_data(**kwargs)
         if self.request.is_ajax():
-            context['parent'] = "enet/ajax.html"
+            context['parent'] = "base/prototypes/ajax.html"
         else:
             context['parent'] = self.parent_template
         context['id'] = self.html_id

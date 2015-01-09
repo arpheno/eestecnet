@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectTasksOptions">
+  <component name="ProjectTasksOptions" suppressed-tasks="SASS;compass sass">
     <TaskOptions isEnabled="false">
       <option name="arguments" value="compile null $UnixSeparators($FilePath$)$" />
       <option name="checkSyntaxErrors" value="true" />
@@ -43,4 +43,3 @@
     </TaskOptions>
   </component>
 </project>
-

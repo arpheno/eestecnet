@@ -1,0 +1,25 @@
+{% load staticfiles %} <!DOCTYPE html>
+{% load compress %}
+<html lang="en">
+<head>
+    {% include 'base/head/base.html' %}
+</head>
+<body>
+<header>
+{% include 'base/header/base.html' %}
+</header>
+
+{% block maincontent %}{% endblock %}
+<footer>
+    {% include 'base/footer/base.html' %}
+</footer>
+<div id="copyright">Copyright EESTEC</div>
+{% block dialogform %}
+    <div id="dialog"></div>
+{% endblock %}
+<div id="feedbackarea"></div>
+<div id="feedbackbutton">
+    Feedback
+</div>
+</body>
+</html>

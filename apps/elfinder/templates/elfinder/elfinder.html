@@ -1,0 +1,6 @@
+{% extends 'base/prototypes/split.html' %}
+{% load static %}
+{% block main %}
+    <script src="{% static 'elfinder/js/elfinder.min.js' %}"></script>
+    {% include "elfinder/elfinder-partial.html" %}
+{% endblock %}

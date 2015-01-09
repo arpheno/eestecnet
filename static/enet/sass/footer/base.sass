@@ -1,0 +1,16 @@
+@import "../definitions"
+body>footer
+  @media only screen and (max-width: 45em)
+    @extend ._flex_center
+  @extend ._flex_between
+  background-color: $eestec-grey-0
+  +white_links
+  font-family: $centurygothic
+  a
+    cursor: pointer
+  >div
+    @extend ._flex_around
+
+@import sponsors
+@import navigation
+@import social

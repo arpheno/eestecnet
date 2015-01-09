@@ -1,0 +1,45 @@
+div.donate_and_newsletter
+  @media (max-width: 45em)
+    order: 3
+  @extend ._flex_between
+  +white_links
+  +big_c
+  font-family: $centurygothic
+  background: none
+  a, input.submit
+    @extend ._flex_center
+    padding: 10px
+    background-color: $eestec-red-3
+    font-weight: bolder
+  input.submit
+    padding: 8px
+  .donate, .newsletter
+    @extend ._flex_center
+    flex: initial
+    font-size: 16px
+    padding: 20px
+    @media (max-width: 1000px)
+      order: 3
+      flex: 1 1 100%
+      padding: 10px
+
+  p, input[type=text]
+    @extend ._flex_center
+    padding: 5px
+    margin: 3px
+    flex: initial
+    color: black
+  .newsletter
+    width: 232px
+    @media (max-width: 1000px)
+      order: 4
+      flex: 1 1 100%
+      padding: 10px
+  form
+    @extend ._flex_center
+    @media (max-width: 1000px)
+      width: initial
+      padding: initial
+      position: initial
+    input[type=text]
+      flex: initial

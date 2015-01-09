@@ -5,6 +5,7 @@ var plotlayers = [];
 
 $(function () {
     // set up the map
+    L.Icon.Default.imagePath = '/static/leaflet/images/'
     map = new L.Map('map');
     // create the tile layer with correct attribution
     var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';

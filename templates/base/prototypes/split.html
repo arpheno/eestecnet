@@ -1,0 +1,8 @@
+{% extends 'base/base.html' %}
+{% block maincontent %}
+    <main>{% block main %} {% endblock %}
+        <div class="grad"></div>
+    </main>
+    <aside>{% block aside %}{% include 'base/sidebar.html' %}{% endblock %}
+    </aside>
+{% endblock %}

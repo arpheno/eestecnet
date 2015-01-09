@@ -1,4 +1,4 @@
-{% extends "enet/detail.html" %}
+{% extends "base/prototypes/detail.html" %}
 {% load thumbnail %}
 {% block class %}member{% endblock %}
 {% block title %}{{ object }}{% endblock %}
@@ -86,8 +86,8 @@
         {% include 'account/eestecers.html' with object_list=object.normal_members %}
     </details>
     {% if object.alumni %}
-        <details open>
-            <summary>Members</summary>
+        <details>
+            <summary>Alumni</summary>
             {% include 'account/eestecers.html' with object_list=object.alumni %}
         </details>
     {% endif %}

@@ -1,41 +1,44 @@
-{% extends 'enet/split.html' %}
+{% extends 'base/prototypes/split.html' %}
 {% load staticfiles %}
+{% load compress %}
 {% block main %}
     {% if object_list.first.is_lc %}
         <style scoped="scoped">#map {
         width: 80%;
         height: 350px;
-    }</style>
+        }</style>
         <link property="stylesheet" rel="stylesheet"
-              href="{% static 'enet/leaflet.css' %}"/>
-    <script src="{% static 'enet/leaflet.js' %}"></script>
-    <script src="{% static 'enet/testleaf.js' %}"></script>
-    <script>
-        $(function () {
-            {% for object in object_list %}
-                var mark = new L.Marker(new L.LatLng({{ object.lat }}, {{  object.lng}}), {title: "{{ object }}"});
-                mark.on('click',
-                        function () {
-                            window.location = "{{ object.as_url }}";
-                        });
-                map.addLayer(mark);
-            {% endfor %}
-        });
-    </script>
+              href="{% static 'leaflet/leaflet.css' %}"/>
+        {% compress js %}
+            <script src="{% static 'leaflet/leaflet.js' %}"></script>
+            <script src="{% static 'enet/testleaf.js' %}"></script>
+            <script>
+                $(function () {
+                    {% for object in object_list %}
+                        var mark = new L.Marker(new L.LatLng({{ object.lat }}, {{  object.lng}}), {title: "{{ object }}"});
+                        mark.on('click',
+                                function () {
+                                    window.location = "{{ object.as_url }}";
+                                });
+                        map.addLayer(mark);
+                    {% endfor %}
+                });
+            </script>
+        {% endcompress %}
         <h1>Members</h1>
         <div id="map">
         </div>
-        <article class="members">
+        <section class="members">
             {% include 'teams/teams.html' with object_list=object_list %}
-        </article>
+        </section>
     {% else %}
         <h1>International Teams and Bodies</h1>
-        <article class="members">
+        <section class="members">
             <ul>
                 {% for object in object_list %}
                     <li>{% include 'teams/international_team.html' with object=object %}</li>
                 {% endfor %}
             </ul>
-        </article>
+        </section>
     {% endif %}
 {% endblock %}
