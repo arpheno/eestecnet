@@ -14,7 +14,6 @@ django-debugtools
 django-extra-views
 django-form-utils
 django-froala-editor
-django-gmapi-new
 django-gunicorn
 django-haystack
 django-helper
@@ -29,11 +28,9 @@ django-suit
 django-suit-redactor
 docutils
 gunicorn
-haystack
 html5lib
 Jinja2
 kombu
-libmagic
 libsass
 MarkupSafe
 Pillow
@@ -51,3 +48,4 @@ Sphinx
 suit
 Whoosh
 xlwt
+psycopg2
