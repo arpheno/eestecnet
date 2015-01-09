@@ -1,2 +1,12 @@
+# Created by .ignore support plugin (hsz.mobi)
+*.pyc
 db.sqlite3
+eestecnet/settings/secret.py
 eestecnet/settings_deploy.py
+tmp
+media
+logs
+.idea
+serve
+whoosh_index
+static/doc

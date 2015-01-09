@@ -1,0 +1,20 @@
+footer nav
+  @media only screen and (max-width: 45em)
+    display: none
+  @extend ._flex_between
+  +nested_list
+  position: relative
+  line-height: normal
+  flex: initial
+  > ul
+    padding: 10px 0px
+    z-index: 1
+    align-items: flex-start
+    align-content: flex-start
+    > li
+      padding: 15px
+  > img
+    z-index: 0
+    position: absolute
+    height: 100%
+

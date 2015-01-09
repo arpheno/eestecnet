@@ -24,11 +24,6 @@ ul li {
   align-items: center;
 }
 
-@font-face {
-  font-family: "helvetica neue"; /*'Helvetica Neue Pro lite'*/
-  src: url("../HelveticaNeueLTPro-Lt.otf");
-}
-
 html {
   background-image: url(../images/bg.jpg);
   font-family: "Helvetica Neue", Helvetica, Verdana sans-serif;
@@ -267,13 +262,6 @@ html > body {
   width: 100%;
 }
 
-.messages {
-  flex: 1 1 100%;
-  padding: 3.0rem;
-  background-color: rgba(lightblue, 0.5);
-  font-weight: bold;
-  font-size: 1.8rem;
-}
 
 .ui-button {
   height: 3.0rem;

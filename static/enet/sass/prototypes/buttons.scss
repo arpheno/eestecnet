@@ -1,0 +1,63 @@
+.animate {
+  transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+}
+
+.action-button {
+  position: relative;
+  padding: 1.0rem 4.0rem;
+  border-radius: 1.0rem;
+  font-size: 2.5rem;
+  color: #FFF;
+  text-decoration: none;
+}
+
+.action-button:active {
+  transform: translate(.0rem, .5rem);
+  -webkit-transform: translate(.0rem, .5rem);
+  border-bottom: .1rem solid;
+}
+
+.blue {
+  background-color: #3498DB;
+  border-bottom: .5rem solid #2980B9;
+  text-shadow: .0rem -.2rem #2980B9;
+}
+
+.red {
+  background-color: #E74C3C;
+  border-bottom: .5rem solid #BD3E31;
+  text-shadow: .0rem -.2rem #BD3E31;
+}
+
+.green {
+  background-color: #82BF56;
+  border-bottom: .5rem solid #669644;
+  text-shadow: .0rem -.2rem #669644;
+}
+
+.yellow {
+  background-color: #F2CF66;
+  border-bottom: .5rem solid #D1B358;
+  text-shadow: .0rem -.2rem #D1B358;
+}
+
+#twitter svg:hover {
+  background-color: #00aced;
+}
+
+#youtube svg:hover {
+  background-color: #bb0000;
+}
+
+#facebook svg:hover {
+  background-color: #3b5998;
+}
+
+#linkedin svg:hover {
+  background-color: #007bb6;
+}
+
+#googleplus svg:hover {
+  background-color: #dd4b39;
+}

@@ -1,0 +1,28 @@
+div.websitefeedback {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  p {
+    flex: 1 1 100%;
+    text-align: center;
+  }
+  input, textarea {
+    border-radius: 15px;
+    border-style: none;
+    padding: 10px;
+    margin: 5px;
+    background-color: rgba(0, 0, 0, 0.02);
+    &[type="submit"] {
+      background-colr: rgba(0, 0, 0, 0.05);
+    }
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.03);
+    }
+  }
+  form {
+    text-align: center;
+    p {
+      text-align: left;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{% load compress %}
+{% load static %} {% compress css %}
+    <!--link rel="stylesheet" type="text/x-scss"
+          href={% static "enet/css/sass/style.scss" %}/-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'enet/css/normalize.css' %}">
+    <link rel="stylesheet" type="text/x-sass"
+          href={% static "enet/sass/header/base.sass" %}/>
+    <link rel="stylesheet" type="text/x-sass"
+          href={% static "enet/sass/footer/base.sass" %}/>
+    <link rel="stylesheet" type="text/x-sass"
+          href={% static "enet/sass/home/base.sass" %}/>
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'jquery/css/jquery-ui-1.11.0.min.css' %}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'image-picker/css/image-picker.css' %}"/>
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'elfinder/css/elfinder.min.css' %}">
+    <link rel="stylesheet" type="text/x-sass"
+          href={% static "enet/sass/base.sass" %}/>
+{% endcompress %}

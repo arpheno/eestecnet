@@ -2,11 +2,26 @@ body > header {
   flex: 1 1 100%;
   background-color: #fff;
   z-index: 3;
-  justify-content: space-around;
-  align-items: center;
-  align-content: center;
   flex-wrap: wrap;
-  padding: 1%;
+  .banners{
+    flex: 1 1 100%;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    padding:2px 0px 2px 0px;
+  }
+  div.messages {
+    flex: 1 1 100%;
+    background-color: rgba(lightblue, 0.5);
+    ul {
+      flex: 1 1 100%;
+      padding: 3.0rem;
+      font-weight: bold;
+      font-size: 1.8rem;
+    }
+  }
+
   img {
     height: 10.0rem;
     width: auto;
@@ -65,7 +80,6 @@ body > header {
       display: none;
     }
   }
-
 }
 
 #nav {

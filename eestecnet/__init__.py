@@ -8,11 +8,11 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.utils.datetime_safe import datetime
 
-from account.models import Eestecer, Position
-from events.models import Event, Application, EventImage
-from pages.models import Stub, Page
-from teams.models import Team, MemberImage
-from news.models import Entry, Membership
+from apps.account.models import Eestecer, Position
+from apps.events.models import Event, Application, EventImage
+from apps.pages.models import Stub, Page
+from apps.teams.models import Team, MemberImage
+from apps.news.models import Entry, Membership
 
 
 def create_stubs():

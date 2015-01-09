@@ -1,0 +1,109 @@
+{% load staticfiles %}
+<a id="shownav" href="#nav" title="Show navigation">
+    <img alt="Navigation" src="{% static 'enet/icons/menu.svg' %}"/>
+</a>
+<a id="hidenav" href="#" title="Hide navigation">
+    <img alt="Navigation" src="{% static 'enet/icons/menu.svg' %}"/>
+</a>
+{% if user.is_authenticated %}
+    <ul>
+        {% if user.is_superuser %}
+            <li>
+                <a href="/admin">Admin </a>
+                <ul>
+                    <li>
+                        <a href="{% url 'masscommunication' %}">Mass Communication</a>
+                    </li>
+                </ul>
+            </li>
+        {% else %}
+            <li><a href="{% url 'home' %}">Home</a></li>
+        {% endif %}
+        <li><a href="{% url 'news' %}">News</a></li>
+        <li><a href="{% url 'cities' %}">Commitments</a></li>
+        <li><a href="{% url 'teams' %}">Teams</a></li>
+        <li><a href="{% url 'events' %}">Events </a></li>
+        <li><a href="{% url 'materials' %}">Files</a></li>
+        <li><a href="{% url 'wikihome' %}">Wiki</a></li>
+        <li>
+            <a href="{% url 'sitemap' %}">Sitemap </a>
+
+            <ul>
+                {% for stub in aboutstubs %}
+                    <li><a href="{{ stub.link }}">{{ stub.title }}</a></li>
+                {% endfor %}
+                {% for stub in activitystubs %}
+                    <li><a href="{{ stub.link }}">{{ stub.title }}</a></li>
+                {% endfor %}
+                <li><a href="/students/join">Become a Member</a></li>
+                <li><a href="/students/observer">Found an Observer</a></li>
+                <li><a href="/partners/cooperations">Cooperations</a></li>
+                <li><a href="/partners/start">Become a Partner</a></li>
+            </ul>
+        </li>
+        <li><a href="/logout/">Log Out</a></li>
+        <li>
+            <form action="/search/" method="get">
+                <div>
+                    {{ mysearchform.q }}
+                    <img alt="" height="25px"
+                         src="{% static 'enet/icons/magnifying.svg' %}"/>
+                </div>
+            </form>
+        </li>
+    </ul>
+{% else %}
+    <ul>
+        <li>
+            <a href="{% url 'home' %}">Home</a>
+        </li>
+        <li>
+            <a href="/about">About EESTEC</a>
+            <ul>
+                {% for stub in aboutstubs %}
+                    <li><a href="{{ stub.link }}">{{ stub.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+        <li>
+            <a href="/activities">Activities</a>
+            <ul>
+                {% for stub in activitystubs %}
+                    <li><a href="{{ stub.link }}">{{ stub.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+        <li>
+            <a href="/students">For Students</a>
+            <ul>
+                <li><a href="/students/join">Become a Member</a></li>
+                <li><a href="{% url 'cities' %}">EESTEC in your city</a></li>
+                <li><a href="/students/observer">Found an Observer</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="/partners">Partners</a>
+            <ul>
+                <li><a href="/partners/cooperations">Cooperations</a></li>
+                <li><a href="/partners/start">Become a Partner</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="/contact">Contact</a>
+        </li>
+        {% if user.is_authenticated %}
+            <li>
+                <a href="{% url 'materials' %}">Files</a>
+            </li>
+        {% endif %}
+        <li>
+            <form action="/search/" method="get">
+                <div>
+                    {{ mysearchform.q }}
+                    <img alt="" height="25px"
+                         src="{% static 'enet/icons/magnifying.svg' %}"/>
+                </div>
+            </form>
+        </li>
+    </ul>
+{% endif %}
