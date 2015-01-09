@@ -1,5 +1,7 @@
 from secret import DATABASE_NAME, DATABASE_PASSWORD, DATABASE_USER, SECRET_KEY
+from basic import *
 
+INSTALLED_APPS
 SECRET_KEY
 ALLOWED_HOSTS = ['.eestec.net',]
 DATABASES = {
