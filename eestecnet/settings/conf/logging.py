@@ -31,10 +31,11 @@ LOGGING = {
             'filters': [],
         },
         'log_file': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': os.path.join(BASE_DIR, 'logs/django.log'),
             'maxBytes': '16777216',  # 16megabytes
+            'backupCount': 5,
             'formatter': 'simple'
         },
     },
