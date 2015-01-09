@@ -35,7 +35,7 @@ Jinja2
 kombu
 libmagic
 libsass
-matplotlib
+MarkupSafe
 Pillow
 Pygments
 pyparsing
