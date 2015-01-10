@@ -1006,7 +1006,8 @@ article .actions form {
 article details {
     align-self: flex-start;
     padding: 20px;
-    line-height: 110%
+    line-height: 110%;
+    font-size: 14px
 }
 
 article details summary {
