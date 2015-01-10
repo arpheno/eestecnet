@@ -2,7 +2,7 @@
 {% load compress %}
 {% block maincontent %}
     {% verbatim %}
-    <div data-ng-app="teams" data-ng-controller="teamsController">
+        <div data-ng-app="teamApp" data-ng-controller="teamsControllers">
         <ul>
             <li data-ng-repeat="team in teams">
                 <span>{{team.name}}</span>
@@ -13,21 +13,23 @@
     {% endverbatim %}
     {% compress js %}
         <script type="text/coffeescript">
-            teamsControllers = angular.module('teamsControllers', [])
-            teamsControllers.controller('TeamListCtrl',
-                    ['$scope', 'Phone', ($scope, Phone) ->
+            root = exports ? this
+            root.teamsControllers = angular.module('teamsControllers', [])
+            root.teamsControllers.controller('TeamListCtrl',
+                    ['$scope', 'Team', ($scope, Phone) ->
                         $scope.phones = Phone.query()
                         $scope.orderProp = 'age'
-                    ])
-            teamService = angular.module("teamService", ["ngResource"])
-            teamService.factory "Team", [
+                        ])
+            root.teamService = angular.module("teamService", ["ngResource",])
+            root.teamService.factory "Team", [
                 "$resource"
                 ($resource) ->
                     return $resource("/teams/api/", pk: "@pk", {})
             ]
-            teamApp = angular.module('teamApp',
+            root.teamApp = angular.module('teamApp',
                     ["ngRoute", "teamsControllers", "teamService"])
-
         </script>
+
+
     {% endcompress %}
 {% endblock %}
