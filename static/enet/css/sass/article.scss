@@ -62,6 +62,10 @@ article {
   }
   details{
     align-self:flex-start;
-    width: 100%;
+    padding: 20px;
+    line-height: 110%;
+    summary {
+      padding: 5px;
+    }
   }
 }

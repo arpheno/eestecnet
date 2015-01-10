@@ -955,7 +955,6 @@ article header {
 }
 
 article header .pictures, article header img {
-    width: 37.5rem;
     height: 22.5rem
 }
 
@@ -1006,7 +1005,12 @@ article .actions form {
 
 article details {
     align-self: flex-start;
-    width: 100%
+    padding: 20px;
+    line-height: 110%
+}
+
+article details summary {
+    padding: 5px
 }
 
 a.member {
