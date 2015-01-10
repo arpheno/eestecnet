@@ -62,6 +62,6 @@ urlpatterns = patterns(
     url(r'^statistics/', include('statistics.urls')),
     url(r'^wiki/', include('wiki.urls')),
     url(r'^active/?$', MassCommunication.as_view(), name='masscommunication'),
-    url(r'^seminar/?', RedirectView.as_view(url="http://www.crowdcast.io/eestec1")),
+    url(r'^seminar/?', RedirectView.as_view(url="http://www.crowdcast.io/e/eestec1")),
     url(r'', include('pages.urls')),
 )
