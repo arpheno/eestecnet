@@ -102,7 +102,7 @@ class MyEventAdmin(admin.ModelAdmin):
         qsb = list(qs.filter(organizers=request.user))
         for item in qsb:
             qsa.append(item)
-        return qs
+        return qsa
 
 
 class OutgoingApplicationFilter(admin.SimpleListFilter):
