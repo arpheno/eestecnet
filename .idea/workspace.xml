@@ -82,8 +82,8 @@
       <file leaf-file-name="admin.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/events/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7983425" vertical-offset="1462" max-vertical-offset="6256">
-              <caret line="103" column="73" selection-start-line="103" selection-start-column="73" selection-end-line="103" selection-end-column="73" />
+            <state vertical-scroll-proportion="0.7513812" vertical-offset="1462" max-vertical-offset="6222">
+              <caret line="102" column="25" selection-start-line="102" selection-start-column="25" selection-end-line="102" selection-end-column="25" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -1407,12 +1407,6 @@
       <option name="number" value="23039090586010" />
       <updated>1420785682399</updated>
     </task>
-    <task id="LOCAL-00468" summary="cp area&#10;newsletter">
-      <created>1420396516744</created>
-      <option name="number" value="00468" />
-      <option name="project" value="LOCAL" />
-      <updated>1420396516744</updated>
-    </task>
     <task id="LOCAL-00469" summary="cp area&#10;newsletter">
       <created>1420396917194</created>
       <option name="number" value="00469" />
@@ -1653,7 +1647,13 @@
       <option name="project" value="LOCAL" />
       <updated>1420994729584</updated>
     </task>
-    <option name="localTasksCounter" value="509" />
+    <task id="LOCAL-00509" summary="try local admin fix">
+      <created>1420994805808</created>
+      <option name="number" value="00509" />
+      <option name="project" value="LOCAL" />
+      <updated>1420994805808</updated>
+    </task>
+    <option name="localTasksCounter" value="510" />
     <option name="closeIssue" value="false" />
     <servers>
       <Generic shared="false" url="https://app.asana.com/api/1.0">
@@ -2258,8 +2258,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/events/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7983425" vertical-offset="1462" max-vertical-offset="6256">
-          <caret line="103" column="73" selection-start-line="103" selection-start-column="73" selection-end-line="103" selection-end-column="73" />
+        <state vertical-scroll-proportion="0.7513812" vertical-offset="1462" max-vertical-offset="6222">
+          <caret line="102" column="25" selection-start-line="102" selection-start-column="25" selection-end-line="102" selection-end-column="25" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>
