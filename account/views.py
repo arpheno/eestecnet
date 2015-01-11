@@ -15,8 +15,8 @@ from django.forms import TextInput
 from form_utils.forms import BetterModelForm
 from form_utils.widgets import ImageWidget
 from mailqueue.models import MailerMessage
-from password_reset.utils import get_username
 
+from password_reset.utils import get_username
 from account.forms import EestecerCreationForm
 from account.models import Eestecer
 from eestecnet.forms import DialogFormMixin, MassCommunicationForm
@@ -162,6 +162,7 @@ class EestecerCreate(DialogFormMixin, CreateView):
         message.to_address = user.email
         message.save()
         user.save()
+        user.update_forum(form.cleaned_data['password1'])
         messages.add_message(
             self.request,
             messages.INFO,
