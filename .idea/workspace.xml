@@ -4,9 +4,8 @@
     <bookmark url="file://$PROJECT_DIR$/../ela/machinelearning.py" description="print X" line="32" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed1fc345-6d46-4376-939e-76a3d1dcfc83" name="Default" comment="becoming better">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/enet/css/sass/article.scss" afterPath="$PROJECT_DIR$/static/enet/css/sass/article.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/enet/css/style.css" afterPath="$PROJECT_DIR$/static/enet/css/style.css" />
+    <list default="true" id="ed1fc345-6d46-4376-939e-76a3d1dcfc83" name="Default" comment="css fixes to articles">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/events/admin.py" afterPath="$PROJECT_DIR$/events/admin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="5b595ea8-e3ac-4d73-8540-46ed3976336f" name="15105832083624 CSS Improvements" comment="more responsiveness&#10;" />
@@ -80,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="admin.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/events/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1853" max-vertical-offset="6086">
-              <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.7044199" vertical-offset="1377" max-vertical-offset="6120">
+              <caret line="106" column="16" selection-start-line="106" selection-start-column="16" selection-end-line="106" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -140,11 +139,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="article.scss" pinned="false" current-in-tab="true">
+      <file leaf-file-name="article.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/enet/css/sass/article.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5483871" vertical-offset="969" max-vertical-offset="1309">
-              <caret line="65" column="20" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="20" />
+            <state vertical-scroll-proportion="-8.923077" vertical-offset="890" max-vertical-offset="1326">
+              <caret line="66" column="16" selection-start-line="66" selection-start-column="16" selection-end-line="66" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -246,11 +245,11 @@
         <option value="$PROJECT_DIR$/static/enet/sass/header/banners.sass" />
         <option value="$PROJECT_DIR$/static/enet/sass/base.sass" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/events/admin.py" />
         <option value="$PROJECT_DIR$/templates/teams/team_detail.html" />
         <option value="$PROJECT_DIR$/templates/account/eestecer_detail.html" />
         <option value="$PROJECT_DIR$/eestecnet/urls.py" />
         <option value="$PROJECT_DIR$/static/enet/css/sass/article.scss" />
+        <option value="$PROJECT_DIR$/events/admin.py" />
       </list>
     </option>
   </component>
@@ -373,59 +372,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="enet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="eestecnet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="eestecnet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="enet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="eestecnet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="eestecnet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="enet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sass" />
+              <option name="myItemId" value="events" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1420,18 +1367,6 @@
       <option name="number" value="23039090586010" />
       <updated>1420785682399</updated>
     </task>
-    <task id="LOCAL-00463" summary="dont use compressor">
-      <created>1420327411467</created>
-      <option name="number" value="00463" />
-      <option name="project" value="LOCAL" />
-      <updated>1420327411468</updated>
-    </task>
-    <task id="LOCAL-00464" summary="use compressor">
-      <created>1420327621477</created>
-      <option name="number" value="00464" />
-      <option name="project" value="LOCAL" />
-      <updated>1420327621478</updated>
-    </task>
     <task id="LOCAL-00465" summary="fix century gothic">
       <created>1420328172065</created>
       <option name="number" value="00465" />
@@ -1666,7 +1601,19 @@
       <option name="project" value="LOCAL" />
       <updated>1420888688552</updated>
     </task>
-    <option name="localTasksCounter" value="504" />
+    <task id="LOCAL-00504" summary="css fixes to articles">
+      <created>1420900645782</created>
+      <option name="number" value="00504" />
+      <option name="project" value="LOCAL" />
+      <updated>1420900645783</updated>
+    </task>
+    <task id="LOCAL-00505" summary="css fixes to articles">
+      <created>1420900761877</created>
+      <option name="number" value="00505" />
+      <option name="project" value="LOCAL" />
+      <updated>1420900761877</updated>
+    </task>
+    <option name="localTasksCounter" value="506" />
     <option name="closeIssue" value="false" />
     <servers>
       <Generic shared="false" url="https://app.asana.com/api/1.0">
@@ -1770,8 +1717,8 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3258786" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32063493" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.47560975" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32229966" sideWeight="0.85209006" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47560975" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32229966" sideWeight="0.85209006" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24517685" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3279743" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2517537" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1833,7 +1780,6 @@
       <TodoPanelSettings />
     </option>
     <confirmRemoveEmptyChangelist value="2" />
-    <MESSAGE value="link front page news" />
     <MESSAGE value="event filters" />
     <MESSAGE value="&#10;jssor" />
     <MESSAGE value="fix description forms" />
@@ -1858,7 +1804,8 @@
     <MESSAGE value="undo" />
     <MESSAGE value="fix filter functionliaty" />
     <MESSAGE value="becoming better" />
-    <option name="LAST_COMMIT_MESSAGE" value="becoming better" />
+    <MESSAGE value="css fixes to articles" />
+    <option name="LAST_COMMIT_MESSAGE" value="css fixes to articles" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1871,7 +1818,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="16" />
+      <option name="time" value="17" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2203,14 +2150,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/events/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1887" max-vertical-offset="6256">
-          <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/teams/team_list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="782">
@@ -2263,8 +2202,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/enet/css/sass/article.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5483871" vertical-offset="969" max-vertical-offset="1309">
-          <caret line="65" column="20" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="20" />
+        <state vertical-scroll-proportion="-8.923077" vertical-offset="890" max-vertical-offset="1326">
+          <caret line="66" column="16" selection-start-line="66" selection-start-column="16" selection-end-line="66" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7044199" vertical-offset="1377" max-vertical-offset="6120">
+          <caret line="106" column="16" selection-start-line="106" selection-start-column="16" selection-end-line="106" selection-end-column="16" />
           <folding />
         </state>
       </provider>

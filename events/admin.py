@@ -100,9 +100,11 @@ class MyEventAdmin(admin.ModelAdmin):
         qs = super(MyEventAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs.filter(
-            Q(organizing_committee__in=request.user.teams_administered()) | Q(
-                organizers=request.user))
+        qsa = list(qs.filter(organizing_committe_in=request.user.teams_administered()))
+        qsb = qs.filter(organizers=request.user)
+        for item in qsb:
+            qsa.append(item)
+        return qs
 
 
 class OutgoingApplicationFilter(admin.SimpleListFilter):
