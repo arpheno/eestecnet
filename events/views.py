@@ -23,6 +23,7 @@ from django.shortcuts import redirect, get_object_or_404
 
 
 
+
 # Create your views here.
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
@@ -250,6 +251,14 @@ class ApplyToEvent(EventMixin, DialogFormMixin, CreateView):
         return reverse('event', kwargs=self.kwargs)
 
     def form_valid(self, form):
+        if not self.request.user.teams:
+            messages.add_message(
+                self.request,
+                messages.INFO,
+                'Only members of EESTEC commitments are entitled to apply for EESTEC '
+                'Events. Please Register with a local commitment or find out how to '
+                'found an observer. It is super easy')
+            return redirect("/")
         application = form.save(commit=False)
         application.applicant = self.request.user
         application.target = Event.objects.get(slug=self.kwargs['slug'])
@@ -337,17 +346,16 @@ class Participations(EventMixin, DialogFormMixin, UpdateWithInlinesView):
     form_title = "These people want to participate in the event!"
 
 
-
 class CreateEvent(DialogFormMixin, CreateWithInlinesView):
     model = Event
     form_class = EventCreationForm
     form_title = "Please fill in this form"
     action = ""
-    form_id="createeventform"
+    form_id = "createeventform"
     inlines = [EventImageInline]
     parent_template = "events/event_list.html"
     protected = 0
-    additional_context = {"appendix":""" <script type="text/javascript">
+    additional_context = {"appendix": """ <script type="text/javascript">
         $(function () {
             $("input[type=submit]").button();
         });
@@ -363,8 +371,10 @@ class CreateEvent(DialogFormMixin, CreateWithInlinesView):
         context = super(CreateEvent, self).get_context_data(**kwargs)
         assert (context["form"])
         return context
+
     def get_success_url(self):
         return reverse_lazy("events")
+
     def get_form_kwargs(self):
         kwargs = super(CreateEvent, self).get_form_kwargs()
         kwargs['user'] = self.request.user
