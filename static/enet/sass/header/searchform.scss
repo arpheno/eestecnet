@@ -10,6 +10,7 @@ header nav form {
   align-items: center;
   background-color: $eestec-red-3;
   div {
+    flex-wrap: nowrap;
     height: 30px;
     padding: 3px;
     background-color: $eestec-red-4;

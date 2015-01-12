@@ -1,6 +1,4 @@
 section.news {
-  display: flex;
-  flex-wrap: wrap;
   padding: 5px;
   > ul {
     flex: 1 1 100%;
@@ -10,7 +8,6 @@ section.news {
     margin: 0px 20px 0px 10px;
   }
   p, div {
-    font-size: 12px;
     margin: 10px 30px 0px 0px;
     flex: 1 1;
     text-align: justify;
@@ -19,13 +16,10 @@ section.news {
     color: blue;
   }
   h1 {
-    display: flex;
-    justify-content: space-between;
     padding-right: 30px;
-    align-content: center;
     span {
       color: black;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: normal;
 
     }

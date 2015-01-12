@@ -5,6 +5,30 @@
 {% block maincontent %}
     <main class="home">
         <div class="donate_and_newsletter">
+
+            <div class="aboutus">
+            <h1>About Us</h1>
+
+            <p>Electrical Engineering Students' European Association is an apolitical,
+                non-governmental and non-profit organization which targets and trains
+                through its activities students from electrical profile Universities,
+                Institutes and Technical Schools in Europe. </p>
+            <hr>
+            <p>The association was founded in The Netherlands, in 1986. Nowadays, EESTEC
+                is present in 28 countries and 53 universities across Europe with over
+                6000 members of whom 3000 are currently active, and indirectly, EESTEC is
+                addressing all students in the faculties that EESTEC exists.</p>
+            </div>
+            <div class="contact">
+                <h1>Contact</h1>
+
+                <div class="social">
+                    {% include 'base/footer/social.html' %}
+                </div>
+                <a style="background-color: transparent;" href="mailto:board@eestec.net">board@eestec.net</a>
+                <address>Mekelweg 4, 2628 CD Delft, The Netherlands</address>
+
+            </div>
             <div class="donate">
                 <p>Spot a bug?</p>
                 <a href="{% url 'website-feedback' %}">
@@ -17,38 +41,26 @@
                     <input type="text" name="mailsub">
                     <input class="submit" type="submit"
                            value="Sign up for our Newsletter">
-            </form>
+                </form>
+            </div>
         </div>
-        </div>
-        <nav>
-            <h1>About Us</h1>
-
-            <p>Electrical Engineering Students' European Association is an apolitical,
-                non-governmental and non-profit organization which targets and trains
-                through its activities students from electrical profile Universities,
-                Institutes and Technical Schools in Europe. </p>
-            <hr>
-            <p>The association was founded in The Netherlands, in 1986. Nowadays, EESTEC
-                is present in 28 countries and 53 universities across Europe with over
-                6000 members of whom 3000 are currently active, and indirectly, EESTEC is
-                addressing all students in the faculties that EESTEC exists.</p>
-        </nav>
         <ul class="pgwSlider">
-        {% for object in object_list %}
+            {% for object in object_list %}
             <li>
-                {% thumbnail object.entry_image "1087x480" quality=75 crop="center" as im %}
-                    <img src="{{ im.url }}"
-                {% endthumbnail %}
-                         alt="{{ object.headline }}"
-                         data-description="
+                <a href="{% url 'news' object.slug %}">
+                    {% thumbnail object.entry_image "1087x480" quality=75 crop="center" as im %}
+                        <img src="{{ im.url }}"
+                    {% endthumbnail %}
+                             alt="{{ object.headline }}"
+                             data-description="
                                 {% autoescape off %}
                                     {{ object.content|truncatewords:50 }}
                                     {% ifnotequal object.content|truncatewords:50|length object.content|truncatewords:51|length %}
-                                        <a href=\"{% url 'news' object.slug %}\"
-                             style="font-weight: bold;\"> Read more</a>"
-                         {% endifnotequal %}
-                         {% endautoescape %}
-                ">
+                                        <a href='{% url 'news' object.slug %}'
+                                 style='font-weight: bold;'> Read more</a>"
+                             {% endifnotequal %}
+                    {% endautoescape %}
+                    "></a>
             </li>
             {% endfor %}
         </ul>

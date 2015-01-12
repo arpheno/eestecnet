@@ -1,62 +1,9 @@
 @import ../definitions
 main.home
   @extend ._flex_center
-  @media (max-width: 1000px)
-    padding: 1px
   background: none
-  padding: 0px 1px 0px 0px
-  .aboutus
-    @extend ._flex_center
-    order: 2
-    margin: 30px
+  h1, h2, h3, b
     color: white
-    min-height: 100px
-    position: relative
-    flex-wrap: wrap
-    h1
-      text-align: center
-    p
-      @media screen and (min-width: 1200px)
-        padding: 20px
-      display: flex
-      padding: 10px
-
-
-    background-color: $eestec-grey-1
-    @media screen and (max-width: 1000px)
-      flex: 1 1 100%
-
-  #preview
-
-    @media screen and (max-width: 1000px)
-      height: initial
-
-    flex: 1 1 100%
-    height: 480px
-    position: relative
-    justify-content: center
-
-    div.news_stub
-      @extend ._flex
-      p
-        @media screen and (max-width: 1000px)
-          margin: 0px
-          padding: 0px
-        padding: 0px 200px
-        font-size: 16px
-        line-height: 1.6em
-      h1
-        @media screen and (max-width: 1000px)
-          margin: 0px
-          padding: 0px
-        padding: 0px 220px
-      background-color: rgba(255, 255, 255, 0.5)
-
-
-    img, .pictures, #news
-      @media screen and (max-width: 1000px)
-        height: initial
-
-      position: relative
+    border-bottom: 1px solid white
 
 @import donate_and_newsletter
