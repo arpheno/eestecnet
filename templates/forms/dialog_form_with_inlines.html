@@ -3,8 +3,7 @@
     <script type="text/javascript">
         $(function () {
             $("#{{ id }} input[type=submit]").button();
-            /*$("#
-            {{ id }} form").submit(function () {
+            $("#{{ id }} form").submit(function () {
                 $.ajax({
                     type: "POST",
                     url: $(this).attr("action"),
@@ -14,9 +13,13 @@
                     statusCode: {
                         200: function (data) {
                             if (data.content) {
-                                $("#dialogform").html(data.content);
-                            }
-                            else {
+                                $.pgwModal({
+                                    content: data.content,
+                                    loadingContent: '<span style="text-align:center">Loading in progress</span>',
+                                    titleBar: false,
+                                    maxWidth: 800
+                                });
+                            } else {
                                 $("#{{ id }}").dialog("close");
                                 location.reload();
                             }
@@ -27,7 +30,7 @@
                     }
                 });
                 return false;
-             });*/
+            });
         });
     </script>
 {% endblock %}
