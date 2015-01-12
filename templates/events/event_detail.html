@@ -11,31 +11,31 @@
     {% endfor %}
 {% endblock %}
 {% block details %}
-    <tr>
-        <td>Event Name</td>
-        <td>{{ object.name }} </td>
-    </tr>
-    <tr>
-        <td>Organizer</td>
-        <td>{% for oc in object.organizing_committee.all %}{{ oc }}{% endfor %}</td>
-    </tr>
-    <tr>
-        <td>Date</td>
-        <td>{{ object.start_date }} - {{ object.end_date }}</td>
-    </tr>
-    <tr>
-        <td>Deadline</td>
-        <td>{{ object.deadline }}</td>
-    </tr>
-    <tr>
-        <td>Maximum participants</td>
-        <td>{{ object.max_participants }} </td>
-    </tr>
-    <tr>
+    <div>
+        <span>Event Name</span>
+        <span>{{ object.name }} </span>
+    </div>
+    <div>
+        <span>Organizer</span>
+        <span>{% for oc in object.organizing_committee.all %}{{ oc }}{% endfor %}</span>
+    </div>
+    <div>
+        <span>Date</span>
+        <span>{{ object.start_date }} - {{ object.end_date }}</span>
+    </div>
+    <div>
+        <span>Deadline</span>
+        <span>{{ object.deadline }}</span>
+    </div>
+    <div>
+        <span>Maximum participants</span>
+        <span>{{ object.max_participants }} </span>
+    </div>
+    <div>
         {% block actions %}
             {% include 'events/actions.html' %}
         {% endblock %}
-    </tr>
+    </div>
 {% endblock %}
 {% block more %}
     <details open>
@@ -46,14 +46,14 @@
         {% endautoescape %}
         {% endblock %}
     </details>
-    <details>
-        <summary>Organizers</summary>
-        {% include 'account/eestecers.html' with object_list=object.organizers.all %}
-    </details>
-    <details>
-        <summary>Participants</summary>
-        {% include 'account/eestecers.html' with object_list=object.participants.all %}
-    </details>
+<h2>Organizers</h2>
+<div id="organizercontainer">
+</div>
+{% include 'account/grids/base.html' with object_list=object.organizers.all parent="#organizercontainer" %}
+<h2>Participants</h2>
+<div id="participantscontainer">
+</div>
+{% include 'account/grids/base.html' with object_list=object.participants.all parent="#participantscontainer" %}
 {% endblock %}
 {% block aside %}
     {% if user in object.applicants.all %}

@@ -14,7 +14,8 @@ def date_now(request):
 
 def login_processor(request):
     form = AuthenticationForm()
-    return {'loginform': form}
+
+    return {'loginform': form, 'userlist': [request.user, ]}
 
 
 def random_event_processor(request):

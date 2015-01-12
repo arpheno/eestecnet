@@ -1,21 +1,21 @@
 {% extends "base/prototypes/split.html" %}
 {% load thumbnail %}
 {% block main %}
-    <article class="{% block class  %}{% endblock %}">
+    <section class="{% block class %}{% endblock %}">
+        <h1>{% block title %}{% endblock %}</h1>
         <header>
-            <h1>{% block title %}{% endblock %}</h1>
 
             <div class="pictures cycle-slideshow">
                 {% block pictures %}
                 {% endblock %}
             </div>
-            <table class="details">
+            <div class="details">
             {% block details %}
                     {% block actions %}{% endblock %}
                 {% endblock %}
-            </table>
+            </div>
         </header>
         {% block more %}
         {% endblock %}
-    </article>
+    </section>
 {% endblock %}

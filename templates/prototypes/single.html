@@ -1,0 +1,44 @@
+<script type="text/javascript">
+    $(function () {
+        $("{% block egcontainer %}{{ parent }}{% endblock %}").elastic_grid({
+            'expandingHeight': 580,
+            'items': [
+                {
+                    'title': "{% block egtitle %}{{ object.name }}{% endblock %}",
+                    'description': "{% block egdescription %} {% filter escapejs %}{{ object.description|truncatewords:80 }}{% endfilter %}{% endblock %}",
+                    'thumbnail': [
+                        {% block egthumbnail %}
+                            {% thumbnail object.thumbnail "190x190" crop="center" as im %}
+                                "{{ im.url }}",
+                            {% endthumbnail %}
+                            {% for image in object.images.all %}
+                                {% thumbnail image "190x190" crop="center" as im %}
+                                    "{{ im.url }}",
+                                {% endthumbnail %}
+                            {% endfor %}
+                        {% endblock %}
+                    ],
+                    'large': [
+                        {% block eglarge %}
+                            {% thumbnail object.thumbnail "600x600" crop="center" as im %}
+                                "{{ im.url }}",
+                            {% endthumbnail %}
+                            {% for image in object.images.all %}
+                                {% thumbnail image "600x600" crop="center" as im %}
+                                    "{{ im.url }}",
+                                {% endthumbnail %}
+                            {% endfor %}
+                        {% endblock %}
+                    ],
+                    'tags': ['{% block egtags %}{% endblock %}'],
+                    'button_list': [{
+                        'title': 'Details',
+                        'url': '{{ object.get_absolute_url}}',
+                    }]
+
+                },
+            ]
+        })
+    });
+
+</script>

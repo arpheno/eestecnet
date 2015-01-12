@@ -14,7 +14,7 @@
     {% endblock %}
 {% else %}
     <div id="userarea">
-        {{ user.as_self }}
     </div>
+    {% include 'account/grids/base.html' with object_list=userlist parent="#userarea" %}
 {% endif %}
 

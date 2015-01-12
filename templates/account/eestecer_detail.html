@@ -11,31 +11,31 @@
 {% endblock %}
 
 {% block details %}
-    <tr>
-        <td>Name:</td>
-        <td>{{ object.get_full_name }}</td>
-    </tr>
+    <div>
+        <span>Name:</span>
+        <span>{{ object.get_full_name }}</span>
+    </div>
     {% if object.show_date_of_birth %}
-    <tr>
-        <td>Date of Birth:</td>
-        <td>{{ object.date_of_birth }}</td>
-    </tr>
+        <div>
+            <span>Date of Birth:</span>
+            <span>{{ object.date_of_birth }}</span>
+        </div>
     {% endif %}
-    <tr>
-        <td>Date Joined:</td>
-        <td>{{ object.date_joined }}</td>
+    <div>
+        <span>Date Joined:</span>
+        <span>{{ object.date_joined }}</span>
 
-    </tr>
-    <tr>
-        <td>Field of Study:</td>
-        <td>{{ object.field_of_study|title }}</td>
-    </tr>
+    </div>
+    <div>
+        <span>Field of Study:</span>
+        <span>{{ object.field_of_study|title }}</span>
+    </div>
     {% if object.curriculum_vitae %}
-        <tr>
-            <td>Curriculum Vitae</td>
-            <td><a href="{{ object.curriculum_vitae.url }}"
-                   style="color:blue;">Download</a></td>
-        </tr>
+        <div>
+            <span>Curriculum Vitae</span>
+            <span><a href="{{ object.curriculum_vitae.url }}"
+                     style="color:blue;">Download</a></span>
+        </div>
     {% endif %}
 {% endblock %}
 
@@ -45,21 +45,21 @@
             {{ object.personal }}
         {% endautoescape %}
     </div>
-    <details open>
-        <summary>LC and Teams</summary>
-        {% include 'teams/teams.html' with object_list=object.teams.all %}
-    </details>
-    {% if object.events_organized.all %}
-        <details open>
-            <h2>Last events Organized</h2>
-            {% include  'events/events.html' with object_list=object.events_organized.all %}
-        </details>
+<h2>Teams and LCs</h2>
+<div id="teamcontainer">
+</div>
+{% include 'teams/grids/base.html' with object_list=object.teams.all parent="#teamcontainer" %}
+{% if object.events_organized.all %}
+    <h2>Last Events Organized</h2>
+    <div id="eventocontainer">
+    </div>
+    {% include 'events/grids/base.html' with object_list=object.events_organized.all parent="#eventocontainer" %}
     {% endif %}
     {% if object.events.all %}
-        <details open>
-            <summary>Last events participated</summary>
-            {% include  'events/events.html' with object_list=object.events.all %}
-        </details>
+        <h2>Last Events Participated</h2>
+        <div id="eventcontainer">
+        </div>
+        {% include 'events/grids/base.html' with object_list=object.events.all parent="#eventcontainer" %}
     {% endif %}
     {% if object.achievements.all %}
         <details open>

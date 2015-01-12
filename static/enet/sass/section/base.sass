@@ -1,4 +1,13 @@
 section
   @extend ._flex
-  ul
+  header
+    align-content: space-around
+    align-items: stretch
     @extend ._flex
+  header > div
+    @extend ._flex_between
+    flex: 1 1 40%
+    align-content: space-around
+    align-items: stretch
+    div
+      @extend ._flex_between

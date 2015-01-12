@@ -11,30 +11,30 @@
     {% endfor %}
 {% endblock %}
 {% block details %}
-    <tr>
+    <div>
         {% if object.is_lc %}
-            <td>LC Name</td>
+            <span>LC Name</span>
         {% else %}
-            <td>Team Name</td>
+            <span>Team Name</span>
         {% endif %}
-        <td>{{ object.name }} </td>
-    </tr>
-    <tr>
-        <td>Founded:</td>
-        <td> {{ object.founded }}</td>
-    </tr>
+        <span>{{ object.name }} </span>
+    </div>
+    <div>
+        <span>Founded:</span>
+        <span> {{ object.founded }}</span>
+    </div>
     {% if object.is_lc %}
-        <tr>
-            <td>Website:</td>
-            <td>{{ object.website }}</td>
-        </tr>
+        <div>
+            <span>Website:</span>
+            <span>{{ object.website }}</span>
+        </div>
     {% endif %}
-    <tr>
-        <td>Number of Members</td>
-        <td>{{ object.member_count }}</td>
-    </tr>
-    <tr>
-        <td colspan="2">
+    <div>
+        <span>Number of Members</span>
+        <span>{{ object.member_count }}</span>
+    </div>
+    <div>
+        <span colspan="2">
             <div class="actions">
                 {% if user.is_authenticated %}
                     {% block application %}
@@ -56,8 +56,8 @@
                     {% endblock %}
                 {% endif %}
             </div>
-        </td>
-    </tr>
+        </span>
+    </div>
 
 {% endblock %}
 {% block more %}
@@ -69,28 +69,28 @@
             {% endautoescape %}
         {% endblock %}
     </details>
-    <details open>
-        <summary>Last Events</summary>
-        {% include 'events/events.html' with object_list=object.event_set.all %}
-    </details>
-    <details open>
-        {% if object.is_lc %}
-            <summary>Board</summary>
-        {% else %}
-            <summary>Coordinator</summary>
-        {% endif %}
-        {% include 'account/eestecers.html' with object_list=object.board %}
-    </details>
-    <details open>
-        <summary>Members</summary>
-        {% include 'account/eestecers.html' with object_list=object.normal_members %}
-    </details>
-    {% if object.alumni %}
-        <details>
-            <summary>Alumni</summary>
-            {% include 'account/eestecers.html' with object_list=object.alumni %}
-        </details>
-    {% endif %}
+<h2>Last Events</h2>
+<div id="eventcontainer">
+</div>
+{% include 'events/grids/base.html' with object_list=object.event_set.all parent="#eventcontainer" %}
+
+{% if object.is_lc %}
+    <h2>Board</h2>
+{% else %}
+    <h2>Coordinator</h2>
+{% endif %}
+<div id="boardcontainer">
+</div>
+{% include 'account/grids/base.html' with object_list=object.board.all parent="#boardcontainer" %}
+<h2>Members</h2>
+<div id="membercontainer">
+</div>
+{% include 'account/grids/base.html' with object_list=object.normal_members parent="#membercontainer" %}
+{% if object.alumni %}
+    <h2>Alumni</h2>
+    <div id="alumnicontainer"></div>
+    {% include 'account/grids/base.html' with object_list=object.alumni parent="#alumnicontainer" %}
+{% endif %}
 {% endblock %}
 
 {% block aside %}
