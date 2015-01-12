@@ -23,10 +23,12 @@
   src: url("../../fonts/HelveticaNeueLTPro-Lt.otf")
 
 
-h1, h2, h3, h4, h5, h6
+b, h1, h2, h3, h4, h5, h6
+  @extend ._flex_between
   font-family: $centurygothic
   align-items: center
   flex: 1 1 100%
+  font-size: 22px
 
 h1
   font-size: 20px
@@ -43,16 +45,16 @@ h4
 ul
   list-style: none
 
-html
-  font-size: 10px
-  font-family: $helvetica
 
 body
   @extend ._flex
   align-items: stretch
   max-width: 1280px
   //1280px => max viewport
-  font-size: 12px
+  font-size: 16px
   margin: 0px auto
   //This centers the body element
   background-image: url(../../img/bg.jpg)
+
+html
+  font-family: $helvetica

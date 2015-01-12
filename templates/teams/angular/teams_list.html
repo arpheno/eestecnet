@@ -2,7 +2,7 @@
 {% load compress %}
 {% block maincontent %}
     {% verbatim %}
-        <div data-ng-app="teamApp" data-ng-controller="teamsControllers">
+    <div data-ng-app="teamApp" data-ng-controller="TeamListCtrl">
         <ul>
             <li data-ng-repeat="team in teams">
                 <span>{{team.name}}</span>
@@ -16,10 +16,10 @@
             root = exports ? this
             root.teamsControllers = angular.module('teamsControllers', [])
             root.teamsControllers.controller('TeamListCtrl',
-                    ['$scope', 'Team', ($scope, Phone) ->
-                        $scope.phones = Phone.query()
-                        $scope.orderProp = 'age'
-                        ])
+                    ['$scope', 'Team', ($scope, Team) ->
+                        $scope.teams = Team.query()
+                    ]
+            )
             root.teamService = angular.module("teamService", ["ngResource",])
             root.teamService.factory "Team", [
                 "$resource"
@@ -29,7 +29,5 @@
             root.teamApp = angular.module('teamApp',
                     ["ngRoute", "teamsControllers", "teamService"])
         </script>
-
-
     {% endcompress %}
 {% endblock %}

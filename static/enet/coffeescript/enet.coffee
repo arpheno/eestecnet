@@ -11,6 +11,10 @@ $ ->
   $("#registerbutton").click( ->
     $("#dialog").load("/register/")
     return false
+    $('.pgwSlider').pgwSlider(
+      intervalDuration: 8000,
+      displayControls: true
+    );
   )
 PersonDialog = (wrapper) ->
   self = this

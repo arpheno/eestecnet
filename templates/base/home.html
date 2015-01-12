@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load compress %}
 {% load thumbnail %}
 {% load staticfiles %}
 {% block maincontent %}
@@ -32,48 +33,24 @@
                 6000 members of whom 3000 are currently active, and indirectly, EESTEC is
                 addressing all students in the faculties that EESTEC exists.</p>
         </nav>
-        <div id="preview" class="cycle-slideshow" data-cycle-slides="article"
-             data-cycle-timeout="8000">
+        <ul class="pgwSlider">
         {% for object in object_list %}
-            <article class="news">
-                    <div class="pictures">
-                        <a href="{% url "news" object.slug %}">
-                            {% thumbnail object.entry_image "1087x480" quality=75 crop="center" as im %}
-                            <img alt="{{ object.headline }}" src="{{ im.url }}">
-                        {% endthumbnail %}
-                        </a>
-                    </div>
-                    <footer>
-                        <div class="news_stub">
-                            <h1 style="display:flex;justify-content: space-between;">
-                                <span>{{ object.headline }}</span>
-                                <span style="font-size:10px;">{{ object.pub_date }}</span>
-                            </h1>
-
-                            <p>
+            <li>
+                {% thumbnail object.entry_image "1087x480" quality=75 crop="center" as im %}
+                    <img src="{{ im.url }}"
+                {% endthumbnail %}
+                         alt="{{ object.headline }}"
+                         data-description="
                                 {% autoescape off %}
                                     {{ object.content|truncatewords:50 }}
                                     {% ifnotequal object.content|truncatewords:50|length object.content|truncatewords:51|length %}
-                                        <a href="{% url "news" object.slug %}"
-                                           style="font-weight: bold;"> Read more</a>
-                                    {% endifnotequal %}
-                                {% endautoescape %}
-                            </p>
-                        </div>
-                        <div class="other_stories">
-                            <h2>Other top Stories:</h2>
-                            {% for other_object in object_list %}
-                                {% if other_object != object %}
-                                    <a href="{% url 'news' other_object.slug %}"
-                                       style="display:flex;justify-content: space-between;"><span>{{ other_object.headline }}</span><span
-                                            style="font-size:10px;">{{ object.pub_date }}</span></a>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    </footer>
-            </article>
+                                        <a href=\"{% url 'news' object.slug %}\"
+                             style="font-weight: bold;\"> Read more</a>"
+                         {% endifnotequal %}
+                         {% endautoescape %}
+                ">
+            </li>
             {% endfor %}
-        </div>
-
+        </ul>
     </main>
 {% endblock %}
