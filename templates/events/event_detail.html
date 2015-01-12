@@ -66,15 +66,14 @@
         <h2> Admin Actions</h2>
         <a href="{% url 'eventdescription' slug=object.slug %}" class="teamadmin">Change
             Description</a>
-        <a href="{% url 'eventchangedetails' slug=object.slug %}" class="teamadmin">Change
-            Details</a>
-        <a href="{% url 'eventimages' slug=object.slug %}" class="teamadmin"> Images </a>
-        <a href="{% url 'eventapplications' slug=object.slug %}" class="teamadmin">
-            Applications </a>
-        {% if object.pending_applications %}
-            <a href="{{ object.as_url }}/teamapplications"
-               class="teamadmin">View {{ object.pending_applications.count }}Applications </a>
-        {% endif %}
+        {% url 'eventchangedetails' slug=object.slug as url %}
+        {% include "prototypes/modal.html" with buttontext='Change Event Details' buttonurl=url %}
+        {% url 'eventimages' slug=object.slug as url %}
+        {% include "prototypes/modal.html" with buttontext='Event Images' buttonurl=url %}
+        {% url 'eventapplications' slug=object.slug as url %}
+        {% include "prototypes/modal.html" with buttontext='Applications' buttonurl=url %}
+        {% url 'eventparticipation' slug=object.slug as url %}
+        {% include "prototypes/modal.html" with buttontext='Participants' buttonurl=url %}
     {% endif %}
     <script type="text/javascript">
         $("a.teamadmin").button();

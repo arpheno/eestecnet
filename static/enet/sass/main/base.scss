@@ -51,10 +51,15 @@ body > main {
 }
 
 body > aside {
+
   @media only screen and (max-width: 45em) /* 640 */
   {
     border-width: 0px;
   }
+  button {
+    width: 200px;
+  }
+  display: flex;
   background-color: #5f6a6d;
   border-width: 0px 57px 0px 0px;
   align-content: flex-start;
@@ -73,7 +78,7 @@ body > aside {
     flex: 1 0 100%;
   }
   @media screen and (min-width: 1200px) {
-    padding: 30px;
+    flex: 0 0 20%;
   }
 }
 

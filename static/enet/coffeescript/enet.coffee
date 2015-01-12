@@ -6,7 +6,11 @@ $ ->
   $(".datetime").datetimepicker()
   $("a[href^=#]").click( (e) ->)
   $("#feedbackbutton").click( ->
-    $("#feedbackarea").load("/pages/feedback/")
+    $.pgwModal(
+      url: '/pages/feedback/',
+      loadingContent: '<span style="text-align:center">Loading in progress</span>',
+      titleBar: false
+    )
   )
   $("#registerbutton").click( ->
     $.pgwModal(

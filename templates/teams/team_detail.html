@@ -98,16 +98,10 @@
         <h2> Admin Actions</h2>
         <a href="{{ object.as_url }}board" id="board">Choose new board</a>
         <a href="{{ object.as_url }}description" id="board">Change Description</a>
-        <a href="{{ object.as_url }}details" id="board">Change Details</a>
-        <a href="{{ object.as_url }}members" id="board">Manage members</a>
-        <a href="{{ object.as_url }}images" id="board"> Images </a>
-        <a href="{{ object.as_url }}outgoing" id="board"> Outgoing </a>
-        {% if object.pending_applications %}
-            <a href="{{ object.as_url }}applications"
-               id="board">View {{ object.pending_applications.count }}Applications </a>
-        {% endif %}
-        <script type="text/javascript">
-            $("a#board").button();
-        </script>
+        {% include "prototypes/modal.html" with buttontext='Change Details' buttonurl=object.as_url|add:"details" %}
+        {% include "prototypes/modal.html" with buttontext='Manage Members' buttonurl=object.as_url|add:"members" %}
+        {% include "prototypes/modal.html" with buttontext='Images' buttonurl=object.as_url|add:"images" %}
+        {% include "prototypes/modal.html" with buttontext='Outgoing' buttonurl=object.as_url|add:"outgoing" %}
+        {% include "prototypes/modal.html" with buttontext='Incoming' buttonurl=object.as_url|add:"applications" %}
     {% endif %}
 {% endblock %}

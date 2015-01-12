@@ -71,8 +71,7 @@
 {% block aside %}
     <h2> Admin Actions</h2>
     {% if object == user %}
-        <a href="{% url 'userupdate' %}" id="updatepersonaldata">Update my Personal
-            Data</a>
+        {% include "prototypes/modal.html" with buttontext='Update my personal Data' buttonurl='/people/me/' %}
         {% if user.is_trainer %}
             <a href="{% url 'certificate' object.slug %}" id="trainercert">Training
                 Certificate

@@ -64,6 +64,8 @@ class ManageMembers(TeamMixin, DialogFormMixin, UpdateWithInlinesView):
     fields = ()
     inlines = [MembershipInline]
 
+    def action(self):
+        return self.get_object().get_absolute_url() + "members"
 
 class OutgoingApplications(TeamMixin, DialogFormMixin, ModelFormSetView):
     model = Application
@@ -75,11 +77,17 @@ class OutgoingApplications(TeamMixin, DialogFormMixin, ModelFormSetView):
         return super(OutgoingApplications, self).get_queryset().filter(
             applicant__in=get_own_members(self.request))
 
+    def action(self):
+        return self.get_object().get_absolute_url() + "outgoing"
+
 class TeamApplications(TeamMixin, DialogFormMixin, UpdateWithInlinesView):
     model = Event
     fields = ()
     inlines = [ApplicationInline]
     form_title = "These people want to join!"
+
+    def action(self):
+        return self.get_object().get_absolute_url() + "applications"
 
     def get_context_data(self, **kwargs):
         context = super(TeamApplications, self).get_context_data(**kwargs)
@@ -97,10 +105,16 @@ class TeamImages(TeamMixin, DialogFormMixin, UpdateWithInlinesView):
     inlines = [MemberImageInline]
     form_class = TeamImageForm
 
+    def action(self):
+        return self.get_object().get_absolute_url() + "images"
+
 
 class ChangeDetails(TeamMixin, DialogFormMixin, UpdateView):
     model = Team
     fields = ('name', 'website', 'address', 'founded', 'facebook')
+
+    def action(self):
+        return self.get_object().get_absolute_url() + "details"
 
 
 class ChangeDescription(TeamMixin, DialogFormMixin, UpdateView):

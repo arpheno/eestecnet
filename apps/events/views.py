@@ -26,6 +26,7 @@ from django.shortcuts import redirect, get_object_or_404
 
 
 
+
 # Create your views here.
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
@@ -318,6 +319,9 @@ class ChangeDetails(EventMixin, DialogFormMixin, UpdateView):
     model = Event
     form_class = EventUpdateForm
 
+    def action(self):
+        return reverse_lazy("eventchangedetails", kwargs=self.kwargs)
+
 
 class ChangeDescription(EventMixin, DialogFormMixin, UpdateView):
     form_class = DescriptionForm
@@ -331,12 +335,18 @@ class EventImages(EventMixin, DialogFormMixin, UpdateWithInlinesView):
                                    widgets={'thumbnail': ImageWidget()})
     inlines = [EventImageInline]
 
+    def action(self):
+        return reverse_lazy("eventimages", kwargs=self.kwargs)
+
 
 class IncomingApplications(EventMixin, DialogFormMixin, UpdateWithInlinesView):
     model = Event
     fields = ()
     inlines = [ApplicationInline]
     form_title = "These people want to participate in the event!"
+
+    def action(self):
+        return reverse_lazy("eventapplications", kwargs=self.kwargs)
 
 
 class Participations(EventMixin, DialogFormMixin, UpdateWithInlinesView):
@@ -351,7 +361,7 @@ class CreateEvent(DialogFormMixin, CreateWithInlinesView):
     model = Event
     form_class = EventCreationForm
     form_title = "Please fill in this form"
-    action = ""
+    action = reverse_lazy("create_event")
     form_id="createeventform"
     inlines = [EventImageInline]
     parent_template = "events/event_list.html"

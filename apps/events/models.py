@@ -10,7 +10,6 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from mailqueue.models import MailerMessage
-
 from apps.news.models import Membership
 
 
@@ -166,6 +165,8 @@ class Event(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('event', kwargs={'slug': self.slug})
     #TODO This isnt working right
     #workshops=WorkshopManager()
     #training=TrainingManager()
