@@ -34,11 +34,12 @@
         <script type="text/javascript">
             $(function () {
                 $("#membercontainer").elastic_grid({
+                    'expandingHeight': 600,
                     'items': [
                         {% for object in object_list %}
                             {
                                 'title': "{{ object.name }}",
-                                'description': " {% filter escapejs %}{{ object.description }}{% endfilter %}",
+                                'description': " {% filter escapejs %}{{ object.description|truncatewords:80 }}{% endfilter %}",
                                 'thumbnail': [
                                     {% thumbnail object.thumbnail "190x190" crop="center" as im %}
                                         "{{ im.url }}",
