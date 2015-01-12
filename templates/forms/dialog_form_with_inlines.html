@@ -2,10 +2,6 @@
 {% block formjavascript %}
     <script type="text/javascript">
         $(function () {
-            $("#{{ id }}").dialog({
-                width: 600,
-                title: "{{ title }}"
-            });
             $("#{{ id }} input[type=submit]").button();
             /*$("#
             {{ id }} form").submit(function () {

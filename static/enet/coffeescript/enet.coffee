@@ -9,8 +9,12 @@ $ ->
     $("#feedbackarea").load("/pages/feedback/")
   )
   $("#registerbutton").click( ->
-    $("#dialog").load("/register/")
-    return false
+    $.pgwModal(
+      url: '/register/',
+      loadingContent: '<span style="text-align:center">Loading in progress</span>',
+      titleBar: false
+    )
+    return false;
   )
   $('.pgwSlider').pgwSlider(
     intervalDuration: 8000,
