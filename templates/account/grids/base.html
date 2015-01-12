@@ -1,0 +1,9 @@
+{% extends 'prototypes/elasticgrid.html' %}
+{% load thumbnail %}
+{% block egtags %}person{% endblock %}
+{% block egtitle %}{{ object.get_full_name }}{% endblock %}
+{% block egthumbnail %}
+    {% thumbnail object.profile_picture "190x190" crop="center" as im %} "{{ im.url }}",
+    {% endthumbnail %}{% endblock %}
+{% block eglarge %} {% thumbnail object.profile_picture "600x600" crop="center" as im %}
+    "{{ im.url }}", {% endthumbnail %}{% endblock %}

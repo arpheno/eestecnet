@@ -1,0 +1,12 @@
+{% extends 'prototypes/elasticgrid.html' %}
+{% block egtags %}{{ object.category }}{% endblock %}
+{% block egdescription %}{% filter escapejs %}{{ object.category|title }} organized by
+    {% for oc in object.organizing_committee.all %}{{ oc }}{% endfor %}
+    <hr>
+    From
+    <date>{{ object.start_date }}</date>till
+    <date>{{ object.end_date }}</date><br>
+    ApplicationDeadline
+    <date>{{ object.deadline }} </date>
+    <hr>
+    {{ object.description|truncatewords:70 }}{% endfilter %} {% endblock %}
