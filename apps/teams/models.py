@@ -76,7 +76,8 @@ class Team(models.Model):
         if self.is_lc():
             return reverse('cities:detail', kwargs={'slug': self.slug})
         return reverse('teams:detail', kwargs={'slug': self.slug})
-
+    def get_absolute_url(self):
+        return self.as_url()
 
     #Members
     users = models.ManyToManyField(

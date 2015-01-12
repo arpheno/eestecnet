@@ -1,5 +1,6 @@
 {% extends 'base/prototypes/split.html' %}
 {% block main %}
     <h2 class="post_title">People</h2>
-    {% include 'account/eestecers.html' with object_list=object_list %}
+    <div id="peoplecontainer"></div>
+    {% include 'account/grids/base.html' with parent="#peoplecontainer" %}
 {% endblock %}

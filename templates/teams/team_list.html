@@ -13,9 +13,6 @@
         {% compress js %}
             <script src="{% static 'leaflet/leaflet.js' %}"></script>
             <script src="{% static 'enet/testleaf.js' %}"></script>
-            <script src="{% static 'elasticgrid/js/modernizr.custom.js' %}"></script>
-            <script src="{% static 'elasticgrid/js/classie.js' %}"></script>
-            <script src="{% static 'elasticgrid/js/elastic_grid.min.js' %}"></script>
             <script type="text/javascript">
                 $(function () {
                     {% for object in object_list %}
@@ -31,55 +28,8 @@
             </script>
 
         {% endcompress %}
-        <script type="text/javascript">
-            $(function () {
-                $("#membercontainer").elastic_grid({
-                    'expandingHeight': 600,
-                    'items': [
-                        {% for object in object_list %}
-                            {
-                                'title': "{{ object.name }}",
-                                'description': " {% filter escapejs %}{{ object.description|truncatewords:80 }}{% endfilter %}",
-                                'thumbnail': [
-                                    {% thumbnail object.thumbnail "190x190" crop="center" as im %}
-                                        "{{ im.url }}",
-                                    {% endthumbnail %}
-                                    {% for image in object.images.all %}
-                                        {% thumbnail image "190x190" crop="center" as im %}
-                                            "{{ im.url }}",
-                                        {% endthumbnail %}
-                                    {% endfor %}
-                                ],
-                                'large': [
-                                    {% thumbnail object.thumbnail "600x600" crop="center" as im %}
-                                        "{{ im.url }}",
-                                    {% endthumbnail %}
-                                    {% for image in object.images.all %}
-                                        {% thumbnail image "600x600" crop="center" as im %}
-                                            "{{ im.url }}",
-                                        {% endthumbnail %}
-                                    {% endfor %}
-                                ],
-                                'tags': ['commitment'],
-                                'button_list': [{
-                                    'title': 'Details',
-                                    'url': '{{ object.as_url}}',
-                                }]
+        {% include 'teams/grids/base.html' with parent="#membercontainer" %}
 
-                            },
-                        {% endfor %}
-                    ]
-                })
-            });
-
-        </script>
-        <link rel="stylesheet"
-              href="{% static 'elasticgrid/css/elastic_grid.min.css' %}"/>
-        <style scoped="scoped" type="text/css">
-            .og-expander {
-                z-index: 9;
-            }
-        </style>
         <h1>Members</h1>
         <div id="map">
         </div>

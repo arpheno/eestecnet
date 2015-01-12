@@ -1,38 +1,20 @@
 {% extends 'base/prototypes/split.html' %}
 {% block main %}
     <h1>Events organized by EESTEC</h1>
-    <p>EESTEC workshops are <b>free</b>. On a list below you can see all current and past
+    <p>EESTEC workshops are free. On a list below you can see all current and past
         events. Click button to show event by status.</p>
-    <section class="events">
-        <form>
-            <div><input type="checkbox" name="workshop" checked value="workshop">
-
-                <div>Workshops</div>
-            </div>
-            <div><input type="checkbox" name="exchange" checked value="exchange">
-
-                <div>Exchanges</div>
-            </div>
-            <div><input type="checkbox" name="operational" checked
-                        value="operational">
-
-                <div>Operational Events</div>
-            </div>
-            <div><input type="checkbox" name="imw" checked value="imw">
-
-                <div>International Motivational Weekends</div>
-            </div>
-            <div><input type="checkbox" name="training" value="training">
-
-                <div>Training Sessions</div>
-            </div>
-        </form>
-        <h2>Open for Application</h2>
-        {% include 'events/events.html' with object_list=active_list %}
-        <h2>Events Pending</h2>
-        {% include 'events/events.html' with object_list=pending_list %}
+    <h2>Open for Application</h2>
+    <div id="openevents">
+    </div>
+    {% include 'events/grids/base.html' with object_list=active_list parent="#openevents" %}
+    <h2>Events Pending</h2>
+    <div id="pendingevents">
+    </div>
+    {% include 'events/grids/base.html' with object_list=pending_list parent="#pendingevents"%}
         <h2>Past Events</h2>
-        {% include 'events/events.html' with object_list=over_list %}
+        <div id="pastevents">
+        </div>
+        {% include 'events/grids/base.html' with object_list=past_list parent="#pastevents" %}
     </section>
     <script type="text/javascript">
         $(function () {
