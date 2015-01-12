@@ -6,9 +6,6 @@ celery
 Django
 django-appconf
 django-autoslug
-django-backbone
-django-celery
-django-common
 django-compressor
 django-debugtools
 django-extra-views

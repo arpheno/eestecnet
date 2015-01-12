@@ -3,7 +3,7 @@ AUTH_USER_MODEL = 'account.Eestecer'
 ROOT_URLCONF = 'eestecnet.urls'
 VERSION = 1
 from conf.apps import *
-
+# Third party apps
 INSTALLED_APPS += (
     'compressor',
     'haystack',
@@ -15,6 +15,7 @@ INSTALLED_APPS += (
     'sorl.thumbnail',
     'form_utils',
     'reversion',
+    'djangular',
 )
 # Own apps
 INSTALLED_APPS += (

@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.views.generic import ListView, RedirectView
+from django.views.generic import ListView, RedirectView, TemplateView
 from haystack.forms import SearchForm
 from haystack.views import SearchView
 
@@ -22,6 +22,8 @@ urlpatterns = patterns(
     url(r'^$', home.as_view(), name='home'),
     url(r'^teams/?$', TeamList.as_view(), name='teams'),
     url(r'^cities/?$', CommitmentList.as_view(), name='cities'),
+    url(r'^cities/angular/?$',
+        TemplateView.as_view(template_name="teams/angular/teams_list.html")),
     url(r'^cities', include('apps.teams.urls', namespace="cities")),
     url(r'^teams', include('apps.teams.urls', namespace="teams")),
     url(r'^events', include('apps.events.urls')),
@@ -32,7 +34,8 @@ urlpatterns = patterns(
     url(r'^statistics', include('apps.statistics.urls')),  # not currently used
 )
 # Orphans
-urlpatterns += patterns('',
+urlpatterns += patterns(
+    '',
     url(r'^login/?', Login.as_view(), name='login'),
     url(r'^complete/(?P<ida>[-\w]+)/?$', complete, name='complete'),
     url(r'^logout/?', Logout.as_view(), name='logout'),
@@ -46,11 +49,11 @@ urlpatterns += patterns('',
     url(r'^governance/?$', Governance.as_view(), name='governance'),
 )
 # Redirects
-urlpatterns += patterns('',
-                        url(r'seminar/?',
-                            RedirectView.as_view(url="http://www.crowdcast.io/eestec1"))
+urlpatterns += patterns(
+    '',
+    url(r'seminar/?', RedirectView.as_view(url="http://www.crowdcast.io/eestec1"))
 )
-#If DEBUG is set, include the local file server
+# If DEBUG is set, include the local file server
 if settings.DEBUG:
     urlpatterns += patterns(
         '',

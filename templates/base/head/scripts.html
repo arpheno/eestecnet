@@ -1,5 +1,8 @@
 {% load compress %}
 {% load static %}
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-resource.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.js"></script>
 {% compress js %}
     <script type="text/javascript"
             src="{% static 'prefixfree/js/prefixfree.min.js' %}"></script>
@@ -11,6 +14,8 @@
             src="{% static 'imgcycle/js/jquery.cycle2.min.js' %}"></script>
     <script type="text/javascript"
             src="{% static 'jquery/js/jquery-ui-timepicker-addon.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'pgwslider/pgwslider.js' %}"></script>
     <script type="text/javascript"
             src="{% static 'image-picker/js/image-picker.min.js' %}"></script>
     <script type="text/coffeescript"
