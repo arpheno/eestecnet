@@ -5,41 +5,41 @@
 
 .action-button {
   position: relative;
-  padding: 1.0rem 4.0rem;
-  border-radius: 1.0rem;
-  font-size: 2.5rem;
+  padding: 10px 40px;
+  border-radius: 10px;
+  font-size: 25px;
   color: #FFF;
   text-decoration: none;
 }
 
 .action-button:active {
-  transform: translate(.0rem, .5rem);
-  -webkit-transform: translate(.0rem, .5rem);
-  border-bottom: .1rem solid;
+  transform: translate(0px, 5px);
+  -webkit-transform: translate(0px, 5px);
+  border-bottom: 1px solid;
 }
 
 .blue {
   background-color: #3498DB;
-  border-bottom: .5rem solid #2980B9;
-  text-shadow: .0rem -.2rem #2980B9;
+  border-bottom: 5px solid #2980B9;
+  text-shadow: 0px -2px #2980B9;
 }
 
 .red {
   background-color: #E74C3C;
-  border-bottom: .5rem solid #BD3E31;
-  text-shadow: .0rem -.2rem #BD3E31;
+  border-bottom: 5px solid #BD3E31;
+  text-shadow: 0px -2px #BD3E31;
 }
 
 .green {
   background-color: #82BF56;
-  border-bottom: .5rem solid #669644;
-  text-shadow: .0rem -.2rem #669644;
+  border-bottom: 5px solid #669644;
+  text-shadow: 0px -2px #669644;
 }
 
 .yellow {
   background-color: #F2CF66;
-  border-bottom: .5rem solid #D1B358;
-  text-shadow: .0rem -.2rem #D1B358;
+  border-bottom: 5px solid #D1B358;
+  text-shadow: 0px -2px #D1B358;
 }
 
 #twitter svg:hover {

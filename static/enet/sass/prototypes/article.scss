@@ -21,8 +21,8 @@ article {
       {
         width: 100%;
       }
-      width: 37.5rem;
-      height: 22.5rem;
+      width: 375px;
+      height: 225px;
     }
     .details {
       @media only screen and (max-width: 45em) /* 640 */
@@ -32,21 +32,21 @@ article {
         width: 100%;
 
       }
-      min-width: 40.0rem;
+      min-width: 400px;
       tr {
         td {
           &:first-child {
-            font-size: 1.8rem;
+            font-size: 18px;
             font-weight: bold;
             color: $eestec-red-3;
             font-family: $centurygothic;
 
           }
         }
-        margin-bottom: 1.5rem;
-        border-bottom: .1rem $eestec-red-3 solid;
+        margin-bottom: 15px;
+        border-bottom: 1px $eestec-red-3 solid;
         &:last-child {
-          height: 5.5rem;
+          height: 55px;
           border: none;
 
         }

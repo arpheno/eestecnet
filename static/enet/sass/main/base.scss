@@ -1,7 +1,7 @@
 body > main {
   @extend ._flex;
-  padding: .1rem;
-  border-width: .0rem 0.1rem .0rem 0.1rem;
+  padding: 1px;
+  border-width: 0px 01px 0px 01px;
   flex: 1 1;
   z-index: 2;
   border-color: #a2a0a0;
@@ -9,14 +9,14 @@ body > main {
   background-color: white;
   flex-wrap: wrap;
   padding-bottom: 45px;
-  box-shadow: .0rem .0rem 2.0rem 1.0rem rgba(0, 0, 0, 0.1),
-  -.0rem .0rem 2.0rem 1.0rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.1),
+  -0px 0px 20px 10px rgba(0, 0, 0, 0.1);
   justify-content: center;
   section {
     flex: 1 0 100%;
   }
   > form {
-    width: 48.0rem;
+    width: 480px;
     display: flex;
     background-color: rgba(0, 0, 0, 0.1);
     position: relative;
@@ -38,10 +38,10 @@ body > main {
 }
 
 .grad {
-  height: 34.0rem;
+  height: 340px;
   width: 100%;
-  top: .0rem;
-  left: .0rem;
+  top: 0px;
+  left: 0px;
   position: absolute;
   z-index: -1;
   background: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.04));
@@ -53,9 +53,9 @@ body > aside {
     border-width: 0px;
   }
   background-color: #5f6a6d;
-  border-width: .0rem 5.7rem .0rem .0rem;
+  border-width: 0px 57px 0px 0px;
   align-content: flex-start;
-  padding-top: 3.0rem;
+  padding-top: 30px;
   border-style: solid;
   border-color: #3f4749;
   z-index: 1;
@@ -70,7 +70,7 @@ body > aside {
     flex: 1 0 100%;
   }
   @media screen and (min-width: 1200px) {
-    flex: 0 0 25.3rem;
+    flex: 0 0 253px;
   }
 }
 
@@ -85,7 +85,7 @@ body > aside {
     width: 100%;
   }
   p {
-    font-size: 1.6rem;
+    font-size: 16px;
   }
   address {
     padding: 10px;
@@ -95,13 +95,13 @@ body > aside {
       td {
         padding: 5px;
         &:first-child {
-          font-size: 1.8rem;
+          font-size: 18px;
           font-weight: bold;
           color: $eestec-red-3;
           font-family: $centurygothic
         }
         &:last-child {
-          font-size: 1.8rem;
+          font-size: 18px;
           border: none;
         }
       }

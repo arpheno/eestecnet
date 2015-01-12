@@ -1,6 +1,6 @@
 /* css for timepicker */
 .ui-timepicker-div .ui-widget-header {
-  margin-bottom: .8rem;
+  margin-bottom: 8px;
 }
 
 .ui-timepicker-div dl {
@@ -10,11 +10,11 @@
 .ui-timepicker-div dl dt {
   float: left;
   clear: left;
-  padding: 0 0 0 .5rem;
+  padding: 0 0 0 5px;
 }
 
 .ui-timepicker-div dl dd {
-  margin: 0 1.0rem 1.0rem 45%;
+  margin: 0 10px 10px 45%;
 }
 
 .ui-timepicker-div td {
@@ -34,7 +34,7 @@
 
 .ui-timepicker-rtl dl {
   text-align: right;
-  padding: 0 .5rem 0 0;
+  padding: 0 5px 0 0;
 }
 
 .ui-timepicker-rtl dl dt {
@@ -43,5 +43,5 @@
 }
 
 .ui-timepicker-rtl dl dd {
-  margin: 0 45% 1.0rem 1.0rem;
+  margin: 0 45% 10px 10px;
 }

@@ -45,7 +45,7 @@ h1, h2, h3 {
     color: $darkereestec;
   }
   color: $darkereestec;
-  margin: 0.4rem;
+  margin: 04px;
   padding: 0% 0% 0.5% 5%;
   flex: 1 1 100%;
   border-bottom: 1px solid $darkeestec;
@@ -56,20 +56,20 @@ h4, h5, h6 {
   color: black;
   font-weight: bold;
   text-align: center;
-  font-size: 1.6rem;
+  font-size: 16px;
 
 }
 
 h1 {
-  font-size: 2.0rem;
+  font-size: 20px;
 }
 
 h2 {
-  font-size: 1.8rem;
+  font-size: 18px;
 }
 
 h3 {
-  font-size: 1.6rem;
+  font-size: 16px;
 }
 
 body, header, #sponsors, footer, aside, main {
@@ -83,12 +83,12 @@ body, header, #sponsors, footer, aside, main {
 }
 
 html > body {
-  max-width: 128.0rem;
+  max-width: 1280px;
   margin: 0rem auto;
-  font-size: 1.2rem;
+  font-size: 12px;
   > main {
-    padding: .1rem;
-    border-width: .0rem 0.1rem .0rem 0.1rem;
+    padding: 1px;
+    border-width: 0px 01px 0px 01px;
     flex: 1 1;
     z-index: 2;
     border-color: #a2a0a0;
@@ -96,14 +96,14 @@ html > body {
     background-color: white;
     flex-wrap: wrap;
     padding-bottom: 45px;
-    box-shadow: .0rem .0rem 2.0rem 1.0rem rgba(0, 0, 0, 0.1),
-    -.0rem .0rem 2.0rem 1.0rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.1),
+    -0px 0px 20px 10px rgba(0, 0, 0, 0.1);
     justify-content: center;
     section {
       flex: 1 0 100%;
     }
     > form {
-      width: 48.0rem;
+      width: 480px;
       display: flex;
       background-color: rgba(0, 0, 0, 0.1);
       position: relative;
@@ -124,10 +124,10 @@ html > body {
     }
   }
   .grad {
-    height: 34.0rem;
+    height: 340px;
     width: 100%;
-    top: .0rem;
-    left: .0rem;
+    top: 0px;
+    left: 0px;
     position: absolute;
     z-index: -1;
     background: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.04));
@@ -138,9 +138,9 @@ html > body {
       border-width: 0px;
     }
     background-color: #5f6a6d;
-    border-width: .0rem 5.7rem .0rem .0rem;
+    border-width: 0px 57px 0px 0px;
     align-content: flex-start;
-    padding-top: 3.0rem;
+    padding-top: 30px;
     border-style: solid;
     border-color: #3f4749;
     z-index: 1;
@@ -155,7 +155,7 @@ html > body {
       flex: 1 0 100%;
     }
     @media screen and (min-width: 1200px) {
-      flex: 0 0 25.3rem;
+      flex: 0 0 253px;
     }
   }
 
@@ -181,7 +181,7 @@ html > body {
       width: 100%;
     }
     p {
-      font-size: 1.6rem;
+      font-size: 16px;
     }
     address {
       padding: 10px;
@@ -191,13 +191,13 @@ html > body {
         td {
           padding: 5px;
           &:first-child {
-            font-size: 1.8rem;
+            font-size: 18px;
             font-weight: bold;
             color: $darkeestec;
             font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
           }
           &:last-child {
-            font-size: 1.8rem;
+            font-size: 18px;
             border: none;
           }
         }
@@ -222,7 +222,7 @@ html > body {
         align-items: center;
         justify-content: center;
         img {
-          height: 3.0rem;
+          height: 30px;
         }
         p {
           color: $eestecgreylight;
@@ -231,7 +231,7 @@ html > body {
           font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
           font-weight: bold;
         }
-        height: 3.0rem;
+        height: 30px;
         width: auto;
       }
     }
@@ -247,9 +247,9 @@ html > body {
     justify-content: space-around;
     flex-wrap: wrap;
     border: red solid;
-    border-right: .2rem;
-    border-left: .2rem;
-    padding: 1.0rem .0rem;
+    border-right: 2px;
+    border-left: 2px;
+    padding: 10px 0px;
     background-color: #fff;
   }
 
@@ -264,7 +264,7 @@ html > body {
 
 
 .ui-button {
-  height: 3.0rem;
+  height: 30px;
   flex: 1 1 100%;
 }
 
