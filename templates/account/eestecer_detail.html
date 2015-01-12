@@ -41,9 +41,11 @@
 
 {% block more %}
     <div>
+        {% block personal %}
         {% autoescape off %}
             {{ object.personal }}
         {% endautoescape %}
+        {% endblock %}
     </div>
     <details open>
         <summary>LC and Teams</summary>
@@ -73,6 +75,8 @@
     {% if object == user %}
         <a href="{% url 'userupdate' %}" id="updatepersonaldata">Update my Personal
             Data</a>
+        <a href="{% url 'personalupdate' %}" id="personaldata">Update my Personal
+            Data</a>
         {% if user.is_trainer %}
             <a href="{% url 'certificate' object.slug %}" id="trainercert">Training
                 Certificate
@@ -80,6 +84,7 @@
         {% endif %}
         <script type="text/javascript">
             $("a#updatepersonaldata").button();
+            $("a#personaldata").button();
             $("a#trainercert").button();
         </script>
         {% if user.is_superuser %}

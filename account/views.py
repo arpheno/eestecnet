@@ -67,18 +67,34 @@ class EestecerUpdateForm(BetterModelForm):
                 'gender', 'date_of_birth', 'show_date_of_birth',
                 'profile_picture', 'field_of_study', 'curriculum_vitae']}),
             ('Contact Information', {'fields': [
-                'hangouts', 'mobile', 'personal', 'skype']}),
+                'hangouts', 'mobile', 'skype']}),
             ('Event Information', {'fields': [
                 'tshirt_size', 'passport_number', 'food_preferences', 'allergies']}),
             ('Administrative Information', {'fields': ['receive_eestec_active']}),
         ]
         widgets = {
             'date_of_birth': TextInput(attrs={'class': 'date'}),
-            'personal': EESTECEditor(include_jquery=False),
             'profile_picture': ImageWidget(
                 template='<span>%(image)s<br />%(input)s</span>'),
         }
 
+
+class EestecerPersonalForm(BetterModelForm):
+    class Meta:
+        model = Eestecer
+        widgets = {
+            'personal': EESTECEditor(include_jquery=False),
+        }
+        fields = ['personal', ]
+
+
+class PersonalUpdate(UpdateView):
+    form_class = EestecerPersonalForm
+    model = Eestecer
+    template_name = "account/eestecerpersonal.html"
+
+    def get_object(self, queryset=None):
+        return self.request.user
 class TrainingList(DetailView):
     template_name = "account/training_list.html"
     model = Eestecer
