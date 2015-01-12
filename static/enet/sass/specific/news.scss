@@ -5,9 +5,18 @@ section.news {
     justify-content: flex-start;
   }
   img {
+    @media only screen and (max-width: 45em) /* 640 */
+    {
+      margin: 0px;
+      flex: 1 1 100%;
+    }
     margin: 0px 20px 0px 10px;
   }
   p, div {
+    @media only screen and (max-width: 45em) {
+      margin: 0px;
+      flex: 1 1 100%;
+    }
     margin: 10px 30px 0px 0px;
     flex: 1 1;
     text-align: justify;

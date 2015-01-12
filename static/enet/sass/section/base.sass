@@ -5,6 +5,9 @@ section
     align-items: stretch
     @extend ._flex
   header > div
+    @media only screen and (max-width: 45em)
+      /* 640 */
+           flex: 1 1 100%
     @extend ._flex_between
     flex: 1 1 40%
     align-content: space-around

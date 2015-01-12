@@ -1,7 +1,7 @@
 from asana.asana import AsanaAPI
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
-from django.forms import ModelForm, TextInput, Textarea
+from django.forms import ModelForm, TextInput, Textarea, CharField
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView, UpdateView
 from extra_views import CreateWithInlinesView, InlineFormSet
@@ -58,13 +58,16 @@ class WebsiteFeedbackInline(InlineFormSet):
 
 
 class WebsiteFeedbackForm(BetterModelForm):
+    email = CharField(required=True,
+                      widget=TextInput(attrs={'placeholder': 'Your Email (optional)'}),
+                      label="")
+    subject = CharField(required=True,
+                        widget=TextInput(attrs={'placeholder': 'Subject'}), label="")
+    content = CharField(required=True,
+                        widget=Textarea(attrs={'cols': 50, 'placeholder': 'Details'}, ),
+                        label="")
     class Meta:
         model = WebsiteFeedback
-        widgets = {
-            'email': TextInput(attrs={'placeholder': 'Your Email (optional)'}),
-            'subject': TextInput(attrs={'placeholder': 'Subject'}),
-            'content': Textarea( attrs={'cols':50,'placeholder': 'Details'}),
-        }
         exclude = ['read']
 
 
