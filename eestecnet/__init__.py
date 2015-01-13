@@ -4,7 +4,6 @@ from datetime import timedelta
 
 from django.contrib.auth.models import Group, Permission
 from django.core.files import File
-from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.utils.datetime_safe import datetime
 
@@ -20,7 +19,7 @@ def create_stubs():
         stub = Stub.objects.create(
             content=open("eestecnet/stub/" + part + ".txt").read(),
             title=open("eestecnet/stub/" + part + "_head.txt").read(),
-            link=reverse(part),
+            link="/",
             group="activities"
         )
         with open('eestecnet/stub/' + part + '.jpg', 'rb') as doc_file:
@@ -29,7 +28,7 @@ def create_stubs():
         stub = Stub.objects.create(
             content=open("eestecnet/stub/" + part + ".txt").read(),
             title=open("eestecnet/stub/" + part + "_head.txt").read(),
-            link=reverse(part),
+            link="/",
             group="about"
         )
         with open('eestecnet/stub/' + part + '.jpg', 'rb') as doc_file:

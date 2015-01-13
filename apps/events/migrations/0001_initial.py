@@ -10,7 +10,6 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('teams', '__first__'),
     ]
 
     operations = [
@@ -24,7 +23,6 @@ class Migration(migrations.Migration):
                 ('letter', models.TextField(null=True, blank=True)),
                 ('priority', models.IntegerField(null=True, blank=True)),
                 ('accepted', models.BooleanField(default=False)),
-                ('applicant', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },
@@ -36,16 +34,23 @@ class Migration(migrations.Migration):
                 ('id',
                  models.AutoField(verbose_name='ID', serialize=False, auto_created=True,
                                   primary_key=True)),
-                ('name', models.CharField(unique=True, max_length=100)),
+                ('name', models.CharField(unique=True, max_length=50)),
                 ('category', models.CharField(default=b'workshop', max_length=40,
                                               choices=[(b'ssa', b'Soft Skills Academy'),
                                                        (b'exchange', b'Exchange'),
                                                        (b'workshop', b'Workshop'), (
+                                                       b'advanced_workshop',
+                                                       b'Advanced Skills Workshop'), (
+                                                       b'exclusive_workshop',
+                                                       b'Exclusive Workshop'), (
                                                        b'operational',
                                                        b'Operational Event'),
-                                                       (b'training', b'Training'),
-                                                       (b'imw', b'IMW'), (b'recruitment',
-                                                                          b'recruitment')])),
+                                                       (b'congress', b'Congress'), (
+                                                       b'ecm',
+                                                       b"EESTEC Chairpersons' Meeting"),
+                                                       (b'training', b'Training'), (
+                                                       b'recruitment',
+                                                       b'recruitment')])),
                 ('scope', models.CharField(default=b'international', max_length=15,
                                            choices=[(b'local', b'Local'), (
                                            b'international', b'International')])),
@@ -64,17 +69,17 @@ class Migration(migrations.Migration):
                 ('deadline',
                  models.DateTimeField(help_text='Until when can participants apply?',
                                       null=True, blank=True)),
+                ('summary', models.TextField()),
                 ('description', models.TextField(
                     help_text='Please provide a detailed description for interesed '
                               'readers')),
                 ('pax_report', models.TextField(null=True, blank=True)),
                 ('organizer_report', models.TextField(null=True, blank=True)),
-                ('applicants', models.ManyToManyField(related_name='applications',
+                ('applicants', models.ManyToManyField(related_name=b'applications',
                                                       through='events.Application',
                                                       to=settings.AUTH_USER_MODEL)),
-                ('organizers', models.ManyToManyField(related_name='events_organized',
+                ('organizers', models.ManyToManyField(related_name=b'events_organized',
                                                       to=settings.AUTH_USER_MODEL)),
-                ('organizing_committee', models.ManyToManyField(to='teams.Team')),
             ],
             options={
                 'ordering': ('name',),
@@ -90,41 +95,10 @@ class Migration(migrations.Migration):
                  models.AutoField(verbose_name='ID', serialize=False, auto_created=True,
                                   primary_key=True)),
                 ('image', models.ImageField(upload_to=b'eventimages')),
-                (
-                'property', models.ForeignKey(related_name='images', to='events.Event')),
+                ('property',
+                 models.ForeignKey(related_name=b'images', to='events.Event')),
             ],
             options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='GeneralQuestion',
-            fields=[
-                ('id',
-                 models.AutoField(verbose_name='ID', serialize=False, auto_created=True,
-                                  primary_key=True)),
-                ('question', models.TextField()),
-                ('answer', models.TextField(null=True, blank=True)),
-            ],
-            options={
-                'abstract': False,
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='MCQuestion',
-            fields=[
-                ('id',
-                 models.AutoField(verbose_name='ID', serialize=False, auto_created=True,
-                                  primary_key=True)),
-                ('question', models.TextField()),
-                ('answer', models.IntegerField(blank=True, max_length=10, null=True,
-                                               help_text=b'1 is worst, 5 is best',
-                                               choices=[(1, 1), (2, 2), (3, 3), (4, 4),
-                                                        (5, 5)])),
-            ],
-            options={
-                'abstract': False,
             },
             bases=(models.Model,),
         ),
@@ -143,19 +117,6 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': 'Participant',
                 'verbose_name_plural': 'Participants',
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='Sheet',
-            fields=[
-                ('id',
-                 models.AutoField(verbose_name='ID', serialize=False, auto_created=True,
-                                  primary_key=True)),
-                ('sheets', models.ManyToManyField(related_name='sheets_rel_+', null=True,
-                                                  to='events.Sheet', blank=True)),
-            ],
-            options={
             },
             bases=(models.Model,),
         ),
@@ -196,53 +157,5 @@ class Migration(migrations.Migration):
             field=models.OneToOneField(null=True, blank=True,
                                        to='events.Transportation'),
             preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='mcquestion',
-            name='sheet',
-            field=models.ForeignKey(blank=True, to='events.Sheet', null=True),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='generalquestion',
-            name='sheet',
-            field=models.ForeignKey(to='events.Sheet'),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='event',
-            name='participants',
-            field=models.ManyToManyField(related_name='events',
-                                         through='events.Participation',
-                                         to=settings.AUTH_USER_MODEL),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='application',
-            name='target',
-            field=models.ForeignKey(to='events.Event'),
-            preserve_default=True,
-        ),
-        migrations.AlterUniqueTogether(
-            name='application',
-            unique_together=set([('applicant', 'target')]),
-        ),
-        migrations.CreateModel(
-            name='IncomingApplication',
-            fields=[
-            ],
-            options={
-                'proxy': True,
-            },
-            bases=('events.application',),
-        ),
-        migrations.CreateModel(
-            name='OutgoingApplication',
-            fields=[
-            ],
-            options={
-                'proxy': True,
-            },
-            bases=('events.application',),
         ),
     ]

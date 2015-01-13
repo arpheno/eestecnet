@@ -6,14 +6,14 @@ from django.db import models, migrations
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('events', '0001_initial'),
+        ('account', '0003_auto_20141024_1024'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='sheet',
-            name='name',
-            field=models.CharField(default=b'Feedback Sheet', max_length=100),
+            model_name='eestecer',
+            name='personal',
+            field=models.TextField(null=True, blank=True),
             preserve_default=True,
         ),
     ]
