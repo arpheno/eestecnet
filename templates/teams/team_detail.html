@@ -11,53 +11,17 @@
     {% endfor %}
 {% endblock %}
 {% block details %}
-    <div>
-        {% if object.is_lc %}
-            <span>LC Name</span>
-        {% else %}
-            <span>Team Name</span>
-        {% endif %}
-        <span>{{ object.name }} </span>
-    </div>
-    <div>
-        <span>Founded:</span>
-        <span> {{ object.founded }}</span>
-    </div>
-    {% if object.is_lc %}
-        <div>
-            <span>Website:</span>
-            <span>{{ object.website }}</span>
+    <!-- These are the team information -->
+    {% for piece in information %}
+        {{ piece }}
+    {% endfor %}
+    {% if may_apply %}
+        <!-- If a user may apply, show the link to the modal -->
+        <div class="actions">
+            {% url 'eventapplication' recruitment.slug as url %}
+            {% include "prototypes/modal.html" with buttontext="Join" buttonurl=url %}
         </div>
     {% endif %}
-    <div>
-        <span>Number of Members</span>
-        <span>{{ object.member_count }}</span>
-    </div>
-    <div>
-        <span colspan="2">
-            <div class="actions">
-                {% if user.is_authenticated %}
-                    {% block application %}
-                        {% if not user in object.users.all and not user in object.pending_applications %}
-                            {% for event in object.event_set.all %}
-                                {% if event.category == "recruitment" %}
-                                    <a href="{% url 'eventapplication' event.slug %}"
-                                       class="action-button shadow animate red">
-                                        {% if object.type == "team" %}
-                                            Apply to this Team
-                                        {% else %}
-                                            Join this Commitment
-                                        {% endif %}
-                                    </a>
-                                {% endif %}
-                            {% endfor %}
-                        {% else %}
-                        {% endif %}
-                    {% endblock %}
-                {% endif %}
-            </div>
-        </span>
-    </div>
 
 {% endblock %}
 {% block more %}
@@ -69,39 +33,19 @@
             {% endautoescape %}
         {% endblock %}
     </details>
-<h2>Last Events</h2>
-<div id="eventcontainer">
-</div>
-{% include 'events/grids/base.html' with object_list=object.event_set.all parent="#eventcontainer" %}
-
-{% if object.is_lc %}
-    <h2>Board</h2>
-{% else %}
-    <h2>Coordinator</h2>
-{% endif %}
-<div id="boardcontainer">
-</div>
-{% include 'account/grids/base.html' with object_list=object.board.all parent="#boardcontainer" %}
-<h2>Members</h2>
-<div id="membercontainer">
-</div>
-{% include 'account/grids/base.html' with object_list=object.normal_members parent="#membercontainer" %}
-{% if object.alumni %}
-    <h2>Alumni</h2>
-    <div id="alumnicontainer"></div>
-    {% include 'account/grids/base.html' with object_list=object.alumni parent="#alumnicontainer" %}
-{% endif %}
+    <!-- Now elastic grids, defined in the view-->
+    {% for grid in grids %}
+        {{ grid }}
+    {% endfor %}
 {% endblock %}
 
 {% block aside %}
     {% if user in object.privileged or user.is_superuser %}
         <h2> Admin Actions</h2>
-        <a href="{{ object.as_url }}board" id="board">Choose new board</a>
         <a href="{{ object.as_url }}description" id="board">Change Description</a>
-        {% include "prototypes/modal.html" with buttontext='Change Details' buttonurl=object.as_url|add:"details" %}
-        {% include "prototypes/modal.html" with buttontext='Manage Members' buttonurl=object.as_url|add:"members" %}
-        {% include "prototypes/modal.html" with buttontext='Images' buttonurl=object.as_url|add:"images" %}
-        {% include "prototypes/modal.html" with buttontext='Outgoing' buttonurl=object.as_url|add:"outgoing" %}
-        {% include "prototypes/modal.html" with buttontext='Incoming' buttonurl=object.as_url|add:"applications" %}
+        <!-- Render the rest of the admin options-->
+        {% for option in adminoptions %}
+            {{ option }}
+        {% endfor %}
     {% endif %}
 {% endblock %}

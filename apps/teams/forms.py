@@ -15,7 +15,6 @@ from apps.teams.widgets import MultiSelectWidget
 class BoardForm(Form):
     board_members = ModelMultipleChoiceField(queryset=Eestecer.objects.none(),
                                              widget=MultiSelectWidget)
-
     def __init__(self, *args, **kwargs):
         team = kwargs.pop('team')
         super(BoardForm, self).__init__(*args, **kwargs)

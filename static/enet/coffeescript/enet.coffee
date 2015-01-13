@@ -24,32 +24,23 @@ $ ->
     intervalDuration: 8000,
     displayControls: true
   )
-PersonDialog = (wrapper) ->
+root = exports ? this
+root.PersonDialog = (wrapper) ->
   self = this
   @wrapper = wrapper
   @filter = @wrapper.find(".filter")
   @labels = @wrapper.find(".thumbnail p")
+  @wrapper.find("select").imagepicker(
+    show_label: true
+  )
   @imgs = @wrapper.find("img").parent().parent()
-  @labels.hide()
   @chosen = ->
     @imgs.find ".selected img"
-
-
-  #Create the dialog window
-  @wrapper.dialog
-    appendTo: self.wrapper.parent()
-    create: self.timer = refresh = setInterval(->
-      console.log "running"
+  self.filter.keyup((e) ->
+    console.log(self.filter.val())
       self.imgs.hide()
       self.imgs.filter(":contains('" + self.filter.val() + "')").show()
-      return
-    , 500)
-    close: ->
-      clearInterval self.timer
-      return
-
-  @wrapper.dialog "option", "width", 550
-
+  )
   #Initiate the autocomplete plugin
   acsrc = @labels.contents()
   @ac = []

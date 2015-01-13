@@ -20,7 +20,7 @@ def login_processor(request):
 
 def random_event_processor(request):
     try:
-        return {'featuredevent': featuredevent()}
+        return {'featuredevent': [featuredevent(),]}
     except:
         return {'None': None}
 

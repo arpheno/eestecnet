@@ -21,9 +21,10 @@ class DialogFormMixin(object):
     html_id = "dialogform"
     form_id = "dialogformform"
     submit = "Update"
-    action = ""
     additional_context = {}
 
+    def action(self):
+        return self.request.path
     def form_invalid(self, form):
         response = super(DialogFormMixin, self).form_invalid(form)
         if self.request.is_ajax():
@@ -44,9 +45,7 @@ class DialogFormMixin(object):
                              "Update successful. The changes might take a minute to "
                              "become effective due to caching.")
         if self.request.is_ajax():
-            data = {
-                'pk': self.object.pk,
-            }
+            data = {}
             return JsonResponse(data, status=200)
         else:
             return response

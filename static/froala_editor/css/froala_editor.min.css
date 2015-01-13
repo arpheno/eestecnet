@@ -1,5 +1,5 @@
 /*!
- * froala_editor v1.2.1 (http://editor.froala.com)
+ * froala_editor v1.2.4 (http://editor.froala.com)
  * Copyright 2014-2014 Froala
  */
 [contenteditable], [contenteditable]:focus {
@@ -8,6 +8,10 @@
 
 button {
     outline: 0
+}
+
+.fr-visible {
+    display: block !important
 }
 
 .f-non-selectable {
@@ -111,15 +115,171 @@ button {
     display: none !important
 }
 
+.froala-element img.fr-fil, img.fr-tag.fr-fil {
+    z-index: 1;
+    position: relative;
+    vertical-align: top;
+    display: block;
+    margin: auto;
+    overflow: auto;
+    padding: 10px 10px 10px 3px;
+    float: left !important
+}
+
+.froala-element img.fr-fil.fr-tni, img.fr-tag.fr-fil.fr-tni {
+    float: none !important;
+    margin-left: 0 !important
+}
+
+.froala-element img.fr-fir, img.fr-tag.fr-fir {
+    z-index: 1;
+    position: relative;
+    vertical-align: top;
+    display: block;
+    margin: auto;
+    overflow: auto;
+    padding: 10px 3px 10px 10px;
+    float: right !important
+}
+
+.froala-element img.fr-fir.fr-tni, img.fr-tag.fr-fir.fr-tni {
+    float: none !important;
+    margin-right: 0 !important
+}
+
+.froala-element img.fr-fin, img.fr-tag.fr-fin {
+    z-index: 1;
+    position: relative;
+    vertical-align: top;
+    display: block;
+    margin: auto;
+    overflow: auto;
+    padding: 10px 0;
+    float: none
+}
+
+.froala-element a.fr-file, a.fr-file {
+    position: relative
+}
+
+.froala-element a.fr-file:before, a.fr-file:before {
+    position: relative;
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\f0c6";
+    top: 0;
+    padding-right: 3px
+}
+
+.froala-element table, table.fr-tag {
+    border-collapse: collapse;
+    empty-cells: show;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.froala-element table td, table.fr-tag td {
+    border: solid 1px #ccc;
+    padding: 5px
+}
+
+.froala-element table th, table.fr-tag th {
+    background: #e6e6e6;
+    border: solid 1px #ccc;
+    padding: 5px
+}
+
+.froala-element pre, pre.fr-tag {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    border: solid 1px #ccc;
+    background: #fcfcfc;
+    padding: 10px;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box
+}
+
+.froala-element blockquote, blockquote.fr-tag {
+    margin-left: 20px;
+    margin-right: 0;
+    margin-top: 0;
+    padding-left: 20px;
+    position: relative;
+    font-style: italic;
+    border-left: solid 5px #ccc
+}
+
+.froala-element hr, hr.fr-tag {
+    height: 0;
+    border: 0;
+    border-top: solid 1px #ccc;
+    clear: both
+}
+
+.fr-fvn {
+    float: none;
+    display: block !important;
+    text-align: center !important
+}
+
+.fr-fvl {
+    float: left;
+    margin: 10px 10px 10px 1px
+}
+
+.fr-fvr {
+    float: right;
+    margin: 10px 1px 10px 10px
+}
+
+.froala-wrapper {
+    position: relative
+}
+
+.froala-wrapper:after {
+    position: absolute;
+    bottom: 5px;
+    right: 7px;
+    color: #CCC;
+    content: attr(data-chars);
+    font-size: 15px;
+    font-family: "Times New Roman", Georgia, Serif
+}
+
 .froala-element {
-    min-height: 30px;
+    min-height: 35px;
     overflow-y: auto;
     overflow-x: hidden;
     position: relative;
     word-wrap: break-word;
-    line-height: 140%;
     vertical-align: top;
-    text-align: left
+    cursor: text
+}
+
+.froala-element.f-inline:after {
+    position: absolute;
+    bottom: 5px;
+    right: 7px;
+    color: #CCC;
+    content: attr(data-chars);
+    font-size: 15px;
+    font-family: "Times New Roman", Georgia, Serif
 }
 
 .froala-element * {
@@ -134,7 +294,8 @@ button {
 
 .froala-element.f-tni span.f-img-wrap {
     display: block;
-    text-align: center
+    text-align: center;
+    float: none !important
 }
 
 .froala-element.f-tni span.f-img-wrap:after {
@@ -159,25 +320,53 @@ button {
     content: ""
 }
 
+.froala-element .btn {
+    user-select: text;
+    -o-user-select: text;
+    -moz-user-select: text;
+    -khtml-user-select: text;
+    -webkit-user-select: text;
+    -ms-user-select: text
+}
+
+.froala-element [contenteditable=false], .froala-element [contenteditable=false] * {
+    user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none
+}
+
 .froala-element span {
     line-height: 120%
 }
 
-.froala-element.f-basic.f-placeholder:before {
-    left: 10px;
-    right: 10px;
-    top: 10px
+.froala-element + span.fr-placeholder {
+    display: none
 }
 
-.froala-element.f-placeholder:before {
+.froala-element.f-placeholder + span.fr-placeholder {
     color: #ccc;
     font-style: italic;
-    content: attr(data-placeholder);
     position: absolute;
-    margin: auto;
+    margin: 0;
     left: 0;
-    top: 0;
-    right: 0
+    right: 0;
+    top: 2px;
+    display: inline-block;
+    cursor: text;
+    padding-left: 2px;
+    user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none
+}
+
+.froala-element.f-basic.f-placeholder + span.fr-placeholder {
+    margin: 10px
 }
 
 .froala-element.not-msie pre, .froala-element.not-msie blockquote {
@@ -187,6 +376,10 @@ button {
 .froala-element table > span, .froala-element table tr > span {
     display: none;
     visibility: hidden
+}
+
+.froala-element table th {
+    font-weight: 400
 }
 
 .froala-element a {
@@ -209,6 +402,10 @@ button {
     max-width: 100% !important
 }
 
+.froala-element td img {
+    max-width: auto !important
+}
+
 .froala-element img::selection {
     color: #fff;
     background-color: transparent !important
@@ -223,7 +420,8 @@ button {
     line-height: 0;
     text-align: center;
     border: 0;
-    outline: 0
+    outline: 0;
+    max-width: 100% !important
 }
 
 .froala-element span.f-img-wrap.fr-fin {
@@ -343,7 +541,11 @@ button {
     padding: 3px
 }
 
-.froala-element .f-video-editor:after {
+.froala-element .f-video-editor > * {
+    max-width: 100%
+}
+
+.froala-box .froala-element .f-video-editor:after {
     position: absolute;
     content: '';
     z-index: 2;
@@ -354,8 +556,14 @@ button {
     cursor: pointer
 }
 
-.froala-element .f-video-editor.active:after {
+.froala-box .froala-element .f-video-editor.active:after {
     border: solid 1px #252525
+}
+
+.f-html .froala-wrapper:after {
+    clear: both;
+    display: block;
+    content: ""
 }
 
 .f-html .froala-element {
@@ -367,8 +575,8 @@ button {
     padding: 0
 }
 
-.f-html .froala-element.f-placeholder:before {
-    content: ''
+.f-html .froala-element + .fr-placeholder {
+    display: none !important
 }
 
 .f-html .froala-element:after {
@@ -377,12 +585,16 @@ button {
     content: ""
 }
 
+.f-html .froala-element.f-inline textarea {
+    padding: 0 0 0 10px
+}
+
 .f-html .froala-element textarea {
     direction: ltr !important;
     text-align: left;
     width: 100%;
     word-wrap: break-word;
-    padding: 0 0 0 10px;
+    padding: 0;
     background: 0 0;
     border: 0 transparent;
     color: #FFF;
@@ -414,7 +626,6 @@ button {
     border: solid 1px #252525;
     border-top: solid 5px #252525;
     padding: 0;
-    position: absolute;
     user-select: none;
     -o-user-select: none;
     -moz-user-select: none;
@@ -425,6 +636,10 @@ button {
     z-index: 1000;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 140%
+}
+
+.froala-editor.f-inline {
+    position: absolute
 }
 
 .froala-editor * {
@@ -520,7 +735,8 @@ button {
     margin-top: 0;
     padding: 0;
     border: solid 1px #252525;
-    z-index: 1000
+    z-index: 1000;
+    -webkit-overflow-scrolling: touch
 }
 
 .froala-editor .fr-dropdown .fr-dropdown-menu li {
@@ -572,7 +788,7 @@ button {
 }
 
 .froala-editor .fr-dropdown.fr-color-picker .fr-dropdown-menu {
-    padding: 10px;
+    padding: 0;
     line-height: 0;
     white-space: nowrap;
     text-align: left;
@@ -584,12 +800,8 @@ button {
     display: inline-block
 }
 
-.froala-editor .fr-dropdown.fr-color-picker .fr-dropdown-menu > div + div {
-    margin-left: 12px
-}
-
 .froala-editor .fr-dropdown.fr-color-picker .fr-dropdown-menu p {
-    margin: 0 0 10px;
+    margin: 0;
     font-size: 13px;
     line-height: 1;
     color: #444
@@ -599,8 +811,24 @@ button {
     float: left
 }
 
+.froala-editor .fr-dropdown.fr-color-picker .fr-dropdown-menu p span.fr-choose-color {
+    padding: 5px 10px;
+    width: 50%;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-top: solid 4px transparent;
+    border-bottom: solid 4px transparent;
+    cursor: pointer
+}
+
+.froala-editor .fr-dropdown.fr-color-picker .fr-dropdown-menu p span.fr-choose-color.active, .froala-editor .fr-dropdown.fr-color-picker .fr-dropdown-menu p span.fr-choose-color:hover {
+    border-bottom: solid 4px #2c82c9
+}
+
 .froala-editor .fr-dropdown.fr-color-picker .fr-dropdown-menu p a.fr-bttn {
-    display: inline;
+    display: inline-block;
     float: right;
     padding: 0;
     color: #444;
@@ -622,11 +850,12 @@ button {
 }
 
 .froala-editor .fr-dropdown.fr-color-picker .fr-dropdown-menu .fr-color-bttn {
-    display: inline;
-    width: 18px;
-    height: 18px;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
     padding: 0;
-    border: solid 1px #fff;
+    border: 0;
+    outline: 0;
     position: relative;
     z-index: 100;
     line-height: 16px !important;
@@ -639,15 +868,19 @@ button {
 }
 
 .froala-editor .fr-dropdown.fr-color-picker .fr-dropdown-menu .fr-color-bttn.active {
-    border: solid 1px #fff;
+    border: 0;
     outline: solid 1px #252525;
     z-index: 101
 }
 
 .froala-editor .fr-dropdown.fr-color-picker .fr-dropdown-menu .fr-color-bttn.active:after {
     position: absolute;
-    left: 2px;
-    top: 1px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    top: 0;
+    bottom: 0;
+    line-height: 30px;
     content: "\f00c";
     font-family: FontAwesome;
     font-weight: 400;
@@ -655,12 +888,17 @@ button {
     color: #fff
 }
 
+.froala-editor .fr-dropdown.fr-color-picker .fr-dropdown-menu .fr-color-bttn i {
+    font-size: 13px
+}
+
 .froala-editor .fr-dropdown.fr-color-picker .fr-dropdown-menu .separator {
     height: 8px
 }
 
 .froala-editor .fr-dropdown.fr-color-picker .fr-dropdown-menu .fr-color-bttn:hover:not(:focus):not(:active) {
-    border: solid 1px #252525
+    outline: solid 1px #252525;
+    z-index: 300
 }
 
 .froala-editor .fr-dropdown .fr-dropdown-menu li a.format-blockquote {
@@ -1115,7 +1353,9 @@ button {
     margin: 0 5px 0 -1px;
     padding: 2px 7px;
     background: #475577;
-    color: #fff
+    color: #fff;
+    border: 0;
+    vertical-align: top
 }
 
 .froala-popup.froala-image-popup div.f-popup-line button.f-browse:hover, .froala-popup.froala-file-popup div.f-popup-line button.f-browse:hover {
@@ -1129,7 +1369,7 @@ button {
 
 .froala-popup.froala-image-popup div.f-popup-line input[type=text], .froala-popup.froala-file-popup div.f-popup-line input[type=text] {
     margin-right: 0 !important;
-    width: 200px
+    width: 160px
 }
 
 .froala-popup.froala-image-popup h4 span + span, .froala-popup.froala-file-popup h4 span + span {
@@ -1194,23 +1434,42 @@ button {
 }
 
 .froala-popup.froala-link-popup div.f-popup-line input[type=text]:disabled {
-    background: #FFF;
-    color: #000
+    background: #fff;
+    color: #aaa
+}
+
+.froala-popup.froala-link-popup div.f-popup-line input[type=text]:disabled.f-bi {
+    color: inherit
+}
+
+.froala-popup.froala-link-popup div.f-popup-line input[type=text].fr-error {
+    border-color: #b8312f
 }
 
 .froala-popup.froala-link-popup div.f-popup-line:not(.fr-hidden) + div.f-popup-line, .froala-popup.froala-link-popup div.f-popup-line + div.f-popup-line:last-child {
     padding-top: 0
 }
 
+.froala-popup.froala-link-popup div.f-popup-line:not(.fr-hidden) + div.f-popup-line ul, .froala-popup.froala-link-popup div.f-popup-line + div.f-popup-line:last-child ul {
+    top: 25px
+}
+
 .froala-popup.froala-link-popup div.f-popup-line .f-browse-links {
     background: #475577;
     color: #fff;
-    margin-left: -1px
+    margin-left: -1px;
+    border: 0
 }
 
 .froala-popup.froala-link-popup div.f-popup-line .f-browse-links:hover {
     background: #353535;
     color: #fff
+}
+
+.froala-popup.froala-link-popup div.f-popup-line .f-browse-links:after {
+    content: "";
+    display: block;
+    clear: both
 }
 
 .froala-popup.froala-link-popup div.f-popup-line ul {
@@ -1220,10 +1479,10 @@ button {
     margin: 0;
     padding: 0;
     position: absolute;
-    top: 25px;
+    top: 35px;
     left: 0;
     right: 0;
-    border: solid 1px #252525;
+    border: solid 1px #ccc;
     border-top: 0;
     display: none;
     max-height: 100px;
@@ -1239,7 +1498,7 @@ button {
 }
 
 .froala-popup.froala-link-popup div.f-popup-line ul li + li {
-    border-top: solid 1px #252525
+    border-top: solid 1px #ccc
 }
 
 .froala-popup.froala-link-popup div.f-popup-line ul li:hover {
@@ -1275,7 +1534,7 @@ button {
     margin-left: 0 !important
 }
 
-.froala-popup button:not(.fr-bttn):not(.fr-trigger) {
+.froala-popup button.fr-p-bttn {
     border: 0;
     color: #fff;
     padding: 2px 5px;
@@ -1292,18 +1551,23 @@ button {
     min-width: 16px
 }
 
-.froala-popup button:not(.fr-bttn):not(.fr-trigger).f-ok {
+.froala-popup button.fr-p-bttn.f-ok {
     background: #2c82c9;
     color: #fff
 }
 
-.froala-popup button:not(.fr-bttn):not(.fr-trigger).f-unlink {
+.froala-popup button.fr-p-bttn.f-unlink {
     background: #b8312f;
     color: #fff;
     margin: 0 5px
 }
 
-.froala-popup button:not(.fr-bttn):not(.fr-trigger):hover, .froala-popup button:not(.fr-bttn):not(.fr-trigger):focus {
+.froala-popup button.fr-p-bttn.f-unlink:hover {
+    background: #353535;
+    color: #fff
+}
+
+.froala-popup button.fr-p-bttn:hover, .froala-popup button.fr-p-bttn:focus {
     background: #353535;
     color: #fff
 }
@@ -1317,7 +1581,8 @@ button {
     left: 0;
     bottom: 0;
     right: 0;
-    text-align: center
+    text-align: center;
+    width: 100%
 }
 
 .froala-modal .f-modal-wrapper {
@@ -1433,10 +1698,6 @@ button {
 
 .froala-modal .f-modal-wrapper div.f-image-list div img {
     width: 100%;
-    -webkit-opacity: .75;
-    -moz-opacity: .75;
-    opacity: .75;
-    -ms-filter: "alpha(Opacity=0)";
     vertical-align: middle
 }
 
@@ -1461,8 +1722,20 @@ button {
     text-decoration: none
 }
 
+.froala-modal .f-modal-wrapper div.f-image-list div .f-delete-img:hover {
+    background: #353535;
+    color: #fff
+}
+
 .froala-modal .f-modal-wrapper div.f-image-list div .f-delete-img {
     display: inline-block
+}
+
+.froala-modal .f-modal-wrapper div.f-image-list:not(.f-touch) img {
+    -webkit-opacity: .75;
+    -moz-opacity: .75;
+    opacity: .75;
+    -ms-filter: "alpha(Opacity=0)"
 }
 
 .froala-modal .f-modal-wrapper div.f-image-list:not(.f-touch) .f-delete-img {
@@ -1614,16 +1887,27 @@ button {
     text-align: right
 }
 
-.froala-element.f-rtl.f-placeholder:before {
+.froala-element.f-rtl:after {
+    left: 5px;
+    right: auto
+}
+
+.froala-element.f-rtl + .fr-placeholder {
     left: auto;
-    right: 10px
+    right: 10px;
+    direction: rtl;
+    text-align: right;
+    padding-right: 3px
 }
 
 .froala-editor.f-basic {
     padding: 0;
     z-index: 999;
-    position: relative;
-    border-bottom: 0 !important
+    width: 100%;
+    border-bottom: 0 !important;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
 }
 
 .froala-editor.f-basic:before {
@@ -1642,20 +1926,32 @@ button {
 }
 
 .froala-editor.f-basic.f-scroll {
+    position: fixed;
+    top: 0;
+    border-bottom-width: 1px !important;
+    border-bottom-style: solid !important;
+    border-bottom-color: inherit !important
+}
+
+.froala-editor.f-basic.f-scroll-abs {
     position: absolute;
     left: 0;
     right: 0;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    border-bottom-color: inherit
+    border-bottom-width: 1px !important;
+    border-bottom-style: solid !important;
+    border-bottom-color: inherit !important
 }
 
 .froala-editor.f-basic hr {
     display: none
 }
 
-.froala-element.f-basic {
+.froala-wrapper.f-basic {
     border: solid 1px #252525;
+    position: relative
+}
+
+.froala-element.f-basic {
     padding: 10px
 }
 

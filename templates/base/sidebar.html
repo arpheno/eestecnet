@@ -1,7 +1,3 @@
 <div class="featured">
-    <ul class="figure">
-        <li>
-        {% include 'events/event.html' with object=featuredevent %}
-        </li>
-    </ul>
 </div>
+{% include 'events/grids/base.html' with object_list=featuredevent parent=".featured" %}

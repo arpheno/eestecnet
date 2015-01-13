@@ -1,11 +1,11 @@
 from django.conf.urls import patterns, url
 from django.contrib import admin
-from django.views.generic import DetailView
 from djangular.views.crud import NgCRUDView
 
 from apps.teams.models import Team
 from apps.teams.views import SelectBoard, ChangeDescription, \
-    ChangeDetails, ManageMembers, TeamImages, TeamApplications, OutgoingApplications
+    ChangeDetails, ManageMembers, TeamImages, TeamApplications, OutgoingApplications, \
+    TeamDetail
 
 
 admin.autodiscover()
@@ -13,7 +13,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^/api/?', NgCRUDView.as_view(model=Team)),
-    url(r'^/(?P<slug>[-\w]+)/$', DetailView.as_view(model=Team), name='detail'),
+    url(r'^/(?P<slug>[-\w]+)/$', TeamDetail.as_view(), name='detail'),
     url(r'^/(?P<slug>[-\w]+)/board/?$', SelectBoard.as_view(), name='board'),
     url(r'^/(?P<slug>[-\w]+)/description/?$', ChangeDescription.as_view(),
         name='description'),

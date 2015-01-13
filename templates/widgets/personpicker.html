@@ -1,49 +1,10 @@
-<div id="personpicker_{{ name }}">
+<div id="imagepicker{{ name }}">
     <input type="text" class="filter">
     {{ widget }}
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {
-        var self = this;
-        this.imgdiv = $("#personpicker_{{ name }}");
-        this.imgpicker = this.imgdiv.find("select");
-        this.imgpicker.imagepicker({"show_label": true});
-        this.wrapper = this.imgdiv.closest("#dialogform");
-        this.filter = this.imgdiv.find('.filter');
-        this.labels = this.imgdiv.find(".thumbnail p");
-        this.imgs = this.imgdiv.find("img").parent().parent();
-        this.chosen = function () {
-            return this.imgdiv.find(".selected img");
-        }
-        //Create the dialog window
-        this.wrapper.dialog({
-            appendTo: self.wrapper.parent(),
-            create: self.timer = refresh = setInterval(function () {
-                console.log("running {{ name }}")
-                self.imgs.hide();
-                self.imgs.filter(":contains('" + self.filter.val() + "')").show();
-            }, 500),
-            close: function () {
-                clearInterval(self.timer);
-            }
-        });
-        console.log(this.imgdiv);
-        console.log(this.labels);
-        var acsrc = this.labels.contents();
-        this.ac = [];
-        acsrc.each(function (item) {
-            self.ac.push(acsrc[item].data);
-        });
-        console.log(this.ac);
-        this.filter.autocomplete({source: self.ac});
-
-        // Prevent Enter Keypresses from submitting the form
-        this.filter.keypress(function (event) {
-            if (event.keyCode == 13) {
-                event.preventDefault();
-            }
-        });
+    $(function () {
+        boarddialog = new PersonDialog($("#imagepicker{{ name }}"));
+        $("input[type=submit]").button();
     });
-    //Initiate the autocomplete plugin
-
 </script>

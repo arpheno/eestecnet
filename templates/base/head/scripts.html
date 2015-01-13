@@ -8,6 +8,13 @@
             src="{% static 'prefixfree/js/prefixfree.min.js' %}"></script>
     <script type="text/javascript"
             src="{% static 'jquery/js/jquery-2.1.1.min.js' %}"></script>
+    <script type="text/javascript">
+        $.expr[":"].contains = $.expr.createPseudo(function (arg) {
+            return function (elem) {
+                return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+            };
+        });
+    </script>
     <script type="text/javascript"
             src="{% static 'jquery/js/jquery-ui-1.11.0.min.js' %}"></script>
     <script type="text/javascript"
