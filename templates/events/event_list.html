@@ -3,29 +3,7 @@
     <h1>Events organized by EESTEC</h1>
     <p>EESTEC workshops are free. On a list below you can see all current and past
         events. Click button to show event by status.</p>
-    <h2>Open for Application</h2>
-    <div id="openevents">
-    </div>
-    {% include 'events/grids/base.html' with object_list=active_list parent="#openevents" %}
-    <h2>Events Pending</h2>
-    <div id="pendingevents">
-    </div>
-    {% include 'events/grids/base.html' with object_list=pending_list parent="#pendingevents"%}
-        <h2>Past Events</h2>
-        <div id="pastevents">
-        </div>
-        {% include 'events/grids/base.html' with object_list=past_list parent="#pastevents" %}
-    </section>
-    <script type="text/javascript">
-        $(function () {
-            $("section.events a.training").hide();
-        });
-        $("section.events input[type=checkbox]").change(function () {
-            if (this.checked) {
-                $("section.events a." + this.value).show();
-            } else {
-                $("section.events a." + this.value).hide();
-            }
-        });
-    </script>
+    {% for grid in grids %}
+        {{ grid }}
+    {% endfor %}
 {% endblock %}

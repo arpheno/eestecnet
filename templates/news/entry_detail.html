@@ -2,12 +2,12 @@
 {% load thumbnail %}
 {% block main %}
     <section class="news">
-        <h1>{{ entry.headline }}</h1>
+        <h1>{{ entry.name }}</h1>
 
         <ul>
             <li>{{ entry.pub_date }}</li>
         </ul>
-        {% thumbnail entry.entry_image "x200" crop="center" as im %}
+        {% thumbnail entry.thumbnail "x200" crop="center" as im %}
             <img alt="{{ object }}" src="{{ im.url }}" width="{{ im.width }}"
                  height="{{ im.height }}">
         {% endthumbnail %}

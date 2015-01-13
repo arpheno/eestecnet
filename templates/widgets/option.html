@@ -1,6 +1,6 @@
 {% load thumbnail %}
-{% if object.profile_picture %}
-    {% thumbnail object.profile_picture "100x102" crop="center" as im %}
+{% if object.thumbnail %}
+    {% thumbnail object.thumbnail "100x102" crop="center" as im %}
         <option data-img-src='{{ im.url }} ' value="{0}"{1}>{2}</option>
     {% endthumbnail %}
 {% elif object.thumbnail %}

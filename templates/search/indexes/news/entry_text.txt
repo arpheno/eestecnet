@@ -1,4 +1,4 @@
-{{object.headline}}
+{{object.name}}
 {{object.content}}
 {% for author in object.author.all%}
 {{author}}

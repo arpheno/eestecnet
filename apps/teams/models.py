@@ -20,70 +20,45 @@ TYPE_CHOICES = (
 
 
 class Team(models.Model):
-    """Member objects are used to unify and abstract away from the internal entity of
-    parts of our organization.
-
-    Members can be Observers, LCs, Junior LCs, International Teams or Bodies of the
-    association.
-    The goal using these objects is to unify the way how we handle interactions that
-    are common to all five kinds of parts of eestec
-
-    When Members are created first, a local event called Recruitment is automatically
-    created. By applying to
-    event, registered users can become part of one or more teams."""
-
+    """ When Members are created first, a local event called Recruitment is automatically
+     created. By applying to event, registered users can become part of one or more
+     teams."""
     # General
-    """ The name of the :class:`Member`"""
     name = models.CharField(max_length=50, unique=True)
-    slug = AutoSlugField(populate_from='name')
-    """The type of the :class:`Member`"""
-    type = models.CharField(
-        max_length=30,
-        choices=TYPE_CHOICES,
-        default='lc')
     thumbnail = models.ImageField(blank=True, null=True, upload_to="memberthumbs")
-    thumbsource = models.CharField(max_length=100, blank=True, null=True)
-    """The picture that should appear in the :class:`Member` list"""
-    teamstub = models.TextField(blank=True, null=True)
+    slug = AutoSlugField(populate_from='name')
     description = models.TextField(blank=True, null=True)
-    """ LC info text"""
+    # People
+    users = models.ManyToManyField(
+        'account.Eestecer', related_name='teams', through='news.Membership')
+    def organizers(self):
+        return self.users.filter(membership__board=True)
+    def privileged(self):
+        return self.users.filter(membership__privileged=True)
+    def members(self):
+        return self.users.filter(membership__alumni=False)
+    def alumni(self):
+        return self.users.filter(membership__alumni=True)
+    def member_count(self):
+        """ The amount of teams currently in the :class:`Member` """
+        return len(self.users.all())
+    #other stuff
+    category = models.CharField(max_length=30, choices=TYPE_CHOICES, default='lc')
+    thumbsource = models.CharField(max_length=100, blank=True, null=True)
+    teamstub = models.TextField(blank=True, null=True)
     facebook = models.URLField(blank=True, null=True)
-    """ Facebook page for the member"""
     website = models.URLField(blank=True, null=True)
     address = models.TextField(blank=True, null=True)
     lat = models.FloatField(blank=True, null=True)
     lng = models.FloatField(blank=True, null=True)
+    founded = models.PositiveIntegerField(null=True, blank=True)
 
-    def board(self):
-        return self.users.filter(membership__board=True)
-
-    def normal_members(self):
-        result = self.users.filter(membership__alumni=False)
-        return result
-
-    def alumni(self):
-        result = self.users.filter(membership__alumni=True)
-        return result
-
-    def privileged(self):
-        result = self.users.filter(membership__privileged=True)
-        return result
-
-    def as_html(self):
-        return render_to_string('teams/team.html', {'object': self})
-
-    def as_url(self):
+    def get_absolute_url(self):
         if self.is_lc():
             return reverse('cities:detail', kwargs={'slug': self.slug})
         return reverse('teams:detail', kwargs={'slug': self.slug})
-    def get_absolute_url(self):
-        return self.as_url()
 
     #Members
-    users = models.ManyToManyField(
-        'account.Eestecer', related_name='teams', through='news.Membership')
-    founded = models.PositiveIntegerField(null=True, blank=True)
-    """When the :class:`Member` was first established"""
 
     def save(self, *args, **kwargs):
         try:
@@ -109,20 +84,16 @@ class Team(models.Model):
             super(Team, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        if self.type not in ['jlc', 'lc', 'observer']:
+        if self.category not in ['jlc', 'lc', 'observer']:
             return self.name
-        return self.type.upper() + " " + self.name
-
-    def member_count(self):
-        """ The amount of teams currently in the :class:`Member` """
-        return len(self.users.all())
+        return self.category.upper() + " " + self.name
 
     def pending_applications(self):
         result = self.event_set.get(category='recruitment').applicants.all()
         return result
 
     def is_lc(self):
-        return self.type in ['jlc', 'lc', 'observer']
+        return self.category in ['jlc', 'lc', 'observer']
 
     def last_event(self):
         try:

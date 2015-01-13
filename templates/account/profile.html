@@ -2,11 +2,11 @@
 <form action="/account" enctype="multipart/form-data" method="post">
     {% csrf_token %}
     <div style="float:left;margin-right:30px;width:200px">
-        {% thumbnail user.profile_picture "200x200" crop="center" as im %}
+        {% thumbnail user.thumbnail "200x200" crop="center" as im %}
             <img alt="{{ object }}" src="{{ im.url }}" height="{{ im.height }}"
                  width="{{ im.width }}">
         {% endthumbnail %}
-        {{ form.profile_picture }}
+        {{ form.thumbnail }}
     </div>
     <div class="meta">
         {{ form.first_name }} {{ form.middle_name }}{{ form.last_name }}

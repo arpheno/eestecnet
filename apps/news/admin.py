@@ -9,7 +9,7 @@ class MyEntryAdminForm(ModelForm):
     class Meta:
         model = Entry
         widgets = {
-            'content': RedactorWidget(editor_options={'lang': 'en', 'iframe': 'true',
+            'description': RedactorWidget(editor_options={'lang': 'en', 'iframe': 'true',
                                                       'css':
                                                           "/static/enet/css/wysiwyg"
                                                           ".css"}),
@@ -36,7 +36,7 @@ class MembershipAdmin(admin.ModelAdmin):
 class MyEntryAdmin(admin.ModelAdmin):
     form = MyEntryAdminForm
     readonly_fields = ['published']
-    list_display = ['pub_date', 'authors', 'headline', 'published']
+    list_display = ['pub_date', 'authors', 'name', 'published']
     actions = ['publish_selected']
 
     def publish_selected(self, request, queryset):

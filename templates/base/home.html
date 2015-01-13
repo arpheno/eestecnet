@@ -48,10 +48,10 @@
             {% for object in object_list %}
             <li>
                 <a href="{% url 'news' object.slug %}">
-                    {% thumbnail object.entry_image "1087x480" quality=75 crop="center" as im %}
+                    {% thumbnail object.thumbnail "1087x480" quality=75 crop="center" as im %}
                         <img src="{{ im.url }}"
                     {% endthumbnail %}
-                             alt="{{ object.headline }}"
+                             alt="{{ object.name }}"
                              data-description="
                                 {% autoescape off %}
                                     {{ object.content|truncatewords:50 }}

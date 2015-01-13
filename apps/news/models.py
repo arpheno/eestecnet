@@ -27,8 +27,8 @@ class Membership(models.Model):
             self.user.groups.add(local)
         super(Membership, self).save()
 
-    def profile_picture(self):
-        return self.user.profile_picture
+    def thumbnail(self):
+        return self.user.thumbnail
     def __unicode__(self):
         return self.user.get_full_name()
 
@@ -42,17 +42,12 @@ class Entry(models.Model):
     class Meta:
         verbose_name_plural = "entries"
 
+    name = models.CharField(max_length=50, unique=True)
     author = models.ManyToManyField('teams.Team')
-    """ The :class:`Members <teams.models.Team>` authoring the news"""
-    headline = models.CharField(max_length=50, unique=True)
-    """ The headline"""
-    slug = AutoSlugField(populate_from='headline')
-    content = models.TextField()
-    """The Content of the message"""
+    description = models.TextField()
+    thumbnail = models.ImageField(upload_to="entryimages")
+    slug = AutoSlugField(populate_from='name')
     pub_date = models.DateTimeField(auto_now_add=True)
-    """ The publication date"""
-    entry_image = models.ImageField(upload_to="entryimages")
-    """ Optionally, an image to add"""
     objects = EntryManager()
     published = models.BooleanField(default=False)
     front_page_news = models.BooleanField(default=False)
@@ -64,9 +59,9 @@ class Entry(models.Model):
         return render_to_string('news/entry.html', {'object': self})
 
     def __unicode__(self):
-        return self.headline
+        return self.name
     def clean(self):
-        if not len(self.headline.strip()):
+        if not len(self.name.strip()):
             raise ValidationError("Headline may not be empty.")
 
 # Create your models here.

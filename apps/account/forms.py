@@ -24,7 +24,7 @@ class EestecerCreationForm(UserCreationForm):
         model = Eestecer
         fields = (
             "first_name", "middle_name", "last_name", "second_last_name",
-            "profile_picture",
+            "thumbnail",
             "email", "gender")
     def save(self, commit=True):
         return super(EestecerCreationForm, self).save(commit=False)
@@ -34,7 +34,7 @@ class EestecerChangeForm(UserChangeForm):
     the user, but replaces the password field with admin's
     password hash display field.
     """
-    profile_picture = ImageField(widget=ImageWidget())
+    thumbnail = ImageField(widget=ImageWidget())
 
     def __init__(self, *args, **kargs):
         super(EestecerChangeForm, self).__init__(*args, **kargs)

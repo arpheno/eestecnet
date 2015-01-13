@@ -1,0 +1,23 @@
+/*
+Errno::ENOENT: No such file or directory - style.scss
+
+Backtrace:
+C:/ruby200/lib/ruby/gems/2.0.0/gems/sass-3.3.9/lib/sass/plugin/compiler.rb:369:in `read'
+C:/ruby200/lib/ruby/gems/2.0.0/gems/sass-3.3.9/lib/sass/plugin/compiler.rb:369:in `update_stylesheet'
+C:/ruby200/lib/ruby/gems/2.0.0/gems/sass-3.3.9/lib/sass/plugin/compiler.rb:189:in `block in update_stylesheets'
+C:/ruby200/lib/ruby/gems/2.0.0/gems/sass-3.3.9/lib/sass/plugin/compiler.rb:186:in `each'
+C:/ruby200/lib/ruby/gems/2.0.0/gems/sass-3.3.9/lib/sass/plugin/compiler.rb:186:in `update_stylesheets'
+C:/ruby200/lib/ruby/gems/2.0.0/gems/sass-3.3.9/lib/sass/plugin.rb:82:in `update_stylesheets'
+C:/ruby200/lib/ruby/gems/2.0.0/gems/sass-3.3.9/lib/sass/exec.rb:489:in `watch_or_update'
+C:/ruby200/lib/ruby/gems/2.0.0/gems/sass-3.3.9/lib/sass/exec.rb:346:in `process_result'
+C:/ruby200/lib/ruby/gems/2.0.0/gems/sass-3.3.9/lib/sass/exec.rb:43:in `parse'
+C:/ruby200/lib/ruby/gems/2.0.0/gems/sass-3.3.9/lib/sass/exec.rb:22:in `parse!'
+C:/ruby200/lib/ruby/gems/2.0.0/gems/sass-3.3.9/bin/sass:13:in `<top (required)>'
+C:/Ruby200/bin/sass:23:in `load'
+C:/Ruby200/bin/sass:23:in `<main>'
+*/
+body:before {
+    white-space: pre;
+    font-family: monospace;
+    content: "Errno::ENOENT: No such file or directory - style.scss";
+}

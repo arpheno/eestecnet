@@ -39,7 +39,7 @@
                             {% endfor %}
                             {% endblock %}
                         ],
-                        'tags': ['{% block egtags %}{% endblock %}'],
+                        'tags': ['{% block egtags %}{{ tags }}{% endblock %}'],
                         'button_list': [{
                             'title': 'Details',
                             'url': '{{ object.get_absolute_url}}',

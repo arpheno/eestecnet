@@ -1,6 +1,6 @@
 {% load thumbnail %}
 <div class="stub {{ object.type }}">
-    <a href="{{ object.as_url }}">
+    <a href="{{ object.get_aboslute_url }}">
         <h1> {{ object }} </h1>
         {% thumbnail object.thumbnail "410x104" crop="center" as im %}
             <img src="{{ im.url }}" alt="{{ object.thumbsource }}"

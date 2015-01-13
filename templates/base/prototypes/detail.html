@@ -10,12 +10,27 @@
                 {% endblock %}
             </div>
             <div class="details">
-            {% block details %}
-                    {% block actions %}{% endblock %}
-                {% endblock %}
+                <!-- These are the information next to the images -->
+                {% for piece in information %}
+                    {{ piece }}
+                {% endfor %}
+                {% block actions %}{% endblock %}
             </div>
         </header>
         {% block more %}
         {% endblock %}
+        <!-- If grids are defined put them near the end -->
+        {% for grid in grids %}
+            {{ grid }}
+        {% endfor %}
     </section>
+{% endblock %}
+{% block aside %}
+    {% if user in object.privileged or user.is_superuser or object == user %}
+        <h1>Actions</h1>
+        {% for option in adminoptions %}
+            {{ option }}
+        {% endfor %}
+    {% endif %}
+    {% block additional_options %}{% endblock %}
 {% endblock %}

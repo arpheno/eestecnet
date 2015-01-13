@@ -11,7 +11,7 @@
                class="action-button shadow animate green">Fill in your transportation
                 details</a>
         {% endif %}
-    {% elif request.user.tshirt_size != None and request.user.profile_picture != None %}
+    {% elif request.user.tshirt_size != None and request.user.thumbnail != None %}
         <a href="{% url 'eventconfirmation' object.slug %}"
            class="action-button shadow animate yellow">Confirm your Participation</a>
     {% else %}

@@ -4,7 +4,7 @@
 {% block class %}eestecer{% endblock %}
 {% block url %}{% url 'user' object.slug %}{% endblock %}
 {% block picture %}
-    {% thumbnail object.profile_picture "100x100" crop="center" as im %}
+    {% thumbnail object.thumbnail "100x100" crop="center" as im %}
         <img alt="{{ object }}" src="{{ im.url }}" width="{{ im.width }}"
              height="{{ im.height }}">
     {% endthumbnail %}

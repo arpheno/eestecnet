@@ -17,8 +17,8 @@ from apps.news.models import Entry, Membership
 def create_stubs():
     for part in ['conference', 'teams', 'competition', 'events']:
         stub = Stub.objects.create(
-            content=open("eestecnet/stub/" + part + ".txt").read(),
-            title=open("eestecnet/stub/" + part + "_head.txt").read(),
+            description=open("eestecnet/stub/" + part + ".txt").read(),
+            name=open("eestecnet/stub/" + part + "_head.txt").read(),
             link="/",
             group="activities"
         )
@@ -26,8 +26,8 @@ def create_stubs():
             stub.image.save(part + ".jpg", File(doc_file), save=True)
     for part in ['news', 'history', 'cities', 'documents', 'governance']:
         stub = Stub.objects.create(
-            content=open("eestecnet/stub/" + part + ".txt").read(),
-            title=open("eestecnet/stub/" + part + "_head.txt").read(),
+            description=open("eestecnet/stub/" + part + ".txt").read(),
+            name=open("eestecnet/stub/" + part + "_head.txt").read(),
             link="/",
             group="about"
         )
@@ -36,15 +36,15 @@ def create_stubs():
 
 
 def create_eestec_news():
-    cng = Entry.objects.create(headline="Congress in athens",
-                               content=open("eestecnet/news/congress.txt").read())
-    mw = Entry.objects.create(headline="Mw in Munich",
-                              content=open("eestecnet/news/mw.txt").read())
+    cng = Entry.objects.create(name="Congress in athens",
+                               description=open("eestecnet/news/congress.txt").read())
+    mw = Entry.objects.create(name="Mw in Munich",
+                              description=open("eestecnet/news/mw.txt").read())
 
     with open('eestecnet/news/congress.jpg', 'rb') as doc_file:
-        cng.entry_image.save("cng.jpg", File(doc_file), save=True)
+        cng.thumbnail.save("cng.jpg", File(doc_file), save=True)
     with open('eestecnet/news/mw.jpg', 'rb') as doc_file:
-        mw.entry_image.save("mw.jpg", File(doc_file), save=True)
+        mw.thumbnail.save("mw.jpg", File(doc_file), save=True)
     cng.save()
     mw.save()
     mw.author.add(Team.objects.get(slug='munich'))
@@ -53,7 +53,7 @@ def create_eestec_news():
 
 def create_eestec_teams():
     Team.objects.create(name='Training Team',
-                        type='team',
+                        category='team',
                         teamstub='In our trainer division we lay the foundation for the \
                         coming generations of EESTECers by educating and passing on the \
                         experience and skills we acquired.',
@@ -61,21 +61,21 @@ def create_eestec_teams():
 
     )
     Team.objects.create(name='Magazine Team',
-                        type='team',
+                        category='team',
                         teamstub='Our Magazine Team is responsible for \
                          publishing issues of  EESTEC Magazine twice a year, on the \
                          occasion of EESTEC Chairpersons’ Meeting and the EESTEC '
                                  'Annual Congress.',
     )
     Team.objects.create(name='Design Team',
-                        type='team',
+                        category='team',
                         teamstub='Our Design Team is responsible for designing EESTEC '
                                  'promotional\
                          materials and also this very website, based  on the rules in '
                                  'our Branding Guide.'
     )
     Team.objects.create(name='IT Team',
-                        type='team',
+                        category='team',
                         teamstub='Our IT Team is responsible for providing IT '
                                  'solutions for EESTEC needs.'
                                  'It is responsible for providing the maintaining '
@@ -83,7 +83,7 @@ def create_eestec_teams():
                                  EESTEC website and the mailing lists.'
     )
     Team.objects.create(name='International Bureau',
-                        type='team',
+                        category='team',
                         teamstub='The International Bureau is the body responsible for '
                                  'keeping'
                                  ' the history and records of the  Association. It '
@@ -93,7 +93,7 @@ def create_eestec_teams():
                                  ' bodies of the Association.'
     )
     Team.objects.create(name='Yearbook Committee',
-                        type='team',
+                        category='team',
                         teamstub='Yearbook Committee is responsible for publishing '
                                  'EESTEC'
                                  ' Yearbook, a yearly publication   which gathers '
@@ -101,7 +101,7 @@ def create_eestec_teams():
                                  'carried'
                                  ' out in EESTEC during the year.'
     )
-    for team in Team.objects.filter(type='team'):
+    for team in Team.objects.filter(category='team'):
         team.description = open("eestecnet/team/" + team.slug + ".txt").read()
         with open('eestecnet/team/' + team.slug + '.jpg', 'rb') as doc_file:
             team.thumbnail.save(team.slug + ".jpg", File(doc_file), save=True)
@@ -297,7 +297,7 @@ def create_eestec_lcs():
                         website="http://eestec.ch",
                         address=u"AMIV an der ETH Zuerich\nEESTEC LC Zurich\nCAB "
                                 u"E37\nUniversitätsstrasse 6\n8092 Zürich\nSwitzerland")
-    for lc in Team.objects.filter(type="lc"):
+    for lc in Team.objects.filter(category="lc"):
         lc.description = open("eestecnet/lc/" + lc.slug + ".txt").read()
         try:
             with open('eestecnet/lc/' + lc.slug + '.jpg', 'rb') as doc_file:
@@ -414,7 +414,7 @@ def create_eestec_people():
                                            last_name="wozny")
     for user in Eestecer.objects.all():
         with open('eestecnet/people/' + user.slug + '.jpg', 'rb') as doc_file:
-            user.profile_picture.save(user.slug + ".jpg", File(doc_file), save=True)
+            user.thumbnail.save(user.slug + ".jpg", File(doc_file), save=True)
         user.save()
     munich = Team.objects.get(slug='munich')
     mm = [ag, aa, cm, ez, mp, ma, ra, sw]
@@ -422,7 +422,7 @@ def create_eestec_people():
         Membership.objects.create(team=munich, user=user).save()
     mb = [cm, mp, ma, ra]
     for membership in Membership.objects.filter(team=munich, user__in=mb):
-        membership.board = True
+        membership.organizers = True
         membership.save()
     Team.objects.get(slug='munich').save()
     munich = Team.objects.get(slug='munich')

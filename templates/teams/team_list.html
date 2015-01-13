@@ -28,15 +28,13 @@
             </script>
 
         {% endcompress %}
-        {% include 'teams/grids/base.html' with parent="#membercontainer" %}
 
-        <h1>Members</h1>
+        <section class="members">
         <div id="map">
         </div>
-        <section class="members">
-            <div id="membercontainer">
-
-            </div>
+            {% for grid in grids %}
+                {{ grid }}
+            {% endfor %}
         </section>
     {% else %}
         <h1>International Teams and Bodies</h1>

@@ -10,11 +10,7 @@
         {% endthumbnail %}
     {% endfor %}
 {% endblock %}
-{% block details %}
-    <!-- These are the team information -->
-    {% for piece in information %}
-        {{ piece }}
-    {% endfor %}
+{% block actions %}
     {% if may_apply %}
         <!-- If a user may apply, show the link to the modal -->
         <div class="actions">
@@ -22,8 +18,8 @@
             {% include "prototypes/modal.html" with buttontext="Join" buttonurl=url %}
         </div>
     {% endif %}
-
 {% endblock %}
+
 {% block more %}
     <details open>
         {% block description %}
@@ -33,19 +29,11 @@
             {% endautoescape %}
         {% endblock %}
     </details>
-    <!-- Now elastic grids, defined in the view-->
-    {% for grid in grids %}
-        {{ grid }}
-    {% endfor %}
 {% endblock %}
 
-{% block aside %}
+{% block additional_options %}
     {% if user in object.privileged or user.is_superuser %}
-        <h2> Admin Actions</h2>
-        <a href="{{ object.as_url }}description" id="board">Change Description</a>
-        <!-- Render the rest of the admin options-->
-        {% for option in adminoptions %}
-            {{ option }}
-        {% endfor %}
+        <a href="{{ object.get_aboslute_url }}description" id="board">Change
+            Description</a>
     {% endif %}
 {% endblock %}

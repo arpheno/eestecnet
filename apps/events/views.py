@@ -27,6 +27,7 @@ from django.shortcuts import redirect, get_object_or_404
 
 
 
+
 # Create your views here.
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
@@ -34,6 +35,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
     DeleteView
 from extra_views import UpdateWithInlinesView, CreateWithInlinesView
 from form_utils.widgets import ImageWidget
+from apps.pages.widgets import Grids, Information, AdminOptions
 from eestecnet.forms import DialogFormMixin
 from apps.events.forms import DescriptionForm, EventImageInline, TransportForm, \
     UploadEventsForm, EventMixin, EventUpdateForm, EventCreationForm
@@ -140,31 +142,29 @@ class AddEvents(FormView):
             new_event.save()
 
 
-class InternationalEvents(ListView):
+class InternationalEvents(Grids,ListView):
     model = Event
-
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(InternationalEvents, self).get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
-        events = context['object_list'].filter(scope="international")
-        context['active_list'] = []
-        context['pending_list'] = []
-        context['over_list'] = []
+    def grids(self):
+        return [
+            ("events/grids/base.html", self.get_events()['active_list'], "Events Open for Application"),
+            ("events/grids/base.html", self.get_events()['pending_list'], "Events in Progress"),
+            ("events/grids/base.html", self.get_events()['over_list'], "Past Events"),
+            ]
+    def get_events(self):
+        events=self.get_queryset().filter(scope="international")
+        eventlist={}
+        eventlist['active_list'] = []
+        eventlist['pending_list'] = []
+        eventlist['over_list'] = []
         for event in events:
-            try:
-                if event.deadline:
-                    if event.deadline > timezone.now():
-                        context['active_list'].append(event)
-                    if event.deadline < timezone.now() and event.end_date > timezone \
-                            .now() \
-                            .date():
-                        context['pending_list'].append(event)
-                if event.end_date < timezone.now().date():
-                    context['over_list'].append(event)
-            except:
-                pass
-        return context
+            if event.deadline and event.deadline > timezone.now():
+                eventlist['active_list'].append(event)
+            if event.deadline and event.deadline < timezone.now() and event.end_date > timezone.now().date():
+                eventlist['pending_list'].append(event)
+            if event.deadline and event.end_date and event.end_date < timezone.now().date():
+                eventlist['over_list'].append(event)
+        return eventlist
+
 
 
 def confirm_event(request, slug):
@@ -180,9 +180,41 @@ def confirm_event(request, slug):
     return redirect(reverse('event', kwargs={'slug': slug}))
 
 
-class EventDetail(DetailView):
+class EventDetail(AdminOptions,Information,Grids,DetailView):
     model = Event
     template_name = "events/event_detail.html"
+    def adminoptions(self):
+        return [
+            ('Change Details',reverse_lazy('eventchangedetails',kwargs=self.kwargs)),
+            ('Manage Images', reverse_lazy('eventimages',kwargs=self.kwargs)),
+            ('Participants', reverse_lazy('eventparticipation',kwargs=self.kwargs)),
+            ('Incoming Applications', reverse_lazy('eventapplications',kwargs=self.kwargs)),
+            ]
+
+    def information(self):
+        event=self.get_object()
+        date = str(event.start_date)
+        if event.end_date:
+            date +=str(event.end_date)
+        information= [
+            ('Event Name', self.get_object().name),
+            ('Organizing Committee', self.get_object().OC()),
+            ('Date',date),
+            ('Number of Members', self.get_object().member_count()),
+            ]
+        if event.deadline:
+            information.append(('Deadline',event.deadline))
+        if event.max_participants:
+            information.append(('Maximum Participants',event.max_participants))
+        return information
+
+    def grids(self):
+        event=self.get_object()
+        return [
+            ("teams/grids/base.html", event.organizing_committee.all(), "Organizing Committee"),
+            ("account/grids/base.html", event.organizers.all(), "Organizers"),
+            ("account/grids/base.html", event.members.all(), "Participants"),
+            ]
 
     def get_context_data(self, **kwargs):
 
@@ -301,7 +333,7 @@ class FillInTransport(EventMixin, DialogFormMixin, CreateView):
         return context
 
     def form_valid(self, form):
-        if not self.request.user.tshirt_size or not self.request.user.profile_picture:
+        if not self.request.user.tshirt_size or not self.request.user.thumbnail:
             return redirect(reverse('event', kwargs=self.kwargs))
         pax = get_object_or_404(Participation, participant=self.request.user,
                                 target__slug=self.kwargs['slug'])

@@ -10,6 +10,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from mailqueue.models import MailerMessage
+
 from apps.news.models import Membership
 
 
@@ -42,43 +43,31 @@ class Event(models.Model):
     """Event objects encapsulate all information that is necessary to describe an
     event. """
 
-    class Meta:
-        verbose_name = "Event"
-        ordering = ('name',)
-        verbose_name_plural = "Events"
-
     #General
     name = models.CharField(max_length=100, unique=True)
-    """Name of the event. Examples: bEErSTEC, Trainers' Meeting, RISEX."""
+    thumbnail = models.ImageField(upload_to='event_thumbnails')
+    description = models.TextField(
+        help_text=_("Please provide a detailed description for interested readers"))
     category = models.CharField(max_length=40, choices=CATEGORY_CHOICES,
                                 default='workshop')
-    """Category of the event, for choices see :attr:`CATEGORY_CHOICES` ."""
-    scope = models.CharField(max_length=15, choices=SCOPE_CHOICES,
-                             default='international')
-    """Scope of the event, an event can be local or international.
-    The main event list will only contain International Events by default. Also see
-    :attr:`SCOPE_CHOICES`."""
     slug = AutoSlugField(populate_from='name')
-    thumbnail = models.ImageField(upload_to='event_thumbnails')
-    #Participants and Organizers
-    max_participants = models.PositiveIntegerField(blank=True, null=True)
-    """ Optional: Maximum amount of participants that will be admitted to the event """
-    organizing_committee = models.ManyToManyField('teams.Team')
-    participation_fee = models.PositiveIntegerField(default=0)
-    """ The organizers that are able to access the admin page for the event apart
-    from the organizing committees privileged users """
+    #People
     organizers = models.ManyToManyField(
         'account.Eestecer', related_name='events_organized')
-    """ A list of the accepted applicants. """
-    participants = models.ManyToManyField(
+    members = models.ManyToManyField(
         'account.Eestecer', related_name='events', through='Participation')
-    """ A list of the current pending applications. They should be either accepted
-    or deleted when the application deadline passes."""
+    def member_count(self):
+        """Number of participants"""
+        return len(self.members.all())
     applicants = models.ManyToManyField(
         'account.Eestecer', related_name='applications', through='Application')
+    #Participants and Organizers
+    max_participants = models.PositiveIntegerField(blank=True, null=True)
+    organizing_committee = models.ManyToManyField('teams.Team')
+    participation_fee = models.PositiveIntegerField(default=0)
 
     #Time and place
-    """Optional: Location of the event."""
+    scope = models.CharField(max_length=15, choices=SCOPE_CHOICES, default='international')
     location = models.CharField(help_text=_("Where are you planning your Event?"),
                                 max_length=30, blank=True, null=True)
     """Start of the event."""
@@ -90,8 +79,6 @@ class Event(models.Model):
     deadline = models.DateTimeField(help_text=_("Until when can participants apply?"),
                                     null=True, blank=True)
     #Content
-    description = models.TextField(
-        help_text=_("Please provide a detailed description for interesed readers"))
     """ A detailed description of the event. Pictures and videos can be included here"""
     pax_report = models.TextField(blank=True, null=True)
     """ Optional: This is a field where the participants report can be stored and
@@ -100,16 +87,14 @@ class Event(models.Model):
     """ Optional: This is a field where the organizers report can be stored and
     accessed."""
 
+    class Meta:
+        verbose_name = "Event"
+        ordering = ('name',)
+        verbose_name_plural = "Events"
     def OC(self):
         """Helper function to display the names of organizing committees of an event"""
         return " ".join([c.name for c in self.organizing_committee.all()])
 
-    def participant_count(self):
-        """Number of participants"""
-        return len(self.participants.all())
-
-    def as_html(self):
-        return render_to_string('events/event.html', {'object': self})
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):

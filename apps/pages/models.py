@@ -11,11 +11,11 @@ class Page(models.Model):
 
 class Stub(models.Model):
     def __unicode__(self):
-        return self.group + " - " + self.title
+        return self.group + " - " + self.name
 
-    title = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
     link = models.CharField(max_length=50)
-    content = models.TextField(max_length=140)
+    description = models.TextField(max_length=140)
     image = models.ImageField(upload_to="stubs")
     group = models.CharField(max_length=20)
 

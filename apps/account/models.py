@@ -81,49 +81,33 @@ def get_eestecer_slug(instance):
 
 
 class Eestecer(AbstractBaseUser, PermissionsMixin):
-    """
-    A fully featured User model with admin-compliant permissions that uses
-    a full-length email field as the username. It stores additional information
-    about eestecers.
-
-    Email and password are required. Other fields are optional.
-    """
+    #Basic Information
+    def name(self):
+        return self.get_full_name()
+    thumbnail = models.ImageField(upload_to="users", blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    slug = AutoSlugField(populate_from=get_eestecer_slug)
     #Contact information
     email = models.EmailField(_('email address'), max_length=254, unique=True)
-    """email adress"""
     skype = models.CharField(_('Skype Account'), max_length=30, null=True, blank=True)
-    """Skype contact info."""
-    hangouts = models.CharField(_('Google Hangouts account'), max_length=30, null=True,
-                                blank=True)
-    """Hangouts contact info"""
+    hangouts = models.CharField (max_length=30, null=True, blank=True)
     mobile = models.CharField(_('Mobile Phone Number'), max_length=30, null=True,
                               blank=True,
                               help_text=_(
                                   'Please provide your phone number in +XX XXX XXXXXX '
                                   'format'))
-    """Mobile Phone number of the user. Mostly used for contact during events."""
-    #Personal Information
+    #Names
     first_name = models.CharField(_('first name'), max_length=30)
     middle_name = models.CharField(_('middle name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30)
-    slug = AutoSlugField(populate_from=get_eestecer_slug)
-    """ This field is used to determine urls"""
     second_last_name = models.CharField(_('second last name'), max_length=30, blank=True)
     """ For our friends from the iberic peninsula"""
     date_of_birth = models.DateField(blank=True, null=True)
     show_date_of_birth = models.BooleanField(default=True)
     receive_eestec_active = models.BooleanField(default=True)
-    """ Date of birth"""
-    personal = models.TextField(blank=True, null=True)
-    """Room for a personal note"""
-    profile_picture = models.ImageField(upload_to="users", blank=True, null=True)
-    """A profile picture to be used on the website. Without a Profile picture the user
-    will not appear in lists"""
     gender = models.CharField(max_length=15, choices=GENDER_CHOICES)
-    "Gender of the applicant. Useful for getting an overview on Gender balance."
     tshirt_size = models.CharField(max_length=15, choices=TSHIRT_SIZE, blank=True,
                                    null=True)
-    """T-shirt size. Used for events"""
     allergies = models.CharField(max_length=50, blank=True, null=True)
     passport_number = models.CharField(max_length=20, blank=True, null=True)
     activation_link = models.CharField(max_length=50, blank=True, null=True)
@@ -198,13 +182,14 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = _('users')
         unique_together = (('first_name', 'middle_name', 'last_name'),)
         ordering = ["first_name", "last_name"]
-
     def get_full_name(self):
         """ Returns the first_name plus the last_name, with a space in between. """
-        full_name = '%s %s %s %s' % (self.first_name.capitalize(),
-                                     self.middle_name.capitalize(),
-                                     self.last_name.capitalize(),
-                                     self.second_last_name.capitalize())
+        full_name = self.first_name.capitalize()
+        if self.middle_name:
+            full_name+=" "+self.middle_name.capitalize()
+        full_name+=" "+self.last_name.capitalize()
+        if self.second_last_name:
+            full_name+=" "+self.second_last_name.capitalize()
         return full_name.strip()
 
     def get_short_name(self):
@@ -235,8 +220,8 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
             }
         if password:
             values['password']=password
-        if self.profile_picture:
-            values['avatar'] = self.profile_picture.url
+        if self.thumbnail:
+            values['avatar'] = self.thumbnail.url
         data=urllib.urlencode(values)
         req = urllib2.Request(url + u'?' + data)
         opener = urllib2.build_opener()

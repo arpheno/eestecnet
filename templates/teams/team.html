@@ -2,7 +2,7 @@
 {% load thumbnail %}
 
 {% block class %}member {{ object.type }}{% endblock %}
-{% block url %} {{ object.as_url }}{% endblock %}
+{% block url %} {{ object.get_aboslute_url }}{% endblock %}
 {% block picture %}
     {% thumbnail object.thumbnail "190x125" crop="center" as im %}
         <img src="{{ im.url }}" style="width:{{ im.width }}px;height:{{ im.height }}px;"

@@ -12,26 +12,6 @@
 {% endblock %}
 {% block details %}
     <div>
-        <span>Event Name</span>
-        <span>{{ object.name }} </span>
-    </div>
-    <div>
-        <span>Organizer</span>
-        <span>{% for oc in object.organizing_committee.all %}{{ oc }}{% endfor %}</span>
-    </div>
-    <div>
-        <span>Date</span>
-        <span>{{ object.start_date }} - {{ object.end_date }}</span>
-    </div>
-    <div>
-        <span>Deadline</span>
-        <span>{{ object.deadline }}</span>
-    </div>
-    <div>
-        <span>Maximum participants</span>
-        <span>{{ object.max_participants }} </span>
-    </div>
-    <div>
         {% block actions %}
             {% include 'events/actions.html' %}
         {% endblock %}
@@ -46,34 +26,17 @@
         {% endautoescape %}
         {% endblock %}
     </details>
-<h2>Organizers</h2>
-<div id="organizercontainer">
-</div>
-{% include 'account/grids/base.html' with object_list=object.organizers.all parent="#organizercontainer" %}
-<h2>Participants</h2>
-<div id="participantscontainer">
-</div>
-{% include 'account/grids/base.html' with object_list=object.participants.all parent="#participantscontainer" %}
 {% endblock %}
-{% block aside %}
+{% block additional_options %}
     {% if user in object.applicants.all %}
         <h2> Application Actions</h2>
         <a href="{% url 'application-edit' slug=object.slug %}" class="teamadmin">Edit my
             application</a>
-
     {% endif %}
     {% if user in object.organizers.all or user.is_superuser %}
         <h2> Admin Actions</h2>
         <a href="{% url 'eventdescription' slug=object.slug %}" class="teamadmin">Change
             Description</a>
-        {% url 'eventchangedetails' slug=object.slug as url %}
-        {% include "prototypes/modal.html" with buttontext='Change Event Details' buttonurl=url %}
-        {% url 'eventimages' slug=object.slug as url %}
-        {% include "prototypes/modal.html" with buttontext='Event Images' buttonurl=url %}
-        {% url 'eventapplications' slug=object.slug as url %}
-        {% include "prototypes/modal.html" with buttontext='Applications' buttonurl=url %}
-        {% url 'eventparticipation' slug=object.slug as url %}
-        {% include "prototypes/modal.html" with buttontext='Participants' buttonurl=url %}
     {% endif %}
     <script type="text/javascript">
         $("a.teamadmin").button();

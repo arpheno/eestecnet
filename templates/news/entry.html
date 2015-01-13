@@ -5,12 +5,12 @@
 {% block class %}news{% endblock %}
 {% block url %}{% url 'news' object.slug %}{% endblock %}
 {% block picture %}
-    {% thumbnail object.entry_image "150x150" crop="center" as im %}
-        <img alt="{{ object.headline }}" src="{{ im.url }}" width="{{ im.width }}"
+    {% thumbnail object.thumbnail "150x150" crop="center" as im %}
+        <img alt="{{ object.name }}" src="{{ im.url }}" width="{{ im.width }}"
              height="{{ im.height }}">
     {% endthumbnail %}
 {% endblock %}
 {% block caption %}
-    {{ object.headline }}
+    {{ object.name }}
 {% endblock %}
 

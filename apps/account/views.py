@@ -24,6 +24,7 @@ from eestecnet.forms import DialogFormMixin, MassCommunicationForm
 from apps.events.models import Event
 from apps.news.widgets import EESTECEditor
 
+
 logger = logging.getLogger(__name__)
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for x in range(size))
@@ -68,17 +69,17 @@ class EestecerUpdateForm(BetterModelForm):
              {'fields': ['first_name', 'middle_name', 'last_name', 'second_last_name']}),
             ('Additional Information', {'fields': [
                 'gender', 'date_of_birth', 'show_date_of_birth',
-                'profile_picture', 'field_of_study', 'curriculum_vitae']}),
+                'thumbnail', 'field_of_study', 'curriculum_vitae']}),
             ('Contact Information', {'fields': [
-                'hangouts', 'mobile', 'personal', 'skype']}),
+                'hangouts', 'mobile', 'description', 'skype']}),
             ('Event Information', {'fields': [
                 'tshirt_size', 'passport_number', 'food_preferences', 'allergies']}),
             ('Administrative Information', {'fields': ['receive_eestec_active']}),
         ]
         widgets = {
             'date_of_birth': TextInput(attrs={'class': 'date'}),
-            'personal': EESTECEditor(include_jquery=False),
-            'profile_picture': ImageWidget(
+            'description': EESTECEditor(include_jquery=False),
+            'thumbnail': ImageWidget(
                 template='<span>%(image)s<br />%(input)s</span>'),
         }
 
@@ -135,7 +136,7 @@ class EestecerList(ListView):
 
     def get_queryset(self):
         qs = super(EestecerList, self).get_queryset()
-        return qs.exclude(profile_picture="")
+        return qs.exclude(thumbnail="")
 
 
 class EestecerCreate(DialogFormMixin, CreateView):

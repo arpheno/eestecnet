@@ -4,7 +4,7 @@
 {% block class %}eestecer{% endblock %}
 {% block title %}{{ object }}{% endblock %}
 {% block pictures %}
-    {% thumbnail object.profile_picture "375x225" crop="center" as im %}
+    {% thumbnail object.thumbnail "375x225" crop="center" as im %}
         <img alt="{{ object }}" src="{{ im.url }}" width="{{ im.width }}" height="
         {{ im.height }}">
     {% endthumbnail %}
@@ -42,7 +42,7 @@
 {% block more %}
     <div>
         {% autoescape off %}
-            {{ object.personal }}
+            {{ object.description }}
         {% endautoescape %}
     </div>
 <h2>Teams and LCs</h2>

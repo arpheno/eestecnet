@@ -6,6 +6,9 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic import ListView, FormView, UpdateView, View, TemplateView, \
     DetailView
 from extra_views import UpdateWithInlinesView, ModelFormSetView
+from apps.pages.widgets import Information
+from apps.pages.widgets import Grids
+from apps.pages.widgets import AdminOptions
 from eestecnet.forms import DialogFormMixin
 from eestecnet.views import NeverCacheMixin
 from apps.events.admin import get_own_members
@@ -14,7 +17,6 @@ from apps.teams.forms import MembershipInline, MemberImageInline, DescriptionFor
     BoardForm, \
     ApplicationInline, TeamImageForm, OutgoingApplicationForm
 from apps.teams.models import Team, Board
-from eestecnet.widgets import button_for_modal, elastic_grid, piece_of_information
 
 
 class TeamMixin(NeverCacheMixin, View):
@@ -34,35 +36,15 @@ class TeamMixin(NeverCacheMixin, View):
         return reverse_lazy("teams:detail", kwargs=self.kwargs)
 
 
-class TeamList(ListView):
+class TeamList(Grids, ListView):
     model = Team
-
+    def grids(self):
+        return [
+            ("teams/grids/base.html", self.get_queryset(), "Cities of EESTEC"),
+            ]
     def get_queryset(self):
-        return Team.objects.filter(type='team')
+        return Team.objects.filter(category='team')
 
-
-class AdminOptions(object):
-    def get_context_data(self, **kwargs):
-        context = super(AdminOptions, self).get_context_data(**kwargs)
-        context['adminoptions'] = [button_for_modal(option[0], option[1]) for option in
-                                   self.adminoptions()]
-        return context
-
-
-class Grids(object):
-    def get_context_data(self, **kwargs):
-        context = super(Grids, self).get_context_data(**kwargs)
-        context['grids'] = [elastic_grid(option[0], option[1], option[2]) for option in
-                            self.grids()]
-        return context
-
-
-class Information(object):
-    def get_context_data(self, **kwargs):
-        context = super(Information, self).get_context_data(**kwargs)
-        context['information'] = [piece_of_information(option[0], option[1]) for option
-                                  in self.information()]
-        return context
 
 
 class TeamDetail(Information, Grids, AdminOptions, DetailView):
@@ -89,20 +71,20 @@ class TeamDetail(Information, Grids, AdminOptions, DetailView):
     def grids(self):
         return [
             ("events/grids/base.html", self.get_object().event_set.all(), "Last Events"),
-            ("account/grids/base.html", self.get_object().board(), "Board"),
-            ("account/grids/base.html", self.get_object().normal_members(), "Members"),
+            ("account/grids/base.html", self.get_object().organizers(), "Board"),
+            ("account/grids/base.html", self.get_object().members(), "Members"),
             ("account/grids/base.html", self.get_object().alumni(), "Alumni"),
         ]
 
     def adminoptions(self):
         return [
-            ("Outgoing", self.get_object().as_url() + "outgoing"),
-            ('Change Board', self.get_object().as_url() + "board"),
-            ('Change Details', self.get_object().as_url() + "details"),
-            ('Manage Members', self.get_object().as_url() + "members"),
-            ('Manage Images', self.get_object().as_url() + "images"),
-            ('Outgoing Applications', self.get_object().as_url() + "outgoing"),
-            ('Incoming Applications', self.get_object().as_url() + "applications"),
+            ("Outgoing", reverse_lazy(self.request.resolver_match.app_name+':outgoing',kwargs=self.kwargs)),
+            ('Change Board', self.get_object().get_absolute_url() + "board"),
+            ('Change Details', self.get_object().get_absolute_url() + "details"),
+            ('Manage Members', self.get_object().get_absolute_url() + "members"),
+            ('Manage Images', self.get_object().get_absolute_url() + "images"),
+            ('Outgoing Applications', self.get_object().get_absolute_url() + "outgoing"),
+            ('Incoming Applications', self.get_object().get_absolute_url() + "applications"),
         ]
 
 
@@ -122,11 +104,14 @@ class Governance(TemplateView):
         return context
 
 
-class CommitmentList(ListView):
+class CommitmentList(Grids,ListView):
     model = Team
-
+    def grids(self):
+        return [
+            ("teams/grids/base.html", self.get_queryset(), "Cities of EESTEC"),
+        ]
     def get_queryset(self):
-        return Team.objects.filter(type__in=["lc", "jlc", "observer"]).order_by('name')
+        return Team.objects.filter(category__in=["lc", "jlc", "observer"]).order_by('name')
 
 
 class ManageMembers(TeamMixin, DialogFormMixin, UpdateWithInlinesView):
@@ -196,11 +181,11 @@ class SelectBoard(TeamMixin, DialogFormMixin, FormView):
     def form_valid(self, form):
         team = Team.objects.get(slug=self.kwargs['slug'])
         for membership in team.membership_set.all():
-            membership.board = False
+            membership.organizers = False
             membership.save()
 
         for user in form.cleaned_data['board_members']:
             mmbrship = user.membership_set.get(team=team)
-            mmbrship.board = True
+            mmbrship.organizers = True
             mmbrship.save()
         return super(SelectBoard, self).form_valid(form)
