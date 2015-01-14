@@ -3,21 +3,47 @@
 {% load thumbnail %}
 {% load staticfiles %}
 {% block maincontent %}
+
+    <ul class="pgwSlider">
+        {% for object in object_list %}
+            <li>
+                <a href="{% url 'news' object.slug %}">
+                    {% thumbnail object.thumbnail "1087x480" quality=75 crop="center" as im %}
+                        <img src="{{ im.url }}"
+                    {% endthumbnail %}
+                             alt="{{ object.name }}"
+                             data-description="
+                                {% autoescape off %}
+                                    {{ object.content|truncatewords:50 }}
+                                    {% ifnotequal object.content|truncatewords:50|length object.content|truncatewords:51|length %}
+                                        <a href='{% url 'news' object.slug %}'
+                                 style='font-weight: bold;'> Read more</a>"
+                             {% endifnotequal %}
+                             {% endautoescape %}
+                    "></a>
+            </li>
+        {% endfor %}
+    </ul>
     <main class="home">
+
         <div class="donate_and_newsletter">
 
             <div class="aboutus">
-            <h1>About Us</h1>
+                <h1>About Us</h1>
 
-            <p>Electrical Engineering Students' European Association is an apolitical,
-                non-governmental and non-profit organization which targets and trains
-                through its activities students from electrical profile Universities,
-                Institutes and Technical Schools in Europe. </p>
-            <hr>
-            <p>The association was founded in The Netherlands, in 1986. Nowadays, EESTEC
-                is present in 28 countries and 53 universities across Europe with over
-                6000 members of whom 3000 are currently active, and indirectly, EESTEC is
-                addressing all students in the faculties that EESTEC exists.</p>
+                <p>Electrical Engineering Students' European Association is an
+                    apolitical,
+                    non-governmental and non-profit organization which targets and trains
+                    through its activities students from electrical profile Universities,
+                    Institutes and Technical Schools in Europe. </p>
+                <hr>
+                <p>The association was founded in The Netherlands, in 1986. Nowadays,
+                    EESTEC
+                    is present in 28 countries and 53 universities across Europe with
+                    over
+                    6000 members of whom 3000 are currently active, and indirectly,
+                    EESTEC is
+                    addressing all students in the faculties that EESTEC exists.</p>
             </div>
             <div class="contact">
                 <h1>Contact</h1>
@@ -44,25 +70,6 @@
                 </form>
             </div>
         </div>
-        <ul class="pgwSlider">
-            {% for object in object_list %}
-            <li>
-                <a href="{% url 'news' object.slug %}">
-                    {% thumbnail object.thumbnail "1087x480" quality=75 crop="center" as im %}
-                        <img src="{{ im.url }}"
-                    {% endthumbnail %}
-                             alt="{{ object.name }}"
-                             data-description="
-                                {% autoescape off %}
-                                    {{ object.content|truncatewords:50 }}
-                                    {% ifnotequal object.content|truncatewords:50|length object.content|truncatewords:51|length %}
-                                        <a href='{% url 'news' object.slug %}'
-                                 style='font-weight: bold;'> Read more</a>"
-                             {% endifnotequal %}
-                    {% endautoescape %}
-                    "></a>
-            </li>
-            {% endfor %}
-        </ul>
+
     </main>
 {% endblock %}
