@@ -1,0 +1,31 @@
+<td colspan="2">
+    <div class="actions">
+        {% if user in event.applicants.all %}
+    <a href="#" class="action-button shadow animate yellow">Application Pending</a>
+{% elif participation != None %}
+    {% if participation.confirmed %}
+        {% if participation.transportation.arrival != None %}
+            <a href="#" class="action-button shadow animate green">Confirmed</a>
+        {% else %}
+            {% url 'eventtransportation' object.slug as url %}
+            {% include "prototypes/modal.html" with buttontext="Fill in your transportation details" buttonurl=url %}
+        {% endif %}
+    {% elif request.user.tshirt_size != None and request.user.thumbnail != None %}
+        {% url 'eventconfirmation' object.slug as url %}
+        {% include "prototypes/modal.html" with buttontext="Confirm your participation" buttonurl=url %}
+    {% else %}
+        {% url 'userupdate' as url %}
+        {% include "prototypes/modal.html" with buttontext="Complete your User Profile" buttonurl=url %}
+    {% endif %}
+
+        {% elif user.is_authenticated and applicable %}
+            {% if object.category == "recruitment" %}
+                {% url 'eventapplication' object.slug as url %}
+                {% include "prototypes/modal.html" with buttontext="Join" buttonurl=url %}
+            {% else %}
+                {% url 'eventapplication' object.slug as url %}
+                {% include "prototypes/modal.html" with buttontext="Apply to Event" buttonurl=url %}
+    {% endif %}
+{% endif %}
+    </div>
+</td>
