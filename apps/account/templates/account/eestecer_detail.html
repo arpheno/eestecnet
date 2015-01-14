@@ -12,9 +12,11 @@
 
 {% block more %}
     <div>
+        {% block description %}
         {% autoescape off %}
             {{ object.description }}
         {% endautoescape %}
+        {% endblock %}
     </div>
     {% if object.achievements.all %}
         <details open>
