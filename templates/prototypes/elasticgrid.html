@@ -11,7 +11,7 @@
                 {% for object in object_list %}
                     {
                         'title': "{% block egtitle %}{{ object.name }}{% endblock %}",
-                        'description': "{% block egdescription %} {% filter escapejs %}{{ object.description|truncatewords:80 }}{% endfilter %}{% endblock %}",
+                        'description': "{% block egdescription %} {% filter escapejs %}{{ object.description|striptags|truncatewords:80 }}{% endfilter %}{% endblock %}",
                         'thumbnail': [
                             {% block egthumbnail %}
                             {% thumbnail object.thumbnail "190x190" crop="center" as im %}
