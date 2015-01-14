@@ -9,6 +9,7 @@ from django.core.files import File
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.forms import widgets
 from django.forms.models import modelform_factory
+from django.http import HttpResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
@@ -167,12 +168,20 @@ class EventDetail(AdminOptions,Information,Grids,DetailView):
     model = Event
     template_name = "events/event_detail.html"
     def adminoptions(self):
-        return [
+        options = [
             ('Change Details',reverse_lazy('eventchangedetails',kwargs=self.kwargs)),
             ('Manage Images', reverse_lazy('eventimages',kwargs=self.kwargs)),
             ('Participants', reverse_lazy('eventparticipation',kwargs=self.kwargs)),
-            ('Incoming Applications', reverse_lazy('eventapplications',kwargs=self.kwargs)),
             ]
+        if self.get_object().application_set.all():
+            options.append(('Incoming Applications',
+                            reverse_lazy('eventapplications', kwargs=self.kwargs)))
+            options.append(('Download Applications',
+                            reverse_lazy('exportapplications', kwargs=self.kwargs)))
+        if self.get_object().participation_set.all():
+            options.append(('Download Participants',
+                            reverse_lazy('exportparticipations', kwargs=self.kwargs)))
+        return options
 
     def information(self):
         event=self.get_object()
@@ -260,6 +269,12 @@ class ApplyToEvent(EventMixin, DialogFormMixin, CreateView):
 
     def dispatch(self, request, *args, **kwargs):
         try:
+            if not self.request.user.teams.all():
+                messages.add_message(
+                    self.request,
+                    messages.ERROR,
+                    'We are sorry. You have to be registered with a EESTEC Committment to apply for EESTEC events.')
+                return redirect("/")
             Application.objects.get(
                 applicant=request.user,
                 target=Event.objects.get(slug=self.kwargs['slug']))
@@ -281,6 +296,9 @@ class ApplyToEvent(EventMixin, DialogFormMixin, CreateView):
                     self.request,
                     messages.INFO,
                     'We are sorry. The deadline for this event has passed.')
+                logger.info(
+                    str(self.request.user) + " just tried applying to to " + str(
+                        application.target) + " but failed because they have no committment")
                 return redirect(self.get_success_url())
 
         application.save()
@@ -288,7 +306,6 @@ class ApplyToEvent(EventMixin, DialogFormMixin, CreateView):
             self.request,
             messages.INFO,
             'Thank you for your application. You will be notified upon acceptance.')
-
         logger.info(
             str(self.request.user) + " just applied to " + str(application.target))
         return redirect(self.get_success_url())
@@ -348,6 +365,194 @@ class EventImages(EventMixin, DialogFormMixin, UpdateWithInlinesView):
     inlines = [EventImageInline]
 
 
+class ExportApplications(EventMixin, DetailView):
+    model = Event
+
+    def get(self, request, *args, **kwargs):
+        return self.download_application_details(self.get_applications())
+
+    def get_applications(self):
+        return Application.objects.filter(target=self.get_object())
+
+    def download_application_details(self, queryset):
+        import xlwt
+
+        response = HttpResponse(content_type='application/ms-excel')
+        response[
+            'Content-Disposition'] = 'attachment; filename=' + self.get_object().slug \
+                                     + 'Application Details.xls'
+        wb = xlwt.Workbook(encoding='utf-8')
+        ws = wb.add_sheet("Incoming Applications")
+
+        row_num = 0
+
+        columns = [
+            (u"Full Name", 8000),
+            (u"LC", 3000),
+            (u"Email", 3000),
+            (u"gender", 3000),
+            (u"T Shirt Size", 6000),
+            (u"Birthday", 6000),
+            (u"Allergies", 3000),
+            (u"Food Preferences", 4000),
+            (u"Mobile Phone", 4000),
+            (u"Motivational Letter", 10000),
+            (u"Profile Picture", 4000),
+            (u"Curriculum Vitae", 4000),
+        ]
+
+        font_style = xlwt.XFStyle()
+        font_style.font.bold = True
+
+        for col_num in xrange(len(columns)):
+            ws.write(row_num, col_num, columns[col_num][0], font_style)
+            # set column width
+            ws.col(col_num).width = columns[col_num][1]
+
+        font_style = xlwt.XFStyle()
+        font_style.alignment.wrap = 1
+
+        for pax in queryset:
+            row_num += 1
+            thumbnail = ""
+            cv = ""
+            if pax.applicant.thumbnail:
+                thumbnail = "https://eestec.net" + pax.applicant.thumbnail.url
+            if pax.applicant.curriculum_vitae:
+                cv = "https://eestec.net" + pax.applicant.curriculum_vitae.url
+            row = [
+                pax.applicant.get_full_name(),
+                ", ".join(str(person) for person in pax.applicant.lc()),
+                pax.applicant.email,
+                pax.applicant.gender,
+                pax.applicant.tshirt_size,
+                pax.applicant.date_of_birth,
+                pax.applicant.allergies,
+                pax.applicant.food_preferences,
+                pax.applicant.mobile,
+                pax.letter,
+                thumbnail,
+                cv,
+            ]
+
+            for col_num in xrange(len(row)):
+                ws.write(row_num, col_num, row[col_num], font_style)
+
+        wb.save(response)
+        return response
+
+
+class ExportParticipants(EventMixin, DetailView):
+    model = Event
+
+    def get(self, request, *args, **kwargs):
+        return self.download_participants_details(self.get_participants())
+
+    def get_participants(self):
+        return Participation.objects.filter(target=self.get_object())
+
+    def download_participants_details(self, queryset):
+        import xlwt
+
+        response = HttpResponse(content_type='application/ms-excel')
+        response[
+            'Content-Disposition'] = 'attachment; filename=' + self.get_object().slug \
+                                     + 'Participants Details.xls'
+        wb = xlwt.Workbook(encoding='utf-8')
+        ws = wb.add_sheet("Participants Details")
+        row_num = 0
+
+        columns = [
+            (u"Full Name", 8000),
+            (u"LC", 3000),
+            (u"Email", 3000),
+            (u"gender", 3000),
+            (u"T Shirt Size", 6000),
+            (u"Birthday", 6000),
+            (u"Allergies", 3000),
+            (u"Food Preferences", 4000),
+            (u"Mobile Phone", 4000),
+            (u"Profile Picture", 4000),
+            (u"Curriculum Vitae", 4000),
+        ]
+
+        font_style = xlwt.XFStyle()
+        font_style.font.bold = True
+
+        for col_num in xrange(len(columns)):
+            ws.write(row_num, col_num, columns[col_num][0], font_style)
+            # set column width
+            ws.col(col_num).width = columns[col_num][1]
+
+        font_style = xlwt.XFStyle()
+        font_style.alignment.wrap = 1
+
+        for pax in queryset:
+            row_num += 1
+            thumbnail = ""
+            cv = ""
+            if pax.participant.thumbnail:
+                thumbnail = "https://eestec.net" + pax.participant.thumbnail.url
+            if pax.participant.curriculum_vitae:
+                cv = "https://eestec.net" + pax.participant.curriculum_vitae.url
+            row = [
+                pax.participant.get_full_name(),
+                ", ".join(str(person) for person in pax.participant.lc()),
+                pax.participant.email,
+                pax.participant.gender,
+                pax.participant.tshirt_size,
+                pax.participant.date_of_birth,
+                pax.participant.allergies,
+                pax.participant.food_preferences,
+                pax.participant.mobile,
+                thumbnail,
+                cv,
+            ]
+
+            for col_num in xrange(len(row)):
+                ws.write(row_num, col_num, row[col_num], font_style)
+
+        ws = wb.add_sheet("Transportation Details")
+
+        row_num = 0
+
+        columns = [
+            (u"Full Name", 8000),
+            (u"Arrival Date and Time", 6000),
+            (u"Arrival By", 3000),
+            (u"Arrival Number", 4000),
+            (u"Departure Date and Time", 6000),
+            (u"Depart By", 3000),
+            (u"Comment", 10000),
+        ]
+
+        font_style = xlwt.XFStyle()
+        font_style.font.bold = True
+
+        for col_num in xrange(len(columns)):
+            ws.write(row_num, col_num, columns[col_num][0], font_style)
+            # set column width
+            ws.col(col_num).width = columns[col_num][1]
+
+        font_style = xlwt.XFStyle()
+        font_style.alignment.wrap = 1
+
+        for pax in queryset:
+            if pax.transportation:
+                row_num += 1
+                row = [
+                    pax.participant.get_full_name(),
+                    str(pax.transportation.arrival),
+                    pax.transportation.arrive_by,
+                    pax.transportation.arrival_number,
+                    str(pax.transportation.departure),
+                    pax.transportation.depart_by,
+                ]
+                for col_num in xrange(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+        wb.save(response)
+        return response
 
 class IncomingApplications(EventMixin, DialogFormMixin, UpdateWithInlinesView):
     model = Event

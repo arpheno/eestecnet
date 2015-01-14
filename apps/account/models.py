@@ -152,7 +152,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
         return len(self.teams.filter(name="Training Team"))
 
     def lc(self):
-        return self.teams.filter(type__in=['jlc', 'lc', 'observer'])
+        return self.teams.filter(category__in=['jlc', 'lc', 'observer'])
 
     def as_self(self):
         return render_to_string('account/self.html', {'object': self})
