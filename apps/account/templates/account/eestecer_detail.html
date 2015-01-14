@@ -25,34 +25,11 @@
         </details>
     {% endif %}
 {% endblock %}
-{% block aside %}
+{% block additional_options %}
     <h2> Admin Actions</h2>
-    {% if object == user %}
-        {% include "prototypes/modal.html" with buttontext='Update my personal Data' buttonurl='/people/me/' %}
         {% if user.is_trainer %}
             <a href="{% url 'certificate' object.slug %}" id="trainercert">Training
                 Certificate
                 Supplement</a>
         {% endif %}
-        <script type="text/javascript">
-            $("a#updatepersonaldata").button();
-            $("a#trainercert").button();
-        </script>
-        {% if user.is_superuser %}
-            <a href="{% url 'batch_add_events' %}" id="add_events">Add events in CSV</a>
-            <script type="text/javascript">
-                $("a#add_events").button();
-            </script>
-        {% endif %}
-        {% for group in user.groups.all %}
-            {% if group.name == 'Local Admins' %}
-                <a href="{% url 'batch_add_events' %}" id="add_events">Add events in
-                    CSV</a>
-                <script type="text/javascript">
-                    $("a#add_events").button();
-                </script>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-    {% block add_events %}{% endblock %}
 {% endblock %}

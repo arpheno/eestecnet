@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.sites.models import RequestSite
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import redirect
 from django.contrib.auth import login, logout
 from django.template.loader import render_to_string
@@ -18,9 +18,9 @@ from form_utils.widgets import ImageWidget
 from mailqueue.models import MailerMessage
 from password_reset.utils import get_username
 
-from apps.account.forms import EestecerCreationForm
+from apps.account.forms import EestecerCreationForm, EestecerPersonalForm
 from apps.account.models import Eestecer
-from apps.pages.widgets import Grids, Information
+from apps.pages.widgets import Grids, Information, AdminOptions
 from eestecnet.forms import DialogFormMixin, MassCommunicationForm
 from apps.events.models import Event
 from apps.news.widgets import EESTECEditor
@@ -57,7 +57,7 @@ def complete(request, ida):
     return redirect('/people/me')
 
 
-class EestecerProfile(Information, Grids, DetailView):
+class EestecerProfile(AdminOptions, Information, Grids, DetailView):
     def information(self):
         info = [
             ('Name', self.get_object().name),
@@ -70,6 +70,13 @@ class EestecerProfile(Information, Grids, DetailView):
                          "<a href=" + self.get_object().curriculum_vitae.url +
                          ">Download</a>"))
         return info
+
+    def adminoptions(self):
+        options = []
+        options.append(('Change Details', reverse_lazy('userupdate')))
+        options.append(('Change Personal Description', reverse_lazy('personalupdate')))
+        return options
+
 
     def grids(self):
         grids = [
@@ -120,6 +127,15 @@ class TrainingList(DetailView):
         for training in context['trainings']:
             training.name = training.name.split("-" + str(training.start_date))[0]
         return context
+
+
+class PersonalUpdate(UpdateView):
+    form_class = EestecerPersonalForm
+    model = Eestecer
+    template_name = "account/personalform.html"
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 class EestecerUpdate(CapitalizeName,DialogFormMixin, UpdateView):
     model=Eestecer

@@ -10,31 +10,13 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.forms import widgets
 from django.forms.models import modelform_factory
 from django.shortcuts import redirect, get_object_or_404
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Create your views here.
 from django.utils import timezone
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
     FormView, \
     DeleteView
 from extra_views import UpdateWithInlinesView, CreateWithInlinesView
 from form_utils.widgets import ImageWidget
+
 from apps.pages.widgets import Grids, Information, AdminOptions
 from eestecnet.forms import DialogFormMixin
 from apps.events.forms import DescriptionForm, EventImageInline, TransportForm, \
@@ -42,6 +24,7 @@ from apps.events.forms import DescriptionForm, EventImageInline, TransportForm, 
 from apps.events.models import Event, Application, Participation
 from apps.teams.forms import ApplicationInline, ParticipationInline
 from apps.teams.models import Team
+
 
 logger = logging.getLogger(__name__)
 

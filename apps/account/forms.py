@@ -3,7 +3,10 @@ import string
 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.forms import ImageField
+from form_utils.forms import BetterModelForm
 from form_utils.widgets import ImageWidget
+
+from apps.news.widgets import EESTECEditor
 
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
@@ -42,3 +45,13 @@ class EestecerChangeForm(UserChangeForm):
 
     class Meta:
         model = Eestecer
+
+
+class EestecerPersonalForm(BetterModelForm):
+    class Meta:
+        model = Eestecer
+        widgets = {
+            'personal': EESTECEditor(include_jquery=False),
+        }
+        fields = ['description', ]
+
