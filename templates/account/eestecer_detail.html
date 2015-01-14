@@ -10,57 +10,12 @@
     {% endthumbnail %}
 {% endblock %}
 
-{% block details %}
-    <div>
-        <span>Name:</span>
-        <span>{{ object.get_full_name }}</span>
-    </div>
-    {% if object.show_date_of_birth %}
-        <div>
-            <span>Date of Birth:</span>
-            <span>{{ object.date_of_birth }}</span>
-        </div>
-    {% endif %}
-    <div>
-        <span>Date Joined:</span>
-        <span>{{ object.date_joined }}</span>
-
-    </div>
-    <div>
-        <span>Field of Study:</span>
-        <span>{{ object.field_of_study|title }}</span>
-    </div>
-    {% if object.curriculum_vitae %}
-        <div>
-            <span>Curriculum Vitae</span>
-            <span><a href="{{ object.curriculum_vitae.url }}"
-                     style="color:blue;">Download</a></span>
-        </div>
-    {% endif %}
-{% endblock %}
-
 {% block more %}
     <div>
         {% autoescape off %}
             {{ object.description }}
         {% endautoescape %}
     </div>
-<h2>Teams and LCs</h2>
-<div id="teamcontainer">
-</div>
-{% include 'teams/grids/base.html' with object_list=object.teams.all parent="#teamcontainer" %}
-{% if object.events_organized.all %}
-    <h2>Last Events Organized</h2>
-    <div id="eventocontainer">
-    </div>
-    {% include 'events/grids/base.html' with object_list=object.events_organized.all parent="#eventocontainer" %}
-    {% endif %}
-    {% if object.events.all %}
-        <h2>Last Events Participated</h2>
-        <div id="eventcontainer">
-        </div>
-        {% include 'events/grids/base.html' with object_list=object.events.all parent="#eventcontainer" %}
-    {% endif %}
     {% if object.achievements.all %}
         <details open>
             <summary>Achievements in EESTEC</summary>

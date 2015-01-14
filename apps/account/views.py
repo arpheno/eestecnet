@@ -20,7 +20,7 @@ from password_reset.utils import get_username
 
 from apps.account.forms import EestecerCreationForm
 from apps.account.models import Eestecer
-from apps.pages.widgets import Grids
+from apps.pages.widgets import Grids, Information
 from eestecnet.forms import DialogFormMixin, MassCommunicationForm
 from apps.events.models import Event
 from apps.news.widgets import EESTECEditor
@@ -57,7 +57,32 @@ def complete(request, ida):
     return redirect('/people/me')
 
 
-class EestecerProfile(DetailView):
+class EestecerProfile(Information, Grids, DetailView):
+    def information(self):
+        info = [
+            ('Name', self.get_object().name),
+            ('Birthday', self.get_object().date_of_birth),
+            ('Date Joined', self.get_object().date_joined),
+            ('Field of Study', self.get_object().field_of_study),
+        ]
+        if self.get_object().curriculum_vitae:
+            info.append(("Curriculum Vitae",
+                         "<a href=" + self.get_object().curriculum_vitae.url +
+                         ">Download</a>"))
+        return info
+
+    def grids(self):
+        grids = [
+            ("teams/grids/base.html", self.get_object().teams.all(), "LC and Teams"),
+        ]
+        if self.get_object().events_organized.all():
+            grids.append((
+            "events/grids/base.html", self.get_object().events_organized.all(),
+            "Last Events"))
+        if self.get_object().events.all():
+            grids.append((
+            "events/grids/base.html", self.get_object().events.all(), "Last Events"))
+        return grids
     model = Eestecer
     template_name= "account/eestecer_detail.html"
 
