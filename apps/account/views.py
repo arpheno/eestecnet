@@ -67,7 +67,7 @@ class EestecerProfile(AdminOptions, Information, Grids, DetailView):
         ]
         if self.get_object().curriculum_vitae:
             info.append(("Curriculum Vitae",
-                         "<a href=" + self.get_object().curriculum_vitae.url +
+                         "<a href='" + self.get_object().curriculum_vitae.url + "'" +
                          ">Download</a>"))
         return info
 
