@@ -11,8 +11,8 @@
             {% include "prototypes/modal.html" with buttontext="Fill in your transportation details" buttonurl=url %}
         {% endif %}
     {% elif request.user.tshirt_size != None and request.user.thumbnail != None %}
-        {% url 'eventconfirmation' object.slug as url %}
-        {% include "prototypes/modal.html" with buttontext="Confirm your participation" buttonurl=url %}
+        <a href="{% url 'eventconfirmation' object.slug %}"
+           class="action-button shadow animate yellow">Confirm your Participation</a>
     {% else %}
         {% url 'userupdate' as url %}
         {% include "prototypes/modal.html" with buttontext="Complete your User Profile" buttonurl=url %}
