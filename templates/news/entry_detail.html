@@ -7,10 +7,11 @@
         <ul>
             <li>{{ entry.pub_date }}</li>
         </ul>
-        {% thumbnail entry.thumbnail "x200" crop="center" as im %}
-            <img alt="{{ object }}" src="{{ im.url }}" width="{{ im.width }}"
-                 height="{{ im.height }}">
+        <div>
+            {% thumbnail entry.thumbnail "x300" crop="center" as im %}
+                <img alt="{{ object }}" src="{{ im.url }}"
         {% endthumbnail %}
+        </div>
 
         <div class="post_content">
             {% autoescape off %}
