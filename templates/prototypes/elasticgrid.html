@@ -21,7 +21,7 @@
                                 "{{ im.url }}",
                             {% endthumbnail %}
                             {% for image in object.images.all %}
-                                {% thumbnail image "190x190" crop="center" as im %}
+                                {% thumbnail image.image "190x190" crop="center" as im %}
                                     "{{ im.url }}",
                                 {% endthumbnail %}
                             {% endfor %}
@@ -33,7 +33,7 @@
                                 "{{ im.url }}",
                             {% endthumbnail %}
                             {% for image in object.images.all %}
-                                {% thumbnail image "600x600" crop="center" as im %}
+                                {% thumbnail image.image "600x600" crop="center" as im %}
                                     "{{ im.url }}",
                                 {% endthumbnail %}
                             {% endfor %}

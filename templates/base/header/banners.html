@@ -13,8 +13,6 @@
         {% include 'account/login.html' %}
     {% endblock %}
 {% else %}
-    <div id="userarea">
-    </div>
-    {% include 'account/grids/base.html' with object_list=userlist parent="#userarea" %}
+    {% include 'account/grids/base.html' with object_list=userlist name="userarea" %}
 {% endif %}
 

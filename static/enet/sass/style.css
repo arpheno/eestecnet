@@ -17,7 +17,6 @@ C:/Ruby200/bin/sass:23:in `load'
 C:/Ruby200/bin/sass:23:in `<main>'
 */
 body:before {
-    white-space: pre;
-    font-family: monospace;
-    content: "Errno::ENOENT: No such file or directory - style.scss";
-}
+  white-space: pre;
+  font-family: monospace;
+  content: "Errno::ENOENT: No such file or directory - style.scss"; }

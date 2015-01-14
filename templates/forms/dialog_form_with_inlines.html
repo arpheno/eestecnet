@@ -3,7 +3,8 @@
     <script type="text/javascript">
         $(function () {
             $("#{{ id }} input[type=submit]").button();
-            $("#{{ id }} form").submit(function () {
+            $("#dialogform form").submit(function () {
+                console.log("form submitted");
                 $.ajax({
                     type: "POST",
                     url: $(this).attr("action"),
@@ -13,6 +14,7 @@
                     statusCode: {
                         200: function (data) {
                             if (data.content) {
+                                console.log("form cameb ack with data");
                                 $.pgwModal({
                                     content: data.content,
                                     loadingContent: '<span style="text-align:center">Loading in progress</span>',
@@ -20,12 +22,12 @@
                                     maxWidth: 800
                                 });
                             } else {
-                                $("#{{ id }}").dialog("close");
+                                console.log("form cameb ack without data");
                                 location.reload();
                             }
-             },
-             302:function(xhr,textstatus,error){
-             location.href = xhr.getResponseHeader("Location");
+                        },
+                        302: function (xhr, textstatus, error) {
+                            location.href = xhr.getResponseHeader("Location");
                         }
                     }
                 });

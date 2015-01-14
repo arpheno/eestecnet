@@ -37,7 +37,6 @@ root.PersonDialog = (wrapper) ->
   @chosen = ->
     @imgs.find ".selected img"
   self.filter.keyup((e) ->
-    console.log(self.filter.val())
       self.imgs.hide()
       self.imgs.filter(":contains('" + self.filter.val() + "')").show()
   )

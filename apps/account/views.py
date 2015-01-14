@@ -20,6 +20,7 @@ from password_reset.utils import get_username
 
 from apps.account.forms import EestecerCreationForm
 from apps.account.models import Eestecer
+from apps.pages.widgets import Grids
 from eestecnet.forms import DialogFormMixin, MassCommunicationForm
 from apps.events.models import Event
 from apps.news.widgets import EESTECEditor
@@ -130,9 +131,16 @@ class EestecerUpdate(CapitalizeName,DialogFormMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
-class EestecerList(ListView):
+
+
+class EestecerList(Grids, ListView):
     model=Eestecer
     template_name = 'account/all_eestecers.html'
+
+    def grids(self):
+        return [
+            ("account/grids/base.html", self.get_queryset(), "People in EESTEC"),
+        ]
 
     def get_queryset(self):
         qs = super(EestecerList, self).get_queryset()

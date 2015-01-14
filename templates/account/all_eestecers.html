@@ -1,6 +1,6 @@
 {% extends 'base/prototypes/split.html' %}
 {% block main %}
-    <h2 class="post_title">People</h2>
-    <div id="peoplecontainer"></div>
-    {% include 'account/grids/base.html' with parent="#peoplecontainer" %}
+    {% for grid in grids %}
+        {{ grid }}
+    {% endfor %}
 {% endblock %}
