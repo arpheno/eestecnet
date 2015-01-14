@@ -169,7 +169,61 @@ class IncomingApplicationAdmin(admin.ModelAdmin):
     list_filter = [IncomingApplicationFilter]
     readonly_fields = ['letter', 'target', 'applicant', 'priority']
     #TODO Fieldsets
+    actions = ['download_applicant_details', ]
 
+    def download_applicant_details(self, request, queryset):
+        import xlwt
+
+        response = HttpResponse(content_type='application/ms-excel')
+        response['Content-Disposition'] = 'attachment; filename=' + queryset[
+            0].target.slug + 'ApplicationDetails.xls'
+        wb = xlwt.Workbook(encoding='utf-8')
+        ws = wb.add_sheet("Applicants")
+
+        row_num = 0
+
+        columns = [
+            (u"Full Name", 8000),
+            (u"LC", 3000),
+            (u"Email", 3000),
+            (u"gender", 3000),
+            (u"T Shirt Size", 6000),
+            (u"Birthday", 6000),
+            (u"Allergies", 3000),
+            (u"Food Preferences", 4000),
+            (u"Picture URL", 4000),
+        ]
+
+        font_style = xlwt.XFStyle()
+        font_style.font.bold = True
+
+        for col_num in xrange(len(columns)):
+            ws.write(row_num, col_num, columns[col_num][0], font_style)
+            # set column width
+            ws.col(col_num).width = columns[col_num][1]
+
+        font_style = xlwt.XFStyle()
+        font_style.alignment.wrap = 1
+
+        for pax in queryset:
+            row_num += 1
+            row = [
+                pax.applicant.get_full_name(),
+                ", ".join(str(person) for person in pax.applicant.lc()),
+                pax.applicant.email,
+                pax.applicant.gender,
+                pax.applicant.tshirt_size,
+                pax.applicant.date_of_birth,
+                pax.applicant.allergies,
+                pax.applicant.food_preferences,
+                pax.applicant.profile_picture.url,
+            ]
+
+            for col_num in xrange(len(row)):
+                ws.write(row_num, col_num, row[col_num], font_style)
+
+        wb.save(response)
+        return response
     def get_queryset(self, request):
         """ A Local admin will only be able to modify applications applying to an
         event by their LC
