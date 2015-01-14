@@ -8,7 +8,7 @@
         {% for object in object_list %}
             <li>
                 <a href="{% url 'news' object.slug %}">
-                    {% thumbnail object.thumbnail "1087x480" quality=75 crop="center" as im %}
+                    {% thumbnail object.thumbnail "1087x480" quality=95 crop="center" as im %}
                         <img src="{{ im.url }}"
                     {% endthumbnail %}
                              alt="{{ object.name }}"
