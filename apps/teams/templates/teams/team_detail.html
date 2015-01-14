@@ -33,7 +33,8 @@
 
 {% block additional_options %}
     {% if user in object.privileged or user.is_superuser %}
-        <a href="{{ object.get_aboslute_url }}description" id="board">Change
+        <a class="action-button blue" href="{{ object.get_aboslute_url }}description"
+           id="board">Change
             Description</a>
     {% endif %}
 {% endblock %}

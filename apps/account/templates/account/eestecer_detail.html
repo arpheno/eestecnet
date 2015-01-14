@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block more %}
-    <div>
+    <div id="userpersonal">
         <h1>Personal Note</h1>
         {% block description %}
         {% autoescape off %}
@@ -28,7 +28,8 @@
 {% endblock %}
 {% block additional_options %}
         {% if user.is_trainer %}
-            <a href="{% url 'certificate' object.slug %}" id="trainercert">Training
+            <a href="{% url 'certificate' object.slug %}" class="action-button blue"
+               id="trainercert">Training
                 Certificate
                 Supplement</a>
         {% endif %}

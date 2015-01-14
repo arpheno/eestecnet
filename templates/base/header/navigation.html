@@ -12,7 +12,23 @@
                 <a href="/admin">Admin </a>
                 <ul>
                     <li>
-                        <a href="{% url 'masscommunication' %}">Mass Communication</a>
+                        <script type="text/javascript">
+                            $(function () {
+
+                                $("#masscom").click(function (event) {
+                                    event.preventDefault();
+                                    $.pgwModal({
+                                                url: "{% url 'masscommunication' %}",
+                                                loadingContent: '<span style="text-align:center">Loading in progress</span>',
+                                                titleBar: false,
+                                                maxWidth: 800
+                                            }
+                                    );
+                                    return false;
+                                });
+                            });
+                        </script>
+                        <a id="masscom" href="">Mass Communication</a>
                     </li>
                 </ul>
             </li>

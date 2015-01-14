@@ -35,7 +35,8 @@
     {% endif %}
     {% if user in object.organizers.all or user.is_superuser %}
         <h2> Admin Actions</h2>
-        <a href="{% url 'eventdescription' slug=object.slug %}" class="teamadmin">Change
+        <a class="action-button blue"
+           href="{% url 'eventdescription' slug=object.slug %}" class="teamadmin">Change
             Description</a>
     {% endif %}
     <script type="text/javascript">

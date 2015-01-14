@@ -70,7 +70,8 @@ class TeamDetail(Information, Grids, AdminOptions, DetailView):
 
     def grids(self):
         return [
-            ("events/grids/base.html", self.get_object().event_set.all(), "Last Events"),
+            ("events/grids/base.html",
+             self.get_object().event_set.exclude(category="recruitment"), "Last Events"),
             ("account/grids/base.html", self.get_object().organizers(), "Board"),
             ("account/grids/base.html", self.get_object().members(), "Members"),
             ("account/grids/base.html", self.get_object().alumni(), "Alumni"),

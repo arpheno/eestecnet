@@ -5,9 +5,14 @@
 
 .action-button {
   position: relative;
-  padding: 10px 40px;
+  padding: 10px 0px;
+  flex: 1 1 100%;
+  text-align: center;
+  font-weight: bold;
+  border: groove;
+  font-family: $centurygothic;
   border-radius: 10px;
-  font-size: 25px;
+  font-size: 20px;
   color: #FFF;
   text-decoration: none;
 }

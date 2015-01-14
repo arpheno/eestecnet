@@ -1,0 +1,15 @@
+{% load compress %}
+
+{% compress js %}
+    <script type="text/coffeescript">
+        $("button:contains('{{ buttontext }}')").click(->
+            $.pgwModal(
+                url: '{{ buttonurl }}',
+                loadingContent: '<span style="text-align:center">Loading in progress</span>',
+                titleBar: false,
+                maxWidth: 800
+            )
+            return false;
+        )
+    </script>
+{% endcompress %}
