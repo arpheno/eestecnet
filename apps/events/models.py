@@ -232,6 +232,7 @@ class Application(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
+
         if not self.date:
             self.date = timezone.now()
         if self.target.deadline:
@@ -249,6 +250,16 @@ class Application(models.Model):
             else:
                 super(Application, self).save()
         else:
+            if not self.pk:
+                message = MailerMessage()
+                message.subject = "Hey hey! Just dropping by to tell you that" + \
+                                  self.request.user + " has applied to the event " + \
+                                  self.target.name + "\n Please remember to send a " \
+                                                     "priority list."
+                message.from_address = "noreply@eestecnet",
+                message.to_address = [user.email for user in
+                                      self.applicant.lc.privileged]
+                message.save()
             if self.accepted:
                 participation, created = Participation.objects.get_or_create(
                     target=self.target,
