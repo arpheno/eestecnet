@@ -1,11 +1,57 @@
-{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>404|It's a shame</title>
-</head>
-<body>
-<img src="{% static 'enet/img/404.png' %}" style="width:100%;height:100%;">
+    <title>Error 404 | Page doesn't exist</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
+    <!-- Optional theme
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    -->
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+        #divA {
+            padding-top: 50px;
+            padding-bottom: 40px;
+        }
+
+        #divB {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="divA" class="col-md-8 col-md-offset-2" style="text-align:center">
+    <div>
+        <p>
+            <!--<img src="https://eestec.net/static/enet/img/EESTEC_logo.svg">-->
+            <img src="{% static 'enet/img/EESTEC_logo.svg' %}">
+        </p><br>
+        <!--<img src="cat.jpg">-->
+        <img src="{% static 'enet/img/cat.jpg' %}">-->
+        <h1 style="font-size:500%">Error 404</h1>
+
+        <h2>Interestingly, You've just found what doesn't exist!</h2>
+
+        <p><!--It looks like something's missing here...-->
+            <br>BTW if you want, you can give us some <a href="#">Feedback</a>. Thank
+            you!
+        </p>
+    </div>
+    <div id="divA" style="text-align:center">
+        <a class="btn btn-default" href="http://eestec.net" role="button">Back to Home
+            Page</a>
+    </div>
+</div>
 </body>
+
 </html>
+
+
+
