@@ -3,9 +3,6 @@
 {% load static %}
 <h2>{{ name }}</h2>
 <div id="{{ name|slugify }}container"></div>
-<script src="{% static 'elasticgrid/js/modernizr.custom.js' %}"></script>
-<script src="{% static 'elasticgrid/js/classie.js' %}"></script>
-<script src="{% static 'elasticgrid/js/elastic_grid.min.js' %}"></script>
 <script type="text/javascript">
     $(function () {
         $("#{{ name|slugify }}container").elastic_grid({
@@ -52,10 +49,3 @@
     });
 
 </script>
-<link rel="stylesheet"
-      href="{% static 'elasticgrid/css/elastic_grid.min.css' %}"/>
-<style scoped="scoped" type="text/css">
-    .og-expander {
-        z-index: 9;
-    }
-</style>
