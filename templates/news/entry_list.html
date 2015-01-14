@@ -14,9 +14,9 @@
 
             <div class="post_content">
             {% autoescape off %}
-                {{ entry.content | truncatewords:110|linebreaks }}
+                {{ entry.description | truncatewords:110|linebreaks }}
                 {% endautoescape %}
-                {% ifnotequal entry.content|truncatewords:110|length entry.content|truncatewords:111|length %}
+                {% ifnotequal entry.description|truncatewords:110|length entry.description|truncatewords:111|length %}
                     <a href="{% url "news" entry.slug %}"
                        style="font-weight: bold;"> Read more</a>
                 {% endifnotequal %}
