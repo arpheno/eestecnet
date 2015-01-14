@@ -192,6 +192,9 @@ class IncomingApplicationAdmin(admin.ModelAdmin):
             (u"Allergies", 3000),
             (u"Food Preferences", 4000),
             (u"Picture URL", 4000),
+            (u"Mobile Phone", 4000),
+            (u"Motivational Letter", 4000),
+            (u"Curriculum Vitae", 4000),
         ]
 
         font_style = xlwt.XFStyle()
@@ -207,9 +210,13 @@ class IncomingApplicationAdmin(admin.ModelAdmin):
         for pax in queryset:
             row_num += 1
             if pax.applicant.profile_picture:
-                thumbnailurl = pax.applicant.profile_picture.url
+                thumbnailurl = "https://eestec.net" + pax.applicant.profile_picture.url
             else:
                 thumbnailurl = ""
+            if pax.applicant.curriculum_vitae:
+                cv = "https://eestec.net" + pax.applicant.curriculum_vitae.url
+            else:
+                cv = ""
             row = [
                 pax.applicant.get_full_name(),
                 ", ".join(str(person) for person in pax.applicant.lc()),
@@ -220,6 +227,9 @@ class IncomingApplicationAdmin(admin.ModelAdmin):
                 pax.applicant.allergies,
                 pax.applicant.food_preferences,
                 thumbnailurl,
+                pax.applicant.mobile,
+                pax.letter,
+                cv,
             ]
 
             for col_num in xrange(len(row)):
