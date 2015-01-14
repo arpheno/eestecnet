@@ -1,7 +1,7 @@
 {% extends 'prototypes/elasticgrid.html' %}
 {% block egtags %}{% filter escapejs %}
     {% if object.category == "workshop" or object.category == "exchange" or object.category == "operational" or object.category == "imw" %}
-        Main Events','{% endif %}{{ object.category|title }}{% endfilter %}{% endblock %}
+        Main Events,{% endif %}{{ object.category|title }}{% endfilter %}{% endblock %}
 {% block egdescription %}{% filter escapejs %}{{ object.category|title }} organized by
     {% for oc in object.organizing_committee.all %}{{ oc }}{% endfor %}
     <hr>

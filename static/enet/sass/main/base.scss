@@ -5,7 +5,7 @@ body > main {
   }
   border-width: 0px 01px 0px 01px;
   flex: 1 1 70%;
-  z-index: 2;
+  z-index: 1;
   border-color: #a2a0a0;
   position: relative;
   background-color: white;
@@ -56,13 +56,11 @@ body > aside {
   {
     border-width: 0px;
   }
-  button {
-    width: 200px;
-  }
   #portfolio-filter {
     display: none;
   }
   display: flex;
+  z-index: 8;
   background-color: #5f6a6d;
   border-width: 0px 57px 0px 0px;
   align-content: flex-start;

@@ -8,6 +8,11 @@ a.member {
   }
 }
 
+section.members {
+  ul {
+    @extend ._flex_around;
+  }
+}
 div.team {
   height: 300px;
 }
