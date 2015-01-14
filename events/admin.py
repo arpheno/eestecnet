@@ -204,9 +204,12 @@ class IncomingApplicationAdmin(admin.ModelAdmin):
 
         font_style = xlwt.XFStyle()
         font_style.alignment.wrap = 1
-
         for pax in queryset:
             row_num += 1
+            if pax.applicant.profile_picture:
+                thumbnailurl = pax.applicant.profile_picture.url
+            else:
+                thumbnailurl = ""
             row = [
                 pax.applicant.get_full_name(),
                 ", ".join(str(person) for person in pax.applicant.lc()),
@@ -216,7 +219,7 @@ class IncomingApplicationAdmin(admin.ModelAdmin):
                 pax.applicant.date_of_birth,
                 pax.applicant.allergies,
                 pax.applicant.food_preferences,
-                pax.applicant.profile_picture.url,
+                thumbnailurl,
             ]
 
             for col_num in xrange(len(row)):
