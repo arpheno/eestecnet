@@ -28,6 +28,7 @@ INSTALLED_APPS += (
     'apps.news',
     'apps.elfinder',
     'apps.wiki',
+    'apps.feedback',
     'apps.pages',
 )
 from conf.templates import *

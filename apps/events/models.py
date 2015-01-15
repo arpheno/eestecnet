@@ -5,12 +5,14 @@ from autoslug import AutoSlugField
 from autoslug.utils import slugify
 from django.core.files import File
 from django.core.urlresolvers import reverse
+from django.db.models import ForeignKey
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from mailqueue.models import MailerMessage
 
+from apps.feedback.models import AnswerSet, Answer
 from apps.news.models import Membership
 
 
@@ -86,7 +88,7 @@ class Event(models.Model):
     organizer_report = models.TextField(blank=True, null=True)
     """ Optional: This is a field where the organizers report can be stored and
     accessed."""
-
+    feedbacksheet = ForeignKey('feedback.QuestionSet', null=True, blank=True)
     class Meta:
         verbose_name = "Event"
         ordering = ('name',)
@@ -99,6 +101,22 @@ class Event(models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         self.slug = slugify(self.name)
+        if (self.feedbacksheet):
+            if self.pk:
+                # if created
+                orig = Event.objects.get(pk=self.pk)
+                if orig.feedbacksheet != self.feedbacksheet:
+                    #if feedbacksheet has changed
+                    for pax in self.participation_set.all():
+                        if pax.feedback:
+                            pax.feedback.delete()
+                        answers = AnswerSet.objects.create(parent=self.feedbacksheet)
+                        answers.save()
+                        pax.feedback = answers
+                        pax.save()
+                        for question in self.feedbacksheet.question_set.all():
+                            Answer.objects.create(parent=pax.feedback, q=question).save()
+
         super(Event, self).save(force_insert, force_update, using, update_fields)
 
     def clean(self):
@@ -170,7 +188,7 @@ class Participation(models.Model):
     confirmed = models.BooleanField(default=False)
     confirmation = models.TextField(editable=False, null=True, blank=True)
     transportation = models.OneToOneField('Transportation', blank=True, null=True)
-
+    feedback = models.OneToOneField('feedback.AnswerSet', null=True, blank=True)
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         salt = sha.new(str(random.random())).hexdigest()[:5]

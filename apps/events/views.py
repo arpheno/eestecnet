@@ -132,6 +132,7 @@ class InternationalEvents(AdminOptions, Grids, ListView):
     def adminoptions(self):
         options = [
             ('Create New Event', reverse_lazy('create_event')),
+            ('New Questionaire', reverse_lazy('newquestionset')),
         ]
         return options
     def grids(self):
@@ -182,11 +183,9 @@ class EventDetail(AdminOptions,Information,Grids,DetailView):
         if self.get_object().application_set.all():
             options.append(('Incoming Applications',
                             reverse_lazy('eventapplications', kwargs=self.kwargs)))
-            options.append(('Download Applications',
-                            reverse_lazy('exportapplications', kwargs=self.kwargs)))
-        if self.get_object().participation_set.all():
-            options.append(('Download Participants',
-                            reverse_lazy('exportparticipations', kwargs=self.kwargs)))
+        if self.request.user in self.get_object().members.all():
+            options.append(
+                ('Feedback', reverse_lazy('answer_feedback', kwargs=self.kwargs)))
         return options
 
     def information(self):
@@ -447,6 +446,45 @@ class ExportApplications(EventMixin, DetailView):
         wb.save(response)
         return response
 
+
+class ExportFeedback(EventMixin, DetailView):
+    model = Event
+
+    def get(self, request, *args, **kwargs):
+        return self.download_feedback()
+
+    def get_participants(self):
+        return Participation.objects.filter(target=self.get_object())
+
+    def download_feedback(self):
+        import xlwt
+
+        response = HttpResponse(content_type='application/ms-excel')
+        response[
+            'Content-Disposition'] = 'attachment; filename=' + self.get_object().slug \
+                                     + ' Feedback.xls'
+        wb = xlwt.Workbook(encoding='utf-8')
+        sheet = 0
+        for pax in self.get_participants():
+            row_num = 0
+            ws = wb.add_sheet("Feedback #" + str(sheet))
+            columns = [(u"Question", 7000), (u"Answer", 10000)]
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            for col_num in xrange(len(columns)):
+                ws.write(row_num, col_num, columns[col_num][0], font_style)
+                # set column width
+                ws.col(col_num).width = columns[col_num][1]
+            font_style = xlwt.XFStyle()
+            font_style.alignment.wrap = 1
+            for answer in pax.feedback.answer_set.all():
+                row_num += 1
+                row = [answer.q.q, answer.a]
+                for col_num in xrange(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+            sheet += 1
+        wb.save(response)
+        return response
 
 class ExportParticipants(EventMixin, DetailView):
     model = Event

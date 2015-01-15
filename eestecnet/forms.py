@@ -22,6 +22,7 @@ class DialogFormMixin(object):
     form_id = "dialogformform"
     submit = "Update"
     additional_context = {}
+    can_add = False
 
     def action(self):
         return self.request.path
@@ -60,6 +61,7 @@ class DialogFormMixin(object):
         context['title'] = self.form_title
         context['submit'] = self.submit
         context['action'] = self.action
+        context['can_add'] = self.can_add
         context.update(self.additional_context)
         return context
 

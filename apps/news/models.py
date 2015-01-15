@@ -27,6 +27,8 @@ class Membership(models.Model):
             self.user.groups.add(local)
         super(Membership, self).save()
 
+    def email(self):
+        return self.user.email
     def thumbnail(self):
         return self.user.thumbnail
     def __unicode__(self):

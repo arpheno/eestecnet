@@ -46,6 +46,7 @@ class EventUpdateForm(BetterModelForm):
             ('General Information', {'fields': ['name', 'scope', 'category']}),
             ('Dates', {'fields': ['start_date', 'end_date', 'deadline']}),
             ('Additional Information', {'fields': ['participation_fee', 'location']}),
+            ('Feedback Sheet', {'fields': ['feedbacksheet', ]}),
         ]
 
 

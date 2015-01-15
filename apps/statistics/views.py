@@ -1,4 +1,4 @@
-# Create your views here.
+# Create your views
 def simpleStatistics(request):
     fig = figure()
     canvas = FigureCanvas(fig)
