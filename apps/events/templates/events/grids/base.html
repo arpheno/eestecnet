@@ -11,4 +11,4 @@
     ApplicationDeadline
     <date>{{ object.deadline }} </date>
     <hr>
-    {{ object.description|truncatewords:70 }}{% endfilter %} {% endblock %}
+    {{ object.description|striptags|truncatewords:70 }}{% endfilter %} {% endblock %}
