@@ -46,7 +46,7 @@ class NewQuestionset(DialogFormMixin, CreateWithInlinesView):
     can_add = True
 
     def get_success_url(self):
-        return reverse_lazy('event', kwargs=self.kwargs)
+        return reverse_lazy('events')
 
     def dispatch(self, request, *args, **kwargs):
         if Group.objects.get(
