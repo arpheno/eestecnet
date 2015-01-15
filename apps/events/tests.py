@@ -47,7 +47,7 @@ class EventTestCase(EESTECMixin, TestCase):
         self.assertEqual(self.inktronics.applicants.all()[0], self.user)
         ap.accepted = True
         ap.save()
-        self.assertEqual(self.inktronics.participants.all()[0], self.user)
+        self.assertEqual(self.inktronics.members.all()[0], self.user)
 
     def test_cant_apply_after_deadline(self):
         for application in Application.objects.all():

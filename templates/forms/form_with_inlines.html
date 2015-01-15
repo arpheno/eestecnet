@@ -45,7 +45,6 @@
             </table>
                 {% if can_add %}
                     <input type="button" value="Add More" id="add_more">
-                    {% compress js %}
                         <script>
                             function cloneMore(selector, type) {
                                 var newElement = $(selector).clone(true);
@@ -71,7 +70,6 @@
                                 cloneMore('#{{ inline.prefix}} tr:last', '{{ inline.prefix }}');
                             });
                         </script>
-                    {% endcompress %}
                 {% endif %}
             {% endfor %}
             <input type="submit" value="{{ submit }}">
