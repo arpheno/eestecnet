@@ -45,7 +45,7 @@ form#userupdate {
     border-style: none;
     padding: 10px;
     margin: 5px;
-    background-color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.025);
     &[type="submit"] {
       background-colr: rgba(0, 0, 0, 0.05);
     }
