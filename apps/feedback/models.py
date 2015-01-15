@@ -5,12 +5,19 @@ class Question(Model):
     parent = ForeignKey('feedback.QuestionSet')
     q = TextField()
 
+    def __str__(self):
+        return self.q
+
+    def __unicode__(self):
+        return self.q
 
 class Answer(Model):
     parent = ForeignKey('feedback.AnswerSet')
     q = ForeignKey('feedback.Question', null=True)
     a = TextField(blank=True, null=True)
 
+    def __unicode__(self):
+        return self.a
     def question(self):
         return self.q.question
 
@@ -30,6 +37,5 @@ class QuestionSet(Model):
 
 class AnswerSet(Model):
     parent = ForeignKey('feedback.QuestionSet')
-
     def relation(self):
         return str(self.participation.participant) + " " + str(self.participation.target)

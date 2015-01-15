@@ -57,7 +57,6 @@ class ApplicationForm(ReadonlyModelForm):
     class Meta:
         model = Application
         fields = ('applicant', 'letter', 'priority', 'accepted')
-
     class NewMeta:
         readonly = ('applicant', 'letter', 'priority' )
 

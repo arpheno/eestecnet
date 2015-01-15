@@ -19,15 +19,14 @@ class QuestionInline(InlineFormSet):
 class AnswerInline(InlineFormSet):
     model = Answer
     form_class = AnswerForm
-
+    extra = 0
+    can_delete = False
 
 class AnswerFeedback(DialogFormMixin, UpdateWithInlinesView):
-    template_name = "feedback/feedback_form.html"
     form_title = "base/base.html"
     inlines = [AnswerInline, ]
     form_class = AnswerSetForm
     model = AnswerSet
-
     def get_object(self, queryset=None):
         p = Participation.objects.get(participant=self.request.user,
                                       target=Event.objects.get(slug=self.kwargs['slug']))
@@ -43,6 +42,7 @@ class NewQuestionset(DialogFormMixin, CreateWithInlinesView):
     inlines = [QuestionInline, ]
     form_class = QuestionSetForm
     model = QuestionSet
+    can_add = True
 
     def get_success_url(self):
         return reverse_lazy('event', kwargs=self.kwargs)

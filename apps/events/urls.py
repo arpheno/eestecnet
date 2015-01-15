@@ -4,7 +4,8 @@ from django.contrib import admin
 from apps.events.views import EventDetail, ApplyToEvent, confirm_event, \
     FillInTransport, UpdateTransport, ChangeDescription, ChangeDetails, EventImages, \
     AddEvents, DeleteApplication, EditApplication, IncomingApplications, CreateEvent, \
-    Participations, InternationalEvents, ExportApplications, ExportParticipants
+    Participations, InternationalEvents, ExportApplications, ExportParticipants, \
+    ExportFeedback
 from apps.feedback.views import NewQuestionset, AnswerFeedback
 
 
@@ -23,6 +24,8 @@ urlpatterns = patterns(
         name='exportapplications'),
     url(r'^/(?P<slug>[-\w]+)/participants/export/?$', ExportParticipants.as_view(),
         name='exportparticipations'),
+    url(r'^/(?P<slug>[-\w]+)/feedback/export/?$', ExportFeedback.as_view(),
+        name='exportfeedback'),
     url(r'^/(?P<slug>[-\w]+)/participants/?$', Participations.as_view(),
         name='eventparticipation'),
     url(r'^/(?P<slug>[-\w]+)/apply/delete/?', DeleteApplication.as_view(),

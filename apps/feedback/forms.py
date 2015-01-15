@@ -21,12 +21,16 @@ class QuestionForm(BetterModelForm):
 
 class AnswerSetForm(BetterModelForm):
     class Meta:
+        fields = []
         model = AnswerSet
 
 
 class AnswerForm(ReadonlyModelForm):
     a = CharField(widget=Textarea(attrs={'rows': '1'}), label="Answer")
-
     class Meta:
         model = Question
+        fields = ('q', 'a')
+
+    class NewMeta:
+        readonly = ('q')
 

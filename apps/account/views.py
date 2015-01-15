@@ -63,7 +63,7 @@ class EestecerProfile(AdminOptions, Information, Grids, DetailView):
             ('Name', self.get_object().name),
             ('Birthday', self.get_object().date_of_birth),
             ('Date Joined', self.get_object().date_joined),
-            ('Field of Study', self.get_object().field_of_study),
+            ('Field of Study', self.get_object().get_field_of_study_display()),
         ]
         if self.get_object().curriculum_vitae:
             info.append(("Curriculum Vitae",
@@ -85,7 +85,7 @@ class EestecerProfile(AdminOptions, Information, Grids, DetailView):
         if self.get_object().events_organized.all():
             grids.append((
             "events/grids/base.html", self.get_object().events_organized.all(),
-            "Last Events"))
+            "Last Events Organized"))
         if self.get_object().events.all():
             grids.append((
             "events/grids/base.html", self.get_object().events.all(), "Last Events"))

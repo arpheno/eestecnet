@@ -43,6 +43,7 @@
                     </tr>
                 {% endfor %}
             </table>
+                {% if can_add %}
                 <input type="button" value="Add More" id="add_more">
                 {% compress js %}
                     <script>
@@ -71,6 +72,7 @@
                         });
                     </script>
                 {% endcompress %}
+                {% endif %}
             {% endfor %}
             <input type="submit" value="{{ submit }}">
         </form>

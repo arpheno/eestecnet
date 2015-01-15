@@ -1,6 +1,5 @@
 {% extends 'forms/dialog_form_with_inlines.html' %}
 {% block formfields %}
-    <td>{{ inform.instance.q.question }}</td>
     {% for field in inform.visible_fields %}
         <td>
             {{ field.errors }}
