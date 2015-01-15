@@ -126,8 +126,14 @@ class AddEvents(FormView):
             new_event.save()
 
 
-class InternationalEvents(Grids,ListView):
+class InternationalEvents(AdminOptions, Grids, ListView):
     model = Event
+
+    def adminoptions(self):
+        options = [
+            ('Create New Event', reverse_lazy('create_event')),
+        ]
+        return options
     def grids(self):
         return [
             ("events/grids/base.html", self.get_events()['active_list'], "Events Open for Application"),

@@ -7,3 +7,14 @@
         {{ grid }}
     {% endfor %}
 {% endblock %}
+
+{% block aside %}
+    {% if user.teams_administered.all or user.is_superuser %}
+        <h2>Actions</h2>
+        {% for option in adminoptions %}
+            {{ option }}
+        {% endfor %}
+    {% else %}
+        {% include 'base/sidebar.html' %}
+    {% endif %}
+{% endblock %}

@@ -12,4 +12,14 @@
             return false;
         )
     </script>
+    <script type="text/coffeescript">
+        $(->
+            $(".date").datepicker(
+                changeYear: true
+                yearRange: "-35:-18"
+            )
+            $(".datetime").datetimepicker()
+        )
+    </script>
+
 {% endcompress %}

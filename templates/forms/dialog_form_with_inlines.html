@@ -33,6 +33,12 @@
                 });
                 return false;
             });
+
+            $(".date").datepicker({
+                changeYear: true,
+                yearRange: "-35:-18"
+            });
+            $(".datetime").datetimepicker();
         });
     </script>
 {% endblock %}
