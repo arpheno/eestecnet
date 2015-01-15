@@ -1,4 +1,5 @@
 <td colspan="2">
+    {% if user.teams.all %}
     <div class="actions">
         {% if user in event.applicants.all %}
     <a href="#" class="action-button shadow animate yellow">Application Pending</a>
@@ -28,4 +29,5 @@
     {% endif %}
 {% endif %}
     </div>
+    {% endif %}
 </td>
