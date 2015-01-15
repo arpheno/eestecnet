@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 from django.contrib import admin
 
 from apps.events.views import EventDetail, ApplyToEvent, confirm_event, \
@@ -39,4 +39,5 @@ urlpatterns = patterns(
         name='updatetransportation'),
     url(r'^/(?P<slug>[-\w]+)/details/?$', ChangeDetails.as_view(),
         name='eventchangedetails'),
+    url(r'^/(?P<slug>[-\w]+)', include('apps.feedback.urls')),
 )

@@ -53,6 +53,6 @@ root.PersonDialog = (wrapper) ->
   @filter.keypress (event) ->
     event.preventDefault()  if event.keyCode is 13
     return
-
   return
+
 

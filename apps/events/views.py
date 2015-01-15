@@ -178,6 +178,7 @@ class EventDetail(AdminOptions,Information,Grids,DetailView):
             ('Change Details',reverse_lazy('eventchangedetails',kwargs=self.kwargs)),
             ('Manage Images', reverse_lazy('eventimages',kwargs=self.kwargs)),
             ('Participants', reverse_lazy('eventparticipation',kwargs=self.kwargs)),
+            ('New Feedbacksheet', reverse_lazy('newquestionset', kwargs=self.kwargs)),
             ]
         if self.get_object().application_set.all():
             options.append(('Incoming Applications',
