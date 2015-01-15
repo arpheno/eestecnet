@@ -279,8 +279,7 @@ class Application(models.Model):
                 message.to_address = self.applicant.email
                 message.save()
 
-                if not created:
-                    self.delete()
+                self.delete()
             else:
                 super(Application, self).save()
 
