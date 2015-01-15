@@ -257,8 +257,8 @@ class Application(models.Model):
                                   self.target.name + "\n Please remember to send a " \
                                                      "priority list."
                 message.from_address = "noreply@eestecnet",
-                message.to_address = [user.email for user in
-                                      self.applicant.lc.privileged]
+                message.to_address = ", ".join(
+                    user.email for user in self.applicant.lc.privileged)
                 message.save()
             if self.accepted:
                 participation, created = Participation.objects.get_or_create(

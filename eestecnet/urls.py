@@ -6,7 +6,7 @@ from haystack.forms import SearchForm
 from haystack.views import SearchView
 
 from apps.account.views import EestecerCreate, \
-    Login, Logout, complete, MassCommunication
+    Login, Logout, complete, MassCommunication, PrivilegedCommunication
 from eestecnet.settings.basic import MEDIA_ROOT
 from eestecnet.views import newsletter
 from apps.pages.models import Stub
@@ -46,6 +46,7 @@ urlpatterns += patterns(
     url(r'^about/?$', AboutStubs.as_view(), name='about'),
     url(r'^newsletter/?$', newsletter, name='newsletter'),
     url(r'^active/?$', MassCommunication.as_view(), name='masscommunication'),
+    url(r'^privileged/?$', PrivilegedCommunication.as_view(), name='privcommunication'),
     url(r'^governance/?$', Governance.as_view(), name='governance'),
 )
 # Redirects

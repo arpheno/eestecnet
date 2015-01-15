@@ -256,6 +256,38 @@ class Logout(View):
         return redirect("/")
 
 
+class PrivilegedCommunication(DialogFormMixin, FormView):
+    parent_template = "base/base.html"
+    form_class = MassCommunicationForm
+    form_title = "Send a message to all registered users"
+    submit = "Send message"
+    success_url = "/"
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_superuser:
+            return super(PrivilegedCommunication, self).dispatch(request, *args,
+                                                                 **kwargs)
+        raise PermissionDenied
+
+    def form_valid(self, form):
+        logger.info(str(
+            self.request.user) + " just sent an email to all privileged members of the EESTEC Community: " +
+                    form.cleaned_data['message'])
+        message = MailerMessage()
+        message.subject = form.cleaned_data['subject']
+        message.content = form.cleaned_data['message']
+        message.from_address = "noreply@eestec.net"
+        message.to_address = "board@eestec.net"
+        message.bcc_address = ", ".join(
+            user.email for user in Eestecer.objects.filter(groups__name="Local Admins"))
+        message.save()
+        messages.add_message(
+            self.request,
+            messages.INFO, "Message will be sent now."
+        )
+        return redirect("/")
+
+
 class MassCommunication(DialogFormMixin, FormView):
     parent_template = "base/base.html"
     form_class = MassCommunicationForm
