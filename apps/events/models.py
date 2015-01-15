@@ -271,12 +271,13 @@ class Application(models.Model):
             if not self.pk:
                 message = MailerMessage()
                 message.subject = "Hey hey! Just dropping by to tell you that" + \
-                                  self.request.user + " has applied to the event " + \
-                                  self.target.name + "\n Please remember to send a " \
-                                                     "priority list."
+                                  str(self.applicant) + " has applied to the event " + \
+                                  str(self.target.name) + "\n Please remember to send " \
+                                                          "a " \
+                                                          "priority list."
                 message.from_address = "noreply@eestecnet",
                 message.to_address = ", ".join(
-                    user.email for user in self.applicant.lc.privileged)
+                    user.email for user in self.applicant.lc()[0].privileged())
                 message.save()
             if self.accepted:
                 participation, created = Participation.objects.get_or_create(
@@ -296,6 +297,7 @@ class Application(models.Model):
                 message.from_address = "noreply@eestecnet",
                 message.to_address = self.applicant.email
                 message.save()
+                len(MailerMessage.objects.all())
 
                 self.delete()
             else:
