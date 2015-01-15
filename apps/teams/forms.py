@@ -41,19 +41,12 @@ class OutgoingApplicationForm(ReadonlyModelForm):
 class MembershipForm(ReadonlyModelForm):
     class Meta:
         model = Membership
-        fields = ('user', 'board', 'privileged', 'alumni')
+        fields = ('user','board', 'privileged', 'alumni')
 
     class NewMeta:
         readonly = ('user')
-
-
-class MembershipForm(ReadonlyModelForm):
-    class Meta:
-        model = Membership
-        fields = ('user', 'board', 'privileged', 'alumni')
-
-    class NewMeta:
-        readonly = ('user')
+    def email(self):
+        return self.instance.user.email
 class MembershipInline(InlineFormSet):
     model = Membership
     extra = 0

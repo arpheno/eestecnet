@@ -32,12 +32,14 @@
                             {{ hidden }}
                         {% endfor %}
                         {% block readonly %} {% endblock %}
+                        {% block formfields %}
                         {% for field in inform.visible_fields %}
                             <td>
                                 {{ field.errors }}
                                 {{ field }}
                             </td>
                         {% endfor %}
+                        {% endblock %}
                     </tr>
                 {% endfor %}
             </table>

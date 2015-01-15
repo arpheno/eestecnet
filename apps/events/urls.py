@@ -1,10 +1,11 @@
-from django.conf.urls import patterns, url, include
+from django.conf.urls import patterns, url
 from django.contrib import admin
 
 from apps.events.views import EventDetail, ApplyToEvent, confirm_event, \
     FillInTransport, UpdateTransport, ChangeDescription, ChangeDetails, EventImages, \
     AddEvents, DeleteApplication, EditApplication, IncomingApplications, CreateEvent, \
     Participations, InternationalEvents, ExportApplications, ExportParticipants
+from apps.feedback.views import NewQuestionset, AnswerFeedback
 
 
 admin.autodiscover()
@@ -12,6 +13,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^/?$', InternationalEvents.as_view(), name='events'),
+    url(r'^/questionaire/create/?$', NewQuestionset.as_view(), name='newquestionset'),
     url(r'^/add_batch/?$', AddEvents.as_view(), name='batch_add_events'),
     url(r'^/create/?$', CreateEvent.as_view(), name='create_event'),
     url(r'^/(?P<slug>[-\w]+)/?$', EventDetail.as_view(), name='event'),
@@ -39,5 +41,6 @@ urlpatterns = patterns(
         name='updatetransportation'),
     url(r'^/(?P<slug>[-\w]+)/details/?$', ChangeDetails.as_view(),
         name='eventchangedetails'),
-    url(r'^/(?P<slug>[-\w]+)', include('apps.feedback.urls')),
+    url(r'^/(?P<slug>[-\w]+)/feedback/?$', AnswerFeedback.as_view(),
+        name='answer_feedback'),
 )

@@ -132,6 +132,7 @@ class InternationalEvents(AdminOptions, Grids, ListView):
     def adminoptions(self):
         options = [
             ('Create New Event', reverse_lazy('create_event')),
+            ('New Questionaire', reverse_lazy('newquestionset')),
         ]
         return options
     def grids(self):
@@ -178,7 +179,6 @@ class EventDetail(AdminOptions,Information,Grids,DetailView):
             ('Change Details',reverse_lazy('eventchangedetails',kwargs=self.kwargs)),
             ('Manage Images', reverse_lazy('eventimages',kwargs=self.kwargs)),
             ('Participants', reverse_lazy('eventparticipation',kwargs=self.kwargs)),
-            ('New Feedbacksheet', reverse_lazy('newquestionset', kwargs=self.kwargs)),
             ]
         if self.get_object().application_set.all():
             options.append(('Incoming Applications',
@@ -188,6 +188,9 @@ class EventDetail(AdminOptions,Information,Grids,DetailView):
         if self.get_object().participation_set.all():
             options.append(('Download Participants',
                             reverse_lazy('exportparticipations', kwargs=self.kwargs)))
+        if self.request.user in self.get_object().members.all():
+            options.append(
+                ('Feedback', reverse_lazy('answer_feedback', kwargs=self.kwargs)))
         return options
 
     def information(self):

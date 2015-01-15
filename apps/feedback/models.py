@@ -11,6 +11,9 @@ class Answer(Model):
     q = ForeignKey('feedback.Question', null=True)
     a = TextField(blank=True, null=True)
 
+    def question(self):
+        return self.q.question
+
 
 class QuestionSet(Model):
     name = TextField(max_length=30)
