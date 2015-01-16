@@ -30,6 +30,7 @@ from apps.teams.models import Team
 
 logger = logging.getLogger(__name__)
 
+
 class HTML5Input(widgets.Input):
     def __init__(self, type, attrs):
         self.input_type = type
@@ -139,27 +140,33 @@ class InternationalEvents(AdminOptions, Grids, ListView):
             ('New Questionaire', reverse_lazy('newquestionset')),
         ]
         return options
+
     def grids(self):
         return [
-            ("events/grids/base.html", self.get_events()['active_list'], "Events Open for Application"),
-            ("events/grids/base.html", self.get_events()['pending_list'], "Events in Progress"),
+            ("events/grids/base.html", self.get_events()['active_list'],
+             "Events Open for Application"),
+            ("events/grids/base.html", self.get_events()['pending_list'],
+             "Events in Progress"),
             ("events/grids/base.html", self.get_events()['over_list'], "Past Events"),
-            ]
+        ]
+
     def get_events(self):
-        events=self.get_queryset().filter(scope="international")
-        eventlist={}
+        events = self.get_queryset().filter(scope="international")
+        eventlist = {}
         eventlist['active_list'] = []
         eventlist['pending_list'] = []
         eventlist['over_list'] = []
         for event in events:
             if event.deadline and event.deadline > timezone.now():
                 eventlist['active_list'].append(event)
-            if event.deadline and event.deadline < timezone.now() and event.end_date > timezone.now().date():
+            if event.deadline and event.deadline < timezone.now() and event.end_date > \
+                    timezone.now().date():
                 eventlist['pending_list'].append(event)
-            if event.deadline and event.end_date and event.end_date < timezone.now().date():
+            if event.deadline and event.end_date and event.end_date < timezone.now(
+
+            ).date():
                 eventlist['over_list'].append(event)
         return eventlist
-
 
 
 def confirm_event(request, slug):
@@ -175,50 +182,55 @@ def confirm_event(request, slug):
     return redirect(reverse('event', kwargs={'slug': slug}))
 
 
-class EventDetail(AdminOptions,Information,Grids,DetailView):
+class EventDetail(AdminOptions, Information, Grids, DetailView):
     model = Event
     template_name = "events/event_detail.html"
+
     def adminoptions(self):
-        if not self.request.user.is_superuser and not Membership.objects.filter(
-                team=self.get_object(), privileged=True, user=self.request.user):
-            return []
-        options = [
-            ('Change Details',reverse_lazy('eventchangedetails',kwargs=self.kwargs)),
-            ('Manage Images', reverse_lazy('eventimages',kwargs=self.kwargs)),
-            ('Participants', reverse_lazy('eventparticipation',kwargs=self.kwargs)),
-            ]
-        if self.get_object().application_set.all():
-            options.append(('Incoming Applications',
-                            reverse_lazy('eventapplications', kwargs=self.kwargs)))
+        options = []
         if self.request.user in self.get_object().members.all():
             options.append(
                 ('Feedback', reverse_lazy('answer_feedback', kwargs=self.kwargs)))
+        if not self.request.user.is_superuser and not Membership.objects.filter(
+                team=self.get_object(), privileged=True, user=self.request.user):
+            return options
+        options.append(
+            ('Change Details', reverse_lazy('eventchangedetails', kwargs=self.kwargs)))
+        options.append(
+            ('Manage Images', reverse_lazy('eventimages', kwargs=self.kwargs)))
+        options.append(
+            ('Participants', reverse_lazy('eventparticipation', kwargs=self.kwargs)))
+
+        if self.get_object().application_set.all():
+            options.append(('Incoming Applications',
+                            reverse_lazy('eventapplications', kwargs=self.kwargs)))
         return options
 
     def information(self):
-        event=self.get_object()
+        event = self.get_object()
         date = str(event.start_date)
         if event.end_date:
-            date +=str(event.end_date)
-        information= [
+            date += str(event.end_date)
+        information = [
             ('Event Name', self.get_object().name),
             ('Organizing Committee', self.get_object().OC()),
-            ('Date',date),
+            ('Date', date),
             ('Number of Members', self.get_object().member_count()),
-            ]
+        ]
         if event.deadline:
-            information.append(('Deadline',event.deadline))
+            information.append(('Deadline', event.deadline))
         if event.max_participants:
-            information.append(('Maximum Participants',event.max_participants))
+            information.append(('Maximum Participants', event.max_participants))
         return information
 
     def grids(self):
-        event=self.get_object()
+        event = self.get_object()
         return [
-            ("teams/grids/base.html", event.organizing_committee.all(), "Organizing Committee"),
+            ("teams/grids/base.html", event.organizing_committee.all(),
+             "Organizing Committee"),
             ("account/grids/base.html", event.organizers.all(), "Organizers"),
             ("account/grids/base.html", event.members.all(), "Participants"),
-            ]
+        ]
 
     def get_context_data(self, **kwargs):
 
@@ -285,7 +297,8 @@ class ApplyToEvent(EventMixin, DialogFormMixin, CreateView):
                 messages.add_message(
                     self.request,
                     messages.ERROR,
-                    'We are sorry. You have to be registered with a EESTEC Committment to apply for EESTEC events.')
+                    'We are sorry. You have to be registered with a EESTEC Committment '
+                    'to apply for EESTEC events.')
                 return redirect("/")
             Application.objects.get(
                 applicant=request.user,
@@ -310,7 +323,8 @@ class ApplyToEvent(EventMixin, DialogFormMixin, CreateView):
                     'We are sorry. The deadline for this event has passed.')
                 logger.info(
                     str(self.request.user) + " just tried applying to to " + str(
-                        application.target) + " but failed because they have no committment")
+                        application.target) + " but failed because they have no "
+                                              "committment")
                 return redirect(self.get_success_url())
 
         application.save()
@@ -493,6 +507,7 @@ class ExportFeedback(EventMixin, DetailView):
         wb.save(response)
         return response
 
+
 class ExportParticipants(EventMixin, DetailView):
     model = Event
 
@@ -605,12 +620,12 @@ class ExportParticipants(EventMixin, DetailView):
         wb.save(response)
         return response
 
+
 class IncomingApplications(EventMixin, DialogFormMixin, UpdateWithInlinesView):
     model = Event
     fields = ()
     inlines = [ApplicationInline]
     form_title = "These people want to participate in the event!"
-
 
 
 class Participations(EventMixin, DialogFormMixin, UpdateWithInlinesView):
@@ -620,16 +635,15 @@ class Participations(EventMixin, DialogFormMixin, UpdateWithInlinesView):
     form_title = "These people want to participate in the event!"
 
 
-
 class CreateEvent(DialogFormMixin, CreateWithInlinesView):
     model = Event
     form_class = EventCreationForm
     form_title = "Please fill in this form"
-    form_id="createeventform"
+    form_id = "createeventform"
     inlines = [EventImageInline]
     parent_template = "events/event_list.html"
     protected = 0
-    additional_context = {"appendix":""" <script type="text/javascript">
+    additional_context = {"appendix": """ <script type="text/javascript">
         $(function () {
             $("input[type=submit]").button();
         });
@@ -645,8 +659,10 @@ class CreateEvent(DialogFormMixin, CreateWithInlinesView):
         context = super(CreateEvent, self).get_context_data(**kwargs)
         assert (context["form"])
         return context
+
     def get_success_url(self):
         return reverse_lazy("events")
+
     def get_form_kwargs(self):
         kwargs = super(CreateEvent, self).get_form_kwargs()
         kwargs['user'] = self.request.user
