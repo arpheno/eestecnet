@@ -52,7 +52,9 @@ urlpatterns += patterns(
 # Redirects
 urlpatterns += patterns(
     '',
-    url(r'seminar/?', RedirectView.as_view(url="http://www.crowdcast.io/eestec1"))
+    url(r'seminar/?', RedirectView.as_view(url="http://www.crowdcast.io/eestec1")),
+    url(r'congress/?', RedirectView.as_view(url="http://eestec.es")),
+    url(r'ecm/?', RedirectView.as_view(url="http://ecm2014.com")),
 )
 # If DEBUG is set, include the local file server
 if settings.DEBUG:
