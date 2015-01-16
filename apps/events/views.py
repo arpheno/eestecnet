@@ -630,6 +630,7 @@ class IncomingApplications(EventMixin, DialogFormMixin, UpdateWithInlinesView):
 class Participations(EventMixin, DialogFormMixin, UpdateWithInlinesView):
     model = Event
     fields = ()
+
     inlines = [ParticipationInline]
     form_title = "These people want to participate in the event!"
 

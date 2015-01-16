@@ -25,7 +25,6 @@ from eestecnet.forms import DialogFormMixin, MassCommunicationForm
 from apps.events.models import Event
 from apps.news.widgets import EESTECEditor
 
-
 logger = logging.getLogger(__name__)
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for x in range(size))

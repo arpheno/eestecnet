@@ -13,6 +13,7 @@ from django.db import models
 from mailqueue.models import MailerMessage
 
 from apps.feedback.models import AnswerSet, Answer
+from apps.feedback.utils import create_answer_set
 from apps.news.models import Membership
 
 
@@ -110,12 +111,8 @@ class Event(models.Model):
                     for pax in self.participation_set.all():
                         if pax.feedback:
                             pax.feedback.delete()
-                        answers = AnswerSet.objects.create(parent=self.feedbacksheet)
-                        answers.save()
-                        pax.feedback = answers
+                        pax.feedback = create_answer_set(self.feedbacksheet)
                         pax.save()
-                        for question in self.feedbacksheet.question_set.all():
-                            Answer.objects.create(parent=pax.feedback, q=question).save()
 
         super(Event, self).save(force_insert, force_update, using, update_fields)
 
@@ -193,7 +190,11 @@ class Participation(models.Model):
              update_fields=None):
         salt = sha.new(str(random.random())).hexdigest()[:5]
         self.confirmation = sha.new(salt + str(random.random())).hexdigest()
-        super(Participation, self).save()
+        if not self.pk:
+            if self.target.feedbacksheet:
+                self.feedback = create_answer_set(self.feedbacksheet)
+        return super(Participation, self).save(force_insert, force_update, using,
+                                               update_fields)
 
     def __unicode__(self):
         return self.participant.get_full_name()

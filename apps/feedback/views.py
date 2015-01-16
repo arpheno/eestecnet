@@ -1,6 +1,6 @@
 # Create your views here.
 from django.contrib.auth.models import Group
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ObjectDoesNotExist
 from django.core.urlresolvers import reverse_lazy
 from extra_views import CreateWithInlinesView, InlineFormSet, UpdateWithInlinesView
 
@@ -25,17 +25,20 @@ class AnswerInline(InlineFormSet):
 class AnswerFeedback(DialogFormMixin, UpdateWithInlinesView):
     form_title = "base/base.html"
     inlines = [AnswerInline, ]
+    parent_template = "base/base.html"
     form_class = AnswerSetForm
     model = AnswerSet
 
     def get_object(self, queryset=None):
-        p = Participation.objects.get(participant=self.request.user,
+        try:
+            p = Participation.objects.get(participant=self.request.user,
                                       target=Event.objects.get(slug=self.kwargs['slug']))
+        except ObjectDoesNotExist:
+            raise PermissionDenied
         return p.feedback
 
     def get_success_url(self):
         return reverse_lazy('event', kwargs=self.kwargs)
-
 
 class NewQuestionset(DialogFormMixin, CreateWithInlinesView):
     parent_template = "base/base.html"

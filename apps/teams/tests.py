@@ -1,12 +1,14 @@
+from django.contrib.auth.models import Permission
 from django.db.models import get_model
 from django.test import TestCase, Client
 from django.utils import timezone
 
+from apps.feedback.models import QuestionSet, Question
 from apps.news.models import Membership
 
 
 Eestecer = get_model('account', 'Eestecer')
-from apps.events.models import Event, Application
+from apps.events.models import Event, Application, Participation
 from apps.teams.models import Team
 
 
@@ -46,8 +48,19 @@ class EESTECMixin(object):
             email="user@eestec.net",
             password="test",
             first_name="user")
+        self.participant = Eestecer.objects.create_user(
+            email="participant@eestec.net",
+            password="test",
+            first_name="participant")
         self.admin.save()
         self.privileged.save()
+        self.user.save()
+        self.participant.save()
+        self.pseudo_privileged.save()
+        self.privileged.user_permissions.add(
+            Permission.objects.get(codename='add_event'))
+        self.pseudo_privileged.user_permissions.add(
+            Permission.objects.get(codename='add_event'))
         self.user.save()
         self.pseudo_privileged.save()
 
@@ -72,6 +85,13 @@ class EESTECMixin(object):
         )
         self.inktronics.save()
         self.inktronics.organizing_committee.add(self.munich)
+        Participation.objects.create(participant=self.participant,
+                                     target=self.inktronics, confirmed=True).save()
+        self.fbksht = QuestionSet.objects.create(name="K")
+        self.fbksht.save()
+        self.q = Question.objects.create(q="wtf?", parent=self.fbksht).save()
+        self.inktronics.feedbacksheet = self.fbksht
+        self.inktronics.save()
 
 
 class ManageTeamTestCase(EESTECMixin, TestCase):

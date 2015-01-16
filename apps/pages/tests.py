@@ -1,6 +1,9 @@
 # Create your tests here.
+import logging
+
 from django.test import TestCase, Client
 
+logger = logging.getLogger(__name__)
 from apps.teams.tests import EESTECMixin
 
 
@@ -59,12 +62,27 @@ class UrlTests(EESTECMixin, TestCase):
             ["/events/questionaire/create", "auth", 403],
             ["/events/questionaire/create", "local", 200],
             ["/events/inktronics/", "anon", 200],
+            ["/events/inktronics/feedback", "auth", 403],
+            ["/events/inktronics/feedback", "anon", 403],
+            ["/events/inktronics/feedback", "participant", 200],
+            ["/events/inktronics/feedback", "admin", 403],
+            ["/events/inktronics/feedback", "local", 403],
+            ["/events/inktronics/feedback", "pseudo", 403],
+            ["/events/inktronics/feedback/export", "admin", 200],
+            ["/events/inktronics/feedback/export", "local", 200],
+            ["/events/inktronics/feedback/export", "pseudo", 403],
             ["/events/inktronics/applications", "admin", 200],
             ["/events/inktronics/applications", "local", 200],
             ["/events/inktronics/applications", "pseudo", 403],
             ["/events/inktronics/applications/export", "admin", 200],
             ["/events/inktronics/applications/export", "local", 200],
             ["/events/inktronics/applications/export", "pseudo", 403],
+            ["/events/inktronics/participants", "admin", 200],
+            ["/events/inktronics/participants", "local", 200],
+            ["/events/inktronics/participants", "pseudo", 403],
+            ["/events/inktronics/participants/export", "admin", 200],
+            ["/events/inktronics/participants/export", "local", 200],
+            ["/events/inktronics/participants/export", "pseudo", 403],
             ["/events/inktronics/description", "local", 200],
             ["/events/inktronics/description", "admin", 200],
             ["/events/inktronics/description", "pseudo", 403],
@@ -78,21 +96,50 @@ class UrlTests(EESTECMixin, TestCase):
             ["/events/inktronics/apply", "auth", 200],
         ]
 
-    def query_url(self, data):
-        c = Client()
-        if data[1] == "admin":
-            c.login(username="admin@eestec.net", password="test")
-        elif data[1] == "local":
-            c.login(username="privileged@eestec.net", password="test")
-        elif data[1] == "pseudo":
-            c.login(username="pseudo@eestec.net", password="test")
-        elif data[1] == "auth":
-            c.login(username="user@eestec.net", password="test")
+    def make_request(self, client, data):
         if len(data) == 3:
             print data[0]
-            response = c.get(data[0])
+            response = client.get(data[0])
             self.assertEqual(response.status_code, data[2])
 
+    def query_url_admin(self, urls):
+        c = Client()
+        c.login(username="admin@eestec.net", password="test")
+        for data in urls:
+            self.make_request(c, data)
+
+    def query_url_local(self, urls):
+        c = Client()
+        c.login(username="privileged@eestec.net", password="test")
+        for data in urls:
+            self.make_request(c, data)
+
+    def query_url_pseudo(self, urls):
+        c = Client()
+        c.login(username="pseudo@eestec.net", password="test")
+        for data in urls:
+            self.make_request(c, data)
+
+    def query_url_auth(self, urls):
+        c = Client()
+        c.login(username="user@eestec.net", password="test")
+        for data in urls:
+            self.make_request(c, data)
+
+    def query_url_participant(self, urls):
+        c = Client()
+        c.login(username="participant@eestec.net", password="test")
+        for data in urls:
+            self.make_request(c, data)
+
     def test_urls_work(self):
-        for url in self.urls:
-            self.query_url(url)
+        local = (data for data in self.urls if data[1] == "local")
+        admin = (data for data in self.urls if data[1] == "admin")
+        pseudo = (data for data in self.urls if data[1] == "pseudo")
+        auth = (data for data in self.urls if data[1] == "auth")
+        participant = (data for data in self.urls if data[1] == "participant")
+        self.query_url_admin(admin)
+        self.query_url_local(local)
+        self.query_url_pseudo(pseudo)
+        self.query_url_auth(auth)
+        self.query_url_participant(participant)
