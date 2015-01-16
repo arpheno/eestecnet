@@ -26,11 +26,9 @@
     </section>
 {% endblock %}
 {% block aside %}
-    {% if user in object.privileged or user.is_superuser or object == user %}
         <h1>Actions</h1>
         {% for option in adminoptions %}
             {{ option }}
         {% endfor %}
-    {% endif %}
     {% block additional_options %}{% endblock %}
 {% endblock %}

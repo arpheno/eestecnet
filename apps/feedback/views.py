@@ -44,7 +44,6 @@ class NewQuestionset(DialogFormMixin, CreateWithInlinesView):
     form_class = QuestionSetForm
     model = QuestionSet
     can_add = True
-
     def get_success_url(self):
         return reverse_lazy('events')
 
