@@ -4,8 +4,9 @@ from eestecnet.widgets import button_for_modal, elastic_grid, piece_of_informati
 class AdminOptions(object):
     def get_context_data(self, **kwargs):
         context = super(AdminOptions, self).get_context_data(**kwargs)
-        if self.adminoptions:
-            context['adminoptions'] = [button_for_modal(option[0], option[1]) for option
+        if not self.request.user.is_authenticated():
+            return context
+        context['adminoptions'] = [button_for_modal(option[0], option[1]) for option
                                        in
                                    self.adminoptions()]
         return context
