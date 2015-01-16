@@ -55,7 +55,6 @@ class AddEvents(FormView):
     form_class = UploadEventsForm
     template_name = "events/add_events.html"
     success_url = "/"
-
     def form_valid(self, form):
         self.handle_events(self.request.FILES['file'])
         return super(AddEvents, self).form_valid(form)
