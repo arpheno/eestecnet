@@ -78,6 +78,9 @@ class TeamDetail(Information, Grids, AdminOptions, DetailView):
         ]
 
     def adminoptions(self):
+        if not self.request.user in self.get_object().privileged() and not \
+                self.request.user.is_superuser:
+            return []
         return [
             ("Outgoing", reverse_lazy(self.request.resolver_match.app_name+':outgoing',kwargs=self.kwargs)),
             ('Change Board', self.get_object().get_absolute_url() + "board"),

@@ -18,6 +18,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, \
 from extra_views import UpdateWithInlinesView, CreateWithInlinesView
 from form_utils.widgets import ImageWidget
 
+from apps.news.models import Membership
 from apps.pages.widgets import Grids, Information, AdminOptions
 from eestecnet.forms import DialogFormMixin
 from apps.events.forms import DescriptionForm, EventImageInline, TransportForm, \
@@ -130,6 +131,9 @@ class InternationalEvents(AdminOptions, Grids, ListView):
     model = Event
 
     def adminoptions(self):
+        if not self.request.user.is_superuser and not Membership.objects.filter(
+                privileged=True, user=self.request.user):
+            return []
         options = [
             ('Create New Event', reverse_lazy('create_event')),
             ('New Questionaire', reverse_lazy('newquestionset')),
@@ -175,6 +179,9 @@ class EventDetail(AdminOptions,Information,Grids,DetailView):
     model = Event
     template_name = "events/event_detail.html"
     def adminoptions(self):
+        if not self.request.user.is_superuser and not Membership.objects.filter(
+                team=self.get_object(), privileged=True, user=self.request.user):
+            return []
         options = [
             ('Change Details',reverse_lazy('eventchangedetails',kwargs=self.kwargs)),
             ('Manage Images', reverse_lazy('eventimages',kwargs=self.kwargs)),

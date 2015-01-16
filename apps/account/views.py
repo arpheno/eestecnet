@@ -72,6 +72,9 @@ class EestecerProfile(AdminOptions, Information, Grids, DetailView):
         return info
 
     def adminoptions(self):
+        if not self.request.user == self.get_object() and not \
+                self.request.user.is_superuser:
+            return []
         options = []
         options.append(('Change Details', reverse_lazy('userupdate')))
         options.append(('Change Personal Description', reverse_lazy('personalupdate')))
