@@ -58,6 +58,7 @@ class WebsiteFeedbackInline(InlineFormSet):
     can_delete = False
 
 
+
 class WebsiteFeedbackForm(BetterModelForm):
     email = CharField(required=True,
                       widget=TextInput(attrs={'placeholder': 'Your Email (optional)'}),
@@ -65,7 +66,7 @@ class WebsiteFeedbackForm(BetterModelForm):
     subject = CharField(required=True,
                         widget=TextInput(attrs={'placeholder': 'Subject'}), label="")
     content = CharField(required=True,
-                        widget=Textarea(attrs={'cols': 50, 'placeholder': 'Details'}, ),
+                        widget=Textarea(attrs={'cols': 30, 'placeholder': 'Details'}, ),
                         label="")
     class Meta:
         model = WebsiteFeedback
