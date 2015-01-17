@@ -55,6 +55,7 @@ class ActivityStubs(ListView):
 
 class WebsiteFeedbackInline(InlineFormSet):
     model = WebsiteFeedbackImage
+    can_delete = False
 
 
 class WebsiteFeedbackForm(BetterModelForm):
