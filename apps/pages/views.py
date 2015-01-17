@@ -66,7 +66,7 @@ class WebsiteFeedbackForm(BetterModelForm):
     subject = CharField(required=True,
                         widget=TextInput(attrs={'placeholder': 'Subject'}), label="")
     content = CharField(required=True,
-                        widget=Textarea(attrs={'cols': 30, 'placeholder': 'Details'}, ),
+                        widget=Textarea(attrs={'cols': 25, 'placeholder': 'Details'}, ),
                         label="")
     class Meta:
         model = WebsiteFeedback
