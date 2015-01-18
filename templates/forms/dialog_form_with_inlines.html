@@ -7,26 +7,21 @@
                 console.log("form submitted");
                 $.ajax({
                     type: "POST",
-                    url: $(this).attr("action"),
+                    url: "https://eestec.net"+$(this).attr("action"),
                     data: new FormData(this),
                     processData: false,
                     contentType: false,
-                    statusCode: {
-                        200: function (data) {
-                            if (data.content) {
-                                console.log("form cameb ack with data");
-                                $.pgwModal({
-                                    content: data.content,
-                                    loadingContent: '<span style="text-align:center">Loading in progress</span>',
-                                    titleBar: false,
-                                    maxWidth: 800
-                                });
-                            } else {
-                                console.log("form cameb ack without data");
-                                location.reload();
-                            }
-                        },
-                        302: function (xhr, textstatus, error) {
+                    success: function (data) {
+                        if (data.content) {
+                            console.log("form cameb ack with data");
+                            $.pgwModal({
+                                content: data.content,
+                                loadingContent: '<span style="text-align:center">Loading in progress</span>',
+                                titleBar: false,
+                                maxWidth: 800
+                            });
+                        } else {
+                            console.log("form cameb ack without data");
                             location.reload();
                         }
                     }
