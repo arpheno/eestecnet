@@ -11,6 +11,7 @@
                     data: new FormData(this),
                     processData: false,
                     contentType: false,
+                    crossDomain: false,
                     success: function (data) {
                         console.log(data);
                         if (data.content) {
