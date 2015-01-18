@@ -292,13 +292,6 @@ class ApplyToEvent(EventMixin, DialogFormMixin, CreateView):
 
     def dispatch(self, request, *args, **kwargs):
         try:
-            if not self.request.user.teams.all():
-                messages.add_message(
-                    self.request,
-                    messages.ERROR,
-                    'We are sorry. You have to be registered with a EESTEC Committment '
-                    'to apply for EESTEC events.')
-                return redirect("/")
             Application.objects.get(
                 applicant=request.user,
                 target=Event.objects.get(slug=self.kwargs['slug']))
@@ -314,6 +307,13 @@ class ApplyToEvent(EventMixin, DialogFormMixin, CreateView):
         application = form.save(commit=False)
         application.applicant = self.request.user
         application.target = Event.objects.get(slug=self.kwargs['slug'])
+        if not self.request.user.teams.all() and application.target.category!="recruitment":
+            messages.add_message(
+                self.request,
+                messages.ERROR,
+                'We are sorry. You have to be registered with a EESTEC Committment '
+                'to apply for EESTEC events.')
+            return redirect("/")
         if application.target.deadline:
             if timezone.now() > application.target.deadline:
                 messages.add_message(
