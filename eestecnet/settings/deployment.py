@@ -28,3 +28,5 @@ CACHE_MIDDLEWARE_KEY_PREFIX=""
 EMAIL_HOST="localhost"
 EMAIL_PORT = 25
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True

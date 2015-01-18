@@ -11,7 +11,7 @@ import os
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "eestecnet.settings.deployment")
 import djcelery
-
+os.environ['HTTPS'] = "on"
 djcelery.setup_loader()
 from django.core.wsgi import get_wsgi_application
 
