@@ -60,9 +60,25 @@
             </div>
             <div class="donate">
                 <p>Spot a bug?</p>
-                <a href="{% url 'website-feedback' %}">
+                <a href="#" id="fdbk">
                     Feedback us
                 </a>
+
+                <script type="text/javascript">
+                    $(function () {
+                        $("#fdbk").click(function (event) {
+                            event.preventDefault();
+                            $.pgwModal({
+                                        url: "{% url 'website-feedback' %}",
+                                        loadingContent: '<span style="text-align:center">Loading in progress</span>',
+                                        titleBar: false,
+                                        maxWidth: 800
+                                    }
+                            );
+                            return false;
+                        });
+                    });
+                </script>
             </div>
             <div class="newsletter">
                 <form action="{% url 'newsletter' %}" method="POST">
