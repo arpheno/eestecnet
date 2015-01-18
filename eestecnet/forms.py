@@ -28,14 +28,11 @@ class DialogFormMixin(object):
         return self.request.path
     def form_invalid(self, form):
         response = super(DialogFormMixin, self).form_invalid(form)
-        if self.request.is_ajax():
-            response.render()
-            data = {
-                'content': response.content,
-            }
-            return JsonResponse(data, status=200)
-        else:
-            return response
+        response.render()
+        data = {
+            'content': response.content,
+        }
+        return JsonResponse(data, status=200)
 
     def form_valid(self, form):
         # We make sure to call the parent's form_valid() method because
@@ -45,11 +42,8 @@ class DialogFormMixin(object):
         messages.add_message(self.request, messages.SUCCESS,
                              "Update successful. The changes might take a minute to "
                              "become effective due to caching.")
-        if self.request.is_ajax():
-            data = {}
-            return JsonResponse(data, status=200)
-        else:
-            return response
+        data = {}
+        return JsonResponse(data, status=200)
     def get_context_data(self, **kwargs):
         context = super(DialogFormMixin, self).get_context_data(**kwargs)
         if self.request.is_ajax():
