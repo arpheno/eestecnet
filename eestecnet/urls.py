@@ -56,6 +56,8 @@ urlpatterns += patterns(
     url(r'congress/?', RedirectView.as_view(url="http://eestec.es")),
     url(r'ecm/?', RedirectView.as_view(url="http://ecm2014.com")),
     url(r'conference/?', RedirectView.as_view(url="http://conference.eestec.hu")),
+    url(r'androidcompetition/?',
+        RedirectView.as_view(url="https://competition.eestec.net")),
 )
 # If DEBUG is set, include the local file server
 if settings.DEBUG:
