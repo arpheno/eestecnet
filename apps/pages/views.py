@@ -120,7 +120,7 @@ class NewWebsiteFeedback(DialogFormMixin, CreateWithInlinesView):
             self.request,
             messages.INFO,
             'Thank you for your feedback. We appreciate it.')
-        return redirect("/")
+        return super(NewWebsiteFeedback,self).forms_valid(form,inlines)
 
 
 class Protected(object):
