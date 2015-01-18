@@ -1,7 +1,9 @@
 from django.contrib import messages
 from django.forms import Form, CharField, Textarea
 from django.http import JsonResponse
+import logging
 
+logger = logging.getLogger(__name__)
 
 class AdditionalContextMixin(object):
     additional_context = {}
@@ -32,8 +34,9 @@ class DialogFormMixin(object):
         data = {
             'content': response.content,
         }
-        return JsonResponse(data, status=200)
-
+        result= JsonResponse(data, status=200)
+        logger.info(result)
+        return result
     def form_valid(self, form):
         # We make sure to call the parent's form_valid() method because
         # it might do some processing (in the case of CreateView, it will
