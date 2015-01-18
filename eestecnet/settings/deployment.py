@@ -30,3 +30,5 @@ EMAIL_PORT = 25
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+os.environ['wsgi.url_scheme'] = 'https'
+os.environ['HTTPS'] = "on"
