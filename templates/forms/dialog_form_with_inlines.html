@@ -9,6 +9,9 @@
                     type: "POST",
                     url: "https://eestec.net"+$(this).attr("action"),
                     data: new FormData(this),
+                    headers:{
+                        "host":"https://eestec.net/",
+                    }
                     processData: false,
                     contentType: false,
                     success: function (data) {
