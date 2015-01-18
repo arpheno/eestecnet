@@ -2,6 +2,7 @@ from asana.asana import AsanaAPI
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.forms import ModelForm, TextInput, Textarea, CharField
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView, UpdateView
 from extra_views import CreateWithInlinesView, InlineFormSet
@@ -120,7 +121,7 @@ class NewWebsiteFeedback(DialogFormMixin, CreateWithInlinesView):
             self.request,
             messages.INFO,
             'Thank you for your feedback. We appreciate it.')
-        return super(NewWebsiteFeedback,self).forms_valid(form,inlines)
+        result= JsonResponse({}, status=200)
 
 
 class Protected(object):
