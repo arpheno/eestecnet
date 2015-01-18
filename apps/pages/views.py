@@ -122,6 +122,7 @@ class NewWebsiteFeedback(DialogFormMixin, CreateWithInlinesView):
             messages.INFO,
             'Thank you for your feedback. We appreciate it.')
         result= JsonResponse({}, status=200)
+        return result
 
 
 class Protected(object):
