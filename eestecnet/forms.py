@@ -38,7 +38,7 @@ class DialogFormMixin(object):
         logger.info(result)
         return result
     def forms_valid(self,form,inlines):
-        result=super(DialogFormMixin,self),forms_valid(form,inlines)
+        result=super(DialogFormMixin,self).forms_valid(form,inlines)
         data = {}
         return JsonResponse(data, status=200)
     def form_valid(self, form):
