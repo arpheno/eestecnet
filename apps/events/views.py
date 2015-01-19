@@ -357,6 +357,9 @@ class FillInTransport(EventMixin, DialogFormMixin, CreateView):
         trans = form.save()
         pax.transportation = trans
         pax.save()
+        logger.info(
+            str(self.request.user) + " just updated their transport information for " + str(
+                Event.objects.get(slug=self.kwargs['slug'])))
         messages.add_message(
             self.request,
             messages.INFO,
