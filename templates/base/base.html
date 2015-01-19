@@ -7,6 +7,8 @@
 <body>
 <header>
 {% include 'base/header/base.html' %}
+    {% block authenticate %}
+    {% endblock %}
 </header>
 
 {% block maincontent %}{% endblock %}

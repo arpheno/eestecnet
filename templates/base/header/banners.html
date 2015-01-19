@@ -9,9 +9,7 @@
 <img id="eestec-text" alt="Electrical Engineering Students' European Association"
      src="{% static 'enet/img/stretched.svg' %}"/>
 {% if not user.is_authenticated %}
-    {% block authenticate %}
         {% include 'account/login.html' %}
-    {% endblock %}
 {% else %}
     {% include 'account/grids/base.html' with object_list=userlist name="userarea" %}
 {% endif %}
