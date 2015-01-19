@@ -22,6 +22,7 @@ class EestecerCreationForm(UserCreationForm):
     def __init__(self, *args, **kargs):
         super(EestecerCreationForm, self).__init__(*args, **kargs)
         del self.fields['username']
+        self.fields['thumbnail'].required=True
 
     class Meta:
         model = Eestecer
@@ -29,6 +30,7 @@ class EestecerCreationForm(UserCreationForm):
             "first_name", "middle_name", "last_name", "second_last_name",
             "thumbnail",
             "email", "gender")
+
     def save(self, commit=True):
         return super(EestecerCreationForm, self).save(commit=False)
 

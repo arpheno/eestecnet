@@ -84,7 +84,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     #Basic Information
     def name(self):
         return self.get_full_name()
-    thumbnail = models.ImageField(upload_to="users", blank=True, null=True)
+    thumbnail = models.ImageField(upload_to="users")
     description = models.TextField(blank=True, null=True)
     slug = AutoSlugField(populate_from=get_eestecer_slug)
     #Contact information

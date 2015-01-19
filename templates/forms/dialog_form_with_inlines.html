@@ -7,7 +7,7 @@
                 console.log("form submitted to https://eestec.net"+$(this).attr('action'));
                 $.ajax({
                     type: "POST",
-                    url: "https://eestec.net"+$(this).attr("action"),
+                    url: $(this).attr("action"),
                     data: new FormData(this),
                     processData: false,
                     contentType: false,
