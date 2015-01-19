@@ -37,6 +37,10 @@ class DialogFormMixin(object):
         result= JsonResponse(data, status=200)
         logger.info(result)
         return result
+    def forms_valid(self,form,inlines):
+        result=super(DialogFormMixin,self),forms_valid(form,inlines)
+        data = {}
+        return JsonResponse(data, status=200)
     def form_valid(self, form):
         # We make sure to call the parent's form_valid() method because
         # it might do some processing (in the case of CreateView, it will
