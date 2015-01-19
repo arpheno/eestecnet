@@ -191,7 +191,7 @@ class EventDetail(AdminOptions, Information, Grids, DetailView):
             options.append(
                 ('Feedback', reverse_lazy('answer_feedback', kwargs=self.kwargs)))
         if not self.request.user.is_superuser and not Membership.objects.filter(
-                team=self.get_object(), privileged=True, user=self.request.user):
+                team__in=self.get_object().organizing_committee.all(), privileged=True, user=self.request.user):
             return options
         options.append(
             ('Change Details', reverse_lazy('eventchangedetails', kwargs=self.kwargs)))

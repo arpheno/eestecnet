@@ -20,3 +20,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'eestecnet@gmail.com'
 EMAIL_HOST_PASSWORD = 'eeStec4ever'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+CORS_ORIGIN_ALLOW_ALL = True
