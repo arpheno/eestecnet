@@ -290,14 +290,6 @@ class ApplyToEvent(EventMixin, DialogFormMixin, CreateView):
         context['object'] = Event.objects.get(slug=self.kwargs['slug'])
         return context
 
-    def dispatch(self, request, *args, **kwargs):
-        try:
-            Application.objects.get(
-                applicant=request.user,
-                target=Event.objects.get(slug=self.kwargs['slug']))
-            return redirect(self.get_success_url())
-        except:
-            return super(ApplyToEvent, self).dispatch(request, *args, **kwargs)
 
 
     def get_success_url(self):
@@ -313,7 +305,7 @@ class ApplyToEvent(EventMixin, DialogFormMixin, CreateView):
                 messages.ERROR,
                 'We are sorry. You have to be registered with a EESTEC Committment '
                 'to apply for EESTEC events.')
-            return redirect("/")
+            return redirect("https://eestec.net")
         if application.target.deadline:
             if timezone.now() > application.target.deadline:
                 messages.add_message(
@@ -333,7 +325,7 @@ class ApplyToEvent(EventMixin, DialogFormMixin, CreateView):
             'Thank you for your application. You will be notified upon acceptance.')
         logger.info(
             str(self.request.user) + " just applied to " + str(application.target))
-        return redirect(self.get_success_url())
+        return super(ApplyToEvent,self).form_valid(form)
 
 
 class UpdateTransport(EventMixin, DialogFormMixin, UpdateView):
@@ -369,7 +361,7 @@ class FillInTransport(EventMixin, DialogFormMixin, CreateView):
             self.request,
             messages.INFO,
             'Thank you for filling in your transportation details.')
-        return redirect(reverse('event', kwargs=self.kwargs))
+        return super(FillInTransport,self).form_valid(form)
 
 
 class ChangeDetails(EventMixin, DialogFormMixin, UpdateView):
