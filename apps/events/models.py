@@ -263,8 +263,7 @@ class Application(models.Model):
                     team=self.target.organizing_committee.all()[0],
                     user=self.applicant)
                 membership.save()
-                if not created:
-                    self.delete()
+                self.delete()
 
             else:
                 super(Application, self).save()
