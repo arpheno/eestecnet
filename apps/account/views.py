@@ -76,7 +76,6 @@ class EestecerProfile(AdminOptions, Information, Grids, DetailView):
             return []
         options = []
         options.append(('Change Details', reverse_lazy('userupdate')))
-        options.append(('Change Personal Description', reverse_lazy('personalupdate')))
         return options
 
 

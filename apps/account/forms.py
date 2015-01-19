@@ -51,7 +51,7 @@ class EestecerPersonalForm(BetterModelForm):
     class Meta:
         model = Eestecer
         widgets = {
-            'personal': EESTECEditor(include_jquery=False),
+            'description': EESTECEditor(include_jquery=False),
         }
         fields = ['description', ]
 

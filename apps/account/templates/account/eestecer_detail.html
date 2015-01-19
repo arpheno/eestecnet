@@ -27,10 +27,13 @@
     {% endif %}
 {% endblock %}
 {% block additional_options %}
+    {% if request.user == object %}
+        <a href="{% url 'personalupdate' %}" class ="action-button blue">Update my personal note</a>
         {% if user.is_trainer %}
             <a href="{% url 'certificate' object.slug %}" class="action-button blue"
                id="trainercert">Training
                 Certificate
                 Supplement</a>
         {% endif %}
+    {% endif %}
 {% endblock %}
