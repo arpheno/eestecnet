@@ -252,19 +252,13 @@ class Application(models.Model):
     def delete(self, using=None):
         if not self.accepted:
             message = MailerMessage()
-            context = {
-                'user': self.applicant,
-                }
+            context = { 'user': self.applicant, }
             body = render_to_string("events/rejection_email.txt",context)
-            message.subject = "Your application to " + \
-                              self.target.name
+            message.subject = "Your application to " + self.target.name
             message.content = body
             message.to_address = self.applicant.email
             message.save()
             len(MailerMessage.objects.all())
-
-            self.delete()
-
         return super(Application,self).delete(using)
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
