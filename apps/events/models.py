@@ -1,3 +1,4 @@
+import logging
 import random
 import sha
 
@@ -17,6 +18,7 @@ from apps.feedback.models import AnswerSet, Answer
 from apps.feedback.utils import create_answer_set
 from apps.news.models import Membership
 
+logger = logging.getLogger(__name__)
 
 SCOPE_CHOICES = (
     ('local', 'Local'),
@@ -258,6 +260,8 @@ class Application(models.Model):
             message.content = body
             message.to_address = self.applicant.email
             message.save()
+            logger.info(
+                str(self.applicant) + "was just rejected from " + str(self.target))
             len(MailerMessage.objects.all())
         return super(Application,self).delete(using)
     def save(self, force_insert=False, force_update=False, using=None,
@@ -307,6 +311,8 @@ class Application(models.Model):
                 message.to_address = self.applicant.email
                 message.save()
                 len(MailerMessage.objects.all())
+                logger.info(
+                    str(self.applicant) + "was just accepted to " + str(self.target))
 
                 self.delete()
             else:
