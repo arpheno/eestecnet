@@ -8,6 +8,7 @@ from eestecnet.forms import ReadonlyModelForm
 class QuestionSetForm(BetterModelForm):
     class Meta:
         model = QuestionSet
+        fields=['name','category']
         widgets = {
             'name': Textarea(attrs={'rows': '1'}),
         }

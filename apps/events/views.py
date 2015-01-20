@@ -243,6 +243,11 @@ class EventDetail(AdminOptions, Information, Grids, DetailView):
                 target__slug=self.kwargs['slug'], participant=self.request.user)
         except:
             context['participation'] = None
+        try:
+            context['application'] = Application.objects.get(
+                target__slug=self.kwargs['slug'], applicant=self.request.user)
+        except:
+            context['application'] = None
         return context
 
 
@@ -407,6 +412,7 @@ class ExportApplications(EventMixin, DetailView):
         row_num = 0
 
         columns = [
+            (u"Profile Picture", 4000),
             (u"Full Name", 8000),
             (u"LC", 3000),
             (u"Email", 3000),
@@ -416,10 +422,14 @@ class ExportApplications(EventMixin, DetailView):
             (u"Allergies", 3000),
             (u"Food Preferences", 4000),
             (u"Mobile Phone", 4000),
-            (u"Motivational Letter", 10000),
-            (u"Profile Picture", 4000),
             (u"Curriculum Vitae", 4000),
+            (u"Motivational Letter", 10000),
         ]
+        questionaires = [application.questionaire for application in queryset]
+        for questionaire in questionaires:
+            if questionaire:
+                for answer in questionaire.answer_set.all():
+                    columns.append((answer.q.q,10000))
 
         font_style = xlwt.XFStyle()
         font_style.font.bold = True
@@ -441,6 +451,7 @@ class ExportApplications(EventMixin, DetailView):
             if pax.applicant.curriculum_vitae:
                 cv = "https://eestec.net" + pax.applicant.curriculum_vitae.url
             row = [
+                thumbnail,
                 pax.applicant.get_full_name(),
                 ", ".join(str(person) for person in pax.applicant.lc()),
                 pax.applicant.email,
@@ -450,10 +461,12 @@ class ExportApplications(EventMixin, DetailView):
                 pax.applicant.allergies,
                 pax.applicant.food_preferences,
                 pax.applicant.mobile,
-                pax.letter,
-                thumbnail,
                 cv,
-            ]
+                pax.letter,
+                ]
+            if pax.questionaire:
+                for answer in pax.questionaire.answer_set.all():
+                    row.append(answer.a)
 
             for col_num in xrange(len(row)):
                 ws.write(row_num, col_num, row[col_num], font_style)

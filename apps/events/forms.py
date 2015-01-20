@@ -2,7 +2,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.forms import Textarea, TextInput, FileField, Form, \
     ModelMultipleChoiceField, \
-    DateField, DateTimeField
+    DateField, DateTimeField, ModelChoiceField
 from django.forms.models import modelform_factory
 from django.views.generic import View
 from extra_views import InlineFormSet
@@ -10,6 +10,7 @@ from form_utils.forms import BetterModelForm
 from form_utils.widgets import ImageWidget
 
 from apps.account.models import Eestecer
+from apps.feedback.models import QuestionSet
 from eestecnet.views import NeverCacheMixin
 from apps.events.models import Event, EventImage, Transportation
 from apps.news.widgets import EESTECEditor
@@ -39,14 +40,18 @@ class EventMixin(NeverCacheMixin, View):
         return reverse("event", kwargs=self.kwargs)
 
 
+
+
 class EventUpdateForm(BetterModelForm):
+    feedbacksheet=ModelChoiceField(queryset=QuestionSet.objects.filter(category="feedback"),required=False)
+    questionaire=ModelChoiceField(queryset=QuestionSet.objects.filter(category="questionaire"),required=False)
     class Meta:
         model = Event
         fieldsets = [
             ('General Information', {'fields': ['name', 'scope', 'category']}),
             ('Dates', {'fields': ['start_date', 'end_date', 'deadline']}),
             ('Additional Information', {'fields': ['participation_fee', 'location']}),
-            ('Feedback Sheet', {'fields': ['feedbacksheet', ]}),
+            ('Feedbacksheet and Questionaire', {'fields': ['feedbacksheet','questionaire' ]}),
         ]
 
 

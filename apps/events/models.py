@@ -92,7 +92,8 @@ class Event(models.Model):
     organizer_report = models.TextField(blank=True, null=True)
     """ Optional: This is a field where the organizers report can be stored and
     accessed."""
-    feedbacksheet = ForeignKey('feedback.QuestionSet', null=True, blank=True)
+    feedbacksheet = ForeignKey('feedback.QuestionSet', null=True, blank=True,related_name="events")
+    questionaire = models.ForeignKey('feedback.QuestionSet',blank=True,null=True,related_name="eventstwo",help_text="Optional: If you want your participants to answer more questions other than writing about their motivation, you can include it here")
     class Meta:
         verbose_name = "Event"
         ordering = ('name',)
@@ -116,7 +117,13 @@ class Event(models.Model):
                             pax.feedback.delete()
                         pax.feedback = create_answer_set(self.feedbacksheet)
                         pax.save()
-
+        if (self.questionaire):
+            if self.pk:
+                orig = Event.objects.get(pk=self.pk)
+                if orig.questionaire != self.questionaire:
+                    for application in self.applicants.all():
+                        application.questionaire = create_answer_set(self.questionaire)
+                        application.save()
         super(Event, self).save(force_insert, force_update, using, update_fields)
 
     def clean(self):
@@ -238,6 +245,7 @@ class Application(models.Model):
     letter = models.TextField(blank=True, null=True)
     priority = models.IntegerField(blank=True, null=True)
     accepted = models.BooleanField(default=False)
+    questionaire = models.OneToOneField('feedback.AnswerSet', null=True, blank=True)
 
     def outgoing(self):
         return [team for team in self.applicant.teams if team.is_lc][0]
@@ -266,7 +274,6 @@ class Application(models.Model):
         return super(Application,self).delete(using)
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-
         if not self.date:
             self.date = timezone.now()
         if self.target.deadline:
@@ -276,7 +283,8 @@ class Application(models.Model):
             if self.accepted:
                 membership, created = Membership.objects.get_or_create(
                     team=self.target.organizing_committee.all()[0],
-                    user=self.applicant)
+                    user=self.applicant
+                )
                 membership.save()
                 self.delete()
 
@@ -284,6 +292,8 @@ class Application(models.Model):
                 super(Application, self).save()
         else:
             if not self.pk:
+                if self.target.questionaire:
+                    self.questionaire = create_answer_set(self.target.questionaire)
                 message = MailerMessage()
                 message.subject = "Hey hey! Just dropping by to tell you that" + \
                                   str(self.applicant) + " has applied to the event " + \

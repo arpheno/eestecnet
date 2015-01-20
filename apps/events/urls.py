@@ -6,7 +6,7 @@ from apps.events.views import EventDetail, ApplyToEvent, confirm_event, \
     AddEvents, DeleteApplication, EditApplication, IncomingApplications, CreateEvent, \
     Participations, InternationalEvents, ExportApplications, ExportParticipants, \
     ExportFeedback
-from apps.feedback.views import NewQuestionset, AnswerFeedback
+from apps.feedback.views import NewQuestionset, AnswerFeedback, FillOutQuestionaire
 
 
 admin.autodiscover()
@@ -46,4 +46,6 @@ urlpatterns = patterns(
         name='eventchangedetails'),
     url(r'^/(?P<slug>[-\w]+)/feedback/?$', AnswerFeedback.as_view(),
         name='answer_feedback'),
+    url(r'^/(?P<slug>[-\w]+)/questionaire/?$', FillOutQuestionaire.as_view(),
+        name='fill_out_questionaire'),
 )
