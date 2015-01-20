@@ -3,6 +3,7 @@ import sha
 
 from autoslug import AutoSlugField
 from autoslug.utils import slugify
+from django.contrib.sites.models import RequestSite
 from django.core.files import File
 from django.core.urlresolvers import reverse
 from django.db.models import ForeignKey
@@ -285,16 +286,14 @@ class Application(models.Model):
                                                              participant=self.applicant)
                 participation.save()
                 message = MailerMessage()
+                context = {
+                    'user': participation.participant,
+                    'slug': participation.target.slug,
+                    }
+                body = render_to_string("events/confirmation_email.txt",context)
                 message.subject = "Congratulations! You were accepted to " + \
                                   participation.target.name
-                message.content = "Dear " + participation.participant.first_name + \
-                                  "\nPlease visit " + reverse(
-                    'eventconfirmation', kwargs={
-                        'slug': participation.target.slug}) + "to confirm your " \
-                                                              "participation to the " \
-                                                              "event" \
-                                                              ".\n Thank you."
-                message.from_address = "noreply@eestecnet",
+                message.content = body
                 message.to_address = self.applicant.email
                 message.save()
                 len(MailerMessage.objects.all())
