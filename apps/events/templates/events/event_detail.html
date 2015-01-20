@@ -28,11 +28,6 @@
     </details>
 {% endblock %}
 {% block additional_options %}
-    {% if user in object.applicants.all %}
-        <h2> Application Actions</h2>
-        <a href="{% url 'application-edit' slug=object.slug %}" class="teamadmin">Edit my
-            application</a>
-    {% endif %}
     {% if user in object.organizers.all or user.is_superuser %}
         <h2> Admin Actions</h2>
         <a class="action-button blue"
