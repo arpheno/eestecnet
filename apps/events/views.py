@@ -187,6 +187,9 @@ class EventDetail(AdminOptions, Information, Grids, DetailView):
 
     def adminoptions(self):
         options = []
+        if self.request.user in self.get_object().applicants.all():
+            options.append(
+                ('Edit My Application', reverse_lazy('application-edit', kwargs=self.kwargs)))
         if self.request.user in self.get_object().members.all():
             options.append(
                 ('Feedback', reverse_lazy('answer_feedback', kwargs=self.kwargs)))
