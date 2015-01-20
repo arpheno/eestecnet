@@ -60,10 +60,11 @@ class EestecerProfile(AdminOptions, Information, Grids, DetailView):
     def information(self):
         info = [
             ('Name', self.get_object().name),
-            ('Birthday', self.get_object().date_of_birth),
             ('Date Joined', self.get_object().date_joined),
             ('Field of Study', self.get_object().get_field_of_study_display()),
         ]
+        if self.get_object().show_date_of_birth:
+            info.append(('Birthday', self.get_object().date_of_birth))
         if self.get_object().curriculum_vitae:
             info.append(("Curriculum Vitae",
                          "<a href='" + self.get_object().curriculum_vitae.url + "'" +
