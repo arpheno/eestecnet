@@ -15,8 +15,10 @@ Windows
 =======
 Please install chocolatey from http://chocolatey.org/
 To do this, open an administrative command shell (cmd.exe) and copy&paste the following ::
+
     @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
 When it's done installing please type ::
+
     choco install python2 git pip vim
 
 Alternatively you can install the pycharm professional edition from their website if you're a student.
@@ -24,30 +26,38 @@ Debian/Ubuntu
 =============
 
 In a command shell do ::
-sudo apt-get install pip virtualenv
+
+    sudo apt-get install pip virtualenv
 
 If you want the pycharm IDE, google it and install it. It's awesome, seriously.
 
 Import EESTECNET
 ################
 In a command prompt or terminal do ::
+
     cd C:\users\*your username*\
+
 or on *nix systems just ::
+
     cd
+
 then ::
+
     mkdir development
     cd development
     pip install virtualenv
     virtualenv .
     git checkout http://github.com/arpheno/eestecnet/
 on windows: ::
+
     scripts\activate
 on *nix: ::
+
     source bin/activate
 then ::
+
     cd eestecnet
     pip install -r requirements.txt
-
  Some python modules have to be compiled for your platform. Please install a C compiler like
  Visual Studio or MinGW, it's very difficult otherwise.
 
