@@ -22,6 +22,7 @@ When it's done installing please type ::
     choco install python2 git pip vim
 
 Alternatively you can install the pycharm professional edition from their website if you're a student.
+
 Debian/Ubuntu
 =============
 
