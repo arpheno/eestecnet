@@ -46,7 +46,7 @@ Security
 Connection
 ++++++++++
 
-Our webserver is configured to run connections to https://www.eestec.net/ with an SSL_ encryption layer.
+Our webserver is configured to run connections to https://eestec.net/ with an SSL_ encryption layer.
 The particular security used for a particular connection depends on the capabilities of the user's browser.
 
 Password storage

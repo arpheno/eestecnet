@@ -1,7 +1,7 @@
 .. eestec documentation master file, created by
-   sphinx-quickstart on Fri Jun 13 15:07:03 2014.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+sphinx-quickstart on Fri Jun 13 15:07:03 2014.
+You can adapt this file completely to your liking, but it should at least
+contain the root `toctree` directive.
 
 Welcome to eestec.net's documentation!
 ======================================
@@ -28,16 +28,17 @@ leaving the website (red arrows) without having become associated with EESTEC.
 
 
 .. toctree::
-   :maxdepth: 1
+:maxdepth: 1
 
    problem
-          requirements
-          implementation
-          setup
+   requirements
+   interface
+   implementation
+   setup
    overview
-          teams
-          eestecnet
-          events
+   teams
+   eestecnet
+   events
    account
    news
 

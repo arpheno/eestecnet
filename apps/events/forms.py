@@ -100,16 +100,18 @@ class EventCreationForm(BetterModelForm):
     organizers = ModelMultipleChoiceField(
         queryset=Eestecer.objects.none(),
         widget=MultiSelectWidget,
-        label=""
+        label="",
+        required=False
     )
     organizing_committee = ModelMultipleChoiceField(
         queryset=Team.objects.none(),
         widget=MultiSelectWidget,
-        label=""
+        label="",
+        required=False
     )
     start_date = DateField(widget=TextInput(attrs={"class": "date"}))
     end_date = DateField(widget=TextInput(attrs={"class": "date"}))
-    deadline = DateTimeField(widget=TextInput(attrs={"class": "datetime"}))
+    deadline = DateTimeField(widget=TextInput(attrs={"class": "datetime"}),required=False)
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user')
