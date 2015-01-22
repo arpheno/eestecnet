@@ -30,7 +30,15 @@ When it's done installing please type ::
     cd eestecnet
     pip install -r requirements.txt
 
-Alternatively you can install the pycharm professional edition from their website if you're a student.
+Additionally you will have to install cygwin and copy some files: ::
+
+    choco install cygwin
+    cd C:\tools\cygwin\bin
+    cp cygwin1.dll cygz.dll cygmagic-1.dll cyggcc_s-1.dll C:\windows\system32
+
+
+Alternatively instead of vim you can install the pycharm professional edition from their website if you're a student.
+
 
 Debian/Ubuntu
 =============
@@ -48,13 +56,12 @@ In a command shell do ::
     cd eestecnet
     pip install -r requirements.txt
 
+
 If you want the pycharm IDE, google it and install it. It's awesome, seriously.
 
 Some python modules have to be compiled for your platform. Please install a C compiler like
 Visual Studio or MinGW or the GNU compiler collection, it's very difficult otherwise.
 
-For the windows version you will have to install cygwin and add it to your path. Make sure the gnu file utility is installed
-and also the library cygmagic.
 
 Local
 #####
