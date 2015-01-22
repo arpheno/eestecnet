@@ -1,7 +1,7 @@
 $ ->
   $(".date").datepicker(
-    changeYear: true,
-  yearRange:"-33:+1",
+    changeYear: true
+    yearRange:"-33:+1"
   )
   $(".datetime").datetimepicker()
   $("a[href^=#]").click( (e) ->)
