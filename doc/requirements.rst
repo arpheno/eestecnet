@@ -1,8 +1,8 @@
-Requirements
-============
+Platform Design
+===============
 
-Non-functional
-##############
+Non-functional reqirements
+##########################
 
 * It should be accessible to people not working in IT both for use and administration.
 * Its interface should adapt to the device of the end user to improve usability.
@@ -10,8 +10,8 @@ Non-functional
 * The data storage should implement a public standard interface.
 * Sensitive user data should be encrypted using appropriate public standard approaches. The encryption procedure must remain secure, even in the case of an attacker with access to the procedure.
 
-Functional
-##########
+Functional requirements
+#######################
 
 General
 -------

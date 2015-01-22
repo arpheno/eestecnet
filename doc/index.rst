@@ -28,8 +28,8 @@ leaving the website (red arrows) without having become associated with EESTEC.
 
 
 .. toctree::
-:maxdepth: 1
 
+   :maxdepth: 1
    problem
    requirements
    interface

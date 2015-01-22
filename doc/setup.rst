@@ -56,10 +56,37 @@ In the window Packages below, select install and install
 
  This command will install all dependencies.
  Some python modules have to be compiled for your platform. Please install a C compiler like
- Visual Studio or MinGW it's very difficult otherwise.
+ Visual Studio or MinGW, it's very difficult otherwise.
 
 For the windows version you will have to install cygwin and add it to your path. Make sure the gnu file utility is installed
 and also the library cygmagic. In site-packages/magic.py on windows change "win32": XXXXX to "win32":"cygmagic-1.dll" .
+
+Import EESTECNET
+################
+In pycharm select “VCS-> checkout from version control -> github”
+Git repository url: https://github.com/arpheno/eestecnet
+Hit clone
+Everything should download now.
+
+Local
+#####
+Activate your virtualenv.
+Navigate to the project root and do ::
+    python manage.py syncdb
+    python manage.py migrate
+    python manage.py runserver
+
+This will launch a local webserver on port 8000.
+The website will now display, albeit with no preloaded content.
+If you want to preload content, hit CTRL + C and do ::
+    python manage.py shell
+    >>> from eestecnet.views import init
+    >>> init(5)
+
+This will preload some content, including an admin account with login credentials:
+
+username arpheno@gmail.com
+password test
 
 Server
 ######
@@ -80,9 +107,3 @@ it has to be configured with nginx, so nginx serves all static files. ::
 
 There are some useful scripts in the scripts folder, however you will have to adjust them to your paths.(I'm assuming the old server burnt down or something)
 
-Import EESTECNET
-################
-In pycharm select “VCS-> checkout from version control -> github”
-Git repository url: https://github.com/arpheno/eestecnet
-Hit clone
-Everything should download now.

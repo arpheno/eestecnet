@@ -5,7 +5,7 @@ eestecnet/settings/secret.py
 eestecnet/settings_deploy.py
 tmp
 media
-logs
+*.log
 .idea
 serve
 whoosh_index
