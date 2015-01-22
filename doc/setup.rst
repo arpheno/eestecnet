@@ -25,7 +25,7 @@ When it's done installing please type ::
     cd development
     pip install virtualenv
     virtualenv .
-    git checkout http://github.com/arpheno/eestecnet/
+    git clone http://github.com/arpheno/eestecnet/
     scripts\activate
     cd eestecnet
     pip install -r requirements.txt
@@ -43,7 +43,7 @@ In a command shell do ::
     cd development
     pip install virtualenv
     virtualenv .
-    git checkout http://github.com/arpheno/eestecnet/
+    git clone http://github.com/arpheno/eestecnet/
     source bin/activate
     cd eestecnet
     pip install -r requirements.txt
