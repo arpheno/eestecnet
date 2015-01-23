@@ -98,7 +98,7 @@ class Team(models.Model):
     def last_event(self):
         try:
             return \
-                self.event_set.all().exclude(name='Recruitment').order_by('-start_date')[
+                self.event_set.all().exclude(category='recruitment').order_by('-start_date')[
                     0].start_date
         except:
             return 0

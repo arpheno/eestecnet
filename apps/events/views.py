@@ -126,7 +126,6 @@ class AddEvents(FormView):
                 new_event.name = event[0]
             new_event.save()
 
-
 class InternationalEvents(AdminOptions, Grids, ListView):
     model = Event
 
@@ -150,7 +149,7 @@ class InternationalEvents(AdminOptions, Grids, ListView):
         ]
 
     def get_events(self):
-        events = self.get_queryset().filter(scope="international")
+        events = self.get_queryset().filter(scope="international").exclude(category="project")
         eventlist = {}
         eventlist['active_list'] = []
         eventlist['pending_list'] = []
@@ -168,6 +167,11 @@ class InternationalEvents(AdminOptions, Grids, ListView):
         return eventlist
 
 
+class InternationalProjects(InternationalEvents):
+    def grids(self):
+        return [
+            ("events/grids/base.html",Event.objects.filter(category="project"), "Current projects carried out in EESTEC"),
+            ]
 def confirm_event(request, slug):
     try:
         pa = Participation.objects.get(target__slug=slug, participant=request.user)

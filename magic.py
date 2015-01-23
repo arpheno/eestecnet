@@ -142,8 +142,10 @@ dll = ctypes.util.find_library('magic') or ctypes.util.find_library('magic1')
 
 # This is necessary because find_library returns None if it doesn't find the library
 if dll:
-    libmagic = ctypes.CDLL(dll)
-
+    try:
+        libmagic = ctypes.CDLL(dll)
+    except:
+        pass
 if not libmagic or not libmagic._name:
 
     platform_to_lib = {'darwin': ['/opt/local/lib/libmagic.dylib',

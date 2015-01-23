@@ -55,7 +55,11 @@
         {% endif %}
         <li><a href="{% url 'news' %}">News</a></li>
         <li><a href="{% url 'cities' %}">Cities</a></li>
-        <li><a href="{% url 'teams' %}">Teams</a></li>
+        <li><a href="{% url 'teams' %}">Teams</a>
+            <ul>
+                <li><a href="{% url 'projects' %}">Projects</a></li>
+            </ul>
+        </li>
         <li><a href="{% url 'events' %}">Events </a></li>
         <li><a href="{% url 'materials' %}">Files</a></li>
         <li><a href="{% url 'wikihome' %}">Wiki</a></li>

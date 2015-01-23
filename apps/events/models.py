@@ -32,6 +32,7 @@ CATEGORY_CHOICES = (
     ('training', 'Training'),
     ('imw', 'IMW'),
     ('recruitment', 'recruitment'),
+    ('project', 'project'),
 )
 
 
