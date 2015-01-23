@@ -45,7 +45,7 @@ Debian/Ubuntu
 
 In a command shell do ::
 
-    sudo apt-get install pip virtualenv
+    sudo apt-get install pip virtualenv coffeescript
     cd
     mkdir development
     cd development
