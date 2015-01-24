@@ -25,6 +25,7 @@ class WikiPage(Model):
                           default="This page does not exist yet, you can create it by clicking Update.")
     last_modified = DateTimeField(auto_now=True)
     slug = AutoSlugField(populate_from="name")
+    username = ForeignKey('account.Eestecer',blank=True,null=True,editable=False)
 
     def get_absolute_url(self):
         return reverse('wikipage', args=[str(self.slug)])

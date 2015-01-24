@@ -42,8 +42,14 @@ class PageDetail(Protected, DetailView):
 class PageUpdate(Protected, UpdateView):
     model = WikiPage
     form_class = WikiForm
+    def form_valid(self, form):
+        form.instance.username=self.request.user
+        return super(PageUpdate,self).form_valid(form)
 
 
 class PageCreate(Protected, CreateView):
     model = WikiPage
     form_class = WikiForm
+    def form_valid(self, form):
+        form.instance.username=self.request.user
+        return super(PageCreate,self).form_valid(form)
