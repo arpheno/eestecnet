@@ -64,7 +64,9 @@ class ApplicationForm(ReadonlyModelForm):
 class ParticipationForm(ReadonlyModelForm):
     class Meta:
         model = Participation
-        fields = ('participant', 'target')
+        fields = ('participant', 'target','confirmed')
+    class NewMeta:
+        readonly = ('confirmed')
 
 
 class ApplicationInline(InlineFormSet):
