@@ -19,7 +19,7 @@ To do this, open an administrative command shell (cmd.exe) and copy&paste the fo
     @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
 When it's done installing please type ::
 
-    choco install python2 git pip vim
+    choco install python2 git pip vim npm cygwin
     cd C:\users\*your username*\
     mkdir development
     cd development
@@ -29,10 +29,9 @@ When it's done installing please type ::
     scripts\activate
     cd eestecnet
     pip install -r requirements.txt
-
+    npm install -g coffee
 Additionally you will have to install cygwin and copy some files: ::
 
-    choco install cygwin
     cd C:\tools\cygwin\bin
     cp cygwin1.dll cygz.dll cygmagic-1.dll cyggcc_s-1.dll C:\windows\system32
 
