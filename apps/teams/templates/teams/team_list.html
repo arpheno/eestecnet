@@ -8,10 +8,10 @@
         width: 80%;
         height: 350px;
         }</style>
-        {% compress js %}
             <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
-            <script>
-            window.addEvent("domready",function(){
+        {% compress js %}
+            <script type="text/javascript">
+            $(function(){
                 if(!window.google){return;}
                 var map, cfg={
                         zoom: 4,
@@ -21,10 +21,10 @@
                         mapTypeControl: false,
                         mapTypeId: window.google && google.maps.MapTypeId.ROADMAP
                 };
-                
+
                 map = window.map = new google.maps.Map(document.getElementById("map"),cfg);
                 map.setCenter(new google.maps.LatLng(cfg.lat,cfg.lng));
-                
+
                 {% for object in object_list %}
                     google.maps.event.addListener(
                         new google.maps.Marker({map:map,position:new google.maps.LatLng({{ object.lat }}, {{ object.lng}}),title:'{{ object }}',icon:'//www.googlemapsmarkers.com/v1/ff0000'}),
