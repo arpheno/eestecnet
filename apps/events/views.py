@@ -216,13 +216,15 @@ class EventDetail(AdminOptions, Information, Grids, DetailView):
         event = self.get_object()
         date = str(event.start_date)
         if event.end_date:
-            date += str(event.end_date)
+            date += " - " + str(event.end_date)
         information = [
             ('Event Name', self.get_object().name),
             ('Organizing Committee', self.get_object().OC()),
             ('Date', date),
             ('Number of Members', self.get_object().member_count()),
         ]
+        if event.participation_fee:
+            information.append(('Participation Fee', event.participation_fee))
         if event.deadline:
             information.append(('Deadline', event.deadline))
         if event.max_participants:
