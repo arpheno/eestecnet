@@ -8,25 +8,32 @@
         width: 80%;
         height: 350px;
         }</style>
-        <link property="stylesheet" rel="stylesheet"
-              href="{% static 'leaflet/leaflet.css' %}"/>
         {% compress js %}
-            <script src="{% static 'leaflet/leaflet.js' %}"></script>
-            <script src="{% static 'enet/testleaf.js' %}"></script>
-            <script type="text/javascript">
-                $(function () {
-                    {% for object in object_list %}
-                        var mark = new L.Marker(new L.LatLng({{ object.lat }}, {{  object.lng}}), {title: "{{ object }}"});
-                        mark.on('click',
-                                function () {
-                                    window.location = "{{ object.get_absolute_url }}";
-                                });
-                        map.addLayer(mark);
-
-                    {% endfor %}
-                });
-            </script>
-
+            <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+            <script>
+            window.addEvent("domready",function(){
+                if(!window.google){return;}
+                var map, cfg={
+                        zoom: 4,
+                        lat:47.5,
+                        lng:19.07,
+                        streetViewControl: false,
+                        mapTypeControl: false,
+                        mapTypeId: window.google && google.maps.MapTypeId.ROADMAP
+                };
+                
+                map = window.map = new google.maps.Map(document.getElementById("map"),cfg);
+                map.setCenter(new google.maps.LatLng(cfg.lat,cfg.lng));
+                
+                {% for object in object_list %}
+                    google.maps.event.addListener(
+                        new google.maps.Marker({map:map,position:new google.maps.LatLng({{ object.lat }}, {{ object.lng}}),title:'{{ object }}',icon:'//www.googlemapsmarkers.com/v1/ff0000'}),
+                        "click",
+                        function(){location.href="{{ object.get_absolute_url }}"; }
+                    );
+                {% endfor %}
+            });
+        </script>
         {% endcompress %}
 
         <section class="members">
