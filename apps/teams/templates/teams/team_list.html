@@ -27,7 +27,7 @@
 
                 {% for object in object_list %}
                     google.maps.event.addListener(
-                        new google.maps.Marker({map:map,position:new google.maps.LatLng({{ object.lat }}, {{ object.lng}}),title:'{{ object }}',icon:'//www.googlemapsmarkers.com/v1/ff0000'}),
+                        new google.maps.Marker({map:map,position:new google.maps.LatLng({{ object.lat }}, {{ object.lng}}),title:'{{ object }}'}),
                         "click",
                         function(){location.href="{{ object.get_absolute_url }}"; }
                     );
