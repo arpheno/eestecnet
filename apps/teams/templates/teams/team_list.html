@@ -9,7 +9,6 @@
         height: 350px;
         }</style>
             <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
-        {% compress js %}
             <script type="text/javascript">
             $(function(){
                 if(!window.google){return;}
@@ -34,7 +33,6 @@
                 {% endfor %}
             });
         </script>
-        {% endcompress %}
 
         <section class="members">
         <div id="map">
