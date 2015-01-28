@@ -11,6 +11,10 @@
 {% if not user.is_authenticated %}
         {% include 'account/login.html' %}
 {% else %}
+    {% if request.user.thumbnail %}
     {% include 'account/grids/base.html' with object_list=userlist name="userarea" %}
+    {% else %}
+        <a style="color:blue;" href="/people/me">{{ request.user.name }}</a>
+    {% endif %}
 {% endif %}
 
