@@ -9,50 +9,54 @@
         height: 350px;
         }</style>
             <script src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
-        {% compress js %}
             <script type="text/javascript">
-            $(function(){
-                if(!window.google){return;}
-                var map, cfg={
+                $(function () {
+                    if (!window.google) {
+                        return;
+                    }
+                    var map, cfg = {
                         zoom: 4,
                         lat:47.5,
                         lng:19.07,
                         streetViewControl: false,
                         mapTypeControl: false,
                         mapTypeId: window.google && google.maps.MapTypeId.ROADMAP
-                };
+                    };
 
-                map = window.map = new google.maps.Map(document.getElementById("map"),cfg);
-                map.setCenter(new google.maps.LatLng(cfg.lat,cfg.lng));
+                    map = window.map = new google.maps.Map(document.getElementById("map"), cfg);
+                    map.setCenter(new google.maps.LatLng(cfg.lat, cfg.lng));
 
-                var infowins={},markers={};
-                {% load thumbnail %}
-                {% for object in object_list %}
-                    infowins["{{object.slug}}"]=new google.maps.InfoWindow({content: '<div id="content">'+
-      '<h1 id="firstHeading" class="firstHeading">{{object.name|escapejs}}</h1>'+
-      '<div id="bodyContent"><p>'+
-        '{% thumbnail object.thumbnail "100x100" crop="center" as im %}<img src="{{ im.url }}">{% endthumbnail %}'+
-        '{{object.description|escapejs}}</p>'+
-        '<p><a href="{{ object.get_absolute_url }}">More details</a></p>'+
-      '</div></div>';});
-                    markers["{{object.slug}}"]=new google.maps.Marker({
-                        map:map,
-                        position:new google.maps.LatLng({{ object.lat }}, {{ object.lng}}),
-                        title:'{{ object.name|escapejs }}'
-                    });
-                    google.maps.event.addListener(
-                        markers["{{object.slug}}"],
-                        "click",
-                        function(){infowins["{{object.slug}}"].open(map,markers["{{object.slug}}"]) }
-                    );
-                {% endfor %}
-            });
-        </script>
-        {% endcompress %}
+                    var infowins = {}, markers = {};
+                    {% load thumbnail %}
+                    {% for object in object_list %}
+                        infowins["{{object.slug}}"] = new google.maps.InfoWindow({content: '<div id="content">' +
+                        '<h1 id="firstHeading" class="firstHeading">{{object.name|escapejs}}</h1>' +
+                        '<div id="bodyContent"><p>' +
+                        '{% thumbnail object.thumbnail "100x100" crop="center" as im %}
+                            <img src="{{ im.url }}">
+                        {% endthumbnail %}'+ '{{object.description|escapejs}} < / p > '+
+                        '<p><a href="{{ object.get_absolute_url }}">More details</a></p>' +
+                        '</div></div>';});
+                        markers["{{object.slug}}"] = new google.maps.Marker({
+                            map: map,
+                            position: new google.maps.LatLng({{ object.lat }}, {{ object.lng}}),
+                            title: '{{ object.name|escapejs }}'
+                        });
+                        google.maps.event.addListener(
+                                markers["{{object.slug}}"],
+                                "click",
+                                function () {
+                                    infowins["{{object.slug}}"].open(map, markers["{{object.slug}}"])
+                                }
+                        );
+                    {% endfor %}
+                })
+                ;
+            </script>
 
         <section class="members">
-        <div id="map">
-        </div>
+            <div id="map">
+            </div>
             {% for grid in grids %}
                 {{ grid }}
             {% endfor %}
