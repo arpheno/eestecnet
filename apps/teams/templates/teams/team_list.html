@@ -26,17 +26,18 @@
                     map = window.map = new google.maps.Map(document.getElementById("map"), cfg);
                     map.setCenter(new google.maps.LatLng(cfg.lat, cfg.lng));
 
-                    var infowins = {}, markers = {};
+                    var infowins = {}, markers = {}, latest=0;
                     {% load thumbnail %}
                     {% for object in object_list %}
-                        infowins["{{object.slug}}"] = new google.maps.InfoWindow({content: '<div id="content">' +
-                        '<h1 id="firstHeading" class="firstHeading">{{object.name|escapejs}}</h1>' +
-                        '<div id="bodyContent"><p>' +
-                        '{% thumbnail object.thumbnail "100x100" crop="center" as im %}
-                            <img src="{{ im.url }}">
-                        {% endthumbnail %}'+ '{{object.description|escapejs}} < / p > '+
-                        '<p><a href="{{ object.get_absolute_url }}">More details</a></p>' +
-                        '</div></div>';});
+                        infowins["{{object.slug}}"] = new google.maps.InfoWindow({
+                            content:'<h1 id="firstHeading" class="firstHeading">{{object.name|escapejs}}</h1>' +
+                                    {% thumbnail object.thumbnail "100x100" crop="center" as im %}
+                                    '<p><img src="{{ im.url }}" style="float:left;margin:5px;">'+
+                                    '{{object.description|truncatechars_html:250|escapejs}}</p>'+
+                                    {% endthumbnail %}
+                                    '<p><a href="{{ object.get_absolute_url }}">More details</a></p>',
+                            maxWidth: 250
+                        });
                         markers["{{object.slug}}"] = new google.maps.Marker({
                             map: map,
                             position: new google.maps.LatLng({{ object.lat }}, {{ object.lng}}),
@@ -46,7 +47,12 @@
                                 markers["{{object.slug}}"],
                                 "click",
                                 function () {
-                                    infowins["{{object.slug}}"].open(map, markers["{{object.slug}}"])
+                                    if(latest==infowins["{{object.slug}}"])
+                                        location.href="{{ object.get_absolute_url }}";
+                                    if(latest)
+                                        latest.close();
+                                    latest = infowins["{{object.slug}}"];
+                                    latest.open(map, markers["{{object.slug}}"]);
                                 }
                         );
                     {% endfor %}
