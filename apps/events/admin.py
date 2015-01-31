@@ -69,7 +69,7 @@ class MyEventAdmin(admin.ModelAdmin):
         ('Organizing Committees', {
             'fields': (('organizing_committee'),)
         }),
-        ('Dates', {
+        ('Dates', {
             'fields': (('start_date', 'end_date', 'deadline', 'location'),)
         }),
         ('Reports', {
