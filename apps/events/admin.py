@@ -69,7 +69,7 @@ class MyEventAdmin(admin.ModelAdmin):
         ('Organizing Committees', {
             'fields': (('organizing_committee'),)
         }),
-        ('Dates', {
+        ('Dates', {
             'fields': (('start_date', 'end_date', 'deadline', 'location'),)
         }),
         ('Reports', {
@@ -178,7 +178,7 @@ class IncomingApplicationAdmin(admin.ModelAdmin):
             qs = qs.filter(
                 # They're either for an event by a committee administered by the user
                 Q(target__in=request.user.teams_administered().filter(
-                    type__in=['observer', 'jlc', 'lc'])[0].event_set.all()) |
+                    category__in=['observer', 'jlc', 'lc'])[0].event_set.all()) |
                 # Or directly for an event directly administered by the user
                 Q(target__in=request.user.events_organized.all())
             )
@@ -344,7 +344,7 @@ class EventParticipationAdmin(admin.ModelAdmin):
             return qs
         try:
             return qs.filter(target__in=request.user.teams_administered().filter(
-                type__in=['observer', 'jlc', 'lc'])[0].event_set.all())
+                category__in=['observer', 'jlc', 'lc'])[0].event_set.all())
         except:
             return qs.none()
 
