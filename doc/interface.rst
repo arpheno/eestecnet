@@ -11,12 +11,19 @@ Functional
 ##########
 
 There is a certain set of functionality required to make the website work well. This is an enumeration of core components that needs to be taken into account.
+
 General
 -------
+
 * The website must display one or more logos of the association in the <header> part of each page.
 * A navigation must be readily accessible to the user at all times.
 * A search function must be readily accessible to the user at all times.
 * Actions for individual pages must appear in the same area across the whole platform.
+
+Home
+----
+
+* The first page serves to attract attention and inform visitors what eestec is and does.
 
 Users
 -----
