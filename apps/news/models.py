@@ -51,6 +51,8 @@ class Entry(models.Model):
     slug = AutoSlugField(populate_from='name')
     pub_date = models.DateTimeField(auto_now_add=True)
     objects = EntryManager()
+    category = models.CharField(max_length=20, choices=(
+    ("news", "EESTEC News"), ("carreer", "Carreer Offer")), default="news")
     published = models.BooleanField(default=False)
     front_page_news = models.BooleanField(default=False)
 

@@ -1,0 +1,23 @@
+{% extends 'base/prototypes/split.html' %}
+{% load thumbnail %}
+{% block main %}
+<section class="career">
+    <h1><a style="color:#9a0008;"
+           href="{% url 'careeroffer' entry.slug %}">
+        {{ entry.name }}
+    </a><span>{{ entry.pub_date }}</span></h1>
+
+    <div>
+        {% thumbnail entry.thumbnail "x300" as im %}
+            <img alt="{{ object }}" src="{{ im.url }}">
+        {% endthumbnail %}
+    </div>
+
+    <div class="post_content">
+        {% autoescape off %}
+        {{ entry.description }}
+        {% endautoescape %}
+    </div>
+
+</section>
+{% endblock %}

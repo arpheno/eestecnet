@@ -83,7 +83,6 @@ class TeamDetail(Information, Grids, AdminOptions, DetailView):
             return []
         return [
             ("Outgoing", reverse_lazy(self.request.resolver_match.app_name+':outgoing',kwargs=self.kwargs)),
-            ('Change Board', self.get_object().get_absolute_url() + "board"),
             ('Change Details', self.get_object().get_absolute_url() + "details"),
             ('Manage Members', self.get_object().get_absolute_url() + "members"),
             ('Manage Images', self.get_object().get_absolute_url() + "images"),

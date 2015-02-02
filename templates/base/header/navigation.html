@@ -61,8 +61,17 @@
             </ul>
         </li>
         <li><a href="{% url 'events' %}">Events </a></li>
-        <li><a href="{% url 'materials' %}">Files</a></li>
-        <li><a href="{% url 'wikihome' %}">Wiki</a></li>
+        <li>
+            <a href="/internal">Internal </a>
+            <ul>
+                <li><a href="{% url 'materials' %}">Files</a></li>
+                <li><a href="{% url 'wikihome' %}">Wiki</a></li>
+                <li><a href="https://forum.eestec.net/">Forum</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="{% url 'careers' %}">Careers</a>
+        </li>
         <li>
             <a href="{% url 'sitemap' %}">Links </a>
 
@@ -125,6 +134,9 @@
                 <li><a href="/partners/cooperations">Cooperations</a></li>
                 <li><a href="/partners/start">Become a Partner</a></li>
             </ul>
+        </li>
+        <li>
+            <a href="{% url 'careers' %}">Careers</a>
         </li>
         <li>
             <a href="/contact">Contact</a>
