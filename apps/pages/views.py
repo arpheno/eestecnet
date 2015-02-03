@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.forms import ModelForm, TextInput, Textarea, CharField
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView, UpdateView
 from extra_views import CreateWithInlinesView, InlineFormSet
 from form_utils.forms import BetterModelForm
@@ -53,6 +53,10 @@ class ActivityStubs(ListView):
     model = Stub
     queryset = Stub.objects.filter(group="activities")
 
+
+class GetinvolvedStubs(ListView):
+    model = Stub
+    queryset = Stub.objects.filter(group="getinvolved")
 
 class WebsiteFeedbackInline(InlineFormSet):
     model = WebsiteFeedbackImage

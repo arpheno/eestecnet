@@ -10,7 +10,7 @@ from apps.account.views import EestecerCreate, \
 from eestecnet.settings.basic import MEDIA_ROOT
 from eestecnet.views import newsletter
 from apps.pages.models import Stub
-from apps.pages.views import ActivityStubs, AboutStubs
+from apps.pages.views import ActivityStubs, AboutStubs, GetinvolvedStubs
 from apps.teams.views import CommitmentList, TeamList, Governance
 from apps.news.views import home, CarreerDetail, CarreerList
 
@@ -44,12 +44,13 @@ urlpatterns += patterns(
     url(r'^activities/?$', ActivityStubs.as_view(), name='activities'),
     url(r'^sitemap/?$', ListView.as_view(model=Stub), name='sitemap'),
     url(r'^about/?$', AboutStubs.as_view(), name='about'),
+    url(r'^get-involved/?$', GetinvolvedStubs.as_view(), name='getinvolved'),
     url(r'^newsletter/?$', newsletter, name='newsletter'),
     url(r'^active/?$', MassCommunication.as_view(), name='masscommunication'),
     url(r'^privileged/?$', PrivilegedCommunication.as_view(), name='privcommunication'),
     url(r'^governance/?$', Governance.as_view(), name='governance'),
     url(r'^careers/?$', CarreerList.as_view(), name='careers'),
-    url(r'^careers/(?P<slug>[-\w]+)/$', CarreerDetail.as_view(), name='careeroffer'),
+    url(r'^careers/(?P<slug>[-\w]+)/?$', CarreerDetail.as_view(), name='careeroffer'),
 )
 # Redirects
 urlpatterns += patterns(
