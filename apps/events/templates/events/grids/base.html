@@ -6,9 +6,9 @@
     {% for oc in object.organizing_committee.all %}{{ oc }}{% endfor %}
     <hr>
     From
-    <date>{{ object.start_date }}</date>till
+    <date>{{ object.start_date }}</date> till
     <date>{{ object.end_date }}</date><br>
-    ApplicationDeadline
+    Application Deadline
     <date>{{ object.deadline }} </date>
     <hr>
     {{ object.description|striptags|truncatewords:70 }}{% endfilter %} {% endblock %}
