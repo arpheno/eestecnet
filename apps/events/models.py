@@ -295,11 +295,11 @@ class Application(models.Model):
                 if self.target.questionaire:
                     self.questionaire = create_answer_set(self.target.questionaire)
                 message = MailerMessage()
-                message.subject = "[EESTEC]" + str(
+                message.subject = "[EESTEC] " + str(
                     self.applicant) + " applied to " + str(self.target.name)
-                message.content = "Hey hey! Just dropping by to tell you that" + \
+                message.content = "Hey hey! Just dropping by to tell you that " + \
                                   str(self.applicant) + " has applied to the event " + \
-                                  str(self.target.name) + "\n Please remember to send " \
+                                  str(self.target.name) + "\nPlease remember to send " \
                                                           "a " \
                                                           "priority list."
                 message.from_address = "noreply@eestecnet"
