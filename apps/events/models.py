@@ -4,7 +4,6 @@ import sha
 
 from autoslug import AutoSlugField
 from autoslug.utils import slugify
-from django.contrib.sites.models import RequestSite
 from django.core.files import File
 from django.core.urlresolvers import reverse
 from django.db.models import ForeignKey
@@ -14,9 +13,9 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from mailqueue.models import MailerMessage
 
-from apps.feedback.models import AnswerSet, Answer
 from apps.feedback.utils import create_answer_set
 from apps.news.models import Membership
+
 
 logger = logging.getLogger(__name__)
 
@@ -296,12 +295,14 @@ class Application(models.Model):
                 if self.target.questionaire:
                     self.questionaire = create_answer_set(self.target.questionaire)
                 message = MailerMessage()
-                message.subject = "Hey hey! Just dropping by to tell you that" + \
+                message.subject = "[EESTEC]" + str(
+                    self.applicant) + " applied to " + str(self.target.name)
+                message.content = "Hey hey! Just dropping by to tell you that" + \
                                   str(self.applicant) + " has applied to the event " + \
                                   str(self.target.name) + "\n Please remember to send " \
                                                           "a " \
                                                           "priority list."
-                message.from_address = "noreply@eestecnet",
+                message.from_address = "noreply@eestecnet"
                 message.to_address = ", ".join(
                     user.email for user in self.applicant.lc()[0].privileged())
                 message.save()
