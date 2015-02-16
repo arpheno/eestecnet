@@ -1,18 +1,19 @@
 from django.conf.urls import patterns, url
 from django.contrib import admin
-from djangular.views.crud import NgCRUDView
 
-from apps.teams.models import Team
 from apps.teams.views import SelectBoard, ChangeDescription, \
     ChangeDetails, ManageMembers, TeamImages, TeamApplications, OutgoingApplications, \
     TeamDetail
 
 
 admin.autodiscover()
+# Serializers define the API representation.
+
+# ViewSets define the view behavior.
+# Routers provide an easy way of automatically determining the URL conf.
 
 urlpatterns = patterns(
     '',
-    url(r'^/api/?', NgCRUDView.as_view(model=Team)),
     url(r'^/(?P<slug>[-\w]+)/$', TeamDetail.as_view(), name='detail'),
     url(r'^/(?P<slug>[-\w]+)/board/?$', SelectBoard.as_view(), name='board'),
     url(r'^/(?P<slug>[-\w]+)/description/?$', ChangeDescription.as_view(),

@@ -15,7 +15,9 @@ INSTALLED_APPS += (
     'sorl.thumbnail',
     'form_utils',
     'reversion',
+    'corsheaders',
     'djangular',
+    'rest_framework',
 )
 # Own apps
 INSTALLED_APPS += (
@@ -54,7 +56,11 @@ from conf.compressor import *
 from conf.localization import *
 from conf.logging import *
 from conf.mailqueue import *
+from conf.rest import *
+from conf.cors import *
 
+CORS_ORIGIN_WHITELIST
+REST_FRAMEWORK
 HAYSTACK_CONNECTIONS
 COMPRESS_ENABLED
 DEFAULT_FROM_EMAIL
