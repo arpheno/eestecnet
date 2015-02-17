@@ -1,7 +1,7 @@
 import csv
-import logging
 import random
 import datetime
+import logging
 
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
@@ -26,7 +26,6 @@ from apps.events.forms import DescriptionForm, EventImageInline, TransportForm, 
 from apps.events.models import Event, Application, Participation
 from apps.teams.forms import ApplicationInline, ParticipationInline
 from apps.teams.models import Team
-
 
 logger = logging.getLogger(__name__)
 

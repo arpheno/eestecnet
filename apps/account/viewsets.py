@@ -1,16 +1,17 @@
+from django.contrib.auth.models import Group
 from rest_framework import viewsets
 
 from apps.account.models import Eestecer
-from apps.account.serializers import PersonSerializer
+from apps.account.serializers import PersonSerializer, GroupSerializer
+from eestecnet.serializers import AdminMixin
 
 
-class People(viewsets.ReadOnlyModelViewSet):
-    def get_queryset(self):
-        if self.request.user.is_superuser:
-            return Eestecer.objects.all()
-        else:
-            return self.request.user
+class GroupViewset(AdminMixin, viewsets.ReadOnlyModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
 
-    model = Eestecer
+
+class People(AdminMixin, viewsets.ReadOnlyModelViewSet):
+    queryset = Eestecer.objects.all()
     serializer_class = PersonSerializer
 

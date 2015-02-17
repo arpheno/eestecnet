@@ -17,5 +17,4 @@ class CitySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Team
-        fields = ('name', 'thumbnail', 'members')
 
