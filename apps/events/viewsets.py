@@ -6,8 +6,7 @@ from eestecnet.serializers import AdminMixin
 
 
 class Events(AdminMixin, viewsets.ReadOnlyModelViewSet):
-    queryset = Event.objects.filter(
-        category__in=["workshop", "training", "operational", "exchange", "imw"])
+    queryset = Event.objects.all()
     serializer_class = EventSerializer
 
 
