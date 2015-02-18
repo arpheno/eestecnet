@@ -10,9 +10,10 @@ class HyperlinkedSorlImageField(serializers.ImageField):
         super(HyperlinkedSorlImageField, self).__init__(*args, **kwargs)
 
     def to_representation(self, value):
-
-        image = get_thumbnail(value, self.dimensions, **self.options)
-
+        try:
+            image = get_thumbnail(value, self.dimensions, **self.options)
+        except TypeError:
+            image = value
         try:
             request = self.context.get('request', None)
             return request.build_absolute_uri(image.url)
