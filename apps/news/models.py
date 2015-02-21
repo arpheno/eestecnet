@@ -24,7 +24,10 @@ class Membership(models.Model):
             self.user.is_staff = True
             self.user.save()
             local, created = Group.objects.get_or_create(name='Local Admins')
+            privileged, created = Group.objects.get_or_create(
+                name=self.team.slug + "privileged")
             self.user.groups.add(local)
+            self.user.groups.add(privileged)
         super(Membership, self).save()
 
     def email(self):

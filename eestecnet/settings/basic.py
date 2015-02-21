@@ -18,6 +18,7 @@ INSTALLED_APPS += (
     'corsheaders',
     'djangular',
     'rest_framework',
+    'guardian',
 )
 # Own apps
 INSTALLED_APPS += (
@@ -58,6 +59,9 @@ from conf.logging import *
 from conf.mailqueue import *
 from conf.rest import *
 from conf.cors import *
+from conf.authentication import *
+
+AUTHENTICATION_BACKENDS
 
 CORS_ORIGIN_WHITELIST
 REST_FRAMEWORK

@@ -1,11 +1,33 @@
 from rest_framework import serializers
 
-from apps.account.serializers import PersonSerializer
-from apps.events.models import Event
+from apps.account.serializers import PersonSerializer, PersonParticipationSerializer
+from apps.events.models import Event, Participation, Transportation, Application
+from apps.feedback.serializers import AnswerSetSerializer
 from apps.teams.serializers import CitySerializer
 from eestecnet.fields import HyperlinkedSorlImageField
 
 
+class TransportationSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Transportation
+
+
+class ApplicationSerializer(serializers.ModelSerializer):
+    applicant = PersonSerializer(read_only=True)
+    questionaire = AnswerSetSerializer(read_only=True)
+    transportation = TransportationSerializer(read_only=True)
+
+    class Meta:
+        model = Application
+
+
+class ParticipationSerializer(serializers.HyperlinkedModelSerializer):
+    participant = PersonParticipationSerializer(read_only=True, )
+    feedback = AnswerSetSerializer(read_only=True)
+    transportation = TransportationSerializer(read_only=True)
+
+    class Meta:
+        model = Participation
 class EventSerializer(serializers.HyperlinkedModelSerializer):
     members = PersonSerializer(
         many=True,

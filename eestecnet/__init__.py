@@ -412,7 +412,7 @@ def create_eestec_people():
                                            first_name="sebastian",
                                            middle_name='stanislaw',
                                            last_name="wozny")
-    for user in Eestecer.objects.all():
+    for user in Eestecer.objects.exclude(first_name=""):
         with open('eestecnet/people/' + user.slug + '.jpg', 'rb') as doc_file:
             user.thumbnail.save(user.slug + ".jpg", File(doc_file), save=True)
         user.save()

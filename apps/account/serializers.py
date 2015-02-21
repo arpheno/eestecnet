@@ -8,6 +8,15 @@ from eestecnet.fields import HyperlinkedSorlImageField
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
+
+
+class PersonParticipationSerializer(serializers.HyperlinkedModelSerializer):
+    thumbnail = HyperlinkedSorlImageField(dimensions="500x500",
+                                          options={'crop': 'center'})
+
+    class Meta:
+        model = Eestecer
+        exclude = ('email', 'password')
 class PersonSerializer(serializers.HyperlinkedModelSerializer):
     thumbnail = HyperlinkedSorlImageField(dimensions="200x200",
                                           options={'crop': 'center'})

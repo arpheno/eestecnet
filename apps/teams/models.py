@@ -1,9 +1,11 @@
 from autoslug import AutoSlugField
 from autoslug.utils import slugify
+from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.loader import render_to_string
 from django.utils.datetime_safe import datetime
+from guardian.shortcuts import assign_perm
 
 from apps.gmapi.maps import Geocoder
 from apps.events.models import Event
@@ -69,8 +71,14 @@ class Team(models.Model):
             self.lat, self.lng = results[0]['geometry']['location']['arg']
         except:
             pass
+
+        super(Team, self).save(*args, **kwargs)
+        privileged, created = Group.objects.get_or_create(name=self.slug + "_privileged")
+        privileged.save()
+        privileged.user_set = self.privileged()
+        privileged.save()
+        assign_perm('change_team', privileged, self)
         if not self.pk:
-            super(Team, self).save(*args, **kwargs)
             a = Event.objects.create(
                 name=str(self.slug + " recruitment"),
                 scope="local",
@@ -80,8 +88,6 @@ class Team(models.Model):
             )
             a.save()
             a.organizing_committee = [self]
-        else:
-            super(Team, self).save(*args, **kwargs)
 
     def __unicode__(self):
         if self.category not in ['jlc', 'lc', 'observer']:

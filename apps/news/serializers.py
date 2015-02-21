@@ -4,7 +4,7 @@ from apps.news.models import Entry, Membership
 from eestecnet.fields import HyperlinkedSorlImageField
 
 
-class MembershipSerializer(serializers.HyperlinkedModelSerializer):
+class MembershipSerializer(serializers.ModelSerializer):
     class Meta:
         model = Membership
 
