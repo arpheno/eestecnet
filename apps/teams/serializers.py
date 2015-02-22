@@ -6,7 +6,18 @@ from apps.teams.models import Team
 from eestecnet.fields import HyperlinkedSorlImageField
 
 
-class CitySerializer(serializers.HyperlinkedModelSerializer):
+class CityListSerializer(serializers.HyperlinkedModelSerializer):
+    thumbnail = HyperlinkedSorlImageField(
+        dimensions="200x200",
+        options={'crop': 'center'}
+    )
+
+    class Meta:
+        model = Team
+        fields = ('thumbnail', 'name')
+
+
+class CityDetailSerializer(serializers.HyperlinkedModelSerializer):
     users = PersonSerializer(
         many=True,
         read_only=True,

@@ -3,7 +3,7 @@ from rest_framework import serializers
 from apps.account.serializers import PersonSerializer, PersonParticipationSerializer
 from apps.events.models import Event, Participation, Transportation, Application
 from apps.feedback.serializers import AnswerSetSerializer
-from apps.teams.serializers import CitySerializer
+from apps.teams.serializers import CityListSerializer
 from eestecnet.fields import HyperlinkedSorlImageField
 
 
@@ -48,7 +48,7 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
     )
     participants = PersonSerializer(many=True, read_only=True, )
     organizers = PersonSerializer(many=True, read_only=True, )
-    organizing_committee = CitySerializer(many=True, read_only=True, )
+    organizing_committee = CityListSerializer(many=True, read_only=True, )
     thumbnail = HyperlinkedSorlImageField(dimensions="200x200",
                                           options={'crop': 'center'})
 

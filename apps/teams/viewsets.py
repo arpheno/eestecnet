@@ -6,7 +6,8 @@ from apps.events.serializers import OutgoingSerializer
 from apps.news.models import Membership
 from apps.news.serializers import MembershipSerializer
 from apps.teams.models import Team
-from apps.teams.serializers import CitySerializer
+from apps.teams.serializers import CityDetailSerializer
+from apps.teams.serializers import CityListSerializer
 from eestecnet import permissions
 from eestecnet.serializers import AdminMixin
 
@@ -20,9 +21,11 @@ class TeamMembers(AdminMixin, viewsets.ReadOnlyModelViewSet):
         return super(TeamMembers, self).list(request)
 class Cities(AdminMixin, viewsets.ReadOnlyModelViewSet):
     queryset = Team.objects.all()
-    serializer_class = CitySerializer
+    serializer_class = CityDetailSerializer
 
-
+    def list(self, request, *args, **kwargs):
+        self.serializer_class = CityListSerializer
+        return super(Cities, self).list(request)
 class Outgoing(viewsets.ReadOnlyModelViewSet):
     queryset = Application.objects.all()
     serializer_class = OutgoingSerializer
