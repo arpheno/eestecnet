@@ -2,8 +2,8 @@ from rest_framework import viewsets
 from rest_framework.filters import DjangoObjectPermissionsFilter
 
 from apps.events.models import Event, Application, Participation
-from apps.events.serializers import EventSerializer, ApplicationSerializer, \
-    ParticipationSerializer
+from apps.events.serializers import EventSerializer, ParticipationSerializer, \
+    IncomingSerializer
 from eestecnet import permissions
 from eestecnet.serializers import AdminMixin
 
@@ -19,9 +19,9 @@ class Participants(viewsets.ReadOnlyModelViewSet):
 
 class Incoming(viewsets.ReadOnlyModelViewSet):
     queryset = Application.objects.all()
-    filter_backends = (DjangoObjectPermissionsFilter,)
-    permission_classes = (permissions.CustomObjectPermissions,)
-    serializer_class = ApplicationSerializer
+    filter_backends = [DjangoObjectPermissionsFilter]
+    permission_classes = [permissions.CustomObjectPermissions]
+    serializer_class = IncomingSerializer
 
     def list(self, request, event_pk=None):
         self.queryset = self.queryset.filter(target__pk=event_pk)

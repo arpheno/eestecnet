@@ -12,14 +12,27 @@ class TransportationSerializer(serializers.HyperlinkedModelSerializer):
         model = Transportation
 
 
-class ApplicationSerializer(serializers.ModelSerializer):
+class IncomingSerializer(serializers.ModelSerializer):
     applicant = PersonSerializer(read_only=True)
     questionaire = AnswerSetSerializer(read_only=True)
-    transportation = TransportationSerializer(read_only=True)
+    class Meta:
+        model = Application
+
+
+class ApplicationSerializer(serializers.ModelSerializer):
+    applicant = PersonSerializer(read_only=True)
+    questionaire = AnswerSetSerializer()
 
     class Meta:
         model = Application
 
+
+class OutgoingSerializer(serializers.ModelSerializer):
+    applicant = PersonSerializer(read_only=True)
+
+    class Meta:
+        model = Application
+        fields = ('applicant', 'target', 'priority')
 
 class ParticipationSerializer(serializers.HyperlinkedModelSerializer):
     participant = PersonParticipationSerializer(read_only=True, )

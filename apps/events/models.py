@@ -96,6 +96,7 @@ class Event(models.Model):
     feedbacksheet = ForeignKey('feedback.QuestionSet', null=True, blank=True,related_name="events")
     questionaire = models.ForeignKey('feedback.QuestionSet',blank=True,null=True,related_name="eventstwo",help_text="Optional: If you want your participants to answer more questions other than writing about their motivation, you can include it here")
     class Meta:
+        permissions = (('view_event', 'Can view event'),)
         verbose_name = "Event"
         ordering = ('name',)
         verbose_name_plural = "Events"
@@ -151,6 +152,7 @@ class Event(models.Model):
 
 class Participation(models.Model):
     class Meta:
+        permissions = (('view_participation', 'Can view Participation'),)
         verbose_name = "Participant"
         verbose_name_plural = "Participants"
 
@@ -177,6 +179,8 @@ class Participation(models.Model):
 
 
 class Transportation(models.Model):
+    class Meta:
+        permissions = (('view_transportation', 'Can view Transportation'),)
     arrival = models.DateTimeField()
     arrive_by = models.CharField(max_length=20, choices=[('plane', 'Plane'),
                                                          ('bus', 'Bus'),
@@ -201,8 +205,8 @@ class Transportation(models.Model):
 class Application(models.Model):
     """Application objects link Users to :class:`Event` objects and provide additional
     information"""
-
     class Meta:
+        permissions = (('view_application', 'Can view Application'),)
         unique_together = (('applicant', 'target'),)
 
     applicant = models.ForeignKey('account.Eestecer')

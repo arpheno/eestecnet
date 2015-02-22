@@ -17,6 +17,15 @@ class PersonParticipationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Eestecer
         exclude = ('email', 'password')
+
+
+class PrivateSerializer(serializers.HyperlinkedModelSerializer):
+    thumbnail = HyperlinkedSorlImageField(dimensions="200x200",
+                                          options={'crop': 'center'})
+
+    class Meta:
+        model = Eestecer
+        exclude = ('password')
 class PersonSerializer(serializers.HyperlinkedModelSerializer):
     thumbnail = HyperlinkedSorlImageField(dimensions="200x200",
                                           options={'crop': 'center'})

@@ -178,6 +178,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
 
 
     class Meta:
+        permissions = (('view_eestecer', 'Can view Eestecer'),)
         verbose_name = _('user')
         verbose_name_plural = _('users')
         unique_together = (('first_name', 'middle_name', 'last_name'),)
@@ -233,11 +234,15 @@ class Position(models.Model):
     name = models.CharField(max_length=60, unique=True)
     description = models.TextField()
 
+    class Meta:
+        permissions = (('view_position', 'Can view position'),)
     def __unicode__(self):
         return self.name
 
 
 class Achievement(models.Model):
+    class Meta:
+        permissions = (('view_achievement', 'Can view achievement'),)
     person = models.ForeignKey(Eestecer, related_name='achievements')
     position = models.ForeignKey(Position)
     member = models.ForeignKey('teams.Team', blank=True, null=True)

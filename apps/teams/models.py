@@ -25,6 +25,9 @@ class Team(models.Model):
     """ When Members are created first, a local event called Recruitment is automatically
      created. By applying to event, registered users can become part of one or more
      teams."""
+
+    class Meta:
+        permissions = (('view_team', 'Can view team'),)
     # General
     name = models.CharField(max_length=50, unique=True)
     thumbnail = models.ImageField(blank=True, null=True, upload_to="memberthumbs")
@@ -111,6 +114,8 @@ class Team(models.Model):
 
 
 class Board(models.Model):
+    class Meta:
+        permissions = (('view_board', 'Can view board'),)
     year = models.PositiveIntegerField()
     treasurer = models.OneToOneField("account.Eestecer",
                                      related_name="treasurer_in_board",
@@ -128,6 +133,9 @@ class Board(models.Model):
 class MemberImage(models.Model):
     """ Helper class used to associate an arbitrary number of images with a
     :class:`Member` """
+
+    class Meta:
+        permissions = (('view_memberimage', 'Can view memberimage'),)
 
     property = models.ForeignKey(Team, related_name='images')
     image = models.ImageField(upload_to="memberimages")

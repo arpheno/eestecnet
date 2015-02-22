@@ -9,6 +9,7 @@ class Membership(models.Model):
     information"""
 
     class Meta:
+        permissions = (('view_membership', 'Can view membership'),)
         unique_together = (('user', 'team'),)
 
     user = models.ForeignKey('account.Eestecer')
@@ -45,6 +46,7 @@ class EntryManager(models.Manager):
 
 class Entry(models.Model):
     class Meta:
+        permissions = (('view_entry', 'Can view entry'),)
         verbose_name_plural = "entries"
 
     name = models.CharField(max_length=50, unique=True)
