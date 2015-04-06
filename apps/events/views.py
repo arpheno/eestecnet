@@ -27,6 +27,7 @@ from apps.events.models import Event, Application, Participation
 from apps.teams.forms import ApplicationInline, ParticipationInline
 from apps.teams.models import Team
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -156,7 +157,8 @@ class InternationalEvents(AdminOptions, Grids, ListView):
         for event in events:
             if event.deadline and event.deadline > timezone.now():
                 eventlist['active_list'].append(event)
-            if event.deadline and event.deadline < timezone.now() and event.end_date > \
+            if event.deadline and event.end_date and event.deadline < timezone.now() \
+                    and event.end_date > \
                     timezone.now().date():
                 eventlist['pending_list'].append(event)
             if event.deadline and event.end_date and event.end_date < timezone.now(
