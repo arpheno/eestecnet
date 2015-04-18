@@ -171,6 +171,7 @@ class Participation(models.Model):
         if not self.pk:
             if self.target.feedbacksheet:
                 self.feedback = create_answer_set(self.feedbacksheet)
+        assign_perm('feedback.change_answerset', self.participant, self.feedback)
         return super(Participation, self).save(force_insert, force_update, using,
                                                update_fields)
 
@@ -257,7 +258,6 @@ class Application(models.Model):
                 )
                 membership.save()
                 self.delete()
-
             else:
                 super(Application, self).save()
         else:
@@ -298,6 +298,12 @@ class Application(models.Model):
 
                 self.delete()
             else:
+                # careful, this is currentlly not being done for appplications to
+                # commitments
+                assign_perm(
+                    'feedback.change_answerset',
+                    self.applicant,
+                    self.questionaire)
                 super(Application, self).save()
 
 

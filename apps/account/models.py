@@ -1,3 +1,6 @@
+import logging
+from urllib2 import URLError
+
 from autoslug import AutoSlugField
 from django.db import models
 from django.template.loader import render_to_string
@@ -9,6 +12,8 @@ from django.contrib.auth.models import (
 
 from apps.teams.models import Team
 
+
+logger = logging.getLogger(__name__)
 
 class EestecerManager(BaseUserManager):
     """ A manager taking care of creating :class:`Eestecer` objects. """
@@ -227,8 +232,10 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
         req = urllib2.Request(url + u'?' + data)
         opener = urllib2.build_opener()
         opener.addheaders = [('User-agent', 'Mozilla/5.0')]
-        response = opener.open(url+'?'+data)
-
+        try:
+            response = opener.open(url + '?' + data)
+        except URLError:
+            logger.info("Forum update failed. Check your internet connection.")
 
 class Position(models.Model):
     name = models.CharField(max_length=60, unique=True)

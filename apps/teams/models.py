@@ -1,3 +1,5 @@
+import logging
+
 from autoslug import AutoSlugField
 from autoslug.utils import slugify
 from django.contrib.auth.models import Group
@@ -11,6 +13,7 @@ from apps.gmapi.maps import Geocoder
 from apps.events.models import Event
 
 
+logger = logging.getLogger(__name__)
 TYPE_CHOICES = (
     ('body', 'Body'),
     ('team', 'International Team'),
@@ -73,15 +76,17 @@ class Team(models.Model):
             results, status_code = geocoder.geocode({'address': self.name})
             self.lat, self.lng = results[0]['geometry']['location']['arg']
         except:
-            pass
+            logger.info("Geographical lookup failed for " + self.slug)
+        if not self.pk:
+            created = True
 
         super(Team, self).save(*args, **kwargs)
         privileged, created = Group.objects.get_or_create(name=self.slug + "_privileged")
         privileged.save()
         privileged.user_set = self.privileged()
         privileged.save()
-        assign_perm('change_team', privileged, self)
-        if not self.pk:
+        assign_perm('teams.change_team', privileged, self)
+        if created:
             a = Event.objects.create(
                 name=str(self.slug + " recruitment"),
                 scope="local",
