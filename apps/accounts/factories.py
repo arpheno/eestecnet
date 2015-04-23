@@ -19,4 +19,4 @@ class AccountFactory(factory.DjangoModelFactory):
     middle_name = "Matteusz"
     last_name = "Knüppel"
     second_last_name = "Goméz"
-    email = "anon@email.com"
+    email = factory.sequence(lambda x: "a@b.de" + str(x))

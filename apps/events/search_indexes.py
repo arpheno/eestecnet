@@ -1,4 +1,4 @@
-from apps.events.models import Event
+from apps.events.models import BaseEvent
 
 __author__ = 'Arphen'
 import logging
@@ -15,4 +15,4 @@ class EventIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
 
     def get_model(self):
-        return Event
+        return BaseEvent

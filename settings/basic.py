@@ -1,5 +1,5 @@
 WSGI_APPLICATION = 'common.wsgi.application'
-# AUTH_USER_MODEL = 'accounts.Eestecer'
+AUTH_USER_MODEL = 'accounts.Account'
 ROOT_URLCONF = 'common.urls'
 VERSION = 1
 from conf.apps import *

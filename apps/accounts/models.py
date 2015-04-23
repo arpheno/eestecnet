@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User, AbstractBaseUser
+from django.contrib.auth.models import User, AbstractBaseUser, AbstractUser, \
+    PermissionsMixin
 from django.db.models import EmailField, CharField
 
 __author__ = 'Arphen'
@@ -8,9 +9,9 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Create your models here.
-class Account(AbstractBaseUser):
+class Account(PermissionsMixin, AbstractBaseUser):
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['email']
+    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     def get_short_name(self):
         return self.first_name
@@ -22,5 +23,5 @@ class Account(AbstractBaseUser):
     middle_name = CharField(max_length=30, blank=True, null=True)
     last_name = CharField(max_length=40)
     second_last_name = CharField(max_length=40, blank=True, null=True)
-    email = EmailField()
+    email = EmailField(unique=True)
 
