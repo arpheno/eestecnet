@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+import factory
+
+from apps.accounts.models import Account
+
+
 __author__ = 'Arphen'
 import logging
 
@@ -5,5 +11,12 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class AccountFactory:
-    pass
+class AccountFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = Account
+
+    first_name = "Łukasz"
+    middle_name = "Matteusz"
+    last_name = "Knüppel"
+    second_last_name = "Goméz"
+    email = "anon@email.com"

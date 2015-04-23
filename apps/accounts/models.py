@@ -19,8 +19,8 @@ class Account(AbstractBaseUser):
         return self.last_name
 
     first_name = CharField(max_length=30)
-    middle_name = CharField(max_length=30)
+    middle_name = CharField(max_length=30, blank=True, null=True)
     last_name = CharField(max_length=40)
-    second_last_name = CharField(max_length=40)
+    second_last_name = CharField(max_length=40, blank=True, null=True)
     email = EmailField()
 
