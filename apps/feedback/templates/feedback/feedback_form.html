@@ -1,9 +1,0 @@
-{% extends 'forms/dialog_form_with_inlines.html' %}
-{% block formfields %}
-    {% for field in inform.visible_fields %}
-        <td>
-            {{ field.errors }}
-            {{ field }}
-        </td>
-    {% endfor %}
-{% endblock %}

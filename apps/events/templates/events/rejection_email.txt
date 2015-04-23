@@ -1,9 +1,0 @@
-Dear {{ user }}
-
-Unfortunately you have not been selected as a participant.
-
-We regret to inform you that you will not be part of this event, but thank you for your application and whish you all the best for your next applications.
-
-Thank you,
-Best Regards
-

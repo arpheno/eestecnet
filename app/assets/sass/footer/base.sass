@@ -1,0 +1,15 @@
+body > footer
+  @media only screen and (max-width: 45em)
+    @extend ._flex_center
+  @extend ._flex_between
+  background-color: $eestec-grey-0
+  color: white
+  +white_links
+  font-family: $centurygothic
+  a
+    cursor: pointer
+  > div
+    @extend ._flex_around
+@import "assets/sass/footer/sponsors"
+@import "assets/sass/footer/navigation"
+@import "assets/sass/footer/social"

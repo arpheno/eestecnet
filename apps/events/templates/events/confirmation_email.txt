@@ -1,8 +1,0 @@
-Dear {{ user }}
-
-You have been accepted as a participant!
-Please visit https://eestec.net{% url 'eventconfirmation' slug %} to confirm your participation to the event
-Fill out your transport information on the website as soon as possible, complete your user profile so the Organizing Committee has all your data.
-
-Thank you.
-

@@ -10,3 +10,9 @@ media
 serve
 whoosh_index
 static/doc
+!.gitkeep
+node_modules/
+bower_components/
+tmp
+.DS_Store
+app/jspm_packages

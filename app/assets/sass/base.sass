@@ -1,0 +1,69 @@
+@import "assets/sass/overrides/base"
+@import "assets/sass/flex/base"
+@import "assets/sass/definitions"
+@import "assets/sass/prototypes/article"
+@import "assets/sass/prototypes/buttons"
+@import "assets/sass/prototypes/datetimepicker"
+@import "assets/sass/main/base"
+@import "assets/sass/footer/base"
+@import "assets/sass/section/base"
+@import "assets/sass/header/base"
+@import "assets/sass/home/base"
+@import "assets/sass/specific/activities"
+@import "assets/sass/specific/eestecers"
+@import "assets/sass/specific/events"
+@import "assets/sass/specific/forms"
+@import "assets/sass/specific/history"
+@import "assets/sass/specific/members"
+@import "assets/sass/specific/news"
+@import "assets/sass/specific/people"
+@import "assets/sass/specific/static"
+@import "assets/sass/specific/stub"
+@import "assets/sass/specific/websitefeedback"
+@import "assets/sass/specific/wiki"
+@import "assets/sass/specific/governance"
+@font-face
+  font-family: "helvetica neue"
+  src: url("../../fonts/HelveticaNeueLTPro-Lt.otf")
+
+b, h1, h2, h3, h4, h5, h6
+  @extend ._flex_between
+  font-family: $centurygothic
+  align-items: center
+  font-size: 22px
+  padding: 1px 20px
+  border-bottom: 1px solid $eestec-red-3
+  margin: 3px
+  color: $eestec-red-3
+
+h1
+  font-size: 24px
+
+h2
+  font-size: 22px
+
+h3
+  font-size: 20px
+
+h4
+  font-size: 18px
+
+ul
+  list-style: none
+
+a
+  text-decoration: none
+
+body
+  @extend ._flex
+  align-items: stretch
+  max-width: 1280px
+  //1280px => max viewport
+  font-size: 16px
+  margin: 0px auto
+  //This centers the body element
+  background-image: url(../../img/bg.jpg)
+
+html
+  font-family: $helvetica
+@import "assets/sass/overrides/base"

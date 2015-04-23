@@ -1,28 +1,12 @@
-from django.conf.urls import patterns, url
-from django.contrib import admin
+from django.conf.urls import patterns
 
-from apps.teams.views import SelectBoard, ChangeDescription, \
-    ChangeDetails, ManageMembers, TeamImages, TeamApplications, OutgoingApplications, \
-    TeamDetail
+__author__ = 'Arphen'
+import logging
 
-
-admin.autodiscover()
-# Serializers define the API representation.
-
-# ViewSets define the view behavior.
-# Routers provide an easy way of automatically determining the URL conf.
-
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 urlpatterns = patterns(
     '',
-    url(r'^/(?P<slug>[-\w]+)/$', TeamDetail.as_view(), name='detail'),
-    url(r'^/(?P<slug>[-\w]+)/board/?$', SelectBoard.as_view(), name='board'),
-    url(r'^/(?P<slug>[-\w]+)/description/?$', ChangeDescription.as_view(),
-        name='description'),
-    url(r'(?P<slug>[-\w]+)/images/?$', TeamImages.as_view(), name='teamimages'),
-    url(r'(?P<slug>[-\w]+)/outgoing/?', OutgoingApplications.as_view(),
-        name='outgoing'),
-    url(r'(?P<slug>[-\w]+)/applications/?', TeamApplications.as_view(),
-        name='teamapplications'),
-    url(r'^/(?P<slug>[-\w]+)/members/?$', ManageMembers.as_view(), name='managemembers'),
-    url(r'^/(?P<slug>[-\w]+)/details/?$', ChangeDetails.as_view(), name='changedetails'),
-)
+    #url(r'^$', , name='home'),
+    )
+# Orphans

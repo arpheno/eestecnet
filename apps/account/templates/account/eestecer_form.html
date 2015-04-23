@@ -1,8 +1,0 @@
-{% extends 'base/prototypes/split.html' %}
-{% block main %}
-    <form id="userupdate" action="" enctype="multipart/form-data" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Update Information">
-    </form>
-{% endblock %}

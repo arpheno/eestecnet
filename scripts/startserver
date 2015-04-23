@@ -1,7 +1,0 @@
-source /var/www/unstable/bin/activate
-cd eestecnet
-gunicorn --env DJANGO_SETTINGS_MODULE=eestecnet.settings.deployment --settings eestecnet.settings.deployment eestecnet.wsgi -b -1.0.0.0:8003 -p ../unstable.pid -D
-~
-~
-~
-~

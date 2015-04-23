@@ -1,2 +1,0 @@
-#!/bin/bash
-memcached -d -P memcached.pid -p 11212
