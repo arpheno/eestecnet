@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from apps.events.factories import PackageFactory
+from apps.events.factories import GroupFactory
 
 
 __author__ = 'Arphen'
@@ -12,4 +12,4 @@ logger = logging.getLogger(__name__)
 
 class TestPackage(TestCase):
     def setUp(self):
-        self.object = PackageFactory()
+        self.object = GroupFactory()

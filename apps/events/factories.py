@@ -41,31 +41,44 @@ class TrainingFactory(BaseEventFactory):
 
 class ParticipationFactory(factory.DjangoModelFactory):
     class Meta:
-        model = 'events.Participation'
+        model = 'common.Participation'
 
     user = factory.SubFactory('apps.accounts.factories.AccountFactory')
-    package = factory.SubFactory('apps.events.factories.PackageFactory')
+    group = factory.SubFactory('apps.events.factories.GroupFactory')
 
 
-class PackageFactory(factory.DjangoModelFactory):
+class WorkshopParticipationFactory(factory.DjangoModelFactory):
     class Meta:
-        model = 'events.Package'
+        model = 'common.Participation'
+
+    group = factory.SubFactory('apps.events.factories.WorkshopPackageFactory')
+    user = factory.SubFactory('apps.accounts.factories.AccountFactory')
+
+
+class GroupFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = 'common.Group'
 
     name = "Wtf"
-    event = factory.SubFactory('apps.events.factories.BaseEventFactory')
-
+    applicable = factory.SubFactory('apps.events.factories.BaseEventFactory')
     @factory.post_generation
     def create_participations(self, bla, blabla):
         return
         for i in range(5):
-            ParticipationFactory(package=self)
+            ParticipationFactory(group=self)
 
+
+class WorkshopPackageFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = 'common.Group'
+
+    applicable = factory.SubFactory('apps.events.factories.WorkshopFactory')
 
 class QuestionnaireFactory(factory.DjangoModelFactory):
     class Meta:
-        model = 'events.Questionnaire'
+        model = 'common.Questionnaire'
 
-    package = factory.SubFactory('apps.events.factories.PackageFactory')
+    group = factory.SubFactory('apps.events.factories.GroupFactory')
     question_one = factory.RelatedFactory('apps.events.factories.QuestionFactory',
                                           'questionnaire')
     question_two = factory.RelatedFactory('apps.events.factories.QuestionFactory',
@@ -74,7 +87,7 @@ class QuestionnaireFactory(factory.DjangoModelFactory):
 
 class QuestionFactory(factory.DjangoModelFactory):
     class Meta:
-        model = 'events.Question'
+        model = 'common.Question'
 
     questionnaire = factory.SubFactory('apps.events.factories.QuestionnaireFactory')
     question = "You talking to me?"

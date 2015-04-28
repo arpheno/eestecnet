@@ -1,8 +1,12 @@
-from django.contrib.auth.models import User, Group
-from django.db import models
-from django.db.models import BooleanField, ForeignKey, CharField, TextField
+from django.contrib.auth.models import User, Permission
+
+from django.contrib.contenttypes.models import ContentType
+from guardian.shortcuts import assign_perm
+from polymorphic import PolymorphicModel
 
 from apps.accounts.models import Account
+
+from common.models import Applicable
 
 
 __author__ = 'Arphen'
@@ -12,9 +16,21 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Create your models here.
-class BaseEvent(models.Model):
+class BaseEvent(Applicable):
     """ Model that stores basic information common to all events."""
-    name = CharField(max_length=50)
+
+    @property
+    def organizers(self):
+        result, created = self.packages.get_or_create(name=self.name + '_Organizers')
+        if created:
+            label = self._meta.object_name
+            assign_perm('change_' + label.lower(), result, self)
+        return result
+
+    @property
+    def officials(self):
+        result, created = self.packages.get_or_create(name=self.name + '_Officials')
+        return result
 
     def save(self, **kwargs):
         result = super(BaseEvent, self).save(**kwargs)
@@ -36,42 +52,5 @@ class Training(BaseEvent):
     pass
 
 
-class Package(Group):
-    """ Events can have different packages, which can contain participants. """
-    event = ForeignKey('events.BaseEvent', related_name='packages')
-    users = models.ManyToManyField('accounts.Account', through='events.Participation')
 
-    def save(self, **kwargs):
-        # Make sure the name is unique before saving
-        self.name = self.event.name + "_" + self.name
-        result = super(Package, self).save(**kwargs)
-
-        # Make sure all users are in the group, put after super in case we create an
-        # object.
-        self.user_set = self.users.all()
-        return result
-
-
-class Participation(models.Model):
-    """ Participations hold information about the application, the transport,
-    and feedback when attending an event."""
-    user = ForeignKey('accounts.Account')
-    package = ForeignKey('events.Package')
-    accepted = BooleanField(default=False)
-    confirmed = BooleanField(default=False)
-
-    def save(self, **kwargs):
-        super(Participation, self).save(**kwargs)
-
-
-class Questionnaire(models.Model):
-    """ Questionnaires store information about Questions that Event organizers would like
-    to ask their (potential) participants. """
-    package = ForeignKey('events.Package')
-
-
-class Question(models.Model):
-    """ Questions appear as atoms in Questionnaires """
-    questionnaire = ForeignKey('events.Questionnaire')
-    question = TextField()
 
