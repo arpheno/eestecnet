@@ -19,7 +19,6 @@ class TestBaseEvent(TestCase, RESTCase):
 
     def test_organizers_can_modify_event(self):
         p = ParticipationFactory(group=self.object.organizers)
-        self.assertEqual(len(self.object.organizers.users.all()), 1)
         self.assertTrue(p.user.has_perm('change_baseevent', self.object))
 
     def test_list_events(self):

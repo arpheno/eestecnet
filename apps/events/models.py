@@ -1,11 +1,11 @@
 from django.contrib.auth.models import User, Permission
-
 from django.contrib.contenttypes.models import ContentType
+from django.db import models
+from django.db.models import ForeignKey, TextField
 from guardian.shortcuts import assign_perm
 from polymorphic import PolymorphicModel
 
 from apps.accounts.models import Account
-
 from common.models import Applicable
 
 
@@ -21,7 +21,7 @@ class BaseEvent(Applicable):
 
     @property
     def organizers(self):
-        result, created = self.packages.get_or_create(name=self.name + '_Organizers')
+        result, created = self.packages.get_or_create(name=self.name + '_organizers')
         if created:
             label = self._meta.object_name
             assign_perm('change_' + label.lower(), result, self)
@@ -29,7 +29,7 @@ class BaseEvent(Applicable):
 
     @property
     def officials(self):
-        result, created = self.packages.get_or_create(name=self.name + '_Officials')
+        result, created = self.packages.get_or_create(name=self.name + '_officials')
         return result
 
     def save(self, **kwargs):
@@ -52,5 +52,13 @@ class Training(BaseEvent):
     pass
 
 
+class Questionnaire(models.Model):
+    """ Questionnaires store information about Questions that Event organizers would like
+    to ask their (potential) participants. """
+    group = ForeignKey('accounts.Group')
 
 
+class Question(models.Model):
+    """ Questions appear as atoms in Questionnaires """
+    questionnaire = ForeignKey('events.Questionnaire')
+    question = TextField()

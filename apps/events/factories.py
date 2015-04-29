@@ -41,7 +41,7 @@ class TrainingFactory(BaseEventFactory):
 
 class ParticipationFactory(factory.DjangoModelFactory):
     class Meta:
-        model = 'common.Participation'
+        model = 'accounts.Participation'
 
     user = factory.SubFactory('apps.accounts.factories.AccountFactory')
     group = factory.SubFactory('apps.events.factories.GroupFactory')
@@ -49,7 +49,7 @@ class ParticipationFactory(factory.DjangoModelFactory):
 
 class WorkshopParticipationFactory(factory.DjangoModelFactory):
     class Meta:
-        model = 'common.Participation'
+        model = 'accounts.Participation'
 
     group = factory.SubFactory('apps.events.factories.WorkshopPackageFactory')
     user = factory.SubFactory('apps.accounts.factories.AccountFactory')
@@ -57,7 +57,7 @@ class WorkshopParticipationFactory(factory.DjangoModelFactory):
 
 class GroupFactory(factory.DjangoModelFactory):
     class Meta:
-        model = 'common.Group'
+        model = 'accounts.Group'
 
     name = "Wtf"
     applicable = factory.SubFactory('apps.events.factories.BaseEventFactory')
@@ -70,13 +70,13 @@ class GroupFactory(factory.DjangoModelFactory):
 
 class WorkshopPackageFactory(factory.DjangoModelFactory):
     class Meta:
-        model = 'common.Group'
+        model = 'accounts.Group'
 
     applicable = factory.SubFactory('apps.events.factories.WorkshopFactory')
 
 class QuestionnaireFactory(factory.DjangoModelFactory):
     class Meta:
-        model = 'common.Questionnaire'
+        model = 'events.Questionnaire'
 
     group = factory.SubFactory('apps.events.factories.GroupFactory')
     question_one = factory.RelatedFactory('apps.events.factories.QuestionFactory',
@@ -87,7 +87,7 @@ class QuestionnaireFactory(factory.DjangoModelFactory):
 
 class QuestionFactory(factory.DjangoModelFactory):
     class Meta:
-        model = 'common.Question'
+        model = 'events.Question'
 
     questionnaire = factory.SubFactory('apps.events.factories.QuestionnaireFactory')
     question = "You talking to me?"

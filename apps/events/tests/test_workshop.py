@@ -1,5 +1,7 @@
 from unittest import TestCase
 
+from guardian.shortcuts import get_perms
+
 from apps.events.factories import WorkshopFactory, WorkshopParticipationFactory
 
 
@@ -16,5 +18,5 @@ class TestWorkshop(TestCase):
 
     def test_organizers_can_modify_event(self):
         p = WorkshopParticipationFactory(group=self.object.organizers)
-        self.assertEqual(len(self.object.organizers.users.all()), 1)
+        print get_perms(p.user, self.object)
         self.assertTrue(p.user.has_perm('change_workshop', self.object))

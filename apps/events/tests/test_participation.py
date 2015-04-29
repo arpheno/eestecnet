@@ -13,3 +13,6 @@ logger = logging.getLogger(__name__)
 class TestParticipation(TestCase):
     def setUp(self):
         self.object = ParticipationFactory()
+
+    def test_participation_has_package(self):
+        print self.object.package.test
