@@ -8,6 +8,7 @@ from django.conf import settings
 
 
 class Migration(migrations.Migration):
+
     dependencies = [
         ('auth', '0006_require_contenttypes_0002'),
         ('accounts', '0001_initial'),
@@ -24,11 +25,7 @@ class Migration(migrations.Migration):
                 ('last_login',
                  models.DateTimeField(null=True, verbose_name='last login', blank=True)),
                 ('is_superuser', models.BooleanField(default=False,
-                                                     help_text='Designates that this '
-                                                               'user has all '
-                                                               'permissions without '
-                                                               'explicitly assigning '
-                                                               'them.',
+                                                     help_text='Designates that this user has all permissions without explicitly assigning them.',
                                                      verbose_name='superuser status')),
                 ('first_name', models.CharField(max_length=30)),
                 ('middle_name', models.CharField(max_length=30, null=True, blank=True)),

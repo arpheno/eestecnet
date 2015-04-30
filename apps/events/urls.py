@@ -1,12 +1,16 @@
-from django.conf.urls import patterns
+from rest_framework_nested import routers
+
+from apps.events.views import EventViewSet, PackageViewSet
+
 
 __author__ = 'Arphen'
 import logging
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
-urlpatterns = patterns(
-    '',
-    #url(r'^$', , name='home'),
-    )
-# Orphans
+
+eventrouter = routers.SimpleRouter()
+eventrouter.register(r'events', EventViewSet)
+
+package_router = routers.NestedSimpleRouter(eventrouter, r'events', lookup='event')
+package_router.register(r'packages', PackageViewSet)

@@ -30,22 +30,6 @@ class Group(auth.models.Group):
         verbose_name_plural = _('groups')
 
 
-class Participation(models.Model):
-    """ Participations hold information about the application, the transport,
-    and feedback when attending an event."""
-    user = ForeignKey('accounts.Account')
-    group = ForeignKey('auth.Group')
-    accepted = BooleanField(default=False)
-    confirmed = BooleanField(default=False)
-
-    @property
-    def package(self):
-        return Group.objects.get(group_ptr_id=self.pk)
-
-
-    def save(self, **kwargs):
-        super(Participation, self).save(**kwargs)
-
 
 # Create your models here.
 class Account(GuardianUserMixin, AbstractBaseUser):
@@ -135,4 +119,22 @@ class Account(GuardianUserMixin, AbstractBaseUser):
     last_name = CharField(max_length=40)
     second_last_name = CharField(max_length=40, blank=True, null=True)
     email = EmailField(unique=True)
+
+
+class Participation(models.Model):
+    """ Participations hold information about the application, the transport,
+    and feedback when attending an event."""
+    user = ForeignKey(Account)
+    group = ForeignKey('auth.Group')
+    accepted = BooleanField(default=False)
+    confirmed = BooleanField(default=False)
+
+    @property
+    def package(self):
+        return Group.objects.get(group_ptr_id=self.pk)
+
+
+    def save(self, **kwargs):
+        super(Participation, self).save(**kwargs)
+
 

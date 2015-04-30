@@ -7,7 +7,7 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
     dependencies = [
         ('accounts', '0002_account_group_participation'),
-        ('common', '0002_applicable_managable'),
+        ('common', '0002_auto_20150430_1517'),
         ('auth', '0006_require_contenttypes_0002'),
     ]
 
