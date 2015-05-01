@@ -2,6 +2,7 @@ from django.contrib import auth
 from django.contrib.auth.models import User, AbstractBaseUser, AbstractUser, \
     PermissionsMixin, Permission, _user_get_all_permissions, _user_has_perm, \
     _user_has_module_perms, GroupManager
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import EmailField, CharField, BooleanField, ManyToManyField, \
     ForeignKey
@@ -24,7 +25,8 @@ class Group(auth.models.Group):
     applicable = ForeignKey('common.Applicable', related_name='packages')
     objects = GroupManager()
     test = CharField(default="LOL", max_length=100)
-
+    def get_absolute_url(self):
+        return reverse('group-detail',kwargs={'pk': self.pk})
     class Meta:
         verbose_name = _('group')
         verbose_name_plural = _('groups')
@@ -119,6 +121,8 @@ class Account(GuardianUserMixin, AbstractBaseUser):
     last_name = CharField(max_length=40)
     second_last_name = CharField(max_length=40, blank=True, null=True)
     email = EmailField(unique=True)
+    def get_absolute_url(self):
+        return reverse('account-detail',kwargs={'pk': self.pk})
 
 
 class Participation(models.Model):
@@ -131,10 +135,11 @@ class Participation(models.Model):
 
     @property
     def package(self):
-        return Group.objects.get(group_ptr_id=self.pk)
+        return Group.objects.get(group_ptr_id=self.group.pk)
 
 
     def save(self, **kwargs):
         super(Participation, self).save(**kwargs)
-
+    def get_absolute_url(self):
+        return reverse('participation-detail',kwargs={'pk':self.pk,'group_pk':self.group.pk})
 

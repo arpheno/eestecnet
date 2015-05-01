@@ -28,5 +28,7 @@ class Applicable(Confirmable):
     Basic model that can have groups of users and accepts applications to those groups.
     """
     name = CharField(max_length=50)
+    def get_absolute_url(self):
+        raise NotImplementedError("Child classes have to overwrite get_absolute_url")
 
 

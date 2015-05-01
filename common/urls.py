@@ -2,6 +2,9 @@ from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.views.generic import RedirectView, TemplateView
+from apps.accounts.urls import grouprouter, group_participationrouter
+from apps.accounts.urls import group_accountrouter
+from apps.accounts.urls import accountrouter
 
 from apps.events.urls import eventrouter, package_router
 from settings.conf.media import MEDIA_ROOT
@@ -14,6 +17,10 @@ urlpatterns = patterns(
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
     url(r'^api/', include(eventrouter.urls)),
     url(r'^api/', include(package_router.urls)),
+    url(r'^api/', include(grouprouter.urls)),
+    url(r'^api/', include(group_accountrouter.urls)),
+    url(r'^api/', include(group_participationrouter.urls)),
+    url(r'^api/', include(accountrouter.urls)),
 )
 # Orphans
 urlpatterns += patterns(

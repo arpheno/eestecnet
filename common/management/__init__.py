@@ -1,9 +1,10 @@
+from django.db.models.signals import post_migrate
+
 __author__ = 'Arphen'
 import logging
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
-from django.db.models.signals import post_syncdb
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import Permission
 
@@ -24,7 +25,6 @@ def add_view_permissions(sender, **kwargs):
             Permission.objects.create(content_type=content_type,
                                       codename=codename,
                                       name="Can view %s" % content_type.name)
-            print "Added view permission for %s" % content_type.name
 
 # check for all our view permissions after a syncdb
-post_syncdb.connect(add_view_permissions)
+post_migrate.connect(add_view_permissions)

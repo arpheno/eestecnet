@@ -17,14 +17,17 @@ class EventViewSet(ModelViewSet):
     serializer_class = EventSerializer
 
 
-class PackageViewSet(ModelViewSet):
+class GroupViewSet(ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
     def list(self, request, event_pk=None):
         self.queryset = self.queryset.filter(applicable=event_pk)
-        return super(ModelViewSet, self).list(request)
+        return super(GroupViewSet, self).list(request)
 
     def retrieve(self, request, pk=None, event_pk=None):
-        self.object = self.queryset.get(pk=pk, applicable=event_pk)
-        return super(ModelViewSet, self).get(request)
+        if event_pk:
+            self.object = self.queryset.get(pk=pk, applicable=event_pk)
+        else:
+            self.object = self.queryset.get(pk=pk)
+        return super(GroupViewSet, self).retrieve(request)

@@ -58,12 +58,12 @@ class WorkshopParticipationFactory(factory.DjangoModelFactory):
 class GroupFactory(factory.DjangoModelFactory):
     class Meta:
         model = 'accounts.Group'
+        django_get_or_create = ('name',)
 
     name = "Wtf"
     applicable = factory.SubFactory('apps.events.factories.BaseEventFactory')
     @factory.post_generation
     def create_participations(self, bla, blabla):
-        return
         for i in range(5):
             ParticipationFactory(group=self)
 

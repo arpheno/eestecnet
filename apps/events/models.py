@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User, Permission
 from django.contrib.contenttypes.models import ContentType
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import ForeignKey, TextField
 from guardian.shortcuts import assign_perm
@@ -35,17 +36,17 @@ class BaseEvent(Applicable):
     def save(self, **kwargs):
         result = super(BaseEvent, self).save(**kwargs)
         return result
+    def get_absolute_url(self):
+        return reverse(self._meta.model_name+'-detail',kwargs= {'pk' :self.pk})
 
 
 class Workshop(BaseEvent):
     """ Workshops as defined in the ROP. """
     pass
 
-
 class Exchange(BaseEvent):
     """ Exchanges as defined in the ROP ."""
     pass
-
 
 class Training(BaseEvent):
     """ Training Sessions held by EESTEC Trainers ."""

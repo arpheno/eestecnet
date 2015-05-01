@@ -1,6 +1,5 @@
-from unittest import TestCase
-
-from django.test import Client
+from django.core.urlresolvers import reverse
+from django.test import Client, TestCase
 
 from apps.events.factories import GroupFactory
 from common.util import RESTCase
@@ -20,9 +19,7 @@ class TestGroup(TestCase, RESTCase):
         self.c = Client()
 
     def test_get_group_nested(self):
-        url = self.root + "/events/" + self.obj.applicable.pk + "/packages/"
+        url = reverse('group-detail',kwargs={'event_pk':self.obj.applicable.pk,'pk':self.obj.pk})
         self.assert_retrieve(url)
-        url = self.root + "/events/" + self.obj.applicable.pk + "/packages/" + \
-              self.obj.pk + "/"
-        self.assert_retrieve(url)
+        self.assert_retrieve(self.obj.get_absolute_url())
 

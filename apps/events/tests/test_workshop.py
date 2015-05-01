@@ -18,5 +18,4 @@ class TestWorkshop(TestCase):
 
     def test_organizers_can_modify_event(self):
         p = WorkshopParticipationFactory(group=self.object.organizers)
-        print get_perms(p.user, self.object)
         self.assertTrue(p.user.has_perm('change_workshop', self.object))

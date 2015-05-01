@@ -1,12 +1,23 @@
 from django.conf.urls import patterns
+from rest_framework.viewsets import ModelViewSet
+from rest_framework_nested.routers import SimpleRouter, NestedSimpleRouter
+from apps.accounts.views import  AccountViewSet, MembershipViewSet
+from apps.events.views import GroupViewSet
 
 __author__ = 'Arphen'
 import logging
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
-urlpatterns = patterns(
-    '',
-    # url(r'^$', , name='home'),
-)
-# Orphans
+
+grouprouter = SimpleRouter()
+grouprouter.register(r'groups', GroupViewSet)
+group_accountrouter = NestedSimpleRouter(grouprouter,r'groups',lookup ='group')
+group_accountrouter.register(r'members', AccountViewSet)
+group_participationrouter = NestedSimpleRouter(grouprouter,r'groups',lookup ='group')
+group_participationrouter.register(r'memberships', MembershipViewSet)
+
+
+accountrouter = SimpleRouter()
+accountrouter.register(r'accounts', AccountViewSet)
+
