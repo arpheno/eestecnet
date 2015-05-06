@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse_lazy
+
 from django.test import TestCase, Client
 
 from apps.accounts.factories import ParticipationFactory, AccountFactory
@@ -68,17 +69,17 @@ class TestParticipationConfirmation(TestCase):
         self.assertTrue(self.p.confirmable.confirmed)
 
 
-class TestExchange(TestCase):
+class TestExchange(RESTCase, TestCase):
     def setUp(self):
         self.object = ExchangeFactory()
 
 
-class TestTraining(TestCase):
+class TestTraining(RESTCase, TestCase):
     def setUp(self):
         self.object = TrainingFactory()
 
 
-class TestWorkshop(TestCase):
+class TestWorkshop(RESTCase, TestCase):
     def setUp(self):
         self.object = WorkshopFactory()
 

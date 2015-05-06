@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import factory
 
-from apps.teams.models import Commitment
+from apps.teams.models import Commitment, InternationalTeam
 
 
 __author__ = 'Sebastian Wozny'
@@ -18,4 +18,8 @@ class CommitmentFactory(factory.DjangoModelFactory):
     name = "Amsterdam"
 
 
+class InternationalTeamFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = InternationalTeam
 
+    name = "IT Team"

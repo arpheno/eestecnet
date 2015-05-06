@@ -24,9 +24,6 @@ class Confirmable(PolymorphicModel):
         to True and save. Classes derived from this class may implement on_confirm to
         run custom actions upon confirmation.
         """
-        print self.confirmation_set.all()
-        for confirmation in self.confirmation_set.all():
-            print confirmation.status
         if all(confirmation.status for confirmation in self.confirmation_set.all()):
             self.on_confirm()
             self.confirmed = True

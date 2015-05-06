@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from common.factories import ConfirmableFactory
+from common.factories import ConfirmableFactory, ConfirmationFactory
 
 
 __author__ = 'swozn'
@@ -20,4 +20,10 @@ class TestConfirmable(TestCase):
             c.status = True
             c.save()
         self.assertTrue(self.object.confirmed)
+
+
+class TestConfirmation(TestCase):
+    def setUp(self):
+        self.object = ConfirmationFactory()
+
 

@@ -1,6 +1,7 @@
 from django.test import TestCase
 
-from apps.questionnaires.factories import QuestionnaireFactory
+from apps.questionnaires.factories import QuestionnaireFactory, QuestionFactory
+from common.util import RESTCase
 
 
 __author__ = 'Sebastian Wozny'
@@ -10,6 +11,12 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class TestQuestionnaire(TestCase):
-    def test_create(self):
-        QuestionnaireFactory()
+class TestQuestionnaire(RESTCase, TestCase):
+    def setUp(self):
+        self.object = QuestionnaireFactory()
+
+
+class TestQuestion(RESTCase, TestCase):
+    def setUp(self):
+        self.object = QuestionFactory()
+
