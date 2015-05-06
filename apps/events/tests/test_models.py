@@ -2,9 +2,12 @@ from django.core.urlresolvers import reverse_lazy
 from django.test import TestCase, Client
 
 from apps.accounts.factories import ParticipationFactory, AccountFactory
-from apps.events.factories import BaseEventFactory
+
+from apps.events.factories import BaseEventFactory, ParticipationConfirmationFactory, \
+    ExchangeFactory, TrainingFactory, WorkshopFactory, WorkshopParticipationFactory
 from apps.prioritylists.models import PriorityList
 from apps.teams.factories import CommitmentFactory
+from common.models import Confirmable, Confirmation
 from common.util import RESTCase
 
 
@@ -43,3 +46,42 @@ class TestBaseEvent(TestCase, RESTCase):
         self.assertTrue(PriorityList.objects.get(event=p.package.applicable,
                                                  commitment=p.user.commitment))
 
+
+class TestParticipationConfirmation(TestCase):
+    def setUp(self):
+        self.p = ParticipationConfirmationFactory()
+
+    def test_polymorphic(self):
+        self.assertTrue(self.p in Confirmable.objects.all())
+        self.assertTrue(self.p in Confirmation.objects.all())
+
+    def test_accept_participant(self):
+        for c in self.p.confirmation_set.all():
+            c.confirm()
+        self.assertTrue(self.p.confirmed)
+
+    def test_confirm_participation(self):
+        for c in self.p.confirmation_set.all():
+            c.confirm()
+        self.assertTrue(self.p.confirmed)
+        self.p.confirm()
+        self.assertTrue(self.p.confirmable.confirmed)
+
+
+class TestExchange(TestCase):
+    def setUp(self):
+        self.object = ExchangeFactory()
+
+
+class TestTraining(TestCase):
+    def setUp(self):
+        self.object = TrainingFactory()
+
+
+class TestWorkshop(TestCase):
+    def setUp(self):
+        self.object = WorkshopFactory()
+
+    def test_organizers_can_modify_event(self):
+        p = WorkshopParticipationFactory(group=self.object.organizers)
+        self.assertTrue(p.user.has_perm('change_workshop', self.object))

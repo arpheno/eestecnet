@@ -11,9 +11,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class ConfirmableFactory(factory.DjangoModelFactory):
-    class Meta:
-        model = Confirmable
 
 
 class NotificationFactory(factory.DjangoModelFactory):
@@ -27,7 +24,7 @@ class ConfirmationFactory(NotificationFactory):
     class Meta:
         model = Confirmation
 
-    confirmable = factory.SubFactory(ConfirmableFactory)
+    confirmable = factory.SubFactory('common.factories.ConfirmableFactory')
 
 
 class ApplicableFactory(NotificationFactory):
@@ -36,4 +33,14 @@ class ApplicableFactory(NotificationFactory):
         django_get_or_create = ('name',)
 
     name = factory.sequence(lambda x: "applicable" + str(x))
+
+
+class ConfirmableFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = Confirmable
+
+    @factory.post_generation
+    def create_confirmations(self, bla, blabla):
+        for i in range(2):
+            ConfirmationFactory(confirmable=self)
 

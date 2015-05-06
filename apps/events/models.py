@@ -59,12 +59,15 @@ class Training(BaseEvent):
     pass
 
 
-class ParticipationConfirmation(Confirmation, Confirmable):
+class ParticipationConfirmation(Confirmable, Confirmation, object):
     """
     A two stage confirmation that requires the organizers to accept a participant,
     before that participant is able to confirm their participation.
     """
 
+    @property
+    def acceptance(self):
+        return self.confirmation_set.all()[0]
     def on_confirm(self):
         """
         When a participation is accepted by the organizing committee, the applicant

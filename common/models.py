@@ -17,13 +17,16 @@ class Confirmable(PolymorphicModel):
     def on_confirm(self):
         pass
 
-    def confirm(self):
+    def check_confirm(self):
         """
         Called by a confirmable's confirmations when they are confirmed. If all
         pending confirmations for the object are resolved, set the confirmed attribute
         to True and save. Classes derived from this class may implement on_confirm to
         run custom actions upon confirmation.
         """
+        print self.confirmation_set.all()
+        for confirmation in self.confirmation_set.all():
+            print confirmation.status
         if all(confirmation.status for confirmation in self.confirmation_set.all()):
             self.on_confirm()
             self.confirmed = True
@@ -52,12 +55,15 @@ class Confirmation(Notification):
     # author = ForeignKey('accounts.Account', null=True, blank=True)
     confirmable = ForeignKey('common.Confirmable')
 
+    def confirm(self):
+        self.status = True
+        self.save()
     def save(self, *args, **kwargs):
         """
         When a confirmation is saved it should notify its parent about potential changes.
         """
         result = super(Confirmation, self).save(*args, **kwargs)
-        self.confirmable.confirm()
+        self.confirmable.check_confirm()
         return result
 
 class Applicable(Confirmable):
@@ -66,6 +72,6 @@ class Applicable(Confirmable):
     """
     name = CharField(max_length=50, unique=True)
     def get_absolute_url(self):
-        raise NotImplementedError("Child classes have to overwrite get_absolute_url")
+        raise NotImplementedError("Child classes have to implement get_absolute_url")
 
 

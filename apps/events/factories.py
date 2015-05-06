@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import factory
 
-from apps.events.models import BaseEvent, Workshop, Exchange
+from apps.events.models import BaseEvent, Workshop, Exchange, ParticipationConfirmation
 
 
 __author__ = 'Sebastian Wozny'
@@ -49,8 +49,11 @@ class WorkshopParticipationFactory(factory.DjangoModelFactory):
     user = factory.SubFactory('apps.accounts.factories.AccountFactory')
 
 
+class ParticipationConfirmationFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = ParticipationConfirmation
 
-
+    confirmable = factory.SubFactory(WorkshopParticipationFactory)
 class WorkshopPackageFactory(factory.DjangoModelFactory):
     class Meta:
         model = 'accounts.Group'
