@@ -1,6 +1,6 @@
-from apps.teams.models import Team
+from apps.teams.models import BaseTeam
 
-__author__ = 'Arphen'
+__author__ = 'Sebastian Wozny'
 import logging
 
 # Get an instance of a logger
@@ -15,4 +15,4 @@ class TeamIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
 
     def get_model(self):
-        return Team
+        return BaseTeam

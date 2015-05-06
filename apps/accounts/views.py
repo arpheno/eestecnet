@@ -1,9 +1,11 @@
 from rest_framework.viewsets import ModelViewSet
-from apps.accounts.models import Group, Account, Participation
-from apps.accounts.serializers import GroupSerializer, AccountSerializer, \
+
+from apps.accounts.models import Account, Participation
+from apps.accounts.serializers import AccountSerializer, \
     ParticipationSerializer
 
-__author__ = 'Arphen'
+
+__author__ = 'Sebastian Wozny'
 import logging
 
 # Get an instance of a logger

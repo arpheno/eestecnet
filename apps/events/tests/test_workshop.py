@@ -1,11 +1,9 @@
 from unittest import TestCase
 
-from guardian.shortcuts import get_perms
-
 from apps.events.factories import WorkshopFactory, WorkshopParticipationFactory
 
 
-__author__ = 'Arphen'
+__author__ = 'Sebastian Wozny'
 import logging
 
 # Get an instance of a logger

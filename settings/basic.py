@@ -10,18 +10,16 @@ INSTALLED_APPS += (
     'kombu.transport.django',
     'djcelery',
     'mailqueue',
-    'froala_editor',
     'gunicorn',
     'sorl.thumbnail',
-    'form_utils',
-    'reversion',
     'corsheaders',
-    'djangular',
     'rest_framework',
     'guardian',
 )
 # Own apps
 INSTALLED_APPS += (
+    'apps.questionnaires',
+    'apps.prioritylists',
     'apps.accounts',
     'apps.events',
     'apps.teams',

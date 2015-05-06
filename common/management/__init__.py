@@ -1,6 +1,6 @@
 from django.db.models.signals import post_migrate
 
-__author__ = 'Arphen'
+__author__ = 'Sebastian Wozny'
 import logging
 
 # Get an instance of a logger
@@ -28,3 +28,4 @@ def add_view_permissions(sender, **kwargs):
 
 # check for all our view permissions after a syncdb
 post_migrate.connect(add_view_permissions)
+

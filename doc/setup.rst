@@ -25,7 +25,7 @@ When it's done installing please type ::
     cd development
     pip install virtualenv
     virtualenv .
-    git clone http://github.com/arpheno/eestecnet/
+    git clone http://github.com/Sebastian Woznyo/eestecnet/
     scripts\activate
     cd eestecnet
     pip install -r requirements.txt
@@ -50,7 +50,7 @@ In a command shell do ::
     cd development
     pip install virtualenv
     virtualenv .
-    git clone http://github.com/arpheno/eestecnet/
+    git clone http://github.com/Sebastian Woznyo/eestecnet/
     source bin/activate
     cd eestecnet
     pip install -r requirements.txt
@@ -79,7 +79,7 @@ If you want to preload content, hit CTRL + C and do ::
 
 This will preload some content, including an admin account with login credentials:
 
-username arpheno@gmail.com
+username Sebastian Woznyo@gmail.com
 password test
 
 Server

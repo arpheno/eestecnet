@@ -3,13 +3,17 @@ from django.contrib.auth.models import User, AbstractBaseUser, AbstractUser, \
     PermissionsMixin, Permission, _user_get_all_permissions, _user_has_perm, \
     _user_has_module_perms, GroupManager
 from django.core.urlresolvers import reverse
-from django.db import models
 from django.db.models import EmailField, CharField, BooleanField, ManyToManyField, \
     ForeignKey
 from django.utils.translation import ugettext_lazy as _
 from guardian.mixins import GuardianUserMixin
+from polymorphic import PolymorphicModel
 
-__author__ = 'Arphen'
+from apps.teams.models import Commitment
+from common.models import Confirmable
+
+
+__author__ = 'Sebastian Wozny'
 import logging
 
 # Get an instance of a logger
@@ -25,6 +29,17 @@ class Group(auth.models.Group):
     applicable = ForeignKey('common.Applicable', related_name='packages')
     objects = GroupManager()
     test = CharField(default="LOL", max_length=100)
+
+    @property
+    def application(self):
+        return self.response_set.get(name="application")
+
+    @property
+    def feedback(self):
+        return self.response_set.get(name="feedback")
+
+    def __unicode__(self):
+        return self.name
     def get_absolute_url(self):
         return reverse('group-detail',kwargs={'pk': self.pk})
     class Meta:
@@ -116,6 +131,12 @@ class Account(GuardianUserMixin, AbstractBaseUser):
     def get_full_name(self):
         return self.last_name
 
+    @property
+    def commitment(self):
+        return self.participation_set.get(
+            group__name__endswith="members").package.applicable
+
+
     first_name = CharField(max_length=30)
     middle_name = CharField(max_length=30, blank=True, null=True)
     last_name = CharField(max_length=40)
@@ -125,19 +146,18 @@ class Account(GuardianUserMixin, AbstractBaseUser):
         return reverse('account-detail',kwargs={'pk': self.pk})
 
 
-class Participation(models.Model):
+class Participation(Confirmable):
     """ Participations hold information about the application, the transport,
     and feedback when attending an event."""
     user = ForeignKey(Account)
     group = ForeignKey('auth.Group')
-    accepted = BooleanField(default=False)
-    confirmed = BooleanField(default=False)
 
     @property
     def package(self):
         return Group.objects.get(group_ptr_id=self.group.pk)
 
-
+    def __unicode__(self):
+        return str(self.package)
     def save(self, **kwargs):
         super(Participation, self).save(**kwargs)
     def get_absolute_url(self):

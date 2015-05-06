@@ -3,7 +3,7 @@ from rest_framework.serializers import ModelSerializer
 from apps.accounts.models import Group, Account, Participation
 
 
-__author__ = 'Arphen'
+__author__ = 'Sebastian Wozny'
 import logging
 
 # Get an instance of a logger

@@ -1,8 +1,9 @@
 from rest_framework_nested import routers
+
 from apps.events.views import GroupViewSet, EventViewSet
 
 
-__author__ = 'Arphen'
+__author__ = 'Sebastian Wozny'
 import logging
 
 # Get an instance of a logger

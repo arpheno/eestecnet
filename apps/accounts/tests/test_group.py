@@ -1,11 +1,11 @@
 from django.core.urlresolvers import reverse
 from django.test import Client, TestCase
 
-from apps.events.factories import GroupFactory
+from apps.accounts.factories import GroupFactory
 from common.util import RESTCase
 
 
-__author__ = 'Arphen'
+__author__ = 'Sebastian Wozny'
 import logging
 
 # Get an instance of a logger
