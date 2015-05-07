@@ -31,6 +31,14 @@ class TestBaseEvent(TestCase, RESTCase):
     def test_list_events(self):
         self.assert_retrieve(reverse_lazy('baseevent-list'))
 
+    def test_participation_has_application(self):
+        p = ParticipationFactory(group=self.object.officials)
+        self.assertTrue(p.package.application)
+
+    def test_participation_has_feedback(self):
+        p = ParticipationFactory(group=self.object.officials)
+        self.assertTrue(p.package.feedback)
+
     def test_applicant_can_modify_application(self):
         p = ParticipationFactory(group=self.object.officials)
         self.assertTrue(p.user.has_perm('change_questionnaire', p.package.application))
