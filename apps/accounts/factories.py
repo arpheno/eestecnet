@@ -15,10 +15,10 @@ class AccountFactory(factory.DjangoModelFactory):
     class Meta:
         model = Account
 
-    first_name = "Łukasz"
-    middle_name = "Matteusz"
-    last_name = "Knüppel"
-    second_last_name = "Goméz"
+    first_name = u"Łukasz"
+    middle_name = u"Matteusz"
+    last_name = u"Knüppel"
+    second_last_name = u"Goméz"
     email = factory.sequence(lambda x: "a@b.de" + str(x))
 
 

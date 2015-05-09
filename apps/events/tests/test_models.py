@@ -1,9 +1,10 @@
 from django.core.urlresolvers import reverse_lazy
 
-from django.test import TestCase, Client
+from django.test import TestCase
 
 from apps.accounts.factories import ParticipationFactory
-
+from apps.events.serializers import BaseEventSerializer, WorkshopSerializer, \
+    TrainingSerializer, ExchangeSerializer
 from apps.events.factories import BaseEventFactory, ParticipationConfirmationFactory, \
     ExchangeFactory, TrainingFactory, WorkshopFactory, WorkshopParticipationFactory
 from common.models import Confirmable, Confirmation
@@ -17,10 +18,11 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class TestBaseEvent(TestCase, RESTCase):
+class TestBaseEvent(RESTCase, TestCase):
     def setUp(self):
         self.object = BaseEventFactory()
-        self.c = Client()
+        super(TestBaseEvent, self).setUp()
+        self.serializer_class = BaseEventSerializer
 
     def test_organizers_can_modify_event(self):
         p = ParticipationFactory(group=self.object.organizers)
@@ -49,6 +51,7 @@ class TestBaseEvent(TestCase, RESTCase):
 class TestParticipationConfirmation(TestCase):
     def setUp(self):
         self.p = ParticipationConfirmationFactory()
+        super(TestParticipationConfirmation, self).setUp()
 
     def test_polymorphic(self):
         self.assertTrue(self.p in Confirmable.objects.all())
@@ -70,16 +73,22 @@ class TestParticipationConfirmation(TestCase):
 class TestExchange(RESTCase, TestCase):
     def setUp(self):
         self.object = ExchangeFactory()
+        self.serializer_class = ExchangeSerializer
+        super(TestExchange, self).setUp()
 
 
 class TestTraining(RESTCase, TestCase):
     def setUp(self):
         self.object = TrainingFactory()
+        self.serializer_class = TrainingSerializer
+        super(TestTraining, self).setUp()
 
 
 class TestWorkshop(RESTCase, TestCase):
     def setUp(self):
         self.object = WorkshopFactory()
+        self.serializer_class = WorkshopSerializer
+        super(TestWorkshop, self).setUp()
 
     def test_organizers_can_modify_event(self):
         p = WorkshopParticipationFactory(group=self.object.organizers)
