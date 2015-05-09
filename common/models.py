@@ -27,9 +27,7 @@ class Confirmable(PolymorphicModel):
         if all(confirmation.status for confirmation in self.confirmation_set.all()):
             self.on_confirm()
             self.confirmed = True
-        else:
-            self.confirmed = False
-        self.save()
+            self.save()
 
 
 class Notification(PolymorphicModel):
@@ -59,6 +57,9 @@ class Confirmation(Notification):
         """
         When a confirmation is saved it should notify its parent about potential changes.
         """
+        if not self.pk:
+            if self.confirmable.confirmed:
+                return
         result = super(Confirmation, self).save(*args, **kwargs)
         self.confirmable.check_confirm()
         return result

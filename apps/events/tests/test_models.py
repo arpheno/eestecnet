@@ -2,12 +2,10 @@ from django.core.urlresolvers import reverse_lazy
 
 from django.test import TestCase, Client
 
-from apps.accounts.factories import ParticipationFactory, AccountFactory
+from apps.accounts.factories import ParticipationFactory
 
 from apps.events.factories import BaseEventFactory, ParticipationConfirmationFactory, \
     ExchangeFactory, TrainingFactory, WorkshopFactory, WorkshopParticipationFactory
-from apps.prioritylists.models import PriorityList
-from apps.teams.factories import CommitmentFactory
 from common.models import Confirmable, Confirmation
 from common.util import RESTCase
 
@@ -46,14 +44,6 @@ class TestBaseEvent(TestCase, RESTCase):
     def test_participant_can_modify_feedback(self):
         p = ParticipationFactory(group=self.object.officials)
         self.assertTrue(p.user.has_perm('change_response', p.package.feedback))
-
-    def test_prioritylist_created(self):
-        c = CommitmentFactory()
-        u = AccountFactory()
-        ParticipationFactory(group=c.members, user=u)
-        p = ParticipationFactory(group=self.object.officials, user=u)
-        self.assertTrue(PriorityList.objects.get(event=p.package.applicable,
-                                                 commitment=p.user.commitment))
 
 
 class TestParticipationConfirmation(TestCase):

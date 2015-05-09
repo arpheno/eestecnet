@@ -34,6 +34,6 @@ class TestCommitment(RESTCase, TestCase):
 
 class TestInternationalTeam(RESTCase, TestCase):
     def setUp(self):
-        super(TestCommitment, self).setUp()
+        super(TestInternationalTeam, self).setUp()
         self.object = InternationalTeamFactory()
 
