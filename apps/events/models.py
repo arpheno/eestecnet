@@ -1,11 +1,11 @@
 from django.contrib.auth.models import User, Permission
 from django.contrib.contenttypes.models import ContentType
-from django.core.urlresolvers import reverse
 from guardian.shortcuts import assign_perm
 from polymorphic import PolymorphicModel
 
 from apps.accounts.models import Account
 from common.models import Applicable, Confirmable, Confirmation
+from common.util import Reversable
 
 
 __author__ = 'Sebastian Wozny'
@@ -15,7 +15,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Create your models here.
-class BaseEvent(Applicable):
+class BaseEvent(Applicable, Reversable):
     """ Model that stores basic information common to all events."""
 
     @property
@@ -42,8 +42,6 @@ class BaseEvent(Applicable):
             assign_perm('change_' + label.lower(), self.organizers, self)
 
         return result
-    def get_absolute_url(self):
-        return reverse(self._meta.model_name+'-detail',kwargs= {'pk' :self.pk})
 
 
 class Workshop(BaseEvent):

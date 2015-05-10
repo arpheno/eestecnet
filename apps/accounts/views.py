@@ -27,9 +27,12 @@ class MembershipViewSet(ModelViewSet):
     queryset = Participation.objects.all()
     serializer_class = ParticipationSerializer
     def list(self, request, group_pk=None):
-        self.queryset = self.queryset.filter(groups=group_pk)
+        if group_pk:
+            self.queryset = self.queryset.filter(groups=group_pk)
+        else:
+            pass
         return super(MembershipViewSet, self).list(request)
 
     def retrieve(self, request, pk=None, group_pk=None):
-        self.object = self.queryset.get(pk=pk, group=group_pk)
+        self.object = self.queryset.get(pk=pk)
         return super(MembershipViewSet, self).retrieve(request)

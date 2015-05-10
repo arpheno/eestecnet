@@ -19,6 +19,8 @@ logger = logging.getLogger(__name__)
 class TestAccount(RESTCase,TestCase):
     def setUp(self):
         self.object = AccountFactory()
+        self.object.set_password("lol")
+        self.object.save()
         super(TestAccount,self).setUp()
         self.serializer_class = AccountSerializer
 

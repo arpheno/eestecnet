@@ -2,8 +2,9 @@ from rest_framework.viewsets import ModelViewSet
 
 from apps.accounts.models import Group
 from apps.accounts.serializers import GroupSerializer
-from apps.events.models import BaseEvent
-from apps.events.serializers import BaseEventSerializer
+from apps.events.models import BaseEvent, Training, Exchange, Workshop
+from apps.events.serializers import BaseEventSerializer, TrainingSerializer, \
+    ExchangeSerializer, WorkshopSerializer
 
 
 __author__ = 'Sebastian Wozny'
@@ -15,6 +16,21 @@ logger = logging.getLogger(__name__)
 class EventViewSet(ModelViewSet):
     queryset = BaseEvent.objects.all()
     serializer_class = BaseEventSerializer
+
+
+class TrainingViewSet(ModelViewSet):
+    queryset = Training.objects.all()
+    serializer_class = TrainingSerializer
+
+
+class ExchangeViewSet(ModelViewSet):
+    queryset = Exchange.objects.all()
+    serializer_class = ExchangeSerializer
+
+
+class WorkshopViewSet(ModelViewSet):
+    queryset = Workshop.objects.all()
+    serializer_class = WorkshopSerializer
 
 
 class GroupViewSet(ModelViewSet):

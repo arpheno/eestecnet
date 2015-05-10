@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from apps.accounts.factories import ParticipationFactory
-
+from apps.events.factories import WorkshopFactory
 from apps.teams.factories import CommitmentFactory, InternationalTeamFactory
 from apps.teams.serializers import CommitmentSerializer, InternationalTeamSerializer
 from common.util import RESTCase
@@ -15,6 +15,10 @@ logger = logging.getLogger(__name__)
 
 
 class TestTeam(TestCase):
+    def setUp(self):
+        super(TestTeam, self).setUp()
+        self.object = WorkshopFactory()
+        self.serializer_class = CommitmentSerializer
     def test_applications_work(self):
         p = ParticipationFactory(group=self.object.officials)
         self.assertTrue(p.user in self.object.applicants)

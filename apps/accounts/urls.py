@@ -16,6 +16,8 @@ group_accountrouter = NestedSimpleRouter(grouprouter,r'groups',lookup ='group')
 group_accountrouter.register(r'members', AccountViewSet)
 group_participationrouter = NestedSimpleRouter(grouprouter,r'groups',lookup ='group')
 group_participationrouter.register(r'memberships', MembershipViewSet)
+membershiprouter = SimpleRouter()
+membershiprouter.register(r'memberships', MembershipViewSet)
 
 
 accountrouter = SimpleRouter()

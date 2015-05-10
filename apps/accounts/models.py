@@ -7,6 +7,7 @@ from django.db.models import EmailField, CharField, BooleanField, ManyToManyFiel
     ForeignKey
 from django.utils.translation import ugettext_lazy as _
 from guardian.mixins import GuardianUserMixin
+from guardian.shortcuts import assign_perm
 from polymorphic import PolymorphicModel
 
 from apps.teams.models import Commitment
@@ -30,13 +31,6 @@ class Group(auth.models.Group):
     objects = GroupManager()
     test = CharField(default="LOL", max_length=100)
 
-    @property
-    def application(self):
-        return self.response_set.get(name="application")
-
-    @property
-    def feedback(self):
-        return self.response_set.get(name="feedback")
 
     def __unicode__(self):
         return self.name
@@ -184,7 +178,24 @@ class Participation(Confirmable):
     def __unicode__(self):
         return str(self.package)
     def save(self, **kwargs):
-        super(Participation, self).save(**kwargs)
+        if not self.pk:
+            result = super(Participation, self).save(**kwargs)
+            from apps.questionnaires.models import Response
+
+            f = Response.objects.create(participation=self, name="feedback")
+            a = Response.objects.create(participation=self, name="application")
+            assign_perm('change_response', self.user, f)
+            assign_perm('change_response', self.user, a)
+        else:
+            result = super(Participation, self).save(**kwargs)
+        return result
     def get_absolute_url(self):
         return reverse('participation-detail',kwargs={'pk':self.pk,'group_pk':self.group.pk})
 
+    @property
+    def application(self):
+        return self.response_set.get(name="application")
+
+    @property
+    def feedback(self):
+        return self.response_set.get(name="feedback")

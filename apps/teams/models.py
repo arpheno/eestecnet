@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from guardian.shortcuts import assign_perm
 
 from common.models import Applicable
+from common.util import Reversable
 
 
 __author__ = 'Sebastian Wozny'
@@ -11,7 +12,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Create your models here.
-class BaseTeam(Applicable):
+class BaseTeam(Applicable, Reversable):
     def save(self, **kwargs):
         """
         When an Event is first created two groups should always be created:

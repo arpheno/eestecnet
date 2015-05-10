@@ -33,19 +33,19 @@ class TestBaseEvent(RESTCase, TestCase):
 
     def test_participation_has_application(self):
         p = ParticipationFactory(group=self.object.officials)
-        self.assertTrue(p.package.application)
+        self.assertTrue(p.application)
 
     def test_participation_has_feedback(self):
         p = ParticipationFactory(group=self.object.officials)
-        self.assertTrue(p.package.feedback)
+        self.assertTrue(p.feedback)
 
     def test_applicant_can_modify_application(self):
         p = ParticipationFactory(group=self.object.officials)
-        self.assertTrue(p.user.has_perm('change_questionnaire', p.package.application))
+        self.assertTrue(p.user.has_perm('change_response', p.application))
 
     def test_participant_can_modify_feedback(self):
         p = ParticipationFactory(group=self.object.officials)
-        self.assertTrue(p.user.has_perm('change_response', p.package.feedback))
+        self.assertTrue(p.user.has_perm('change_response', p.feedback))
 
 
 class TestParticipationConfirmation(TestCase):

@@ -1,7 +1,6 @@
 from django.core.urlresolvers import reverse_lazy
 from django.test import Client
 
-from apps.accounts.factories import AccountFactory
 
 
 __author__ = 'Sebastian Wozny'
@@ -11,6 +10,10 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+class Reversable(object):
+    def get_absolute_url(self):
+        return reverse_lazy(self._meta.model_name + '-detail', kwargs={'pk': self.pk})
+
 class RESTCase(object):
     """
     Mixin that combines common functionality for testing the REST API.
@@ -18,6 +21,7 @@ class RESTCase(object):
     To use this mixin the child testcase must create a self.object resource.
     """
     def setUp(self):
+        from apps.accounts.factories import AccountFactory
         admin = AccountFactory(email="admin@admin.de")
         admin.set_password("admin")
         admin.is_superuser = True
@@ -35,6 +39,7 @@ class RESTCase(object):
             self.assertEqual(response.status_code, 201)
         except AssertionError:
             print response.content
+            raise
 
     def assert_retrieve(self, url):
         response = self.c.get(url)
@@ -42,21 +47,24 @@ class RESTCase(object):
             self.assertEqual(response.status_code, 200)
         except AssertionError:
             print response.content
+            raise
 
     def assert_update(self, url, data):
-        response = self.c.get(url)
+        response = self.c.put(path=url, data=data)
         try:
             self.assertIn(response.status_code, [200, 202, 204])
         except AssertionError:
             print response.content
+            raise
 
 
     def assert_delete(self, url):
-        response = self.c.delete(url)
+        response = self.c.delete(path=url)
         try:
             self.assertIn(response.status_code, [200, 202, 204])
         except AssertionError:
             print response.content
+            raise
 
 
     def test_rest_list_resource(self):
@@ -68,21 +76,17 @@ class RESTCase(object):
         self.assert_retrieve(url)
 
     def test_rest_create_resource(self):
+        url = self.object.get_absolute_url()
+        self.assert_delete(url)
         data = self.serializer_class(self.object).data
         url = reverse_lazy(self.object._meta.object_name.lower() + '-list')
         self.assert_create(url, data)
 
     def test_rest_update_resource(self):
         data = self.serializer_class(self.object).data
-        url = reverse_lazy(self.object._meta.object_name.lower() + '-list')
-        self.assert_create(url, data)
-
-        url = reverse_lazy(self.object.get_absolute_url())
+        url = self.object.get_absolute_url()
         self.assert_update(url, data)
 
     def test_rest_delete_resource(self):
-        data = self.serializer_class(self.object).data
-        url = reverse_lazy(self.object._meta.object_name.lower() + '-list')
-        self.assert_create(url, data)
-        url = reverse_lazy(self.object.get_absolute_url())
+        url = self.object.get_absolute_url()
         self.assert_delete(url)
