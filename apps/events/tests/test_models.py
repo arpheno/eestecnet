@@ -3,10 +3,8 @@ from django.core.urlresolvers import reverse_lazy
 from django.test import TestCase
 
 from apps.accounts.factories import ParticipationFactory
-from apps.events.serializers import BaseEventSerializer, WorkshopSerializer, \
-    TrainingSerializer, ExchangeSerializer
-from apps.events.factories import BaseEventFactory, ParticipationConfirmationFactory, \
-    ExchangeFactory, TrainingFactory, WorkshopFactory, WorkshopParticipationFactory
+from apps.events.serializers import BaseEventSerializer
+from apps.events.factories import BaseEventFactory, ParticipationConfirmationFactory
 from common.models import Confirmable, Confirmation
 from common.util import RESTCase
 
@@ -62,34 +60,3 @@ class TestParticipationConfirmation(TestCase):
             c.confirm()
         self.assertTrue(self.p.confirmed)
 
-    def test_confirm_participation(self):
-        for c in self.p.confirmation_set.all():
-            c.confirm()
-        self.assertTrue(self.p.confirmed)
-        self.p.confirm()
-        self.assertTrue(self.p.confirmable.confirmed)
-
-
-class TestExchange(RESTCase, TestCase):
-    def setUp(self):
-        self.object = ExchangeFactory()
-        self.serializer_class = ExchangeSerializer
-        super(TestExchange, self).setUp()
-
-
-class TestTraining(RESTCase, TestCase):
-    def setUp(self):
-        self.object = TrainingFactory()
-        self.serializer_class = TrainingSerializer
-        super(TestTraining, self).setUp()
-
-
-class TestWorkshop(RESTCase, TestCase):
-    def setUp(self):
-        self.object = WorkshopFactory()
-        self.serializer_class = WorkshopSerializer
-        super(TestWorkshop, self).setUp()
-
-    def test_organizers_can_modify_event(self):
-        p = WorkshopParticipationFactory(group=self.object.organizers)
-        self.assertTrue(p.user.has_perm('change_workshop', self.object))

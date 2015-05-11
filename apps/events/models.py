@@ -72,14 +72,16 @@ class ParticipationConfirmation(Confirmable, Confirmation, object):
         should be granted rights to confirm their participation.
         """
         assign_perm('change_participationconfirmation', self.confirmable.user, self)
-
     def save(self, *args, **kwargs):
         if not self.pk:
             result = super(ParticipationConfirmation, self).save(*args, **kwargs)
             acceptance = Confirmation.objects.create(confirmable=self)
             assign_perm('change_confirmation',
-                        self.confirmable.group.applicable.organizers, acceptance)
+                        self.confirmable.package.applicable.organizers, acceptance)
 
         else:
             result = super(ParticipationConfirmation, self).save(*args, **kwargs)
+
+        self.confirmable.check_confirm()
+
         return result

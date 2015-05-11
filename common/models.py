@@ -1,5 +1,5 @@
 from django.db.models import CharField, DateField, BooleanField, ForeignKey, TextField, \
-    AutoField
+    AutoField, SET_NULL
 from polymorphic import PolymorphicModel
 
 __author__ = 'Sebastian Wozny'
@@ -48,7 +48,8 @@ class Confirmation(Notification):
     # makemigrations call and put in a separate call
 
     # author = ForeignKey('accounts.Account', null=True, blank=True)
-    confirmable = ForeignKey('common.Confirmable')
+    confirmable = ForeignKey('common.Confirmable', on_delete=SET_NULL, null=True,
+                             blank=True)
 
     def confirm(self):
         self.status = True

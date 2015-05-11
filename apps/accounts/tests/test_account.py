@@ -3,8 +3,13 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 from apps.accounts.factories import AccountFactory, ParticipationFactory, GroupFactory
+from apps.accounts.models import Participation
 from apps.accounts.serializers import AccountSerializer, GroupSerializer, \
     ParticipationSerializer
+from apps.events.factories import ExchangeFactory, TrainingFactory, WorkshopFactory, \
+    WorkshopParticipationFactory
+from apps.events.serializers import ExchangeSerializer, WorkshopSerializer
+from apps.events.serializers import TrainingSerializer
 from apps.teams.factories import CommitmentFactory
 from common.util import RESTCase
 
@@ -16,21 +21,21 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class TestAccount(RESTCase,TestCase):
+class TestAccount(RESTCase, TestCase):
     def setUp(self):
         self.object = AccountFactory()
         self.object.set_password("lol")
         self.object.save()
-        super(TestAccount,self).setUp()
+        super(TestAccount, self).setUp()
         self.serializer_class = AccountSerializer
 
     def test_get_short_name(self):
         self.assertEqual(self.object.get_short_name(), u'Łukasz')
+
     def test_get_commitment(self):
         amsterdam = CommitmentFactory()
         ParticipationFactory(group=amsterdam.members, user=self.object)
         self.assertEqual(self.object.commitment, amsterdam)
-
 
 
 class TestGroup(RESTCase, TestCase):
@@ -50,5 +55,36 @@ class TestParticipation(RESTCase, TestCase):
         super(TestParticipation, self).setUp()
         self.object = ParticipationFactory()
         self.serializer_class = ParticipationSerializer
+
     def test_participation_has_package(self):
         self.assertTrue(self.object.package.test)
+
+    def test_confirm_participation(self):
+        for c in self.object.confirmation_set.all():
+            c.confirm()
+        self.assertTrue(Participation.objects.get(pk=self.object.pk).confirmed)
+
+
+class TestExchange(RESTCase, TestCase):
+    def setUp(self):
+        self.object = ExchangeFactory()
+        self.serializer_class = ExchangeSerializer
+        super(TestExchange, self).setUp()
+
+
+class TestTraining(RESTCase, TestCase):
+    def setUp(self):
+        self.object = TrainingFactory()
+        self.serializer_class = TrainingSerializer
+        super(TestTraining, self).setUp()
+
+
+class TestWorkshop(RESTCase, TestCase):
+    def setUp(self):
+        self.object = WorkshopFactory()
+        self.serializer_class = WorkshopSerializer
+        super(TestWorkshop, self).setUp()
+
+    def test_organizers_can_modify_event(self):
+        p = WorkshopParticipationFactory(group=self.object.organizers)
+        self.assertTrue(p.user.has_perm('change_workshop', self.object))
