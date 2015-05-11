@@ -76,26 +76,22 @@ class Applicable(Confirmable):
     def applications(self):
         result = [p for g in self.packages.all() for p in
                   g.participation_set.filter(confirmed=False)]
-        print result
         return result
 
     @property
     def participations(self):
         result = [p for g in self.packages.all() for p in
                   g.participation_set.filter(confirmed=True)]
-        print result
         return result
 
     @property
     def applicants(self):
         result = [p.user for g in self.packages.all() for p in
                   g.participation_set.filter(confirmed=False)]
-        print result
         return result
 
     @property
     def participants(self):
         result = [p.user for g in self.packages.all() for p in
                   g.participation_set.filter(confirmed=True)]
-        print result
         return result

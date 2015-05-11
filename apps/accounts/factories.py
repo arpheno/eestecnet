@@ -19,6 +19,8 @@ class AccountFactory(factory.DjangoModelFactory):
     middle_name = u"Matteusz"
     last_name = u"Knüppel"
     second_last_name = u"Goméz"
+    password = factory.PostGenerationMethodCall('set_password',
+                                                'defaultpassword')
     email = factory.sequence(lambda x: "a@b.de" + str(x))
 
 

@@ -22,6 +22,18 @@ class TestBaseEvent(RESTCase, TestCase):
         super(TestBaseEvent, self).setUp()
         self.serializer_class = BaseEventSerializer
 
+    def test_applications_work(self):
+        p = ParticipationFactory(group=self.object.officials)
+        self.assertTrue(p.user in self.object.applicants)
+        self.assertTrue(p in self.object.applications)
+        self.assertFalse(p.user in self.object.participants)
+        self.assertFalse(p in self.object.participations)
+        for c in p.confirmation_set.all():
+            c.confirm()
+        self.assertFalse(p.user in self.object.applicants)
+        self.assertFalse(p in self.object.applications)
+        self.assertTrue(p.user in self.object.participants)
+        self.assertTrue(p in self.object.participations)
     def test_organizers_can_modify_event(self):
         p = ParticipationFactory(group=self.object.organizers)
         self.assertTrue(p.user.has_perm('change_baseevent', self.object))

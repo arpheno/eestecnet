@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 from apps.accounts.factories import AccountFactory, ParticipationFactory, GroupFactory
-from apps.accounts.models import Participation
+from apps.accounts.models import Participation, Account
 from apps.accounts.serializers import AccountSerializer, GroupSerializer, \
     ParticipationSerializer
 from apps.events.factories import ExchangeFactory, TrainingFactory, WorkshopFactory, \
@@ -24,11 +24,11 @@ logger = logging.getLogger(__name__)
 class TestAccount(RESTCase, TestCase):
     def setUp(self):
         self.object = AccountFactory()
-        self.object.set_password("lol")
-        self.object.save()
         super(TestAccount, self).setUp()
         self.serializer_class = AccountSerializer
 
+    def test_password_hashed(self):
+        self.assertTrue("$" in Account.objects.get(pk=self.object.pk).password)
     def test_get_short_name(self):
         self.assertEqual(self.object.get_short_name(), u'Łukasz')
 
