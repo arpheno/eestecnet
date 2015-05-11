@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import factory
 
+from apps.accounts.factories import AccountFactory
 from apps.events.factories import BaseEventFactory
 from apps.prioritylists.models import PriorityList, Priority
 from apps.teams.factories import CommitmentFactory
@@ -24,6 +25,10 @@ class PriorityListFactory(factory.DjangoModelFactory):
 class PriorityFactory(factory.DjangoModelFactory):
     class Meta:
         model = Priority
+
+    priority_list = factory.SubFactory(PriorityListFactory)
+    user = factory.SubFactory(AccountFactory)
+    priority = factory.sequence(lambda x: x)
 
 
 

@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 class BaseEventFactory(factory.DjangoModelFactory):
     class Meta:
         model = BaseEvent
+        django_get_or_create = ['name']
 
     name = "base_event"
 

@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 class PriorityListSerializer(ModelSerializer):
     class Meta:
         model = PriorityList
+        fields = ('event', 'commitment', 'users')
 
 
 class PrioritySerializer(ModelSerializer):

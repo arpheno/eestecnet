@@ -15,7 +15,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class Questionnaire(PolymorphicModel):
+class Questionnaire(PolymorphicModel, Reversable):
     """ Questionnaires store information about Questions that Event organizers would like
     to ask their (potential) participants. """
     group = ForeignKey('accounts.Group')

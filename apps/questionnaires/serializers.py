@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from apps.questionnaires.models import Questionnaire
+from apps.questionnaires.models import Questionnaire, Question
 
 
 __author__ = 'Sebastian Wozny'
@@ -13,3 +13,8 @@ logger = logging.getLogger(__name__)
 class QuestionnaireSerializer(ModelSerializer):
     class Meta:
         model = Questionnaire
+
+
+class QuestionSerializer(ModelSerializer):
+    class Meta:
+        model = Question

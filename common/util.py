@@ -1,6 +1,6 @@
 from django.core.urlresolvers import reverse_lazy
 from django.test import Client
-
+from rest_framework.renderers import JSONRenderer
 
 
 __author__ = 'Sebastian Wozny'
@@ -39,6 +39,7 @@ class RESTCase(object):
             self.assertEqual(response.status_code, 201)
         except AssertionError:
             print response.content
+            print data
             raise
 
     def assert_retrieve(self, url):
@@ -50,7 +51,8 @@ class RESTCase(object):
             raise
 
     def assert_update(self, url, data):
-        response = self.c.put(path=url, data=data)
+        json = JSONRenderer().render(data)
+        response = self.c.put(path=url, data=json, content_type='application/json')
         try:
             self.assertIn(response.status_code, [200, 202, 204])
         except AssertionError:

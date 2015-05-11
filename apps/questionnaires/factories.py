@@ -15,6 +15,7 @@ class QuestionnaireFactory(factory.DjangoModelFactory):
     class Meta:
         model = Questionnaire
 
+    name = "feedback"
     group = factory.SubFactory('apps.accounts.factories.GroupFactory')
     question_one = factory.RelatedFactory(
         'apps.questionnaires.factories.QuestionFactory',

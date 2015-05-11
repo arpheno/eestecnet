@@ -7,6 +7,8 @@ from apps.accounts.urls import grouprouter, group_participationrouter, membershi
 from apps.accounts.urls import group_accountrouter
 from apps.accounts.urls import accountrouter
 from apps.events.urls import eventrouter, package_router
+from apps.prioritylists.urls import prioritylistrouter
+from apps.questionnaires.urls import questionnairerouter
 from apps.teams.urls import teamrouter
 from settings.conf.media import MEDIA_ROOT
 
@@ -25,6 +27,8 @@ urlpatterns = patterns(
     url(r'^api/', include(group_participationrouter.urls)),
     url(r'^api/', include(accountrouter.urls)),
     url(r'^api/', include(membershiprouter.urls)),
+    url(r'^api/', include(questionnairerouter.urls)),
+    url(r'^api/', include(prioritylistrouter.urls)),
 )
 # Orphans
 urlpatterns += patterns(

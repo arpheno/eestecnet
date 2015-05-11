@@ -2,9 +2,9 @@ from django.test import TestCase
 
 from apps.accounts.factories import AccountFactory, ParticipationFactory
 from apps.events.factories import BaseEventFactory
-
-from apps.prioritylists.factories import PriorityListFactory
+from apps.prioritylists.factories import PriorityListFactory, PriorityFactory
 from apps.prioritylists.models import PriorityList
+from apps.prioritylists.serializers import PriorityListSerializer, PrioritySerializer
 from apps.teams.factories import CommitmentFactory
 from common.util import RESTCase
 
@@ -18,14 +18,17 @@ logger = logging.getLogger(__name__)
 
 class TestPriorityList(RESTCase, TestCase):
     def setUp(self):
+        super(TestPriorityList, self).setUp()
         self.object = PriorityListFactory()
+        self.serializer_class = PriorityListSerializer
+
 
     def test_prioritylist_created(self):
         c = CommitmentFactory()
         u = AccountFactory()
         e = BaseEventFactory()
         ParticipationFactory(group=c.members, user=u)
-        p = ParticipationFactory(group=e.object.officials, user=u)
+        p = ParticipationFactory(group=e.officials, user=u)
         self.assertTrue(PriorityList.objects.get(event=p.package.applicable,
                                                  commitment=p.user.commitment))
 
@@ -41,4 +44,8 @@ class TestPriorityList(RESTCase, TestCase):
         self.assertTrue(u.has_perm('change_prioritylist', pl))
 
 
-
+class TestPriority(RESTCase, TestCase):
+    def setUp(self):
+        super(TestPriority, self).setUp()
+        self.object = PriorityFactory()
+        self.serializer_class = PrioritySerializer

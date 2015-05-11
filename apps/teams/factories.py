@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 class CommitmentFactory(factory.DjangoModelFactory):
     class Meta:
         model = Commitment
+        django_get_or_create = ['name']
 
     name = "Amsterdam"
 

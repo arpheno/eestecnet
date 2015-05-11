@@ -6,6 +6,7 @@ from polymorphic import PolymorphicModel
 
 from apps.accounts.models import Account
 from common.models import Applicable
+from common.util import Reversable
 
 
 __author__ = 'Sebastian Wozny'
@@ -15,7 +16,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class Priority(PolymorphicModel):
+class Priority(PolymorphicModel, Reversable):
     """
     Through model to attach the actual priority to an individual.
     """
@@ -31,7 +32,7 @@ class Priority(PolymorphicModel):
         return unicode(self.priority)
 
 
-class PriorityList(PolymorphicModel):
+class PriorityList(PolymorphicModel, Reversable):
     """
     Prioritylists are sent out by commitments to rank the applications for an event
     against
@@ -57,8 +58,8 @@ class PriorityList(PolymorphicModel):
         else:
             result = super(PriorityList, self).save(*args, **kwargs)
             assign_perm('view_prioritylist', self.event.organizers, self)
-            assign_perm('change_prioritylist', self.team.board, self)
-            for user in self.event.officials.all():
+            assign_perm('change_prioritylist', self.commitment.board, self)
+            for user in self.event.officials.user_set.all():
                 Priority.objects.create(user=user, priority_list=self)
         return result
 
