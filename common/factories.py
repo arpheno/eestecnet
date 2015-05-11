@@ -27,7 +27,7 @@ class ConfirmationFactory(NotificationFactory):
     confirmable = factory.SubFactory('common.factories.ConfirmableFactory')
 
 
-class ApplicableFactory(NotificationFactory):
+class ApplicableFactory(factory.DjangoModelFactory):
     class Meta:
         model = Applicable
         django_get_or_create = ('name',)

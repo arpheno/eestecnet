@@ -6,6 +6,7 @@ from django.views.generic import RedirectView, TemplateView
 from apps.accounts.urls import grouprouter, group_participationrouter, membershiprouter
 from apps.accounts.urls import group_accountrouter
 from apps.accounts.urls import accountrouter
+from apps.announcements.urls import announcementrouter
 from apps.events.urls import eventrouter, package_router
 from apps.prioritylists.urls import prioritylistrouter
 from apps.questionnaires.urls import questionnairerouter
@@ -29,6 +30,7 @@ urlpatterns = patterns(
     url(r'^api/', include(membershiprouter.urls)),
     url(r'^api/', include(questionnairerouter.urls)),
     url(r'^api/', include(prioritylistrouter.urls)),
+    url(r'^api/', include(announcementrouter.urls)),
 )
 # Orphans
 urlpatterns += patterns(

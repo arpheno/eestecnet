@@ -21,6 +21,7 @@ INSTALLED_APPS += (
     'apps.questionnaires',
     'apps.prioritylists',
     'apps.accounts',
+    'apps.announcements',
     'apps.events',
     'apps.teams',
     'common'
