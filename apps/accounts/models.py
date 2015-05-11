@@ -11,7 +11,7 @@ from guardian.shortcuts import assign_perm
 from polymorphic import PolymorphicModel
 
 from apps.teams.models import Commitment
-from common.models import Confirmable
+from common.models import Confirmable, Confirmation
 
 
 __author__ = 'Sebastian Wozny'
@@ -180,8 +180,8 @@ class Participation(Confirmable):
     def save(self, **kwargs):
         if not self.pk:
             result = super(Participation, self).save(**kwargs)
+            Confirmation.objects.create(confirmable=self)
             from apps.questionnaires.models import Response
-
             f = Response.objects.create(participation=self, name="feedback")
             a = Response.objects.create(participation=self, name="application")
             assign_perm('change_response', self.user, f)

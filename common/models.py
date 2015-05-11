@@ -53,6 +53,7 @@ class Confirmation(Notification):
     def confirm(self):
         self.status = True
         self.save()
+        self.confirmable.check_confirm()
     def save(self, *args, **kwargs):
         """
         When a confirmation is saved it should notify its parent about potential changes.
@@ -70,4 +71,30 @@ class Applicable(Confirmable):
     """
     name = CharField(max_length=50, unique=True)
 
+    @property
+    def applications(self):
+        result = [p for g in self.packages.all() for p in
+                  g.participation_set.filter(confirmed=False)]
+        print result
+        return result
 
+    @property
+    def participations(self):
+        result = [p for g in self.packages.all() for p in
+                  g.participation_set.filter(confirmed=True)]
+        print result
+        return result
+
+    @property
+    def applicants(self):
+        result = [p.user for g in self.packages.all() for p in
+                  g.participation_set.filter(confirmed=False)]
+        print result
+        return result
+
+    @property
+    def participants(self):
+        result = [p.user for g in self.packages.all() for p in
+                  g.participation_set.filter(confirmed=True)]
+        print result
+        return result
