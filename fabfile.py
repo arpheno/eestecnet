@@ -18,5 +18,3 @@ def remove_migrations():
         local('rm common/migrations/0*')
     except:
         pass
-
-

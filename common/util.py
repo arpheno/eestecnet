@@ -14,27 +14,50 @@ class Reversable(object):
     def get_absolute_url(self):
         return reverse_lazy(self._meta.model_name + '-detail', kwargs={'pk': self.pk})
 
+
+class AuditCase(object):
+    def test_owner_has_permissions(self):
+        self.assertTrue(
+            self.object.owner.has_perm('view_' + self.object._meta.object_name.lower(),
+                                       self.object))
+        self.assertTrue(
+            self.object.owner.has_perm('delete_' + self.object._meta.object_name.lower(),
+                                       self.object))
+        self.assertTrue(
+            self.object.owner.has_perm('change_' + self.object._meta.object_name.lower(),
+                                       self.object))
 class RESTCase(object):
     """
     Mixin that combines common functionality for testing the REST API.
     By default will also test the list and absolute endpoints of a resource.
     To use this mixin the child testcase must create a self.object resource.
     """
-    def setUp(self):
+
+    @classmethod
+    def setUpClass(cls):
         from apps.accounts.factories import AccountFactory
         admin = AccountFactory(email="admin@admin.de")
         admin.set_password("admin")
         admin.is_superuser = True
         admin.save()
-        self.c = Client()
-        self.c.post('/login/', data={'username': 'admin@admin.de', 'password': 'admin'})
-        self.root = "/api"
 
+        RESTCase.c = Client()
+        RESTCase.c.post('/login/',
+                        data={'username': 'admin@admin.de', 'password': 'admin'})
+
+    @classmethod
+    def tearDownClass(cls):
+        from apps.accounts.models import Account
+
+        Account.objects.get(email="admin@admin.de").delete()
+
+    def setUp(self):
+        self.root = "/api"
         super(RESTCase, self).setUp()
 
 
     def assert_create(self, url, data):
-        response = self.c.post(url, data)
+        response = RESTCase.c.post(url, data)
         try:
             self.assertEqual(response.status_code, 201)
         except AssertionError:
@@ -43,7 +66,7 @@ class RESTCase(object):
             raise
 
     def assert_retrieve(self, url):
-        response = self.c.get(url)
+        response = RESTCase.c.get(url)
         try:
             self.assertEqual(response.status_code, 200)
         except AssertionError:
@@ -52,7 +75,7 @@ class RESTCase(object):
 
     def assert_update(self, url, data):
         json = JSONRenderer().render(data)
-        response = self.c.put(path=url, data=json, content_type='application/json')
+        response = RESTCase.c.put(path=url, data=json, content_type='application/json')
         try:
             self.assertIn(response.status_code, [200, 202, 204])
         except AssertionError:
@@ -61,7 +84,7 @@ class RESTCase(object):
 
 
     def assert_delete(self, url):
-        response = self.c.delete(path=url)
+        response = RESTCase.c.delete(path=url)
         try:
             self.assertIn(response.status_code, [200, 202, 204])
         except AssertionError:

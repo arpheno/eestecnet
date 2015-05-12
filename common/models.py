@@ -24,7 +24,9 @@ class Confirmable(PolymorphicModel):
         to True and save. Classes derived from this class may implement on_confirm to
         run custom actions upon confirmation.
         """
-        if all(confirmation.status for confirmation in self.confirmation_set.all()):
+
+        if self.pk and all(
+                confirmation.status for confirmation in self.confirmation_set.all()):
             self.on_confirm()
             self.confirmed = True
             self.save()
@@ -59,9 +61,6 @@ class Confirmation(Notification):
         """
         When a confirmation is saved it should notify its parent about potential changes.
         """
-        if not self.pk:
-            if self.confirmable.confirmed:
-                return
         result = super(Confirmation, self).save(*args, **kwargs)
         self.confirmable.check_confirm()
         return result
@@ -90,6 +89,9 @@ class Applicable(Confirmable):
                   g.participation_set.filter(confirmed=False)]
         return result
 
+    @property
+    def members(self):
+        return self.participants
     @property
     def participants(self):
         result = [p.user for g in self.packages.all() for p in

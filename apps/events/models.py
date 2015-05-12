@@ -4,7 +4,7 @@ from django.db.models import ForeignKey
 from guardian.shortcuts import assign_perm
 from polymorphic import PolymorphicModel
 
-from apps.accounts.models import Account
+from apps.accounts.models import Account, Participation
 from common.models import Applicable, Confirmable, Confirmation
 from common.util import Reversable
 
@@ -40,8 +40,12 @@ class BaseEvent(Applicable, Reversable):
             result = super(BaseEvent, self).save(**kwargs)
             self.packages.create(name=self.name + '_officials')
             self.packages.create(name=self.name + '_organizers')
+            Participation.objects.create(confirmed=True, group=self.organizers,
+                                         user=self.owner)
             label = self._meta.object_name
             assign_perm('change_' + label.lower(), self.organizers, self)
+            assign_perm('view_' + label.lower(), self.organizers, self)
+            assign_perm('delete_' + label.lower(), self.organizers, self)
 
         return result
 
@@ -80,7 +84,6 @@ class ParticipationConfirmation(Confirmable, Confirmation, object):
             acceptance = Confirmation.objects.create(confirmable=self)
             assign_perm('change_confirmation',
                         self.confirmable.package.applicable.organizers, acceptance)
-
         else:
             result = super(ParticipationConfirmation, self).save(*args, **kwargs)
 

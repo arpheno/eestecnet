@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import factory
 
+from apps.accounts.factories import AccountFactory
 from apps.announcements.models import Announcement, News, CareerOffer
 
 
@@ -17,6 +18,7 @@ class AnnouncementFactory(factory.DjangoModelFactory):
 
     name = "Short text"
     description = "long text"
+    owner = factory.SubFactory(AccountFactory)
 
 
 class NewsFactory(AnnouncementFactory):

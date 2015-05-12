@@ -6,10 +6,6 @@ from apps.accounts.factories import AccountFactory, ParticipationFactory, GroupF
 from apps.accounts.models import Participation, Account
 from apps.accounts.serializers import AccountSerializer, GroupSerializer, \
     ParticipationSerializer
-from apps.events.factories import ExchangeFactory, TrainingFactory, WorkshopFactory, \
-    WorkshopParticipationFactory
-from apps.events.serializers import ExchangeSerializer, WorkshopSerializer
-from apps.events.serializers import TrainingSerializer
 from apps.teams.factories import CommitmentFactory
 from common.util import RESTCase
 
@@ -65,26 +61,4 @@ class TestParticipation(RESTCase, TestCase):
         self.assertTrue(Participation.objects.get(pk=self.object.pk).confirmed)
 
 
-class TestExchange(RESTCase, TestCase):
-    def setUp(self):
-        self.object = ExchangeFactory()
-        self.serializer_class = ExchangeSerializer
-        super(TestExchange, self).setUp()
 
-
-class TestTraining(RESTCase, TestCase):
-    def setUp(self):
-        self.object = TrainingFactory()
-        self.serializer_class = TrainingSerializer
-        super(TestTraining, self).setUp()
-
-
-class TestWorkshop(RESTCase, TestCase):
-    def setUp(self):
-        self.object = WorkshopFactory()
-        self.serializer_class = WorkshopSerializer
-        super(TestWorkshop, self).setUp()
-
-    def test_organizers_can_modify_event(self):
-        p = WorkshopParticipationFactory(group=self.object.organizers)
-        self.assertTrue(p.user.has_perm('change_workshop', self.object))

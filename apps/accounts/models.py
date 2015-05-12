@@ -181,7 +181,6 @@ class Participation(Confirmable):
         if not self.pk:
             result = super(Participation, self).save(**kwargs)
             from apps.events.models import ParticipationConfirmation
-
             p = ParticipationConfirmation.objects.create(confirmable=self)
             p.save()
             from apps.questionnaires.models import Response

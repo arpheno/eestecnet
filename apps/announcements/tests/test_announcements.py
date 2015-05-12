@@ -7,7 +7,7 @@ from apps.announcements.serializers import AnnouncementSerializer, NewsSerialize
     CareerOfferSerializer
 from apps.teams.factories import InternationalTeamFactory
 from apps.teams.models import BaseTeam
-from common.util import RESTCase
+from common.util import RESTCase, AuditCase
 
 
 __author__ = 'Sebastian Wozny'
@@ -17,20 +17,21 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class TestAnnouncement(RESTCase, TestCase):
+class TestAnnouncement(RESTCase, AuditCase, TestCase):
     def setUp(self):
         super(TestAnnouncement, self).setUp()
         self.ib = InternationalTeamFactory(name="international board")
         self.object = AnnouncementFactory()
         self.serializer_class = AnnouncementSerializer
 
-    def test_confirmation_created_and_editable_by_international_board(self):
-        c = self.object.confirmation_set.all()[0]
-        self.assertTrue('change_confirmation' in get_perms(
-            BaseTeam.objects.get(name='international board').board, c))
+
+def test_confirmation_created_and_editable_by_international_board(self):
+    c = self.object.confirmation_set.all()[0]
+    self.assertTrue('change_confirmation' in get_perms(
+        BaseTeam.objects.get(name='international board').board, c))
 
 
-class TestCareerOffer(RESTCase, TestCase):
+class TestCareerOffer(RESTCase, AuditCase, TestCase):
     def setUp(self):
         super(TestCareerOffer, self).setUp()
         self.ib = InternationalTeamFactory(name="international board")
@@ -38,7 +39,7 @@ class TestCareerOffer(RESTCase, TestCase):
         self.serializer_class = CareerOfferSerializer
 
 
-class TestNews(RESTCase, TestCase):
+class TestNews(RESTCase, AuditCase, TestCase):
     def setUp(self):
         super(TestNews, self).setUp()
         self.ib = InternationalTeamFactory(name="international board")

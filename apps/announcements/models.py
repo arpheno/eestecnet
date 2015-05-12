@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import CharField, \
-    TextField
+    TextField, ForeignKey
 from guardian.shortcuts import assign_perm
 from polymorphic import PolymorphicModel
 
@@ -27,10 +27,15 @@ class Announcement(Confirmable, Reversable):
 
     name = CharField(max_length=300)
     description = TextField(max_length=300)
+    owner = ForeignKey('accounts.Account', editable=False)
 
     def save(self, *args, **kwargs):
         if not self.pk:
             result = super(Announcement, self).save()
+
+            assign_perm('change_'+self._meta.object_name.lower(),self.owner,self)
+            assign_perm('view_'+self._meta.object_name.lower(),self.owner,self)
+            assign_perm('delete_'+self._meta.object_name.lower(),self.owner,self)
             i = Confirmation.objects.create(confirmable=self)
             assign_perm('change_confirmation',
                         Applicable.objects.get(name="international board").organizers, i)

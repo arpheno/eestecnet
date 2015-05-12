@@ -1,3 +1,6 @@
+from rest_framework.fields import HiddenField
+from rest_framework.fields import CurrentUserDefault
+
 from rest_framework.serializers import ModelSerializer
 
 from apps.announcements.models import Announcement, News, CareerOffer
@@ -14,12 +17,16 @@ class AnnouncementSerializer(ModelSerializer):
     class Meta:
         model = Announcement
 
+    owner = HiddenField(
+        default=CurrentUserDefault()
+    )
 
-class NewsSerializer(ModelSerializer):
+
+class NewsSerializer(AnnouncementSerializer):
     class Meta:
         model = News
 
 
-class CareerOfferSerializer(ModelSerializer):
+class CareerOfferSerializer(AnnouncementSerializer):
     class Meta:
         model = CareerOffer

@@ -27,10 +27,11 @@ class AccountFactory(factory.DjangoModelFactory):
 class ParticipationFactory(factory.DjangoModelFactory):
     class Meta:
         model = 'accounts.Participation'
-        django_get_or_create = ('group',)
+        django_get_or_create = ('group', 'user')
 
     user = factory.SubFactory('apps.accounts.factories.AccountFactory')
     group = factory.SubFactory('apps.accounts.factories.GroupFactory')
+    confirmed = False
 
 
 class GroupFactory(factory.DjangoModelFactory):

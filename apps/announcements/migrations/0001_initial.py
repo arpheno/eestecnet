@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+from django.conf import settings
 
 import common.util
 
@@ -10,6 +11,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('common', '0001_initial'),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
@@ -44,5 +46,11 @@ class Migration(migrations.Migration):
                 'abstract': False,
             },
             bases=('announcements.announcement',),
+        ),
+        migrations.AddField(
+            model_name='announcement',
+            name='owner',
+            field=models.ForeignKey(editable=False, to=settings.AUTH_USER_MODEL),
+            preserve_default=True,
         ),
     ]
