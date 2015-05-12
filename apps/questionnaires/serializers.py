@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from apps.questionnaires.models import Questionnaire, Question
+from apps.questionnaires.models import Questionnaire, Question, Response, Answer
 
 
 __author__ = 'Sebastian Wozny'
@@ -18,3 +18,13 @@ class QuestionnaireSerializer(ModelSerializer):
 class QuestionSerializer(ModelSerializer):
     class Meta:
         model = Question
+
+
+class ResponseSerializer(ModelSerializer):
+    class Meta:
+        model = Response
+
+
+class AnswerSerializer(ModelSerializer):
+    class Meta:
+        model = Answer

@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import ForeignKey, TextField, CharField
+from guardian.shortcuts import assign_perm
 from polymorphic import PolymorphicModel
 
 from apps.accounts.models import Account
@@ -33,9 +34,33 @@ class Response(PolymorphicModel, Reversable):
     participation = ForeignKey('accounts.Participation')
     name = CharField(max_length=300)
 
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            result = super(Response, self).save()
+            label = self._meta.object_name
+            assign_perm('view_' + label.lower(), self.participation.user, self)
+            assign_perm('change_' + label.lower(), self.participation.user, self)
+        else:
+            result = super(Response, self).save()
+        return result
+
 
 class Answer(PolymorphicModel, Reversable):
     """ Answers appear as atoms in Responses."""
     response = ForeignKey('questionnaires.Response')
     answer = TextField()
     question = ForeignKey('questionnaires.Question')
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            result = super(Answer, self).save()
+            label = self._meta.object_name
+            assign_perm('change_' + label.lower(), self.response.participation.user,
+                        self)
+            assign_perm('view_' + label.lower(), self.response.participation.user, self)
+            assign_perm('delete_' + label.lower(), self.response.participation.user,
+                        self)
+        else:
+            result = super(Answer, self).save()
+        return result
+

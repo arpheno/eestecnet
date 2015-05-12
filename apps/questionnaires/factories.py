@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 import factory
 
-from apps.questionnaires.models import Questionnaire, Question
+from apps.accounts.factories import ParticipationFactory
+
+from apps.questionnaires.models import Questionnaire, Question, Response, Answer
 
 
 __author__ = 'Sebastian Wozny'
@@ -32,4 +34,27 @@ class QuestionFactory(factory.DjangoModelFactory):
 
     questionnaire = factory.SubFactory(QuestionnaireFactory)
     question = "You talking to me?"
+
+
+class AnswerFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = Answer
+
+    response = factory.SubFactory('apps.questionnaires.factories.ResponseFactory')
+    answer = "BIG FAT LIE"
+    question = factory.SubFactory(QuestionFactory)
+
+
+class ResponseFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = Response
+        django_get_or_create = ('participation', 'name')
+
+    participation = factory.SubFactory(ParticipationFactory)
+    name = factory.Sequence(lambda x: "response " + str(x))
+
+    @factory.post_generation
+    def create_responses(self, bla, blabla):
+        for i in range(5):
+            AnswerFactory(response=self)
 

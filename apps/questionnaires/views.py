@@ -1,7 +1,9 @@
 from rest_framework.viewsets import ModelViewSet
 
-from apps.questionnaires.models import Question, Questionnaire
-from apps.questionnaires.serializers import QuestionnaireSerializer, QuestionSerializer
+from apps.questionnaires.models import Question, Questionnaire, Response, Answer
+from apps.questionnaires.serializers import QuestionnaireSerializer, \
+    QuestionSerializer, \
+    ResponseSerializer, AnswerSerializer
 
 
 __author__ = 'Sebastian Wozny'
@@ -18,3 +20,13 @@ class QuestionnaireViewSet(ModelViewSet):
 class QuestionViewSet(ModelViewSet):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
+
+
+class ResponseViewSet(ModelViewSet):
+    queryset = Response.objects.all()
+    serializer_class = ResponseSerializer
+
+
+class AnswerViewSet(ModelViewSet):
+    queryset = Answer.objects.all()
+    serializer_class = AnswerSerializer
