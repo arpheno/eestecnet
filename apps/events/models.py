@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User, Permission
 from django.contrib.contenttypes.models import ContentType
+from django.db.models import ForeignKey
 from guardian.shortcuts import assign_perm
 from polymorphic import PolymorphicModel
 
@@ -18,6 +19,7 @@ logger = logging.getLogger(__name__)
 class BaseEvent(Applicable, Reversable):
     """ Model that stores basic information common to all events."""
 
+    owner = ForeignKey('accounts.Account', editable=False)
     @property
     def organizers(self):
         return self.packages.get(name=self.name + '_organizers')

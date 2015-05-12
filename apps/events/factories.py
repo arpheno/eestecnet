@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import factory
 
+from apps.accounts.factories import AccountFactory
+
 from apps.events.models import BaseEvent, Workshop, Exchange, ParticipationConfirmation
 
 
@@ -17,6 +19,7 @@ class BaseEventFactory(factory.DjangoModelFactory):
         django_get_or_create = ['name']
 
     name = "base_event"
+    owner = factory.SubFactory(AccountFactory)
 
 
 class WorkshopFactory(BaseEventFactory):
