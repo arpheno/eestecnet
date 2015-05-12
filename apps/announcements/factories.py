@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import factory
 
-from apps.announcements.models import Announcement
+from apps.announcements.models import Announcement, News, CareerOffer
 
 
 __author__ = 'Sebastian Wozny'
@@ -19,5 +19,11 @@ class AnnouncementFactory(factory.DjangoModelFactory):
     description = "long text"
 
 
+class NewsFactory(AnnouncementFactory):
+    class Meta:
+        model = News
 
 
+class CareerOfferFactory(AnnouncementFactory):
+    class Meta:
+        model = CareerOffer

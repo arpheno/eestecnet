@@ -1,8 +1,10 @@
 from django.test import TestCase
 from guardian.shortcuts import get_perms
 
-from apps.announcements.factories import AnnouncementFactory
-from apps.announcements.serializers import AnnouncementSerializer
+from apps.announcements.factories import AnnouncementFactory, NewsFactory, \
+    CareerOfferFactory
+from apps.announcements.serializers import AnnouncementSerializer, NewsSerializer, \
+    CareerOfferSerializer
 from apps.teams.factories import InternationalTeamFactory
 from apps.teams.models import BaseTeam
 from common.util import RESTCase
@@ -26,3 +28,20 @@ class TestAnnouncement(RESTCase, TestCase):
         c = self.object.confirmation_set.all()[0]
         self.assertTrue('change_confirmation' in get_perms(
             BaseTeam.objects.get(name='international board').board, c))
+
+
+class TestCareerOffer(RESTCase, TestCase):
+    def setUp(self):
+        super(TestCareerOffer, self).setUp()
+        self.ib = InternationalTeamFactory(name="international board")
+        self.object = CareerOfferFactory()
+        self.serializer_class = CareerOfferSerializer
+
+
+class TestNews(RESTCase, TestCase):
+    def setUp(self):
+        super(TestNews, self).setUp()
+        self.ib = InternationalTeamFactory(name="international board")
+        self.object = NewsFactory()
+        self.serializer_class = NewsSerializer
+

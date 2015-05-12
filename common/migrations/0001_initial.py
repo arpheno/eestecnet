@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
@@ -59,7 +60,9 @@ class Migration(migrations.Migration):
                                       to='common.Notification')),
                 ('requested', models.DateField(auto_now=True)),
                 ('status', models.BooleanField(default=False)),
-                ('confirmable', models.ForeignKey(to='common.Confirmable')),
+                ('confirmable',
+                 models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL,
+                                   blank=True, to='common.Confirmable', null=True)),
             ],
             options={
                 'abstract': False,

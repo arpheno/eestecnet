@@ -24,8 +24,8 @@ class Migration(migrations.Migration):
                 ('first_name', models.CharField(max_length=30)),
                 ('middle_name', models.CharField(max_length=30, null=True, blank=True)),
                 ('last_name', models.CharField(max_length=40)),
-                ('second_last_name', models.CharField(max_length=40, null=True,
-                                                      blank=True)),
+                ('second_last_name',
+                 models.CharField(max_length=40, null=True, blank=True)),
                 ('email', models.EmailField(unique=True, max_length=75)),
             ],
             options={

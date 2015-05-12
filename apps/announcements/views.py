@@ -1,7 +1,9 @@
 from rest_framework.viewsets import ModelViewSet
 
-from apps.announcements.models import Announcement
-from apps.announcements.serializers import AnnouncementSerializer
+from apps.announcements.models import Announcement, News, CareerOffer
+from apps.announcements.serializers import AnnouncementSerializer, \
+    CareerOfferSerializer, \
+    NewsSerializer
 
 
 __author__ = 'Sebastian Wozny'
@@ -15,3 +17,11 @@ class AnnouncementViewSet(ModelViewSet):
     serializer_class = AnnouncementSerializer
 
 
+class NewsViewSet(ModelViewSet):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
+
+class CareerOfferViewSet(ModelViewSet):
+    queryset = CareerOffer.objects.all()
+    serializer_class = CareerOfferSerializer

@@ -7,18 +7,16 @@ import common.util
 
 
 class Migration(migrations.Migration):
+
     dependencies = [
-        ('common', '0002_auto_20150511_2058'),
+        ('common', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
             name='Announcement',
             fields=[
-                ('confirmable_ptr',
-                 models.OneToOneField(parent_link=True, auto_created=True,
-                                      primary_key=True, serialize=False,
-                                      to='common.Confirmable')),
+                ('confirmable_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='common.Confirmable')),
                 ('name', models.CharField(max_length=300)),
                 ('description', models.TextField(max_length=300)),
             ],
@@ -26,5 +24,25 @@ class Migration(migrations.Migration):
                 'abstract': False,
             },
             bases=('common.confirmable', common.util.Reversable),
+        ),
+        migrations.CreateModel(
+            name='CareerOffer',
+            fields=[
+                ('announcement_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='announcements.Announcement')),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=('announcements.announcement',),
+        ),
+        migrations.CreateModel(
+            name='News',
+            fields=[
+                ('announcement_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='announcements.Announcement')),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=('announcements.announcement',),
         ),
     ]

@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from apps.announcements.models import Announcement
+from apps.announcements.models import Announcement, News, CareerOffer
 
 
 __author__ = 'Sebastian Wozny'
@@ -15,3 +15,11 @@ class AnnouncementSerializer(ModelSerializer):
         model = Announcement
 
 
+class NewsSerializer(ModelSerializer):
+    class Meta:
+        model = News
+
+
+class CareerOfferSerializer(ModelSerializer):
+    class Meta:
+        model = CareerOffer

@@ -42,4 +42,11 @@ class Announcement(Confirmable, Reversable):
         return unicode(self.name)
 
 
+class News(Announcement):
+    pass
+
+
+class CareerOffer(Announcement):
+    pass
+
 
