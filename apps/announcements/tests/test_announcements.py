@@ -24,11 +24,10 @@ class TestAnnouncement(RESTCase, AuditCase, TestCase):
         self.object = AnnouncementFactory()
         self.serializer_class = AnnouncementSerializer
 
-
-def test_confirmation_created_and_editable_by_international_board(self):
-    c = self.object.confirmation_set.all()[0]
-    self.assertTrue('change_confirmation' in get_perms(
-        BaseTeam.objects.get(name='international board').board, c))
+    def test_confirmation_created_and_editable_by_international_board(self):
+        c = self.object.confirmation_set.all()[0]
+        self.assertTrue('change_confirmation' in get_perms(
+            BaseTeam.objects.get(name='international board').board, c))
 
 
 class TestCareerOffer(RESTCase, AuditCase, TestCase):
