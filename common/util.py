@@ -92,26 +92,19 @@ class RESTCase(object):
             raise
 
 
-    def test_rest_list_resource(self):
+    def test_rest(self):
+        url = self.object.get_absolute_url()
+        data = self.serializer_class(self.object).data
+        # def test_rest_update_resource(self):
+        self.assert_update(url, data)
+        self.assert_retrieve(url)
+        # def test_rest_list_resource(self):
         self.assert_retrieve(
             reverse_lazy(self.object._meta.object_name.lower() + '-list'))
-
-    def test_rest_retrieve_resource(self):
-        url = self.object.get_absolute_url()
-        self.assert_retrieve(url)
-
-    def test_rest_create_resource(self):
-        url = self.object.get_absolute_url()
+        #def test_rest_delete_resource(self):
         self.assert_delete(url)
-        data = self.serializer_class(self.object).data
+        #def test_rest_create_resource(self):
         url = reverse_lazy(self.object._meta.object_name.lower() + '-list')
         self.assert_create(url, data)
 
-    def test_rest_update_resource(self):
-        data = self.serializer_class(self.object).data
-        url = self.object.get_absolute_url()
-        self.assert_update(url, data)
 
-    def test_rest_delete_resource(self):
-        url = self.object.get_absolute_url()
-        self.assert_delete(url)
