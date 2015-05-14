@@ -7,7 +7,7 @@ from apps.accounts.models import Participation, Account
 from apps.accounts.serializers import AccountSerializer, GroupSerializer, \
     ParticipationSerializer
 from apps.teams.factories import CommitmentFactory
-from common.util import RESTCase
+from common.util import RESTCase, ImageCase
 
 
 __author__ = 'Sebastian Wozny'
@@ -17,11 +17,11 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class TestAccount(RESTCase, TestCase):
+class TestAccount(RESTCase, TestCase, ImageCase):
     def setUp(self):
         self.object = AccountFactory()
-        super(TestAccount, self).setUp()
         self.serializer_class = AccountSerializer
+        super(TestAccount, self).setUp()
 
     def test_password_hashed(self):
         self.assertTrue("$" in Account.objects.get(pk=self.object.pk).password)
@@ -36,9 +36,9 @@ class TestAccount(RESTCase, TestCase):
 
 class TestGroup(RESTCase, TestCase):
     def setUp(self):
-        super(TestGroup, self).setUp()
         self.object = GroupFactory()
         self.serializer_class = GroupSerializer
+        super(TestGroup, self).setUp()
 
     def test_get_group_nested(self):
         url = reverse('group-detail', kwargs={'event_pk': self.object.applicable.pk,
@@ -48,9 +48,9 @@ class TestGroup(RESTCase, TestCase):
 
 class TestParticipation(RESTCase, TestCase):
     def setUp(self):
-        super(TestParticipation, self).setUp()
         self.object = ParticipationFactory()
         self.serializer_class = ParticipationSerializer
+        super(TestParticipation, self).setUp()
 
     def test_participation_has_package(self):
         self.assertTrue(self.object.package.test)

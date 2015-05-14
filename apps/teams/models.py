@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db.models import ForeignKey
 from guardian.shortcuts import assign_perm
 
@@ -15,6 +16,7 @@ logger = logging.getLogger(__name__)
 # Create your models here.
 class BaseTeam(Applicable, Reversable):
     owner = ForeignKey('accounts.Account', editable=False)
+    images = GenericRelation('common.Image', related_query_name='images')
     def save(self, **kwargs):
         """
         When an Event is first created two groups should always be created:

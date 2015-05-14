@@ -1,6 +1,11 @@
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import CharField, DateField, BooleanField, ForeignKey, TextField, \
-    AutoField, SET_NULL
+    AutoField, SET_NULL, ImageField, PositiveIntegerField
 from polymorphic import PolymorphicModel
+
+from common.util import Reversable
+
 
 __author__ = 'Sebastian Wozny'
 import logging
@@ -97,3 +102,12 @@ class Applicable(Confirmable):
         result = [p.user for g in self.packages.all() for p in
                   g.participation_set.filter(confirmed=True)]
         return result
+
+
+class Image(PolymorphicModel, Reversable):
+    content_type = ForeignKey(ContentType)
+    object_id = PositiveIntegerField()
+    content_object = GenericForeignKey()
+    full_size = ImageField(upload_to='images')
+    thumbnail = BooleanField(default=False)
+

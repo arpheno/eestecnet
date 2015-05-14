@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User, Permission
+from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import ForeignKey, OneToOneField, DateTimeField, CharField, \
     TextField
@@ -22,6 +23,7 @@ class BaseEvent(Applicable, Reversable):
     """ Model that stores basic information common to all events."""
 
     owner = ForeignKey('accounts.Account', editable=False)
+    images = GenericRelation('common.Image', related_query_name='images')
     @property
     def organizers(self):
         return self.packages.get(name=self.name + '_organizers')
@@ -73,6 +75,17 @@ class Travel(Notification, Reversable):
     departure_mode = CharField(max_length=100, choices=TRAVEL_CHOICES)
     comment = TextField(blank=True, null=True)
 
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            result = super(Travel, self).save(*args, **kwargs)
+            label = self._meta.object_name
+            assign_perm('view_' + label.lower(),
+                        self.participation.package.applicable.organizers, self)
+            assign_perm('view_' + label.lower(), self.participation.user, self)
+            assign_perm('change_' + label.lower(), self.participation.user, self)
+        else:
+            result = super(Travel, self).save(*args, **kwargs)
+        return result
 
 class ParticipationConfirmation(Confirmable, Confirmation, object):
     """

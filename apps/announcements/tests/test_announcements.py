@@ -7,7 +7,7 @@ from apps.announcements.serializers import AnnouncementSerializer, NewsSerialize
     CareerOfferSerializer
 from apps.teams.factories import InternationalTeamFactory
 from apps.teams.models import BaseTeam
-from common.util import RESTCase, AuditCase
+from common.util import RESTCase, AuditCase, ImageCase
 
 
 __author__ = 'Sebastian Wozny'
@@ -17,12 +17,12 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class TestAnnouncement(RESTCase, AuditCase, TestCase):
+class TestAnnouncement(RESTCase, AuditCase, TestCase, ImageCase):
     def setUp(self):
-        super(TestAnnouncement, self).setUp()
         self.ib = InternationalTeamFactory(name="international board")
         self.object = AnnouncementFactory()
         self.serializer_class = AnnouncementSerializer
+        super(TestAnnouncement, self).setUp()
 
     def test_confirmation_created_and_editable_by_international_board(self):
         c = self.object.confirmation_set.all()[0]
@@ -32,16 +32,16 @@ class TestAnnouncement(RESTCase, AuditCase, TestCase):
 
 class TestCareerOffer(RESTCase, AuditCase, TestCase):
     def setUp(self):
-        super(TestCareerOffer, self).setUp()
         self.ib = InternationalTeamFactory(name="international board")
         self.object = CareerOfferFactory()
         self.serializer_class = CareerOfferSerializer
+        super(TestCareerOffer, self).setUp()
 
 
 class TestNews(RESTCase, AuditCase, TestCase):
     def setUp(self):
-        super(TestNews, self).setUp()
         self.ib = InternationalTeamFactory(name="international board")
         self.object = NewsFactory()
         self.serializer_class = NewsSerializer
+        super(TestNews, self).setUp()
 

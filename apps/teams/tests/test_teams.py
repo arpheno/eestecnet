@@ -3,7 +3,7 @@ from django.test import TestCase
 from apps.accounts.factories import ParticipationFactory
 from apps.teams.factories import CommitmentFactory, InternationalTeamFactory
 from apps.teams.serializers import CommitmentSerializer, InternationalTeamSerializer
-from common.util import RESTCase, AuditCase
+from common.util import RESTCase, AuditCase, ImageCase
 
 
 __author__ = 'Sebastian Wozny'
@@ -13,7 +13,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class TestTeam(TestCase, AuditCase):
+class TestTeam(TestCase, AuditCase, ImageCase):
     def setUp(self):
         super(TestTeam, self).setUp()
         self.object = CommitmentFactory()
@@ -34,14 +34,14 @@ class TestTeam(TestCase, AuditCase):
 
 class TestCommitment(RESTCase, AuditCase, TestCase):
     def setUp(self):
-        super(TestCommitment, self).setUp()
         self.object = CommitmentFactory()
         self.serializer_class = CommitmentSerializer
+        super(TestCommitment, self).setUp()
 
 
 class TestInternationalTeam(RESTCase, AuditCase, TestCase):
     def setUp(self):
-        super(TestInternationalTeam, self).setUp()
         self.object = InternationalTeamFactory()
         self.serializer_class = InternationalTeamSerializer
+        super(TestInternationalTeam, self).setUp()
 

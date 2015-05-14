@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import factory
 
-from common.models import Confirmable, Notification, Confirmation, Applicable
+from apps.events.factories import BaseEventFactory
+from common.models import Confirmable, Notification, Confirmation, Applicable, Image
 
 
 __author__ = 'Sebastian Wozny'
@@ -44,3 +45,10 @@ class ConfirmableFactory(factory.DjangoModelFactory):
         for i in range(2):
             ConfirmationFactory(confirmable=self)
 
+
+class ImageFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = Image
+
+    full_size = factory.django.ImageField(color='blue', width=200, height=200)
+    content_object = factory.SubFactory(BaseEventFactory)

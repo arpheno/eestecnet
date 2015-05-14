@@ -18,9 +18,9 @@ logger = logging.getLogger(__name__)
 
 class TestPriorityList(RESTCase, TestCase):
     def setUp(self):
-        super(TestPriorityList, self).setUp()
         self.object = PriorityListFactory()
         self.serializer_class = PriorityListSerializer
+        super(TestPriorityList, self).setUp()
 
 
     def test_prioritylist_created(self):
@@ -46,6 +46,6 @@ class TestPriorityList(RESTCase, TestCase):
 
 class TestPriority(RESTCase, TestCase):
     def setUp(self):
-        super(TestPriority, self).setUp()
         self.object = PriorityFactory()
         self.serializer_class = PrioritySerializer
+        super(TestPriority, self).setUp()

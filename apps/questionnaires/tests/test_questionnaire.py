@@ -18,23 +18,23 @@ logger = logging.getLogger(__name__)
 
 class TestQuestionnaire(RESTCase, TestCase):
     def setUp(self):
-        super(TestQuestionnaire, self).setUp()
         self.object = QuestionnaireFactory()
         self.serializer_class = QuestionnaireSerializer
+        super(TestQuestionnaire, self).setUp()
 
 
 class TestQuestion(RESTCase, TestCase):
     def setUp(self):
-        super(TestQuestion, self).setUp()
         self.object = QuestionFactory()
         self.serializer_class = QuestionSerializer
+        super(TestQuestion, self).setUp()
 
 
 class TestResponse(RESTCase, TestCase):
     def setUp(self):
-        super(TestResponse, self).setUp()
         self.object = ResponseFactory()
         self.serializer_class = ResponseSerializer
+        super(TestResponse, self).setUp()
 
     def test_organizers_can_view(self):
         self.assertTrue(
@@ -53,9 +53,9 @@ class TestResponse(RESTCase, TestCase):
 
 class TestAnswer(RESTCase, TestCase):
     def setUp(self):
-        super(TestAnswer, self).setUp()
         self.object = AnswerFactory()
         self.serializer_class = AnswerSerializer
+        super(TestAnswer, self).setUp()
 
 
     def test_organizers_can_view(self):

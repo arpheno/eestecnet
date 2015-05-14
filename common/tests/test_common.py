@@ -1,6 +1,8 @@
 from django.test import TestCase
 
-from common.factories import ConfirmableFactory, ConfirmationFactory
+from common.factories import ConfirmableFactory, ConfirmationFactory, ImageFactory
+from common.serializers import ImageSerializer
+from common.util import RESTCase
 
 
 __author__ = 'swozn'
@@ -27,3 +29,13 @@ class TestConfirmation(TestCase):
         self.object = ConfirmationFactory()
 
 
+class TestImage(RESTCase, TestCase):
+    def setUp(self):
+        self.object = ImageFactory()
+        self.serializer_class = ImageSerializer
+        super(TestImage, self).setUp()
+        import base64
+
+        with self.object.full_size as image_file:
+            imagedata = base64.b64encode(image_file.read())
+        self.data['full_size'] = imagedata

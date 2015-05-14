@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User, Permission
+from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import CharField, \
     TextField, ForeignKey
@@ -28,6 +29,7 @@ class Announcement(Confirmable, Reversable):
     name = CharField(max_length=300)
     description = TextField(max_length=300)
     owner = ForeignKey('accounts.Account', editable=False)
+    images = GenericRelation('common.Image', related_query_name='images')
 
     def save(self, *args, **kwargs):
         if not self.pk:

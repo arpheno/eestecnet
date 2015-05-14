@@ -15,6 +15,9 @@ class Reversable(object):
         return reverse_lazy(self._meta.model_name + '-detail', kwargs={'pk': self.pk})
 
 
+class ImageCase(object):
+    def test_has_image(self):
+        self.assertTrue(hasattr(self.object, 'images'))
 class AuditCase(object):
     def test_owner_has_permissions(self):
         self.assertTrue(
@@ -51,9 +54,6 @@ class RESTCase(object):
 
         Account.objects.get(email="admin@admin.de").delete()
 
-    def setUp(self):
-        self.root = "/api"
-        super(RESTCase, self).setUp()
 
 
     def assert_create(self, url, data):
@@ -92,19 +92,23 @@ class RESTCase(object):
             raise
 
 
+    def setUp(self):
+        super(RESTCase, self).setUp()
+        if not hasattr(self, "url"):
+            self.root = "/api"
+            self.url = self.object.get_absolute_url()
+            self.data = self.serializer_class(self.object).data
+            self.group_url = reverse_lazy(
+                self.object._meta.object_name.lower() + '-list')
     def test_rest(self):
-        url = self.object.get_absolute_url()
-        data = self.serializer_class(self.object).data
         # def test_rest_update_resource(self):
-        self.assert_update(url, data)
-        self.assert_retrieve(url)
+        self.assert_update(self.url, self.data)
+        self.assert_retrieve(self.url)
         # def test_rest_list_resource(self):
-        self.assert_retrieve(
-            reverse_lazy(self.object._meta.object_name.lower() + '-list'))
+        self.assert_retrieve(self.group_url)
         #def test_rest_delete_resource(self):
-        self.assert_delete(url)
+        self.assert_delete(self.url)
         #def test_rest_create_resource(self):
-        url = reverse_lazy(self.object._meta.object_name.lower() + '-list')
-        self.assert_create(url, data)
+        self.assert_create(self.group_url, self.data)
 
 

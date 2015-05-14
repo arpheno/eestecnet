@@ -40,6 +40,8 @@ class Response(PolymorphicModel, Reversable):
             label = self._meta.object_name
             assign_perm('view_' + label.lower(), self.participation.user, self)
             assign_perm('change_' + label.lower(), self.participation.user, self)
+            assign_perm('view_' + label.lower(),
+                        self.participation.package.applicable.organizers, self)
         else:
             result = super(Response, self).save()
         return result
@@ -60,6 +62,8 @@ class Answer(PolymorphicModel, Reversable):
             assign_perm('view_' + label.lower(), self.response.participation.user, self)
             assign_perm('delete_' + label.lower(), self.response.participation.user,
                         self)
+            assign_perm('view_' + label.lower(),
+                        self.response.participation.package.applicable.organizers, self)
         else:
             result = super(Answer, self).save()
         return result

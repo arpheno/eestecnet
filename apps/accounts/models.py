@@ -2,6 +2,7 @@ from django.contrib import auth
 from django.contrib.auth.models import User, AbstractBaseUser, AbstractUser, \
     PermissionsMixin, Permission, _user_get_all_permissions, _user_has_perm, \
     _user_has_module_perms, GroupManager, BaseUserManager
+from django.contrib.contenttypes.fields import GenericRelation
 from django.core.urlresolvers import reverse
 from django.db.models import EmailField, CharField, BooleanField, ManyToManyField, \
     ForeignKey
@@ -156,6 +157,7 @@ class Account(GuardianUserMixin, AbstractBaseUser):
             group__name__endswith="members").package.applicable
 
 
+    images = GenericRelation('common.Image', related_query_name='images')
     first_name = CharField(max_length=30)
     middle_name = CharField(max_length=30, blank=True, null=True)
     last_name = CharField(max_length=40)

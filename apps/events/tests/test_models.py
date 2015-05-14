@@ -1,5 +1,6 @@
 from django.core.urlresolvers import reverse_lazy
 from django.test import TestCase
+from guardian.shortcuts import get_perms
 
 from apps.accounts.factories import ParticipationFactory, AccountFactory
 from apps.events.serializers import BaseEventSerializer, ExchangeSerializer, \
@@ -8,7 +9,7 @@ from apps.events.factories import BaseEventFactory, ParticipationConfirmationFac
     ExchangeFactory, TrainingFactory, WorkshopFactory, WorkshopParticipationFactory, \
     TravelFactory
 from common.models import Confirmable, Confirmation
-from common.util import RESTCase, AuditCase
+from common.util import RESTCase, AuditCase, ImageCase
 
 
 __author__ = 'Sebastian Wozny'
@@ -18,11 +19,11 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class TestBaseEvent(RESTCase, TestCase, AuditCase):
+class TestBaseEvent(RESTCase, TestCase, AuditCase, ImageCase):
     def setUp(self):
         self.object = BaseEventFactory()
-        super(TestBaseEvent, self).setUp()
         self.serializer_class = BaseEventSerializer
+        super(TestBaseEvent, self).setUp()
 
     def test_applications_work(self):
         k = AccountFactory(email="asdj@sadjo.de")
@@ -103,7 +104,22 @@ class TestWorkshop(RESTCase, TestCase, AuditCase):
 
 class TestTravel(RESTCase, TestCase):
     def setUp(self):
-        super(TestTravel, self).setUp()
         self.object = TravelFactory()
         self.serializer_class = TravelSerializer
+        super(TestTravel, self).setUp()
+
+    def test_organizers_can_view(self):
+        self.assertTrue(
+            'view_' + self.object._meta.object_name.lower() in get_perms(
+                self.object.participation.package.applicable.organizers, self.object))
+
+    def test_user_has_perms(self):
+        self.assertTrue(
+            self.object.participation.user.has_perm(
+                'view_' + self.object._meta.object_name.lower(),
+                self.object))
+        self.assertTrue(
+            self.object.participation.user.has_perm(
+                'change_' + self.object._meta.object_name.lower(),
+                self.object))
 
