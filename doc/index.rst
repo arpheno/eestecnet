@@ -27,15 +27,11 @@ leaving the website (red arrows) without having become associated with EESTEC.
    :maxdepth: 1
    problem
    requirements
+       usecases
    interface
    implementation
    setup
    overview
-   teams
-   eestecnet
-   events
-   account
-   news
 
 Indices and tables
 ==================
