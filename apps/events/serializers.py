@@ -1,8 +1,7 @@
 from rest_framework.fields import HiddenField, CurrentUserDefault
-
 from rest_framework.serializers import ModelSerializer
 
-from apps.events.models import BaseEvent, Exchange, Training, Workshop
+from apps.events.models import BaseEvent, Exchange, Training, Workshop, Travel
 
 
 __author__ = 'Sebastian Wozny'
@@ -33,3 +32,8 @@ class TrainingSerializer(BaseEventSerializer):
 class WorkshopSerializer(BaseEventSerializer):
     class Meta:
         model = Workshop
+
+
+class TravelSerializer(ModelSerializer):
+    class Meta:
+        model = Travel

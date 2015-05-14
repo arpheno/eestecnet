@@ -1,12 +1,12 @@
 from django.core.urlresolvers import reverse_lazy
-
 from django.test import TestCase
 
 from apps.accounts.factories import ParticipationFactory, AccountFactory
 from apps.events.serializers import BaseEventSerializer, ExchangeSerializer, \
-    TrainingSerializer, WorkshopSerializer
+    TrainingSerializer, WorkshopSerializer, TravelSerializer
 from apps.events.factories import BaseEventFactory, ParticipationConfirmationFactory, \
-    ExchangeFactory, TrainingFactory, WorkshopFactory, WorkshopParticipationFactory
+    ExchangeFactory, TrainingFactory, WorkshopFactory, WorkshopParticipationFactory, \
+    TravelFactory
 from common.models import Confirmable, Confirmation
 from common.util import RESTCase, AuditCase
 
@@ -99,3 +99,11 @@ class TestWorkshop(RESTCase, TestCase, AuditCase):
     def test_organizers_can_modify_event(self):
         p = WorkshopParticipationFactory(group=self.object.organizers)
         self.assertTrue(p.user.has_perm('change_workshop', self.object))
+
+
+class TestTravel(RESTCase, TestCase):
+    def setUp(self):
+        super(TestTravel, self).setUp()
+        self.object = TravelFactory()
+        self.serializer_class = TravelSerializer
+

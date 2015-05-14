@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+from django.utils.timezone import now
 import factory
 
-from apps.accounts.factories import AccountFactory
-
-from apps.events.models import BaseEvent, Workshop, Exchange, ParticipationConfirmation
+from apps.accounts.factories import AccountFactory, ParticipationFactory
+from apps.events.models import BaseEvent, Workshop, Exchange, \
+    ParticipationConfirmation, \
+    Travel
 
 
 __author__ = 'Sebastian Wozny'
@@ -65,3 +67,13 @@ class WorkshopPackageFactory(factory.DjangoModelFactory):
     applicable = factory.SubFactory('apps.events.factories.WorkshopFactory')
 
 
+class TravelFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = Travel
+
+    participation = factory.SubFactory(ParticipationFactory)
+    arrival_datetime = now()
+    departure_datetime = now()
+    arrival_mode = 'car'
+    departure_mode = 'car'
+    comment = "moo"

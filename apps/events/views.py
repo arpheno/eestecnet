@@ -2,9 +2,9 @@ from rest_framework.viewsets import ModelViewSet
 
 from apps.accounts.models import Group
 from apps.accounts.serializers import GroupSerializer
-from apps.events.models import BaseEvent, Training, Exchange, Workshop
+from apps.events.models import BaseEvent, Training, Exchange, Workshop, Travel
 from apps.events.serializers import BaseEventSerializer, TrainingSerializer, \
-    ExchangeSerializer, WorkshopSerializer
+    ExchangeSerializer, WorkshopSerializer, TravelSerializer
 
 
 __author__ = 'Sebastian Wozny'
@@ -47,3 +47,8 @@ class GroupViewSet(ModelViewSet):
         else:
             self.object = self.queryset.get(pk=pk)
         return super(GroupViewSet, self).retrieve(request)
+
+
+class TravelViewSet(ModelViewSet):
+    queryset = Travel.objects.all()
+    serializer_class = TravelSerializer

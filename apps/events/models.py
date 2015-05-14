@@ -1,12 +1,14 @@
 from django.contrib.auth.models import User, Permission
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import ForeignKey
+from django.db.models import ForeignKey, OneToOneField, DateTimeField, CharField, \
+    TextField
 from guardian.shortcuts import assign_perm
 from polymorphic import PolymorphicModel
 
 from apps.accounts.models import Account, Participation
-from common.models import Applicable, Confirmable, Confirmation
+from common.models import Applicable, Confirmable, Confirmation, Notification
 from common.util import Reversable
+from settings.conf.choices import TRAVEL_CHOICES
 
 
 __author__ = 'Sebastian Wozny'
@@ -61,6 +63,15 @@ class Exchange(BaseEvent):
 class Training(BaseEvent):
     """ Training Sessions held by EESTEC Trainers ."""
     pass
+
+
+class Travel(Notification, Reversable):
+    participation = OneToOneField('accounts.Participation')
+    arrival_datetime = DateTimeField()
+    arrival_mode = CharField(max_length=100, choices=TRAVEL_CHOICES)
+    departure_datetime = DateTimeField()
+    departure_mode = CharField(max_length=100, choices=TRAVEL_CHOICES)
+    comment = TextField(blank=True, null=True)
 
 
 class ParticipationConfirmation(Confirmable, Confirmation, object):
