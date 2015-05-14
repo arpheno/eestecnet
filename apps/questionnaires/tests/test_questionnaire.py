@@ -1,4 +1,5 @@
 from django.test import TestCase
+from guardian.shortcuts import get_perms
 
 from apps.questionnaires.factories import QuestionnaireFactory, QuestionFactory, \
     ResponseFactory, AnswerFactory
@@ -35,6 +36,10 @@ class TestResponse(RESTCase, TestCase):
         self.object = ResponseFactory()
         self.serializer_class = ResponseSerializer
 
+    def test_organizers_can_view(self):
+        self.assertTrue(
+            'view_' + self.object._meta.object_name.lower() in get_perms(
+                self.object.participation.package.applicable.organizers, self.object))
     def test_user_has_perms(self):
         self.assertTrue(
             self.object.participation.user.has_perm(
@@ -51,6 +56,13 @@ class TestAnswer(RESTCase, TestCase):
         super(TestAnswer, self).setUp()
         self.object = AnswerFactory()
         self.serializer_class = AnswerSerializer
+
+
+    def test_organizers_can_view(self):
+        self.assertTrue(
+            'view_' + self.object._meta.object_name.lower() in get_perms(
+                self.object.response.participation.package.applicable.organizers,
+                self.object))
 
     def test_user_has_perms(self):
         self.assertTrue(
