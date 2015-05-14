@@ -1,5 +1,6 @@
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.db import models
 from django.db.models import CharField, DateField, BooleanField, ForeignKey, TextField, \
     AutoField, SET_NULL, ImageField, PositiveIntegerField
 from polymorphic import PolymorphicModel
@@ -12,6 +13,21 @@ import logging
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
+
+
+class DescriptionMixin(models.Model):
+    class Meta:
+        abstract = True
+
+    description = TextField(blank=True)
+
+
+class NameMixin(models.Model):
+    class Meta:
+        abstract = True
+
+    name = CharField(max_length=300)
+
 class Confirmable(PolymorphicModel):
     """
     Confirmables have two states: Confirmed(Approved) or pending.
@@ -37,12 +53,11 @@ class Confirmable(PolymorphicModel):
             self.save()
 
 
-class Notification(PolymorphicModel):
+class Notification(PolymorphicModel, DescriptionMixin):
     """
     Notifications prompt users for action
     """
-    description = TextField(blank=True, null=True)
-
+    pass
 
 class Confirmation(Notification):
     """
@@ -70,27 +85,27 @@ class Confirmation(Notification):
         self.confirmable.check_confirm()
         return result
 
-class Applicable(Confirmable):
+
+class Applicable(Confirmable, NameMixin, DescriptionMixin):
     """
     Basic model that can have groups of users and accepts applications to those groups.
     """
-    name = CharField(max_length=50, unique=True)
 
     @property
     def applications(self):
-        result = [p for g in self.packages.all() for p in
+        result = [p for g in self.group_set.all() for p in
                   g.participation_set.filter(confirmed=False)]
         return result
 
     @property
     def participations(self):
-        result = [p for g in self.packages.all() for p in
+        result = [p for g in self.group_set.all() for p in
                   g.participation_set.filter(confirmed=True)]
         return result
 
     @property
     def applicants(self):
-        result = [p.user for g in self.packages.all() for p in
+        result = [p.user for g in self.group_set.all() for p in
                   g.participation_set.filter(confirmed=False)]
         return result
 
@@ -99,7 +114,7 @@ class Applicable(Confirmable):
         return self.participants
     @property
     def participants(self):
-        result = [p.user for g in self.packages.all() for p in
+        result = [p.user for g in self.group_set.all() for p in
                   g.participation_set.filter(confirmed=True)]
         return result
 
@@ -110,4 +125,5 @@ class Image(PolymorphicModel, Reversable):
     content_object = GenericForeignKey()
     full_size = ImageField(upload_to='images')
     thumbnail = BooleanField(default=False)
+
 

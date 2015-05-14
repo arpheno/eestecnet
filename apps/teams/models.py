@@ -26,9 +26,9 @@ class BaseTeam(Applicable, Reversable):
             result = super(BaseTeam, self).save(**kwargs)
         else:
             result = super(BaseTeam, self).save(**kwargs)
-            self.packages.create(name=self.name + '_organizers')
-            self.packages.create(name=self.name + '_members')
-            self.packages.create(name=self.name + '_alumni')
+            self.group_set.create(name=self.name + '_organizers')
+            self.group_set.create(name=self.name + '_members')
+            self.group_set.create(name=self.name + '_alumni')
             from apps.accounts.models import Participation
 
             Participation.objects.create(confirmed=True, group=self.board,
@@ -41,15 +41,15 @@ class BaseTeam(Applicable, Reversable):
         return result
     @property
     def organizers(self):
-        return self.packages.get(name=self.name + '_organizers')
+        return self.group_set.get(name=self.name + '_organizers')
 
     @property
     def board(self):
-        return self.packages.get(name=self.name + '_organizers')
+        return self.group_set.get(name=self.name + '_organizers')
 
     @property
     def members(self):
-        return self.packages.get(name=self.name + '_members')
+        return self.group_set.get(name=self.name + '_members')
 class Commitment(BaseTeam):
     pass
 class InternationalTeam(BaseTeam):

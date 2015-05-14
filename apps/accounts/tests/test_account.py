@@ -6,7 +6,7 @@ from apps.accounts.factories import AccountFactory, ParticipationFactory, GroupF
 from apps.accounts.models import Participation, Account
 from apps.accounts.serializers import AccountSerializer, GroupSerializer, \
     ParticipationSerializer
-from apps.teams.factories import CommitmentFactory
+from apps.teams.factories import CommitmentFactory, InternationalTeamFactory
 from common.util import RESTCase, ImageCase
 
 
@@ -30,7 +30,9 @@ class TestAccount(RESTCase, TestCase, ImageCase):
 
     def test_get_commitment(self):
         amsterdam = CommitmentFactory()
+        intb = InternationalTeamFactory()
         ParticipationFactory(group=amsterdam.members, user=self.object)
+        ParticipationFactory(group=intb.members, user=self.object)
         self.assertEqual(self.object.commitment, amsterdam)
 
 

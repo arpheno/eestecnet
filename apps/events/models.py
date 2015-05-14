@@ -26,11 +26,11 @@ class BaseEvent(Applicable, Reversable):
     images = GenericRelation('common.Image', related_query_name='images')
     @property
     def organizers(self):
-        return self.packages.get(name=self.name + '_organizers')
+        return self.group_set.get(name=self.name + '_organizers')
 
     @property
     def officials(self):
-        return self.packages.get(name=self.name + '_officials')
+        return self.group_set.get(name=self.name + '_officials')
 
     def save(self, **kwargs):
         """
@@ -42,8 +42,8 @@ class BaseEvent(Applicable, Reversable):
             result = super(BaseEvent, self).save(**kwargs)
         else:
             result = super(BaseEvent, self).save(**kwargs)
-            self.packages.create(name=self.name + '_officials')
-            self.packages.create(name=self.name + '_organizers')
+            self.group_set.create(name=self.name + '_officials')
+            self.group_set.create(name=self.name + '_organizers')
             Participation.objects.create(confirmed=True, group=self.organizers,
                                          user=self.owner)
             label = self._meta.object_name

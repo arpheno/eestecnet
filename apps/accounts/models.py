@@ -12,7 +12,7 @@ from guardian.shortcuts import assign_perm
 from polymorphic import PolymorphicModel
 
 from apps.teams.models import Commitment
-from common.models import Confirmable, Confirmation
+from common.models import Confirmable, Confirmation, DescriptionMixin
 
 
 __author__ = 'Sebastian Wozny'
@@ -28,7 +28,7 @@ class Group(auth.models.Group):
     """
      An applicable can have different groups, which relate users to it.
     """
-    applicable = ForeignKey('common.Applicable', related_name='packages')
+    applicable = ForeignKey('common.Applicable')
     objects = GroupManager()
     test = CharField(default="LOL", max_length=100)
 
@@ -68,7 +68,7 @@ class AccountManager(BaseUserManager):
         return account
 
 # Create your models here.
-class Account(GuardianUserMixin, AbstractBaseUser):
+class Account(GuardianUserMixin, AbstractBaseUser, DescriptionMixin):
     is_superuser = BooleanField(_('superuser status'), default=False,
                                 help_text=_(
                                     'Designates that this user has all permissions '
@@ -153,8 +153,8 @@ class Account(GuardianUserMixin, AbstractBaseUser):
 
     @property
     def commitment(self):
-        return self.participation_set.get(
-            group__name__endswith="members").package.applicable
+        # TODO if a user is in two commitments, we only get one of them
+        return Commitment.objects.filter(group__user=self)[0]
 
 
     images = GenericRelation('common.Image', related_query_name='images')

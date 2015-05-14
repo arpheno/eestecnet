@@ -1,14 +1,14 @@
 from django.contrib.auth.models import User, Permission
 from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import CharField, \
-    TextField, ForeignKey
+from django.db.models import ForeignKey
 from guardian.shortcuts import assign_perm
 from polymorphic import PolymorphicModel
 
 from apps.accounts.models import Account, Group
 from apps.teams.models import BaseTeam
-from common.models import Applicable, Confirmable, Confirmation
+from common.models import Applicable, Confirmable, Confirmation, NameMixin, \
+    DescriptionMixin
 from common.util import Reversable
 
 
@@ -19,15 +19,13 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class Announcement(Confirmable, Reversable):
+class Announcement(Confirmable, Reversable, NameMixin, DescriptionMixin):
     """
     Class that encapsulates logic for things that can be
     published on the website intended for the general public.
     Possibly having pictures pointed at.
     """
 
-    name = CharField(max_length=300)
-    description = TextField(max_length=300)
     owner = ForeignKey('accounts.Account', editable=False)
     images = GenericRelation('common.Image', related_query_name='images')
 
