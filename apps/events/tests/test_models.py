@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse_lazy
 from django.test import TestCase
 from guardian.shortcuts import get_perms
+from rest_framework.renderers import JSONRenderer
 
 from apps.accounts.factories import ParticipationFactory, AccountFactory
 from apps.events.serializers import BaseEventSerializer, ExchangeSerializer, \
@@ -8,6 +9,7 @@ from apps.events.serializers import BaseEventSerializer, ExchangeSerializer, \
 from apps.events.factories import BaseEventFactory, ParticipationConfirmationFactory, \
     ExchangeFactory, TrainingFactory, WorkshopFactory, WorkshopParticipationFactory, \
     TravelFactory
+from common.factories import ReportFactory
 from common.models import Confirmable, Confirmation
 from common.util import RESTCase, AuditCase, ImageCase
 
@@ -25,6 +27,11 @@ class TestBaseEvent(RESTCase, TestCase, AuditCase, ImageCase):
         self.serializer_class = BaseEventSerializer
         super(TestBaseEvent, self).setUp()
 
+    def test_reports_in_generated_data(self):
+        r = ReportFactory()
+        e = r.content_object
+        json = JSONRenderer().render(self.serializer_class(e).data)
+        self.assertIn("Organizer Report", json)
     def test_applications_work(self):
         k = AccountFactory(email="asdj@sadjo.de")
         p = ParticipationFactory(user=k, group=self.object.officials)

@@ -1,6 +1,7 @@
 from django.test import TestCase
 
-from common.factories import ConfirmableFactory, ConfirmationFactory, ImageFactory
+from common.factories import ConfirmableFactory, ConfirmationFactory, ImageFactory, \
+    ReportFactory
 from common.serializers import ImageSerializer
 from common.util import RESTCase
 
@@ -29,6 +30,9 @@ class TestConfirmation(TestCase):
         self.object = ConfirmationFactory()
 
 
+class TestReport(TestCase):
+    def test_can_construct(self):
+        self.object = ReportFactory()
 class TestImage(RESTCase, TestCase):
     def setUp(self):
         self.object = ImageFactory()

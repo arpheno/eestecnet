@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
+import datetime
+
 from django.utils.timezone import now
 import factory
 
 from apps.accounts.factories import AccountFactory, ParticipationFactory
 from apps.events.models import BaseEvent, Workshop, Exchange, \
     ParticipationConfirmation, \
-    Travel
+    Travel, Training
 
 
 __author__ = 'Sebastian Wozny'
@@ -22,6 +24,9 @@ class BaseEventFactory(factory.DjangoModelFactory):
 
     name = "base_event"
     owner = factory.SubFactory(AccountFactory)
+    deadline = datetime.datetime.now()
+    max_participants = 5
+    unofficial_fee = 500
 
 
 class WorkshopFactory(BaseEventFactory):
@@ -29,6 +34,9 @@ class WorkshopFactory(BaseEventFactory):
         model = Workshop
 
     name = "Inktronics"
+    start_date = datetime.datetime.today().date()
+    end_date = datetime.datetime.today().date()
+    location = "munich"
 
 
 class ExchangeFactory(BaseEventFactory):
@@ -36,15 +44,19 @@ class ExchangeFactory(BaseEventFactory):
         model = Exchange
 
     name = "Jahorina Spring Break"
+    start_date = datetime.datetime.today().date()
+    end_date = datetime.datetime.today().date()
+    location = "jahorina"
+    participation_fee = 500
 
 
 class TrainingFactory(BaseEventFactory):
     class Meta:
-        model = BaseEvent
+        model = Training
 
     name = "Emotional Intelligence"
-
-
+    date = datetime.datetime.today().date()
+    location = u"Kraków"
 
 
 class WorkshopParticipationFactory(factory.DjangoModelFactory):

@@ -29,12 +29,13 @@ class Migration(migrations.Migration):
             name='Applicable',
             fields=[
                 ('confirmable_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='common.Confirmable')),
-                ('name', models.CharField(unique=True, max_length=50)),
+                ('description', models.TextField(blank=True)),
+                ('name', models.CharField(max_length=300)),
             ],
             options={
                 'abstract': False,
             },
-            bases=('common.confirmable',),
+            bases=('common.confirmable', models.Model),
         ),
         migrations.CreateModel(
             name='Image',
@@ -55,7 +56,7 @@ class Migration(migrations.Migration):
             name='Notification',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('description', models.TextField(null=True, blank=True)),
+                ('description', models.TextField(blank=True)),
             ],
             options={
                 'abstract': False,
@@ -74,6 +75,21 @@ class Migration(migrations.Migration):
                 'abstract': False,
             },
             bases=('common.notification',),
+        ),
+        migrations.CreateModel(
+            name='Report',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('description', models.TextField(blank=True)),
+                ('name', models.CharField(max_length=300)),
+                ('object_id', models.PositiveIntegerField()),
+                ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
+                ('polymorphic_ctype', models.ForeignKey(related_name='polymorphic_common.report_set+', editable=False, to='contenttypes.ContentType', null=True)),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=(models.Model,),
         ),
         migrations.AddField(
             model_name='notification',

@@ -2,6 +2,7 @@ from rest_framework.fields import HiddenField, CurrentUserDefault
 from rest_framework.serializers import ModelSerializer
 
 from apps.events.models import BaseEvent, Exchange, Training, Workshop, Travel
+from common.serializers import ReportSerializer
 
 
 __author__ = 'Sebastian Wozny'
@@ -18,6 +19,7 @@ class BaseEventSerializer(ModelSerializer):
     owner = HiddenField(
         default=CurrentUserDefault()
     )
+    reports = ReportSerializer(many=True, read_only=True)
 
 class ExchangeSerializer(BaseEventSerializer):
     class Meta:

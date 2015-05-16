@@ -119,6 +119,13 @@ class Applicable(Confirmable, NameMixin, DescriptionMixin):
         return result
 
 
+class Report(PolymorphicModel, NameMixin, DescriptionMixin):
+    """ Reports to stuff """
+    content_type = ForeignKey(ContentType)
+    object_id = PositiveIntegerField()
+    content_object = GenericForeignKey()
+
+
 class Image(PolymorphicModel, Reversable):
     content_type = ForeignKey(ContentType)
     object_id = PositiveIntegerField()

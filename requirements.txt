@@ -32,13 +32,12 @@ factory-boy==2.5.2
 gunicorn==19.1.1
 kombu==3.0.24
 libsass==0.6.2
-paramiko==1.15.2
+paramiko
 pycrypto==2.6.1
-pyparsing==2.0.3
+pyparsing
 python-magic==0.4.6
 python-ptrace==0.8.1
 pytz==2014.10
 requests==2.5.1
 six==1.8.0
 sorl-thumbnail==12.2
-sorl-thumbnail-serializer-field==0.1

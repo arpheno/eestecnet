@@ -19,13 +19,13 @@ class Migration(migrations.Migration):
             name='Announcement',
             fields=[
                 ('confirmable_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='common.Confirmable')),
+                ('description', models.TextField(blank=True)),
                 ('name', models.CharField(max_length=300)),
-                ('description', models.TextField(max_length=300)),
             ],
             options={
                 'abstract': False,
             },
-            bases=('common.confirmable', common.util.Reversable),
+            bases=('common.confirmable', common.util.Reversable, models.Model),
         ),
         migrations.CreateModel(
             name='CareerOffer',

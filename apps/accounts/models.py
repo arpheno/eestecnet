@@ -5,14 +5,18 @@ from django.contrib.auth.models import User, AbstractBaseUser, AbstractUser, \
 from django.contrib.contenttypes.fields import GenericRelation
 from django.core.urlresolvers import reverse
 from django.db.models import EmailField, CharField, BooleanField, ManyToManyField, \
-    ForeignKey
+    ForeignKey, DateField, FileField
 from django.utils.translation import ugettext_lazy as _
 from guardian.mixins import GuardianUserMixin
 from guardian.shortcuts import assign_perm
 from polymorphic import PolymorphicModel
 
+from apps.accounts.help_texts import GROUPS_HELP_TEXT
+from apps.accounts.help_texts import IS_SUPERUSER_HELP_TEXT
 from apps.teams.models import Commitment
 from common.models import Confirmable, Confirmation, DescriptionMixin
+from settings.conf.choices import GENDER_CHOICES, TSHIRT_SIZE, FIELDS_OF_STUDY, \
+    FOOD_CHOICES
 
 
 __author__ = 'Sebastian Wozny'
@@ -35,8 +39,10 @@ class Group(auth.models.Group):
 
     def __unicode__(self):
         return self.name
+
     def get_absolute_url(self):
-        return reverse('group-detail',kwargs={'pk': self.pk})
+        return reverse('group-detail', kwargs={'pk': self.pk})
+
     class Meta:
         verbose_name = _('group')
         verbose_name_plural = _('groups')
@@ -67,28 +73,9 @@ class AccountManager(BaseUserManager):
 
         return account
 
-# Create your models here.
-class Account(GuardianUserMixin, AbstractBaseUser, DescriptionMixin):
-    is_superuser = BooleanField(_('superuser status'), default=False,
-                                help_text=_(
-                                    'Designates that this user has all permissions '
-                                    'without '
-                                    'explicitly assigning them.'))
-    groups = ManyToManyField('auth.Group', verbose_name=_('groups'),
-                             blank=True,
-                             through='accounts.Participation',
-                             help_text=_('The groups this user belongs to. A user will '
-                                         'get all permissions granted to each of '
-                                         'their groups.'),
-                             related_name="user_set", related_query_name="user")
-    user_permissions = ManyToManyField(Permission,
-                                       verbose_name=_('user permissions'), blank=True,
-                                       help_text=_(
-                                           'Specific permissions for this user.'),
-                                       related_name="user_set",
-                                       related_query_name="user")
-    objects = AccountManager()
 
+# Create your models here.
+class AbstractAccount(object):
     def get_group_permissions(self, obj=None):
         """
         Returns a list of permission strings that this user has through their
@@ -142,6 +129,11 @@ class Account(GuardianUserMixin, AbstractBaseUser, DescriptionMixin):
             return True
 
         return _user_has_module_perms(self, app_label)
+
+
+class Account(GuardianUserMixin, AbstractBaseUser, DescriptionMixin, AbstractAccount):
+    objects = AccountManager()
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']
 
@@ -156,15 +148,43 @@ class Account(GuardianUserMixin, AbstractBaseUser, DescriptionMixin):
         # TODO if a user is in two commitments, we only get one of them
         return Commitment.objects.filter(group__user=self)[0]
 
-
-    images = GenericRelation('common.Image', related_query_name='images')
-    first_name = CharField(max_length=30)
-    middle_name = CharField(max_length=30, blank=True, null=True)
-    last_name = CharField(max_length=40)
-    second_last_name = CharField(max_length=40, blank=True, null=True)
-    email = EmailField(unique=True)
     def get_absolute_url(self):
-        return reverse('account-detail',kwargs={'pk': self.pk})
+        return reverse('account-detail', kwargs={'pk': self.pk})
+
+    # Personal information
+    first_name = CharField(max_length=30)
+    middle_name = CharField(max_length=30, blank=True)
+    last_name = CharField(max_length=40)
+    second_last_name = CharField(max_length=40, blank=True)
+    email = EmailField(unique=True)
+    birthday = DateField()
+    birthday_show = BooleanField(default=True)
+    gender = CharField(max_length=15, choices=GENDER_CHOICES)
+
+    # Information important for events
+    images = GenericRelation('common.Image', related_query_name='images')
+    tshirt_size = CharField(max_length=15, choices=TSHIRT_SIZE)
+    allergies = CharField(max_length=300, blank=True)
+    food_preferences = CharField(max_length=30, choices=FOOD_CHOICES, blank=True)
+    passport_number = CharField(max_length=20)
+    mobile = CharField(max_length=50, blank=True)
+    skype = CharField(max_length=50, blank=True)
+    hangouts = CharField(max_length=50, blank=True)
+
+    #Information important for companies
+    field_of_study = CharField(max_length=50, choices=FIELDS_OF_STUDY)
+    curriculum_vitae = FileField(upload_to="currcula_vitae", blank=True, null=True)
+
+    #Information related to the platform
+    receive_eestec_active = BooleanField(default=True)
+    activation_link = CharField(max_length=100, blank=True)
+    date_joined = DateField(auto_now_add=True)
+    is_superuser = BooleanField(default=False, help_text=IS_SUPERUSER_HELP_TEXT)
+    groups = ManyToManyField('auth.Group', blank=True, through='accounts.Participation',
+                             help_text=GROUPS_HELP_TEXT,
+                             related_name="user_set", related_query_name="user")
+    user_permissions = ManyToManyField(Permission, blank=True, related_name="user_set",
+                                       related_query_name="user")
 
 
 class Participation(Confirmable):
@@ -179,13 +199,16 @@ class Participation(Confirmable):
 
     def __unicode__(self):
         return str(self.package)
+
     def save(self, **kwargs):
         if not self.pk:
             result = super(Participation, self).save(**kwargs)
             from apps.events.models import ParticipationConfirmation
+
             p = ParticipationConfirmation.objects.create(confirmable=self)
             p.save()
             from apps.questionnaires.models import Response
+
             f = Response.objects.create(participation=self, name="feedback")
             a = Response.objects.create(participation=self, name="application")
             assign_perm('change_response', self.user, f)
@@ -193,8 +216,10 @@ class Participation(Confirmable):
         else:
             result = super(Participation, self).save(**kwargs)
         return result
+
     def get_absolute_url(self):
-        return reverse('participation-detail',kwargs={'pk':self.pk,'group_pk':self.group.pk})
+        return reverse('participation-detail',
+                       kwargs={'pk': self.pk, 'group_pk': self.group.pk})
 
     @property
     def application(self):

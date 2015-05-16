@@ -1,3 +1,5 @@
+from settings.conf.templates import TEMPLATE_DIRS
+
 WSGI_APPLICATION = 'common.wsgi.application'
 AUTH_USER_MODEL = 'accounts.Account'
 ROOT_URLCONF = 'common.urls'
@@ -6,7 +8,7 @@ from conf.apps import *
 # Third party apps
 INSTALLED_APPS += (
     'compressor',
-    'haystack',
+    # 'haystack',
     'kombu.transport.django',
     'djcelery',
     'mailqueue',
@@ -58,3 +60,4 @@ LOGGING
 MAILQUEUE_CELERY
 MEDIA_ROOT
 MIDDLEWARE_CLASSES
+TEMPLATE_DIRS

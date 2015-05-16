@@ -4,7 +4,7 @@ from django.contrib.auth.models import Permission
 from rest_framework import serializers, viewsets
 from rest_framework.serializers import ModelSerializer
 
-from common.models import Image
+from common.models import Image, Report
 
 
 logger = logging.getLogger(__name__)
@@ -80,3 +80,8 @@ class ImageSerializer(ModelSerializer):
     full_size = Base64ImageField(
         max_length=None, use_url=True,
     )
+
+
+class ReportSerializer(ModelSerializer):
+    class Meta:
+        model = Report

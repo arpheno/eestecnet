@@ -18,10 +18,21 @@ logger = logging.getLogger(__name__)
 
 
 class TestAccount(RESTCase, TestCase, ImageCase):
+    @classmethod
+    def setUpClass(cls):
+        super(TestAccount, cls).setUpClass()
+        cls.object = AccountFactory()
+
+    @classmethod
+    def tearDownClass(cls):
+        super(TestAccount, cls).tearDownClass()
+        cls.object.delete()
+
     def setUp(self):
-        self.object = AccountFactory()
+        self.object = TestAccount.object
         self.serializer_class = AccountSerializer
         super(TestAccount, self).setUp()
+        del self.data['curriculum_vitae']
 
     def test_password_hashed(self):
         self.assertTrue("$" in Account.objects.get(pk=self.object.pk).password)

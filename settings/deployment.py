@@ -1,9 +1,16 @@
-from secret import DATABASE_NAME, DATABASE_PASSWORD, DATABASE_USER, SECRET_KEY
+try:
+    from secret import DATABASE_NAME, DATABASE_PASSWORD, DATABASE_USER, SECRET_KEY
+except:
+    DATABASE_NAME = "myapp"
+    DATABASE_PASSWORD = "dbpass"
+    DATABASE_USER = DATABASE_NAME
+    SECRET_KEY = "Lasjod"
 from basic import *
 
 INSTALLED_APPS
 SECRET_KEY
-ALLOWED_HOSTS = ['.eestec.net',]
+ALLOWED_HOSTS = ['.eestec.net', 'localhost']
+DEBUG = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -11,7 +18,7 @@ DATABASES = {
         'USER': DATABASE_USER,
         'PASSWORD': DATABASE_PASSWORD,
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432',
     }
 }
 CACHES = {

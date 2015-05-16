@@ -2,7 +2,8 @@
 import factory
 
 from apps.events.factories import BaseEventFactory
-from common.models import Confirmable, Notification, Confirmation, Applicable, Image
+from common.models import Confirmable, Notification, Confirmation, Applicable, Image, \
+    Report
 
 
 __author__ = 'Sebastian Wozny'
@@ -44,6 +45,15 @@ class ConfirmableFactory(factory.DjangoModelFactory):
     def create_confirmations(self, bla, blabla):
         for i in range(2):
             ConfirmationFactory(confirmable=self)
+
+
+class ReportFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = Report
+
+    name = "Organizer Report"
+    description = "Organizer Report"
+    content_object = factory.SubFactory(BaseEventFactory)
 
 
 class ImageFactory(factory.DjangoModelFactory):

@@ -13,11 +13,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
 )
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
-)
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
+)
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
 )
 
