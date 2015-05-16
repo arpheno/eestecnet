@@ -7,7 +7,7 @@ from apps.announcements.serializers import AnnouncementSerializer, NewsSerialize
     CareerOfferSerializer
 from apps.teams.factories import InternationalTeamFactory
 from apps.teams.models import BaseTeam
-from common.util import RESTCase, AuditCase, ImageCase
+from common.tests import RESTCase, ImageCase, AuditCase
 
 
 __author__ = 'Sebastian Wozny'

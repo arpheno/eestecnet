@@ -10,7 +10,4 @@ sudo service nginx start
 sudo nginx -s reload
 cd /vagrant
 fab remove_migrations
-python manage.py makemigrations
-python manage.py migrate
-python manage.py collectstatic --noinput
-sudo service supervisor restart
+

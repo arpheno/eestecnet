@@ -9,7 +9,7 @@ import common.util
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0002_auto_20150516_1851'),
+        ('accounts', '0002_auto_20150516_2119'),
         ('contenttypes', '0001_initial'),
     ]
 

@@ -159,7 +159,6 @@ class Account(GuardianUserMixin, AbstractBaseUser, DescriptionMixin, AbstractAcc
     email = EmailField(unique=True)
     birthday = DateField()
     birthday_show = BooleanField(default=True)
-    gender = CharField(max_length=15, choices=GENDER_CHOICES)
 
     # Information important for events
     images = GenericRelation('common.Image', related_query_name='images')
@@ -170,6 +169,7 @@ class Account(GuardianUserMixin, AbstractBaseUser, DescriptionMixin, AbstractAcc
     mobile = CharField(max_length=50, blank=True)
     skype = CharField(max_length=50, blank=True)
     hangouts = CharField(max_length=50, blank=True)
+    gender = CharField(max_length=15, choices=GENDER_CHOICES)
 
     #Information important for companies
     field_of_study = CharField(max_length=50, choices=FIELDS_OF_STUDY)

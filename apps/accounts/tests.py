@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
+from django.contrib.auth.models import AnonymousUser
 from django.core.urlresolvers import reverse
+from django.http import HttpRequest
 from django.test import TestCase
 
 from apps.accounts.factories import AccountFactory, ParticipationFactory, GroupFactory
 from apps.accounts.models import Participation, Account
 from apps.accounts.serializers import AccountSerializer, GroupSerializer, \
     ParticipationSerializer
+from apps.accounts.views import AccountViewSet, MembershipViewSet
 from apps.teams.factories import CommitmentFactory, InternationalTeamFactory
-from common.util import RESTCase, ImageCase
+from common.tests import RESTCase, ImageCase
 
 
 __author__ = 'Sebastian Wozny'
@@ -38,6 +41,30 @@ class TestAccount(RESTCase, TestCase, ImageCase):
         self.assertTrue("$" in Account.objects.get(pk=self.object.pk).password)
     def test_get_short_name(self):
         self.assertEqual(self.object.get_short_name(), u'Łukasz')
+
+    def test_allergies_visible(self):
+        r = HttpRequest()
+        r.user = self.object
+        self.object.is_superuser = True
+        self.object.save()
+        r.method = "GET"
+        second = AccountFactory()
+        account_detail = AccountViewSet.as_view({'get': 'retrieve'})
+        response = account_detail(r, pk=second.pk)
+        self.assertEqual(response.status_code, 200)
+        response.render()
+        self.assertTrue("allergies" in response.content)
+
+    def test_allergies_invisible(self):
+        r = HttpRequest()
+        r.user = AnonymousUser()
+        r.method = "GET"
+        second = AccountFactory()
+        account_detail = AccountViewSet.as_view({'get': 'retrieve'})
+        response = account_detail(r, pk=second.pk)
+        response.render()
+        print "response:" + response.content
+        self.assertTrue("allergies" not in response.content)
 
     def test_get_commitment(self):
         amsterdam = CommitmentFactory()
@@ -73,5 +100,17 @@ class TestParticipation(RESTCase, TestCase):
             c.confirm()
         self.assertTrue(Participation.objects.get(pk=self.object.pk).confirmed)
 
+    def test_allergies_visible(self):
+        r = HttpRequest()
+        r.user = AccountFactory()
+        self.object.is_superuser = True
+        self.object.save()
+        r.method = "GET"
+        second = ParticipationFactory()
+        account_detail = MembershipViewSet.as_view({'get': 'retrieve'})
+        response = account_detail(r, pk=second.pk)
+        self.assertEqual(response.status_code, 200)
+        response.render()
+        self.assertTrue("allergies" in response.content)
 
 

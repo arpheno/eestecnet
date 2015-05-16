@@ -11,7 +11,7 @@ from apps.events.factories import BaseEventFactory, ParticipationConfirmationFac
     TravelFactory
 from common.factories import ReportFactory
 from common.models import Confirmable, Confirmation
-from common.util import RESTCase, AuditCase, ImageCase
+from common.tests import RESTCase, ImageCase, AuditCase
 
 
 __author__ = 'Sebastian Wozny'

@@ -2,7 +2,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from apps.accounts.models import Account, Participation
 from apps.accounts.serializers import AccountSerializer, \
-    ParticipationSerializer
+    ParticipationSerializer, UnprivilegedAccountSerializer, ReadParticipationSerializer
 
 
 __author__ = 'Sebastian Wozny'
@@ -14,7 +14,13 @@ logger = logging.getLogger(__name__)
 
 class AccountViewSet(ModelViewSet):
     queryset = Account.objects.all()
-    serializer_class = AccountSerializer
+
+    def get_serializer_class(self):
+        if self.request.user.is_superuser or self.request.method.lower() == "post" or \
+                        self.get_object() == self.request.user:
+            return AccountSerializer
+        else:
+            return UnprivilegedAccountSerializer
     def list(self, request, group_pk=None):
         self.queryset = self.queryset.filter(groups=group_pk)
         return super(AccountViewSet, self).list(request)
@@ -25,7 +31,11 @@ class AccountViewSet(ModelViewSet):
 
 class MembershipViewSet(ModelViewSet):
     queryset = Participation.objects.all()
-    serializer_class = ParticipationSerializer
+
+    def get_serializer_class(self):
+        if self.request.method.lower() == "get":
+            return ReadParticipationSerializer
+        return ParticipationSerializer
     def list(self, request, group_pk=None):
         if group_pk:
             self.queryset = self.queryset.filter(groups=group_pk)

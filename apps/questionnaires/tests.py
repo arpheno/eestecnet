@@ -6,7 +6,7 @@ from apps.questionnaires.factories import QuestionnaireFactory, QuestionFactory,
 from apps.questionnaires.serializers import QuestionnaireSerializer, \
     QuestionSerializer, \
     ResponseSerializer, AnswerSerializer
-from common.util import RESTCase
+from common.tests import RESTCase
 
 
 __author__ = 'Sebastian Wozny'

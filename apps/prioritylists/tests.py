@@ -6,7 +6,7 @@ from apps.prioritylists.factories import PriorityListFactory, PriorityFactory
 from apps.prioritylists.models import PriorityList
 from apps.prioritylists.serializers import PriorityListSerializer, PrioritySerializer
 from apps.teams.factories import CommitmentFactory
-from common.util import RESTCase
+from common.tests import RESTCase
 
 
 __author__ = 'Sebastian Wozny'
