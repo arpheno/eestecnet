@@ -3,7 +3,7 @@ from django.contrib.contenttypes.fields import GenericRelation
 from django.db.models import ForeignKey
 from guardian.shortcuts import assign_perm
 
-from common.models import Applicable
+from common.models import Applicable, NameMixin, DescriptionMixin
 from common.util import Reversable
 
 
@@ -14,9 +14,15 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Create your models here.
-class BaseTeam(Applicable, Reversable):
+class BaseTeam(Applicable, Reversable, DescriptionMixin, NameMixin):
     owner = ForeignKey('accounts.Account', editable=False)
     images = GenericRelation('common.Image', related_query_name='images')
+    locations = GenericRelation('common.Location', related_query_name='locations')
+    urls = GenericRelation('common.URL', related_query_name='urls')
+
+    @property
+    def location(self):
+        return self.locations.all()[0]
     def save(self, **kwargs):
         """
         When an Event is first created two groups should always be created:

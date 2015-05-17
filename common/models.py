@@ -2,7 +2,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import CharField, DateField, BooleanField, ForeignKey, TextField, \
-    AutoField, SET_NULL, ImageField, PositiveIntegerField
+    AutoField, SET_NULL, ImageField, PositiveIntegerField, FloatField, URLField
 from polymorphic import PolymorphicModel
 
 from common.util import Reversable
@@ -20,7 +20,6 @@ class DescriptionMixin(models.Model):
         abstract = True
 
     description = TextField(blank=True)
-
 
 class NameMixin(models.Model):
     class Meta:
@@ -86,7 +85,7 @@ class Confirmation(Notification):
         return result
 
 
-class Applicable(Confirmable, NameMixin, DescriptionMixin):
+class Applicable(Confirmable):
     """
     Basic model that can have groups of users and accepts applications to those groups.
     """
@@ -126,6 +125,20 @@ class Report(PolymorphicModel, NameMixin, DescriptionMixin):
     content_object = GenericForeignKey()
 
 
+class URL(PolymorphicModel, NameMixin):
+    content_type = ForeignKey(ContentType)
+    object_id = PositiveIntegerField()
+    content_object = GenericForeignKey()
+    url = URLField(max_length=255)
+
+
+class Location(PolymorphicModel):
+    content_type = ForeignKey(ContentType)
+    object_id = PositiveIntegerField()
+    content_object = GenericForeignKey()
+    string = CharField(max_length=100)
+    latitude = FloatField(blank=True, null=True)
+    longitude = FloatField(blank=True, null=True)
 class Image(PolymorphicModel, Reversable):
     content_type = ForeignKey(ContentType)
     object_id = PositiveIntegerField()

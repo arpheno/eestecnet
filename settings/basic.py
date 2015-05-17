@@ -1,3 +1,5 @@
+from settings.conf.debugtoolbar import *
+from settings.conf.statsd import *
 from settings.conf.templates import TEMPLATE_DIRS
 
 WSGI_APPLICATION = 'common.wsgi.application'
@@ -64,25 +66,6 @@ MAILQUEUE_CELERY
 MEDIA_ROOT
 MIDDLEWARE_CLASSES
 TEMPLATE_DIRS
-STATSD_MODEL_SIGNALS = True
-STATSD_CLIENT = 'django_statsd.clients.toolbar'
-DEBUG_TOOLBAR_PANELS = [
-    'debug_toolbar.panels.versions.VersionsPanel',
-    'debug_toolbar.panels.timer.TimerPanel',
-    'debug_toolbar.panels.settings.SettingsPanel',
-    'debug_toolbar.panels.headers.HeadersPanel',
-    'debug_toolbar.panels.request.RequestPanel',
-    'debug_toolbar.panels.sql.SQLPanel',
-    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-    'debug_toolbar.panels.templates.TemplatesPanel',
-    'debug_toolbar.panels.cache.CachePanel',
-    'debug_toolbar.panels.signals.SignalsPanel',
-    'debug_toolbar.panels.logging.LoggingPanel',
-    'debug_toolbar.panels.redirects.RedirectsPanel',
-    'django_statsd.panel.StatsdPanel',
-]
-STATSD_PATCHES = [
-    'django_statsd.patches.db',
-    'django_statsd.patches.cache',
-]
+STATSD_MODEL_SIGNALS
+DEBUG_TOOLBAR_PANELS
 

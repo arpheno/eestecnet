@@ -8,7 +8,9 @@ from guardian.shortcuts import assign_perm
 from polymorphic import PolymorphicModel
 
 from apps.accounts.models import Account, Participation
-from common.models import Applicable, Confirmable, Confirmation, Notification
+from common.models import Applicable, Confirmable, Confirmation, Notification, \
+    NameMixin, \
+    DescriptionMixin
 from common.util import Reversable
 from settings.conf.choices import TRAVEL_CHOICES
 
@@ -39,12 +41,7 @@ class LongEvent(models.Model):
     end_date = DateField()
 
 
-class PhysicalEvent(models.Model):
-    class Meta:
-        abstract = True
-
-    location = CharField(max_length=200)
-class BaseEvent(Applicable, Reversable):
+class BaseEvent(Applicable, Reversable, NameMixin, DescriptionMixin):
     """ Model that stores basic information common to all events."""
 
     owner = ForeignKey('accounts.Account', editable=False)
@@ -53,6 +50,12 @@ class BaseEvent(Applicable, Reversable):
     deadline = DateTimeField(null=True, blank=True)
     unofficial_fee = IntegerField(blank=True, null=True)
     max_participants = IntegerField(blank=True, null=True)
+    locations = GenericRelation('common.Location', related_query_name='locations')
+    urls = GenericRelation('common.URL', related_query_name='urls')
+
+    @property
+    def location(self):
+        return self.locations.all()[0]
     @property
     def organizers(self):
         return self.group_set.get(name=self.name + '_organizers')
@@ -83,17 +86,17 @@ class BaseEvent(Applicable, Reversable):
         return result
 
 
-class Workshop(BaseEvent, LongEvent, PhysicalEvent):
+class Workshop(BaseEvent, LongEvent):
     """ Workshops as defined in the ROP. """
     pass
 
 
-class Exchange(BaseEvent, LongEvent, PhysicalEvent):
+class Exchange(BaseEvent, LongEvent):
     """ Exchanges as defined in the ROP ."""
     participation_fee = IntegerField()
 
 
-class Training(BaseEvent, ShortEvent, PhysicalEvent):
+class Training(BaseEvent, ShortEvent):
     """ Training Sessions held by EESTEC Trainers ."""
     pass
 

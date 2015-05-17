@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Permission
 from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import ForeignKey
+from django.db.models import ForeignKey, DateTimeField, BooleanField
 from guardian.shortcuts import assign_perm
 from polymorphic import PolymorphicModel
 
@@ -27,7 +27,9 @@ class Announcement(Confirmable, Reversable, NameMixin, DescriptionMixin):
     """
 
     owner = ForeignKey('accounts.Account', editable=False)
+    pub_date = DateTimeField(auto_now_add=True)
     images = GenericRelation('common.Image', related_query_name='images')
+    important = BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if not self.pk:
@@ -38,7 +40,7 @@ class Announcement(Confirmable, Reversable, NameMixin, DescriptionMixin):
             assign_perm('delete_'+self._meta.object_name.lower(),self.owner,self)
             i = Confirmation.objects.create(confirmable=self)
             assign_perm('change_confirmation',
-                        Applicable.objects.get(name="international board").organizers, i)
+                        BaseTeam.objects.get(name="international board").organizers, i)
         else:
             result = super(Announcement, self).save()
         return result

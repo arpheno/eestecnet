@@ -22,6 +22,7 @@ class Migration(migrations.Migration):
                 ('password', models.CharField(max_length=128, verbose_name='password')),
                 ('last_login', models.DateTimeField(default=django.utils.timezone.now, verbose_name='last login')),
                 ('description', models.TextField(blank=True)),
+                ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
                 ('first_name', models.CharField(max_length=30)),
                 ('middle_name', models.CharField(max_length=30, blank=True)),
                 ('last_name', models.CharField(max_length=40)),
@@ -47,7 +48,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
             },
-            bases=(guardian.mixins.GuardianUserMixin, models.Model, apps.accounts.models.AbstractAccount),
+            bases=(guardian.mixins.GuardianUserMixin, apps.accounts.models.AbstractAccount, models.Model, object),
         ),
         migrations.CreateModel(
             name='Group',

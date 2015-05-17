@@ -3,7 +3,7 @@ import factory
 
 from apps.events.factories import BaseEventFactory
 from common.models import Confirmable, Notification, Confirmation, Applicable, Image, \
-    Report
+    Report, Location
 
 
 __author__ = 'Sebastian Wozny'
@@ -32,9 +32,7 @@ class ConfirmationFactory(NotificationFactory):
 class ApplicableFactory(factory.DjangoModelFactory):
     class Meta:
         model = Applicable
-        django_get_or_create = ('name',)
 
-    name = factory.sequence(lambda x: "applicable" + str(x))
 
 
 class ConfirmableFactory(factory.DjangoModelFactory):
@@ -61,4 +59,14 @@ class ImageFactory(factory.DjangoModelFactory):
         model = Image
 
     full_size = factory.django.ImageField(color='blue', width=200, height=200)
+    content_object = factory.SubFactory(BaseEventFactory)
+
+
+class LocationFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = Location
+
+    longitude = 45.9
+    latitude = 35.9
+    string = u"München"
     content_object = factory.SubFactory(BaseEventFactory)

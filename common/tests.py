@@ -3,7 +3,7 @@ from django.test import TestCase, Client
 from rest_framework.renderers import JSONRenderer
 
 from common.factories import ConfirmableFactory, ConfirmationFactory, ImageFactory, \
-    ReportFactory
+    ReportFactory, LocationFactory
 from common.serializers import ImageSerializer
 
 
@@ -118,6 +118,14 @@ class RESTCase(object):
         self.assert_delete(self.url)
         #def test_rest_create_resource(self):
         self.assert_create(self.group_url, self.data)
+
+
+class TestLocation(TestCase):
+    def setUp(self):
+        self.object = LocationFactory()
+
+    def test_event_has_location(self):
+        self.assertEqual(self.object.content_object.location, self.object)
 
 
 class TestImage(RESTCase, TestCase):

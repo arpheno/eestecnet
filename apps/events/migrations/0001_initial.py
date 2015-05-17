@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('common', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('accounts', '0002_auto_20150516_2119'),
+        ('accounts', '0002_auto_20150517_1540'),
     ]
 
     operations = [
@@ -20,6 +20,8 @@ class Migration(migrations.Migration):
             name='BaseEvent',
             fields=[
                 ('applicable_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='common.Applicable')),
+                ('description', models.TextField(blank=True)),
+                ('name', models.CharField(max_length=300)),
                 ('deadline', models.DateTimeField(null=True, blank=True)),
                 ('unofficial_fee', models.IntegerField(null=True, blank=True)),
                 ('max_participants', models.IntegerField(null=True, blank=True)),
@@ -27,7 +29,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
             },
-            bases=('common.applicable', common.util.Reversable),
+            bases=('common.applicable', common.util.Reversable, models.Model),
         ),
         migrations.CreateModel(
             name='Exchange',
@@ -35,7 +37,6 @@ class Migration(migrations.Migration):
                 ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
                 ('start_date', models.DateField()),
                 ('end_date', models.DateField()),
-                ('location', models.CharField(max_length=200)),
                 ('participation_fee', models.IntegerField()),
             ],
             options={
@@ -59,7 +60,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
                 ('date', models.DateField()),
-                ('location', models.CharField(max_length=200)),
             ],
             options={
                 'abstract': False,
@@ -88,7 +88,6 @@ class Migration(migrations.Migration):
                 ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
                 ('start_date', models.DateField()),
                 ('end_date', models.DateField()),
-                ('location', models.CharField(max_length=200)),
             ],
             options={
                 'abstract': False,

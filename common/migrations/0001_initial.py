@@ -29,13 +29,11 @@ class Migration(migrations.Migration):
             name='Applicable',
             fields=[
                 ('confirmable_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='common.Confirmable')),
-                ('description', models.TextField(blank=True)),
-                ('name', models.CharField(max_length=300)),
             ],
             options={
                 'abstract': False,
             },
-            bases=('common.confirmable', models.Model),
+            bases=('common.confirmable',),
         ),
         migrations.CreateModel(
             name='Image',
@@ -51,6 +49,22 @@ class Migration(migrations.Migration):
                 'abstract': False,
             },
             bases=(models.Model, common.util.Reversable),
+        ),
+        migrations.CreateModel(
+            name='Location',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('object_id', models.PositiveIntegerField()),
+                ('string', models.CharField(max_length=100)),
+                ('latitude', models.FloatField(null=True, blank=True)),
+                ('longitude', models.FloatField(null=True, blank=True)),
+                ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
+                ('polymorphic_ctype', models.ForeignKey(related_name='polymorphic_common.location_set+', editable=False, to='contenttypes.ContentType', null=True)),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Notification',
@@ -85,6 +99,21 @@ class Migration(migrations.Migration):
                 ('object_id', models.PositiveIntegerField()),
                 ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
                 ('polymorphic_ctype', models.ForeignKey(related_name='polymorphic_common.report_set+', editable=False, to='contenttypes.ContentType', null=True)),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='URL',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=300)),
+                ('object_id', models.PositiveIntegerField()),
+                ('url', models.URLField(max_length=255)),
+                ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
+                ('polymorphic_ctype', models.ForeignKey(related_name='polymorphic_common.url_set+', editable=False, to='contenttypes.ContentType', null=True)),
             ],
             options={
                 'abstract': False,

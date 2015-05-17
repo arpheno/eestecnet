@@ -48,7 +48,6 @@ class TestBaseEvent(RESTCase, TestCase, AuditCase, ImageCase):
     def test_organizers_can_modify_event(self):
         p = ParticipationFactory(group=self.object.organizers)
         self.assertTrue(p.user.has_perm('change_baseevent', self.object))
-
     def test_list_events(self):
         self.assert_retrieve(reverse_lazy('baseevent-list'))
 
