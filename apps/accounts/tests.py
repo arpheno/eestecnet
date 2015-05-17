@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.models import AnonymousUser
-from django.core.urlresolvers import reverse
+from django.core import mail
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpRequest
 from django.test import TestCase
 
@@ -42,11 +43,22 @@ class TestAccount(RESTCase, TestCase, ImageCase):
     def test_get_short_name(self):
         self.assertEqual(self.object.get_short_name(), u'Łukasz')
 
+    def test_registration_api_register(self):
+        self.data['email'] = "fake@qq.de"
+        response = self.client.post(reverse_lazy('registration_api_register'),
+                                    data=self.data)
+        self.assertEqual(201, response.status_code)
+        print Account.objects.all()
+        a = Account.objects.get(email="fake@qq.de")
+        self.assertFalse(a.is_active)
+        self.assertTrue("$" in a.password)
+        self.assertEqual(len(mail.outbox), 1)
+
+
     def test_allergies_visible(self):
         r = HttpRequest()
-        r.user = self.object
-        self.object.is_superuser = True
-        self.object.save()
+        r.user = AccountFactory()
+        r.user.is_superuser = True
         r.method = "GET"
         second = AccountFactory()
         account_detail = AccountViewSet.as_view({'get': 'retrieve'})
@@ -112,5 +124,4 @@ class TestParticipation(RESTCase, TestCase):
         self.assertEqual(response.status_code, 200)
         response.render()
         self.assertTrue("allergies" in response.content)
-
 

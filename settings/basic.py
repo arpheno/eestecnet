@@ -17,6 +17,7 @@ INSTALLED_APPS += (
     'corsheaders',
     'rest_framework',
     'guardian',
+    'registration_api',
 )
 # Own apps
 INSTALLED_APPS += (

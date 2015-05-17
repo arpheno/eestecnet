@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, AbstractBaseUser, AbstractUser, \
     PermissionsMixin, Permission, _user_get_all_permissions, _user_has_perm, \
     _user_has_module_perms, GroupManager, BaseUserManager
 from django.contrib.contenttypes.fields import GenericRelation
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.db.models import EmailField, CharField, BooleanField, ManyToManyField, \
     ForeignKey, DateField, FileField
@@ -52,14 +53,10 @@ class AccountManager(BaseUserManager):
     def create_user(self, email, password=None, **kwargs):
         if not email:
             raise ValueError('Users must have a valid email address.')
+        kwargs['email'] = email
+        account = self.model(**kwargs)
 
-        if not kwargs.get('username'):
-            raise ValueError('Users must have a valid username.')
-
-        account = self.model(
-            email=self.normalize_email(email), username=kwargs.get('username')
-        )
-
+        print account
         account.set_password(password)
         account.save()
 
@@ -130,13 +127,24 @@ class AbstractAccount(object):
 
         return _user_has_module_perms(self, app_label)
 
+    def email_user(self, subject, message, from_email=None, **kwargs):
+        """
+        Sends an email to this User.
+        """
+        send_mail(subject, message, from_email, [self.email], **kwargs)
 
-class Account(GuardianUserMixin, AbstractBaseUser, DescriptionMixin, AbstractAccount):
+
+class Account(GuardianUserMixin, AbstractAccount, AbstractBaseUser, DescriptionMixin,
+              object):
     objects = AccountManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']
 
+    is_active = BooleanField(_('active'), default=True,
+                             help_text=_(
+                                 'Designates whether this user should be treated as '
+                                 'active. Unselect this instead of deleting accounts.'))
     def get_short_name(self):
         return self.first_name
 
