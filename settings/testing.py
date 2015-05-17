@@ -1,6 +1,7 @@
 SECRET_KEY = 'o&)%bwhyl5(g)%rmq+knp%75y9s@j!a-x#3oh^rzuw$$=nld*x'
 from basic import *
 
+STATSD_CLIENT = 'django_statsd.clients.null'
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 DATABASES = {

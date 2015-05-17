@@ -50,17 +50,22 @@ urlpatterns += patterns(
 )
 # If DEBUG is set, include the local file server
 if settings.DEBUG:
+    import debug_toolbar
     urlpatterns += patterns(
         '',
+        url(r'^__debug__/', include(debug_toolbar.urls)),
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': MEDIA_ROOT}),
     )
 # Third party apps and pages
 
 
+from django_statsd.urls import urlpatterns as statsd_patterns
 urlpatterns += patterns(
     '',
     url(r'^accounts_api/', include('registration_api.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^mail-queue/?$', include('mailqueue.urls')),
+    url(r'^services/timing/', include(statsd_patterns)),
 )
+

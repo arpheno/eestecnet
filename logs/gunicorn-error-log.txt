@@ -1,0 +1,18 @@
+[2015-05-17 01:52:05 +0000] [1122] [INFO] Starting gunicorn 19.3.0
+[2015-05-17 01:52:05 +0000] [1122] [INFO] Listening at: http://0.0.0.0:8003 (1122)
+[2015-05-17 01:52:05 +0000] [1122] [INFO] Using worker: sync
+[2015-05-17 01:52:05 +0000] [1138] [INFO] Booting worker with pid: 1138
+[2015-05-17 01:52:05 +0000] [1143] [INFO] Booting worker with pid: 1143
+[2015-05-17 01:52:05 +0000] [1148] [INFO] Booting worker with pid: 1148
+[2015-05-17 01:52:05 +0000] [1150] [INFO] Booting worker with pid: 1150
+[2015-05-17 01:52:05 +0000] [1154] [INFO] Booting worker with pid: 1154
+[2015-05-17 10:19:33 +0000] [1122] [INFO] Handling signal: term
+[2015-05-17 10:19:35 +0000] [1122] [INFO] Shutting down: Master
+[2015-05-17 10:20:21 +0000] [1129] [INFO] Starting gunicorn 19.3.0
+[2015-05-17 10:20:21 +0000] [1129] [INFO] Listening at: http://0.0.0.0:8003 (1129)
+[2015-05-17 10:20:21 +0000] [1129] [INFO] Using worker: sync
+[2015-05-17 10:20:21 +0000] [1134] [INFO] Booting worker with pid: 1134
+[2015-05-17 10:20:21 +0000] [1139] [INFO] Booting worker with pid: 1139
+[2015-05-17 10:20:22 +0000] [1144] [INFO] Booting worker with pid: 1144
+[2015-05-17 10:20:22 +0000] [1145] [INFO] Booting worker with pid: 1145
+[2015-05-17 10:20:22 +0000] [1146] [INFO] Booting worker with pid: 1146
