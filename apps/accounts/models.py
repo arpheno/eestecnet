@@ -171,12 +171,12 @@ class Account(GuardianUserMixin, AbstractAccount, AbstractBaseUser, DescriptionM
     # Information important for events
     images = GenericRelation('common.Image', related_query_name='images')
     tshirt_size = CharField(max_length=15, choices=TSHIRT_SIZE)
-    allergies = CharField(max_length=300, blank=True)
+    allergies = CharField(max_length=300, null=True, blank=True)
     food_preferences = CharField(max_length=30, choices=FOOD_CHOICES, blank=True)
     passport_number = CharField(max_length=20)
-    mobile = CharField(max_length=50, blank=True)
-    skype = CharField(max_length=50, blank=True)
-    hangouts = CharField(max_length=50, blank=True)
+    mobile = CharField(max_length=50, null=True, blank=True)
+    skype = CharField(max_length=50, null=True, blank=True)
+    hangouts = CharField(max_length=50, null=True, blank=True)
     gender = CharField(max_length=15, choices=GENDER_CHOICES)
 
     #Information important for companies
@@ -185,13 +185,13 @@ class Account(GuardianUserMixin, AbstractAccount, AbstractBaseUser, DescriptionM
 
     #Information related to the platform
     receive_eestec_active = BooleanField(default=True)
-    activation_link = CharField(max_length=100, blank=True)
     date_joined = DateField(auto_now_add=True)
     is_superuser = BooleanField(default=False, help_text=IS_SUPERUSER_HELP_TEXT)
     groups = ManyToManyField('auth.Group', blank=True, through='accounts.Participation',
                              help_text=GROUPS_HELP_TEXT,
                              related_name="user_set", related_query_name="user")
     user_permissions = ManyToManyField(Permission, blank=True, related_name="user_set",
+                                       null=True,
                                        related_query_name="user")
 
 

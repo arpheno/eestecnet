@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import datetime
-import random
 
 import factory
 
@@ -23,7 +22,7 @@ class AccountFactory(factory.DjangoModelFactory):
     second_last_name = u"Goméz"
     password = factory.PostGenerationMethodCall('set_password',
                                                 'defaultpassword')
-    email = factory.sequence(lambda x: str(random.randint(1, 1000)) + "a@b.de" + str(x))
+    email = factory.sequence(lambda x: str(x) + "a@b.de" + str(x))
     birthday = datetime.datetime.today().date()
     gender = "m"
 
@@ -32,9 +31,9 @@ class AccountFactory(factory.DjangoModelFactory):
     passport_number = "asdad"
     #Information important for companies
     field_of_study = "ee"
+    food_preferences = "vegan"
+    # curriculum_vitae = factory.django.FileField(name="lol.txt")
 
-    #Information related to the platform
-    activation_link = "asdasd"
 
 
 def get_anonymous_user_instance(User):

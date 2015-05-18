@@ -5,6 +5,8 @@ from guardian.shortcuts import assign_perm
 from polymorphic import PolymorphicModel
 
 from apps.accounts.models import Account
+from apps.events.models import BaseEvent
+from apps.teams.models import Commitment
 from common.models import Applicable
 from common.util import Reversable
 
@@ -25,7 +27,7 @@ class Priority(PolymorphicModel, Reversable):
         unique_together = ('priority', 'priority_list')
 
     priority_list = ForeignKey('prioritylists.PriorityList')
-    user = ForeignKey('accounts.Account')
+    user = ForeignKey(Account)
     priority = IntegerField(blank=True, null=True)
 
     def __unicode__(self):
@@ -42,9 +44,9 @@ class PriorityList(PolymorphicModel, Reversable):
     class Meta:
         unique_together = ('event', 'commitment')
 
-    event = ForeignKey('events.BaseEvent')
-    commitment = ForeignKey('teams.Commitment')
-    users = ManyToManyField('accounts.Account', through='prioritylists.Priority')
+    event = ForeignKey(BaseEvent)
+    commitment = ForeignKey(Commitment)
+    users = ManyToManyField(Account, through='prioritylists.Priority')
 
     def save(self, *args, **kwargs):
         """
