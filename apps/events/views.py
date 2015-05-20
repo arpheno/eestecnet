@@ -505,7 +505,7 @@ class ExportFeedback(EventMixin, DetailView):
         sheet = 0
         if self.get_object().feedbacksheet:
             for pax in self.get_participants():
-                ws = wb.add_sheet("Feedback #" + str(sheet))
+                ws = wb.add_sheet("Feedback #" + str(sheet),cell_overwrite_ok=True)
                 row_num=0
                 columns = [(u"Question", 7000), (u"Answer", 10000)]
                 font_style = xlwt.XFStyle()
