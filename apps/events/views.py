@@ -503,9 +503,9 @@ class ExportFeedback(EventMixin, DetailView):
                                      + ' Feedback.xls'
         wb = xlwt.Workbook(encoding='utf-8')
         sheet = 0
+        ws = wb.add_sheet("Feedback #" + str(sheet))
+        row_num=0
         for pax in self.get_participants():
-            row_num = 0
-            ws = wb.add_sheet("Feedback #" + str(sheet))
             columns = [(u"Question", 7000), (u"Answer", 10000)]
             font_style = xlwt.XFStyle()
             font_style.font.bold = True

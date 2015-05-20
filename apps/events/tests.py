@@ -2,10 +2,50 @@ from datetime import timedelta
 
 from django.test import TestCase, Client
 from django.utils.timezone import now
+from apps.events.factories import LegacyEventFactory
 
 from apps.events.models import Application, Event
+from apps.events.serializers import LegacyEventSerializer
 from apps.teams.tests import EESTECMixin
 
+
+from io import BytesIO
+from django.test import TestCase, Client
+
+# Create your tests here.
+import pytest
+from rest_framework.parsers import JSONParser
+from rest_framework.renderers import JSONRenderer
+from apps.account.factories import LegacyAccountFactory
+from apps.account.models import Eestecer
+from apps.account.serializers import LegacyAccountSerializer
+from apps.teams.tests import EESTECMixin
+
+
+
+
+@pytest.mark.django_db
+def test_serializer_tautonomic():
+    #Build a regular user
+    old_event=LegacyEventFactory()
+    #Serialize it
+    data=LegacyEventSerializer(old_event).data
+    # Send it over the wire
+    json = JSONRenderer().render(data)
+    stream = BytesIO(json)
+    new_input = JSONParser().parse(stream)
+    #Deserialize it
+    serializer = LegacyEventSerializer(data=new_input)
+    old_event.delete()
+    serializer.is_valid(raise_exception=True)
+    new_event = serializer.save()
+    new_account = serializer.save()
+    #Compare the two objects
+    del new_input["curriculum_vitae"]
+    del new_input["thumbnail"]
+    del new_input["id"]
+    for key in new_input:
+        assert getattr(new_event,key) == getattr(old_event,key)
 
 class EventTestCase(EESTECMixin, TestCase):
     def test_cant_apply_anonymously(self):

@@ -19,11 +19,11 @@ class LegacyAccountFactory(factory.DjangoModelFactory):
         model = Eestecer
 
     tshirt_size = "mxxl"
-    passport_number = "asdad"
+    passport_number = factory.sequence(lambda x:"asdad"+str(x))
     #Information important for companies
     field_of_study = "ee"
     first_name = u"Łukasz"
-    middle_name = u"Matteusz"
+    middle_name = factory.sequence(lambda x:"asdad"+str(x))
     last_name = u"Knüppel"
     second_last_name = u"Goméz"
     password = factory.PostGenerationMethodCall('set_password',
