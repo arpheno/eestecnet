@@ -503,24 +503,25 @@ class ExportFeedback(EventMixin, DetailView):
                                      + ' Feedback.xls'
         wb = xlwt.Workbook(encoding='utf-8')
         sheet = 0
-        ws = wb.add_sheet("Feedback #" + str(sheet))
-        row_num=0
-        for pax in self.get_participants():
-            columns = [(u"Question", 7000), (u"Answer", 10000)]
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            for col_num in xrange(len(columns)):
-                ws.write(row_num, col_num, columns[col_num][0], font_style)
-                # set column width
-                ws.col(col_num).width = columns[col_num][1]
-            font_style = xlwt.XFStyle()
-            font_style.alignment.wrap = 1
-            for answer in pax.feedback.answer_set.all():
-                row_num += 1
-                row = [answer.q.q, answer.a]
-                for col_num in xrange(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-            sheet += 1
+        if self.get_object().feedbacksheet:
+            for pax in self.get_participants():
+                ws = wb.add_sheet("Feedback #" + str(sheet))
+                row_num=0
+                columns = [(u"Question", 7000), (u"Answer", 10000)]
+                font_style = xlwt.XFStyle()
+                font_style.font.bold = True
+                for col_num in xrange(len(columns)):
+                    ws.write(row_num, col_num, columns[col_num][0], font_style)
+                    # set column width
+                    ws.col(col_num).width = columns[col_num][1]
+                font_style = xlwt.XFStyle()
+                font_style.alignment.wrap = 1
+                for answer in pax.feedback.answer_set.all():
+                    row_num += 1
+                    row = [answer.q.q, answer.a]
+                    for col_num in xrange(len(row)):
+                        ws.write(row_num, col_num, row[col_num], font_style)
+                sheet += 1
         wb.save(response)
         return response
 
