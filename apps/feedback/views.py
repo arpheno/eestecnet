@@ -21,6 +21,7 @@ class AnswerInline(InlineFormSet):
     extra = 0
     can_delete = False
 
+
 class FillOutQuestionaire(DialogFormMixin, UpdateWithInlinesView):
     form_title = "base/base.html"
     inlines = [AnswerInline, ]
