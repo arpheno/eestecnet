@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from apps.account.serializers import PersonSerializer
+from apps.account.serializers import PersonSerializer, Base64ImageField
 from apps.teams.models import Team
 from eestecnet.fields import HyperlinkedSorlImageField
 
@@ -17,4 +17,9 @@ class CitySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Team
-
+class LegacyTeamSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Team
+    thumbnail = Base64ImageField(
+        max_length=None, use_url=True,
+    )
