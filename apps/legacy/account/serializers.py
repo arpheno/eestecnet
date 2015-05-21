@@ -1,9 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
-
 from rest_framework.serializers import ModelSerializer
 
 from apps.accounts.models import Account
-
 from apps.legacy.account.models import Eestecer
 from common.serializers import ImageSerializer, Base64ImageField, Base64PdfField
 
@@ -19,8 +17,8 @@ class ConversionMixin(object):
 
     def convert(self, data):
         data[None] = None
-        dellist = [key for key in self.conversion_map]
-        update = {self.conversion_map[key]: data[key] for key in self.conversion_map}
+        dellist = [key for key in self.conversion_map if key in data]
+        update = {self.conversion_map[key]: data[key] for key in dellist}
         data.update(update)
         self.keep = {}
         for key in dellist:

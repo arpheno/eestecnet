@@ -2,7 +2,6 @@
 import factory
 
 from apps.accounts.factories import AccountFactory
-
 from apps.teams.models import Commitment, InternationalTeam, BaseTeam
 
 
@@ -27,7 +26,8 @@ class CommitmentFactory(BaseTeamFactory):
         django_get_or_create = ['name']
 
     name = "Amsterdam"
-
+    rank = 0
+    founded = 1990
 
 class InternationalTeamFactory(BaseTeamFactory):
     class Meta:

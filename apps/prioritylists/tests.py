@@ -27,7 +27,7 @@ class TestPriorityList(RESTCase, TestCase):
         c = CommitmentFactory()
         u = AccountFactory()
         e = BaseEventFactory()
-        ParticipationFactory(group=c.members, user=u)
+        ParticipationFactory(group=c.users, user=u)
         p = ParticipationFactory(group=e.officials, user=u)
         self.assertTrue(PriorityList.objects.get(event=p.package.applicable,
                                                  commitment=p.user.commitment))
@@ -36,7 +36,7 @@ class TestPriorityList(RESTCase, TestCase):
         c = CommitmentFactory()
         u = AccountFactory()
         e = BaseEventFactory()
-        ParticipationFactory(group=c.members, user=u)
+        ParticipationFactory(group=c.users, user=u)
         ParticipationFactory(group=c.board, user=u)
         p = ParticipationFactory(group=e.officials, user=u)
         pl = PriorityList.objects.get(event=p.package.applicable,

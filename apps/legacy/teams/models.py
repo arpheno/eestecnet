@@ -1,12 +1,7 @@
 from autoslug import AutoSlugField
-from autoslug.utils import slugify
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.loader import render_to_string
-from django.utils.datetime_safe import datetime
-
-from apps.gmapi.maps import Geocoder
-from apps.events.models import Event
 
 
 TYPE_CHOICES = (
@@ -29,24 +24,6 @@ class Team(models.Model):
     slug = AutoSlugField(populate_from='name')
     description = models.TextField(blank=True, null=True)
     # People
-    users = models.ManyToManyField(
-        'account.Eestecer', related_name='teams', through='news.Membership')
-
-    def organizers(self):
-        return self.users.filter(membership__board=True)
-
-    def privileged(self):
-        return self.users.filter(membership__privileged=True)
-
-    def members(self):
-        return self.users.filter(membership__alumni=False)
-
-    def alumni(self):
-        return self.users.filter(membership__alumni=True)
-
-    def member_count(self):
-        """ The amount of teams currently in the :class:`Member` """
-        return len(self.users.all())
 
     # other stuff
     category = models.CharField(max_length=30, choices=TYPE_CHOICES, default='lc')
@@ -66,64 +43,9 @@ class Team(models.Model):
 
     #Members
 
-    def save(self, *args, **kwargs):
-        try:
-            self.slug = slugify(self.name)
-            geocoder = Geocoder()
-            address = self.address
-            results, status_code = geocoder.geocode({'address': self.name})
-            self.lat, self.lng = results[0]['geometry']['location']['arg']
-        except:
-            pass
-        if not self.pk:
-            super(Team, self).save(*args, **kwargs)
-            a = Event.objects.create(
-                name=str(self.slug + " recruitment"),
-                scope="local",
-                category="recruitment",
-                description="We are always recruiting and welcoming new people.",
-                start_date=datetime.now()
-            )
-            a.save()
-            a.organizing_committee = [self]
-        else:
-            super(Team, self).save(*args, **kwargs)
-
-    def __unicode__(self):
-        if self.category not in ['jlc', 'lc', 'observer']:
-            return self.name
-        return self.category.upper() + " " + self.name
-
-    def pending_applications(self):
-        result = self.event_set.get(category='recruitment').applicants.all()
-        return result
-
-    def is_lc(self):
-        return self.category in ['jlc', 'lc', 'observer']
-
-    def last_event(self):
-        try:
-            return \
-                self.event_set.all().exclude(category='recruitment').order_by(
-                    '-start_date')[
-                    0].start_date
-        except:
-            return 0
 
 
-class Board(models.Model):
-    year = models.PositiveIntegerField()
-    treasurer = models.OneToOneField("account.Eestecer",
-                                     related_name="treasurer_in_board",
-                                     null=True, blank=True)
-    vcia = models.OneToOneField("account.Eestecer", related_name="ia_in_board",
-                                null=True, blank=True)
-    vcea = models.OneToOneField("account.Eestecer", related_name="ea_in_board",
-                                null=True, blank=True)
-    vcpa = models.OneToOneField("account.Eestecer", related_name="pa_in_board",
-                                null=True, blank=True)
-    cp = models.OneToOneField("account.Eestecer", related_name="cp_in_board",
-                              null=True, blank=True)
+
 
 
 class MemberImage(models.Model):

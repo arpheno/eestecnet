@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericRelation
-from django.db.models import ForeignKey
+from django.db.models import ForeignKey, IntegerField
 from guardian.shortcuts import assign_perm
 
 from common.models import Applicable, NameMixin, DescriptionMixin
@@ -52,11 +52,21 @@ class BaseTeam(Applicable, Reversable, DescriptionMixin, NameMixin):
     @property
     def board(self):
         return self.group_set.get(name=self.name + '_organizers')
-
     @property
-    def members(self):
+    def users(self):
         return self.group_set.get(name=self.name + '_members')
+
 class Commitment(BaseTeam):
+    founded = IntegerField(blank=True, null=True)
+    rank = IntegerField(blank=True, null=True)
     pass
 class InternationalTeam(BaseTeam):
+    pass
+
+
+class InternationalBody(BaseTeam):
+    pass
+
+
+class InternationalDepartment(BaseTeam):
     pass

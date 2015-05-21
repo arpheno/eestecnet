@@ -19,7 +19,7 @@ class TestTeam(TestCase, AuditCase, ImageCase):
         self.object = CommitmentFactory()
         self.serializer_class = CommitmentSerializer
     def test_applications_work(self):
-        p = ParticipationFactory(group=self.object.members)
+        p = ParticipationFactory(group=self.object.users)
         self.assertTrue(p.user in self.object.applicants)
         self.assertTrue(p in self.object.applications)
         self.assertFalse(p.user in self.object.participants)

@@ -81,8 +81,8 @@ class TestAccount(RESTCase, TestCase, ImageCase):
     def test_get_commitment(self):
         amsterdam = CommitmentFactory()
         intb = InternationalTeamFactory()
-        ParticipationFactory(group=amsterdam.members, user=self.object)
-        ParticipationFactory(group=intb.members, user=self.object)
+        ParticipationFactory(group=amsterdam.users, user=self.object)
+        ParticipationFactory(group=intb.users, user=self.object)
         self.assertEqual(self.object.commitment, amsterdam)
 
 
