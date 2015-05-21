@@ -14,7 +14,7 @@ class Question(Model):
 class Answer(Model):
     parent = ForeignKey('feedback.AnswerSet')
     q = ForeignKey('feedback.Question', null=True)
-    a = TextField(blank=True, null=True,blank=True)
+    a = TextField(blank=True, null=True)
 
     def __unicode__(self):
         return self.a

@@ -28,7 +28,7 @@ class AnswerSetForm(BetterModelForm):
 
 
 class AnswerForm(ReadonlyModelForm):
-    a = CharField(widget=Textarea(attrs={'rows': '1'}), label="Answer")
+    a = CharField(widget=Textarea(attrs={'rows': '1'}), label="Answer",required=False)
 
     class Meta:
         model = Question
