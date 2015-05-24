@@ -21,5 +21,5 @@ class LegacyTeamSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Team
     thumbnail = Base64ImageField(
-        max_length=None, use_url=True,
+        max_length=None, use_url=True,required=False
     )

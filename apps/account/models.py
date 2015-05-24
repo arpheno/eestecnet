@@ -84,7 +84,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     #Basic Information
     def name(self):
         return self.get_full_name()
-    thumbnail = models.ImageField(upload_to="users",null=True,blank=True)
+    thumbnail = models.ImageField(upload_to="users",null=True,blank=True,default="/media/cvs/example.jpg")
     description = models.TextField(blank=True, null=True)
     slug = AutoSlugField(populate_from=get_eestecer_slug)
     #Contact information
@@ -116,7 +116,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     food_preferences = models.CharField(max_length=15, choices=FOOD_CHOICES,
                                         default='none')
     """ Food preferences, for example vegetarian or no pork. """
-    curriculum_vitae = models.FileField(upload_to="cvs", blank=True, null=True)
+    curriculum_vitae = models.FileField(upload_to="cvs", blank=True, null=True,default="/media/cvs/example.dat")
     """ For the future incorporation of Lykeion """
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     """Should be set by the user to the time they joined eestec. For new users it will

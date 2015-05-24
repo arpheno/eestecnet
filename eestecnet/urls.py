@@ -7,7 +7,7 @@ from haystack.views import SearchView
 
 from apps.account.views import EestecerCreate, \
     Login, Logout, complete, MassCommunication, PrivilegedCommunication
-from eestecnet.routers import router
+from eestecnet.routers import router, lrouter
 from eestecnet.settings.basic import MEDIA_ROOT
 from eestecnet.views import newsletter
 from apps.pages.models import Stub
@@ -74,6 +74,7 @@ if settings.DEBUG:
 urlpatterns += patterns(
     '',
     url(r'^api/', include(router.urls)),
+    url(r'^legacy/', include(lrouter.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^froala_editor/', include('froala_editor.urls')),
     url(r'^admin/?', include(admin.site.urls)),

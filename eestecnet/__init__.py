@@ -416,6 +416,10 @@ def create_eestec_people():
         with open('eestecnet/people/' + user.slug + '.jpg', 'rb') as doc_file:
             user.thumbnail.save(user.slug + ".jpg", File(doc_file), save=True)
         user.save()
+    for user in Eestecer.objects.all():
+        with open('eestecnet/people/' + user.slug + '.jpg', 'rb') as doc_file:
+            user.curriculum_vitae.save(user.slug + ".jpg", File(doc_file), save=True)
+        user.save()
     munich = Team.objects.get(slug='munich')
     mm = [ag, aa, cm, ez, mp, ma, ra, sw]
     for user in mm:
