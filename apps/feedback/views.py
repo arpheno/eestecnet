@@ -8,6 +8,7 @@ from apps.events.models import Event, Participation, Application
 from apps.feedback.forms import QuestionForm, QuestionSetForm, AnswerSetForm, AnswerForm
 from apps.feedback.models import Question, Answer, QuestionSet, AnswerSet
 from eestecnet.forms import DialogFormMixin
+from eestecnet.views import NeverCacheMixin
 
 
 class QuestionInline(InlineFormSet):
@@ -20,6 +21,7 @@ class AnswerInline(InlineFormSet):
     form_class = AnswerForm
     extra = 0
     can_delete = False
+
 
 class FillOutQuestionaire(DialogFormMixin, UpdateWithInlinesView):
     form_title = "base/base.html"
@@ -42,7 +44,7 @@ class FillOutQuestionaire(DialogFormMixin, UpdateWithInlinesView):
     def get_success_url(self):
         return reverse_lazy('event', kwargs=self.kwargs)
 
-class AnswerFeedback(DialogFormMixin, UpdateWithInlinesView):
+class AnswerFeedback(NeverCacheMixin,DialogFormMixin, UpdateWithInlinesView):
     form_title = "base/base.html"
     inlines = [AnswerInline, ]
     parent_template = "base/base.html"

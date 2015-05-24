@@ -1,24 +1,12 @@
 from rest_framework import serializers
 
-from apps.account.serializers import PersonSerializer
-from apps.news.serializers import MembershipSerializer
+from apps.account.serializers import PersonSerializer, Base64ImageField
 from apps.teams.models import Team
 from eestecnet.fields import HyperlinkedSorlImageField
 
 
-class CityListSerializer(serializers.HyperlinkedModelSerializer):
-    thumbnail = HyperlinkedSorlImageField(
-        dimensions="200x200",
-        options={'crop': 'center'}
-    )
-
-    class Meta:
-        model = Team
-        fields = ('thumbnail', 'name')
-
-
-class CityDetailSerializer(serializers.HyperlinkedModelSerializer):
-    users = PersonSerializer(
+class CitySerializer(serializers.HyperlinkedModelSerializer):
+    members = PersonSerializer(
         many=True,
         read_only=True,
     )
@@ -26,7 +14,12 @@ class CityDetailSerializer(serializers.HyperlinkedModelSerializer):
         dimensions="200x200",
         options={'crop': 'center'}
     )
-    membership_set = MembershipSerializer(many=True, read_only=True)
+
     class Meta:
         model = Team
-
+class LegacyTeamSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Team
+    thumbnail = Base64ImageField(
+        max_length=None, use_url=True,required=False
+    )

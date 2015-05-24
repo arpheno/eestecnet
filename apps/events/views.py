@@ -27,6 +27,7 @@ from apps.events.models import Event, Application, Participation
 from apps.teams.forms import ApplicationInline, ParticipationInline
 from apps.teams.models import Team
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -156,7 +157,8 @@ class InternationalEvents(AdminOptions, Grids, ListView):
         for event in events:
             if event.deadline and event.deadline > timezone.now():
                 eventlist['active_list'].append(event)
-            if event.deadline and event.deadline < timezone.now() and event.end_date > \
+            if event.deadline and event.end_date and event.deadline < timezone.now() \
+                    and event.end_date > \
                     timezone.now().date():
                 eventlist['pending_list'].append(event)
             if event.deadline and event.end_date and event.end_date < timezone.now(
@@ -501,24 +503,25 @@ class ExportFeedback(EventMixin, DetailView):
                                      + ' Feedback.xls'
         wb = xlwt.Workbook(encoding='utf-8')
         sheet = 0
-        for pax in self.get_participants():
-            row_num = 0
-            ws = wb.add_sheet("Feedback #" + str(sheet))
-            columns = [(u"Question", 7000), (u"Answer", 10000)]
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            for col_num in xrange(len(columns)):
-                ws.write(row_num, col_num, columns[col_num][0], font_style)
-                # set column width
-                ws.col(col_num).width = columns[col_num][1]
-            font_style = xlwt.XFStyle()
-            font_style.alignment.wrap = 1
-            for answer in pax.feedback.answer_set.all():
-                row_num += 1
-                row = [answer.q.q, answer.a]
-                for col_num in xrange(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-            sheet += 1
+        if self.get_object().feedbacksheet:
+            for pax in self.get_participants():
+                ws = wb.add_sheet("Feedback #" + str(sheet),cell_overwrite_ok=True)
+                row_num=0
+                columns = [(u"Question", 7000), (u"Answer", 10000)]
+                font_style = xlwt.XFStyle()
+                font_style.font.bold = True
+                for col_num in xrange(len(columns)):
+                    ws.write(row_num, col_num, columns[col_num][0], font_style)
+                    # set column width
+                    ws.col(col_num).width = columns[col_num][1]
+                font_style = xlwt.XFStyle()
+                font_style.alignment.wrap = 1
+                for answer in pax.feedback.answer_set.all():
+                    row_num += 1
+                    row = [answer.q.q, answer.a]
+                    for col_num in xrange(len(row)):
+                        ws.write(row_num, col_num, row[col_num], font_style)
+                sheet += 1
         wb.save(response)
         return response
 

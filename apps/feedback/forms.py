@@ -26,14 +26,13 @@ class AnswerSetForm(BetterModelForm):
         fields = []
         model = AnswerSet
 
-
 class AnswerForm(ReadonlyModelForm):
-    a = CharField(widget=Textarea(attrs={'rows': '1'}), label="Answer")
+    a = CharField(widget=Textarea(attrs={'rows': '1'}), label="Answer",required=False)
 
     class Meta:
         model = Question
         fields = ('q', 'a')
-
     class NewMeta:
         readonly = ('q')
-
+    def is_valid(self):
+        return True

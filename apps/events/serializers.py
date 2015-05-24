@@ -1,46 +1,14 @@
 from rest_framework import serializers
+from rest_framework.relations import SlugRelatedField
+from rest_framework.serializers import ModelSerializer
 
-from apps.account.serializers import PersonSerializer, PersonParticipationSerializer
-from apps.events.models import Event, Participation, Transportation, Application
-from apps.feedback.serializers import AnswerSetSerializer
-from apps.teams.serializers import CityListSerializer
+from apps.account.serializers import PersonSerializer, Base64ImageField
+from apps.events.models import Event, Participation
+from apps.feedback.serializers import LegacyQuestionSetSerializer
+from apps.teams.serializers import CitySerializer
 from eestecnet.fields import HyperlinkedSorlImageField
 
 
-class TransportationSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Transportation
-
-
-class IncomingSerializer(serializers.ModelSerializer):
-    applicant = PersonSerializer(read_only=True)
-    questionaire = AnswerSetSerializer(read_only=True)
-    class Meta:
-        model = Application
-
-
-class ApplicationSerializer(serializers.ModelSerializer):
-    applicant = PersonSerializer(read_only=True)
-    questionaire = AnswerSetSerializer()
-
-    class Meta:
-        model = Application
-
-
-class OutgoingSerializer(serializers.ModelSerializer):
-    applicant = PersonSerializer(read_only=True)
-
-    class Meta:
-        model = Application
-        fields = ('applicant', 'target', 'priority')
-
-class ParticipationSerializer(serializers.HyperlinkedModelSerializer):
-    participant = PersonParticipationSerializer(read_only=True, )
-    feedback = AnswerSetSerializer(read_only=True)
-    transportation = TransportationSerializer(read_only=True)
-
-    class Meta:
-        model = Participation
 class EventSerializer(serializers.HyperlinkedModelSerializer):
     members = PersonSerializer(
         many=True,
@@ -48,7 +16,7 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
     )
     participants = PersonSerializer(many=True, read_only=True, )
     organizers = PersonSerializer(many=True, read_only=True, )
-    organizing_committee = CityListSerializer(many=True, read_only=True, )
+    organizing_committee = CitySerializer(many=True, read_only=True, )
     thumbnail = HyperlinkedSorlImageField(dimensions="200x200",
                                           options={'crop': 'center'})
 
@@ -57,3 +25,17 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
         exclude = ['applicants', 'questionaire', 'feedbacksheet', 'pax_report',
                    'organizer_report']
 
+class LegacyEventSerializer(ModelSerializer):
+    class Meta:
+        model = Event
+    questionaire = LegacyQuestionSetSerializer(read_only=True)
+    feedbacksheet = LegacyQuestionSetSerializer(read_only=True)
+    organizers = SlugRelatedField("slug",many=True, read_only=True)
+    members = SlugRelatedField("slug",many=True, read_only=True)
+    organizing_committee = SlugRelatedField("slug",many=True, read_only=True)
+    thumbnail = Base64ImageField(max_length=0,use_url=True)
+class LegacyParticipationSerializer(ModelSerializer):
+    class Meta:
+        model = Participation
+    participant = SlugRelatedField("slug", read_only=True)
+    target = SlugRelatedField("slug", read_only=True)

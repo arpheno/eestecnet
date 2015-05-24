@@ -170,7 +170,7 @@ class Participation(models.Model):
         self.confirmation = sha.new(salt + str(random.random())).hexdigest()
         if not self.pk:
             if self.target.feedbacksheet:
-                self.feedback = create_answer_set(self.feedbacksheet)
+                self.feedback = create_answer_set(self.target.feedbacksheet)
         return super(Participation, self).save(force_insert, force_update, using,
                                                update_fields)
 

@@ -1,10 +1,17 @@
+from io import BytesIO
 from django.contrib.auth.models import Permission
 from django.db.models import get_model
 from django.test import TestCase, Client
 from django.utils import timezone
+import pytest
+from rest_framework.parsers import JSONParser
+from rest_framework.renderers import JSONRenderer
+from apps.account.serializers import LegacyAccountSerializer
 
 from apps.feedback.models import QuestionSet, Question
 from apps.news.models import Membership
+from apps.teams.factories import LegacyTeamFactory
+from apps.teams.serializers import LegacyTeamSerializer
 
 
 Eestecer = get_model('account', 'Eestecer')
@@ -145,3 +152,23 @@ class JoinTeamTestCase(EESTECMixin, TestCase):
         a.accepted = True
         a.save()
         assert (Membership.objects.filter(user=self.user, team=self.skopje))
+
+@pytest.mark.django_db
+def test_account_tautonomic():
+    #Build a regular user
+    old_object=LegacyTeamFactory()
+    #Serialize it
+    data=LegacyTeamSerializer(old_object).data
+    # Send it over the wire
+    json = JSONRenderer().render(data)
+    stream = BytesIO(json)
+    new_input = JSONParser().parse(stream)
+    #Deserialize it
+    serializer = LegacyTeamSerializer(data=new_input)
+    old_object.delete()
+    serializer.is_valid(raise_exception=True)
+    new_object = serializer.save()
+    #Compare the two objects
+    for key in new_input:
+        assert getattr(new_object,key) == getattr(old_object,key)
+
