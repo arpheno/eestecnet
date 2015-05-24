@@ -24,4 +24,4 @@ class LegacyTeamSerializer(serializers.HyperlinkedModelSerializer):
     thumbnail = Base64ImageField(
         max_length=None, use_url=True,required=False
     )
-    members = StringRelatedField(many=True,read_only=True)
+    users = StringRelatedField(many=True,read_only=True)
