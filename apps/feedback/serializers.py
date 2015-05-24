@@ -1,6 +1,6 @@
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
-from rest_framework.relations import SlugRelatedField
+from rest_framework.relations import SlugRelatedField, StringRelatedField
 from rest_framework.serializers import ModelSerializer, Serializer
 from apps.events.models import Participation
 from apps.feedback.models import Question, QuestionSet
@@ -18,5 +18,5 @@ class LegacyQuestionSetSerializer(ModelSerializer):
 class LegacyParticipationSerializer(ModelSerializer):
     class Meta:
         model = Participation
-    participant = SlugRelatedField("slug", read_only=True)
-    target = SlugRelatedField("slug", read_only=True)
+    participant = StringRelatedField( read_only=True)
+    target = StringRelatedField(read_only=True)

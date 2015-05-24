@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.relations import StringRelatedField
 
 from apps.account.serializers import PersonSerializer, Base64ImageField
 from apps.teams.models import Team
@@ -23,3 +24,4 @@ class LegacyTeamSerializer(serializers.HyperlinkedModelSerializer):
     thumbnail = Base64ImageField(
         max_length=None, use_url=True,required=False
     )
+    members = StringRelatedField(many=True,read_only=True)

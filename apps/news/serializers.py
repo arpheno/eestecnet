@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from rest_framework.relations import SlugRelatedField
+from rest_framework.relations import SlugRelatedField, StringRelatedField
 from rest_framework.serializers import ModelSerializer
 
 from apps.news.models import Entry, Membership
@@ -22,6 +22,6 @@ class LegacyMembershipSerializer(ModelSerializer):
     class Meta:
         model = Membership
 
-    user = SlugRelatedField("slug", read_only=True)
-    team = SlugRelatedField("slug", read_only=True)
+    user = StringRelatedField( read_only=True)
+    team = StringRelatedField(read_only=True)
 

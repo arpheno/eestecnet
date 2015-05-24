@@ -197,7 +197,9 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
         "Returns the short name for the user."
         return '%s %s' % (self.first_name, self.last_name)
     def __unicode__(self):
-        return self.get_full_name()
+        if self.middle_name:
+            return "-".join([self.first_name,self.middle_name,self.last_name])
+        return "-".join([self.first_name,self.last_name])
     def get_absolute_url(self):
         return "/people/"+  self.slug
     def update_forum(self,password=None):

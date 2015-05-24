@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from rest_framework.relations import SlugRelatedField
+from rest_framework.relations import SlugRelatedField, StringRelatedField
 from rest_framework.serializers import ModelSerializer
 
 from apps.account.serializers import PersonSerializer, Base64ImageField
@@ -30,12 +30,12 @@ class LegacyEventSerializer(ModelSerializer):
         model = Event
     questionaire = LegacyQuestionSetSerializer(read_only=True)
     feedbacksheet = LegacyQuestionSetSerializer(read_only=True)
-    organizers = SlugRelatedField("slug",many=True, read_only=True)
-    members = SlugRelatedField("slug",many=True, read_only=True)
-    organizing_committee = SlugRelatedField("slug",many=True, read_only=True)
+    organizers = StringRelatedField(many=True, read_only=True)
+    members = StringRelatedField(many=True, read_only=True)
+    organizing_committee = StringRelatedField(many=True, read_only=True)
     thumbnail = Base64ImageField(max_length=0,use_url=True)
 class LegacyParticipationSerializer(ModelSerializer):
     class Meta:
         model = Participation
-    participant = SlugRelatedField("slug", read_only=True)
-    target = SlugRelatedField("slug", read_only=True)
+    participant = StringRelatedField(read_only=True)
+    target = StringRelatedField( read_only=True)
