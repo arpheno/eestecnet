@@ -1,3 +1,4 @@
+import json
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
@@ -5,8 +6,17 @@ from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from mailqueue.models import MailerMessage
+from rest_framework.renderers import JSONRenderer
+from apps.account.serializers import LegacyAccountSerializer
 
 from eestecnet import *
+
+def dump_account():
+    with open("/account_dump.json",'w') as f:
+        for a in Eestecer.objects.all():
+            serializer =  LegacyAccountSerializer(a)
+            json = JSONRenderer().render(serializer.data)
+            f.write(json)
 
 
 def init(request):
