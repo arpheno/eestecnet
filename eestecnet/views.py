@@ -12,7 +12,7 @@ from apps.account.serializers import LegacyAccountSerializer
 from eestecnet import *
 
 def dump_account():
-    with open("/account_dump.json",'w') as f:
+    with open("account_dump.json",'w') as f:
         for a in Eestecer.objects.all():
             serializer =  LegacyAccountSerializer(a)
             json = JSONRenderer().render(serializer.data)
