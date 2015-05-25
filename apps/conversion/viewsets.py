@@ -2,8 +2,9 @@ from rest_framework.viewsets import ModelViewSet
 
 from apps.account.models import Eestecer
 from apps.conversion.serializers import LegacyEventSerializer, LegacyAccountSerializer, \
-    LegacyTeamSerializer
+    LegacyTeamSerializer, LegacyEntrySerializer
 from apps.events.models import Event
+from apps.news.models import Entry
 from apps.teams.models import Team
 
 
@@ -28,6 +29,15 @@ class lAccounts(ModelViewSet):
 class lTeams(ModelViewSet):
     queryset = Team.objects.all()
     serializer_class = LegacyTeamSerializer
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_superuser:
+            return super(lTeams, self).dispatch(request, *args, **kwargs)
+
+
+class lEntries(ModelViewSet):
+    queryset = Entry.objects.all()
+    serializer_class = LegacyEntrySerializer
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser:

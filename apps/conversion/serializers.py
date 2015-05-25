@@ -4,6 +4,7 @@ from apps.account.models import Eestecer
 from apps.account.serializers import Base64ImageField, Base64PdfField
 from apps.events.models import Event, Participation, EventImage
 from apps.feedback.serializers import LegacyQuestionSetSerializer
+from apps.news.models import Entry
 from apps.teams.models import Team, MemberImage
 
 
@@ -50,4 +51,7 @@ class LegacyParticipationSerializer(ModelSerializer):
         model = Participation
     participant = StringRelatedField(read_only=True)
     target = StringRelatedField( read_only=True)
-
+class LegacyEntrySerializer(ModelSerializer):
+    class Meta:
+        model = Entry
+    thumbnail =  Base64ImageField(max_length=0,allow_empty_file=True,use_url = True)
