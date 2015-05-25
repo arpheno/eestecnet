@@ -32,7 +32,7 @@ class LegacyEventSerializer(ModelSerializer):
     feedbacksheet = LegacyQuestionSetSerializer(read_only=True)
     organizers = StringRelatedField(many=True, read_only=True)
     members = StringRelatedField(many=True, read_only=True)
-    organizing_committee = StringRelatedField(many=True, read_only=True)
+    organizing_committee = SlugRelatedField("slug",many=True, read_only=True)
     thumbnail = Base64ImageField(max_length=0,use_url=True)
 class LegacyParticipationSerializer(ModelSerializer):
     class Meta:
