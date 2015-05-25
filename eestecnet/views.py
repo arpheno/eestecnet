@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from mailqueue.models import MailerMessage
 from rest_framework.renderers import JSONRenderer
-from apps.account.serializers import LegacyAccountSerializer
+from apps.conversion.serializers import LegacyAccountSerializer
 
 from eestecnet import *
 

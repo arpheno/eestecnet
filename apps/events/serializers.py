@@ -25,17 +25,4 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
         exclude = ['applicants', 'questionaire', 'feedbacksheet', 'pax_report',
                    'organizer_report']
 
-class LegacyEventSerializer(ModelSerializer):
-    class Meta:
-        model = Event
-    questionaire = LegacyQuestionSetSerializer(read_only=True)
-    feedbacksheet = LegacyQuestionSetSerializer(read_only=True)
-    organizers = StringRelatedField(many=True, read_only=True)
-    members = StringRelatedField(many=True, read_only=True)
-    organizing_committee = SlugRelatedField("slug",many=True, read_only=True)
-    thumbnail = Base64ImageField(max_length=0,use_url=True)
-class LegacyParticipationSerializer(ModelSerializer):
-    class Meta:
-        model = Participation
-    participant = StringRelatedField(read_only=True)
-    target = StringRelatedField( read_only=True)
+

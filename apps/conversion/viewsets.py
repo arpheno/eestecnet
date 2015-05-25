@@ -1,17 +1,38 @@
-from django.contrib.auth.models import Group
-from rest_framework import viewsets
+from rest_framework.viewsets import ModelViewSet
 
 from apps.account.models import Eestecer
-from apps.account.serializers import PersonSerializer, GroupSerializer
-from eestecnet.serializers import AdminMixin
+from apps.conversion.serializers import LegacyEventSerializer, LegacyAccountSerializer, \
+    LegacyTeamSerializer
+from apps.events.models import Event
+from apps.teams.models import Team
 
 
-class GroupViewset(AdminMixin, viewsets.ReadOnlyModelViewSet):
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
+class lEvents(ModelViewSet):
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_superuser:
+            return super(lEvents, self).dispatch(request, *args, **kwargs)
+
+    queryset = Event.objects.exclude(category="recruitment")
+    serializer_class = LegacyEventSerializer
 
 
-class People(AdminMixin, viewsets.ReadOnlyModelViewSet):
+class lAccounts(ModelViewSet):
     queryset = Eestecer.objects.all()
-    serializer_class = PersonSerializer
+    serializer_class = LegacyAccountSerializer
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_superuser:
+            return super(lAccounts, self).dispatch(request, *args, **kwargs)
+
+
+class lTeams(ModelViewSet):
+    queryset = Team.objects.all()
+    serializer_class = LegacyTeamSerializer
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_superuser:
+            return super(lTeams, self).dispatch(request, *args, **kwargs)
+
+
+
 

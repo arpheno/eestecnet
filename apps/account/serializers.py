@@ -155,12 +155,4 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
             'thumbnail', 'first_name', 'middle_name', 'last_name', 'second_last_name',
             'is_superuser', 'slug', 'field_of_study', 'groups', 'user_permissions')
         # exclude=('email','password','passport_number','date_of_birth')
-class LegacyAccountSerializer(ModelSerializer):
-    class Meta:
-        model = Eestecer
-    thumbnail = Base64ImageField(
-        max_length=None, use_url=True,
-    )
-    curriculum_vitae= Base64PdfField(
-        max_length=None, use_url=True,
-    )
+

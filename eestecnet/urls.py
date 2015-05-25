@@ -7,7 +7,9 @@ from haystack.views import SearchView
 
 from apps.account.views import EestecerCreate, \
     Login, Logout, complete, MassCommunication, PrivilegedCommunication
-from eestecnet.routers import router, lrouter
+from apps.conversion.routers import lrouter
+from eestecnet.routers import router
+
 from eestecnet.settings.basic import MEDIA_ROOT
 from eestecnet.views import newsletter
 from apps.pages.models import Stub
