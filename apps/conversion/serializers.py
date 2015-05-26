@@ -55,3 +55,4 @@ class LegacyEntrySerializer(ModelSerializer):
     class Meta:
         model = Entry
     thumbnail =  Base64ImageField(max_length=0,allow_empty_file=True,use_url = True)
+    author = StringRelatedField(read_only=True)
