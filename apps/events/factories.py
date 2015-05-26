@@ -24,9 +24,9 @@ class BaseEventFactory(factory.DjangoModelFactory):
 
     name = "base_event"
     owner = factory.SubFactory(AccountFactory)
+    start_date = datetime.datetime.today().date()
+    end_date = datetime.datetime.today().date()
     deadline = datetime.datetime.now()
-    max_participants = 5
-    unofficial_fee = 500
 
 
 class WorkshopFactory(BaseEventFactory):
@@ -34,8 +34,6 @@ class WorkshopFactory(BaseEventFactory):
         model = Workshop
 
     name = "Inktronics"
-    start_date = datetime.datetime.today().date()
-    end_date = datetime.datetime.today().date()
     location = "munich"
 
 
@@ -55,7 +53,6 @@ class TrainingFactory(BaseEventFactory):
         model = Training
 
     name = "Emotional Intelligence"
-    date = datetime.datetime.today().date()
     location = u"Kraków"
 
 

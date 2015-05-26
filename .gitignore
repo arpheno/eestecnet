@@ -6,6 +6,7 @@ eestecnet/settings_deploy.py
 tmp
 media
 *.log
+apps/legacy/*.json
 .idea
 .vagrant
 serve
@@ -17,3 +18,5 @@ bower_components/
 tmp
 .DS_Store
 app/jspm_packages
+
+apps/legacy/account/account_dump.json

@@ -12,7 +12,8 @@ class Migration(migrations.Migration):
     dependencies = [
         ('common', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('accounts', '0002_auto_20150517_1540'),
+        ('accounts', '0002_auto_20150523_2158'),
+        ('teams', '0001_initial'),
     ]
 
     operations = [
@@ -23,8 +24,8 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(blank=True)),
                 ('name', models.CharField(max_length=300)),
                 ('deadline', models.DateTimeField(null=True, blank=True)),
-                ('unofficial_fee', models.IntegerField(null=True, blank=True)),
-                ('max_participants', models.IntegerField(null=True, blank=True)),
+                ('start_date', models.DateField()),
+                ('end_date', models.DateField()),
             ],
             options={
                 'abstract': False,
@@ -32,17 +33,45 @@ class Migration(migrations.Migration):
             bases=('common.applicable', common.util.Reversable, models.Model),
         ),
         migrations.CreateModel(
+            name='Congress',
+            fields=[
+                ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=('events.baseevent',),
+        ),
+        migrations.CreateModel(
             name='Exchange',
             fields=[
                 ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
-                ('start_date', models.DateField()),
-                ('end_date', models.DateField()),
                 ('participation_fee', models.IntegerField()),
             ],
             options={
                 'abstract': False,
             },
-            bases=('events.baseevent', models.Model),
+            bases=('events.baseevent',),
+        ),
+        migrations.CreateModel(
+            name='IMW',
+            fields=[
+                ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=('events.baseevent',),
+        ),
+        migrations.CreateModel(
+            name='Operational',
+            fields=[
+                ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=('events.baseevent',),
         ),
         migrations.CreateModel(
             name='ParticipationConfirmation',
@@ -56,15 +85,34 @@ class Migration(migrations.Migration):
             bases=('common.confirmable', 'common.confirmation', object),
         ),
         migrations.CreateModel(
-            name='Training',
+            name='Project',
             fields=[
                 ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
-                ('date', models.DateField()),
             ],
             options={
                 'abstract': False,
             },
-            bases=('events.baseevent', models.Model),
+            bases=('events.baseevent',),
+        ),
+        migrations.CreateModel(
+            name='SSA',
+            fields=[
+                ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=('events.baseevent',),
+        ),
+        migrations.CreateModel(
+            name='Training',
+            fields=[
+                ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=('events.baseevent',),
         ),
         migrations.CreateModel(
             name='Travel',
@@ -86,13 +134,17 @@ class Migration(migrations.Migration):
             name='Workshop',
             fields=[
                 ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
-                ('start_date', models.DateField()),
-                ('end_date', models.DateField()),
             ],
             options={
                 'abstract': False,
             },
-            bases=('events.baseevent', models.Model),
+            bases=('events.baseevent',),
+        ),
+        migrations.AddField(
+            model_name='baseevent',
+            name='organizing_committee',
+            field=models.ManyToManyField(related_name='events', to='teams.BaseTeam'),
+            preserve_default=True,
         ),
         migrations.AddField(
             model_name='baseevent',

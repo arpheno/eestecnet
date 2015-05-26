@@ -45,16 +45,16 @@ class ConversionAccountSerializer(ConversionMixin, ModelSerializer):
 
     def create(self, validated_data):
         result = super(ConversionAccountSerializer, self).create(validated_data)
-        ct = ContentType.objects.get(app_label="common", model="image")
-        data = {
-            "full_size": self.keep["thumbnail"],
-            "content_object": result,
-            "content_type": ct.pk,
-            "object_id": result.pk}
-        print data
-        thumbnail = ImageSerializer(data=data)
-        thumbnail.is_valid(raise_exception=True)
-        thumbnail.save()
+        if self.keep["thumbnail"]:
+            ct = ContentType.objects.get(app_label="common", model="image")
+            data = {
+                "full_size": self.keep["thumbnail"],
+                "content_object": result,
+                "content_type": ct.pk,
+                "object_id": result.pk}
+            thumbnail = ImageSerializer(data=data, allow_null=True)
+            thumbnail.is_valid(raise_exception=True)
+            thumbnail.save()
         return result
 
 
@@ -64,7 +64,9 @@ class LegacyAccountSerializer(ModelSerializer):
 
     thumbnail = Base64ImageField(
         max_length=None, use_url=True,
+        required=False, allow_empty_file=True,
     )
     curriculum_vitae = Base64PdfField(
         max_length=None, use_url=True,
+        required=False, allow_empty_file=True, allow_null=True
     )

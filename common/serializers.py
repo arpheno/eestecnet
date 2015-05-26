@@ -72,6 +72,7 @@ class Base64PdfField(serializers.FileField):
 
             data = ContentFile(decoded_file, name=complete_file_name)
 
+        self.allow_empty_file = True
         return super(Base64PdfField, self).to_internal_value(data)
 
     def get_file_extension(self, file_name, decoded_file):
@@ -119,7 +120,7 @@ class Base64ImageField(serializers.ImageField):
             complete_file_name = "%s.%s" % (file_name, file_extension, )
 
             data = ContentFile(decoded_file, name=complete_file_name)
-
+        self.allow_empty_file = True
         return super(Base64ImageField, self).to_internal_value(data)
 
     def get_file_extension(self, file_name, decoded_file):
@@ -134,6 +135,7 @@ class ImageSerializer(ModelSerializer):
         model = Image
     full_size = Base64ImageField(
         max_length=None, use_url=True,
+        allow_empty_file=True, allow_null=True,
     )
 
 

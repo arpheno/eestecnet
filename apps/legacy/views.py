@@ -1,8 +1,11 @@
 from rest_framework.viewsets import ModelViewSet
 
-from apps.teams.models import BaseTeam, Commitment, InternationalTeam
-from apps.teams.serializers import TeamSerializer, CommitmentSerializer, \
-    InternationalTeamSerializer
+from apps.accounts.models import Account
+from apps.events.models import BaseEvent
+from apps.legacy.account.serializers import ConversionAccountSerializer
+from apps.legacy.events.serializers import ConversionEventSerializer
+from apps.legacy.teams.serializers import ConversionTeamSerializer
+from apps.teams.models import BaseTeam
 
 
 __author__ = 'Sebastian Wozny'
@@ -10,17 +13,22 @@ import logging
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
-# Create your views here.
-class BaseTeamViewSet(ModelViewSet):
+
+
+class Accounts(ModelViewSet):
+    queryset = Account.objects.all()
+    serializer_class = ConversionAccountSerializer
+
+
+class Teams(ModelViewSet):
     queryset = BaseTeam.objects.all()
-    serializer_class = TeamSerializer
+    serializer_class = ConversionTeamSerializer
 
 
-class CommitmentViewSet(ModelViewSet):
-    queryset = Commitment.objects.all()
-    serializer_class = CommitmentSerializer
+class Events(ModelViewSet):
+    queryset = BaseEvent.objects.all()
+    serializer_class = ConversionEventSerializer
 
 
-class InternationalTeamViewSet(ModelViewSet):
-    queryset = InternationalTeam.objects.all()
-    serializer_class = InternationalTeamSerializer
+
+

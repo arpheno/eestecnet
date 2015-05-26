@@ -6,7 +6,7 @@ from django.contrib.contenttypes.fields import GenericRelation
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.db.models import EmailField, CharField, BooleanField, ManyToManyField, \
-    ForeignKey, DateField, FileField
+    ForeignKey, DateField, FileField, IntegerField
 from django.utils.translation import ugettext_lazy as _
 from guardian.mixins import GuardianUserMixin
 from guardian.shortcuts import assign_perm
@@ -36,8 +36,8 @@ class Group(auth.models.Group):
     applicable = ForeignKey('common.Applicable')
     objects = GroupManager()
     test = CharField(default="LOL", max_length=100)
-
-
+    fee = IntegerField(default=0)
+    max_participants = IntegerField(default=0)
     def __unicode__(self):
         return self.name
 
@@ -165,22 +165,23 @@ class Account(GuardianUserMixin, AbstractAccount, AbstractBaseUser, DescriptionM
     last_name = CharField(max_length=40)
     second_last_name = CharField(max_length=40, blank=True)
     email = EmailField(unique=True)
-    birthday = DateField()
+    birthday = DateField(blank=True, null=True)
     birthday_show = BooleanField(default=True)
 
     # Information important for events
     images = GenericRelation('common.Image', related_query_name='images')
-    tshirt_size = CharField(max_length=15, choices=TSHIRT_SIZE)
+    tshirt_size = CharField(max_length=15, choices=TSHIRT_SIZE, null=True, blank=True)
     allergies = CharField(max_length=300, null=True, blank=True)
     food_preferences = CharField(max_length=30, choices=FOOD_CHOICES, blank=True)
-    passport_number = CharField(max_length=20)
+    passport_number = CharField(max_length=20, null=True, blank=True)
     mobile = CharField(max_length=50, null=True, blank=True)
     skype = CharField(max_length=50, null=True, blank=True)
     hangouts = CharField(max_length=50, null=True, blank=True)
     gender = CharField(max_length=15, choices=GENDER_CHOICES)
 
     #Information important for companies
-    field_of_study = CharField(max_length=50, choices=FIELDS_OF_STUDY)
+    field_of_study = CharField(max_length=50, choices=FIELDS_OF_STUDY, blank=True,
+                               null=True)
     curriculum_vitae = FileField(upload_to="currcula_vitae", blank=True, null=True)
 
     #Information related to the platform

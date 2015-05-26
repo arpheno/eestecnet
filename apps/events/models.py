@@ -1,13 +1,13 @@
 from django.contrib.auth.models import User, Permission
 from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.contenttypes.models import ContentType
-from django.db import models
 from django.db.models import ForeignKey, OneToOneField, DateTimeField, CharField, \
-    TextField, DateField, IntegerField
+    TextField, DateField, IntegerField, ManyToManyField
 from guardian.shortcuts import assign_perm
 from polymorphic import PolymorphicModel
 
 from apps.accounts.models import Account, Participation
+from apps.teams.models import BaseTeam
 from common.models import Applicable, Confirmable, Confirmation, Notification, \
     NameMixin, \
     DescriptionMixin
@@ -22,24 +22,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Create your models here.
-class ShortEvent(models.Model):
-    """ Some Events last longer than a day """
-
-    class Meta:
-        abstract = True
-
-    date = DateField()
-
-
-class LongEvent(models.Model):
-    """ Some Events last longer than a day """
-
-    class Meta:
-        abstract = True
-
-    start_date = DateField()
-    end_date = DateField()
-
 
 class BaseEvent(Applicable, Reversable, NameMixin, DescriptionMixin):
     """ Model that stores basic information common to all events."""
@@ -47,11 +29,12 @@ class BaseEvent(Applicable, Reversable, NameMixin, DescriptionMixin):
     owner = ForeignKey('accounts.Account', editable=False)
     images = GenericRelation('common.Image', related_query_name='images')
     reports = GenericRelation('common.Report', related_query_name='reports')
-    deadline = DateTimeField(null=True, blank=True)
-    unofficial_fee = IntegerField(blank=True, null=True)
-    max_participants = IntegerField(blank=True, null=True)
-    locations = GenericRelation('common.Location', related_query_name='locations')
     urls = GenericRelation('common.URL', related_query_name='urls')
+    locations = GenericRelation('common.Location', related_query_name='locations')
+    deadline = DateTimeField(null=True, blank=True)
+    organizing_committee = ManyToManyField(BaseTeam, related_name="events", null=True)
+    start_date = DateField()
+    end_date = DateField()
 
     @property
     def location(self):
@@ -86,17 +69,42 @@ class BaseEvent(Applicable, Reversable, NameMixin, DescriptionMixin):
         return result
 
 
-class Workshop(BaseEvent, LongEvent):
+class Workshop(BaseEvent):
     """ Workshops as defined in the ROP. """
     pass
 
 
-class Exchange(BaseEvent, LongEvent):
+class Congress(BaseEvent):
+    """ Annual Congress as defined in the ROP. """
+    pass
+
+
+class IMW(BaseEvent):
+    """ Annual Congress as defined in the ROP. """
+    pass
+
+
+class Exchange(BaseEvent):
     """ Exchanges as defined in the ROP ."""
     participation_fee = IntegerField()
 
 
-class Training(BaseEvent, ShortEvent):
+class Training(BaseEvent):
+    """ Training Sessions held by EESTEC Trainers ."""
+    pass
+
+
+class Project(BaseEvent):
+    """ Training Sessions held by EESTEC Trainers ."""
+    pass
+
+
+class SSA(BaseEvent):
+    """ Training Sessions held by EESTEC Trainers ."""
+    pass
+
+
+class Operational(BaseEvent):
     """ Training Sessions held by EESTEC Trainers ."""
     pass
 

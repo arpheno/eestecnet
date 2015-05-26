@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
+import ijson
 import pytest
 
 from apps.accounts.factories import AccountFactory
+from apps.events.factories import BaseEventFactory
 from apps.legacy.account.factories import LegacyAccountFactory
 from apps.legacy.account.serializers import LegacyAccountSerializer, \
     ConversionAccountSerializer
-from apps.teams.factories import CommitmentFactory
+from apps.teams.factories import CommitmentFactory, InternationalTeamFactory
 from common.models import Image
 
 
@@ -25,6 +27,49 @@ def convert(data, conversion_map):
         del data[key]
     del data[None]
     return data
+
+
+@pytest.mark.django_db
+def test_convert_legacy_models():
+    from apps.legacy.teams.serializers import ConversionTeamSerializer
+    from apps.legacy.events.serializers import ConversionEventSerializer
+    from apps.legacy.news.serializers import ConversionEntrySerializer
+
+    InternationalTeamFactory(name="international board")
+    with open('apps/legacy/account/laccounts.json', 'rU') as dump:
+        accounts = ijson.items(dump, "item")
+        for account in accounts:
+            serializer = ConversionAccountSerializer(data=account)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+    with open('apps/legacy/teams/lteams.json', 'rU') as dump:
+        teams = ijson.items(dump, "item")
+        for team in teams:
+            serializer = ConversionTeamSerializer(data=team)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+    with open('apps/legacy/events/levents.json', 'rU') as dump:
+        events = ijson.items(dump, "item")
+        for event in events:
+            serializer = ConversionEventSerializer(data=event)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+    with open('apps/legacy/news/lentries.json', 'rU') as dump:
+        events = ijson.items(dump, "item")
+        for event in events:
+            serializer = ConversionEntrySerializer(data=event)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            # Fuck this shit with open('apps/legacy/account/account_dump.json',
+            # 'rU') as dump:
+            #    accounts= ijson.items(dump,"item")
+            #    for account in accounts:
+            #        try:
+            #            serializer = ConversionAccountSerializer(data=account)
+            #            serializer.is_valid(raise_exception=True)
+            #        except:
+            #            print "Unexpected error:", sys.exc_info()[0]
+            #    assert 1==0
 
 
 @pytest.mark.django_db
@@ -86,64 +131,26 @@ def test_convert_membership():
 
 
 @pytest.mark.django_db
-def test_convert_membership():
-    from apps.legacy.news.factories import LegacyMembershipFactory
-    from apps.legacy.news.serializers import ConversionMembershipSerializer
+def test_convert_event():
+    from apps.legacy.events.factories import LegacyEventFactory
+    from apps.legacy.events.serializers import LegacyEventSerializer, \
+        ConversionEventSerializer
     # Legacy side
-    a = AccountFactory(first_name="a", middle_name="b", last_name="c")
-    d = AccountFactory(first_name="d", last_name="c")
     c = CommitmentFactory(name="munich")
-    object = LegacyMembershipFactory.build()
-    data = {"user": "a-b-c", "team": "munich"}
-    serializer = ConversionMembershipSerializer(data=data)
+    object = LegacyEventFactory.build()
+    data = LegacyEventSerializer(object).data
+    serializer = ConversionEventSerializer(data=data)
     serializer.is_valid(raise_exception=True)
     membership = serializer.save()
-    data = {"user": "d-c", "team": "munich"}
-    serializer = ConversionMembershipSerializer(data=data)
-    serializer.is_valid(raise_exception=True)
-    membership = serializer.save()
-    assert d in c.members
-    assert a in c.members
-
-
 @pytest.mark.django_db
-def test_convert_membership():
-    from apps.legacy.news.factories import LegacyMembershipFactory
-    from apps.legacy.news.serializers import ConversionMembershipSerializer
+def test_convert_participation():
+    from apps.legacy.events.serializers import ConversionParticipationSerializer
     # Legacy side
     a = AccountFactory(first_name="a", middle_name="b", last_name="c")
-    d = AccountFactory(first_name="d", last_name="c")
-    c = CommitmentFactory(name="munich")
-    object = LegacyMembershipFactory.build()
-    data = {"user": "a-b-c", "team": "munich"}
-    serializer = ConversionMembershipSerializer(data=data)
+    e = BaseEventFactory(name="inktronics")
+    data = {"user": "a-b-c", "team": "inktronics"}
+    serializer = ConversionParticipationSerializer(data=data)
     serializer.is_valid(raise_exception=True)
     membership = serializer.save()
-    data = {"user": "d-c", "team": "munich"}
-    serializer = ConversionMembershipSerializer(data=data)
-    serializer.is_valid(raise_exception=True)
-    membership = serializer.save()
-    assert d in c.members
-    assert a in c.members
-
-
-@pytest.mark.django_db
-def test_convert_membership():
-    from apps.legacy.news.factories import LegacyMembershipFactory
-    from apps.legacy.news.serializers import ConversionMembershipSerializer
-    # Legacy side
-    a = AccountFactory(first_name="a", middle_name="b", last_name="c")
-    d = AccountFactory(first_name="d", last_name="c")
-    c = CommitmentFactory(name="munich")
-    object = LegacyMembershipFactory.build()
-    data = {"user": "a-b-c", "team": "munich"}
-    serializer = ConversionMembershipSerializer(data=data)
-    serializer.is_valid(raise_exception=True)
-    membership = serializer.save()
-    data = {"user": "d-c", "team": "munich"}
-    serializer = ConversionMembershipSerializer(data=data)
-    serializer.is_valid(raise_exception=True)
-    membership = serializer.save()
-    assert d in c.members
-    assert a in c.members
+    assert a in e.members
 

@@ -19,7 +19,7 @@ class DescriptionMixin(models.Model):
     class Meta:
         abstract = True
 
-    description = TextField(blank=True)
+    description = TextField(blank=True, null=True)
 
 class NameMixin(models.Model):
     class Meta:
@@ -136,7 +136,7 @@ class Location(PolymorphicModel):
     content_type = ForeignKey(ContentType)
     object_id = PositiveIntegerField()
     content_object = GenericForeignKey()
-    string = CharField(max_length=100)
+    string = CharField(max_length=200)
     latitude = FloatField(blank=True, null=True)
     longitude = FloatField(blank=True, null=True)
 class Image(PolymorphicModel, Reversable):

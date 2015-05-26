@@ -23,7 +23,6 @@ def remove_migrations():
 def cleanup():
     local(r"find . -name '*.pyc' -delete")
 def test():
-    cleanup()
     apps = local('ls  -d -1 apps/*/', capture=True).split()
     files = [app + "tests.py" for app in apps]
     local(r'py.test -n 2 common/tests.py ' + " ".join(files))

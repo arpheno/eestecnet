@@ -31,6 +31,28 @@ class Migration(migrations.Migration):
             name='Commitment',
             fields=[
                 ('baseteam_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='teams.BaseTeam')),
+                ('founded', models.IntegerField(null=True, blank=True)),
+                ('rank', models.IntegerField(null=True, blank=True)),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=('teams.baseteam',),
+        ),
+        migrations.CreateModel(
+            name='InternationalBody',
+            fields=[
+                ('baseteam_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='teams.BaseTeam')),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=('teams.baseteam',),
+        ),
+        migrations.CreateModel(
+            name='InternationalDepartment',
+            fields=[
+                ('baseteam_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='teams.BaseTeam')),
             ],
             options={
                 'abstract': False,
