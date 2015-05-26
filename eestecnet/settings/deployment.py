@@ -1,4 +1,10 @@
-from secret import DATABASE_NAME, DATABASE_PASSWORD, DATABASE_USER, SECRET_KEY
+try:
+    from secret import DATABASE_NAME, DATABASE_PASSWORD, DATABASE_USER, SECRET_KEY
+except ImportError:
+    print "No secret.py setting blank database information"
+    DATABASE_NAME=""
+    DATABASE_USER=""
+    DATABASE_PASSWORD=""
 from basic import *
 
 INSTALLED_APPS

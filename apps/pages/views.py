@@ -9,8 +9,11 @@ from extra_views import CreateWithInlinesView, InlineFormSet
 from form_utils.forms import BetterModelForm
 
 from eestecnet.forms import DialogFormMixin
-from eestecnet.settings.secret import ASANA_API_KEY, EESTEC_ITT_WORKSPACE_ID, \
-    FEEDBACK_PROJECT_ID
+try:
+    from eestecnet.settings.secret import ASANA_API_KEY, EESTEC_ITT_WORKSPACE_ID, \
+        FEEDBACK_PROJECT_ID
+except:
+    pass
 from apps.news.widgets import EESTECEditor
 from apps.pages.models import Page, Stub, WebsiteFeedback, WebsiteFeedbackImage
 
