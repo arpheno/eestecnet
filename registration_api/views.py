@@ -1,3 +1,5 @@
+import json
+
 from django.http import HttpResponseRedirect
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
@@ -14,9 +16,13 @@ VALID_USER_FIELDS = utils.get_valid_user_fields()
 @api_view(['POST'])
 @permission_classes((AllowAny, ))
 def register(request):
-    serialized = UserSerializer(data=request.POST)
+    if request.META.get("CONTENT_TYPE") == "application/json":
+        data = json.loads(request.body)
+    else:
+        data = request.POST
+    serialized = UserSerializer(data=data)
     if serialized.is_valid():
-        user_data = utils.get_user_data(request.POST)
+        user_data = utils.get_user_data(data)
         utils.create_inactive_user(request, **user_data)
         return Response(utils.USER_CREATED_RESPONSE_DATA,
                         status=status.HTTP_201_CREATED)

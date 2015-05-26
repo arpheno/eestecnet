@@ -23,6 +23,7 @@ INSTALLED_APPS += (
     'debug_toolbar',
     'django_statsd',
 )
+INSTALLED_APPS += ("djcelery_email",)
 # Own apps
 INSTALLED_APPS += (
     'apps.questionnaires',

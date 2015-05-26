@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import json
+
 from django.contrib.auth.models import AnonymousUser
 from django.core import mail
 from django.core.urlresolvers import reverse, reverse_lazy
@@ -43,12 +45,21 @@ class TestAccount(RESTCase, TestCase, ImageCase):
     def test_get_short_name(self):
         self.assertEqual(self.object.get_short_name(), u'Łukasz')
 
+    def test_registration_api_register_json(self):
+        self.data['email'] = "fake@qq.de"
+        response = self.client.post(reverse_lazy('registration_api_register'),
+                                    data=json.dumps(self.data),
+                                    content_type="application/json")
+        self.assertEqual(201, response.status_code)
+        a = Account.objects.get(email="fake@qq.de")
+        self.assertFalse(a.is_active)
+        self.assertTrue("$" in a.password)
+        self.assertEqual(len(mail.outbox), 1)
     def test_registration_api_register(self):
         self.data['email'] = "fake@qq.de"
         response = self.client.post(reverse_lazy('registration_api_register'),
                                     data=self.data)
         self.assertEqual(201, response.status_code)
-        print Account.objects.all()
         a = Account.objects.get(email="fake@qq.de")
         self.assertFalse(a.is_active)
         self.assertTrue("$" in a.password)

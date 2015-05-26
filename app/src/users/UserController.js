@@ -3,7 +3,7 @@
     angular
         .module('users')
         .controller('UserController', [
-            'userService', '$mdSidenav', '$mdBottomSheet', '$log', '$q',
+            'userService', '$mdSidenav', '$mdBottomSheet', '$log', '$q', '$http',
             UserController
         ]);
 
@@ -14,7 +14,7 @@
      * @param avatarsService
      * @constructor
      */
-    function UserController(userService, $mdSidenav, $mdBottomSheet, $log, $q) {
+    function UserController(userService, $mdSidenav, $mdBottomSheet, $log, $q, $http) {
         var self = this;
 
         self.selected = null;
@@ -22,7 +22,21 @@
         self.selectUser = selectUser;
         self.toggleList = toggleUsersList;
         self.share = share;
-
+        $http.post('/accounts_api/register/', {
+            last_name: 'my_ce',
+            first_name: 'my_face',
+            email: 'my_face@asd.de',
+            password: 'm',
+            gender: 'm'
+        }).
+            success(function (data, status, headers, config) {
+                // this callback will be called asynchronously
+                // when the response is available
+            }).
+            error(function (data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
         // Load all registered users
 
         userService
