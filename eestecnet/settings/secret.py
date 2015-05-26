@@ -1,9 +1,0 @@
-SECRET_KEY = 'penisesbwhyl5(g)%rmq+knp%75y9s@j!a-x#3oh^rzuw$$=nld*x'
-DATABASE_NAME = ""
-DATABASE_USER = ""
-DATABASE_PASSWORD = ""
-ASANA_API_KEY = ""
-EESTEC_ITT_WORKSPACE_ID = ""
-FEEDBACK_PROJECT_ID = ""
-FORUM_PASSWORD = ""
-
