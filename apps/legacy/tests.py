@@ -62,7 +62,7 @@ def test_convert_legacy_models():
             serializer.save()
             # Fuck this shit with open('apps/legacy/account/account_dump.json',
             # 'rU') as dump:
-            #    accounts= ijson.items(dump,"item")
+            # accounts= ijson.items(dump,"item")
             #    for account in accounts:
             #        try:
             #            serializer = ConversionAccountSerializer(data=account)

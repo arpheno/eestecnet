@@ -62,7 +62,7 @@ class LegacyEventFactory(factory.Factory):
     category = "workshop"
     slug = "slug"
     # People
-    #Participants and Organizers
+    # Participants and Organizers
     max_participants = 10
     participation_fee = 10
 

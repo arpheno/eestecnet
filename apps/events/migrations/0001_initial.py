@@ -35,7 +35,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Congress',
             fields=[
-                ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
+                ('baseevent_ptr',
+                 models.OneToOneField(parent_link=True, auto_created=True,
+                                      primary_key=True, serialize=False,
+                                      to='events.BaseEvent')),
             ],
             options={
                 'abstract': False,
@@ -56,7 +59,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='IMW',
             fields=[
-                ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
+                ('baseevent_ptr',
+                 models.OneToOneField(parent_link=True, auto_created=True,
+                                      primary_key=True, serialize=False,
+                                      to='events.BaseEvent')),
             ],
             options={
                 'abstract': False,
@@ -66,7 +72,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Operational',
             fields=[
-                ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
+                ('baseevent_ptr',
+                 models.OneToOneField(parent_link=True, auto_created=True,
+                                      primary_key=True, serialize=False,
+                                      to='events.BaseEvent')),
             ],
             options={
                 'abstract': False,
@@ -87,7 +96,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Project',
             fields=[
-                ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
+                ('baseevent_ptr',
+                 models.OneToOneField(parent_link=True, auto_created=True,
+                                      primary_key=True, serialize=False,
+                                      to='events.BaseEvent')),
             ],
             options={
                 'abstract': False,
@@ -97,7 +109,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SSA',
             fields=[
-                ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
+                ('baseevent_ptr',
+                 models.OneToOneField(parent_link=True, auto_created=True,
+                                      primary_key=True, serialize=False,
+                                      to='events.BaseEvent')),
             ],
             options={
                 'abstract': False,
