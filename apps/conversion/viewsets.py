@@ -8,40 +8,40 @@ from apps.news.models import Entry
 from apps.teams.models import Team
 
 
-class lEvents(ModelViewSet):
+class Events(ModelViewSet):
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser:
-            return super(lEvents, self).dispatch(request, *args, **kwargs)
+            return super(Events, self).dispatch(request, *args, **kwargs)
 
     queryset = Event.objects.exclude(category="recruitment")
     serializer_class = LegacyEventSerializer
 
 
-class lAccounts(ModelViewSet):
+class Accounts(ModelViewSet):
     queryset = Eestecer.objects.all()
     serializer_class = LegacyAccountSerializer
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser:
-            return super(lAccounts, self).dispatch(request, *args, **kwargs)
+            return super(Accounts, self).dispatch(request, *args, **kwargs)
 
 
-class lTeams(ModelViewSet):
+class Teams(ModelViewSet):
     queryset = Team.objects.all()
     serializer_class = LegacyTeamSerializer
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser:
-            return super(lTeams, self).dispatch(request, *args, **kwargs)
+            return super(Teams, self).dispatch(request, *args, **kwargs)
 
 
-class lEntries(ModelViewSet):
+class Entries(ModelViewSet):
     queryset = Entry.objects.all()
     serializer_class = LegacyEntrySerializer
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser:
-            return super(lTeams, self).dispatch(request, *args, **kwargs)
+            return super(Entries, self).dispatch(request, *args, **kwargs)
 
 
 
