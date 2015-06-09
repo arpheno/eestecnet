@@ -2,16 +2,19 @@
   "name": "EESTECDOTNET",
   "description": "Webportal of EESTEC",
   "version": "2.0.0",
-  "homepage": "https://github.com/Sebastian Woznyo/eestecnet/",
-  "license": "MIT",
+  "homepage": "https://github.com/arpheno/eestecnet/",
   "private": true,
   "dependencies": {
-    "angular": "^1.3.x",
-    "angular-animate": "v1.3.x",
-    "angular-aria": "^1.3.x",
-    "angular-material": "^0.8.0"
+    "prefixfree": "*",
+    "angular": "~1.4.0",
+    "bower-google-analytics": "~0.1.1",
+    "angular-route": "~1.4.0",
+    "angular-resource": "~1.4.0",
+    "angular-material": "~0.9.7",
+    "angular-material-icons": "~0.4.0"
   },
-  "devDependencies": {
-    "angular-material": "~0.8.3"
+  "devDependencies": {},
+  "resolutions": {
+    "angular": "1.4.0"
   }
 }

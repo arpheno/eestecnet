@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             name='Announcement',
             fields=[
                 ('confirmable_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='common.Confirmable')),
-                ('description', models.TextField(blank=True)),
+                ('description', models.TextField(null=True, blank=True)),
                 ('name', models.CharField(max_length=300)),
                 ('pub_date', models.DateTimeField(auto_now_add=True)),
                 ('important', models.BooleanField(default=False)),

@@ -1,5 +1,4 @@
 from settings.conf.debugtoolbar import *
-from settings.conf.statsd import *
 from settings.conf.templates import TEMPLATE_DIRS
 
 WSGI_APPLICATION = 'common.wsgi.application'
@@ -13,7 +12,6 @@ INSTALLED_APPS += (
     # 'haystack',
     'kombu.transport.django',
     'djcelery',
-    'mailqueue',
     'gunicorn',
     'sorl.thumbnail',
     'corsheaders',
@@ -52,6 +50,7 @@ from conf.mailqueue import *
 from conf.rest import *
 from conf.cors import *
 from conf.authentication import *
+from conf.statsd import *
 
 AUTHENTICATION_BACKENDS
 

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import datetime
+from random import randint
 
 import factory
 
 from apps.accounts.models import Account
-
 
 __author__ = 'Sebastian Wozny'
 import logging
@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 class AccountFactory(factory.DjangoModelFactory):
     class Meta:
         model = Account
+        django_get_or_create=["email"]
 
     first_name = u"Łukasz"
     middle_name = u"Matteusz"
@@ -22,7 +23,7 @@ class AccountFactory(factory.DjangoModelFactory):
     second_last_name = u"Goméz"
     password = factory.PostGenerationMethodCall('set_password',
                                                 'defaultpassword')
-    email = factory.sequence(lambda x: str(x) + "a@b.de" + str(x))
+    email = factory.sequence(lambda x: str(randint(1,100)) + "a@b.de" + str(x))
     birthday = datetime.datetime.today().date()
     gender = "m"
 
@@ -37,7 +38,7 @@ class AccountFactory(factory.DjangoModelFactory):
 
 
 def get_anonymous_user_instance(User):
-    return AccountFactory.build()
+    return Account(email="ANA@ANsA.ANA",first_name="anon",last_name="ymous")
 
 class ParticipationFactory(factory.DjangoModelFactory):
     class Meta:

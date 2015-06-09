@@ -12,20 +12,32 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "hashicorp/precise64"
+  config.vm.box = "phusion-open-ubuntu-14.04-amd64"
+  config.vm.box_url = "https://oss-binaries.phusionpassenger.com/vagrant/boxes/latest/ubuntu-14.04-amd64-vbox.box"
 
   config.vm.provision "fix-no-tty", type: "shell" do |s|
        s.privileged = false
        s.inline = "sudo sed -i '/tty/!s/mesg n/tty -s \\&\\& mesg n/' /root/.profile"
    end
+   config.vm.provision "shell" do |s|
+    s.inline = "groupadd -f docker"
+  end
+  config.vm.provision "docker", images: ["rabbitmq"]
+  config.vm.provision "docker", images: ["hopsoft/graphite-statsd"]
+  config.ssh.port = 2222
+  config.vm.provision "docker" do |d|
+    d.run "rabbitmq"
+    d.run "hopsoft/graphite-statsd",
+    args:"--name graphite -p 8005:80 -p 2003:2003 -p 8125:8125/udp -d"
+  end
   config.vm.provision :shell, :path => "settings/vagrant/bootstrap.sh"
   config.vm.provision :shell, :path => "settings/vagrant/postgres.sh"
   config.vm.provision :shell, :path => "settings/vagrant/deploy.sh"
   config.vm.provision :shell, :path => "settings/vagrant/start.sh",run: "always"
   config.vm.network "forwarded_port", guest: 80, host: 80
   config.vm.network "forwarded_port", guest: 8000, host: 8000
+  config.vm.network "forwarded_port", guest: 8005, host: 8005
   config.vm.network "forwarded_port", guest: 11211, host: 11211
-
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.

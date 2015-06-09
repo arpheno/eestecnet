@@ -19,7 +19,6 @@ from common.models import Confirmable, Confirmation, DescriptionMixin
 from settings.conf.choices import GENDER_CHOICES, TSHIRT_SIZE, FIELDS_OF_STUDY, \
     FOOD_CHOICES
 
-
 __author__ = 'Sebastian Wozny'
 import logging
 
@@ -86,7 +85,9 @@ class AbstractAccount(object):
                 permissions.update(backend.get_group_permissions(self, obj))
         return permissions
 
-
+    @property
+    def is_staff(self):
+        return self.is_superuser
     def get_all_permissions(self, obj=None):
         return _user_get_all_permissions(self, obj)
 
@@ -213,16 +214,20 @@ class Participation(Confirmable):
     def save(self, **kwargs):
         if not self.pk:
             result = super(Participation, self).save(**kwargs)
+            info = "A new participation has been created for user %s to group %s", \
+                   self.user.get_full_name(), self.group.name
+            logger.info(info)
             from apps.events.models import ParticipationConfirmation
 
             p = ParticipationConfirmation.objects.create(confirmable=self)
-            p.save()
             from apps.questionnaires.models import Response
 
             f = Response.objects.create(participation=self, name="feedback")
             a = Response.objects.create(participation=self, name="application")
             assign_perm('change_response', self.user, f)
+            assign_perm('view_response', self.user, f)
             assign_perm('change_response', self.user, a)
+            assign_perm('view_response', self.user, a)
         else:
             result = super(Participation, self).save(**kwargs)
         return result

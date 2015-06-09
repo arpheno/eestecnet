@@ -1,3 +1,4 @@
+from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 from rest_framework.viewsets import ModelViewSet
 
 from apps.accounts.models import Group
@@ -6,7 +7,6 @@ from apps.events.models import BaseEvent, Training, Exchange, Workshop, Travel
 from apps.events.serializers import BaseEventSerializer, TrainingSerializer, \
     ExchangeSerializer, WorkshopSerializer, TravelSerializer
 
-
 __author__ = 'Sebastian Wozny'
 import logging
 
@@ -14,21 +14,22 @@ import logging
 logger = logging.getLogger(__name__)
 # Create your views here.
 class EventViewSet(ModelViewSet):
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = BaseEvent.objects.all()
     serializer_class = BaseEventSerializer
 
 
-class TrainingViewSet(ModelViewSet):
+class TrainingViewSet(EventViewSet):
     queryset = Training.objects.all()
     serializer_class = TrainingSerializer
 
 
-class ExchangeViewSet(ModelViewSet):
+class ExchangeViewSet(EventViewSet):
     queryset = Exchange.objects.all()
     serializer_class = ExchangeSerializer
 
 
-class WorkshopViewSet(ModelViewSet):
+class WorkshopViewSet(EventViewSet):
     queryset = Workshop.objects.all()
     serializer_class = WorkshopSerializer
 
@@ -36,9 +37,13 @@ class WorkshopViewSet(ModelViewSet):
 class GroupViewSet(ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
     def list(self, request, event_pk=None):
-        self.queryset = self.queryset.filter(applicable=event_pk)
+        if event_pk:
+            self.queryset = self.queryset.filter(applicable=event_pk)
+        else:
+            pass
         return super(GroupViewSet, self).list(request)
 
     def retrieve(self, request, pk=None, event_pk=None):

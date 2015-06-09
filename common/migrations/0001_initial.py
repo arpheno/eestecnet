@@ -55,7 +55,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('object_id', models.PositiveIntegerField()),
-                ('string', models.CharField(max_length=100)),
+                ('string', models.CharField(max_length=200)),
                 ('latitude', models.FloatField(null=True, blank=True)),
                 ('longitude', models.FloatField(null=True, blank=True)),
                 ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
@@ -70,7 +70,7 @@ class Migration(migrations.Migration):
             name='Notification',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('description', models.TextField(blank=True)),
+                ('description', models.TextField(null=True, blank=True)),
             ],
             options={
                 'abstract': False,
@@ -94,7 +94,7 @@ class Migration(migrations.Migration):
             name='Report',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('description', models.TextField(blank=True)),
+                ('description', models.TextField(null=True, blank=True)),
                 ('name', models.CharField(max_length=300)),
                 ('object_id', models.PositiveIntegerField()),
                 ('content_type', models.ForeignKey(to='contenttypes.ContentType')),

@@ -1,26 +1,127 @@
-{% load staticfiles %} <!DOCTYPE html>
+<!DOCTYPE html>
 {% load compress %}
+{% load static %}
 <html lang="en">
 <head>
     {% include 'base/head/base.html' %}
+    <base href="http://localhost:8000/">
 </head>
-<body>
-<header>
-{% include 'base/header/base.html' %}
-    {% block authenticate %}
-    {% endblock %}
-</header>
+<body ng-app="eestec">
+<div ng-controller='appCtrl' layout="row" flex>
+    <div layout="column" flex id="content">
+        <md-content>
+            <md-toolbar hide show-gt-md id="topbar" md-scroll-shrink
+                        style="min-height:30px;height:65px;" class="md-accent md-hue-3"
+                        layout="row" layout-align="space-between center">
+                <span>Electrical Engineering Students' European assoCiation</span>
+                <span layout="row" layout-align="center center">
+                    <ng-md-icon icon="person"></ng-md-icon>
+                    <ng-md-icon icon="search"></ng-md-icon>
+                    <md-input-container>
+                        <label>Search</label>
+                        <input/>
+                    </md-input-container>
+                    <ng-md-icon icon="clear"></ng-md-icon>
+                </span>
+            </md-toolbar>
+            <md-toolbar id="navbar" md-scroll-shrink class="md-medium-tall" layout="row"
+                        layout-align="space-between center">
+                <ng-md-icon icon="search" hide-gt-md></ng-md-icon>
+                <a href="/#/"><img id="logo" src="{% static 'common/logo.svg' %}"/></a>
+                <span layout="row" layout-align="center center">
+            <md-tabs md-selected="10" class="md-primary " style="width:700px;" hide
+                     show-gt-md>
+                <md-tab md-on-select="navigation('events/')" label="About Us"></md-tab>
+                <md-tab md-on-select="navigation('activities')"
+                        label="Activities"></md-tab>
+                <md-tab md-on-select="navigation('students')"
+                        label="For Students"></md-tab>
+                <md-tab md-on-select="navigation('partners')" label="Partners"></md-tab>
+                <md-tab md-on-select="navigation('career')" label="Career"></md-tab>
+            </md-tabs>
+                    <ng-md-icon icon="menu" ng-click="toggleSidenav('right')"
+                                class="menuBtn">
+                    </ng-md-icon>
+                </span>
+            </md-toolbar>
+            <div class="view-container">
+                <div ng-view class="view-frame"></div>
+            </div>
+            <footer>
+                <div></div>
+            </footer>
 
-{% block maincontent %}{% endblock %}
-<footer>
-    {% include 'base/footer/base.html' %}
-</footer>
-{% block dialogform %}
-    <div id="dialog"></div>
-{% endblock %}
-<div id="feedbackarea"></div>
-<div id="feedbackbutton">
-    Feedback
+        </md-content>
+        <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+            <md-list>
+                <md-item>
+                    <md-button>About Us</md-button>
+                    <md-list>
+                        <md-item>
+                            <md-button ng-click="navigation('values')">Our Values
+                            </md-button>
+                        </md-item>
+                        <md-item>
+                            <md-button ng-click="navigation('cities')">Our History
+                            </md-button>
+                        </md-item>
+                        <md-item>
+                            <md-button ng-click="navigation('structure')">Our Structure
+                            </md-button>
+                        </md-item>
+                        <md-item>
+                            <md-button ng-click="navigation('documents')">Our Documents
+                            </md-button>
+                        </md-item>
+                        <md-item>
+                            <md-button ng-click="navigation('cities')">Map of the
+                                Network
+                            </md-button>
+                        </md-item>
+                    </md-list>
+                </md-item>
+                <md-item>
+                    <md-button>Activities</md-button>
+                    <md-list>
+                        <md-item>
+                            <md-button ng-click="navigation('events')">Events in EESTEC
+                            </md-button>
+                        </md-item>
+                        <md-item>
+                            <md-button ng-click="navigation('teams')">Working Teams
+                            </md-button>
+                        </md-item>
+                        <md-item>
+                            <md-button ng-click="navigation('structure')">Projects in
+                                EESTEC
+                            </md-button>
+                        </md-item>
+                        <md-item>
+                            <md-button ng-click="navigation('eca')">EESTEC Competition
+                                for Android
+                            </md-button>
+                        </md-item>
+                        <md-item>
+                            <md-button ng-click="navigation('conference')">EESTEC
+                                Conference
+                            </md-button>
+                        </md-item>
+                    </md-list>
+
+                </md-item>
+                <md-item>
+                    <md-button>For Students</md-button>
+                </md-item>
+                <md-item>
+                    <md-button>Partners</md-button>
+                </md-item>
+                <md-item>
+                    <md-button>Career</md-button>
+                </md-item>
+            </md-list>
+        </md-sidenav>
+
+    </div>
 </div>
 </body>
 </html>

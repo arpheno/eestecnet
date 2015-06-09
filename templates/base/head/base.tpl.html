@@ -14,11 +14,10 @@
 
 {% compress css %}
     <!-- bower:css -->
-    <link rel="stylesheet" href="{% static "angular-material/angular-material.css" %}"/>
     <!-- endbower -->
-
-
-
+    <!-- include: "type": "scss", "files": "**/*.scss" -->
+    <!-- include: "type": "sass", "files": "**/*.sass" -->
+    <!-- include: "type": "css", "files": "**/*.css" -->
 {% endcompress %}
 {% compress js %}
     <!-- bower:js -->
@@ -26,15 +25,8 @@
     <script src="{% static "angular/angular.js" %}"></script>
     <script src="{% static "angular-route/angular-route.js" %}"></script>
     <script src="{% static "angular-resource/angular-resource.js" %}"></script>
-    <script src="{% static "angular-animate/angular-animate.js" %}"></script>
-    <script src="{% static "angular-aria/angular-aria.js" %}"></script>
-    <script src="{% static "angular-material/angular-material.js" %}"></script>
-    <script src="{% static "angular-material-icons/angular-material-icons.min.js" %}"></script>
     <!-- endbower -->
-    <script type="text/javascript" src="{% static "events/events.js" %}"></script>
-    <script type="text/javascript" src="{% static "events/services.js" %}"></script>
-    <script type="text/javascript" src="{% static "events/views/detail.js" %}"></script>
-    <script type="text/javascript" src="{% static "events/views/list.js" %}"></script>
+    <!-- include: "type": "js", "files": "**/*.js" -->
 {% endcompress %}
 <script type="text/javascript" src="{% static 'common/app.js' %}"></script>
 {% block header %}{% endblock %}

@@ -25,6 +25,8 @@ django-mail-queue
 django-mptt
 django-polymorphic
 djangorestframework
+django-celery-email
+django-filter
 docutils
 drf-nested-routers
 ecdsa

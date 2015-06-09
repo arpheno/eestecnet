@@ -8,7 +8,6 @@ from apps.questionnaires.serializers import QuestionnaireSerializer, \
     ResponseSerializer, AnswerSerializer
 from common.tests import RESTCase
 
-
 __author__ = 'Sebastian Wozny'
 import logging
 
@@ -28,6 +27,23 @@ class TestQuestion(RESTCase, TestCase):
         self.object = QuestionFactory()
         self.serializer_class = QuestionSerializer
         super(TestQuestion, self).setUp()
+    def test_organizers_have_perms(self):
+        self.assertTrue(
+            'view_' + self.object._meta.object_name.lower() in get_perms(
+                self.object.questionnaire.group.applicable.organizers, self.object)
+        )
+        self.assertTrue(
+            'change_' + self.object._meta.object_name.lower() in get_perms(
+                self.object.questionnaire.group.applicable.organizers, self.object)
+        )
+    def test_user_has_perms(self):
+        self.assertTrue(
+            'view_' + self.object._meta.object_name.lower() in get_perms(
+                self.object.questionnaire.group, self.object)
+        )
+
+
+
 
 
 class TestResponse(RESTCase, TestCase):

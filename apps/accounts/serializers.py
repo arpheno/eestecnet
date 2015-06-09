@@ -1,8 +1,8 @@
+from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 from rest_framework.serializers import ModelSerializer
 
 from apps.accounts.models import Group, Account, Participation
 from common.serializers import ImageSerializer
-
 
 __author__ = 'Sebastian Wozny'
 import logging
@@ -11,9 +11,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class GroupSerializer(ModelSerializer):
-    class Meta:
-        model = Group
 
 
 ACCOUNT_PUBLIC = ['first_name', 'middle_name', 'last_name', 'second_last_name', 'images']
@@ -48,3 +45,11 @@ class ReadParticipationSerializer(ParticipationSerializer):
         model = Participation
 
     user = ParticipationAccountSerializer(read_only=True)
+
+
+class GroupSerializer(ModelSerializer):
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    user_set = UnprivilegedAccountSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Group

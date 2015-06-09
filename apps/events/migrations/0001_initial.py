@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('common', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('accounts', '0002_auto_20150523_2158'),
+        ('accounts', '0002_auto_20150604_1057'),
         ('teams', '0001_initial'),
     ]
 
@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
             name='BaseEvent',
             fields=[
                 ('applicable_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='common.Applicable')),
-                ('description', models.TextField(blank=True)),
+                ('description', models.TextField(null=True, blank=True)),
                 ('name', models.CharField(max_length=300)),
                 ('deadline', models.DateTimeField(null=True, blank=True)),
                 ('start_date', models.DateField()),
@@ -35,10 +35,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Congress',
             fields=[
-                ('baseevent_ptr',
-                 models.OneToOneField(parent_link=True, auto_created=True,
-                                      primary_key=True, serialize=False,
-                                      to='events.BaseEvent')),
+                ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
             ],
             options={
                 'abstract': False,
@@ -59,10 +56,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='IMW',
             fields=[
-                ('baseevent_ptr',
-                 models.OneToOneField(parent_link=True, auto_created=True,
-                                      primary_key=True, serialize=False,
-                                      to='events.BaseEvent')),
+                ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
             ],
             options={
                 'abstract': False,
@@ -72,10 +66,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Operational',
             fields=[
-                ('baseevent_ptr',
-                 models.OneToOneField(parent_link=True, auto_created=True,
-                                      primary_key=True, serialize=False,
-                                      to='events.BaseEvent')),
+                ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
             ],
             options={
                 'abstract': False,
@@ -96,10 +87,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Project',
             fields=[
-                ('baseevent_ptr',
-                 models.OneToOneField(parent_link=True, auto_created=True,
-                                      primary_key=True, serialize=False,
-                                      to='events.BaseEvent')),
+                ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
             ],
             options={
                 'abstract': False,
@@ -109,10 +97,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SSA',
             fields=[
-                ('baseevent_ptr',
-                 models.OneToOneField(parent_link=True, auto_created=True,
-                                      primary_key=True, serialize=False,
-                                      to='events.BaseEvent')),
+                ('baseevent_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='events.BaseEvent')),
             ],
             options={
                 'abstract': False,
@@ -158,7 +143,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='baseevent',
             name='organizing_committee',
-            field=models.ManyToManyField(related_name='events', to='teams.BaseTeam'),
+            field=models.ManyToManyField(related_name='events', null=True, to='teams.BaseTeam'),
             preserve_default=True,
         ),
         migrations.AddField(

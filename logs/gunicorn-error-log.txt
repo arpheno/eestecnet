@@ -208,3 +208,361 @@
 [2015-05-26 20:28:43 +0000] [1124] [INFO] Booting worker with pid: 1124
 [2015-05-26 20:28:43 +0000] [1133] [INFO] Booting worker with pid: 1133
 [2015-05-26 20:28:43 +0000] [1134] [INFO] Booting worker with pid: 1134
+[2015-05-27 06:55:48 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:1134)
+[2015-05-27 06:55:48 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:1123)
+[2015-05-27 06:55:48 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:1124)
+[2015-05-27 06:55:48 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:1133)
+[2015-05-27 06:55:48 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:1118)
+[2015-05-27 06:55:48 +0000] [3479] [INFO] Booting worker with pid: 3479
+[2015-05-27 06:55:48 +0000] [3480] [INFO] Booting worker with pid: 3480
+[2015-05-27 06:55:48 +0000] [3481] [INFO] Booting worker with pid: 3481
+[2015-05-27 06:55:48 +0000] [3482] [INFO] Booting worker with pid: 3482
+[2015-05-27 06:55:48 +0000] [3483] [INFO] Booting worker with pid: 3483
+[2015-05-27 20:37:05 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:3479)
+[2015-05-27 20:37:05 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:3480)
+[2015-05-27 20:37:05 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:3481)
+[2015-05-27 20:37:05 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:3482)
+[2015-05-27 20:37:05 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:3483)
+[2015-05-27 20:37:05 +0000] [3624] [INFO] Booting worker with pid: 3624
+[2015-05-27 20:37:05 +0000] [3626] [INFO] Booting worker with pid: 3626
+[2015-05-27 20:37:05 +0000] [3625] [INFO] Booting worker with pid: 3625
+[2015-05-27 20:37:05 +0000] [3627] [INFO] Booting worker with pid: 3627
+[2015-05-27 20:37:05 +0000] [3628] [INFO] Booting worker with pid: 3628
+[2015-05-28 13:31:17 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:3624)
+[2015-05-28 13:31:17 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:3625)
+[2015-05-28 13:31:17 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:3626)
+[2015-05-28 13:31:17 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:3627)
+[2015-05-28 13:31:17 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:3628)
+[2015-05-28 13:31:17 +0000] [4749] [INFO] Booting worker with pid: 4749
+[2015-05-28 13:31:17 +0000] [4750] [INFO] Booting worker with pid: 4750
+[2015-05-28 13:31:17 +0000] [4751] [INFO] Booting worker with pid: 4751
+[2015-05-28 13:31:17 +0000] [4752] [INFO] Booting worker with pid: 4752
+[2015-05-28 13:31:17 +0000] [4753] [INFO] Booting worker with pid: 4753
+[2015-05-28 15:16:06 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:4749)
+[2015-05-28 15:16:06 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:4750)
+[2015-05-28 15:16:06 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:4751)
+[2015-05-28 15:16:06 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:4752)
+[2015-05-28 15:16:06 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:4753)
+[2015-05-28 15:16:06 +0000] [4889] [INFO] Booting worker with pid: 4889
+[2015-05-28 15:16:06 +0000] [4891] [INFO] Booting worker with pid: 4891
+[2015-05-28 15:16:06 +0000] [4892] [INFO] Booting worker with pid: 4892
+[2015-05-28 15:16:06 +0000] [4890] [INFO] Booting worker with pid: 4890
+[2015-05-28 15:16:06 +0000] [4894] [INFO] Booting worker with pid: 4894
+[2015-05-29 06:45:34 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:4889)
+[2015-05-29 06:45:34 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:4890)
+[2015-05-29 06:45:34 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:4891)
+[2015-05-29 06:45:34 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:4892)
+[2015-05-29 06:45:34 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:4894)
+[2015-05-29 06:45:34 +0000] [5553] [INFO] Booting worker with pid: 5553
+[2015-05-29 06:45:34 +0000] [5554] [INFO] Booting worker with pid: 5554
+[2015-05-29 06:45:34 +0000] [5555] [INFO] Booting worker with pid: 5555
+[2015-05-29 06:45:34 +0000] [5556] [INFO] Booting worker with pid: 5556
+[2015-05-29 06:45:34 +0000] [5557] [INFO] Booting worker with pid: 5557
+[2015-05-29 10:56:12 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:5553)
+[2015-05-29 10:56:12 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:5554)
+[2015-05-29 10:56:12 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:5555)
+[2015-05-29 10:56:12 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:5556)
+[2015-05-29 10:56:12 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:5557)
+[2015-05-29 10:56:12 +0000] [5584] [INFO] Booting worker with pid: 5584
+[2015-05-29 10:56:12 +0000] [5585] [INFO] Booting worker with pid: 5585
+[2015-05-29 10:56:12 +0000] [5586] [INFO] Booting worker with pid: 5586
+[2015-05-29 10:56:12 +0000] [5587] [INFO] Booting worker with pid: 5587
+[2015-05-29 10:56:12 +0000] [5592] [INFO] Booting worker with pid: 5592
+[2015-05-29 13:58:18 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:5584)
+[2015-05-29 13:58:18 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:5585)
+[2015-05-29 13:58:18 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:5586)
+[2015-05-29 13:58:18 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:5587)
+[2015-05-29 13:58:18 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:5592)
+[2015-05-29 13:58:18 +0000] [5813] [INFO] Booting worker with pid: 5813
+[2015-05-29 13:58:18 +0000] [5814] [INFO] Booting worker with pid: 5814
+[2015-05-29 13:58:18 +0000] [5815] [INFO] Booting worker with pid: 5815
+[2015-05-29 13:58:18 +0000] [5816] [INFO] Booting worker with pid: 5816
+[2015-05-29 13:58:18 +0000] [5822] [INFO] Booting worker with pid: 5822
+[2015-05-29 15:46:37 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:5813)
+[2015-05-29 15:46:37 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:5814)
+[2015-05-29 15:46:37 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:5815)
+[2015-05-29 15:46:37 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:5816)
+[2015-05-29 15:46:37 +0000] [1103] [CRITICAL] WORKER TIMEOUT (pid:5822)
+[2015-05-29 15:46:38 +0000] [5842] [INFO] Booting worker with pid: 5842
+[2015-05-29 15:46:38 +0000] [5843] [INFO] Booting worker with pid: 5843
+[2015-05-29 15:46:38 +0000] [5844] [INFO] Booting worker with pid: 5844
+[2015-05-29 15:46:38 +0000] [5845] [INFO] Booting worker with pid: 5845
+[2015-05-29 15:46:38 +0000] [5846] [INFO] Booting worker with pid: 5846
+[2015-05-29 16:24:05 +0000] [1203] [INFO] Starting gunicorn 19.3.0
+[2015-05-29 16:24:05 +0000] [1203] [INFO] Listening at: http://0.0.0.0:8003 (1203)
+[2015-05-29 16:24:05 +0000] [1203] [INFO] Using worker: sync
+[2015-05-29 16:24:05 +0000] [1219] [INFO] Booting worker with pid: 1219
+[2015-05-29 16:24:05 +0000] [1220] [INFO] Booting worker with pid: 1220
+[2015-05-29 16:24:05 +0000] [1221] [INFO] Booting worker with pid: 1221
+[2015-05-29 16:24:05 +0000] [1222] [INFO] Booting worker with pid: 1222
+[2015-05-29 16:24:05 +0000] [1223] [INFO] Booting worker with pid: 1223
+[2015-06-01 22:38:01 +0000] [1480] [INFO] Starting gunicorn 19.3.0
+[2015-06-01 22:38:01 +0000] [1480] [INFO] Listening at: http://0.0.0.0:8003 (1480)
+[2015-06-01 22:38:01 +0000] [1480] [INFO] Using worker: sync
+[2015-06-01 22:38:01 +0000] [1495] [INFO] Booting worker with pid: 1495
+[2015-06-01 22:38:01 +0000] [1498] [INFO] Booting worker with pid: 1498
+[2015-06-01 22:38:02 +0000] [1501] [INFO] Booting worker with pid: 1501
+[2015-06-01 22:38:02 +0000] [1502] [INFO] Booting worker with pid: 1502
+[2015-06-01 22:38:02 +0000] [1503] [INFO] Booting worker with pid: 1503
+[2015-06-01 22:54:02 +0000] [1480] [INFO] Handling signal: term
+[2015-06-01 22:54:02 +0000] [1480] [INFO] Shutting down: Master
+[2015-06-01 22:54:08 +0000] [1984] [INFO] Starting gunicorn 19.3.0
+[2015-06-01 22:54:08 +0000] [1984] [INFO] Listening at: http://0.0.0.0:8003 (1984)
+[2015-06-01 22:54:08 +0000] [1984] [INFO] Using worker: sync
+[2015-06-01 22:54:08 +0000] [1989] [INFO] Booting worker with pid: 1989
+[2015-06-01 22:54:08 +0000] [1992] [INFO] Booting worker with pid: 1992
+[2015-06-01 22:54:08 +0000] [1995] [INFO] Booting worker with pid: 1995
+[2015-06-01 22:54:08 +0000] [1996] [INFO] Booting worker with pid: 1996
+[2015-06-01 22:54:08 +0000] [1997] [INFO] Booting worker with pid: 1997
+[2015-06-01 22:56:11 +0000] [1984] [INFO] Handling signal: term
+[2015-06-01 22:56:11 +0000] [1984] [INFO] Shutting down: Master
+[2015-06-01 22:56:18 +0000] [2020] [INFO] Starting gunicorn 19.3.0
+[2015-06-01 22:56:18 +0000] [2020] [INFO] Listening at: http://0.0.0.0:8003 (2020)
+[2015-06-01 22:56:18 +0000] [2020] [INFO] Using worker: sync
+[2015-06-01 22:56:18 +0000] [2025] [INFO] Booting worker with pid: 2025
+[2015-06-01 22:56:18 +0000] [2026] [INFO] Booting worker with pid: 2026
+[2015-06-01 22:56:18 +0000] [2030] [INFO] Booting worker with pid: 2030
+[2015-06-01 22:56:18 +0000] [2029] [INFO] Booting worker with pid: 2029
+[2015-06-01 22:56:18 +0000] [2033] [INFO] Booting worker with pid: 2033
+[2015-06-01 23:21:58 +0000] [2020] [INFO] Handling signal: term
+[2015-06-01 23:21:58 +0000] [2020] [INFO] Shutting down: Master
+[2015-06-01 23:22:04 +0000] [2532] [INFO] Starting gunicorn 19.3.0
+[2015-06-01 23:22:04 +0000] [2532] [INFO] Listening at: http://0.0.0.0:8003 (2532)
+[2015-06-01 23:22:04 +0000] [2532] [INFO] Using worker: sync
+[2015-06-01 23:22:04 +0000] [2537] [INFO] Booting worker with pid: 2537
+[2015-06-01 23:22:04 +0000] [2539] [INFO] Booting worker with pid: 2539
+[2015-06-01 23:22:04 +0000] [2541] [INFO] Booting worker with pid: 2541
+[2015-06-01 23:22:05 +0000] [2543] [INFO] Booting worker with pid: 2543
+[2015-06-01 23:22:05 +0000] [2546] [INFO] Booting worker with pid: 2546
+[2015-06-01 23:22:27 +0000] [2532] [INFO] Handling signal: term
+[2015-06-01 23:22:27 +0000] [2532] [INFO] Shutting down: Master
+[2015-06-01 23:22:33 +0000] [2564] [INFO] Starting gunicorn 19.3.0
+[2015-06-01 23:22:33 +0000] [2564] [INFO] Listening at: http://0.0.0.0:8003 (2564)
+[2015-06-01 23:22:33 +0000] [2564] [INFO] Using worker: sync
+[2015-06-01 23:22:33 +0000] [2569] [INFO] Booting worker with pid: 2569
+[2015-06-01 23:22:33 +0000] [2570] [INFO] Booting worker with pid: 2570
+[2015-06-01 23:22:33 +0000] [2571] [INFO] Booting worker with pid: 2571
+[2015-06-01 23:22:33 +0000] [2573] [INFO] Booting worker with pid: 2573
+[2015-06-01 23:22:33 +0000] [2577] [INFO] Booting worker with pid: 2577
+[2015-06-02 00:05:30 +0000] [17002] [INFO] Starting gunicorn 19.3.0
+[2015-06-02 00:05:30 +0000] [17002] [INFO] Listening at: http://0.0.0.0:8003 (17002)
+[2015-06-02 00:05:30 +0000] [17002] [INFO] Using worker: sync
+[2015-06-02 00:05:30 +0000] [17017] [INFO] Booting worker with pid: 17017
+[2015-06-02 00:05:30 +0000] [17018] [INFO] Booting worker with pid: 17018
+[2015-06-02 00:05:30 +0000] [17019] [INFO] Booting worker with pid: 17019
+[2015-06-02 00:05:30 +0000] [17020] [INFO] Booting worker with pid: 17020
+[2015-06-02 00:05:30 +0000] [17023] [INFO] Booting worker with pid: 17023
+[2015-06-02 07:05:37 +0000] [1476] [INFO] Starting gunicorn 19.3.0
+[2015-06-02 07:05:37 +0000] [1476] [INFO] Listening at: http://0.0.0.0:8003 (1476)
+[2015-06-02 07:05:37 +0000] [1476] [INFO] Using worker: sync
+[2015-06-02 07:05:37 +0000] [1492] [INFO] Booting worker with pid: 1492
+[2015-06-02 07:05:37 +0000] [1493] [INFO] Booting worker with pid: 1493
+[2015-06-02 07:05:37 +0000] [1494] [INFO] Booting worker with pid: 1494
+[2015-06-02 07:05:37 +0000] [1495] [INFO] Booting worker with pid: 1495
+[2015-06-02 07:05:37 +0000] [1496] [INFO] Booting worker with pid: 1496
+[2015-06-02 07:10:02 +0000] [1476] [INFO] Handling signal: term
+[2015-06-02 07:10:02 +0000] [1476] [INFO] Shutting down: Master
+[2015-06-02 07:10:09 +0000] [1977] [INFO] Starting gunicorn 19.3.0
+[2015-06-02 07:10:09 +0000] [1977] [INFO] Listening at: http://0.0.0.0:8003 (1977)
+[2015-06-02 07:10:09 +0000] [1977] [INFO] Using worker: sync
+[2015-06-02 07:10:09 +0000] [1982] [INFO] Booting worker with pid: 1982
+[2015-06-02 07:10:09 +0000] [1983] [INFO] Booting worker with pid: 1983
+[2015-06-02 07:10:09 +0000] [1986] [INFO] Booting worker with pid: 1986
+[2015-06-02 07:10:09 +0000] [1988] [INFO] Booting worker with pid: 1988
+[2015-06-02 07:10:09 +0000] [1990] [INFO] Booting worker with pid: 1990
+[2015-06-02 07:14:30 +0000] [1977] [INFO] Handling signal: term
+[2015-06-02 07:14:30 +0000] [1977] [INFO] Shutting down: Master
+[2015-06-02 07:14:37 +0000] [2346] [INFO] Starting gunicorn 19.3.0
+[2015-06-02 07:14:37 +0000] [2346] [INFO] Listening at: http://0.0.0.0:8003 (2346)
+[2015-06-02 07:14:37 +0000] [2346] [INFO] Using worker: sync
+[2015-06-02 07:14:37 +0000] [2351] [INFO] Booting worker with pid: 2351
+[2015-06-02 07:14:37 +0000] [2352] [INFO] Booting worker with pid: 2352
+[2015-06-02 07:14:37 +0000] [2353] [INFO] Booting worker with pid: 2353
+[2015-06-02 07:14:37 +0000] [2358] [INFO] Booting worker with pid: 2358
+[2015-06-02 07:14:37 +0000] [2359] [INFO] Booting worker with pid: 2359
+[2015-06-02 07:21:56 +0000] [2346] [INFO] Handling signal: term
+[2015-06-02 07:21:57 +0000] [2346] [INFO] Shutting down: Master
+[2015-06-02 07:22:03 +0000] [2415] [INFO] Starting gunicorn 19.3.0
+[2015-06-02 07:22:03 +0000] [2415] [INFO] Listening at: http://0.0.0.0:8003 (2415)
+[2015-06-02 07:22:03 +0000] [2415] [INFO] Using worker: sync
+[2015-06-02 07:22:03 +0000] [2420] [INFO] Booting worker with pid: 2420
+[2015-06-02 07:22:03 +0000] [2421] [INFO] Booting worker with pid: 2421
+[2015-06-02 07:22:03 +0000] [2422] [INFO] Booting worker with pid: 2422
+[2015-06-02 07:22:03 +0000] [2423] [INFO] Booting worker with pid: 2423
+[2015-06-02 07:22:03 +0000] [2426] [INFO] Booting worker with pid: 2426
+[2015-06-02 14:25:58 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:2426)
+[2015-06-02 14:25:58 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:2420)
+[2015-06-02 14:25:58 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:2421)
+[2015-06-02 14:25:58 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:2422)
+[2015-06-02 14:25:58 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:2423)
+[2015-06-02 14:25:58 +0000] [2448] [INFO] Booting worker with pid: 2448
+[2015-06-02 14:25:58 +0000] [2446] [INFO] Booting worker with pid: 2446
+[2015-06-02 14:25:58 +0000] [2447] [INFO] Booting worker with pid: 2447
+[2015-06-02 14:25:58 +0000] [2449] [INFO] Booting worker with pid: 2449
+[2015-06-02 14:25:58 +0000] [2450] [INFO] Booting worker with pid: 2450
+[2015-06-02 14:54:10 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:2446)
+[2015-06-02 14:54:10 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:2447)
+[2015-06-02 14:54:10 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:2448)
+[2015-06-02 14:54:10 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:2449)
+[2015-06-02 14:54:10 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:2450)
+[2015-06-02 14:54:10 +0000] [2498] [INFO] Booting worker with pid: 2498
+[2015-06-02 14:54:10 +0000] [2499] [INFO] Booting worker with pid: 2499
+[2015-06-02 14:54:10 +0000] [2500] [INFO] Booting worker with pid: 2500
+[2015-06-02 14:54:10 +0000] [2501] [INFO] Booting worker with pid: 2501
+[2015-06-02 14:54:10 +0000] [2502] [INFO] Booting worker with pid: 2502
+[2015-06-03 07:19:53 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:2498)
+[2015-06-03 07:19:53 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:2499)
+[2015-06-03 07:19:53 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:2500)
+[2015-06-03 07:19:53 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:2501)
+[2015-06-03 07:19:53 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:2502)
+[2015-06-03 07:19:53 +0000] [4248] [INFO] Booting worker with pid: 4248
+[2015-06-03 07:19:53 +0000] [4249] [INFO] Booting worker with pid: 4249
+[2015-06-03 07:19:53 +0000] [4250] [INFO] Booting worker with pid: 4250
+[2015-06-03 07:19:53 +0000] [4251] [INFO] Booting worker with pid: 4251
+[2015-06-03 07:19:53 +0000] [4256] [INFO] Booting worker with pid: 4256
+[2015-06-03 09:44:16 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:4256)
+[2015-06-03 09:44:16 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:4248)
+[2015-06-03 09:44:16 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:4249)
+[2015-06-03 09:44:16 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:4250)
+[2015-06-03 09:44:16 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:4251)
+[2015-06-03 09:44:17 +0000] [4337] [INFO] Booting worker with pid: 4337
+[2015-06-03 09:44:17 +0000] [4338] [INFO] Booting worker with pid: 4338
+[2015-06-03 09:44:17 +0000] [4339] [INFO] Booting worker with pid: 4339
+[2015-06-03 09:44:17 +0000] [4346] [INFO] Booting worker with pid: 4346
+[2015-06-03 09:44:17 +0000] [4347] [INFO] Booting worker with pid: 4347
+[2015-06-03 18:22:54 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:4337)
+[2015-06-03 18:22:54 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:4338)
+[2015-06-03 18:22:54 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:4339)
+[2015-06-03 18:22:54 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:4346)
+[2015-06-03 18:22:54 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:4347)
+[2015-06-03 18:22:54 +0000] [5511] [INFO] Booting worker with pid: 5511
+[2015-06-03 18:22:54 +0000] [5512] [INFO] Booting worker with pid: 5512
+[2015-06-03 18:22:54 +0000] [5514] [INFO] Booting worker with pid: 5514
+[2015-06-03 18:22:54 +0000] [5515] [INFO] Booting worker with pid: 5515
+[2015-06-03 18:22:54 +0000] [5516] [INFO] Booting worker with pid: 5516
+[2015-06-04 07:03:03 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:5511)
+[2015-06-04 07:03:03 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:5512)
+[2015-06-04 07:03:03 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:5514)
+[2015-06-04 07:03:03 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:5515)
+[2015-06-04 07:03:03 +0000] [2415] [CRITICAL] WORKER TIMEOUT (pid:5516)
+[2015-06-04 07:03:03 +0000] [6790] [INFO] Booting worker with pid: 6790
+[2015-06-04 07:03:03 +0000] [6793] [INFO] Booting worker with pid: 6793
+[2015-06-04 07:03:03 +0000] [6792] [INFO] Booting worker with pid: 6792
+[2015-06-04 07:03:03 +0000] [6791] [INFO] Booting worker with pid: 6791
+[2015-06-04 07:03:03 +0000] [6794] [INFO] Booting worker with pid: 6794
+[2015-06-04 11:21:43 +0000] [1480] [INFO] Starting gunicorn 19.3.0
+[2015-06-04 11:21:43 +0000] [1480] [INFO] Listening at: http://0.0.0.0:8003 (1480)
+[2015-06-04 11:21:43 +0000] [1480] [INFO] Using worker: sync
+[2015-06-04 11:21:43 +0000] [1496] [INFO] Booting worker with pid: 1496
+[2015-06-04 11:21:44 +0000] [1499] [INFO] Booting worker with pid: 1499
+[2015-06-04 11:21:44 +0000] [1502] [INFO] Booting worker with pid: 1502
+[2015-06-04 11:21:44 +0000] [1503] [INFO] Booting worker with pid: 1503
+[2015-06-04 11:21:44 +0000] [1504] [INFO] Booting worker with pid: 1504
+[2015-06-04 20:24:25 +0000] [1480] [CRITICAL] WORKER TIMEOUT (pid:1496)
+[2015-06-04 20:24:25 +0000] [1480] [CRITICAL] WORKER TIMEOUT (pid:1504)
+[2015-06-04 20:24:25 +0000] [1480] [CRITICAL] WORKER TIMEOUT (pid:1499)
+[2015-06-04 20:24:25 +0000] [1480] [CRITICAL] WORKER TIMEOUT (pid:1502)
+[2015-06-04 20:24:25 +0000] [1480] [CRITICAL] WORKER TIMEOUT (pid:1503)
+[2015-06-04 20:24:25 +0000] [1526] [INFO] Booting worker with pid: 1526
+[2015-06-04 20:24:25 +0000] [1525] [INFO] Booting worker with pid: 1525
+[2015-06-04 20:24:25 +0000] [1527] [INFO] Booting worker with pid: 1527
+[2015-06-04 20:24:25 +0000] [1528] [INFO] Booting worker with pid: 1528
+[2015-06-04 20:24:25 +0000] [1529] [INFO] Booting worker with pid: 1529
+[2015-06-05 07:19:59 +0000] [1480] [CRITICAL] WORKER TIMEOUT (pid:1525)
+[2015-06-05 07:19:59 +0000] [1480] [CRITICAL] WORKER TIMEOUT (pid:1526)
+[2015-06-05 07:19:59 +0000] [1480] [CRITICAL] WORKER TIMEOUT (pid:1527)
+[2015-06-05 07:19:59 +0000] [1480] [CRITICAL] WORKER TIMEOUT (pid:1528)
+[2015-06-05 07:19:59 +0000] [1480] [CRITICAL] WORKER TIMEOUT (pid:1529)
+[2015-06-05 07:19:59 +0000] [2236] [INFO] Booting worker with pid: 2236
+[2015-06-05 07:19:59 +0000] [2237] [INFO] Booting worker with pid: 2237
+[2015-06-05 07:19:59 +0000] [2238] [INFO] Booting worker with pid: 2238
+[2015-06-05 07:19:59 +0000] [2239] [INFO] Booting worker with pid: 2239
+[2015-06-05 07:19:59 +0000] [2240] [INFO] Booting worker with pid: 2240
+[2015-06-06 08:15:28 +0000] [1480] [CRITICAL] WORKER TIMEOUT (pid:2240)
+[2015-06-06 08:15:28 +0000] [1480] [CRITICAL] WORKER TIMEOUT (pid:2236)
+[2015-06-06 08:15:28 +0000] [1480] [CRITICAL] WORKER TIMEOUT (pid:2237)
+[2015-06-06 08:15:29 +0000] [1480] [CRITICAL] WORKER TIMEOUT (pid:2238)
+[2015-06-06 08:15:29 +0000] [1480] [CRITICAL] WORKER TIMEOUT (pid:2239)
+[2015-06-06 08:15:29 +0000] [5258] [INFO] Booting worker with pid: 5258
+[2015-06-06 08:15:29 +0000] [5259] [INFO] Booting worker with pid: 5259
+[2015-06-06 08:15:29 +0000] [5260] [INFO] Booting worker with pid: 5260
+[2015-06-06 08:15:29 +0000] [5261] [INFO] Booting worker with pid: 5261
+[2015-06-06 08:15:29 +0000] [5268] [INFO] Booting worker with pid: 5268
+[2015-06-06 11:43:14 +0000] [1480] [INFO] Handling signal: term
+[2015-06-06 11:43:15 +0000] [1480] [INFO] Shutting down: Master
+[2015-06-06 11:43:21 +0000] [6730] [INFO] Starting gunicorn 19.3.0
+[2015-06-06 11:43:21 +0000] [6730] [INFO] Listening at: http://0.0.0.0:8003 (6730)
+[2015-06-06 11:43:21 +0000] [6730] [INFO] Using worker: sync
+[2015-06-06 11:43:21 +0000] [6735] [INFO] Booting worker with pid: 6735
+[2015-06-06 11:43:21 +0000] [6736] [INFO] Booting worker with pid: 6736
+[2015-06-06 11:43:21 +0000] [6737] [INFO] Booting worker with pid: 6737
+[2015-06-06 11:43:21 +0000] [6738] [INFO] Booting worker with pid: 6738
+[2015-06-06 11:43:21 +0000] [6743] [INFO] Booting worker with pid: 6743
+[2015-06-06 12:10:50 +0000] [1477] [INFO] Starting gunicorn 19.3.0
+[2015-06-06 12:10:50 +0000] [1477] [INFO] Listening at: http://0.0.0.0:8003 (1477)
+[2015-06-06 12:10:50 +0000] [1477] [INFO] Using worker: sync
+[2015-06-06 12:10:50 +0000] [1492] [INFO] Booting worker with pid: 1492
+[2015-06-06 12:10:50 +0000] [1495] [INFO] Booting worker with pid: 1495
+[2015-06-06 12:10:50 +0000] [1496] [INFO] Booting worker with pid: 1496
+[2015-06-06 12:10:50 +0000] [1497] [INFO] Booting worker with pid: 1497
+[2015-06-06 12:10:50 +0000] [1500] [INFO] Booting worker with pid: 1500
+[2015-06-07 09:30:23 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:1496)
+[2015-06-07 09:30:23 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:1497)
+[2015-06-07 09:30:23 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:1492)
+[2015-06-07 09:30:23 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:1500)
+[2015-06-07 09:30:23 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:1495)
+[2015-06-07 09:30:24 +0000] [3960] [INFO] Booting worker with pid: 3960
+[2015-06-07 09:30:24 +0000] [3961] [INFO] Booting worker with pid: 3961
+[2015-06-07 09:30:24 +0000] [3962] [INFO] Booting worker with pid: 3962
+[2015-06-07 09:30:24 +0000] [3963] [INFO] Booting worker with pid: 3963
+[2015-06-07 09:30:24 +0000] [3966] [INFO] Booting worker with pid: 3966
+[2015-06-07 17:15:27 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:3960)
+[2015-06-07 17:15:27 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:3961)
+[2015-06-07 17:15:27 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:3962)
+[2015-06-07 17:15:27 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:3963)
+[2015-06-07 17:15:27 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:3966)
+[2015-06-07 17:15:27 +0000] [5482] [INFO] Booting worker with pid: 5482
+[2015-06-07 17:15:27 +0000] [5484] [INFO] Booting worker with pid: 5484
+[2015-06-07 17:15:27 +0000] [5483] [INFO] Booting worker with pid: 5483
+[2015-06-07 17:15:27 +0000] [5485] [INFO] Booting worker with pid: 5485
+[2015-06-07 17:15:27 +0000] [5492] [INFO] Booting worker with pid: 5492
+[2015-06-08 14:43:48 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:5492)
+[2015-06-08 14:43:48 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:5482)
+[2015-06-08 14:43:48 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:5483)
+[2015-06-08 14:43:48 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:5484)
+[2015-06-08 14:43:48 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:5485)
+[2015-06-08 14:43:49 +0000] [8429] [INFO] Booting worker with pid: 8429
+[2015-06-08 14:43:49 +0000] [8428] [INFO] Booting worker with pid: 8428
+[2015-06-08 14:43:49 +0000] [8430] [INFO] Booting worker with pid: 8430
+[2015-06-08 14:43:49 +0000] [8431] [INFO] Booting worker with pid: 8431
+[2015-06-08 14:43:49 +0000] [8440] [INFO] Booting worker with pid: 8440
+[2015-06-08 16:18:58 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:8440)
+[2015-06-08 16:18:58 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:8428)
+[2015-06-08 16:18:58 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:8431)
+[2015-06-08 16:18:58 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:8430)
+[2015-06-08 16:18:58 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:8429)
+[2015-06-08 16:18:58 +0000] [8588] [INFO] Booting worker with pid: 8588
+[2015-06-08 16:18:58 +0000] [8590] [INFO] Booting worker with pid: 8590
+[2015-06-08 16:18:58 +0000] [8591] [INFO] Booting worker with pid: 8591
+[2015-06-08 16:18:58 +0000] [8596] [INFO] Booting worker with pid: 8596
+[2015-06-08 16:18:58 +0000] [8599] [INFO] Booting worker with pid: 8599
+[2015-06-09 07:33:07 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:8596)
+[2015-06-09 07:33:07 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:8599)
+[2015-06-09 07:33:07 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:8588)
+[2015-06-09 07:33:07 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:8590)
+[2015-06-09 07:33:07 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:8591)
+[2015-06-09 07:33:07 +0000] [9940] [INFO] Booting worker with pid: 9940
+[2015-06-09 07:33:07 +0000] [9941] [INFO] Booting worker with pid: 9941
+[2015-06-09 07:33:07 +0000] [9942] [INFO] Booting worker with pid: 9942
+[2015-06-09 07:33:07 +0000] [9943] [INFO] Booting worker with pid: 9943
+[2015-06-09 07:33:07 +0000] [9944] [INFO] Booting worker with pid: 9944
+[2015-06-09 10:51:13 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:9940)
+[2015-06-09 10:51:13 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:9941)
+[2015-06-09 10:51:13 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:9942)
+[2015-06-09 10:51:13 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:9943)
+[2015-06-09 10:51:13 +0000] [1477] [CRITICAL] WORKER TIMEOUT (pid:9944)
+[2015-06-09 10:51:13 +0000] [10181] [INFO] Booting worker with pid: 10181
+[2015-06-09 10:51:13 +0000] [10182] [INFO] Booting worker with pid: 10182
+[2015-06-09 10:51:13 +0000] [10183] [INFO] Booting worker with pid: 10183
+[2015-06-09 10:51:13 +0000] [10184] [INFO] Booting worker with pid: 10184
+[2015-06-09 10:51:13 +0000] [10185] [INFO] Booting worker with pid: 10185

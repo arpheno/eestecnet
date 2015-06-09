@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             name='BaseTeam',
             fields=[
                 ('applicable_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='common.Applicable')),
-                ('description', models.TextField(blank=True)),
+                ('description', models.TextField(null=True, blank=True)),
                 ('name', models.CharField(max_length=300)),
             ],
             options={
@@ -42,10 +42,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='InternationalBody',
             fields=[
-                ('baseteam_ptr',
-                 models.OneToOneField(parent_link=True, auto_created=True,
-                                      primary_key=True, serialize=False,
-                                      to='teams.BaseTeam')),
+                ('baseteam_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='teams.BaseTeam')),
             ],
             options={
                 'abstract': False,
@@ -55,10 +52,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='InternationalDepartment',
             fields=[
-                ('baseteam_ptr',
-                 models.OneToOneField(parent_link=True, auto_created=True,
-                                      primary_key=True, serialize=False,
-                                      to='teams.BaseTeam')),
+                ('baseteam_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='teams.BaseTeam')),
             ],
             options={
                 'abstract': False,

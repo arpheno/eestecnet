@@ -14,13 +14,11 @@ from apps.teams.urls import teamrouter
 from common.routers import imagerouter
 from settings.conf.media import MEDIA_ROOT
 
-
 admin.autodiscover()
 # App includes
 urlpatterns = patterns(
     '',
     url('^', include('django.contrib.auth.urls')),
-    url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
     url(r'^api/', include(eventrouter.urls)),
     url(r'^api/', include(teamrouter.urls)),
     url(r'^api/', include(package_router.urls)),
@@ -65,7 +63,9 @@ urlpatterns += patterns(
     '',
     url(r'^accounts_api/', include('registration_api.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^mail-queue/?$', include('mailqueue.urls')),
     url(r'^services/timing/', include(statsd_patterns)),
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', TemplateView.as_view(template_name='base/base.html'), name='home'),
+    url(r'^', TemplateView.as_view(template_name='base/base.html')),
 )
 
