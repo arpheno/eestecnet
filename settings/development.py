@@ -2,6 +2,13 @@ SECRET_KEY = 'o&)%bwhyl5(g)%rmq+knp%75y9s@j!a-x#3oh^rzuw$$=nld*x'
 from basic import *
 DEBUG = True
 TEMPLATE_DEBUG = True
+
+
+def show_toolbar(request):
+    return True
+
+
+SHOW_TOOLBAR_CALLBACK = show_toolbar
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

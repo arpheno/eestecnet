@@ -10,11 +10,15 @@
     "bower-google-analytics": "~0.1.1",
     "angular-route": "~1.4.0",
     "angular-resource": "~1.4.0",
-    "angular-material": "~0.9.7",
-    "angular-material-icons": "~0.4.0"
+    "angular-material": "master",
+    "angular-material-icons": "~0.4.0",
+    "bower": "*",
+    "install": "~1.0.4",
+    "angular-sanitize": "~1.4.1"
   },
   "devDependencies": {},
   "resolutions": {
-    "angular": "1.4.0"
+    "angular": "~1.4.0",
+    "angular-material": "master"
   }
 }

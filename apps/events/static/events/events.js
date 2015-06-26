@@ -7,6 +7,6 @@
 angular.module('eestec.events', [
     'ngRoute',
     'eestec.events.detail',
-    'eestec.events.list',
+    'eestec.events.list'
 ]);
 

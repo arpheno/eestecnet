@@ -18,4 +18,5 @@ angular.module('eestec.events.list', ['ngRoute',
     .controller('EventListCtrl', ['$scope', 'Event', function ($scope, Event) {
         $scope.events = Event.query();
         console.log($scope.events);
+        console.log(new Event());
     }]);

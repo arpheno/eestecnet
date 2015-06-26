@@ -5,8 +5,7 @@ from django.contrib.auth.models import Permission
 from rest_framework import serializers, viewsets
 from rest_framework.serializers import ModelSerializer
 
-from common.models import Image, Report, URL, Location
-
+from common.models import Image, Report, URL, Location, Content
 
 logger = logging.getLogger(__name__)
 
@@ -138,6 +137,29 @@ class ImageSerializer(ModelSerializer):
         allow_empty_file=True, allow_null=True,
     )
 
+
+class ImageURLSerializer(ModelSerializer):
+    class Meta:
+        model = Image
+
+
+class ContentSerializer(ModelSerializer):
+    class Meta:
+        model = Content
+
+    images = ImageURLSerializer(many=True)
+
+    def update(self, instance, validated_data):
+        images = validated_data.pop('images')
+        instance.images = [Image.objects.create(**img) for img in images]
+        return super(ContentSerializer, self).update(instance, validated_data)
+
+    def create(self, validated_data):
+        images = validated_data.pop('images')
+        instance = Content.objects.create(**validated_data)
+        instance.save()
+        instance.images = [Image.objects.create(**img) for img in images]
+        return instance
 
 class URLSerializer(ModelSerializer):
     class Meta:

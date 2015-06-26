@@ -16,11 +16,11 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="{% static "angular-material/angular-material.css" %}"/>
     <!-- endbower -->
+    <link type="text/x-scss" rel="stylesheet" href="{% static 'common/app.scss' %}"/>
 
 
 
 {% endcompress %}
-{% compress js %}
     <!-- bower:js -->
     <script src="{% static "prefixfree/prefixfree.min.js" %}"></script>
     <script src="{% static "angular/angular.js" %}"></script>
@@ -30,13 +30,15 @@
     <script src="{% static "angular-aria/angular-aria.js" %}"></script>
     <script src="{% static "angular-material/angular-material.js" %}"></script>
     <script src="{% static "angular-material-icons/angular-material-icons.min.js" %}"></script>
+<script src="{% static "angular-sanitize/angular-sanitize.js" %}"></script>
     <!-- endbower -->
     <script type="text/javascript" src="{% static "events/events.js" %}"></script>
     <script type="text/javascript" src="{% static "events/services.js" %}"></script>
     <script type="text/javascript" src="{% static "events/views/detail.js" %}"></script>
     <script type="text/javascript" src="{% static "events/views/list.js" %}"></script>
-{% endcompress %}
 <script type="text/javascript" src="{% static 'common/app.js' %}"></script>
+<script type="text/javascript" src="{% static 'common/directives.js' %}"></script>
+<script type="text/javascript" src="{% static 'common/services.js' %}"></script>
 {% block header %}{% endblock %}
 {{ form.media }}
 

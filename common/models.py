@@ -1,4 +1,4 @@
-from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import CharField, DateField, BooleanField, ForeignKey, TextField, \
@@ -6,7 +6,6 @@ from django.db.models import CharField, DateField, BooleanField, ForeignKey, Tex
 from polymorphic import PolymorphicModel
 
 from common.util import Reversable
-
 
 __author__ = 'Sebastian Wozny'
 import logging
@@ -132,6 +131,10 @@ class URL(PolymorphicModel, NameMixin):
     url = URLField(max_length=255)
 
 
+class Content(PolymorphicModel):
+    name = CharField(max_length=255, unique=True)
+    content = TextField(blank=True, null=True)
+    images = GenericRelation('common.Image', related_query_name='images')
 class Location(PolymorphicModel):
     content_type = ForeignKey(ContentType)
     object_id = PositiveIntegerField()

@@ -11,7 +11,7 @@ from apps.events.urls import eventrouter, package_router
 from apps.prioritylists.urls import prioritylistrouter
 from apps.questionnaires.urls import questionnairerouter
 from apps.teams.urls import teamrouter
-from common.routers import imagerouter
+from common.routers import imagerouter, contentrouter
 from settings.conf.media import MEDIA_ROOT
 
 admin.autodiscover()
@@ -31,6 +31,7 @@ urlpatterns = patterns(
     url(r'^api/', include(prioritylistrouter.urls)),
     url(r'^api/', include(announcementrouter.urls)),
     url(r'^api/', include(imagerouter.urls)),
+    url(r'^api/', include(contentrouter.urls)),
 )
 # Orphans
 urlpatterns += patterns(
