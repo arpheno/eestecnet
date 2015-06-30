@@ -12,15 +12,16 @@
 <!-- Assets-->
 <link rel="image_src" href="{% static 'enet/img/logo_square.png' %}"/>
 
-{% compress css %}
     <!-- bower:css -->
-    <link rel="stylesheet" href="{% static "angular-material/angular-material.css" %}"/>
+<link rel="stylesheet" href="{% static "angular-material/angular-material.css" %}"/>
     <!-- endbower -->
-    <link type="text/x-scss" rel="stylesheet" href="{% static 'common/app.scss' %}"/>
-
-
-
+{% compress css %}
+    <link type="text/x-scss" rel="stylesheet" href="{% static 'common/general.scss' %}"/>
+    <link rel="stylesheet" href="{% static "common/ng-img-crop.css" %}"/>
 {% endcompress %}
+
+
+
     <!-- bower:js -->
     <script src="{% static "prefixfree/prefixfree.min.js" %}"></script>
     <script src="{% static "angular/angular.js" %}"></script>
@@ -32,6 +33,7 @@
     <script src="{% static "angular-material-icons/angular-material-icons.min.js" %}"></script>
 <script src="{% static "angular-sanitize/angular-sanitize.js" %}"></script>
     <!-- endbower -->
+<script src="{% static "common/ng-img-crop.js" %}"></script>
     <script type="text/javascript" src="{% static "events/events.js" %}"></script>
     <script type="text/javascript" src="{% static "events/services.js" %}"></script>
     <script type="text/javascript" src="{% static "events/views/detail.js" %}"></script>

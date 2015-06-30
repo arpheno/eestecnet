@@ -143,8 +143,8 @@ class Location(PolymorphicModel):
     latitude = FloatField(blank=True, null=True)
     longitude = FloatField(blank=True, null=True)
 class Image(PolymorphicModel, Reversable):
-    content_type = ForeignKey(ContentType)
-    object_id = PositiveIntegerField()
+    content_type = ForeignKey(ContentType, null=True, blank=True)
+    object_id = PositiveIntegerField(null=True, blank=True)
     content_object = GenericForeignKey()
     full_size = ImageField(upload_to='images')
     thumbnail = BooleanField(default=False)

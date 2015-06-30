@@ -1,8 +1,25 @@
+img {
+  min-width: 20px;
+  min-height: 20px;
+}
 
+md-content, html, body {
+
+  height: 100%;
+}
+
+html, body {
+  overflow: hidden;
+}
 md-toolbar {
   height: 80px;
   align-items: center;
   justify-content: space-between;
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   span {
     flex: 1 1 50%;
     justify-content: flex-end;
@@ -31,9 +48,6 @@ ng-md-icon {
   fill: #fff;
 }
 
-main, md-tabs {
-  height: 100%;
-}
 
 md-sidenav {
   display: flex;
@@ -53,6 +67,12 @@ md-sidenav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width: 500px;
+    height: 350px;
   }
   a {
     font-size: 10px;
@@ -107,3 +127,26 @@ md-sidenav {
 
 }
 
+#values {
+  div {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  h2 {
+    flex: 1 1 100%;
+  }
+  img {
+    flex: 1 1 33%;
+  }
+  p {
+    flex: 1 1 67%;
+  }
+}
+
+h1 {
+  font-size: 112px;
+  text-align: center;
+  font-color: #333333;
+  font-weight: normal;
+  font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+}

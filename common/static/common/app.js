@@ -7,7 +7,8 @@ angular.module('eestec', [
     'ngMdIcons',
     'eestec.events',
     'customControl',
-    'content.services'
+    'content.services',
+    'ngImgCrop'
 ]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/', {
@@ -52,7 +53,6 @@ angular.module('eestec', [
                     result.$save();
                     $scope.contents.push(result);
                 }
-                console.log(result);
                 return result;
             };
             $scope.edit = false;

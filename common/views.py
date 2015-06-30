@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 
 from common.models import Image, Content
-from common.serializers import ImageSerializer, ContentSerializer
+from common.serializers import ImageSerializer, ContentOutSerializer, ContentInSerializer
 
 __author__ = 'swozn'
 import logging
@@ -12,7 +12,14 @@ logger = logging.getLogger(__name__)
 
 class ContentViewSet(ModelViewSet):
     queryset = Content.objects.all()
-    serializer_class = ContentSerializer
+    serializer_class = ContentOutSerializer
+
+    def get_serializer_class(self):
+        if self.request.method in ["PUT", "POST"]:
+            return ContentInSerializer
+        return ContentOutSerializer
+
+
 class ImageViewSet(ModelViewSet):
     queryset = Image.objects.all()
     serializer_class = ImageSerializer

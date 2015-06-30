@@ -143,7 +143,26 @@ class ImageURLSerializer(ModelSerializer):
         model = Image
 
 
-class ContentSerializer(ModelSerializer):
+class ContentInSerializer(ModelSerializer):
+    class Meta:
+        model = Content
+
+    images = ImageSerializer(many=True)
+
+    def update(self, instance, validated_data):
+        images = validated_data.pop('images')
+        instance.images = [Image.objects.create(**img) for img in images]
+        return super(ContentInSerializer, self).update(instance, validated_data)
+
+    def create(self, validated_data):
+        images = validated_data.pop('images')
+        instance = Content.objects.create(**validated_data)
+        instance.save()
+        instance.images = [Image.objects.create(**img) for img in images]
+        return instance
+
+
+class ContentOutSerializer(ModelSerializer):
     class Meta:
         model = Content
 
@@ -151,13 +170,18 @@ class ContentSerializer(ModelSerializer):
 
     def update(self, instance, validated_data):
         images = validated_data.pop('images')
+        images = [ImageSerializer(data=image) for image in images]
+        import pdb;
+
+        pdb.set_trace()
         instance.images = [Image.objects.create(**img) for img in images]
-        return super(ContentSerializer, self).update(instance, validated_data)
+        return super(ContentOutSerializer, self).update(instance, validated_data)
 
     def create(self, validated_data):
         images = validated_data.pop('images')
         instance = Content.objects.create(**validated_data)
         instance.save()
+        print images
         instance.images = [Image.objects.create(**img) for img in images]
         return instance
 
