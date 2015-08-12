@@ -6,9 +6,11 @@ angular.module('eestec', [
     'ngMaterial',
     'ngMdIcons',
     'eestec.events',
+    'eestec.commitments',
     'customControl',
     'content.services',
-    'ngImgCrop'
+    'ngImgCrop',
+    'uiGmapgoogle-maps'
 ]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/', {
@@ -17,20 +19,53 @@ angular.module('eestec', [
         $routeProvider.when('/identity/', {
             templateUrl: 'static/common/identity.html'
         });
-        $routeProvider.otherwise({redirectTo: '/'});
-    }]).
-    config(function ($resourceProvider) {
+    }])
+    .config(function ($resourceProvider) {
+        $resourceProvider.defaults.actions = {
+            'get': {method: 'GET'},
+            'save': {method: 'POST'},
+            'query': {method: 'GET', isArray: true},
+            'remove': {method: 'DELETE'},
+            'delete': {method: 'DELETE'},
+            'update': {method: 'PUT'},
+            'options': {method: 'OPTIONS'}
+        };
         $resourceProvider.defaults.stripTrailingSlashes = false;
-    }).
-    config(['$locationProvider', function ($locationProvider) {
+
+    })
+    .config(['$locationProvider', function ($locationProvider) {
         $locationProvider.html5Mode(true);
-    }]).
-    config(function ($mdThemingProvider) {
+    }])
+    .config(function (uiGmapGoogleMapApiProvider) {
+        uiGmapGoogleMapApiProvider.configure({
+            //    key: 'your api key',
+            v: '3.17',
+            libraries: 'weather,geometry,visualization'
+        });
+    })
+    .config(function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('red')
             .accentPalette('light-blue');
-    }).
-    controller('appCtrl', [
+    })
+    .controller('networkController', function ($scope, uiGmapGoogleMapApi) {
+        $scope.map = "";
+        $scope.events = {
+            "scroll": function () {
+                return;
+            }
+        };
+        uiGmapGoogleMapApi.then(function (maps) {
+            $scope.map = {
+                center: {
+                    latitude: 48.1333,
+                    longitude: 11.56
+                },
+                zoom: 5
+            };
+        });
+    })
+    .controller('appCtrl', [
         '$scope', '$http', '$mdSidenav', '$location', '$mdDialog', 'Content',
         function ($scope, $http, $mdSidenav, $location, $mdDialog, Content) {
             $http.defaults.xsrfCookieName = "csrftoken";
@@ -38,6 +73,8 @@ angular.module('eestec', [
             $scope.contents = Content.query(function () {
                 $scope.loaded = true;
             });
+            console.log($scope);
+            $scope.name = 'ello';
             $scope.content = function (name) {
                 while (!$scope.loaded) {
                     var a = 0;
@@ -56,7 +93,6 @@ angular.module('eestec', [
                 return result;
             };
             $scope.edit = false;
-            $scope.x = "hello";
             $scope.toggleSidenav = function (name) {
                 $mdSidenav(name).toggle();
             };

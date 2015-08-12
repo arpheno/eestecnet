@@ -1,0 +1,46 @@
+<style>
+    resourceform {
+        display: flex;
+        flex-wrap: wrap;
+        flex: 0 1 45%;
+    }
+
+    div.resourceform {
+        flex: 1 1 45%;
+    }
+
+    .resourceform h2 {
+        min-font-size: 18px;
+        font-size: 2.4vw;
+    }
+
+    resourceform md-content {
+        flex: 1 1 100%;
+    }
+
+    .resourceform md-toolbar {
+        height: 45px;
+        justify-content: center;
+    }
+</style>
+<div class=" resourceform md-whiteframe-z1">
+    <md-toolbar class="resourceform"><h2>Create new {{ headline }}</h2></md-toolbar>
+    <md-content class="md-padding">
+        <md-input-container ng-repeat="(key,value) in fields"
+                            ng-if="!value.read_only&&value.type!='field'">
+            <label>{{ key }}</label>
+            <input ng-required="value.required" type="text" ng-model="obj[key]"
+                   ng-if="value.type=='string'&&value.max_length">
+            <input ng-required="value.required" type="number" ng-model="obj[key]"
+                   ng-if="value.type=='integer'">
+            <textarea ng-required="value.required" type="text" ng-model="obj[key]"
+                      ng-if="value.type=='string'&&!value.max_length"></textarea>
+            <md-radio-group ng-required="value.required" ng-model="obj[key]"
+                            ng-if="value.type=='choice'">
+                <md-radio-button ng-repeat="choice in value.choices"
+                                 ng-value="choice.value">{{ choice.display_name }}</md-radio-button>
+            </md-radio-group>
+        </md-input-container>
+        <md-button class="md-raised md-accent" ng-click="obj.$save()">Create</md-button>
+    </md-content>
+</div>

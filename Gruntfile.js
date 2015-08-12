@@ -33,7 +33,7 @@ module.exports = function (grunt) {
         },
         includeSource: {
             options: {
-                basePath: 'apps/',
+                basePath: '.',
                 baseUrl: '',
                 templates: {
                     html: {
@@ -44,7 +44,11 @@ module.exports = function (grunt) {
                     }
                 },
                 rename: function (dest, matchedSrcPath, options) {
-                    matchedSrcPath = matchedSrcPath.split("/").slice(2, 10).join("/");
+                    var slicer = 2;
+                    if (matchedSrcPath.indexOf("apps") > -1)
+                        slicer++;
+
+                    matchedSrcPath = matchedSrcPath.split("/").slice(slicer, 10).join("/");
                     return dest + matchedSrcPath;
                 }
             },

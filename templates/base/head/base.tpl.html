@@ -15,9 +15,12 @@
 {% compress css %}
     <!-- bower:css -->
     <!-- endbower -->
-    <!-- include: "type": "scss", "files": "**/*.scss" -->
-    <!-- include: "type": "sass", "files": "**/*.sass" -->
-    <!-- include: "type": "css", "files": "**/*.css" -->
+    <!-- include: "type": "scss", "files": "common/**/*.scss" -->
+    <!-- include: "type": "sass", "files": "common/**/*.sass" -->
+    <!-- include: "type": "css", "files": "common/**/*.css" -->
+    <!-- include: "type": "scss", "files": "apps/**/*.scss" -->
+    <!-- include: "type": "sass", "files": "apps/**/*.sass" -->
+    <!-- include: "type": "css", "files": "apps/**/*.css" -->
 {% endcompress %}
 {% compress js %}
     <!-- bower:js -->
@@ -26,8 +29,9 @@
     <script src="{% static "angular-route/angular-route.js" %}"></script>
     <script src="{% static "angular-resource/angular-resource.js" %}"></script>
     <!-- endbower -->
-    <!-- include: "type": "js", "files": "**/*.js" -->
 {% endcompress %}
+<!-- include: "type": "js", "files": "apps/**/*.js" -->
+<!-- include: "type": "js", "files": "common/**/*.js" -->
 <script type="text/javascript" src="{% static 'common/app.js' %}"></script>
 {% block header %}{% endblock %}
 {{ form.media }}

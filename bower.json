@@ -14,7 +14,9 @@
     "angular-material-icons": "~0.4.0",
     "bower": "*",
     "install": "~1.0.4",
-    "angular-sanitize": "~1.4.1"
+    "angular-sanitize": "~1.4.1",
+    "angular-google-maps": "~2.1.5",
+    "ng-messages": "*"
   },
   "devDependencies": {},
   "resolutions": {

@@ -1,5 +1,28 @@
-angular.module('customControl', []).
-    directive('editable', ['$mdDialog', function ($mdDialog) {
+angular.module('customControl', [])
+    .directive('resourceform', [function () {
+        return {
+            restrict: 'E',
+            scope: {
+                resource: "="
+            },
+            link: function ($scope, element, attrs) {
+                console.log($scope.resource);
+                var resource = new $scope.resource;
+                $scope.fields = resource.$options(function (value) {
+                    $scope.fields = value.actions.POST;
+                    $scope.headline = value.name.split(" ");
+                    $scope.headline.pop();
+                    $scope.headline = $scope.headline.join(" ");
+                });
+                $scope.obj = new $scope.resource;
+            },
+            templateUrl: "/static/common/resourceform.html",
+            controller: function ($scope) {
+                console.log($scope.resource);
+            }
+        };
+    }])
+    .directive('editable', ['$mdDialog', function ($mdDialog) {
         return {
             restrict: 'A', // only activate on element attribute
             scope: {
@@ -8,7 +31,8 @@ angular.module('customControl', []).
 
             },
             link: function (scope, element, attrs) {
-                attrs.$set('ngSrc', scope.res.images[scope.req].full_size);
+                if (scope.res.images[scope.req])
+                    attrs.$set('ngSrc', scope.res.images[scope.req].full_size);
                 function showAlert(ev) {
                     $mdDialog.show({
                         controller: DialogController,

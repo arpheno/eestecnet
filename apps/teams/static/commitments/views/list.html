@@ -1,0 +1,10 @@
+<md-grid-list md-cols="8" md-row-height="1:1">
+    <md-grid-tile ng-repeat="commitment in commitments" md-rowspan="2" md-colspan="2">
+        <md-grid-tile-header>
+            {{ commitment.name }}
+        </md-grid-tile-header>
+        <md-grid-tile-footer>
+            Nothing yet
+        </md-grid-tile-footer>
+    </md-grid-tile>
+</md-grid-list>

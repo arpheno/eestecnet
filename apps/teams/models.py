@@ -6,7 +6,6 @@ from guardian.shortcuts import assign_perm
 from common.models import Applicable, NameMixin, DescriptionMixin
 from common.util import Reversable
 
-
 __author__ = 'Sebastian Wozny'
 import logging
 
@@ -14,7 +13,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Create your models here.
-class BaseTeam(Applicable, Reversable, DescriptionMixin, NameMixin):
+class BaseTeam(Applicable, Reversable, NameMixin, DescriptionMixin):
     owner = ForeignKey('accounts.Account', editable=False)
     images = GenericRelation('common.Image', related_query_name='images')
     locations = GenericRelation('common.Location', related_query_name='locations')
@@ -57,9 +56,9 @@ class BaseTeam(Applicable, Reversable, DescriptionMixin, NameMixin):
         return self.group_set.get(name=self.name + '_members')
 
 class Commitment(BaseTeam):
+    RANKS = [(0, 'Observer'), (1, 'JLC'), (2, 'LC')]
     founded = IntegerField(blank=True, null=True)
-    rank = IntegerField(blank=True, null=True)
-    pass
+    rank = IntegerField(choices=RANKS, default=0, blank=True, null=True)
 class InternationalTeam(BaseTeam):
     pass
 
