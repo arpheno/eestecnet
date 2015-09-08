@@ -27,6 +27,19 @@ class Question(PolymorphicModel, Reversable):
     """ Questions appear as atoms in Questionnaires """
     questionnaire = ForeignKey('questionnaires.Questionnaire')
     question = TextField()
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            result = super(Question, self).save()
+            label = self._meta.object_name
+            assign_perm('view_' + label.lower(),
+                        self.questionnaire.group, self)
+            assign_perm('view_' + label.lower(),
+                        self.questionnaire.group.applicable.organizers, self)
+            assign_perm('change_' + label.lower(),
+                        self.questionnaire.group.applicable.organizers, self)
+        else:
+            result = super(Question, self).save()
+        return result
 
 
 class Response(PolymorphicModel, Reversable):

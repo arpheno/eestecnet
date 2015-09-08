@@ -11,5 +11,4 @@ sudo ln -sfn /vagrant/settings/etc/nginx/sites-enabled/eestec.conf /etc/nginx/si
 sudo service nginx start
 sudo nginx -s reload
 cd /vagrant
-fab remove_migrations
 

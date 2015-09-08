@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('common', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('accounts', '0002_auto_20150908_1012'),
+        ('accounts', '0002_auto_20150908_1210'),
         ('teams', '0001_initial'),
     ]
 
@@ -142,7 +142,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='baseevent',
             name='organizing_committee',
-            field=models.ManyToManyField(related_name='events', null=True, to='teams.BaseTeam'),
+            field=models.ManyToManyField(related_name='events', null=True, to='teams.BaseTeam', blank=True),
             preserve_default=True,
         ),
         migrations.AddField(
