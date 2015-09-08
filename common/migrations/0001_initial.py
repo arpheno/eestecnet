@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 import django.db.models.deletion
-
 import common.util
 
 
@@ -36,13 +35,26 @@ class Migration(migrations.Migration):
             bases=('common.confirmable',),
         ),
         migrations.CreateModel(
+            name='Content',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(unique=True, max_length=255)),
+                ('content', models.TextField(null=True, blank=True)),
+                ('polymorphic_ctype', models.ForeignKey(related_name='polymorphic_common.content_set+', editable=False, to='contenttypes.ContentType', null=True)),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='Image',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('object_id', models.PositiveIntegerField()),
+                ('object_id', models.PositiveIntegerField(null=True, blank=True)),
                 ('full_size', models.ImageField(upload_to=b'images')),
                 ('thumbnail', models.BooleanField(default=False)),
-                ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
+                ('content_type', models.ForeignKey(blank=True, to='contenttypes.ContentType', null=True)),
                 ('polymorphic_ctype', models.ForeignKey(related_name='polymorphic_common.image_set+', editable=False, to='contenttypes.ContentType', null=True)),
             ],
             options={

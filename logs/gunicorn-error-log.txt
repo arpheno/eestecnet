@@ -1262,3 +1262,35 @@
 [2015-07-30 10:26:15 +0000] [1906] [INFO] Booting worker with pid: 1906
 [2015-07-30 10:26:15 +0000] [1907] [INFO] Booting worker with pid: 1907
 [2015-07-30 10:26:15 +0000] [1908] [INFO] Booting worker with pid: 1908
+[2015-09-08 09:25:20 +0000] [14400] [INFO] Starting gunicorn 19.3.0
+[2015-09-08 09:25:20 +0000] [14400] [INFO] Listening at: http://0.0.0.0:8003 (14400)
+[2015-09-08 09:25:20 +0000] [14400] [INFO] Using worker: sync
+[2015-09-08 09:25:20 +0000] [14416] [INFO] Booting worker with pid: 14416
+[2015-09-08 09:25:20 +0000] [14417] [INFO] Booting worker with pid: 14417
+[2015-09-08 09:25:20 +0000] [14420] [INFO] Booting worker with pid: 14420
+[2015-09-08 09:25:20 +0000] [14421] [INFO] Booting worker with pid: 14421
+[2015-09-08 09:25:20 +0000] [14424] [INFO] Booting worker with pid: 14424
+[2015-09-08 09:31:54 +0000] [1389] [INFO] Starting gunicorn 19.3.0
+[2015-09-08 09:31:54 +0000] [1389] [INFO] Listening at: http://0.0.0.0:8003 (1389)
+[2015-09-08 09:31:54 +0000] [1389] [INFO] Using worker: sync
+[2015-09-08 09:31:54 +0000] [1401] [INFO] Booting worker with pid: 1401
+[2015-09-08 09:31:54 +0000] [1404] [INFO] Booting worker with pid: 1404
+[2015-09-08 09:31:54 +0000] [1405] [INFO] Booting worker with pid: 1405
+[2015-09-08 09:31:54 +0000] [1408] [INFO] Booting worker with pid: 1408
+[2015-09-08 09:31:54 +0000] [1409] [INFO] Booting worker with pid: 1409
+[2015-09-08 10:12:34 +0000] [14017] [INFO] Starting gunicorn 19.3.0
+[2015-09-08 10:12:34 +0000] [14017] [INFO] Listening at: http://0.0.0.0:8003 (14017)
+[2015-09-08 10:12:34 +0000] [14017] [INFO] Using worker: sync
+[2015-09-08 10:12:34 +0000] [14032] [INFO] Booting worker with pid: 14032
+[2015-09-08 10:12:34 +0000] [14033] [INFO] Booting worker with pid: 14033
+[2015-09-08 10:12:34 +0000] [14034] [INFO] Booting worker with pid: 14034
+[2015-09-08 10:12:34 +0000] [14039] [INFO] Booting worker with pid: 14039
+[2015-09-08 10:12:34 +0000] [14042] [INFO] Booting worker with pid: 14042
+[2015-09-08 10:14:58 +0000] [1338] [INFO] Starting gunicorn 19.3.0
+[2015-09-08 10:14:58 +0000] [1338] [INFO] Listening at: http://0.0.0.0:8003 (1338)
+[2015-09-08 10:14:58 +0000] [1338] [INFO] Using worker: sync
+[2015-09-08 10:14:58 +0000] [1353] [INFO] Booting worker with pid: 1353
+[2015-09-08 10:14:59 +0000] [1354] [INFO] Booting worker with pid: 1354
+[2015-09-08 10:14:59 +0000] [1357] [INFO] Booting worker with pid: 1357
+[2015-09-08 10:14:59 +0000] [1358] [INFO] Booting worker with pid: 1358
+[2015-09-08 10:14:59 +0000] [1361] [INFO] Booting worker with pid: 1361

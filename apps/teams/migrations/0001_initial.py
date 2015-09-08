@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 from django.conf import settings
-
 import common.util
 
 
@@ -32,7 +31,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('baseteam_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='teams.BaseTeam')),
                 ('founded', models.IntegerField(null=True, blank=True)),
-                ('rank', models.IntegerField(null=True, blank=True)),
+                ('rank', models.IntegerField(default=0, null=True, blank=True, choices=[(0, b'Observer'), (1, b'JLC'), (2, b'LC')])),
             ],
             options={
                 'abstract': False,

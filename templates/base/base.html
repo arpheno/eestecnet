@@ -46,11 +46,9 @@
     document.addEventListener("DOMContentLoaded", function (event) {
         thisbetterwork = '{{ name }}';
         console.log(thisbetterwork);
-        {%
-            endverbatim %
-        }
     });
 </script>
+{% endverbatim %}
 <md-sidenav class="md-sidenav-right" md-component-id="right"
             ng-include="'/static/common/sidenav.html'"></md-sidenav>
 </body>

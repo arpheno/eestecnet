@@ -2,14 +2,13 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-
 import common.util
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0002_auto_20150614_1353'),
+        ('accounts', '0002_auto_20150908_1012'),
         ('contenttypes', '0001_initial'),
     ]
 

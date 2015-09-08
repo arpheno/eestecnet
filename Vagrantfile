@@ -22,14 +22,12 @@ Vagrant.configure(2) do |config|
    config.vm.provision "shell" do |s|
     s.inline = "groupadd -f docker"
   end
-  config.vm.provision "docker", images: ["rabbitmq"]
-  config.vm.provision "docker", images: ["hopsoft/graphite-statsd"]
   config.ssh.port = 2222
-  config.vm.provision "docker" do |d|
-    d.run "rabbitmq"
-    d.run "hopsoft/graphite-statsd",
-    args:"--name graphite -p 8005:80 -p 2003:2003 -p 8125:8125/udp -d"
-  end
+  #config.vm.provision "docker", images: ["hopsoft/graphite-statsd"]
+  #config.vm.provision "docker" do |d|
+  #  d.run "hopsoft/graphite-statsd",
+  #  args:"--name graphite -p 8005:80 -p 2003:2003 -p 8125:8125/udp -d"
+  #end
   config.vm.provision :shell, :path => "settings/vagrant/bootstrap.sh"
   config.vm.provision :shell, :path => "settings/vagrant/postgres.sh"
   config.vm.provision :shell, :path => "settings/vagrant/deploy.sh"
