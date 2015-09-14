@@ -1,15 +1,6 @@
 ===================================
 How to set up for local development
 ===================================
-This tutorial will help you install python on your windows machine.
-
-You will also install the PyCharm IDE and git. After the installation you will be able to run eestec.net on
-your own machine, write and modify code, and upload your changes using git.
-
-Setup
-=====
-
-Feel free to leave out any steps you have already completed.
 
 Windows
 =======
@@ -20,25 +11,10 @@ To do this, open an administrative command shell (cmd.exe) and copy&paste the fo
 
 When it's done installing please type ::
 
-    choco install python2 git pip vim npm cygwin
-    cd C:\users\*your username*\
-    mkdir development
-    cd development
-    pip install virtualenv
-    virtualenv .
+    choco install git virtualbox vagrant
     git clone http://github.com/Sebastian Woznyo/eestecnet/
-    scripts\activate
-    cd eestecnet
-    pip install -r requirements.txt
-    npm install -g coffee
-
-Additionally you will have to install cygwin and copy some files: ::
-
-    cd C:\tools\cygwin\bin
-    cp cygwin1.dll cygz.dll cygmagic-1.dll cyggcc_s-1.dll C:\windows\system32
-
-
-Alternatively instead of vim you can install the pycharm professional edition from their website if you're a student.
+    vagrant up
+    vagrant ssh
 
 
 Debian/Ubuntu
@@ -46,16 +22,11 @@ Debian/Ubuntu
 
 In a command shell do ::
 
-    sudo apt-get install pip virtualenv coffeescript
-    cd
-    mkdir development
-    cd development
-    pip install virtualenv
-    virtualenv .
+    sudo apt-get install git virtualbox vagrant
     git clone http://github.com/Sebastian Woznyo/eestecnet/
-    source bin/activate
-    cd eestecnet
     pip install -r requirements.txt
+    vagrant up
+    vagrant ssh
 
 
 If you want the pycharm IDE, google it and install it. It's awesome, seriously.
@@ -66,25 +37,14 @@ Visual Studio or MinGW or the GNU compiler collection, it's very difficult other
 
 Local
 #####
-Activate your virtualenv.
 Navigate to the project root and do ::
 
-    python manage.py syncdb
     python manage.py migrate
-    python manage.py runserver
+    python manage.py createsuperuser
+    python manage.py runserver 0.0.0.0:8000
 
 This will launch a local webserver on port 8000.
 The website will now display, albeit with no preloaded content.
-If you want to preload content, hit CTRL + C and do ::
-
-    python manage.py shell
-    >>> from eestecnet.views import init
-    >>> init(5)
-
-This will preload some content, including an admin account with login credentials:
-
-username Sebastian Woznyo@gmail.com
-password test
 
 Server
 ######
