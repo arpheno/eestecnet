@@ -8,6 +8,5 @@ sudo ln -s /usr/bin/nodejs /usr/bin/node
 sudo npm install -g bower babel
 sudo pip install gunicorn psycopg2 python-memcached pytest-django pytest-xdist ijson
 sudo pip install -r /vagrant/requirements.txt
-sudo pip install django-debug-toolbar django-statsd-mozilla
 cd /vagrant
 bower install --allow-root

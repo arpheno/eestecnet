@@ -43,3 +43,5 @@ pytz
 requests
 six
 sorl-thumbnail
+django-debug-toolbar
+django-statsd-mozilla
