@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/arpheno/eestecnet.svg?branch=green)](https://travis-ci.org/arpheno/eestecnet)
 # EESTECNET
 
 ## Motivation
