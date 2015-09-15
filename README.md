@@ -8,13 +8,15 @@ Electrical Engineering Students' European Association (EESTEC). Its purpose is t
 as a central communication and administration hub for the association and preserve knowledge for
 future generations.
 
-===================================
-How to set up for local development
-===================================
+===============
+Getting Started
+===============
 
 Windows
 =======
-Please install chocolatey from http://chocolatey.org/
+The easiest way to get all dependencies is to install chocolatey from http://chocolatey.org/
+Chocolatey is a package manager for Windows and works similar to apt on Debian or yum on rpm based linux distributions.
+
 To do this, open an administrative command shell (cmd.exe) and copy&paste the following ::
 
     @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
@@ -22,10 +24,8 @@ To do this, open an administrative command shell (cmd.exe) and copy&paste the fo
 When it's done installing please type ::
 
     choco install git virtualbox vagrant
-    git clone http://github.com/Sebastian Woznyo/eestecnet/
-    vagrant up
-    vagrant ssh
 
+Alternativley install the dependencies manually and add them to your path.
 
 Debian/Ubuntu
 =============
@@ -33,25 +33,35 @@ Debian/Ubuntu
 In a command shell do ::
 
     sudo apt-get install git virtualbox vagrant
-    git clone http://github.com/Sebastian Woznyo/eestecnet/
-    pip install -r requirements.txt
+
+
+
+Development tools
+=================
+
+I personally recommend the JetBrains PyCharm IDE. It is available for free as in beer for students.
+
+Set up
+======
+
+Everything will run inside a virtual machine on your machine, with all dependencies and tools encapsulated in that machine.
+We use Vagrant to manage the virtualmachine.
+Depending on your machine the following steps to pull the project and set up for local development may take several minutes.
+
+    vagrant plugin install vagrant-reload
+    git clone http://github.com/Sebastian Wozny/eestecnet/
     vagrant up
+
+To verify the installation, open a browser and go to http://localhost/api/content/ and log in as user admin@eestec.net with password 1234
+Then navigate to http://localhost/ and you should see the index page.
+
+
+Instead of using the pseudo production environment that comes out of the box, you may find it more convenient to run a debug server:
     vagrant ssh
-
-
-If you want the pycharm IDE, google it and install it. It's awesome, seriously.
-
-Some python modules have to be compiled for your platform. Please install a C compiler like
-Visual Studio or MinGW or the GNU compiler collection, it's very difficult otherwise.
-
-
-Local
-#####
-Navigate to the project root and do ::
-
+    cd /vagrant/
     python manage.py migrate
     python manage.py createsuperuser
     python manage.py runserver 0.0.0.0:8000
 
 This will launch a local webserver on port 8000.
-The website will now display, albeit with no preloaded content.
+The website will now display, albeit with no preloaded content
