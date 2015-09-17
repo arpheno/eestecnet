@@ -153,3 +153,260 @@
 [2015-09-15 16:42:26 +0000] [3125] [INFO] Booting worker with pid: 3125
 [2015-09-15 16:42:26 +0000] [3129] [INFO] Booting worker with pid: 3129
 [2015-09-15 16:42:26 +0000] [3133] [INFO] Booting worker with pid: 3133
+[2015-09-16 07:44:57 +0000] [2999] [CRITICAL] WORKER TIMEOUT (pid:3117)
+[2015-09-16 07:44:57 +0000] [2999] [CRITICAL] WORKER TIMEOUT (pid:3121)
+[2015-09-16 07:44:57 +0000] [2999] [CRITICAL] WORKER TIMEOUT (pid:3125)
+[2015-09-16 07:44:57 +0000] [2999] [CRITICAL] WORKER TIMEOUT (pid:3129)
+[2015-09-16 07:44:57 +0000] [2999] [CRITICAL] WORKER TIMEOUT (pid:3133)
+[2015-09-16 07:44:57 +0000] [3171] [INFO] Booting worker with pid: 3171
+[2015-09-16 07:44:57 +0000] [3170] [INFO] Booting worker with pid: 3170
+[2015-09-16 07:44:57 +0000] [3173] [INFO] Booting worker with pid: 3173
+[2015-09-16 07:44:57 +0000] [3176] [INFO] Booting worker with pid: 3176
+[2015-09-16 07:44:57 +0000] [3178] [INFO] Booting worker with pid: 3178
+[2015-09-16 07:46:11 +0000] [2999] [INFO] Handling signal: term
+[2015-09-16 07:46:11 +0000] [2999] [INFO] Shutting down: Master
+[2015-09-16 16:53:54 +0000] [1469] [INFO] Starting gunicorn 19.3.0
+[2015-09-16 16:53:54 +0000] [1469] [INFO] Listening at: http://0.0.0.0:8003 (1469)
+[2015-09-16 16:53:54 +0000] [1469] [INFO] Using worker: sync
+[2015-09-16 16:53:54 +0000] [1474] [INFO] Booting worker with pid: 1474
+[2015-09-16 16:53:54 +0000] [1476] [INFO] Booting worker with pid: 1476
+[2015-09-16 16:53:54 +0000] [1478] [INFO] Booting worker with pid: 1478
+[2015-09-16 16:53:54 +0000] [1480] [INFO] Booting worker with pid: 1480
+[2015-09-16 16:53:54 +0000] [1482] [INFO] Booting worker with pid: 1482
+[2015-09-16 17:06:03 +0000] [1670] [INFO] Booting worker with pid: 1670
+[2015-09-16 17:06:03 +0000] [1672] [INFO] Booting worker with pid: 1672
+[2015-09-16 17:06:03 +0000] [1678] [INFO] Booting worker with pid: 1678
+[2015-09-16 17:06:04 +0000] [1682] [INFO] Booting worker with pid: 1682
+[2015-09-16 17:06:04 +0000] [1686] [INFO] Booting worker with pid: 1686
+[2015-09-16 17:06:51 +0000] [1469] [INFO] Handling signal: term
+[2015-09-16 17:06:51 +0000] [1469] [INFO] Shutting down: Master
+[2015-09-16 17:06:57 +0000] [1709] [INFO] Starting gunicorn 19.3.0
+[2015-09-16 17:06:57 +0000] [1709] [INFO] Listening at: http://0.0.0.0:8003 (1709)
+[2015-09-16 17:06:57 +0000] [1709] [INFO] Using worker: sync
+[2015-09-16 17:06:57 +0000] [1714] [INFO] Booting worker with pid: 1714
+[2015-09-16 17:06:57 +0000] [1718] [INFO] Booting worker with pid: 1718
+[2015-09-16 17:06:57 +0000] [1722] [INFO] Booting worker with pid: 1722
+[2015-09-16 17:06:57 +0000] [1723] [INFO] Booting worker with pid: 1723
+[2015-09-16 17:06:57 +0000] [1728] [INFO] Booting worker with pid: 1728
+[2015-09-17 08:49:59 +0000] [1709] [CRITICAL] WORKER TIMEOUT (pid:1728)
+[2015-09-17 08:49:59 +0000] [1709] [CRITICAL] WORKER TIMEOUT (pid:1714)
+[2015-09-17 08:49:59 +0000] [1709] [CRITICAL] WORKER TIMEOUT (pid:1723)
+[2015-09-17 08:49:59 +0000] [1709] [CRITICAL] WORKER TIMEOUT (pid:1722)
+[2015-09-17 08:49:59 +0000] [1709] [CRITICAL] WORKER TIMEOUT (pid:1718)
+[2015-09-17 08:49:59 +0000] [1838] [INFO] Booting worker with pid: 1838
+[2015-09-17 08:49:59 +0000] [1839] [INFO] Booting worker with pid: 1839
+[2015-09-17 08:49:59 +0000] [1841] [INFO] Booting worker with pid: 1841
+[2015-09-17 08:49:59 +0000] [1843] [INFO] Booting worker with pid: 1843
+[2015-09-17 08:49:59 +0000] [1854] [INFO] Booting worker with pid: 1854
+[2015-09-17 09:40:42 +0000] [1709] [INFO] Handling signal: term
+[2015-09-17 09:40:42 +0000] [1709] [INFO] Shutting down: Master
+[2015-09-17 09:40:48 +0000] [2154] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:40:48 +0000] [2154] [INFO] Listening at: http://0.0.0.0:8003 (2154)
+[2015-09-17 09:40:48 +0000] [2154] [INFO] Using worker: sync
+[2015-09-17 09:40:48 +0000] [2159] [INFO] Booting worker with pid: 2159
+[2015-09-17 09:40:48 +0000] [2161] [INFO] Booting worker with pid: 2161
+[2015-09-17 09:40:48 +0000] [2165] [INFO] Booting worker with pid: 2165
+[2015-09-17 09:40:48 +0000] [2168] [INFO] Booting worker with pid: 2168
+[2015-09-17 09:40:48 +0000] [2171] [INFO] Booting worker with pid: 2171
+[2015-09-17 09:42:15 +0000] [2154] [INFO] Handling signal: term
+[2015-09-17 09:42:16 +0000] [2154] [INFO] Shutting down: Master
+[2015-09-17 09:42:22 +0000] [2242] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:42:22 +0000] [2242] [INFO] Listening at: http://0.0.0.0:8003 (2242)
+[2015-09-17 09:42:22 +0000] [2242] [INFO] Using worker: sync
+[2015-09-17 09:42:22 +0000] [2247] [INFO] Booting worker with pid: 2247
+[2015-09-17 09:42:22 +0000] [2250] [INFO] Booting worker with pid: 2250
+[2015-09-17 09:42:22 +0000] [2253] [INFO] Booting worker with pid: 2253
+[2015-09-17 09:42:22 +0000] [2259] [INFO] Booting worker with pid: 2259
+[2015-09-17 09:42:22 +0000] [2261] [INFO] Booting worker with pid: 2261
+[2015-09-17 09:44:09 +0000] [2242] [INFO] Handling signal: term
+[2015-09-17 09:44:10 +0000] [2242] [INFO] Shutting down: Master
+[2015-09-17 09:44:16 +0000] [2336] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:44:16 +0000] [2336] [INFO] Listening at: http://0.0.0.0:8003 (2336)
+[2015-09-17 09:44:16 +0000] [2336] [INFO] Using worker: sync
+[2015-09-17 09:44:16 +0000] [2341] [INFO] Booting worker with pid: 2341
+[2015-09-17 09:44:16 +0000] [2345] [INFO] Booting worker with pid: 2345
+[2015-09-17 09:44:16 +0000] [2347] [INFO] Booting worker with pid: 2347
+[2015-09-17 09:44:16 +0000] [2353] [INFO] Booting worker with pid: 2353
+[2015-09-17 09:44:16 +0000] [2355] [INFO] Booting worker with pid: 2355
+[2015-09-17 09:45:01 +0000] [2401] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:45:01 +0000] [2401] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:01 +0000] [2401] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:02 +0000] [2401] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:02 +0000] [2401] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:03 +0000] [2401] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:03 +0000] [2401] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:04 +0000] [2401] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:04 +0000] [2401] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:05 +0000] [2401] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:05 +0000] [2401] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:06 +0000] [2401] [ERROR] Can't connect to ('0.0.0.0', 8003)
+[2015-09-17 09:45:08 +0000] [2418] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:45:08 +0000] [2418] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:08 +0000] [2418] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:09 +0000] [2418] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:09 +0000] [2418] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:10 +0000] [2418] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:10 +0000] [2418] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:11 +0000] [2418] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:11 +0000] [2418] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:12 +0000] [2418] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:12 +0000] [2418] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:13 +0000] [2418] [ERROR] Can't connect to ('0.0.0.0', 8003)
+[2015-09-17 09:45:14 +0000] [2430] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:45:14 +0000] [2430] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:14 +0000] [2430] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:15 +0000] [2430] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:15 +0000] [2430] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:16 +0000] [2430] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:16 +0000] [2430] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:17 +0000] [2430] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:17 +0000] [2430] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:18 +0000] [2430] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:18 +0000] [2430] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:19 +0000] [2430] [ERROR] Can't connect to ('0.0.0.0', 8003)
+[2015-09-17 09:45:21 +0000] [2436] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:45:21 +0000] [2436] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:21 +0000] [2436] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:22 +0000] [2436] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:22 +0000] [2436] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:23 +0000] [2436] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:23 +0000] [2436] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:24 +0000] [2436] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:24 +0000] [2436] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:25 +0000] [2436] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:25 +0000] [2436] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:26 +0000] [2436] [ERROR] Can't connect to ('0.0.0.0', 8003)
+[2015-09-17 09:45:27 +0000] [2441] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:45:27 +0000] [2441] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:27 +0000] [2441] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:28 +0000] [2441] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:28 +0000] [2441] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:29 +0000] [2441] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:29 +0000] [2441] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:30 +0000] [2441] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:30 +0000] [2441] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:31 +0000] [2441] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:31 +0000] [2441] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:32 +0000] [2441] [ERROR] Can't connect to ('0.0.0.0', 8003)
+[2015-09-17 09:45:33 +0000] [2447] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:45:33 +0000] [2447] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:33 +0000] [2447] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:34 +0000] [2447] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:34 +0000] [2447] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:35 +0000] [2447] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:35 +0000] [2447] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:36 +0000] [2447] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:36 +0000] [2447] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:37 +0000] [2447] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:37 +0000] [2447] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:38 +0000] [2447] [ERROR] Can't connect to ('0.0.0.0', 8003)
+[2015-09-17 09:45:39 +0000] [2454] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:45:39 +0000] [2454] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:45:39 +0000] [2454] [ERROR] Retrying in 1 second.
+[2015-09-17 09:45:40 +0000] [2454] [INFO] Listening at: http://0.0.0.0:8003 (2454)
+[2015-09-17 09:45:40 +0000] [2454] [INFO] Using worker: sync
+[2015-09-17 09:45:40 +0000] [2459] [INFO] Booting worker with pid: 2459
+[2015-09-17 09:45:40 +0000] [2461] [INFO] Booting worker with pid: 2461
+[2015-09-17 09:45:40 +0000] [2467] [INFO] Booting worker with pid: 2467
+[2015-09-17 09:45:40 +0000] [2469] [INFO] Booting worker with pid: 2469
+[2015-09-17 09:45:40 +0000] [2471] [INFO] Booting worker with pid: 2471
+[2015-09-17 09:47:26 +0000] [2488] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:47:26 +0000] [2488] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:26 +0000] [2488] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:27 +0000] [2488] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:27 +0000] [2488] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:28 +0000] [2488] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:28 +0000] [2488] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:29 +0000] [2488] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:29 +0000] [2488] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:30 +0000] [2488] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:30 +0000] [2488] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:31 +0000] [2488] [ERROR] Can't connect to ('0.0.0.0', 8003)
+[2015-09-17 09:47:32 +0000] [2495] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:47:32 +0000] [2495] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:32 +0000] [2495] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:33 +0000] [2495] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:33 +0000] [2495] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:34 +0000] [2495] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:34 +0000] [2495] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:35 +0000] [2495] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:35 +0000] [2495] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:36 +0000] [2495] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:36 +0000] [2495] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:37 +0000] [2495] [ERROR] Can't connect to ('0.0.0.0', 8003)
+[2015-09-17 09:47:38 +0000] [2505] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:47:38 +0000] [2505] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:38 +0000] [2505] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:39 +0000] [2505] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:39 +0000] [2505] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:40 +0000] [2505] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:40 +0000] [2505] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:41 +0000] [2505] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:41 +0000] [2505] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:42 +0000] [2505] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:42 +0000] [2505] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:43 +0000] [2505] [ERROR] Can't connect to ('0.0.0.0', 8003)
+[2015-09-17 09:47:45 +0000] [2512] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:47:45 +0000] [2512] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:45 +0000] [2512] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:46 +0000] [2512] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:46 +0000] [2512] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:47 +0000] [2512] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:47 +0000] [2512] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:48 +0000] [2512] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:48 +0000] [2512] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:49 +0000] [2512] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:49 +0000] [2512] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:50 +0000] [2512] [ERROR] Can't connect to ('0.0.0.0', 8003)
+[2015-09-17 09:47:51 +0000] [2519] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:47:51 +0000] [2519] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:51 +0000] [2519] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:52 +0000] [2519] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:52 +0000] [2519] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:53 +0000] [2519] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:53 +0000] [2519] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:54 +0000] [2519] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:54 +0000] [2519] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:54 +0000] [2519] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:47:54 +0000] [2519] [ERROR] Retrying in 1 second.
+[2015-09-17 09:47:55 +0000] [2519] [ERROR] Can't connect to ('0.0.0.0', 8003)
+[2015-09-17 09:48:48 +0000] [2540] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:48:48 +0000] [2540] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:48:48 +0000] [2540] [ERROR] Retrying in 1 second.
+[2015-09-17 09:48:49 +0000] [2540] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:48:49 +0000] [2540] [ERROR] Retrying in 1 second.
+[2015-09-17 09:48:50 +0000] [2540] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:48:50 +0000] [2540] [ERROR] Retrying in 1 second.
+[2015-09-17 09:48:51 +0000] [2540] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:48:51 +0000] [2540] [ERROR] Retrying in 1 second.
+[2015-09-17 09:48:52 +0000] [2540] [ERROR] Connection in use: ('0.0.0.0', 8003)
+[2015-09-17 09:48:52 +0000] [2540] [ERROR] Retrying in 1 second.
+[2015-09-17 09:48:53 +0000] [2540] [ERROR] Can't connect to ('0.0.0.0', 8003)
+[2015-09-17 09:53:57 +0000] [2673] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:53:57 +0000] [2673] [INFO] Listening at: http://0.0.0.0:8003 (2673)
+[2015-09-17 09:53:57 +0000] [2673] [INFO] Using worker: sync
+[2015-09-17 09:53:57 +0000] [2678] [INFO] Booting worker with pid: 2678
+[2015-09-17 09:53:57 +0000] [2680] [INFO] Booting worker with pid: 2680
+[2015-09-17 09:53:57 +0000] [2682] [INFO] Booting worker with pid: 2682
+[2015-09-17 09:53:57 +0000] [2686] [INFO] Booting worker with pid: 2686
+[2015-09-17 09:53:57 +0000] [2690] [INFO] Booting worker with pid: 2690
+[2015-09-17 09:57:24 +0000] [2673] [INFO] Handling signal: term
+[2015-09-17 09:57:24 +0000] [2673] [INFO] Shutting down: Master
+[2015-09-17 09:57:30 +0000] [2767] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 09:57:30 +0000] [2767] [INFO] Listening at: http://0.0.0.0:8003 (2767)
+[2015-09-17 09:57:30 +0000] [2767] [INFO] Using worker: sync
+[2015-09-17 09:57:30 +0000] [2772] [INFO] Booting worker with pid: 2772
+[2015-09-17 09:57:30 +0000] [2776] [INFO] Booting worker with pid: 2776
+[2015-09-17 09:57:30 +0000] [2777] [INFO] Booting worker with pid: 2777
+[2015-09-17 09:57:30 +0000] [2780] [INFO] Booting worker with pid: 2780
+[2015-09-17 09:57:30 +0000] [2782] [INFO] Booting worker with pid: 2782
+[2015-09-17 10:00:03 +0000] [2767] [INFO] Handling signal: term
+[2015-09-17 10:00:03 +0000] [2767] [INFO] Shutting down: Master
+[2015-09-17 10:24:49 +0000] [3100] [INFO] Starting gunicorn 19.3.0
+[2015-09-17 10:24:49 +0000] [3100] [INFO] Listening at: http://0.0.0.0:8003 (3100)
+[2015-09-17 10:24:49 +0000] [3100] [INFO] Using worker: sync
+[2015-09-17 10:24:49 +0000] [3105] [INFO] Booting worker with pid: 3105
+[2015-09-17 10:24:49 +0000] [3109] [INFO] Booting worker with pid: 3109
+[2015-09-17 10:24:49 +0000] [3113] [INFO] Booting worker with pid: 3113
+[2015-09-17 10:24:49 +0000] [3115] [INFO] Booting worker with pid: 3115
+[2015-09-17 10:24:50 +0000] [3121] [INFO] Booting worker with pid: 3121

@@ -1,3 +1,4 @@
+from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import ModelViewSet
 
 from common.models import Image, Content
@@ -13,6 +14,7 @@ logger = logging.getLogger(__name__)
 class ContentViewSet(ModelViewSet):
     queryset = Content.objects.all()
     serializer_class = ContentOutSerializer
+    permission_classes = (AllowAny,)
 
     def get_serializer_class(self):
         if self.request.method in ["PUT", "POST"]:

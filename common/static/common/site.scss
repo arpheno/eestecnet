@@ -15,6 +15,9 @@ md-content, html, body {
   height: 100%;
 }
 
+main{
+  flex:1 1 100%;
+}
 html, body {
   overflow: hidden;
   font-family: Verdana;

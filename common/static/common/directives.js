@@ -61,7 +61,7 @@ angular.module('customControl', [])
             }
         };
     }]).
-    directive('contenteditable', [function () {
+    directive('contenteditable', ["$q",function ($q) {
         return {
             restrict: 'A', // only activate on element attribute
             scope: {
@@ -69,16 +69,18 @@ angular.module('customControl', [])
                 req: '='
             },
             link: function (scope, element, attrs) {
-                element.html(scope.res[scope.req]);
-                // Listen for change events to enable binding
-                element.on('focus', function () {
-                    element.text(element.html());
-                    scope.res.$update();
-                });
-                element.on('blur', function () {
-                    scope.res[scope.req] = element.text();
-                    element.html(element.text());
-                    scope.res.$update();
+                $q.when(scope.res).then(function (result) {
+                    element.html(result[scope.req]);
+                    // Listen for change events to enable binding
+                    element.on('focus', function () {
+                        element.text(element.html());
+                        result.$update();
+                    });
+                    element.on('blur', function () {
+                        result[scope.req] = element.text();
+                        element.html(element.text());
+                        result.$update();
+                    });
                 });
             }
         };
