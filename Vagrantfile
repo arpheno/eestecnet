@@ -32,9 +32,15 @@ Vagrant.configure(2) do |config|
     d.run "hopsoft/graphite-statsd",
     args:"--name graphite -p 8005:80 -p 2003:2003 -p 8125:8125/udp -d"
   end
+  config.vm.provision "docker" do |d|
+    d.run selenium/standalone-chrome:2.47.1",
+    args:"--name selenium -p 4444:4444 -v /dev/shm:/dev/shm -d"
+    d.run "hopsoft/graphite-statsd",
+    args:"--name graphite -p 8005:80 -p 2003:2003 -p 8125:8125/udp -d"
+  end
   config.vm.provision :shell, :path => "settings/vagrant/start.sh"
   config.vm.network "forwarded_port", guest: 80, host: 80
-  config.vm.network :forwarded_port, guest: 4445, host: 4444
+  config.vm.network :forwarded_port, guest: 4444, host: 4444
   config.vm.network "forwarded_port", guest: 8000, host: 8000
   config.vm.network "forwarded_port", guest: 8005, host: 8005
   config.vm.network "forwarded_port", guest: 11211, host: 11211

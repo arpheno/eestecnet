@@ -14,7 +14,7 @@ angular.module('eestec.commitments.list', ['ngRoute',
         });
     }])
 
-    .controller('CommitmentListController', function ($scope, Commitment) {
+    .controller('CommitmentListController',[ "$scope","Commitment",function ($scope, Commitment) {
         $scope.commitments = Commitment.query();
         console.log($scope.commitments);
-    });
+    }]);

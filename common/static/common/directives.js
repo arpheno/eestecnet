@@ -35,7 +35,7 @@ angular.module('customControl', [])
                     attrs.$set('ngSrc', scope.res.images[scope.req].full_size);
                 function showAlert(ev) {
                     $mdDialog.show({
-                        controller: DialogController,
+                        controller: ["$scope", "$mdDialog", DialogController],
                         templateUrl: '/static/common/imgcrop.html',
                         parent: angular.element(document.querySelector('body')),
                         targetEvent: ev,
@@ -61,7 +61,7 @@ angular.module('customControl', [])
             }
         };
     }]).
-    directive('contenteditable', ["$q",function ($q) {
+    directive('contenteditable', ["$q", function ($q) {
         return {
             restrict: 'A', // only activate on element attribute
             scope: {

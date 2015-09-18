@@ -13,7 +13,7 @@ angular.module('eestec.commitments.detail', ['ngRoute'])
         });
     }])
 
-    .controller('CommitmentDetailController', [function ($scope) {
+    .controller('CommitmentDetailController', ["$scope",function ($scope) {
         $scope.a = 0;
         console.log("a");
 

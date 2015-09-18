@@ -11,6 +11,6 @@ angular.module('eestec.commitments.create', ['ngRoute', "eestec.commitments.serv
             controller: 'CommitmentCreate'
         });
     }])
-    .controller('CommitmentCreate', function ($scope, Commitment) {
+    .controller('CommitmentCreate', ["$scope","Commitment", function ($scope, Commitment) {
         $scope.Commitment = Commitment;
-    });
+    }]);

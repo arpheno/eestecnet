@@ -13,7 +13,7 @@ angular.module('eestec.events.detail', ['ngRoute'])
         });
     }])
 
-    .controller('EventDetailCtrl', [function ($scope) {
+    .controller('EventDetailCtrl', ["$scope",function ($scope) {
         $scope.a = 0;
         console.log("a");
 

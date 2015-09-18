@@ -410,3 +410,4 @@
 [2015-09-17 10:24:49 +0000] [3113] [INFO] Booting worker with pid: 3113
 [2015-09-17 10:24:49 +0000] [3115] [INFO] Booting worker with pid: 3115
 [2015-09-17 10:24:50 +0000] [3121] [INFO] Booting worker with pid: 3121
+[2015-09-17 11:18:11 +0000] [3100] [INFO] Handling signal: term
