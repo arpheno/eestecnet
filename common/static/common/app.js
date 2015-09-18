@@ -71,29 +71,35 @@ angular.module('eestec', [
             $http.defaults.xsrfCookieName = "csrftoken";
             $http.defaults.xsrfHeaderName = "X-CSRFTOKEN";
             $scope.contents = Content.query(function () {
+                var dict={};
+                for(var i=0;i<$scope.contents.length;i++){
+                    dict[$scope.contents[i].name]=$scope.contents[i];
+                }
+                $scope.contents=dict;
+                console.log($scope.contents);
             });
             console.log($scope);
             $scope.name = 'ello';
-            $scope.content = function (name) {
-                var deferred = $q.defer();
-                console.log("my ass");
-
-                $scope.contents.$promise.then(function (r) {
-                    var result = $scope.contents.filter(function (x) {
-                        return x.name === name;
-                    })[0];
-                    if (!result) {
-                        result = new Content();
-                        result.name = name;
-                        result.content = "Placeholder for " + name;
-                        result.images = [];
-                        result.$save();
-                        $scope.contents.push(result);
-                    }
-                    deferred.resolve(result);
-                });
-                return deferred.promise;
-            };
+            //$scope.content = function (name) {
+            //    var deferred = $q.defer();
+            //    console.log("my ass");
+            //
+            //    $scope.contents.$promise.then(function (r) {
+            //        var result = $scope.contents.filter(function (x) {
+            //            return x.name === name;
+            //        })[0];
+            //        if (!result) {
+            //            result = new Content();
+            //            result.name = name;
+            //            result.content = "Placeholder for " + name;
+            //            result.images = [];
+            //            result.$save();
+            //            $scope.contents.push(result);
+            //        }
+            //        deferred.resolve(result);
+            //    });
+            //    return deferred.promise;
+            //};
             $scope.edit = false;
             $scope.toggleSidenav = function (name) {
                 $mdSidenav(name).toggle();
