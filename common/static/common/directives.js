@@ -1,4 +1,6 @@
-angular.module('customControl', [])
+angular.module('eestec.common.directives', [
+    'ngImgCrop'
+])
     .directive('resourceform', [function () {
         return {
             restrict: 'E',
@@ -30,12 +32,12 @@ angular.module('customControl', [])
                 req: '='
 
             },
-            link: function (scope, element, attrs) {
-                if (scope.res.images[scope.req])
-                    attrs.$set('ngSrc', scope.res.images[scope.req].full_size);
-                function showAlert(ev) {
+            link: function ($scope, element, attrs) {
+                if ($scope.res.images[$scope.req])
+                    attrs.$set('ngSrc', $scope.res.images[$scope.req].full_size);
+                function showImageEditingDialog(ev) {
                     $mdDialog.show({
-                        controller: ["$scope", "$mdDialog", DialogController],
+                        controller: ["$scope", "$mdDialog", ImDController],
                         templateUrl: '/static/common/imgcrop.html',
                         parent: angular.element(document.querySelector('body')),
                         targetEvent: ev,
@@ -44,19 +46,19 @@ angular.module('customControl', [])
 
                     })
                         .then(function (image) {
-                            scope.source = image;
+                            $scope.source = image;
                             attrs.$set('ngSrc', image);
-                            scope.res.images[scope.req] = {
+                            $scope.res.images[$scope.req] = {
                                 full_size: image
                             };
-                            scope.res.$update();
+                            $scope.res.$update();
                         }, function () {
                             $scope.alert = 'You cancelled the dialog.';
                         });
-                };
+                }
                 // Listen for change events to enable binding
                 element.on('click', function () {
-                    showAlert();
+                    showImageEditingDialog();
                 });
             }
         };
@@ -86,7 +88,7 @@ angular.module('customControl', [])
         };
     }]);
 
-function DialogController($scope, $mdDialog) {
+function ImDController($scope, $mdDialog) {
     $scope.hide = function () {
         $mdDialog.hide();
     };

@@ -6,7 +6,7 @@ exports.config = {
     specs: ['../../**/spec.js'],
     capabilities: {
         browserName: 'chrome',
-        baseUrl: 'http://172.16.42.1:8000'
+        baseUrl: 'http://172.17.42.1:8000'
     },
     params: {
         admin: {
