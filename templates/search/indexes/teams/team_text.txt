@@ -1,3 +1,0 @@
-{{object.type}}{{object.name}}
-{{object.name}}
-

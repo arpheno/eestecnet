@@ -14,6 +14,8 @@ whoosh_index
 static/doc
 !.gitkeep
 node_modules/
+/logs/gunicorn-error-log.txt
+/logs/gunicorn-access-log.txt
 bower_components/
 tmp
 .DS_Store

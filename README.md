@@ -8,70 +8,60 @@ Electrical Engineering Students' European Association (EESTEC). Its purpose is t
 as a central communication and administration hub for the association and preserve knowledge for
 future generations.
 
-## Use cases
+===============
+Getting Started
+===============
 
-The online platform of EESTEC will serve content to different visitors with different backgrounds and different intentions.
-Visitors can be grouped according to the illustration below
-![Different groups of visitors](use_cases.png "Use cases")
+Windows
+=======
+The easiest way to get all dependencies is to install chocolatey from http://chocolatey.org/
+Chocolatey is a package manager for Windows and works similar to apt on Debian or yum on rpm based linux distributions.
 
-The platform should identify the key target groups and adapt its presentation to minimize the fraction of key users
-leaving the website (red arrows) without having become associated with EESTEC.
+To do this, open an administrative command shell (cmd.exe) and copy&paste the following ::
 
-### Implementation
+    @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
 
-This particular implementation identifies three key groups:
+When it's done installing please type ::
 
-* Persons who have previously never heard of EESTEC
-* Persons who have some interest in EESTEC
-* Persons who are associated with the association.
+    choco install git virtualbox vagrant
 
-In particular this implementation does not strive to be any of the following:
+Alternativley install the dependencies manually and add them to your path.
 
-* A recruitment portal for Commitments
-* A place to reaffirm company and university representatives
+Debian/Ubuntu
+=============
+
+In a command shell do ::
+
+    sudo apt-get install git virtualbox vagrant
 
 
-## Requirements
 
-### Non-functional
+Development tools
+=================
 
-* It should be accessible to people not working in IT both for use and administration.
-* Its interface should adapt to the device of the end user to improve usability.
-* It should adhere to best practices in HTML in the newest standard published by the W3C
-* The data storage should implement a public standard interface.
-* Sensitive user data should be encrypted using appropriate public standard approaches. The encryption procedure must remain secure, even in the case of an attacker with access to the procedure.
+I personally recommend the JetBrains PyCharm IDE. It is available for free as in beer for students.
 
-### Functional
+Set up
+======
 
-#### General
+Everything will run inside a virtual machine on your machine, with all dependencies and tools encapsulated in that machine.
+We use Vagrant to manage the virtualmachine.
+Depending on your machine the following steps to pull the project and set up for local development may take several minutes.
 
-* The program should offer a remotely accessible service.
-* It should store and distribute information about News and Events publicly.
-* It should store and distribute relevant numbers and figures about the association.
-* It should store and distribute information about the members of EESTEC and commitments looking to become members of EESTEC. It is the responsibility of commitments to update their information.
-* It should inform persons interested in joining a commitment of EESTEC, or in founding a commitment about relevant aspects of the association.
-* It should inform companies interested in becoming partners of EESTEC about relevant aspects of the association.
-* It should provide information about the contact details of the board and relevant persons.
-* It should display advertising material provided by the partners of EESTEC.
+    vagrant plugin install vagrant-reload
+    git clone http://github.com/Sebastian Wozny/eestecnet/
+    vagrant up
 
-#### Users
+To verify the installation, open a browser and go to http://localhost/api/content/ and log in as user admin@eestec.net with password 1234
+Then navigate to http://localhost/ and you should see the index page.
 
-* It should allow users to create a profile (sign up) and store relevant information.
-* It should allow authenticated users to apply for membership in commitments.
-* It should allow members of commitments to apply for participation in events.
 
-#### Commitments
+Instead of using the pseudo production environment that comes out of the box, you may find it more convenient to run a debug server:
+    vagrant ssh
+    cd /vagrant/
+    python manage.py migrate
+    python manage.py createsuperuser
+    python manage.py runserver 0.0.0.0:8000
 
-* It should allow commitments of EESTEC to publish events and announcements.
-* It should allow commitments of EESTEC to manage applications to their events.
-* It should allow commitments of EESTEC to accept and manage their members.
-* It should allow commitments of EESTEC to store and retrieve critical documents.
-
-## General Description of the System
-
-The system is implemented as a dynamic web service, or in laymen's terms a website. It
-can be reached via a HTTP request and returns meaningful data in a HTTP response. The
-content of the HTTP response depends on what was requested, and can be html files, stylesheets,
-scripts or binary files like images.
-
-##
+This will launch a local webserver on port 8000.
+The website will now display, albeit with no preloaded content

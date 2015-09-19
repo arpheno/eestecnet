@@ -20,7 +20,7 @@ angular.module('eestec', [
             templateUrl: 'static/common/identity.html'
         });
     }])
-    .config(function ($resourceProvider) {
+    .config(["$resourceProvider", function ($resourceProvider) {
         $resourceProvider.defaults.actions = {
             'get': {method: 'GET'},
             'save': {method: 'POST'},
@@ -32,23 +32,23 @@ angular.module('eestec', [
         };
         $resourceProvider.defaults.stripTrailingSlashes = false;
 
-    })
+    }])
     .config(['$locationProvider', function ($locationProvider) {
         $locationProvider.html5Mode(true);
     }])
-    .config(function (uiGmapGoogleMapApiProvider) {
+    .config(["uiGmapGoogleMapApiProvider", function (uiGmapGoogleMapApiProvider) {
         uiGmapGoogleMapApiProvider.configure({
             //    key: 'your api key',
             v: '3.17',
             libraries: 'weather,geometry,visualization'
         });
-    })
-    .config(function ($mdThemingProvider) {
+    }])
+    .config(["$mdThemingProvider", function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('red')
             .accentPalette('light-blue');
-    })
-    .controller('networkController', function ($scope, uiGmapGoogleMapApi) {
+    }])
+    .controller('networkController', ["$scope", "uiGmapGoogleMapApi", function ($scope, uiGmapGoogleMapApi) {
         $scope.map = "";
         $scope.events = {
             "scroll": function () {
@@ -64,33 +64,35 @@ angular.module('eestec', [
                 zoom: 5
             };
         });
-    })
+    }])
     .controller('appCtrl', [
-        '$scope', '$http', '$mdSidenav', '$location', '$mdDialog', 'Content',
-        function ($scope, $http, $mdSidenav, $location, $mdDialog, Content) {
+        '$scope', '$http', '$mdSidenav', '$location', '$mdDialog', 'Content', "$q",
+        function ($scope, $http, $mdSidenav, $location, $mdDialog, Content, $q) {
             $http.defaults.xsrfCookieName = "csrftoken";
             $http.defaults.xsrfHeaderName = "X-CSRFTOKEN";
             $scope.contents = Content.query(function () {
-                $scope.loaded = true;
             });
             console.log($scope);
             $scope.name = 'ello';
             $scope.content = function (name) {
-                while (!$scope.loaded) {
-                    var a = 0;
-                }
-                var result = $scope.contents.filter(function (x) {
-                    return x.name === name;
-                })[0];
-                if (!result) {
-                    result = new Content();
-                    result.name = name;
-                    result.content = "Placeholder for " + name;
-                    result.images = [];
-                    result.$save();
-                    $scope.contents.push(result);
-                }
-                return result;
+                var deferred = $q.defer();
+                console.log("my ass");
+
+                $scope.contents.$promise.then(function (r) {
+                    var result = $scope.contents.filter(function (x) {
+                        return x.name === name;
+                    })[0];
+                    if (!result) {
+                        result = new Content();
+                        result.name = name;
+                        result.content = "Placeholder for " + name;
+                        result.images = [];
+                        result.$save();
+                        $scope.contents.push(result);
+                    }
+                    deferred.resolve(result);
+                });
+                return deferred.promise;
             };
             $scope.edit = false;
             $scope.toggleSidenav = function (name) {
@@ -103,7 +105,7 @@ angular.module('eestec', [
             };
             $scope.showLogin = function (ev) {
                 $mdDialog.show({
-                    controller: DialogController,
+                    controller: ["$scope","$mdDialog", DialogController],
                     templateUrl: '/static/common/login.html',
                     parent: angular.element(document.body),
                     targetEvent: ev,

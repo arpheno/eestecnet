@@ -60,7 +60,7 @@ Commitments
 
 
 Events
------------
+------
 * List: A list of the events currently being organized by commitments, and a view of events organized in the past.
 * Detail: A detailed view of one Event in particular:
     * General information about the Event:

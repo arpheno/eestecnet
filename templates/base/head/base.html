@@ -25,7 +25,6 @@
     <link rel="stylesheet" type="text/x-scss" href="{% static "common/site.scss" %}"/>
 {% endcompress %}
 {% compress js %}
-{% endcompress %}
     <!-- bower:js -->
     <script src="{% static "prefixfree/prefixfree.min.js" %}"></script>
     <script src="{% static "angular/angular.js" %}"></script>
@@ -39,23 +38,23 @@
 <script src="{% static "lodash/lodash.js" %}"></script>
 <script src="{% static "angular-google-maps/dist/angular-google-maps.js" %}"></script>
     <!-- endbower -->
-<script type="text/javascript" src="{% static  "events/events.js" %}"></script>
-<script type="text/javascript" src="{% static  "events/services.js" %}"></script>
-<script type="text/javascript" src="{% static  "events/views/detail.js" %}"></script>
-<script type="text/javascript" src="{% static  "events/views/list.js" %}"></script>
-<script type="text/javascript" src="{% static  "commitments/commitments.js" %}"></script>
-<script type="text/javascript"
-        src="{% static  "commitments/controllers/create.js" %}"></script>
-<script type="text/javascript"
-        src="{% static  "commitments/controllers/detail.js" %}"></script>
-<script type="text/javascript"
-        src="{% static  "commitments/controllers/list.js" %}"></script>
-<script type="text/javascript" src="{% static  "commitments/services.js" %}"></script>
-<script type="text/javascript" src="{% static  "teams/teams.js" %}"></script>
-<script type="text/javascript" src="{% static  "common/app.js" %}"></script>
+    <script type="text/javascript" src="{% static  "events/events.js" %}"></script>
+    <script type="text/javascript" src="{% static  "events/services.js" %}"></script>
+    <script type="text/javascript" src="{% static  "events/views/detail.js" %}"></script>
+    <script type="text/javascript" src="{% static  "events/views/list.js" %}"></script>
+    <script type="text/javascript" src="{% static  "commitments/commitments.js" %}"></script>
+    <script type="text/javascript"
+            src="{% static  "commitments/controllers/create.js" %}"></script>
+    <script type="text/javascript"
+            src="{% static  "commitments/controllers/detail.js" %}"></script>
+    <script type="text/javascript"
+            src="{% static  "commitments/controllers/list.js" %}"></script>
+    <script type="text/javascript" src="{% static  "commitments/services.js" %}"></script>
+    <script type="text/javascript" src="{% static  "teams/teams.js" %}"></script>
 <script type="text/javascript" src="{% static  "common/directives.js" %}"></script>
 <script type="text/javascript" src="{% static  "common/ng-img-crop.js" %}"></script>
 <script type="text/javascript" src="{% static  "common/services.js" %}"></script>
+{% endcompress %}
 <script type="text/javascript" src="{% static 'common/app.js' %}"></script>
 {% block header %}{% endblock %}
 {{ form.media }}

@@ -1,8 +1,0 @@
-{% extends  "forms/raw_form_with_inlines.html" %}
-{% block formjavascript %}
-    <script type="text/javascript">
-        $(function () {
-            $("#{{ id }} input[type=submit]").button();
-        });
-    </script>
-{% endblock %}
