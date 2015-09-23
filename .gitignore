@@ -1,4 +1,3 @@
-/.coverage
 # Created by .ignore support plugin (hsz.mobi)
 *.pyc
 db.sqlite3

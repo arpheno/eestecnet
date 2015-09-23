@@ -24,4 +24,4 @@ def cleanup():
 def test():
     apps = local('ls  -d -1 apps/*/', capture=True).split()
     files = [app + "tests.py" for app in apps if not "legacy" in app]
-    local(r'coverage run -m py.test -n 4 common/tests.py ' + " ".join(files))
+    local(r'coverage run --source . -m py.test -n 4 common/tests.py ' + " ".join(files))
