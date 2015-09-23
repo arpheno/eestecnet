@@ -1,6 +1,7 @@
-# Created by .ignore support plugin (hsz.mobi)
-*.pyc
+.coverage
+htmlcov
 db.sqlite3
+.cache
 eestecnet/settings/secret.py
 eestecnet/settings_deploy.py
 tmp
