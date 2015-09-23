@@ -411,3 +411,56 @@
 [2015-09-17 10:24:49 +0000] [3115] [INFO] Booting worker with pid: 3115
 [2015-09-17 10:24:50 +0000] [3121] [INFO] Booting worker with pid: 3121
 [2015-09-17 11:18:11 +0000] [3100] [INFO] Handling signal: term
+[2015-09-22 19:39:33 +0000] [3742] [INFO] Starting gunicorn 19.3.0
+[2015-09-22 19:39:33 +0000] [3742] [INFO] Listening at: http://0.0.0.0:8003 (3742)
+[2015-09-22 19:39:33 +0000] [3742] [INFO] Using worker: sync
+[2015-09-22 19:39:33 +0000] [3747] [INFO] Booting worker with pid: 3747
+[2015-09-22 19:39:33 +0000] [3749] [INFO] Booting worker with pid: 3749
+[2015-09-22 19:39:33 +0000] [3751] [INFO] Booting worker with pid: 3751
+[2015-09-22 19:39:33 +0000] [3753] [INFO] Booting worker with pid: 3753
+[2015-09-22 19:39:34 +0000] [3755] [INFO] Booting worker with pid: 3755
+[2015-09-22 21:08:45 +0000] [3742] [CRITICAL] WORKER TIMEOUT (pid:3753)
+[2015-09-22 21:08:45 +0000] [3742] [CRITICAL] WORKER TIMEOUT (pid:3755)
+[2015-09-22 21:08:45 +0000] [3742] [CRITICAL] WORKER TIMEOUT (pid:3747)
+[2015-09-22 21:08:45 +0000] [3742] [CRITICAL] WORKER TIMEOUT (pid:3749)
+[2015-09-22 21:08:45 +0000] [3742] [CRITICAL] WORKER TIMEOUT (pid:3751)
+[2015-09-22 21:08:45 +0000] [4175] [INFO] Booting worker with pid: 4175
+[2015-09-22 21:08:45 +0000] [4176] [INFO] Booting worker with pid: 4176
+[2015-09-22 21:08:45 +0000] [4178] [INFO] Booting worker with pid: 4178
+[2015-09-22 21:08:45 +0000] [4181] [INFO] Booting worker with pid: 4181
+[2015-09-22 21:08:45 +0000] [4190] [INFO] Booting worker with pid: 4190
+[2015-09-23 00:01:33 +0000] [7503] [INFO] Booting worker with pid: 7503
+[2015-09-23 00:01:33 +0000] [7505] [INFO] Booting worker with pid: 7505
+[2015-09-23 00:01:33 +0000] [7507] [INFO] Booting worker with pid: 7507
+[2015-09-23 00:01:33 +0000] [7509] [INFO] Booting worker with pid: 7509
+[2015-09-23 00:01:33 +0000] [7511] [INFO] Booting worker with pid: 7511
+[2015-09-23 00:26:10 +0000] [3742] [INFO] Handling signal: term
+[2015-09-23 00:26:10 +0000] [3742] [INFO] Shutting down: Master
+[2015-09-23 00:26:17 +0000] [7761] [INFO] Starting gunicorn 19.3.0
+[2015-09-23 00:26:17 +0000] [7761] [INFO] Listening at: http://0.0.0.0:8003 (7761)
+[2015-09-23 00:26:17 +0000] [7761] [INFO] Using worker: sync
+[2015-09-23 00:26:17 +0000] [7766] [INFO] Booting worker with pid: 7766
+[2015-09-23 00:26:17 +0000] [7768] [INFO] Booting worker with pid: 7768
+[2015-09-23 00:26:17 +0000] [7772] [INFO] Booting worker with pid: 7772
+[2015-09-23 00:26:17 +0000] [7776] [INFO] Booting worker with pid: 7776
+[2015-09-23 00:26:17 +0000] [7782] [INFO] Booting worker with pid: 7782
+[2015-09-23 00:27:35 +0000] [7875] [INFO] Booting worker with pid: 7875
+[2015-09-23 00:27:35 +0000] [7879] [INFO] Booting worker with pid: 7879
+[2015-09-23 00:27:35 +0000] [7881] [INFO] Booting worker with pid: 7881
+[2015-09-23 00:27:36 +0000] [7887] [INFO] Booting worker with pid: 7887
+[2015-09-23 00:27:36 +0000] [7891] [INFO] Booting worker with pid: 7891
+[2015-09-23 00:29:11 +0000] [7902] [INFO] Booting worker with pid: 7902
+[2015-09-23 00:29:11 +0000] [7906] [INFO] Booting worker with pid: 7906
+[2015-09-23 00:29:12 +0000] [7910] [INFO] Booting worker with pid: 7910
+[2015-09-23 00:29:12 +0000] [7912] [INFO] Booting worker with pid: 7912
+[2015-09-23 00:29:12 +0000] [7918] [INFO] Booting worker with pid: 7918
+[2015-09-23 00:29:48 +0000] [7761] [INFO] Handling signal: term
+[2015-09-23 00:29:48 +0000] [7761] [INFO] Shutting down: Master
+[2015-09-23 00:29:54 +0000] [7940] [INFO] Starting gunicorn 19.3.0
+[2015-09-23 00:29:54 +0000] [7940] [INFO] Listening at: http://0.0.0.0:8003 (7940)
+[2015-09-23 00:29:54 +0000] [7940] [INFO] Using worker: sync
+[2015-09-23 00:29:54 +0000] [7945] [INFO] Booting worker with pid: 7945
+[2015-09-23 00:29:54 +0000] [7946] [INFO] Booting worker with pid: 7946
+[2015-09-23 00:29:54 +0000] [7953] [INFO] Booting worker with pid: 7953
+[2015-09-23 00:29:54 +0000] [7955] [INFO] Booting worker with pid: 7955
+[2015-09-23 00:29:54 +0000] [7959] [INFO] Booting worker with pid: 7959

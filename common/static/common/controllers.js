@@ -24,45 +24,15 @@ angular.module('eestec.common.controllers', [
             };
         });
     }])
-    .controller('appCtrl', [
-        '$scope', '$http', '$location', '$mdDialog', '$mdSidenav', 'Content',
-        function ($scope, $http, $location, $mdDialog, $mdSidenav, Content) {
-            $scope.contents = Content.query(function () {
-                var dict = {};
-                for (var i = 0; i < $scope.contents.length; i++) {
-                    dict[$scope.contents[i].name] = $scope.contents[i];
-                }
-                $scope.contents = dict;
-                console.log($scope.contents);
-            });
-            //$scope.content = function (name) {
-            //    var deferred = $q.defer();
-            //    console.log("my ass");
-            //
-            //    $scope.contents.$promise.then(function (r) {
-            //        var result = $scope.contents.filter(function (x) {
-            //            return x.name === name;
-            //        })[0];
-            //        if (!result) {
-            //            result = new Content();
-            //            result.name = name;
-            //            result.content = "Placeholder for " + name;
-            //            result.images = [];
-            //            result.$save();
-            //            $scope.contents.push(result);
-            //        }
-            //        deferred.resolve(result);
-            //    });
-            //    return deferred.promise;
-            //};
-            $scope.edit = false;
-            $scope.toggleSidenav = function (name) {
-                $mdSidenav(name).toggle();
-            };
+    .controller('toolbarController', [
+        "$scope", "$location", "$mdDialog","$mdSidenav",
+        function ($scope, $location, $mdDialog,$mdSidenav) {
             $scope.navigation = function (name) {
                 $location.path(name).replace();
                 console.log($location);
-
+            };
+            $scope.toggleSidenav = function (name) {
+                $mdSidenav(name).toggle();
             };
             $scope.showLogin = function (ev) {
                 $mdDialog.show({
@@ -79,5 +49,36 @@ angular.module('eestec.common.controllers', [
                     clickOutsideToClose: true,
                     escapeToClose: true
                 })
+            };
+        }])
+    .controller('appCtrl', [
+        '$scope', '$http', '$location', '$mdSidenav', 'Content',
+        function ($scope, $http, $location, $mdSidenav, Content) {
+            $scope.contents = Content.query(function () {
+                //var dict = {};
+                //for (var i = 0; i < $scope.contents.length; i++) {
+                //    dict[$scope.contents[i].name] = $scope.contents[i];
+                //}
+                //$scope.contents = dict;
+                //console.log($scope.contents);
+                $scope.content = function (name) {
+                    var result = $scope.contents.filter(function (x) {
+                        return x.name === name;
+                    })[0];
+                    if (!result) {
+                        result = new Content();
+                        result.name = name;
+                        result.content = "Placeholder for " + name;
+                        result.images = [];
+                        result.$save();
+                        $scope.contents.push(result);
+                    }
+                    return result;
+                };
+            });
+            $scope.edit = false;
+            $scope.navigation = function (name) {
+                $location.path(name).replace();
+                console.log($location);
             };
         }]);

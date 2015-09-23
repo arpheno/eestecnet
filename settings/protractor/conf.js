@@ -2,11 +2,12 @@
  * Created by swozn on 9/18/2015.
  */
 exports.config = {
-    seleniumAddress: 'http://localhost:4445/wd/hub',
+    seleniumAddress: 'http://localhost:4444/wd/hub',
     specs: ['../../**/spec.js'],
     capabilities: {
         browserName: 'chrome',
-        baseUrl: 'http://172.17.42.1:8000'
+        idleTimeout: 30,
+        baseUrl: 'http://172.17.42.1:8000/'
     },
     params: {
         admin: {
