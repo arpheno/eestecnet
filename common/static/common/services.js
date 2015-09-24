@@ -4,7 +4,7 @@
  */
 'use strict';
 
-angular.module('content.services', ['ngResource'])
+angular.module('eestec.common.services', ['ngResource'])
     .factory('Content', ['$resource',
         function ($resource) {
             return $resource('/api/content/:id/', {id: "@id"}, {

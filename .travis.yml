@@ -5,8 +5,10 @@ python:
 
 install:
 - pip install -r requirements.txt
-- pip install fabric pytest-django pytest-xdist ijson
+- pip install fabric pytest-django pytest-xdist ijson coveralls coverage
 - python manage.py migrate
 
 script:
 - fab test
+after_success:
+  coveralls

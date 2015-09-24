@@ -10,7 +10,6 @@ from basic import *
 INSTALLED_APPS
 SECRET_KEY
 ALLOWED_HOSTS = ['.eestec.net', 'localhost']
-DEBUG = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',

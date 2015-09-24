@@ -33,8 +33,8 @@ Vagrant.configure(2) do |config|
     args:"--name graphite -p 8005:80 -p 2003:2003 -p 8125:8125/udp -d"
   end
   config.vm.provision "docker" do |d|
-    d.run selenium/standalone-chrome:2.47.1",
-    args:"--name selenium -p 4444:4444 -v /dev/shm:/dev/shm -d"
+    d.run "selenium/standalone-chrome",
+    args:" -p 4444:4444 -v /dev/shm:/dev/shm"
     d.run "hopsoft/graphite-statsd",
     args:"--name graphite -p 8005:80 -p 2003:2003 -p 8125:8125/udp -d"
   end

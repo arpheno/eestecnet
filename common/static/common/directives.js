@@ -1,4 +1,6 @@
-angular.module('customControl', [])
+angular.module('eestec.common.directives', [
+    'ngImgCrop'
+])
     .directive('resourceform', [function () {
         return {
             restrict: 'E',
@@ -22,7 +24,7 @@ angular.module('customControl', [])
             }
         };
     }])
-    .directive('editable', ['$mdDialog', function ($mdDialog) {
+    .directive('editable', ['$mdDialog', '$q', function ($mdDialog, $q) {
         return {
             restrict: 'A', // only activate on element attribute
             scope: {
@@ -30,33 +32,59 @@ angular.module('customControl', [])
                 req: '='
 
             },
-            link: function (scope, element, attrs) {
-                if (scope.res.images[scope.req])
-                    attrs.$set('ngSrc', scope.res.images[scope.req].full_size);
-                function showAlert(ev) {
+            link: function ($scope, element, attrs) {
+                $q.when($scope.res).then(function (result) {
+                    console.log(result);
+                    if (result.images[$scope.req]) {
+                        attrs.$set('ngSrc', result.images[$scope.req].full_size);
+                    }
+                });
+                element.on('click', function (ev) {
+                    console.log(ev);
                     $mdDialog.show({
-                        controller: ["$scope", "$mdDialog", DialogController],
+                        controller: ["$scope", "$mdDialog",
+                            function ($scope, $mdDialog) {
+                                $scope.hide = $mdDialog.hide;
+                                $scope.cancel = $mdDialog.cancel;
+                                $scope.confirm = function () {
+                                    $mdDialog.hide($scope.myCroppedImage);
+                                };
+                                $scope.myImage = '';
+                                $scope.myCroppedImage = '';
+                                console.log("trying to show log");
+
+                                var handleFileSelect = function (evt) {
+                                    var file = evt.currentTarget.files[0];
+                                    var reader = new FileReader();
+                                    reader.onload = function (evt) {
+                                        $scope.$apply(function ($scope) {
+                                            $scope.myImage = evt.target.result;
+                                        });
+                                    };
+                                    reader.readAsDataURL(file);
+                                };
+                                angular.element(document).ready(function () {
+                                        var temp = document.getElementById('fileInput');
+                                        angular.element(temp).on('change', handleFileSelect);
+                                    }
+                                );
+                            }
+                        ],
                         templateUrl: '/static/common/imgcrop.html',
-                        parent: angular.element(document.querySelector('body')),
                         targetEvent: ev,
                         clickOutsideToClose: true,
-                        escapeToClose: true,
-
+                        escapeToClose: true
                     })
                         .then(function (image) {
-                            scope.source = image;
+                            $scope.source = image;
                             attrs.$set('ngSrc', image);
-                            scope.res.images[scope.req] = {
+                            $scope.res.images[$scope.req] = {
                                 full_size: image
                             };
-                            scope.res.$update();
+                            $scope.res.$update();
                         }, function () {
                             $scope.alert = 'You cancelled the dialog.';
                         });
-                };
-                // Listen for change events to enable binding
-                element.on('click', function () {
-                    showAlert();
                 });
             }
         };
@@ -69,49 +97,20 @@ angular.module('customControl', [])
                 req: '='
             },
             link: function (scope, element, attrs) {
-                $q.when(scope.res).then(function (result) {
-                    element.html(result[scope.req]);
-                    // Listen for change events to enable binding
-                    element.on('focus', function () {
-                        element.text(element.html());
-                        result.$update();
-                    });
-                    element.on('blur', function () {
-                        result[scope.req] = element.text();
-                        element.html(element.text());
-                        result.$update();
-                    });
+                result = scope.res;
+                element.html(result[scope.req]);
+                // Listen for change events to enable binding
+                element.on('focus', function () {
+                    element.text(element.html());
+                    result.$update();
+                });
+                element.on('blur', function () {
+                    result[scope.req] = element.text();
+                    element.html(element.text());
+                    result.$update();
                 });
             }
         };
     }]);
 
-function DialogController($scope, $mdDialog) {
-    $scope.hide = function () {
-        $mdDialog.hide();
-    };
-    $scope.cancel = function () {
-        $mdDialog.cancel();
-    };
-    $scope.confirm = function () {
-        $mdDialog.hide($scope.myCroppedImage);
-    };
-    $scope.myImage = '';
-    $scope.myCroppedImage = '';
 
-    var handleFileSelect = function (evt) {
-        var file = evt.currentTarget.files[0];
-        var reader = new FileReader();
-        reader.onload = function (evt) {
-            $scope.$apply(function ($scope) {
-                $scope.myImage = evt.target.result;
-            });
-        };
-        reader.readAsDataURL(file);
-    };
-    angular.element(document).ready(function () {
-            var temp = document.getElementById('fileInput');
-            angular.element(temp).on('change', handleFileSelect);
-        }
-    );
-}

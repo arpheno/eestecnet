@@ -7,8 +7,8 @@
     <base href="/">
 </head>
 <body ng-app="eestec" ng-controller='appCtrl'>
-<md-toolbar id="navbar" layout="row" md-scroll-shrink="true"
-            layout-align="flex-start center">
+<md-toolbar id="navbar" layout="row"
+            layout-align="flex-start center" ng-controller="toolbarController">
     <a flex href="/#/"><img id="logo" src="{% static 'common/logo.svg' %}"/></a>
         <span layout="row">
             <md-tabs md-selected="0" class="md-primary" hide show-gt-sm>
@@ -27,7 +27,7 @@
                        aria-label="Login">
                 <ng-md-icon icon="account_box"></ng-md-icon>
             </md-button>
-            <md-button class="md-icon-button" ng-click="toggleSidenav('right')">
+            <md-button class="md-icon-button" id="sidenavbutton" ng-click="toggleSidenav('right')">
                 <ng-md-icon icon="menu"></ng-md-icon>
             </md-button>
         </span>
