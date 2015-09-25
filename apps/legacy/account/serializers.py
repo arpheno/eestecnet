@@ -46,7 +46,7 @@ class ConversionAccountSerializer(ConversionMixin, ModelSerializer):
     def create(self, validated_data):
         result = super(ConversionAccountSerializer, self).create(validated_data)
         if self.keep["thumbnail"]:
-            ct = ContentType.objects.get(app_label="legacy", model="account")
+            ct = ContentType.objects.get(app_label="accounts", model="account")
             data = {
                 "full_size": self.keep["thumbnail"],
                 "content_object": result,

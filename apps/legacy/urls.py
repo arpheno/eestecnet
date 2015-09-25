@@ -12,8 +12,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 legacyrouter = routers.SimpleRouter()
-legacyrouter.register(r'teams', Teams)
-legacyrouter.register(r'events', Events)
-legacyrouter.register(r'accounts', Accounts)
+legacyrouter.register(r'teams', Teams,'legacyteams')
+legacyrouter.register(r'events', Events,'legacyevents')
+legacyrouter.register(r'accounts', Accounts,'legacyaccounts')
 
 
