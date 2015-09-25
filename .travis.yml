@@ -9,6 +9,6 @@ install:
 - python manage.py migrate
 
 script:
-- fab test
+- fab coverage
 after_success:
   coveralls

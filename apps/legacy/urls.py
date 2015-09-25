@@ -1,4 +1,5 @@
 from rest_framework_nested import routers
+from apps.legacy.views import Accounts, Events, Teams
 
 from apps.teams.views import BaseTeamViewSet, InternationalTeamViewSet
 from apps.teams.views import CommitmentViewSet
@@ -10,9 +11,9 @@ import logging
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
-teamrouter = routers.SimpleRouter()
-teamrouter.register(r'teams', BaseTeamViewSet)
-teamrouter.register(r'commitments', CommitmentViewSet)
-teamrouter.register(r'internationalteams', InternationalTeamViewSet)
+legacyrouter = routers.SimpleRouter()
+legacyrouter.register(r'teams', Teams,'legacyteams')
+legacyrouter.register(r'events', Events,'legacyevents')
+legacyrouter.register(r'accounts', Accounts,'legacyaccounts')
 
 

@@ -75,7 +75,7 @@ class ConversionEventSerializer(ConversionMixin, ModelSerializer):
                 c.save()
         try:
             for image in self.keep["images"]:
-                ct = ContentType.objects.get(app_label="common", model="image")
+                ct = ContentType.objects.get(app_label="events", model="baseevent")
                 data = {
                     "full_size": image["image"],
                     "content_object": result,
@@ -83,7 +83,9 @@ class ConversionEventSerializer(ConversionMixin, ModelSerializer):
                     "object_id": result.pk}
                 thumbnail = ImageSerializer(data=data)
                 thumbnail.is_valid(raise_exception=True)
+                thumbnail.save()
         except KeyError:
+            print "Something went wrong with an image"
             pass
         if self.keep["organizers"]:
             for user in self.keep["organizers"]:
@@ -95,7 +97,7 @@ class ConversionEventSerializer(ConversionMixin, ModelSerializer):
                 c.is_valid(raise_exception=True)
                 c.save()
         if self.keep["thumbnail"]:
-            ct = ContentType.objects.get(app_label="common", model="image")
+            ct = ContentType.objects.get(app_label="events", model="baseevent")
             data = {
                 "full_size": self.keep["thumbnail"],
                 "content_object": result,
@@ -105,7 +107,7 @@ class ConversionEventSerializer(ConversionMixin, ModelSerializer):
             thumbnail.is_valid(raise_exception=True)
             thumbnail.save()
         if self.keep["pax_report"]:
-            ct = ContentType.objects.get(app_label="common", model="report")
+            ct = ContentType.objects.get(app_label="events", model="baseevent")
             data = {
                 "name": "Participants' Report",
                 "description": self.keep["pax_report"],
@@ -116,7 +118,7 @@ class ConversionEventSerializer(ConversionMixin, ModelSerializer):
             rel.is_valid(raise_exception=True)
             rel.save()
         if self.keep["organizer_report"]:
-            ct = ContentType.objects.get(app_label="common", model="report")
+            ct = ContentType.objects.get(app_label="events", model="baseevent")
             data = {
                 "name": "Organizers' Report",
                 "description": self.keep["organizer_report"],

@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/arpheno/eestecnet.svg?branch=green)](https://travis-ci.org/arpheno/eestecnet)
+[![Coverage Status](https://coveralls.io/repos/arpheno/eestecnet/badge.svg?branch=green&service=github)](https://coveralls.io/github/arpheno/eestecnet?branch=green)
 # EESTECNET
 
 ## Motivation
