@@ -8,10 +8,9 @@ sudo ln -sfn /vagrant/settings/etc/supervisor/gunicorn.conf /etc/supervisor/conf
 sudo rm -f /etc/nginx/sites-enabled/default
 sudo rm -f /etc/nginx/sites-enabled/eestec.conf
 sudo ln -sfn /vagrant/settings/etc/nginx/sites-enabled/eestec.conf /etc/nginx/sites-enabled -f
-sudo service nginx start
-sudo nginx -s reload
 cd /vagrant
-sudo pip install -r /vagrant/requirements.txt
+sudo apt-get -y install postgresql-server-dev-9.3 supervisor nginx memcached
+sudo pip install gunicorn psycopg2 python-memcached
 python manage.py makemigrations --settings=settings.deployment
 python manage.py migrate --settings=settings.deployment
 python manage.py collectstatic --noinput  --settings=settings.deployment

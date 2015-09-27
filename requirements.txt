@@ -25,6 +25,7 @@ django-mail-queue
 django-mptt
 django-polymorphic
 djangorestframework
+django-registration-rest-framework
 django-celery-email
 django-filter
 docutils
