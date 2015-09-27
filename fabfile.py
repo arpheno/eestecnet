@@ -23,5 +23,9 @@ def cleanup():
     local(r"find . -name '*.pyc' -delete")
 def test():
     apps = local('ls  -d -1 apps/*/', capture=True).split()
-    files = [app + "tests.py" for app in apps if not "legacy" in app]
-    local(r'coverage run --source . -m py.test -n 4 common/tests.py ' + " ".join(files))
+    files = [app + "tests.py" for app in apps]
+    local(r'py.test common/tests.py ' + " ".join(files))
+def coverage():
+    apps = local('ls  -d -1 apps/*/', capture=True).split()
+    files = [app + "tests.py" for app in apps]
+    local(r'coverage run --source . -m py.test common/tests.py ' + " ".join(files))

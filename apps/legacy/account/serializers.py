@@ -40,13 +40,13 @@ class ConversionAccountSerializer(ConversionMixin, ModelSerializer):
         "slug": None,
     }
     curriculum_vitae = Base64PdfField(
-        max_length=None, use_url=True,
+        max_length=None, use_url=True,allow_empty_file=True,allow_null=True,
     )
 
     def create(self, validated_data):
         result = super(ConversionAccountSerializer, self).create(validated_data)
         if self.keep["thumbnail"]:
-            ct = ContentType.objects.get(app_label="common", model="image")
+            ct = ContentType.objects.get(app_label="accounts", model="account")
             data = {
                 "full_size": self.keep["thumbnail"],
                 "content_object": result,

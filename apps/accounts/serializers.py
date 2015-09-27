@@ -19,6 +19,7 @@ ACCOUNT_EVENT = ['tshirt_size', 'allergies', 'food_preferences', 'passport_numbe
 class AccountSerializer(ModelSerializer):
     class Meta:
         model = Account
+    images = ImageSerializer(many=True, read_only=True)
 
 
 class UnprivilegedAccountSerializer(AccountSerializer):

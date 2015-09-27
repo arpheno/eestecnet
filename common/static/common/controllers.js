@@ -52,8 +52,9 @@ angular.module('eestec.common.controllers', [
             };
         }])
     .controller('appCtrl', [
-        '$scope', '$http', '$location', '$mdSidenav', 'Content',
-        function ($scope, $http, $location, $mdSidenav, Content) {
+        '$scope', '$http', '$location', '$mdSidenav', 'Content',"$q",
+        function ($scope, $http, $location, $mdSidenav, Content,$q) {
+            CONTENTLOADED=$q.defer();
             $scope.contents = Content.query(function () {
                 //var dict = {};
                 //for (var i = 0; i < $scope.contents.length; i++) {
@@ -75,6 +76,7 @@ angular.module('eestec.common.controllers', [
                     }
                     return result;
                 };
+                CONTENTLOADED.resolve();
             });
             $scope.edit = false;
             $scope.navigation = function (name) {

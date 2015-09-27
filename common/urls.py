@@ -8,6 +8,7 @@ from apps.accounts.urls import group_accountrouter
 from apps.accounts.urls import accountrouter
 from apps.announcements.urls import announcementrouter
 from apps.events.urls import eventrouter, package_router
+from apps.legacy.urls import legacyrouter
 from apps.prioritylists.urls import prioritylistrouter
 from apps.questionnaires.urls import questionnairerouter
 from apps.teams.urls import teamrouter
@@ -32,6 +33,7 @@ urlpatterns = patterns(
     url(r'^api/', include(announcementrouter.urls)),
     url(r'^api/', include(imagerouter.urls)),
     url(r'^api/', include(contentrouter.urls)),
+    url(r'^legacy/', include(legacyrouter.urls)),
 )
 # Orphans
 urlpatterns += patterns(

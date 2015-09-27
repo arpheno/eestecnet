@@ -60,16 +60,6 @@ def test_convert_legacy_models():
             serializer = ConversionEntrySerializer(data=event)
             serializer.is_valid(raise_exception=True)
             serializer.save()
-            # Fuck this shit with open('apps/legacy/account/account_dump.json',
-            # 'rU') as dump:
-            # accounts= ijson.items(dump,"item")
-            #    for account in accounts:
-            #        try:
-            #            serializer = ConversionAccountSerializer(data=account)
-            #            serializer.is_valid(raise_exception=True)
-            #        except:
-            #            print "Unexpected error:", sys.exc_info()[0]
-            #    assert 1==0
 
 
 @pytest.mark.django_db
@@ -78,7 +68,7 @@ def test_convert_account():
     with open('media/example.dat', 'wb') as cv:
         cv.write("LOL")
     with open('media/example.jpg', 'wb') as cv:
-        with open('media/images/0aa84e03-5f0.jpg', 'rb') as img:
+        with open('media/images/example.jpg', 'rb') as img:
             cv.write(img.read())
     object = LegacyAccountFactory.build(email="asdf@asdf.de")
     data = LegacyAccountSerializer(object).data
@@ -98,7 +88,7 @@ def test_convert_team():
     with open('media/example.dat', 'wb') as cv:
         cv.write("LOL")
     with open('media/example.jpg', 'wb') as cv:
-        with open('media/images/0aa84e03-5f0.jpg', 'rb') as img:
+        with open('media/images/example.jpg', 'rb') as img:
             cv.write(img.read())
     objects = [LegacyTeamFactory.build(category=c) for c in
                "observer", "lc", "jlc", "team", "department", "body"]

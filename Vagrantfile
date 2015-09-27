@@ -14,7 +14,6 @@ Vagrant.configure(2) do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "phusion-open-ubuntu-14.04-amd64"
   config.vm.box_url = "https://oss-binaries.phusionpassenger.com/vagrant/boxes/latest/ubuntu-14.04-amd64-vbox.box"
-  config.ssh.port = 2222
 
   config.vm.provision "fix-no-tty", type: "shell" do |s|
        s.privileged = false
@@ -24,19 +23,15 @@ Vagrant.configure(2) do |config|
     s.inline = "groupadd -f docker"
   end
   config.vm.provision :shell, :path => "settings/vagrant/bootstrap.sh"
-  config.vm.provision :shell, :path => "settings/vagrant/postgres.sh"
-  config.vm.provision :shell, :path => "settings/vagrant/deploy.sh"
+  config.vm.provision :shell, :path => "settings/vagrant/develop.sh"
   config.vm.provision :reload
-  config.vm.provision "docker", images: ["hopsoft/graphite-statsd"]
-  config.vm.provision "docker" do |d|
-    d.run "hopsoft/graphite-statsd",
-    args:"--name graphite -p 8005:80 -p 2003:2003 -p 8125:8125/udp -d"
-  end
   config.vm.provision "docker" do |d|
     d.run "selenium/standalone-chrome",
-    args:" -p 4444:4444 -v /dev/shm:/dev/shm"
+    args:" -p 4444:4444 -v /dev/shm:/dev/shm -d"
     d.run "hopsoft/graphite-statsd",
     args:"--name graphite -p 8005:80 -p 2003:2003 -p 8125:8125/udp -d"
+    d.run "sameersbn/postgresql",
+    args:"--name postgresql -e 'DB_USER=myapp' -e 'DB_NAME=myapp' -e 'DB_PASS=dbpass' -d"
   end
   config.vm.provision :shell, :path => "settings/vagrant/start.sh"
   config.vm.network "forwarded_port", guest: 80, host: 80
