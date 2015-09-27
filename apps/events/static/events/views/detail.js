@@ -8,7 +8,7 @@ angular.module('eestec.events.detail', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/events/:pk', {
-            templateUrl: 'static/events/detail.html',
+            templateUrl: 'static/events/views/details.html',
             controller: 'EventDetailCtrl'
         });
     }])

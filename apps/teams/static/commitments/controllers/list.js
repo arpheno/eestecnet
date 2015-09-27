@@ -12,9 +12,20 @@ angular.module('eestec.commitments.list', ['ngRoute',
             templateUrl: '/static/commitments/views/list.html',
             controller: 'CommitmentListController'
         });
+        $routeProvider.when('/cities/:id', {
+            templateUrl: '/static/commitments/views/detail.html',
+            controller: 'CommitmentController'
+        });
     }])
 
     .controller('CommitmentListController',[ "$scope","Commitment",function ($scope, Commitment) {
         $scope.commitments = Commitment.query();
         console.log($scope.commitments);
+    }])
+
+    .controller('CommitmentController',[ "$scope","Commitment", "$routeParams", "$log", function ($scope, Commitment, $routeParams, $log) {
+        $scope.test = $routeParams.id;
+        // $scope.commitments = Commitment.query();
+        console.log($scope.test);
+        $log.debug($scope.test);
     }]);
