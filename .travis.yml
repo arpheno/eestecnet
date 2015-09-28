@@ -5,10 +5,10 @@ python:
 services:
   - docker
 install:
+- docker run -d -p 127.0.0.1:4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
 - pip install -r requirements.txt
 - pip install fabric pytest-django pytest-xdist ijson coveralls coverage
 - python manage.py migrate
-- docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
 before_script:
 - python manage.py runserver 0.0.0.0:8000 &
 script:
