@@ -5,6 +5,7 @@ python:
 services:
   - docker
 install:
+- sudo service docker restart ; sleep 10
 - docker run -d -p 127.0.0.1:4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
 - pip install -r requirements.txt
 - pip install fabric pytest-django pytest-xdist ijson coveralls coverage
