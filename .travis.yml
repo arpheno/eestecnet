@@ -5,7 +5,7 @@ node_js:
 addons:
   apt:
     packages:
-    - npm
+    - nodejs
     - libjpeg-dev
     - zlib1g-dev
     - libpng12-dev
