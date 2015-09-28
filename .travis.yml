@@ -1,29 +1,14 @@
 language: python
-sudo: required
-node_js:
-  - "0.10"
-addons:
-  apt:
-    packages:
-    - libjpeg-dev
-    - zlib1g-dev
-    - libpng12-dev
+
 python:
 - 2.7
-services:
-  - docker
+
 install:
-- sudo service docker restart ; sleep 10
-- npm install -g protractor
-- docker run -d -p 127.0.0.1:4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
 - pip install -r requirements.txt
 - pip install fabric pytest-django pytest-xdist ijson coveralls coverage
 - python manage.py migrate
-before_script:
-- python manage.py runserver 0.0.0.0:8000 &
+
 script:
 - fab coverage
-- fab protractor
 after_success:
   coveralls
-
