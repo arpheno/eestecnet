@@ -25,7 +25,8 @@ angular.module('eestec.commitments.list', ['ngRoute',
 
     .controller('CommitmentController',[ "$scope","Commitment", "$routeParams", "$log", function ($scope, Commitment, $routeParams, $log) {
         $scope.test = $routeParams.id;
-        // $scope.commitments = Commitment.query();
-        console.log($scope.test);
-        $log.debug($scope.test);
+        $scope.commitments = Commitment.query(5);
+        console.log($scope.commitments);
+        // console.log($scope.test);
+        // $log.debug($scope.test);
     }]);

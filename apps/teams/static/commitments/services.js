@@ -7,7 +7,7 @@
 angular.module('eestec.commitments.services', ['ngResource'])
     .factory('Commitment', ['$resource',
         function ($resource) {
-            return $resource('/api/commitments/:pk', {pk: "@pk"},
-                {});
+            return $resource('/api/commitments/:pk/', {pk: "@pk"}, {});
+            // return $resource('/api/commitments/7/', {});
         }]);
 
