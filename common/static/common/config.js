@@ -3,7 +3,8 @@
  */
 angular.module('eestec.common.config', [
     'ngRoute',
-    'ngMaterial'
+    'ngMaterial',
+    'ngStorage'
 ])
     .config(["$resourceProvider", function ($resourceProvider) {
         $resourceProvider.defaults.actions = {
@@ -38,6 +39,23 @@ angular.module('eestec.common.config', [
     .config(["$httpProvider", function ($httpProvider) {
         $httpProvider.defaults.xsrfCookieName = 'csrftoken';
         $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+        $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function ($q, $location, $localStorage) {
+            return {
+                'request': function (config) {
+                    config.headers = config.headers || {};
+                    if ($localStorage.token) {
+                        config.headers.Authorization = 'JWT ' + $localStorage.token;
+                    }
+                    return config;
+                },
+                'responseError': function (response) {
+                    if (response.status === 401 || response.status === 403) {
+                        $location.path('/signin');
+                    }
+                    return $q.reject(response);
+                }
+            };
+        }]);
     }])
     .config(["$mdThemingProvider", function ($mdThemingProvider) {
         $mdThemingProvider.theme('default')

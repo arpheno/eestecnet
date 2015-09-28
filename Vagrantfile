@@ -14,12 +14,14 @@ Vagrant.configure(2) do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "phusion-open-ubuntu-14.04-amd64"
   config.vm.box_url = "https://oss-binaries.phusionpassenger.com/vagrant/boxes/latest/ubuntu-14.04-amd64-vbox.box"
-
+  config.vm.provider "virtualbox" do |v|
+      v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
+  end
   config.vm.provision "fix-no-tty", type: "shell" do |s|
        s.privileged = false
        s.inline = "sudo sed -i '/tty/!s/mesg n/tty -s \\&\\& mesg n/' /root/.profile"
-   end
-   config.vm.provision "shell" do |s|
+  end
+  config.vm.provision "shell" do |s|
     s.inline = "groupadd -f docker"
   end
   config.vm.provision :shell, :path => "settings/vagrant/bootstrap.sh"

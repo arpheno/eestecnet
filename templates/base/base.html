@@ -23,10 +23,7 @@
                        aria-label="Open sample menu">
                 <ng-md-icon icon="search"></ng-md-icon>
             </md-button>
-            <md-button class="md-icon-button" ng-click="showLogin()"
-                       aria-label="Login">
-                <ng-md-icon icon="account_box"></ng-md-icon>
-            </md-button>
+            <account user="user"></account>
             <md-button class="md-icon-button" id="sidenavbutton" ng-click="toggleSidenav('right')">
                 <ng-md-icon icon="menu"></ng-md-icon>
             </md-button>
@@ -38,7 +35,7 @@
     <md-tab label="What we do"></md-tab>
     <md-tab label="Get involved"></md-tab>
 </md-tabs>
-<md-content>
+<md-content ng-controller="contentController">
     <div ng-view class="view-animate"></div>
 </md-content>
 {% verbatim %}

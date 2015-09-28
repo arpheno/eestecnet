@@ -65,6 +65,7 @@ from django_statsd.urls import urlpatterns as statsd_patterns
 urlpatterns += patterns(
     '',
     url(r'^accounts_api/', include('registration_api.urls')),
+    url(r'^api-token-auth/', 'rest_framework_jwt.views.obtain_jwt_token'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^services/timing/', include(statsd_patterns)),
     url(r'^admin/', include(admin.site.urls)),

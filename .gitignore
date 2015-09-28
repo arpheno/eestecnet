@@ -21,5 +21,6 @@ bower_components/
 tmp
 .DS_Store
 app/jspm_packages
+*.pyc
 
 apps/legacy/account/account_dump.json
