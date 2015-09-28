@@ -25,8 +25,8 @@ angular.module('eestec.common.controllers', [
         });
     }])
     .controller('toolbarController', [
-        "$scope", "$location", "$mdDialog","$mdSidenav",
-        function ($scope, $location, $mdDialog,$mdSidenav) {
+        "$scope", "$location", "$mdDialog", "$mdSidenav", "$http",
+        function ($scope, $location, $mdDialog, $mdSidenav, $http) {
             $scope.navigation = function (name) {
                 $location.path(name).replace();
                 console.log($location);
@@ -34,34 +34,17 @@ angular.module('eestec.common.controllers', [
             $scope.toggleSidenav = function (name) {
                 $mdSidenav(name).toggle();
             };
-            $scope.showLogin = function (ev) {
-                $mdDialog.show({
-                    controller: ["$scope", "$mdDialog", function ($scope, $mdDialog) {
-                        $scope.hide = $mdDialog.hide;
-                        $scope.cancel = $mdDialog.cancel;
-                        $scope.answer = function (answer) {
-                            $mdDialog.hide(answer);
-                        };
-                    }],
-                    templateUrl: '/static/common/login.html',
-                    parent: angular.element(document.body),
-                    targetEvent: ev,
-                    clickOutsideToClose: true,
-                    escapeToClose: true
-                })
-            };
         }])
     .controller('appCtrl', [
-        '$scope', '$http', '$location', '$mdSidenav', 'Content',"$q",
-        function ($scope, $http, $location, $mdSidenav, Content,$q) {
-            CONTENTLOADED=$q.defer();
+        '$scope',
+        function ($scope) {
+            $scope.user = "";
+        }])
+    .controller('contentController', [
+        '$scope', 'Content', "$q",
+        function ($scope, Content, $q) {
+            CONTENTLOADED = $q.defer();
             $scope.contents = Content.query(function () {
-                //var dict = {};
-                //for (var i = 0; i < $scope.contents.length; i++) {
-                //    dict[$scope.contents[i].name] = $scope.contents[i];
-                //}
-                //$scope.contents = dict;
-                //console.log($scope.contents);
                 $scope.content = function (name) {
                     var result = $scope.contents.filter(function (x) {
                         return x.name === name;
@@ -79,8 +62,4 @@ angular.module('eestec.common.controllers', [
                 CONTENTLOADED.resolve();
             });
             $scope.edit = false;
-            $scope.navigation = function (name) {
-                $location.path(name).replace();
-                console.log($location);
-            };
         }]);

@@ -16,7 +16,9 @@
     "install": "~1.0.4",
     "angular-sanitize": "~1.4.1",
     "angular-google-maps": "~2.1.5",
-    "ng-messages": "*"
+    "ng-messages": "*",
+    "ngstorage": "~0.3.9",
+    "angularLocalStorage": "ngStorage#~0.3.0"
   },
   "devDependencies": {},
   "resolutions": {

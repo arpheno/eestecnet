@@ -1,0 +1,19 @@
+<md-button class="md-icon-button" ng-click="showLogin()"
+           aria-label="Login" ng-show="!user">
+    <ng-md-icon icon="account_box"></ng-md-icon>
+</md-button>
+<md-menu ng-show="user">
+    <!-- Trigger element is a md-button with an icon -->
+    <md-button class="md-icon-button" aria-label="Manage your Account" ng-click="$mdOpenMenu($event)">
+        <ng-md-icon icon="account_box"></ng-md-icon>
+        <!-- This is a hack because ng-md expects us to have an md-icon here but we use ng-md-icon-->
+        <md-icon md-svg-icon="call:phone" style="display:none;"></md-icon>
+    </md-button>
+    <md-menu-content>
+        {{ user.email }}
+        {{ user.first_name }} {{ user.last_name }}
+        <md-menu-item>
+            <md-button ng-click="logout()">Log Out</md-button>
+        </md-menu-item>
+    </md-menu-content>
+</md-menu>

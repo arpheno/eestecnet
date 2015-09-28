@@ -1,3 +1,4 @@
+from fabric.context_managers import lcd
 from fabric.operations import local
 
 __author__ = 'swozn'
@@ -18,7 +19,11 @@ def remove_migrations():
         local('rm common/migrations/0*')
     except:
         pass
-
+def selenium():
+    local(r"docker run --name selenium -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome")
+def protractor():
+    with lcd("settings/protractor"):
+        local(r"protractor conf.js")
 def cleanup():
     local(r"find . -name '*.pyc' -delete")
 def test():

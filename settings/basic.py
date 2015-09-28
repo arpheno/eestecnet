@@ -20,6 +20,7 @@ INSTALLED_APPS += (
     'registration_api',
     'debug_toolbar',
     'django_statsd',
+    'rest_framework_jwt',
 )
 INSTALLED_APPS += ("djcelery_email",)
 # Own apps

@@ -2,13 +2,18 @@ language: python
 
 python:
 - 2.7
-
+services:
+  - docker
 install:
 - pip install -r requirements.txt
 - pip install fabric pytest-django pytest-xdist ijson coveralls coverage
 - python manage.py migrate
-
+- docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome
+before_script:
+- python manage.py runserver 0.0.0.0:8000 &
 script:
 - fab coverage
+- fab protractor
 after_success:
   coveralls
+

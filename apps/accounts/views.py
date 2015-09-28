@@ -1,4 +1,8 @@
-from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
+import json
+from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
+from rest_framework.decorators import list_route
+from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly, AllowAny
 from rest_framework.viewsets import ModelViewSet
 
 from apps.accounts.models import Account, Participation
@@ -23,7 +27,10 @@ class AccountViewSet(ModelViewSet):
             return AccountSerializer
         else:
             return UnprivilegedAccountSerializer
-
+    @list_route()
+    def me(self,request):
+        self.kwargs["pk"]=self.request.user.id
+        return super(AccountViewSet, self).retrieve(request,pk=self.request.user.id)
     def list(self, request):
         self.queryset = self.queryset
         return super(AccountViewSet, self).list(request)
@@ -31,6 +38,8 @@ class AccountViewSet(ModelViewSet):
     def retrieve(self, request, pk=None, group_pk=None):
         self.object = self.queryset.get(pk=pk, groups=group_pk)
         return super(AccountViewSet, self).retrieve(request)
+
+
 
 class MembershipViewSet(ModelViewSet):
     queryset = Participation.objects.all()
