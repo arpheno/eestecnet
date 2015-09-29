@@ -16,7 +16,4 @@ eventrouter.register(r'exchanges', ExchangeViewSet)
 eventrouter.register(r'workshops', WorkshopViewSet)
 eventrouter.register(r'travel', TravelViewSet)
 
-package_router = routers.NestedSimpleRouter(eventrouter, r'events', lookup='event')
 
-
-package_router.register(r'groups', GroupViewSet)

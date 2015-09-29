@@ -239,7 +239,7 @@ class Participation(Confirmable):
 
     def get_absolute_url(self):
         return reverse('participation-detail',
-                       kwargs={'pk': self.pk, 'group_pk': self.group.pk})
+                       kwargs={'pk': self.pk})
 
     @property
     def application(self):

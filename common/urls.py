@@ -3,11 +3,10 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.views.generic import RedirectView, TemplateView
 
-from apps.accounts.urls import grouprouter, group_participationrouter, membershiprouter
-from apps.accounts.urls import group_accountrouter
+from apps.accounts.urls import grouprouter,  membershiprouter
 from apps.accounts.urls import accountrouter
 from apps.announcements.urls import announcementrouter
-from apps.events.urls import eventrouter, package_router
+from apps.events.urls import eventrouter
 from apps.legacy.urls import legacyrouter
 from apps.prioritylists.urls import prioritylistrouter
 from apps.questionnaires.urls import questionnairerouter
@@ -22,10 +21,7 @@ urlpatterns = patterns(
     url('^', include('django.contrib.auth.urls')),
     url(r'^api/', include(eventrouter.urls)),
     url(r'^api/', include(teamrouter.urls)),
-    url(r'^api/', include(package_router.urls)),
     url(r'^api/', include(grouprouter.urls)),
-    url(r'^api/', include(group_accountrouter.urls)),
-    url(r'^api/', include(group_participationrouter.urls)),
     url(r'^api/', include(accountrouter.urls)),
     url(r'^api/', include(membershiprouter.urls)),
     url(r'^api/', include(questionnairerouter.urls)),
