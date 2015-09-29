@@ -36,7 +36,7 @@ class AccountViewSet(ModelViewSet):
         return super(AccountViewSet, self).list(request)
 
     def retrieve(self, request, pk=None, group_pk=None):
-        self.object = self.queryset.get(pk=pk, groups=group_pk)
+        self.object = self.queryset.get(pk=pk)
         return super(AccountViewSet, self).retrieve(request)
 
 

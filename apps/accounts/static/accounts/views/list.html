@@ -1,0 +1,12 @@
+<md-grid-list md-cols="8" md-row-height="1:1" style="flex:1 1 100%;">
+    <md-grid-tile ng-repeat="object in object_list" md-rowspan="2" md-colspan="2">
+        <md-grid-tile-header>
+            {{ object.first_name }}{{ object.last_name }}
+        </md-grid-tile-header>
+        <a ng-href="/people/{{ object.id }}/">{{ object.images[0].full_size }}</a>
+        <md-grid-tile-footer>
+            Nothing yet
+        </md-grid-tile-footer>
+    </md-grid-tile>
+</md-grid-list>
+

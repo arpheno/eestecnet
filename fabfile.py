@@ -19,8 +19,12 @@ def remove_migrations():
         local('rm common/migrations/0*')
     except:
         pass
+def graphite():
+    local(r"docker run --name graphite -p 8005:80 -p 2003:2003 -p 8125:8125/udp -d hopsoft/graphite-statsd")
 def selenium():
     local(r"docker run --name selenium -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome")
+def postgresql():
+    local(r"docker run  --name postgresql -e 'DB_USER=myapp' -e 'DB_NAME=myapp' -e 'DB_PASS=dbpass' -d sameersbn/postgresql")
 def protractor():
     with lcd("settings/protractor"):
         local(r"protractor conf.js")
