@@ -10,9 +10,5 @@ import logging
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
-teamrouter = routers.SimpleRouter()
-teamrouter.register(r'teams', BaseTeamViewSet)
-teamrouter.register(r'commitments', CommitmentViewSet)
-teamrouter.register(r'internationalteams', InternationalTeamViewSet)
 
 
