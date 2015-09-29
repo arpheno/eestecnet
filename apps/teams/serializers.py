@@ -4,7 +4,7 @@ from rest_framework.fields import CurrentUserDefault
 from rest_framework.serializers import ModelSerializer
 
 from apps.teams.models import BaseTeam, InternationalTeam, Commitment
-
+from common.serializers import ImageSerializer
 
 __author__ = 'Sebastian Wozny'
 import logging
@@ -15,6 +15,7 @@ class TeamSerializer(ModelSerializer):
     class Meta:
         model = BaseTeam
 
+    images = ImageSerializer(many=True, read_only=True)
     owner = HiddenField(
         default=CurrentUserDefault()
     )

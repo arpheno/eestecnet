@@ -34,7 +34,7 @@ class BaseEvent(Applicable, Reversable, NameMixin, DescriptionMixin):
     deadline = DateTimeField(null=True, blank=True)
     organizing_committee = ManyToManyField(BaseTeam, related_name="events", null=True,blank=True)
     start_date = DateField()
-    end_date = DateField()
+    end_date = DateField(null=True,blank=True)
 
     @property
     def location(self):
@@ -53,6 +53,8 @@ class BaseEvent(Applicable, Reversable, NameMixin, DescriptionMixin):
         Official participants and organizers. Organizers need the right to modify the
         event.
         """
+        info = "Saving Event: "+self.name
+        logger.info(info)
         if self.pk:
             result = super(BaseEvent, self).save(**kwargs)
         else:
@@ -86,7 +88,7 @@ class IMW(BaseEvent):
 
 class Exchange(BaseEvent):
     """ Exchanges as defined in the ROP ."""
-    participation_fee = IntegerField()
+    participation_fee = IntegerField(default=0)
 
 
 class Training(BaseEvent):

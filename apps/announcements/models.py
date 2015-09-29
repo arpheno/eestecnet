@@ -32,6 +32,8 @@ class Announcement(Confirmable, Reversable, NameMixin, DescriptionMixin):
     important = BooleanField(default=False)
 
     def save(self, *args, **kwargs):
+        info = "Saving News: "+self.name
+        logger.info(info)
         if not self.pk:
             result = super(Announcement, self).save()
 
