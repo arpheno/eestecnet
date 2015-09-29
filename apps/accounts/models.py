@@ -35,7 +35,7 @@ class Group(auth.models.Group):
     applicable = ForeignKey('common.Applicable')
     objects = GroupManager()
     test = CharField(default="LOL", max_length=100)
-    fee = IntegerField(default=0)
+    fee = IntegerField(default=0,null=True)
     max_participants = IntegerField(default=0)
     def __unicode__(self):
         return self.name
@@ -151,7 +151,7 @@ class Account(GuardianUserMixin, AbstractAccount, AbstractBaseUser, DescriptionM
         return self.first_name
 
     def get_full_name(self):
-        return self.last_name
+        return self.first_name +self.last_name
 
     @property
     def commitment(self):
@@ -160,6 +160,11 @@ class Account(GuardianUserMixin, AbstractAccount, AbstractBaseUser, DescriptionM
 
     def get_absolute_url(self):
         return reverse('account-detail', kwargs={'pk': self.pk})
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        info = "Saving Account: "+self.get_full_name()
+        logger.info(info)
+        return super(Account, self).save(force_insert,force_update,using,update_fields)
 
     # Personal information
     first_name = CharField(max_length=30)
@@ -214,8 +219,8 @@ class Participation(Confirmable):
     def save(self, **kwargs):
         if not self.pk:
             result = super(Participation, self).save(**kwargs)
-            info = "A new participation has been created for user %s to group %s", \
-                   self.user.get_full_name(), self.group.name
+            info = "A new participation has been created for user" \
+                   +self.user.get_full_name()+" to group "+ self.group.name
             logger.info(info)
             from apps.events.models import ParticipationConfirmation
 

@@ -92,7 +92,7 @@ class Base64ImageField(serializers.ImageField):
     """
 
     def to_representation(self, value):
-        with open(value.path, "rb") as image_file:
+        with open(value.path.encode("utf-8"), "rb") as image_file:
             value = base64.b64encode(image_file.read())
         return value
     def to_internal_value(self, data):
