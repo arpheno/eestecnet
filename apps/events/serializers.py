@@ -17,45 +17,41 @@ EVENT_PUBLIC = ["pk", "images", "name", "organizing_committee"
 EVENT_LIST = ["pk", "images", "name", "organizing_committee"]
 
 
+def detail_public_factory(mdl):
+    class DetailPublic(ModelSerializer):
+        class Meta:
+            model = mdl
+            fields = EVENT_PUBLIC
+
+        images = ImageSerializer(many=True, read_only=True)
+        participants = UnprivilegedAccountSerializer(many=True, read_only=True)
+        urls = URLSerializer(many=True, read_only=True)
+    return DetailPublic
+def detail_factory(mdl):
+    class DetailSerializer(ModelSerializer):
+        class Meta:
+            model = mdl
+        owner = HiddenField(default=CurrentUserDefault())
+        reports = ReportSerializer(many=True, read_only=True)
+        images = ImageSerializer(many=True, read_only=True)
+        group_set = GroupSerializer(many=True, read_only=True)
+    return DetailSerializer
+
+def list_factory(mdl):
+    class ListSerializer(ModelSerializer):
+        class Meta:
+            model = mdl
+            fields = EVENT_LIST
+
+        images = ImageSerializer(many=True, read_only=True)
+    return ListSerializer
 class Detail(ModelSerializer):
     class Meta:
         model = BaseEvent
-
     owner = HiddenField(default=CurrentUserDefault())
     reports = ReportSerializer(many=True, read_only=True)
     images = ImageSerializer(many=True, read_only=True)
     group_set = GroupSerializer(many=True, read_only=True)
-
-
-class DetailPublic(ModelSerializer):
-    class Meta:
-        model = BaseEvent
-        fields = EVENT_PUBLIC
-
-    images = ImageSerializer(many=True, read_only=True)
-    participants = UnprivilegedAccountSerializer(many=True, read_only=True)
-    urls = URLSerializer(many=True, read_only=True)
-class EventListSerializer(ModelSerializer):
-    class Meta:
-        model = BaseEvent
-        fields = EVENT_LIST
-
-    images = ImageSerializer(many=True, read_only=True)
-
-
-class ExchangeSerializer(Detail):
-    class Meta:
-        model = Exchange
-
-
-class TrainingSerializer(Detail):
-    class Meta:
-        model = Training
-
-
-class WorkshopSerializer(Detail):
-    class Meta:
-        model = Workshop
 
 
 class TravelSerializer(ModelSerializer):

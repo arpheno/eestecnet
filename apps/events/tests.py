@@ -7,8 +7,8 @@ from rest_framework.renderers import JSONRenderer
 
 from apps.accounts.factories import ParticipationFactory, AccountFactory
 from apps.accounts.models import Account
-from apps.events.serializers import Detail, ExchangeSerializer, \
-    TrainingSerializer, WorkshopSerializer, TravelSerializer
+from apps.events.models import Exchange, Training, Workshop
+from apps.events.serializers import Detail, detail_factory, TravelSerializer
 from apps.events.factories import BaseEventFactory, ParticipationConfirmationFactory, \
     ExchangeFactory, TrainingFactory, WorkshopFactory, WorkshopParticipationFactory, \
     TravelFactory
@@ -123,21 +123,21 @@ class TestParticipationConfirmation(TestCase):
 class TestExchange(RESTCase, TestCase, AuditCase):
     def setUp(self):
         self.object = ExchangeFactory()
-        self.serializer_class = ExchangeSerializer
+        self.serializer_class = detail_factory(Exchange)
         super(TestExchange, self).setUp()
 
 
 class TestTraining(RESTCase, TestCase, AuditCase):
     def setUp(self):
         self.object = TrainingFactory()
-        self.serializer_class = TrainingSerializer
+        self.serializer_class = detail_factory(Training)
         super(TestTraining, self).setUp()
 
 
 class TestWorkshop(RESTCase, TestCase, AuditCase):
     def setUp(self):
         self.object = WorkshopFactory()
-        self.serializer_class = WorkshopSerializer
+        self.serializer_class = detail_factory(Workshop)
         super(TestWorkshop, self).setUp()
 
     def test_organizers_can_modify_event(self):
