@@ -11,16 +11,17 @@ import logging
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
-EVENT_PUBLIC = ["pk","images","name","description","urls","start_date","end_date","deadline","participants"]
-EVENT_LIST = ["pk","images","name"]
+EVENT_PUBLIC = ["pk", "images", "name", "organizing_committee"
+    , "description", "urls", "start_date"
+    , "end_date", "deadline", "participants"]
+EVENT_LIST = ["pk", "images", "name", "organizing_committee"]
+
 
 class Detail(ModelSerializer):
     class Meta:
         model = BaseEvent
 
-    owner = HiddenField(
-        default=CurrentUserDefault()
-    )
+    owner = HiddenField(default=CurrentUserDefault())
     reports = ReportSerializer(many=True, read_only=True)
     images = ImageSerializer(many=True, read_only=True)
     group_set = GroupSerializer(many=True, read_only=True)
@@ -30,9 +31,16 @@ class DetailPublic(ModelSerializer):
     class Meta:
         model = BaseEvent
         fields = EVENT_PUBLIC
+
     images = ImageSerializer(many=True, read_only=True)
-    participants = UnprivilegedAccountSerializer(many=True,read_only=True)
-    urls = URLSerializer(many=True,read_only=True)
+    participants = UnprivilegedAccountSerializer(many=True, read_only=True)
+    urls = URLSerializer(many=True, read_only=True)
+class EventListSerializer(ModelSerializer):
+    class Meta:
+        model = BaseEvent
+        fields = EVENT_LIST
+
+    images = ImageSerializer(many=True, read_only=True)
 
 
 class ExchangeSerializer(Detail):

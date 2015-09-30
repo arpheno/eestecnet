@@ -50,6 +50,13 @@ def test_public_serializer(input, expected):
     response = client.get(reverse_lazy("baseevent-detail",kwargs={"pk":baseline.pk}))
     data = json.loads(response.content)
     assert expected == ("group_set" in data)
+@pytest.mark.django_db
+def test_list_serializer():
+    baseline = BaseEventFactory.create()
+    client = eestecer()
+    response = client.get(reverse_lazy("baseevent-list"))
+    data = json.loads(response.content)[0]
+    assert all(["pk" in data,"images" in data, "name" in data,"organizing_committee" in data])
 
 class TestBaseEvent(RESTCase, TestCase, AuditCase, ImageCase):
     def setUp(self):
