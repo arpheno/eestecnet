@@ -1,32 +1,40 @@
+import json
 import urllib2
 
 __author__ = 'swozn'
 OLDHOST = "http://localhost:8010"
 NEWHOST = "http://localhost:8000"
-CHUNK_SIZE = 1 # dont change this motherfucker
+CHUNK_SIZE = 1  # dont change this motherfucker
 
 
-def accounts(host, chunksize, start):
-    base = host + "/legacy/accounts"
+
+def resource(host, start, point):
+    base = host + "/legacy/" + point
     while True:
-        url = base+"?limit="+str(chunksize)+"&offset="+str(start)
-        response= urllib2.urlopen(url).read()
-        response=response[response.find("result"):]
-        response=response[response.find("{"):response.find("}")+1]
-        yield response
-        start+=1
+        url = base + "?limit=1"+ "&offset=" + str(start)
+        response = json.loads(urllib2.urlopen(url).read())
+        result= response["results"]
+        if not result:
+            raise StopIteration
+        yield result[0]
+        start += 1
 
-def send_account(host,data):
-    url=host+"/legacy/accounts/"
-    req = urllib2.Request(url, data, {'Content-Type': 'application/json'})
+
+def send(host, data,point):
+    url = host + "/legacy/"+point+"/"
+    req = urllib2.Request(url, json.dumps(data), {'Content-Type': 'application/json'})
     try:
         f = urllib2.urlopen(req)
     except urllib2.HTTPError as e:
-        # import pdb;pdb.set_trace()
         pass
+        #print data
+        # import pdb;pdb.set_trace()
+
 
 if __name__ == "__main__":
-    test = accounts(OLDHOST,5,0)
-    for account in test:
-        send_account(NEWHOST,account)
-
+    # test = accounts(OLDHOST,5,0)
+    # for account in test:
+    #     send_account(NEWHOST,account)
+    for point in ["teams","events","entries"]:
+        for res in resource(OLDHOST, 0,point):
+            send(NEWHOST, res,point)

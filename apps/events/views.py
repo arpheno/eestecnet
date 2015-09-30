@@ -39,20 +39,6 @@ class GroupViewSet(ModelViewSet):
     serializer_class = GroupSerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
-    def list(self, request, event_pk=None):
-        if event_pk:
-            self.queryset = self.queryset.filter(applicable=event_pk)
-        else:
-            pass
-        return super(GroupViewSet, self).list(request)
-
-    def retrieve(self, request, pk=None, event_pk=None):
-        if event_pk:
-            self.object = self.queryset.get(pk=pk, applicable=event_pk)
-        else:
-            self.object = self.queryset.get(pk=pk)
-        return super(GroupViewSet, self).retrieve(request)
-
 
 class TravelViewSet(ModelViewSet):
     queryset = Travel.objects.all()
