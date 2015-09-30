@@ -171,23 +171,6 @@ class ContentOutSerializer(ModelSerializer):
 
     images = ImageURLSerializer(many=True)
 
-    def update(self, instance, validated_data):
-        images = validated_data.pop('images')
-        images = [ImageSerializer(data=image) for image in images]
-        import pdb;
-
-        pdb.set_trace()
-        instance.images = [Image.objects.create(**img) for img in images]
-        return super(ContentOutSerializer, self).update(instance, validated_data)
-
-    def create(self, validated_data):
-        images = validated_data.pop('images')
-        instance = Content.objects.create(**validated_data)
-        instance.save()
-        print images
-        instance.images = [Image.objects.create(**img) for img in images]
-        return instance
-
 class URLSerializer(ModelSerializer):
     class Meta:
         model = URL

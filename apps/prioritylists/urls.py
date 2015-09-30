@@ -9,7 +9,4 @@ import logging
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
-prioritylistrouter = routers.SimpleRouter()
-prioritylistrouter.register(r'prioritylists', PriorityListViewSet)
-prioritylistrouter.register(r'priorities', PriorityViewSet)
 
