@@ -37,4 +37,4 @@ def test():
 def coverage():
     apps = local('ls  -d -1 apps/*/', capture=True).split()
     files = [app + "tests.py" for app in apps]
-    local(r'coverage run --omit="apps/legacy/**" --source . -m py.test common/tests.py ' + " ".join(files))
+    local(r'coverage run --omit="fabfile.py,settings/**,apps/legacy/**" --source . -m py.test common/tests.py ' + " ".join(files))
