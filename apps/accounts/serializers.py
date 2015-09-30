@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 
-ACCOUNT_PUBLIC = ['first_name', 'middle_name', 'last_name', 'second_last_name', 'images']
+ACCOUNT_PUBLIC = ['id','first_name', 'middle_name', 'last_name', 'second_last_name', 'images']
 ACCOUNT_EVENT = ['tshirt_size', 'allergies', 'food_preferences', 'passport_number',
                  'mobile']
 class AccountSerializer(ModelSerializer):

@@ -11,5 +11,4 @@ sudo pip install -r /vagrant/requirements.txt
 sudo apt-get -y install postgresql-server-dev-9.3 supervisor nginx memcached
 cd /vagrant
 bower install --allow-root
-npm install grunt
 sudo service supervisor restart

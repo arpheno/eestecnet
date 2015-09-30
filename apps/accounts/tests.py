@@ -103,10 +103,6 @@ class TestGroup(RESTCase, TestCase):
         self.serializer_class = GroupSerializer
         super(TestGroup, self).setUp()
 
-    def test_get_group_nested(self):
-        url = reverse('group-detail', kwargs={'event_pk': self.object.applicable.pk,
-                                              'pk': self.object.pk})
-        self.assert_retrieve(url)
 
 
 class TestParticipation(RESTCase, TestCase):

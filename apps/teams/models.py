@@ -27,6 +27,8 @@ class BaseTeam(Applicable, Reversable, NameMixin, DescriptionMixin):
         When an Event is first created two groups should always be created:
         Official participants and organizers. Organizers need the right to modify the event.
         """
+        info = "Saving Team: "+self.name
+        logger.info(info)
         if self.pk:
             result = super(BaseTeam, self).save(**kwargs)
         else:

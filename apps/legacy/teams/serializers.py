@@ -3,6 +3,7 @@ from rest_framework.serializers import ModelSerializer
 
 from apps.accounts.factories import AccountFactory
 from apps.legacy.account.serializers import ConversionMixin
+from apps.legacy.news.serializers import ConversionMembershipSerializer
 from apps.legacy.teams.models import Team
 from apps.teams.models import BaseTeam, InternationalBody, InternationalTeam, \
     InternationalDepartment, Commitment
@@ -60,18 +61,29 @@ class ConversionTeamSerializer(ConversionMixin, ModelSerializer):
         result.owner = AccountFactory()
         result.name = result.name.lower()
         result.save()
-
-        ct = ContentType.objects.get(app_label="common", model="image")
-        data = {
-            "full_size": self.keep["thumbnail"],
-            "content_object": result,
-            "content_type": ct.pk,
-            "object_id": result.pk}
-        thumbnail = ImageSerializer(data=data)
-        thumbnail.is_valid(raise_exception=True)
-        thumbnail.save()
+        ct = result.polymorphic_ctype
+        if self.keep["thumbnail"]:
+            data = {
+                "full_size": self.keep["thumbnail"],
+                "content_object": result,
+                "content_type": ct.pk,
+                "object_id": result.pk}
+            thumbnail = ImageSerializer(data=data)
+            thumbnail.is_valid(raise_exception=True)
+            thumbnail.save()
+        if self.keep["users"]:
+            for user in self.keep["users"]:
+                data = {
+                    "user": user,
+                    "team": result.name,
+                }
+                c = ConversionMembershipSerializer(data=data)
+                try:
+                    c.is_valid(raise_exception=True)
+                except:
+                    import pdb;pdb.set_trace()
+                c.save()
         if self.keep["facebook"]:
-            ct = ContentType.objects.get(app_label="common", model="url")
             data = {
                 "url": self.keep["facebook"],
                 "name": "facebook",
@@ -82,7 +94,6 @@ class ConversionTeamSerializer(ConversionMixin, ModelSerializer):
             facebook.is_valid(raise_exception=True)
             facebook.save()
         if self.keep["website"]:
-            ct = ContentType.objects.get(app_label="common", model="url")
             data = {
                 "url": self.keep["website"],
                 "name": "website",
@@ -94,7 +105,6 @@ class ConversionTeamSerializer(ConversionMixin, ModelSerializer):
             website.save()
         try:
             for image in self.keep["images"]:
-                ct = ContentType.objects.get(app_label="common", model="image")
                 data = {
                     "full_size": image["image"],
                     "content_object": result,
