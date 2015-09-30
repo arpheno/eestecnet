@@ -33,7 +33,7 @@ def cleanup():
 def test():
     apps = local('ls  -d -1 apps/*/', capture=True).split()
     files = [app + "tests.py" for app in apps]
-    local(r'py.test common/tests.py ' + " ".join(files))
+    local(r'py.test -n 4 common/tests.py ' + " ".join(files))
 def coverage():
     apps = local('ls  -d -1 apps/*/', capture=True).split()
     files = [app + "tests.py" for app in apps]

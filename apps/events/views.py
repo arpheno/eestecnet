@@ -4,8 +4,8 @@ from rest_framework.viewsets import ModelViewSet
 from apps.accounts.models import Group
 from apps.accounts.serializers import GroupSerializer
 from apps.events.models import BaseEvent, Training, Exchange, Workshop, Travel
-from apps.events.serializers import BaseEventSerializer, TrainingSerializer, \
-    ExchangeSerializer, WorkshopSerializer, TravelSerializer
+from apps.events.serializers import Detail, TrainingSerializer, \
+    ExchangeSerializer, WorkshopSerializer, TravelSerializer, DetailPublic
 
 __author__ = 'Sebastian Wozny'
 import logging
@@ -16,7 +16,10 @@ logger = logging.getLogger(__name__)
 class EventViewSet(ModelViewSet):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
     queryset = BaseEvent.objects.all()
-    serializer_class = BaseEventSerializer
+    def get_serializer_class(self):
+        if self.request.user.is_superuser:
+            return Detail
+        return DetailPublic
 
 
 class TrainingViewSet(EventViewSet):
@@ -38,20 +41,6 @@ class GroupViewSet(ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
-
-    def list(self, request, event_pk=None):
-        if event_pk:
-            self.queryset = self.queryset.filter(applicable=event_pk)
-        else:
-            pass
-        return super(GroupViewSet, self).list(request)
-
-    def retrieve(self, request, pk=None, event_pk=None):
-        if event_pk:
-            self.object = self.queryset.get(pk=pk, applicable=event_pk)
-        else:
-            self.object = self.queryset.get(pk=pk)
-        return super(GroupViewSet, self).retrieve(request)
 
 
 class TravelViewSet(ModelViewSet):
