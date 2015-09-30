@@ -31,13 +31,6 @@ class AccountViewSet(ModelViewSet):
     def me(self,request):
         self.kwargs["pk"]=self.request.user.id
         return super(AccountViewSet, self).retrieve(request,pk=self.request.user.id)
-    def list(self, request):
-        self.queryset = self.queryset
-        return super(AccountViewSet, self).list(request)
-
-    def retrieve(self, request, pk=None, group_pk=None):
-        self.object = self.queryset.get(pk=pk)
-        return super(AccountViewSet, self).retrieve(request)
 
 
 
@@ -48,13 +41,4 @@ class MembershipViewSet(ModelViewSet):
         if self.request.method.lower() == "get":
             return ReadParticipationSerializer
         return ParticipationSerializer
-    def list(self, request, group_pk=None):
-        if group_pk:
-            self.queryset = self.queryset.filter(groups=group_pk)
-        else:
-            pass
-        return super(MembershipViewSet, self).list(request)
 
-    def retrieve(self, request, pk=None, group_pk=None):
-        self.object = self.queryset.get(pk=pk)
-        return super(MembershipViewSet, self).retrieve(request)
