@@ -5,8 +5,9 @@
 'use strict';
 
 angular.module('eestec.events', [
-    'ngRoute',
     'eestec.events.detail',
+    'eestec.events.create',
+    'eestec.events.services',
     'eestec.events.list'
 ]);
 

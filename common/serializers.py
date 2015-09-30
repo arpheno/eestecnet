@@ -38,13 +38,13 @@ class Base64PdfField(serializers.FileField):
     Updated for Django REST framework 3.
     """
 
-    def to_representation(self, value):
-        try:
-            with open(value.path, "rb") as image_file:
-                value = base64.b64encode(image_file.read())
-            return value
-        except ValueError:
-            return None
+    # def to_representation(self, value):
+    #     try:
+    #         with open(value.path, "rb") as image_file:
+    #             value = base64.b64encode(image_file.read())
+    #         return value
+    #     except ValueError:
+    #         return None
 
     def to_internal_value(self, data):
         from django.core.files.base import ContentFile
@@ -91,10 +91,10 @@ class Base64ImageField(serializers.ImageField):
     Updated for Django REST framework 3.
     """
 
-    def to_representation(self, value):
-        with open(value.path.encode("utf-8"), "rb") as image_file:
-            value = base64.b64encode(image_file.read())
-        return value
+    # def to_representation(self, value):
+    #     with open(value.path.encode("utf-8"), "rb") as image_file:
+    #         value = base64.b64encode(image_file.read())
+    #     return value
     def to_internal_value(self, data):
         from django.core.files.base import ContentFile
         import base64

@@ -1,4 +1,4 @@
-from rest_framework.fields import HiddenField, CurrentUserDefault
+from rest_framework.fields import HiddenField, CurrentUserDefault, IntegerField
 from rest_framework.serializers import ModelSerializer
 
 from apps.accounts.serializers import GroupSerializer

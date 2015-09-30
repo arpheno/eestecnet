@@ -7,5 +7,7 @@
 angular.module('eestec.events.services', ['ngResource'])
     .factory('Event', ['$resource',
         function ($resource) {
-            return $resource('/api/events/:pk', {pk: "@pk"}, {});
+            return $resource('/api/events/:pk/', {pk: "@pk"},
+                {});
         }]);
+
