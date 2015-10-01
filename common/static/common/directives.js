@@ -12,6 +12,7 @@ angular.module('eestec.common.directives', [
                 var resource = new $scope.resource;
                 $scope.fields = resource.$options(function (value) {
                     $scope.fields = value.actions.POST;
+                    console.log($scope.fields);
                     $scope.headline = value.name.split(" ");
                     $scope.headline.pop();
                     $scope.headline = $scope.headline.join(" ");

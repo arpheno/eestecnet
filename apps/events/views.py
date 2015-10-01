@@ -3,7 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from apps.accounts.models import Group
 from apps.accounts.serializers import GroupSerializer
-from apps.events.models import BaseEvent, Training, Exchange, Workshop, Travel
+from apps.events.models import BaseEvent, Training, Exchange, Workshop, Travel, IMW
 from apps.events.serializers import TravelSerializer, event_list_serializer_factory, \
     event_serializer_factory, event_public_serializer_factory
 from common.permissions import can_change, can_add
@@ -50,6 +50,9 @@ class ExchangeViewSet(EventViewSet):
 class WorkshopViewSet(EventViewSet):
     queryset = Workshop.objects.all()
     model = Workshop
+class IMWViewSet(EventViewSet):
+    queryset = IMW.objects.all()
+    model = IMW
 
 
 class GroupViewSet(ModelViewSet):

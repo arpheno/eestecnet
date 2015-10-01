@@ -18,6 +18,8 @@ def resource(host, start, point):
             if not result:
                 raise StopIteration
             yield result[0]
+        except StopIteration:
+            raise
         except:
             pass
         start += 1
@@ -38,6 +40,6 @@ if __name__ == "__main__":
     # test = accounts(OLDHOST,5,0)
     # for account in test:
     #     send_account(NEWHOST,account)
-    for point in ["accounts","teams","events","entries"]:
+    for point in ["entries"]:
         for res in resource(OLDHOST, 0,point):
             send(NEWHOST, res,point)
