@@ -1,9 +1,11 @@
-import base64
+from collections import OrderedDict
 import logging
 
 from django.contrib.auth.models import Permission
-from rest_framework import serializers, viewsets
+from rest_framework import viewsets
+from rest_framework.fields import Field
 from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 
 from common.models import Image, Report, URL, Location, Content
 
@@ -18,13 +20,6 @@ class PermissionSerializer(serializers.HyperlinkedModelSerializer):
 class Permissions(viewsets.ReadOnlyModelViewSet):
     queryset = Permission.objects.all()
     serializer_class = PermissionSerializer
-
-class AdminMixin(object):
-    def get_serializer(self, *args, **kwargs):
-        serializer = super(AdminMixin, self).get_serializer(*args, **kwargs)
-        return serializer
-
-from rest_framework import serializers
 
 
 class Base64PdfField(serializers.FileField):
@@ -70,7 +65,7 @@ class Base64PdfField(serializers.FileField):
             # Get the file name extension:
             file_extension = self.get_file_extension(file_name, decoded_file)
 
-            complete_file_name = "%s.%s" % (file_name, file_extension, )
+            complete_file_name = "%s.%s" % (file_name, file_extension,)
 
             data = ContentFile(decoded_file, name=complete_file_name)
 
@@ -79,6 +74,7 @@ class Base64PdfField(serializers.FileField):
 
     def get_file_extension(self, file_name, decoded_file):
         return "pdf"
+
 
 class Base64ImageField(serializers.ImageField):
     """
@@ -115,11 +111,11 @@ class Base64ImageField(serializers.ImageField):
                 self.fail('invalid_image')
 
             # Generate file name:
-            file_name = str(uuid.uuid4())[:12] # 12 characters are more than enough.
+            file_name = str(uuid.uuid4())[:12]  # 12 characters are more than enough.
             # Get the file name extension:
             file_extension = self.get_file_extension(file_name, decoded_file)
 
-            complete_file_name = "%s.%s" % (file_name, file_extension, )
+            complete_file_name = "%s.%s" % (file_name, file_extension,)
 
             data = ContentFile(decoded_file, name=complete_file_name)
         self.allow_empty_file = True
@@ -132,9 +128,12 @@ class Base64ImageField(serializers.ImageField):
         extension = "jpg" if extension == "jpeg" else extension
 
         return extension
+
+
 class ImageSerializer(ModelSerializer):
     class Meta:
         model = Image
+
     full_size = Base64ImageField(
         max_length=None, use_url=True,
         allow_empty_file=True, allow_null=True,
@@ -165,18 +164,58 @@ class ContentInSerializer(ModelSerializer):
         return instance
 
 
+def serializer_factory(mdl, fields=None, **kwargss):
+    """ Generalized serializer factory to increase DRYness of code.
+
+    :param mdl: The model class that should be instanciated
+    :param fields: the fields that should be exclusively present on the serializer
+    :param kwargss: optional additional field specifications
+    :return: An awesome serializer
+    """
+
+    def _get_declared_fields(attrs):
+        fields = [(field_name, attrs.pop(field_name))
+                  for field_name, obj in list(attrs.items())
+                  if isinstance(obj, Field)]
+        fields.sort(key=lambda x: x[1]._creation_counter)
+        return OrderedDict(fields)
+
+    # Create an object that will look like a base serializer
+    class Base(object):
+        pass
+
+    Base._declared_fields = _get_declared_fields(kwargss)
+
+    class MySerializer(Base, ModelSerializer):
+        class Meta:
+            model = mdl
+
+        if fields:
+            setattr(Meta, "fields", fields)
+
+    return MySerializer
+
+#TODO: The below could be cleaned up using factories.
 class ContentOutSerializer(ModelSerializer):
     class Meta:
         model = Content
 
     images = ImageURLSerializer(many=True)
 
+
 class URLSerializer(ModelSerializer):
     class Meta:
         model = URL
+
+
 class LocationSerializer(ModelSerializer):
     class Meta:
         model = Location
+
+
 class ReportSerializer(ModelSerializer):
     class Meta:
         model = Report
+
+
+

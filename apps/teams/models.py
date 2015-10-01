@@ -40,12 +40,13 @@ class BaseTeam(Applicable, Reversable, NameMixin, DescriptionMixin):
 
             Participation.objects.create(confirmed=True, group=self.board,
                                          user=self.owner)
-            label = self._meta.object_name
-            assign_perm('change_' + label.lower(), self.board, self)
-            assign_perm('delete_' + label.lower(), self.board, self)
-            assign_perm('view_' + label.lower(), self.board, self)
-
+            self.assign_permissions()
         return result
+    def assign_permissions(self):
+        label = self._meta.object_name
+        assign_perm('change_' + label.lower(), self.board, self)
+        assign_perm('delete_' + label.lower(), self.board, self)
+        assign_perm('view_' + label.lower(), self.board, self)
     @property
     def organizers(self):
         return self.group_set.get(name=self.name + '_organizers')
