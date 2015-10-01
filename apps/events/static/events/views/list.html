@@ -3,7 +3,7 @@
         <md-grid-tile-header>
             {{ object.name }}
         </md-grid-tile-header>
-        <a ng-href="/events/{{ object.id }}/">{{ object.images[0].full_size }}</a>
+        <a ng-href="{{ object.pk }}/">{{ object.images[0].full_size }}</a>
         <md-grid-tile-footer>
             Nothing yet
         </md-grid-tile-footer>

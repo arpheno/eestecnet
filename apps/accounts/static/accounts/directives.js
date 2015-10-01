@@ -1,7 +1,30 @@
 angular.module('eestec.accounts.directives', [])
     .directive('account', [function () {
+        var registerController = ["$scope", "$mdDialog", "$http",
+            function ($scope, $mdDialog, $http) {
+                $scope.submit = function () {
+                    $http({
+                        url: "/accounts_api/register/",
+                        method: "POST",
+                        data: $scope.account
+                    }).then(function (response) {
+                        console.log(response);
+                        $mdDialog.hide();
+                    }, function (response) {
+                        console.log("FAIL");
+                    });
+                }
+            }];
         var dialogController = ["$scope", "$mdDialog", "$http",
             function ($scope, $mdDialog, $http) {
+                $scope.signup= function(){
+                    $mdDialog.show({
+                        controller: registerController,
+                        templateUrl: '/static/accounts/register.html',
+                        clickOutsideToClose: true,
+                        escapeToClose: true
+                    });
+                };
                 $scope.submit = function () {
                     $http({
                         url: "/api-token-auth/",
@@ -29,7 +52,7 @@ angular.module('eestec.accounts.directives', [])
                 $scope.showLogin = function (ev) {
                     $mdDialog.show({
                         controller: dialogController,
-                        templateUrl: '/static/common/login.html',
+                        templateUrl: '/static/accounts/login.html',
                         clickOutsideToClose: true,
                         escapeToClose: true
                     }).then($scope.login);
