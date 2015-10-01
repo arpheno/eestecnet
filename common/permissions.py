@@ -14,3 +14,11 @@ class CustomObjectPermissions(permissions.DjangoObjectPermissions):
         'PATCH': ['%(app_label)s.change_%(model_name)s'],
         'DELETE': ['%(app_label)s.delete_%(model_name)s'],
     }
+
+
+def can_change(user, obj):
+    return user.has_perm('change_' + obj._meta.object_name.lower(), obj)
+
+
+def can_add(user, cls):
+    return user.has_perm('add' + cls._meta.model_name)

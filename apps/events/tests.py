@@ -7,8 +7,8 @@ from rest_framework.renderers import JSONRenderer
 
 from apps.accounts.factories import ParticipationFactory, AccountFactory
 from apps.accounts.models import Account
-from apps.events.models import Exchange, Training, Workshop
-from apps.events.serializers import Detail, detail_factory, TravelSerializer
+from apps.events.models import Exchange, Training, Workshop, BaseEvent
+from apps.events.serializers import  event_serializer_factory, TravelSerializer
 from apps.events.factories import BaseEventFactory, ParticipationConfirmationFactory, \
     ExchangeFactory, TrainingFactory, WorkshopFactory, WorkshopParticipationFactory, \
     TravelFactory
@@ -56,12 +56,14 @@ def test_list_serializer():
     client = eestecer()
     response = client.get(reverse_lazy("baseevent-list"))
     data = json.loads(response.content)[0]
-    assert all(["pk" in data,"images" in data, "name" in data,"organizing_committee" in data])
+    assert all(["pk" in data,"images" in data,
+                "name" in data,
+                "organizing_committee" in data])
 
 class TestBaseEvent(RESTCase, TestCase, AuditCase, ImageCase):
     def setUp(self):
         self.object = BaseEventFactory()
-        self.serializer_class = Detail
+        self.serializer_class = event_serializer_factory(BaseEvent)
         super(TestBaseEvent, self).setUp()
 
     def test_reports_in_generated_data(self):
@@ -123,21 +125,21 @@ class TestParticipationConfirmation(TestCase):
 class TestExchange(RESTCase, TestCase, AuditCase):
     def setUp(self):
         self.object = ExchangeFactory()
-        self.serializer_class = detail_factory(Exchange)
+        self.serializer_class = event_serializer_factory(Exchange)
         super(TestExchange, self).setUp()
 
 
 class TestTraining(RESTCase, TestCase, AuditCase):
     def setUp(self):
         self.object = TrainingFactory()
-        self.serializer_class = detail_factory(Training)
+        self.serializer_class = event_serializer_factory(Training)
         super(TestTraining, self).setUp()
 
 
 class TestWorkshop(RESTCase, TestCase, AuditCase):
     def setUp(self):
         self.object = WorkshopFactory()
-        self.serializer_class = detail_factory(Workshop)
+        self.serializer_class = event_serializer_factory(Workshop)
         super(TestWorkshop, self).setUp()
 
     def test_organizers_can_modify_event(self):

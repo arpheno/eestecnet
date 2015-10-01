@@ -12,11 +12,14 @@ def resource(host, start, point):
     base = host + "/legacy/" + point
     while True:
         url = base + "?limit=1"+ "&offset=" + str(start)
-        response = json.loads(urllib2.urlopen(url).read())
-        result= response["results"]
-        if not result:
-            raise StopIteration
-        yield result[0]
+        try:
+            response = json.loads(urllib2.urlopen(url).read())
+            result= response["results"]
+            if not result:
+                raise StopIteration
+            yield result[0]
+        except:
+            pass
         start += 1
 
 
@@ -35,6 +38,6 @@ if __name__ == "__main__":
     # test = accounts(OLDHOST,5,0)
     # for account in test:
     #     send_account(NEWHOST,account)
-    for point in ["teams","events","entries"]:
+    for point in ["accounts","teams","events","entries"]:
         for res in resource(OLDHOST, 0,point):
             send(NEWHOST, res,point)
