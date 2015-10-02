@@ -17,7 +17,7 @@ angular.module('eestec.accounts.directives', [])
             }];
         var dialogController = ["$scope", "$mdDialog", "$http",
             function ($scope, $mdDialog, $http) {
-                $scope.signup= function(){
+                $scope.signup = function () {
                     $mdDialog.show({
                         controller: registerController,
                         templateUrl: '/static/accounts/register.html',
@@ -37,28 +37,36 @@ angular.module('eestec.accounts.directives', [])
                     });
                 }
             }];
-        var controller = ["$scope", "$mdDialog", "$http", "$localStorage","$location",
-            function ($scope, $mdDialog, $http, $localStorage,$location) {
-                $scope.logout = function (ev) {
-                    $localStorage.token = "";
-                    $scope.user = "";
-                };
-                $scope.login = function (result) {
-                    $localStorage.token = result;
-                    $http.get("/api/accounts/me/").then(function (result) {
-                        $scope.user = result.data;
+        var controller = ["$scope", "$mdDialog", "$http", "$localStorage", "$location", "$route",
+                function ($scope, $mdDialog, $http, $localStorage, $location, $route) {
+                    $scope.$on('$routeChangeSuccess', function () {
+                        //If this doesn't work, console.log $route.current to see how it's formatted
+                        if ($location.path().indexOf("signin") > -1)
+                            $scope.showLogin();
                     });
-                    $location.path("/").replace();
-                };
-                $scope.showLogin = function (ev) {
-                    $mdDialog.show({
-                        controller: dialogController,
-                        templateUrl: '/static/accounts/login.html',
-                        clickOutsideToClose: true,
-                        escapeToClose: true
-                    }).then($scope.login);
-                };
-            }];
+                    $scope.logout = function (ev) {
+                        $localStorage.token = "";
+                        $scope.user = "";
+                    };
+                    $scope.login = function (result) {
+                        $localStorage.token = result;
+                        $http.get("/api/accounts/me/").then(function (result) {
+                            $scope.user = result.data;
+                        });
+                        $location.path("/").replace();
+                    };
+                    $scope.showLogin = function (ev) {
+                        $mdDialog.show({
+                            controller: dialogController,
+                            templateUrl: '/static/accounts/login.html',
+                            clickOutsideToClose: true,
+                            escapeToClose: true
+                        }).then($scope.login);
+                    };
+                }
+
+            ]
+            ;
         return {
             restrict: 'E',
             scope: {user: '='},

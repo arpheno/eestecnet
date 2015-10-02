@@ -12,7 +12,10 @@ angular.module('eestec.accounts.list', ['ngRoute',
             templateUrl: '/static/accounts/views/list.html',
             controller: 'AccountListController'
         });
+        console.log("Meh")
+        $routeProvider.when('/signin', {});
     }])
+
 
     .controller('AccountListController',[ "$scope","Account",function ($scope, Account) {
         $scope.object_list = Account.query();
