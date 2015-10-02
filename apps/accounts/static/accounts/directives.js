@@ -37,8 +37,8 @@ angular.module('eestec.accounts.directives', [])
                     });
                 }
             }];
-        var controller = ["$scope", "$mdDialog", "$http", "$localStorage",
-            function ($scope, $mdDialog, $http, $localStorage) {
+        var controller = ["$scope", "$mdDialog", "$http", "$localStorage","$location",
+            function ($scope, $mdDialog, $http, $localStorage,$location) {
                 $scope.logout = function (ev) {
                     $localStorage.token = "";
                     $scope.user = "";
@@ -48,6 +48,7 @@ angular.module('eestec.accounts.directives', [])
                     $http.get("/api/accounts/me/").then(function (result) {
                         $scope.user = result.data;
                     });
+                    $location.path("/").replace();
                 };
                 $scope.showLogin = function (ev) {
                     $mdDialog.show({
