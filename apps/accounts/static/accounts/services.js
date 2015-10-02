@@ -4,10 +4,9 @@
  */
 'use strict';
 
-angular.module('eestec.accounts.services', ['ngResource'])
+angular.module('eestec.accounts.services', ['ngResource','ngMaterial'])
     .factory('Account', ['$resource',
         function ($resource) {
             return $resource('/api/accounts/:pk/', {pk: "@pk"},
                 {});
-        }]);
-
+        }])

@@ -177,6 +177,10 @@ section, article {
 
 #values {
   md-card {
+    @media (max-width: 600px) {
+
+    flex: 1 1 22%;
+    }
     flex: 1 1 15%;
   }
 }
@@ -188,7 +192,7 @@ h1, h2 {
 }
 
 h1 {
-  font-size: 112px;
+  font-size: 6vw;
   text-align: center;
 }
 
