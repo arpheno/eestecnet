@@ -105,7 +105,7 @@ angular.module('eestec.common.directives', [
                     CONTENTLOADED = $q.defer();
                 }
                 CONTENTLOADED.promise.then(function () {
-                    result = scope.res;
+                    var result = scope.res;
                     element.html(result[scope.req]);
                     // Listen for change events to enable binding
                     element.on('focus', function () {
