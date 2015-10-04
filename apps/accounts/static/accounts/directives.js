@@ -1,4 +1,4 @@
-angular.module('eestec.accounts.directives', [])
+angular.module('eestec.accounts.directives', ['angular-jwt'])
     .directive('account', [function () {
         var registerController = ["$scope", "$mdDialog", "$http",
             function ($scope, $mdDialog, $http) {
@@ -31,14 +31,14 @@ angular.module('eestec.accounts.directives', [])
                         method: "POST",
                         data: $scope.login
                     }).then(function (response) {
-                        $mdDialog.hide(response.data.token);
+                        $mdDialog.hide({token: response.data.token, permanent: $scope.login.permanent});
                     }, function (response) {
                         console.log("FAIL");
                     });
                 }
             }];
-        var controller = ["$scope", "$mdDialog", "$http", "$localStorage", "$location", "$route",
-                function ($scope, $mdDialog, $http, $localStorage, $location, $route) {
+        var controller = ["$scope", "$mdDialog", "$http", "$localStorage", "$location", "$route", "$sessionStorage","jwtHelper",
+                function ($scope, $mdDialog, $http, $localStorage, $location, $route, $sessionStorage,jwtHelper) {
                     $scope.$on('$routeChangeSuccess', function () {
                         //If this doesn't work, console.log $route.current to see how it's formatted
                         if ($location.path().indexOf("signin") > -1)
@@ -49,11 +49,37 @@ angular.module('eestec.accounts.directives', [])
                         $scope.user = "";
                     };
                     $scope.login = function (result) {
-                        $localStorage.token = result;
-                        $http.get("/api/accounts/me/").then(function (result) {
-                            $scope.user = result.data;
-                        });
-                        $location.path("/").replace();
+                        if (result.permanent) {
+                            $localStorage.token = result.token;
+                            $sessionStorage.token = "";
+                        } else {
+                            $sessionStorage.token = result.token;
+                            $sessionStorage.token = "";
+                        }
+                        $scope.set_user();
+                        if ($location.path().indexOf("signin") > -1) {
+                            $location.path("/").replace();
+                        }
+                    };
+                    $scope.refresh_token = function () {
+                        if ($localStorage.token &&!jwtHelper.isTokenExpired($localStorage.token)) {
+                            console.log( jwtHelper.decodeToken($localStorage.token));
+                            $http({
+                                url: "/api-token-refresh/",
+                                method: "POST",
+                                data: {token:$localStorage.token}
+                            }).then($scope.login);
+                        }else{
+                            $localStorage.token="";
+                        }
+                    };
+                    $scope.refresh_token();
+                    $scope.set_user = function () {
+                        if ($localStorage.token) {
+                            $http.get("/api/accounts/me/").then(function (result) {
+                                $scope.user = result.data;
+                            });
+                        }
                     };
                     $scope.showLogin = function (ev) {
                         $mdDialog.show({
@@ -73,6 +99,8 @@ angular.module('eestec.accounts.directives', [])
             templateUrl: "/static/accounts/area.html",
             controller: controller
         };
-    }]);
+    }]
+)
+;
 
 

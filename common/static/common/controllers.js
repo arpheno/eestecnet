@@ -3,27 +3,19 @@
  */
 angular.module('eestec.common.controllers', [
     'ngMaterial',
-    'uiGmapgoogle-maps'
+    'ngMap'
 ])
-    .controller('networkController', ["$scope", "uiGmapGoogleMapApi", function ($scope, uiGmapGoogleMapApi) {
-        $scope.map = "";
-        $scope.events = {
-            "scroll": function () {
-                // Override the scroll event so it doesnt zoom the map.
-                // This is important for mobile devices.
-                return;
-            }
-        };
-        uiGmapGoogleMapApi.then(function (maps) {
-            $scope.map = {
-                center: {
-                    latitude: 48.1333,
-                    longitude: 11.56
-                },
-                zoom: 5
-            };
-        });
-    }])
+    .controller('networkController', ["$scope","Commitment",
+        function ($scope, Commitment) {
+            Commitment.query(function (result) {
+                $scope.markers = result.filter(function (x) {
+                    return x.locations.length;
+                }).map(function (x) {
+                    console.log(x);
+                    return {pos: x.locations[0].latitude+","+ x.locations[0].longitude}
+                });
+            });
+        }])
     .controller('toolbarController', [
         "$scope", "$location", "$mdDialog", "$mdSidenav", "$http",
         function ($scope, $location, $mdDialog, $mdSidenav, $http) {

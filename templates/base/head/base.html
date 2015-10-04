@@ -24,6 +24,7 @@
     
     
 {% endcompress %}
+<script src="//maps.google.com/maps/api/js"></script>
 {% compress js %}
     <!-- bower:js -->
     <script src="{% static "prefixfree/prefixfree.min.js" %}"></script>
@@ -41,10 +42,13 @@
     <script src="{% static "ngstorage/ngStorage.js" %}"></script>
     <script src="{% static "angular-cookies/angular-cookies.js" %}"></script>
     <script src="{% static "angularLocalStorage/src/angularLocalStorage.js" %}"></script>
+    <script src="{% static "angular-jwt/dist/angular-jwt.js" %}"></script>
+    <script src="{% static "ngmap/build/scripts/ng-map.js" %}"></script>
     <!-- endbower -->
 {% endcompress %}
 <script type="text/javascript" src="{% static  "" %}"></script>
 <script type="text/javascript" src="{% static  "accounts/accounts.js" %}"></script>
+<script type="text/javascript" src="{% static  "accounts/controllers/auth.js" %}"></script>
 <script type="text/javascript" src="{% static  "accounts/controllers/detail.js" %}"></script>
 <script type="text/javascript" src="{% static  "accounts/controllers/list.js" %}"></script>
 <script type="text/javascript" src="{% static  "accounts/directives.js" %}"></script>

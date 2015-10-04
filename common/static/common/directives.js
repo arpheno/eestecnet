@@ -56,15 +56,11 @@ angular.module('eestec.common.directives', [
         ];
         var control_initialization = ["$scope", function ($scope) {
             $scope.$watch($scope.res, function () {
-                if ($scope.res) {
-                    var timeout = 0;
-                } else {
-                    var timeout = 1000;
-                }
-                setTimeout(function () {
-                    // TODO This is a hack.
-                    if ($scope.res.images[$scope.req]) {
+                var timeout = 1000;
+                var contentfetching = setInterval(function () {
+                        if ($scope.res.images[$scope.req]) {
                         $scope.attrs.$set('ngSrc', $scope.res.images[$scope.req].full_size);
+                        clearInterval(contentfetching);
                     }
                 }, timeout);
             }, true);
@@ -106,14 +102,12 @@ angular.module('eestec.common.directives', [
             },
             controller: ["$scope", function ($scope) {
                 $scope.$watch($scope.res, function () {
-                    if ($scope.res) {
-                        var timeout = 0;
-                    } else {
                         var timeout = 1000;
-                    }
-                    setTimeout(function () {
-                        // TODO This is a hack.
+                    var contentfetching = setInterval(function () {
                         $scope.element.html($scope.res[$scope.req]);
+                        if($scope.res){
+                            clearInterval(contentfetching);
+                        }
                     }, timeout);
                 }, true);
                 $scope.update = function () {
