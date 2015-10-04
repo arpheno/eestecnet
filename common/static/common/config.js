@@ -29,6 +29,13 @@ angular.module('eestec.common.config', [
     .config(['$locationProvider', function ($locationProvider) {
         $locationProvider.html5Mode(true);
     }])
+    .config(["uiGmapGoogleMapApiProvider", function (uiGmapGoogleMapApiProvider) {
+        uiGmapGoogleMapApiProvider.configure({
+            //    key: 'your api key',
+            v: '3.17',
+            libraries: 'geometry,visualization'
+        });
+    }])
     .config(["$httpProvider", function ($httpProvider) {
         $httpProvider.defaults.xsrfCookieName = 'csrftoken';
         $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';

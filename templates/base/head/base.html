@@ -18,13 +18,12 @@
     <link rel="stylesheet" href="{% static "angular-material/angular-material.css" %}" />
     <!-- endbower -->
     <link rel="stylesheet" type="text/x-scss" href="{%static "common/site.scss"%}" />
-    
+
     <link rel="stylesheet" type="text/css" href="{%static "common/ng-img-crop.css"%}" />
 
-    
-    
+
+
 {% endcompress %}
-<script src="//maps.google.com/maps/api/js"></script>
 {% compress js %}
     <!-- bower:js -->
     <script src="{% static "prefixfree/prefixfree.min.js" %}"></script>
@@ -37,18 +36,16 @@
     <script src="{% static "angular-material-icons/angular-material-icons.min.js" %}"></script>
     <script src="{% static "angular-sanitize/angular-sanitize.js" %}"></script>
     <script src="{% static "lodash/lodash.js" %}"></script>
-    <script src="{% static "angular-google-maps/dist/angular-google-maps.js" %}"></script>
+    <script src="{% static "angular-google-maps/dist/angular-google-maps.min.js" %}"></script>
     <script src="{% static "ng-messages/angular-messages.js" %}"></script>
     <script src="{% static "ngstorage/ngStorage.js" %}"></script>
     <script src="{% static "angular-cookies/angular-cookies.js" %}"></script>
-    <script src="{% static "angularLocalStorage/src/angularLocalStorage.js" %}"></script>
     <script src="{% static "angular-jwt/dist/angular-jwt.js" %}"></script>
-    <script src="{% static "ngmap/build/scripts/ng-map.js" %}"></script>
+    <script src="{% static "angularLocalStorage/src/angularLocalStorage.js" %}"></script>
     <!-- endbower -->
 {% endcompress %}
 <script type="text/javascript" src="{% static  "" %}"></script>
 <script type="text/javascript" src="{% static  "accounts/accounts.js" %}"></script>
-<script type="text/javascript" src="{% static  "accounts/controllers/auth.js" %}"></script>
 <script type="text/javascript" src="{% static  "accounts/controllers/detail.js" %}"></script>
 <script type="text/javascript" src="{% static  "accounts/controllers/list.js" %}"></script>
 <script type="text/javascript" src="{% static  "accounts/directives.js" %}"></script>

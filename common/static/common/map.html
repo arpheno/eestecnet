@@ -1,6 +1,13 @@
 <article ng-controller="networkController" id="map">
-    <map center="48.1333, 11.56" zoom="5">
-        <marker position="{{ marker.pos }}" title="Hello World!" ng-repeat="marker in markers"></marker>
-    </map>
+    <ui-gmap-google-map
+            options='{"scrollwheel":false}'
+            center='map.center'
+            zoom='map.zoom'>
+        <ui-gmap-marker ng-repeat="marker in markers"
+                idKey="marker.object_id"
+                coords="marker"
+                >
+        </ui-gmap-marker>
+    </ui-gmap-google-map>
 </article>
 
