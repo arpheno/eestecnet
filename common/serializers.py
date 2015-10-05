@@ -144,12 +144,14 @@ class ImageSerializer(ModelSerializer):
     square = ThumbnailField(
         dimensions="250x250",
         options={'crop': 'center'},
-        source="full_size"
+        source="full_size",
+        read_only=True
     )
-    square = ThumbnailField(
+    large_square = ThumbnailField(
         dimensions="500x500",
         options={'crop': 'center'},
-        source="full_size"
+        source="full_size",
+        read_only=True
     )
 
 
