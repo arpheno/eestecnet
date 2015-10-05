@@ -146,6 +146,11 @@ class ImageSerializer(ModelSerializer):
         options={'crop': 'center'},
         source="full_size"
     )
+    square = ThumbnailField(
+        dimensions="500x500",
+        options={'crop': 'center'},
+        source="full_size"
+    )
 
 
 class ImageURLSerializer(ModelSerializer):

@@ -9,6 +9,7 @@
                 >
         </ui-gmap-marker>
     </ui-gmap-google-map>
+    <h1 contenteditable req="content" res="content('gch')"></h1>
     <md-grid-list md-cols="8" md-row-height="1:1" style="flex:1 1 100%;">
         <md-grid-tile
                 ng-repeat="object in commitments"
@@ -17,8 +18,12 @@
             <md-grid-tile-header>
                 {{ object.name }}
             </md-grid-tile-header>
-            <a ng-href="/cities/{{ object.pk }}/">
-                <img ng-src="{{ object.images[0].square }}" style="width: 100%;"/></a>
+            <a ng-href="/cities/{{ object.id }}/">
+                <picture>
+                    <source ng-srcset="{{ object.images[0].square_large }}" media="(min-width: 600px)">
+                    <img ng-src="{{ object.images[0].square }}" style="width: 100%;"/>
+                </picture>
+            </a>
             <md-grid-tile-footer>
                 Founded in {{ object.founded }}
             </md-grid-tile-footer>
