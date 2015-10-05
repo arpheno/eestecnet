@@ -12,9 +12,9 @@
     <a flex href="/#/"><img id="logo" src="{% static 'common/logo-red.svg' %}"/></a>
         <span layout="row">
             <md-tabs md-selected="0" hide show-gt-sm>
-                <md-tab md-on-select="console.log('a');$location.path('/');"
+                <md-tab md-on-select="navigation('/identity/');"
                         label="Who we are"></md-tab>
-                <md-tab md-on-select="console.log('a');$location.path('/');"
+                <md-tab md-on-select="navigation('/activity/');"
                         label="What we do"></md-tab>
                 <md-tab md-on-select="console.log('a');$location.path('/');"
                         label="Get involved"></md-tab>
@@ -38,6 +38,7 @@
 </md-tabs>
 <md-content ng-controller="contentController">
     <div ng-view class="view-animate"></div>
+    <footer style="height:300px;background-color: #838383"></footer>
 </md-content>
 {% verbatim %}
 <script type="text/javascript" id="{{ name }}">

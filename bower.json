@@ -18,7 +18,8 @@
     "angular-google-maps": "~2.1.5",
     "ng-messages": "*",
     "ngstorage": "~0.3.9",
-    "angularLocalStorage": "ngStorage#~0.3.0"
+    "angularLocalStorage": "ngStorage#~0.3.0",
+    "angular-jwt": "~0.0.9"
   },
   "devDependencies": {},
   "resolutions": {

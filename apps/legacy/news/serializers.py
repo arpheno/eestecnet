@@ -9,7 +9,6 @@ from apps.announcements.models import Announcement, News, CareerOffer
 from apps.events.models import BaseEvent
 from apps.legacy.account.serializers import ConversionMixin
 from apps.teams.models import BaseTeam
-from common.fields import HyperlinkedSorlImageField
 from apps.legacy.news.models import Membership, Entry
 from common.serializers import Base64ImageField, ImageSerializer
 
@@ -128,8 +127,6 @@ class ConversionApplicationSerializer(ConversionMixin, Serializer):
         return p
 
 class EntrySerializer(serializers.HyperlinkedModelSerializer):
-    thumbnail = HyperlinkedSorlImageField(dimensions="200x200",
-                                          options={'crop': 'center'})
 
     class Meta:
         model = Entry

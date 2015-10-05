@@ -151,7 +151,10 @@ class Account(GuardianUserMixin, AbstractAccount, AbstractBaseUser, DescriptionM
         return self.first_name
 
     def get_full_name(self):
-        return self.first_name +self.last_name
+        return " ".join(name.title() for name in [self.first_name ,self.middle_name,self.last_name] if name)
+    @property
+    def name(self):
+        return self.get_full_name()
 
     @property
     def commitment(self):

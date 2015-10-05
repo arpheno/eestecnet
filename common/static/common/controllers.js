@@ -5,7 +5,13 @@ angular.module('eestec.common.controllers', [
     'ngMaterial',
     'uiGmapgoogle-maps'
 ])
-    .controller('networkController', ["$scope", "uiGmapGoogleMapApi", function ($scope, uiGmapGoogleMapApi) {
+    .controller('activitiesController', ["$scope", "Team","Workshop",
+        function ($scope, Team,Workshop) {
+            $scope.teams = Team.query();
+            $scope.events = Workshop.query();
+        }])
+    .controller('networkController', ["$scope", "uiGmapGoogleMapApi", "Commitment",
+        function ($scope, uiGmapGoogleMapApi,Commitment) {
         $scope.map = "";
         $scope.events = {
             "scroll": function () {
@@ -22,6 +28,13 @@ angular.module('eestec.common.controllers', [
                 },
                 zoom: 5
             };
+        });
+        $scope.commitments = Commitment.query(function (result) {
+            $scope.markers = result.filter(function (x) {
+                return x.locations.length;
+            }).map(function (x) {
+                return JSON.parse(JSON.stringify(x.locations[0]));
+            });
         });
     }])
     .controller('toolbarController', [
