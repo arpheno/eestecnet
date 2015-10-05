@@ -4,7 +4,7 @@
 angular.module('eestec', [
     'eestec.common',
     'eestec.events',
-    'eestec.commitments',
+    'eestec.teams',
     'eestec.accounts',
     'ngMdIcons'
 ]);

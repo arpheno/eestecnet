@@ -104,8 +104,8 @@ angular.module('eestec.common.directives', [
                 $scope.$watch($scope.res, function () {
                         var timeout = 1000;
                     var contentfetching = setInterval(function () {
-                        $scope.element.html($scope.res[$scope.req]);
-                        if($scope.res){
+                        if($scope.res[$scope.req]){
+                            $scope.element.html($scope.res[$scope.req]);
                             clearInterval(contentfetching);
                         }
                     }, timeout);

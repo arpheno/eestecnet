@@ -11,18 +11,18 @@
 </title>
 <!-- Assets-->
 <link rel="image_src" href="{% static 'enet/img/logo_square.png' %}"/>
-<link href='https://fonts.googleapis.com/css?family=Roboto&subset=latin,greek,cyrillic' rel='stylesheet' type='text/css'>
+
 {% compress css %}
-    <link rel="stylesheet" type="text/css" href="{%static "common/reset.css"%}" />
     <!-- bower:css -->
     <link rel="stylesheet" href="{% static "angular-material/angular-material.css" %}" />
     <!-- endbower -->
     <link rel="stylesheet" type="text/x-scss" href="{%static "common/site.scss"%}" />
-
+    
     <link rel="stylesheet" type="text/css" href="{%static "common/ng-img-crop.css"%}" />
-
-
-
+    <link rel="stylesheet" type="text/css" href="{%static "common/reset.css"%}" />
+    
+    
+    
 {% endcompress %}
 {% compress js %}
     <!-- bower:js -->
@@ -36,16 +36,17 @@
     <script src="{% static "angular-material-icons/angular-material-icons.min.js" %}"></script>
     <script src="{% static "angular-sanitize/angular-sanitize.js" %}"></script>
     <script src="{% static "lodash/lodash.js" %}"></script>
-    <script src="{% static "angular-google-maps/dist/angular-google-maps.min.js" %}"></script>
+    <script src="{% static "angular-google-maps/dist/angular-google-maps.js" %}"></script>
     <script src="{% static "ng-messages/angular-messages.js" %}"></script>
     <script src="{% static "ngstorage/ngStorage.js" %}"></script>
     <script src="{% static "angular-cookies/angular-cookies.js" %}"></script>
-    <script src="{% static "angular-jwt/dist/angular-jwt.js" %}"></script>
     <script src="{% static "angularLocalStorage/src/angularLocalStorage.js" %}"></script>
+    <script src="{% static "angular-jwt/dist/angular-jwt.js" %}"></script>
     <!-- endbower -->
 {% endcompress %}
 <script type="text/javascript" src="{% static  "" %}"></script>
 <script type="text/javascript" src="{% static  "accounts/accounts.js" %}"></script>
+<script type="text/javascript" src="{% static  "accounts/controllers/auth.js" %}"></script>
 <script type="text/javascript" src="{% static  "accounts/controllers/detail.js" %}"></script>
 <script type="text/javascript" src="{% static  "accounts/controllers/list.js" %}"></script>
 <script type="text/javascript" src="{% static  "accounts/directives.js" %}"></script>
@@ -55,11 +56,10 @@
 <script type="text/javascript" src="{% static  "events/controllers/list.js" %}"></script>
 <script type="text/javascript" src="{% static  "events/events.js" %}"></script>
 <script type="text/javascript" src="{% static  "events/services.js" %}"></script>
-<script type="text/javascript" src="{% static  "commitments/commitments.js" %}"></script>
-<script type="text/javascript" src="{% static  "commitments/controllers/create.js" %}"></script>
-<script type="text/javascript" src="{% static  "commitments/controllers/detail.js" %}"></script>
-<script type="text/javascript" src="{% static  "commitments/controllers/list.js" %}"></script>
-<script type="text/javascript" src="{% static  "commitments/services.js" %}"></script>
+<script type="text/javascript" src="{% static  "teams/controllers/create.js" %}"></script>
+<script type="text/javascript" src="{% static  "teams/controllers/detail.js" %}"></script>
+<script type="text/javascript" src="{% static  "teams/controllers/list.js" %}"></script>
+<script type="text/javascript" src="{% static  "teams/services.js" %}"></script>
 <script type="text/javascript" src="{% static  "teams/teams.js" %}"></script>
 <script type="text/javascript" src="{% static  "" %}"></script>
 <script type="text/javascript" src="{% static  "common/app.js" %}"></script>

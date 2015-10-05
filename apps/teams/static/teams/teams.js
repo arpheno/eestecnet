@@ -7,6 +7,7 @@
 angular.module('eestec.teams', [
     'eestec.teams.list',
     'eestec.teams.create',
+    'eestec.teams.services',
     'eestec.teams.detail'
 ]);
 

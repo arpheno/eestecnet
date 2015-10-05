@@ -4,7 +4,7 @@
  */
 'use strict';
 
-angular.module('eestec.commitments.services', ['ngResource'])
+angular.module('eestec.teams.services', ['ngResource'])
     .factory('BaseTeam', ['$resource',
         function ($resource) {
             return $resource('/api/baseteams/:pk/', {pk: "@pk"},

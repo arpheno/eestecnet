@@ -5,6 +5,11 @@ angular.module('eestec.common.controllers', [
     'ngMaterial',
     'uiGmapgoogle-maps'
 ])
+    .controller('activitiesController', ["$scope", "Team","Workshop",
+        function ($scope, Team,Workshop) {
+            $scope.teams = Team.query();
+            $scope.events = Workshop.query();
+        }])
     .controller('networkController', ["$scope", "uiGmapGoogleMapApi", "Commitment",
         function ($scope, uiGmapGoogleMapApi,Commitment) {
         $scope.map = "";

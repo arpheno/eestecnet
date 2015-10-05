@@ -4,7 +4,7 @@
  */
 'use strict';
 
-angular.module('eestec.teams.create', ['ngRoute', "eestec.commitments.services"])
+angular.module('eestec.teams.create', ['ngRoute', "eestec.teams.services"])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/cities/new/', {
             templateUrl: '/static/teams/views/create.html',

@@ -25,6 +25,9 @@ angular.module('eestec.common.config', [
         $routeProvider.when('/identity/', {
             templateUrl: 'static/common/identity.html'
         });
+        $routeProvider.when('/activity/', {
+            templateUrl: 'static/common/activity.html'
+        });
     }])
     .config(['$locationProvider', function ($locationProvider) {
         $locationProvider.html5Mode(true);
