@@ -24,14 +24,12 @@ angular.module('eestec.common.controllers', [
                 zoom: 5
             };
         });
-
-        Commitment.query(function (result) {
+        $scope.commitments = Commitment.query(function (result) {
             $scope.markers = result.filter(function (x) {
                 return x.locations.length;
             }).map(function (x) {
                 return JSON.parse(JSON.stringify(x.locations[0]));
             });
-            console.log($scope.markers);
         });
     }])
     .controller('toolbarController', [

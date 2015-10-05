@@ -2,12 +2,12 @@ from rest_framework import serializers
 from sorl.thumbnail import get_thumbnail
 
 
-class HyperlinkedSorlImageField(serializers.ImageField):
+class ThumbnailField(serializers.ImageField):
     def __init__(self, dimensions, options={}, *args, **kwargs):
 
         self.dimensions = dimensions
         self.options = options
-        super(HyperlinkedSorlImageField, self).__init__(*args, **kwargs)
+        super(ThumbnailField, self).__init__(*args, **kwargs)
 
     def to_representation(self, value):
         try:
@@ -18,4 +18,4 @@ class HyperlinkedSorlImageField(serializers.ImageField):
             request = self.context.get('request', None)
             return request.build_absolute_uri(image.url)
         except Exception, e:
-            return super(HyperlinkedSorlImageField, self).to_representation(value)
+            return super(ThumbnailField, self).to_representation(value)

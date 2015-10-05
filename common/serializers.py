@@ -4,9 +4,12 @@ import logging
 from django.contrib.auth.models import Permission
 from rest_framework import viewsets
 from rest_framework.fields import Field
+
 from rest_framework.serializers import ModelSerializer
+
 from rest_framework import serializers
 
+from common.fields import ThumbnailField
 from common.models import Image, Report, URL, Location, Content
 
 logger = logging.getLogger(__name__)
@@ -138,6 +141,11 @@ class ImageSerializer(ModelSerializer):
         max_length=None, use_url=True,
         allow_empty_file=True, allow_null=True,
     )
+    square = ThumbnailField(
+        dimensions="250x250",
+        options={'crop': 'center'},
+        source="full_size"
+    )
 
 
 class ImageURLSerializer(ModelSerializer):
@@ -195,7 +203,8 @@ def serializer_factory(mdl, fields=None, **kwargss):
 
     return MySerializer
 
-#TODO: The below could be cleaned up using factories.
+
+# TODO: The below could be cleaned up using factories.
 class ContentOutSerializer(ModelSerializer):
     class Meta:
         model = Content
@@ -216,6 +225,3 @@ class LocationSerializer(ModelSerializer):
 class ReportSerializer(ModelSerializer):
     class Meta:
         model = Report
-
-
-
