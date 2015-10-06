@@ -10,11 +10,21 @@ img {
   min-height: 20px;
 }
 
+ui-gmap-google-map {
+  display: flex;
+  flex: 1 1 100%;
+  > div {
+    display: flex;
+    flex: 1 1 100%;
+  }
+  .angular-google-map-container {
+    height: 600px;
+    flex: 1 1 100%;
+  }
+}
 md-content, html, body {
-
   height: 100%;
 }
-
 main{
   flex:1 1 100%;
 }
@@ -46,12 +56,6 @@ md-toolbar {
     width: 500px;
     height: 50px;
   }
-}
-
-#buttons {
-  position: absolute;
-  right: 24px;
-  top: 55px;
 }
 
 ng-md-icon {
@@ -133,32 +137,7 @@ md-sidenav {
   }
   outline: none;
   cursor: default;
-
 }
-
-#values {
-  div {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  h2 {
-    flex: 1 1 100%;
-  }
-  img {
-    flex: 1 1 33%;
-  }
-  div {
-    flex: 1 1 67%;
-    p {
-      width: 100%
-    }
-  ;
-    &:last-child {
-      text-align: right;
-    }
-  }
-}
-
 [contenteditable] {
   min-width: 10px;
   min-height: 10px;
@@ -175,29 +154,24 @@ section, article {
   }
 }
 
-#values {
-  md-card {
-    @media (max-width: 600px) {
-
-    flex: 1 1 22%;
-    }
-    flex: 1 1 15%;
-  }
-}
-
-h1, h2 {
-  font-color: #333333;
-  font-weight: normal;
-  font-family: 'Roboto', sans-serif;
-}
 
 h1 {
   font-size: 6vw;
+  font-family: 'Roboto', sans-serif;
+  color: #272727;
+  font-weight: lighter;
+  padding-bottom:20px;
   text-align: center;
 }
 
-h2 {
-  font-size: 56px;
+#values h1, #values p, #values img{
+  text-align: center;
+  flex: 1 1 100%;
+}
+@media (min-width:1000px) {
+  h1 {
+    font-size: 50px;
+  }
 }
 
 h3 {
@@ -208,15 +182,4 @@ h3 {
   line-height: 26px;
 }
 
-ui-gmap-google-map {
-  display: flex;
-  flex: 1 1 100%;
-  > div {
-    display: flex;
-    flex: 1 1 100%;
-  }
-  .angular-google-map-container {
-    height: 600px;
-    flex: 1 1 100%;
-  }
-}
+

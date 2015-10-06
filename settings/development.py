@@ -21,13 +21,8 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-EMAIL_HOST_USER = 'eestecnet@gmail.com'
-EMAIL_HOST_PASSWORD = 'eeStec4ever'
-EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 CELERY_EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+COMPRESS_REBUILD_TIMEOUT=5
 
 CORS_ORIGIN_ALLOW_ALL = True

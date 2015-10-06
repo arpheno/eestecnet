@@ -53,5 +53,5 @@ urlpatterns += patterns(
     url(r'^services/timing/', include(statsd_patterns)),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', TemplateView.as_view(template_name='base/base.html'), name='home'),
-    url(r'^', TemplateView.as_view(template_name='base/base.html')),
+    url(r'', TemplateView.as_view(template_name='base/base.html')),
 )

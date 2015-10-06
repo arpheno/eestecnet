@@ -21,8 +21,10 @@ class AccountViewSet(ModelViewSet):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
     def get_serializer_class(self):
-        if self.request.user.is_superuser or self.request.method.lower() == "post" or \
-                                self.action == 'retrieve' and self.get_object() == \
+        print self.request.user.is_superuser
+        if self.request.user.is_superuser or \
+                        self.request.method.lower() == "post" or \
+                        self.action == 'retrieve' and self.get_object() == \
                         self.request.user:
             return AccountSerializer
         else:

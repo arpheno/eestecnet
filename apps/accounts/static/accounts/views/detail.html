@@ -1,8 +1,14 @@
-<md-whiteframe>
-    <md-whiteframe>
-        <img  height=500 ng-src="{{ object.images[0].full_size }}"/>
-    </md-whiteframe>
-    <md-whiteframe>
-        <h1>{{ object.first_name }} {{ object.last_name }}</h1>
-    </md-whiteframe>
-</md-whiteframe>
+<style type="text/css">
+    div, h1, p {
+        flex: 1 1 100%;
+    }
+</style>
+<div style="display: flex;flex:1 1 100%;justify-content: center;">
+    <img req='0' res='object' editable/>
+</div>
+<h1>{{ object.name }}</h1>
+<p style="text-align: center" contenteditable req="'description'" res="object"></p>
+<div>
+    <span><label> Skype:</label><p contenteditable req="'skype'" res="object"></p></span>
+    <span><label> Hangouts:</label><p contenteditable req="'hangouts'" res="object"></p></span>
+</div>

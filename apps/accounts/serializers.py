@@ -1,8 +1,9 @@
+from rest_framework.fields import CharField
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 from rest_framework.serializers import ModelSerializer
 
 from apps.accounts.models import Group, Account, Participation
-from common.serializers import ImageSerializer
+from common.serializers import ImageSerializer, ImageMixin
 
 __author__ = 'Sebastian Wozny'
 import logging
@@ -16,10 +17,13 @@ logger = logging.getLogger(__name__)
 ACCOUNT_PUBLIC = ['name','id','first_name', 'middle_name', 'last_name', 'second_last_name', 'images']
 ACCOUNT_EVENT = ['name','tshirt_size', 'allergies', 'food_preferences', 'passport_number',
                  'mobile']
-class AccountSerializer(ModelSerializer):
+class AccountSerializer(ImageMixin,ModelSerializer):
     class Meta:
         model = Account
-    images = ImageSerializer(many=True, read_only=True)
+    images = ImageSerializer(many=True)
+    name = CharField(read_only=True)
+
+
 
 
 class UnprivilegedAccountSerializer(AccountSerializer):

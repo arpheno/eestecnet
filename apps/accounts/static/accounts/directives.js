@@ -44,9 +44,11 @@ angular.module('eestec.accounts.directives', ['angular-jwt'])
                         if ($location.path().indexOf("signin") > -1)
                             $scope.showLogin();
                     });
+                    $scope.update = function (ev) {
+                        $location.path("/people/"+$scope.user.id+"/").replace();
+                    };
                     $scope.logout = function (ev) {
                         $localStorage.token = "";
-                        $scope.user = "";
                     };
                     $scope.login = function (result) {
                         if (result.permanent) {

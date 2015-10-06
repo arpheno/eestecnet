@@ -7,7 +7,7 @@
 angular.module('eestec.accounts.detail', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/people/:pk/', {
+        $routeProvider.when('/people/:id/', {
             templateUrl: '/static/accounts/views/detail.html',
             controller: 'AccountDetailController'
         });
@@ -16,5 +16,5 @@ angular.module('eestec.accounts.detail', ['ngRoute'])
     .controller('AccountDetailController', [
         "$scope","Account","$routeParams",
         function ($scope,Account,$routeParams) {
-        $scope.object = Account.get({pk:$routeParams.pk});
+        $scope.object = Account.get({id:$routeParams.id});
     }]);

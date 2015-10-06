@@ -55,19 +55,14 @@ angular.module('eestec.common.directives', [
             }
         ];
         var control_initialization = ["$scope", function ($scope) {
-            $scope.$watch($scope.res, function () {
-                var timeout = 1000;
-                var contentfetching = setInterval(function () {
-                        if ($scope.res.images[$scope.req]) {
-                        $scope.attrs.$set('ngSrc', $scope.res.images[$scope.req].full_size);
-                        clearInterval(contentfetching);
-                    }
-                }, timeout);
-            }, true);
-            $scope.update = function () {
-                $scope.res[$scope.req] = $scope.element.text();
-                $scope.res.$update();
-            };
+            var timeout = 1000;
+            var contentfetching = setInterval(function () {
+                if ($scope.res.images[$scope.req]) {
+                    $scope.attrs.$set('ngSrc', $scope.res.images[$scope.req].full_size);
+                    $scope.attrs.$set('src', $scope.res.images[$scope.req].full_size);
+                    clearInterval(contentfetching);
+                }
+            }, timeout);
         }];
         return {
             restrict: 'A', // only activate on element attribute
@@ -78,6 +73,7 @@ angular.module('eestec.common.directives', [
                 $scope.update = function (image) {
                     $scope.source = image;
                     attrs.$set('ngSrc', image);
+                    attrs.$set('src', image);
                     $scope.res.images[$scope.req] = {full_size: image};
                     $scope.res.$update();
                 };
@@ -101,15 +97,13 @@ angular.module('eestec.common.directives', [
                 req: '='
             },
             controller: ["$scope", function ($scope) {
-                $scope.$watch($scope.res, function () {
-                        var timeout = 1000;
-                    var contentfetching = setInterval(function () {
-                        if($scope.res[$scope.req]){
-                            $scope.element.html($scope.res[$scope.req]);
-                            clearInterval(contentfetching);
-                        }
-                    }, timeout);
-                }, true);
+                var timeout = 1000;
+                var contentfetching = setInterval(function () {
+                    if ($scope.res[$scope.req]) {
+                        $scope.element.html($scope.res[$scope.req]);
+                        clearInterval(contentfetching);
+                    }
+                }, timeout);
                 $scope.update = function () {
                     $scope.res[$scope.req] = $scope.element.text();
                     $scope.res.$update();

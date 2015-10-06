@@ -9,9 +9,11 @@
         <!-- This is a hack because ng-md expects us to have an md-icon here but we use ng-md-icon-->
         <md-icon md-svg-icon="call:phone" style="display:none;"></md-icon>
     </md-button>
-    <md-menu-content>
-        {{ user.email }}
+    <md-menu-content class="userareamenu">
         {{ user.first_name }} {{ user.last_name }}
+        <md-menu-item>
+            <md-button ng-click="update()">Update My Profile</md-button>
+        </md-menu-item>
         <md-menu-item>
             <md-button ng-click="logout()">Log Out</md-button>
         </md-menu-item>

@@ -9,7 +9,11 @@ from apps.accounts.models import Account
 
 def seed_admin(aapps,schema):
     try:
-        Account.objects.create_superuser("admin@eestec.net","1234")
+        ac=Account.objects.create_superuser("admin@eestec.net","1234")
+        ac.first_name="default"
+        ac.last_name="default"
+        ac.gender="m"
+        ac.save()
         print "Created account admin@eestec.net with password 1234"
     except:
         print "Could not create account admin@eestec.net with password 1234"

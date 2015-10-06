@@ -11,7 +11,7 @@
             layout-align="flex-start center" ng-controller="toolbarController">
     <a flex href="/#/"><img id="logo" src="{% static 'common/logo-red.svg' %}"/></a>
         <span layout="row">
-            <md-tabs md-selected="0" hide show-gt-sm>
+            <md-tabs md-selected="-1" hide show-gt-sm>
                 <md-tab md-on-select="navigation('/identity/');"
                         label="Who we are"></md-tab>
                 <md-tab md-on-select="navigation('/activity/');"
@@ -30,7 +30,7 @@
             </md-button>
         </span>
 </md-toolbar>
-<md-tabs flex md-selected="1" class="md-primary" hide show-sm
+<md-tabs flex md-selected="-1" class="md-primary" hide show-sm
          layout-align="center center">
     <md-tab label="Who we are"></md-tab>
     <md-tab label="What we do"></md-tab>

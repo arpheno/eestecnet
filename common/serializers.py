@@ -1,3 +1,4 @@
+import base64
 from collections import OrderedDict
 import logging
 
@@ -101,6 +102,11 @@ class Base64ImageField(serializers.ImageField):
         import uuid
 
         # Check if this is a base64 string
+        if "/media/" in data:
+            file=data[data.find("media"):]
+            with open("file","rb") as im:
+                data=ContentFile(im.read(),name=file)
+            return super(Base64ImageField, self).to_internal_value(data)
         if isinstance(data, six.string_types):
             # Check if the base64 string is in the "data:" format
             if 'data:' in data and ';base64,' in data:
@@ -159,24 +165,23 @@ class ImageURLSerializer(ModelSerializer):
     class Meta:
         model = Image
 
-
-class ContentInSerializer(ModelSerializer):
-    class Meta:
-        model = Content
-
-    images = ImageSerializer(many=True)
-
+class ImageMixin(object):
     def update(self, instance, validated_data):
         images = validated_data.pop('images')
         instance.images = [Image.objects.create(**img) for img in images]
-        return super(ContentInSerializer, self).update(instance, validated_data)
+        return super(ImageMixin, self).update(instance, validated_data)
 
     def create(self, validated_data):
         images = validated_data.pop('images')
-        instance = Content.objects.create(**validated_data)
+        instance =super(ImageMixin, self).create(validated_data)
         instance.save()
         instance.images = [Image.objects.create(**img) for img in images]
         return instance
+class ContentInSerializer(ImageMixin,ModelSerializer):
+    class Meta:
+        model = Content
+    images = ImageSerializer(many=True)
+
 
 
 def serializer_factory(mdl, fields=None, **kwargss):
