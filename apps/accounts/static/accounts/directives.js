@@ -49,6 +49,8 @@ angular.module('eestec.accounts.directives', ['angular-jwt'])
                     };
                     $scope.logout = function (ev) {
                         $localStorage.token = "";
+                        $scope.user = "";
+                        $localStorage.user = "";
                     };
                     $scope.login = function (result) {
                         if (result.permanent) {
@@ -80,6 +82,7 @@ angular.module('eestec.accounts.directives', ['angular-jwt'])
                         if ($localStorage.token) {
                             $http.get("/api/accounts/me/").then(function (result) {
                                 $scope.user = result.data;
+                                $localStorage.user = result.data;
                             });
                         }
                     };

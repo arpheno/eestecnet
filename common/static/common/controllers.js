@@ -109,9 +109,9 @@ angular.module('eestec.common.controllers', [
     ])
     .
     controller('appCtrl', [
-        '$scope',
-        function ($scope) {
-            $scope.user = "";
+        '$scope', '$localStorage',
+        function ($scope, $localStorage) {
+            $scope.user = $localStorage.user;
         }])
     .controller('contentController', [
         '$scope', 'Content', "$q",
