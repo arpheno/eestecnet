@@ -64,15 +64,6 @@ ng-md-icon {
   fill: #fff;
 }
 
-md-sidenav {
-  display: flex;
-  md-item, md-list {
-    padding: 5px;
-    flex-wrap: wrap;
-    display: flex;
-    flex: 1 1 100%;
-  }
-}
 
 #login {
   ng-md-icon {
@@ -182,4 +173,16 @@ h3 {
   line-height: 26px;
 }
 
+
+[ng-controller="sidenav"]{
+  md-sidenav {
+    display: flex;
+    md-item, md-list,md-button {
+      padding: 5px;
+      flex-wrap: wrap;
+      display: flex;
+      flex: 1 1 100%;
+    }
+  }
+}
 
