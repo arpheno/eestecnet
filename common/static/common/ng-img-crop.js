@@ -995,8 +995,15 @@
                 temp_canvas = angular.element('<canvas></canvas>')[0];
                 temp_ctx = temp_canvas.getContext('2d');
                 var ris = this.getResultImageSize();
-                temp_canvas.width = theArea.getSize().w;
-                temp_canvas.height = theArea.getSize().h;
+                var adjusted_width = image.width * theArea.getSize().w / ctx.canvas.width;
+                var adjusted_height = image.height * theArea.getSize().h / ctx.canvas.height;
+                console.log([adjusted_height, ctx.canvas.height]);
+                console.log([adjusted_width, ctx.canvas.width]);
+                console.log([adjusted_width / ctx.canvas.width]);
+                console.log([adjusted_height / ctx.canvas.height]);
+                console.log([image.height, image.width]);
+                temp_canvas.width = adjusted_width;
+                temp_canvas.height = adjusted_height;
                 var center = theArea.getCenterPoint();
                 var retObj = {
                     dataURI: null,
@@ -1007,7 +1014,6 @@
                     console.log(temp_canvas);
                     console.log(ris);
                     console.log(theArea.getSize());
-
                     temp_ctx.drawImage(image,
                         (center.x - theArea.getSize().w / 2) * (image.width / ctx.canvas.width),
                         (center.y - theArea.getSize().h / 2) * (image.height / ctx.canvas.height),
@@ -1015,11 +1021,12 @@
                         theArea.getSize().h * (image.height / ctx.canvas.height),
                         0,
                         0,
-                        theArea.getSize().w,
-                        theArea.getSize().h);
-                    //temp_ctx.drawImage(image, 0, 0, theArea.getSize().w, theArea.getSize().h);
+                        adjusted_width,
+                        adjusted_height);
+                    //temp_ctx.drawImage(image, 0, 0, adjusted_width, adjusted_height);
                     retObj.dataURI = temp_canvas.toDataURL();
-                    retObj.imageData = temp_canvas.getContext("2d").getImageData(0, 0, theArea.getSize().w, theArea.getSize().h);
+                    console.log([adjusted_height, adjusted_width, temp_ctx, retObj]);
+                    retObj.imageData = temp_canvas.getContext("2d").getImageData(0, 0, adjusted_width, adjusted_height);
                 }
                 return retObj;
             };

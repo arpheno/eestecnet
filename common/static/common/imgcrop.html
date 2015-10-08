@@ -1,19 +1,14 @@
 <md-dialog id="login" flex="70">
-    <md-dialog-content layout="row">
-        <div layout="column">
+    <md-dialog-content layout="column" layout-align="center center">
             <span>
                 <span>Select an image file:</span>
                 <input type="file" id="fileInput"/>
             </span>
+
             <div class="cropArea">
                 <img-crop area-type="rectangle" area-coords="myAreaCoords"
                           image="myImage" result-image="myCroppedImage"></img-crop>
             </div>
-        </div>
-        <div>
-            <p>Cropped Image:ss</p>
-            <img ng-src="{{ myCroppedImage }}"/>
-            <button ng-click="confirm()">Use this image</button>
-        </div>
+        <button ng-click="confirm()">Use this image</button>
     </md-dialog-content>
 </md-dialog>
