@@ -1,7 +1,9 @@
 <md-grid-list md-cols="8" md-row-height="1:1">
     <md-grid-tile ng-repeat="commitment in commitments" md-rowspan="2" md-colspan="2">
         <md-grid-tile-header>
-            {{ commitment.name }}
+	        <md-button ng-href="cities/{{ commitment.confirmable_identifier }}">
+	            {{ commitment.name }}
+            </md-button>
         </md-grid-tile-header>
         {{ commitment.description }}
         <md-grid-tile-footer>

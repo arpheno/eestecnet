@@ -13,8 +13,10 @@ angular.module('eestec.commitments.detail', ['ngRoute'])
         });
     }])
 
-    .controller('CommitmentDetailController', ["$scope",function ($scope) {
-        $scope.a = 0;
-        console.log("a");
-
+    .controller('CommitmentDetailController',[ "$scope","Commitment", "$routeParams", "$log", function ($scope, Commitment, $routeParams, $log) {
+        var pk = $routeParams.pk;
+        Commitment.get({pk:pk},
+            function(commitment) {
+                $scope.commitment = commitment;
+            });
     }]);
