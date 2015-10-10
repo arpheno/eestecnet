@@ -1,10 +1,16 @@
 import base64
+from collections import OrderedDict
 import logging
 
 from django.contrib.auth.models import Permission
-from rest_framework import serializers, viewsets
+from rest_framework import viewsets
+from rest_framework.fields import Field
+
 from rest_framework.serializers import ModelSerializer
 
+from rest_framework import serializers
+
+from common.fields import ThumbnailField
 from common.models import Image, Report, URL, Location, Content
 
 logger = logging.getLogger(__name__)
@@ -19,13 +25,6 @@ class Permissions(viewsets.ReadOnlyModelViewSet):
     queryset = Permission.objects.all()
     serializer_class = PermissionSerializer
 
-class AdminMixin(object):
-    def get_serializer(self, *args, **kwargs):
-        serializer = super(AdminMixin, self).get_serializer(*args, **kwargs)
-        return serializer
-
-from rest_framework import serializers
-
 
 class Base64PdfField(serializers.FileField):
     """
@@ -38,13 +37,13 @@ class Base64PdfField(serializers.FileField):
     Updated for Django REST framework 3.
     """
 
-    def to_representation(self, value):
-        try:
-            with open(value.path, "rb") as image_file:
-                value = base64.b64encode(image_file.read())
-            return value
-        except ValueError:
-            return None
+    # def to_representation(self, value):
+    #     try:
+    #         with open(value.path, "rb") as image_file:
+    #             value = base64.b64encode(image_file.read())
+    #         return value
+    #     except ValueError:
+    #         return None
 
     def to_internal_value(self, data):
         from django.core.files.base import ContentFile
@@ -70,7 +69,7 @@ class Base64PdfField(serializers.FileField):
             # Get the file name extension:
             file_extension = self.get_file_extension(file_name, decoded_file)
 
-            complete_file_name = "%s.%s" % (file_name, file_extension, )
+            complete_file_name = "%s.%s" % (file_name, file_extension,)
 
             data = ContentFile(decoded_file, name=complete_file_name)
 
@@ -79,6 +78,7 @@ class Base64PdfField(serializers.FileField):
 
     def get_file_extension(self, file_name, decoded_file):
         return "pdf"
+
 
 class Base64ImageField(serializers.ImageField):
     """
@@ -91,10 +91,10 @@ class Base64ImageField(serializers.ImageField):
     Updated for Django REST framework 3.
     """
 
-    def to_representation(self, value):
-        with open(value.path, "rb") as image_file:
-            value = base64.b64encode(image_file.read())
-        return value
+    # def to_representation(self, value):
+    #     with open(value.path.encode("utf-8"), "rb") as image_file:
+    #         value = base64.b64encode(image_file.read())
+    #     return value
     def to_internal_value(self, data):
         from django.core.files.base import ContentFile
         import base64
@@ -102,6 +102,11 @@ class Base64ImageField(serializers.ImageField):
         import uuid
 
         # Check if this is a base64 string
+        if "/media/" in data:
+            file=data[data.find("media"):]
+            with open("file","rb") as im:
+                data=ContentFile(im.read(),name=file)
+            return super(Base64ImageField, self).to_internal_value(data)
         if isinstance(data, six.string_types):
             # Check if the base64 string is in the "data:" format
             if 'data:' in data and ';base64,' in data:
@@ -115,11 +120,11 @@ class Base64ImageField(serializers.ImageField):
                 self.fail('invalid_image')
 
             # Generate file name:
-            file_name = str(uuid.uuid4())[:12] # 12 characters are more than enough.
+            file_name = str(uuid.uuid4())[:12]  # 12 characters are more than enough.
             # Get the file name extension:
             file_extension = self.get_file_extension(file_name, decoded_file)
 
-            complete_file_name = "%s.%s" % (file_name, file_extension, )
+            complete_file_name = "%s.%s" % (file_name, file_extension,)
 
             data = ContentFile(decoded_file, name=complete_file_name)
         self.allow_empty_file = True
@@ -132,12 +137,27 @@ class Base64ImageField(serializers.ImageField):
         extension = "jpg" if extension == "jpeg" else extension
 
         return extension
+
+
 class ImageSerializer(ModelSerializer):
     class Meta:
         model = Image
+
     full_size = Base64ImageField(
         max_length=None, use_url=True,
         allow_empty_file=True, allow_null=True,
+    )
+    square = ThumbnailField(
+        dimensions="250x250",
+        options={'crop': 'center'},
+        source="full_size",
+        read_only=True
+    )
+    large_square = ThumbnailField(
+        dimensions="500x500",
+        options={'crop': 'center'},
+        source="full_size",
+        read_only=True
     )
 
 
@@ -145,55 +165,75 @@ class ImageURLSerializer(ModelSerializer):
     class Meta:
         model = Image
 
-
-class ContentInSerializer(ModelSerializer):
-    class Meta:
-        model = Content
-
-    images = ImageSerializer(many=True)
-
+class ImageMixin(object):
     def update(self, instance, validated_data):
         images = validated_data.pop('images')
         instance.images = [Image.objects.create(**img) for img in images]
-        return super(ContentInSerializer, self).update(instance, validated_data)
+        return super(ImageMixin, self).update(instance, validated_data)
 
     def create(self, validated_data):
         images = validated_data.pop('images')
-        instance = Content.objects.create(**validated_data)
+        instance =super(ImageMixin, self).create(validated_data)
         instance.save()
         instance.images = [Image.objects.create(**img) for img in images]
         return instance
+class ContentInSerializer(ImageMixin,ModelSerializer):
+    class Meta:
+        model = Content
+    images = ImageSerializer(many=True)
 
 
+
+def serializer_factory(mdl, fields=None, **kwargss):
+    """ Generalized serializer factory to increase DRYness of code.
+
+    :param mdl: The model class that should be instanciated
+    :param fields: the fields that should be exclusively present on the serializer
+    :param kwargss: optional additional field specifications
+    :return: An awesome serializer
+    """
+
+    def _get_declared_fields(attrs):
+        fields = [(field_name, attrs.pop(field_name))
+                  for field_name, obj in list(attrs.items())
+                  if isinstance(obj, Field)]
+        fields.sort(key=lambda x: x[1]._creation_counter)
+        return OrderedDict(fields)
+
+    # Create an object that will look like a base serializer
+    class Base(object):
+        pass
+
+    Base._declared_fields = _get_declared_fields(kwargss)
+
+    class MySerializer(Base, ModelSerializer):
+        class Meta:
+            model = mdl
+
+        if fields:
+            setattr(Meta, "fields", fields)
+
+    return MySerializer
+
+
+# TODO: The below could be cleaned up using factories.
 class ContentOutSerializer(ModelSerializer):
     class Meta:
         model = Content
 
     images = ImageURLSerializer(many=True)
 
-    def update(self, instance, validated_data):
-        images = validated_data.pop('images')
-        images = [ImageSerializer(data=image) for image in images]
-        import pdb;
-
-        pdb.set_trace()
-        instance.images = [Image.objects.create(**img) for img in images]
-        return super(ContentOutSerializer, self).update(instance, validated_data)
-
-    def create(self, validated_data):
-        images = validated_data.pop('images')
-        instance = Content.objects.create(**validated_data)
-        instance.save()
-        print images
-        instance.images = [Image.objects.create(**img) for img in images]
-        return instance
 
 class URLSerializer(ModelSerializer):
     class Meta:
         model = URL
+
+
 class LocationSerializer(ModelSerializer):
     class Meta:
         model = Location
+
+
 class ReportSerializer(ModelSerializer):
     class Meta:
         model = Report

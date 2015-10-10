@@ -1,3 +1,4 @@
+/registration_api
 .coverage
 htmlcov
 db.sqlite3

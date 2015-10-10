@@ -50,16 +50,17 @@ We use Vagrant to manage the virtualmachine.
 Depending on your machine the following steps to pull the project and set up for local development may take several minutes.
 
     vagrant plugin install vagrant-reload
-    git clone http://github.com/Sebastian Wozny/eestecnet/
+    git clone http://github.com/arpheno/eestecnet/
     vagrant up
 
-To verify the installation, open a browser and go to http://localhost/api/content/ and log in as user admin@eestec.net with password 1234
-Then navigate to http://localhost/ and you should see the index page.
+When it finishes you should check localhost:8000 for a running instance of eestecnet,
+if you encouncter problems :
 
 
-Instead of using the pseudo production environment that comes out of the box, you may find it more convenient to run a debug server:
     vagrant ssh
     cd /vagrant/
+    sudo service supervisor stop
+    sudo killall python
     python manage.py migrate
     python manage.py createsuperuser
     python manage.py runserver 0.0.0.0:8000

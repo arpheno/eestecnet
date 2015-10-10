@@ -5,28 +5,41 @@ angular.module('eestec.common.controllers', [
     'ngMaterial',
     'uiGmapgoogle-maps'
 ])
-    .controller('networkController', ["$scope", "uiGmapGoogleMapApi", function ($scope, uiGmapGoogleMapApi) {
-        $scope.map = "";
-        $scope.events = {
-            "scroll": function () {
-                // Override the scroll event so it doesnt zoom the map.
-                // This is important for mobile devices.
-                return;
-            }
-        };
-        uiGmapGoogleMapApi.then(function (maps) {
-            $scope.map = {
-                center: {
-                    latitude: 48.1333,
-                    longitude: 11.56
-                },
-                zoom: 5
+    .controller('activitiesController', ["$scope", "Team", "Workshop",
+        function ($scope, Team, Workshop) {
+            $scope.teams = Team.query();
+            $scope.events = Workshop.query();
+        }])
+    .controller('networkController', ["$scope", "uiGmapGoogleMapApi", "Commitment",
+        function ($scope, uiGmapGoogleMapApi, Commitment) {
+            $scope.map = "";
+            $scope.events = {
+                "scroll": function () {
+                    // Override the scroll event so it doesnt zoom the map.
+                    // This is important for mobile devices.
+                    return;
+                }
             };
-        });
-    }])
+            uiGmapGoogleMapApi.then(function (maps) {
+                $scope.map = {
+                    center: {
+                        latitude: 48.1333,
+                        longitude: 11.56
+                    },
+                    zoom: 5
+                };
+            });
+            $scope.commitments = Commitment.query(function (result) {
+                $scope.markers = result.filter(function (x) {
+                    return x.locations.length;
+                }).map(function (x) {
+                    return JSON.parse(JSON.stringify(x.locations[0]));
+                });
+            });
+        }])
     .controller('toolbarController', [
-        "$scope", "$location", "$mdDialog","$mdSidenav",
-        function ($scope, $location, $mdDialog,$mdSidenav) {
+        "$scope", "$location", "$mdDialog", "$mdSidenav", "$http",
+        function ($scope, $location, $mdDialog, $mdSidenav, $http) {
             $scope.navigation = function (name) {
                 $location.path(name).replace();
                 console.log($location);
@@ -34,34 +47,77 @@ angular.module('eestec.common.controllers', [
             $scope.toggleSidenav = function (name) {
                 $mdSidenav(name).toggle();
             };
-            $scope.showLogin = function (ev) {
-                $mdDialog.show({
-                    controller: ["$scope", "$mdDialog", function ($scope, $mdDialog) {
-                        $scope.hide = $mdDialog.hide;
-                        $scope.cancel = $mdDialog.cancel;
-                        $scope.answer = function (answer) {
-                            $mdDialog.hide(answer);
-                        };
-                    }],
-                    templateUrl: '/static/common/login.html',
-                    parent: angular.element(document.body),
-                    targetEvent: ev,
-                    clickOutsideToClose: true,
-                    escapeToClose: true
-                })
-            };
         }])
-    .controller('appCtrl', [
-        '$scope', '$http', '$location', '$mdSidenav', 'Content',"$q",
-        function ($scope, $http, $location, $mdSidenav, Content,$q) {
-            CONTENTLOADED=$q.defer();
+    .controller('sidenavcontroller', [
+        '$scope',"$location",
+        function ($scope, $location) {
+            $scope.navigation = function (name) {
+                $location.path(name).replace();
+                console.log($location);
+            };
+            $scope.sections = [{
+                name: "About Us",
+                links: [{
+                    href: "/values/",
+                    title: "Our Values"
+                }, {
+                    href: "/cities/",
+                    title: "Map of the Network"
+                }, {
+                    href: "/history/",
+                    title: "Our History"
+                }, {
+                    href: "/structure/",
+                    title: "Our Structure"
+                }, {
+                    href: "/structure/",
+                    title: "Our Structure"
+                }]
+            }, {
+                name: "Activities",
+                links: [{
+                    href: "/announcements/",
+                    title: "Announcements"
+                }, {
+                    href: "/events/",
+                    title: "Events"
+                }, {
+                    href: "/history/",
+                    title: "Our History"
+                }, {
+                    href: "/teams/",
+                    title: "Working Groups"
+                }, {
+                    href: "/projects/",
+                    title: "Ongoing Projects"
+                }]
+            }, {
+                name: "Work with us",
+                links: [{
+                    href: "/getinvolved/",
+                    title: "Students"
+                }, {
+                    href: "/cooperation/",
+                    title: "Companies"
+                }, {
+                    href: "/academia/",
+                    title: "Universities"
+                }]
+            }];
+        }
+
+    ])
+    .
+    controller('appCtrl', [
+        '$scope', '$localStorage',
+        function ($scope, $localStorage) {
+            $scope.user = $localStorage.user;
+        }])
+    .controller('contentController', [
+        '$scope', 'Content', "$q",
+        function ($scope, Content, $q) {
+            CONTENTLOADED = $q.defer();
             $scope.contents = Content.query(function () {
-                //var dict = {};
-                //for (var i = 0; i < $scope.contents.length; i++) {
-                //    dict[$scope.contents[i].name] = $scope.contents[i];
-                //}
-                //$scope.contents = dict;
-                //console.log($scope.contents);
                 $scope.content = function (name) {
                     var result = $scope.contents.filter(function (x) {
                         return x.name === name;
@@ -79,8 +135,4 @@ angular.module('eestec.common.controllers', [
                 CONTENTLOADED.resolve();
             });
             $scope.edit = false;
-            $scope.navigation = function (name) {
-                $location.path(name).replace();
-                console.log($location);
-            };
         }]);

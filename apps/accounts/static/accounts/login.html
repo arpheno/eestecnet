@@ -1,0 +1,33 @@
+<md-dialog class="login" id="login" style="width:400px;">
+    <md-dialog-content style="display: flex;">
+        <div class="photo"></div>
+        <h3 style="text-align: center">Sign in</h3>
+        <md-input-container>
+            <label>Login</label>
+            <input type="text" ng-model="login.email" required>
+        </md-input-container>
+        <md-input-container>
+            <label>Password</label>
+            <input type="password" ng-model="login.password" required>
+        </md-input-container>
+        <div>
+            <md-checkbox ng-model="login.permanent">
+                Remember Me
+            </md-checkbox>
+            <md-button style="color:white" class="md-accent md-hue-2 md-raised" id="loginbutton" ng-click="submit()">
+                Sign in
+            </md-button>
+        </div>
+        <a href="/password-reset/">Forgot Password</a>
+    </md-dialog-content>
+    <md-button class="md-actions"
+               style="border-top:1px solid lightgrey;
+               margin:0;
+               min-height:initial;
+               height:32px;
+               justify-content:center;
+               text-align:center;
+               font-size: 10px" flex ng-click="signup()">
+        Create an account
+    </md-button>
+</md-dialog>

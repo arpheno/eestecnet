@@ -10,9 +10,4 @@ import logging
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
-questionnairerouter = SimpleRouter()
-questionnairerouter.register(r'questionnaires', QuestionnaireViewSet)
-questionnairerouter.register(r'questions', QuestionViewSet)
-questionnairerouter.register(r'responses', ResponseViewSet)
-questionnairerouter.register(r'answers', AnswerViewSet)
 

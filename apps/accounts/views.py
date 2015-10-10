@@ -1,4 +1,6 @@
+from rest_framework.decorators import list_route
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
+
 from rest_framework.viewsets import ModelViewSet
 
 from apps.accounts.models import Account, Participation
@@ -10,6 +12,8 @@ import logging
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
+
+
 # Create your views here.
 
 class AccountViewSet(ModelViewSet):
@@ -17,20 +21,20 @@ class AccountViewSet(ModelViewSet):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
     def get_serializer_class(self):
-        if self.request.user.is_superuser or self.request.method.lower() == "post" or \
-                                self.action == 'retrieve' and self.get_object() == \
+        print self.request.user.is_superuser
+        if self.request.user.is_superuser or \
+                        self.request.method.lower() == "post" or \
+                                self.action in ['put', 'retrieve'] and self.get_object() == \
                         self.request.user:
             return AccountSerializer
         else:
             return UnprivilegedAccountSerializer
 
-    def list(self, request):
-        self.queryset = self.queryset
-        return super(AccountViewSet, self).list(request)
+    @list_route()
+    def me(self, request):
+        self.kwargs["pk"] = self.request.user.id
+        return super(AccountViewSet, self).retrieve(request, pk=self.request.user.id)
 
-    def retrieve(self, request, pk=None, group_pk=None):
-        self.object = self.queryset.get(pk=pk, groups=group_pk)
-        return super(AccountViewSet, self).retrieve(request)
 
 class MembershipViewSet(ModelViewSet):
     queryset = Participation.objects.all()
@@ -39,13 +43,3 @@ class MembershipViewSet(ModelViewSet):
         if self.request.method.lower() == "get":
             return ReadParticipationSerializer
         return ParticipationSerializer
-    def list(self, request, group_pk=None):
-        if group_pk:
-            self.queryset = self.queryset.filter(groups=group_pk)
-        else:
-            pass
-        return super(MembershipViewSet, self).list(request)
-
-    def retrieve(self, request, pk=None, group_pk=None):
-        self.object = self.queryset.get(pk=pk)
-        return super(MembershipViewSet, self).retrieve(request)

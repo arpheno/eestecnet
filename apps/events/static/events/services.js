@@ -7,5 +7,22 @@
 angular.module('eestec.events.services', ['ngResource'])
     .factory('Event', ['$resource',
         function ($resource) {
-            return $resource('/api/events/:pk', {pk: "@pk"}, {});
+            return $resource('/api/events/:pk/', {pk: "@pk"},
+                {});
+        }])
+    .factory('Workshop', ['$resource',
+        function ($resource) {
+            return $resource('/api/workshops/:pk/', {pk: "@pk"},
+                {});
+        }])
+    .factory('Exchange', ['$resource',
+        function ($resource) {
+            return $resource('/api/exchanges/:pk/', {pk: "@pk"},
+                {});
+        }])
+    .factory('IMW', ['$resource',
+        function ($resource) {
+            return $resource('/api/imws/:pk/', {pk: "@pk"},
+                {});
         }]);
+

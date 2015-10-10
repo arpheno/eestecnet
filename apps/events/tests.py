@@ -1,11 +1,14 @@
+import json
 from django.core.urlresolvers import reverse_lazy
-from django.test import TestCase
+from django.test import TestCase, Client
 from guardian.shortcuts import get_perms
+import pytest
 from rest_framework.renderers import JSONRenderer
 
 from apps.accounts.factories import ParticipationFactory, AccountFactory
-from apps.events.serializers import BaseEventSerializer, ExchangeSerializer, \
-    TrainingSerializer, WorkshopSerializer, TravelSerializer
+from apps.accounts.models import Account
+from apps.events.models import Exchange, Training, Workshop, BaseEvent
+from apps.events.serializers import  event_serializer_factory, TravelSerializer
 from apps.events.factories import BaseEventFactory, ParticipationConfirmationFactory, \
     ExchangeFactory, TrainingFactory, WorkshopFactory, WorkshopParticipationFactory, \
     TravelFactory
@@ -20,11 +23,47 @@ import logging
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
+def eestecer():
+    hans=AccountFactory(first_name="Hans",is_active=True,is_superuser=False)
+    hans.set_password("default")
+    hans.save()
+    myadmin = Client()
+    myadmin.login(username=hans.email, password="default")
+    return myadmin
+
+def admin():
+    peter = AccountFactory(first_name="Peter",is_active=True,is_superuser=True)
+    peter.set_password("default")
+    peter.save()
+    myadmin = Client()
+    myadmin.login(username=peter.email, password="default")
+    return myadmin
+
+@pytest.mark.parametrize("input,expected", [
+    (admin, True),
+    (eestecer, False),
+])
+@pytest.mark.django_db
+def test_public_serializer(input, expected):
+    baseline = BaseEventFactory.create()
+    client = input()
+    response = client.get(reverse_lazy("baseevent-detail",kwargs={"pk":baseline.pk}))
+    data = json.loads(response.content)
+    assert expected == ("group_set" in data)
+@pytest.mark.django_db
+def test_list_serializer():
+    baseline = BaseEventFactory.create()
+    client = eestecer()
+    response = client.get(reverse_lazy("baseevent-list"))
+    data = json.loads(response.content)[0]
+    assert all(["pk" in data,"images" in data,
+                "name" in data,
+                "organizing_committee" in data])
 
 class TestBaseEvent(RESTCase, TestCase, AuditCase, ImageCase):
     def setUp(self):
         self.object = BaseEventFactory()
-        self.serializer_class = BaseEventSerializer
+        self.serializer_class = event_serializer_factory(BaseEvent)
         super(TestBaseEvent, self).setUp()
 
     def test_reports_in_generated_data(self):
@@ -86,21 +125,21 @@ class TestParticipationConfirmation(TestCase):
 class TestExchange(RESTCase, TestCase, AuditCase):
     def setUp(self):
         self.object = ExchangeFactory()
-        self.serializer_class = ExchangeSerializer
+        self.serializer_class = event_serializer_factory(Exchange)
         super(TestExchange, self).setUp()
 
 
 class TestTraining(RESTCase, TestCase, AuditCase):
     def setUp(self):
         self.object = TrainingFactory()
-        self.serializer_class = TrainingSerializer
+        self.serializer_class = event_serializer_factory(Training)
         super(TestTraining, self).setUp()
 
 
 class TestWorkshop(RESTCase, TestCase, AuditCase):
     def setUp(self):
         self.object = WorkshopFactory()
-        self.serializer_class = WorkshopSerializer
+        self.serializer_class = event_serializer_factory(Workshop)
         super(TestWorkshop, self).setUp()
 
     def test_organizers_can_modify_event(self):

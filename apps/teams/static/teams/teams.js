@@ -5,8 +5,9 @@
 'use strict';
 
 angular.module('eestec.teams', [
-    'ngRoute',
-    'eestec.teams.commitments.list',
-    'eestec.teams.commitments.detail'
+    'eestec.teams.list',
+    'eestec.teams.create',
+    'eestec.teams.services',
+    'eestec.teams.detail'
 ]);
 

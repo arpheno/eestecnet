@@ -9,9 +9,51 @@ from apps.announcements.models import Announcement, News, CareerOffer
 from apps.events.models import BaseEvent
 from apps.legacy.account.serializers import ConversionMixin
 from apps.teams.models import BaseTeam
-from common.fields import HyperlinkedSorlImageField
 from apps.legacy.news.models import Membership, Entry
 from common.serializers import Base64ImageField, ImageSerializer
+
+
+def get_account(r):
+    return Account.objects.get(email=r)
+    names = r.split("-")
+    names = [name.strip() for name in names]
+    print names
+    try:
+        return Account.objects.get(last_name=names[-1],is_active=True)
+    except:
+        pass
+    try:
+        if len(names) == 4:
+            return Account.objects.get(first_name=names[0], middle_name=names[1],
+                                       last_name=names[2],is_active=True)
+        elif len(names) == 3:
+            return Account.objects.get(first_name=names[0], middle_name=names[1],
+                                       last_name=names[2],is_active=True)
+        else:
+            return Account.objects.get(first_name=names[0],middle_name="", last_name=names[1],is_active=True)
+    except:
+        return Account.objects.get(first_name__startswith=names[0], last_name__startswith=names[-1],is_active=True)
+
+
+def get_team(r):
+    try:
+        return BaseTeam.objects.get(name=r)
+    except:
+        pass
+    try:
+        return BaseTeam.objects.get(name__startswith=r[:-1])
+    except:
+        pass
+    try:
+        return BaseTeam.objects.get(name__startswith=r[:3])
+    except:
+        pass
+
+def get_event(r):
+    try:
+        return BaseEvent.objects.get(name=r)
+    except:
+        return BaseEvent.objects.get(name__startswith=r[:-1])
 
 
 class MembershipSerializer(serializers.HyperlinkedModelSerializer):
@@ -32,15 +74,9 @@ class ConversionMembershipSerializer(ConversionMixin, Serializer):
         "user": None,
         "team": None,
     }
-
     def create(self, validated_data):
-        names = self.keep["user"].split("-")
-        if len(names) == 3:
-            u = Account.objects.get(first_name=names[0], middle_name=names[1],
-                                    last_name=names[2])
-        else:
-            u = Account.objects.get(first_name=names[0], last_name=names[1])
-        e = BaseTeam.objects.get(name=self.keep["team"])
+        u = get_account(self.keep["user"])
+        e = get_team(self.keep["team"])
         p = Participation(user=u, group=e.group_set.get(name__endswith="members"),
                           confirmed=True)
         p.save()
@@ -54,13 +90,8 @@ class ConversionOrganizerSerializer(ConversionMixin, Serializer):
     }
 
     def create(self, validated_data):
-        names = self.keep["user"].split("-")
-        if len(names) == 3:
-            u = Account.objects.get(first_name=names[0], middle_name=names[1],
-                                    last_name=names[2])
-        else:
-            u = Account.objects.get(first_name=names[0], last_name=names[1])
-        e = BaseEvent.objects.get(name=self.keep["team"])
+        u = get_account(self.keep["user"])
+        e = get_event(self.keep["team"])
         p = Participation(user=u, group=e.group_set.get(name__endswith="organizers"),
                           confirmed=True)
         p.save()
@@ -74,22 +105,28 @@ class ConversionParticipationSerializer(ConversionMixin, Serializer):
     }
 
     def create(self, validated_data):
-        names = self.keep["user"].split("-")
-        if len(names) == 3:
-            u = Account.objects.get(first_name=names[0], middle_name=names[1],
-                                    last_name=names[2])
-        else:
-            u = Account.objects.get(first_name=names[0], last_name=names[1])
-        e = BaseEvent.objects.get(name=self.keep["team"])
+        u = get_account(self.keep["user"])
+        e = get_event(self.keep["team"])
         p = Participation(user=u, group=e.group_set.get(name__endswith="officials"),
                           confirmed=True)
         p.save()
         return p
 
+class ConversionApplicationSerializer(ConversionMixin, Serializer):
+    conversion_map = {
+        "user": None,
+        "team": None,
+    }
+
+    def create(self, validated_data):
+        u = get_account(self.keep["user"])
+        e = get_event(self.keep["team"])
+        p = Participation(user=u, group=e.group_set.get(name__endswith="officials"),
+                          confirmed=False)
+        p.save()
+        return p
 
 class EntrySerializer(serializers.HyperlinkedModelSerializer):
-    thumbnail = HyperlinkedSorlImageField(dimensions="200x200",
-                                          options={'crop': 'center'})
 
     class Meta:
         model = Entry
@@ -122,8 +159,8 @@ class ConversionEntrySerializer(ConversionMixin, ModelSerializer):
             result = CareerOffer(**validated_data)
         result.owner = AccountFactory()
         result.save()
+        ct = result.polymorphic_ctype
         if self.keep["thumbnail"]:
-            ct = ContentType.objects.get(app_label="common", model="image")
             data = {
                 "full_size": self.keep["thumbnail"],
                 "content_object": result,

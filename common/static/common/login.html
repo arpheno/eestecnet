@@ -1,21 +1,21 @@
 <md-dialog id="login" flex="33">
     <md-dialog-content>
-        <form layout-align="flex-start center">
+        <div layout-align="flex-start center">
             <md-input-container>
                 <label>Username</label>
-                <input type="text" ng-model="username" required>
+                <input type="text" ng-model="login.email" required>
             </md-input-container>
             <md-input-container>
                 <label>Password</label>
-                <input type="text" ng-model="password" required>
+                <input type="text" ng-model="login.password" required>
             </md-input-container>
-            <md-button>
+            <md-button id="loginbutton" ng-click="submit()">
                 Login
             </md-button>
-            <md-button class="md-accent">
+            <md-button class="md-accent" ng-click="mea()">
                 Register
             </md-button>
-        </form>
+        </div>
         <a href="/password-reset/">Forgot Password</a>
     </md-dialog-content>
 </md-dialog>

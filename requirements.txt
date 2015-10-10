@@ -8,7 +8,6 @@ Sphinx
 Whoosh
 amqp
 anyjson
-asana
 billiard
 celery
 django-appconf
@@ -25,11 +24,11 @@ django-mail-queue
 django-mptt
 django-polymorphic
 djangorestframework
+djangorestframework-jwt
 django-registration-rest-framework
 django-celery-email
 django-filter
 docutils
-drf-nested-routers
 ecdsa
 factory-boy
 gunicorn

@@ -40,6 +40,8 @@
                 <md-radio-button ng-repeat="choice in value.choices"
                                  ng-value="choice.value">{{ choice.display_name }}</md-radio-button>
             </md-radio-group>
+            <md-datepicker ng-model="obj[key]" ng-if="value.type=='date'"></md-datepicker>
+            <input type="datetime-local" ng-model="obj[key]" ng-if="value.type=='datetime'">
         </md-input-container>
         <md-button class="md-raised md-accent" ng-click="obj.$save()">Create</md-button>
     </md-content>

@@ -1,0 +1,5 @@
+Dear user,
+
+Please visit {{site}}{{ path }} to finish your registration.
+
+Thank you.

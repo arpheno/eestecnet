@@ -5,7 +5,8 @@ from django.contrib.auth.models import AnonymousUser
 from django.core import mail
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpRequest
-from django.test import TestCase
+from django.test import TestCase, Client
+import pytest
 
 from apps.accounts.factories import AccountFactory, ParticipationFactory, GroupFactory
 from apps.accounts.models import Participation, Account
@@ -55,16 +56,6 @@ class TestAccount(RESTCase, TestCase, ImageCase):
         self.assertFalse(a.is_active)
         self.assertTrue("$" in a.password)
         self.assertEqual(len(mail.outbox), 1)
-    def test_registration_api_register(self):
-        self.data['email'] = "fake@qq.de"
-        response = self.client.post(reverse_lazy('registration_api_register'),
-                                    data=self.data)
-        self.assertEqual(201, response.status_code)
-        a = Account.objects.get(email="fake@qq.de")
-        self.assertFalse(a.is_active)
-        self.assertTrue("$" in a.password)
-        self.assertEqual(len(mail.outbox), 1)
-
 
     def test_allergies_visible(self):
         r = HttpRequest()
@@ -103,10 +94,6 @@ class TestGroup(RESTCase, TestCase):
         self.serializer_class = GroupSerializer
         super(TestGroup, self).setUp()
 
-    def test_get_group_nested(self):
-        url = reverse('group-detail', kwargs={'event_pk': self.object.applicable.pk,
-                                              'pk': self.object.pk})
-        self.assert_retrieve(url)
 
 
 class TestParticipation(RESTCase, TestCase):
@@ -136,3 +123,18 @@ class TestParticipation(RESTCase, TestCase):
         response.render()
         self.assertTrue("allergies" in response.content)
 
+
+@pytest.mark.django_db
+def test_registration_works():
+    data = {"email": "test@test.de", "password": "test", "password_check": "test", "first_name": "test",
+            "last_name": "test", "gender": "m"}
+    url = reverse_lazy("registration_api_register")
+    c = Client()
+    resp = c.post(url, data)
+    assert resp.status_code == 201, "The user account was not created"
+    user = Account.objects.get(email="test@test.de")
+    assert user.is_active == False, "User was activated without clicking links"
+    activation_code = user.api_registration_profile.activation_key
+    resp = c.get(reverse_lazy("registration_activate", kwargs={"activation_key": activation_code}))
+    user = Account.objects.get(email="test@test.de")
+    assert user.is_active == True, "User was not activated after clicking"
