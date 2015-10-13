@@ -202,7 +202,6 @@ class Account(GuardianUserMixin, AbstractAccount, AbstractBaseUser, DescriptionM
                              help_text=GROUPS_HELP_TEXT,
                              related_name="user_set", related_query_name="user")
     user_permissions = ManyToManyField(Permission, blank=True, related_name="user_set",
-                                       null=True,
                                        related_query_name="user")
 
 

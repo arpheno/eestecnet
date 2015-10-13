@@ -32,7 +32,7 @@ class BaseEvent(Applicable, Reversable, NameMixin, DescriptionMixin):
     urls = GenericRelation('common.URL', related_query_name='urls')
     locations = GenericRelation('common.Location', related_query_name='locations')
     deadline = DateTimeField(null=True, blank=True)
-    organizing_committee = ManyToManyField(BaseTeam, related_name="events", null=True,blank=True)
+    organizing_committee = ManyToManyField(BaseTeam, related_name="events", blank=True)
     start_date = DateField()
     end_date = DateField(null=True,blank=True)
 

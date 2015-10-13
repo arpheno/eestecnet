@@ -1,6 +1,6 @@
+SILENCED_SYSTEM_CHECKS = [u"models.E005"]
 from settings.conf.debugtoolbar import *
 from settings.conf.templates import TEMPLATE_DIRS
-
 WSGI_APPLICATION = 'common.wsgi.application'
 AUTH_USER_MODEL = 'accounts.Account'
 ROOT_URLCONF = 'common.urls'
