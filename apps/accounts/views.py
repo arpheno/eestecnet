@@ -1,6 +1,5 @@
 from rest_framework.decorators import list_route
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
-
 from rest_framework.viewsets import ModelViewSet
 
 from apps.accounts.models import Account, Participation

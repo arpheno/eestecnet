@@ -24,7 +24,8 @@ def graphite():
 def selenium():
     local(r"docker run --name selenium -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome")
 def postgresql():
-    local(r"docker run  --name postgresql -e 'DB_USER=myapp' -e 'DB_NAME=myapp' -e 'DB_PASS=dbpass' -d sameersbn/postgresql")
+    local(
+        r"docker run  --name postgresql -p 5432:5432 -e 'DB_USER=myapp' -e 'DB_NAME=myapp' -e 'DB_PASS=dbpass' -d sameersbn/postgresql")
 def protractor():
     with lcd("settings/protractor"):
         local(r"protractor conf.js")

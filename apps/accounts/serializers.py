@@ -11,19 +11,18 @@ import logging
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
-
-
-
-ACCOUNT_PUBLIC = ['name','id','first_name', 'middle_name', 'last_name', 'second_last_name', 'images']
-ACCOUNT_EVENT = ['name','tshirt_size', 'allergies', 'food_preferences', 'passport_number',
+ACCOUNT_PUBLIC = ['name', 'id', 'first_name', 'middle_name', 'last_name', 'second_last_name', 'images']
+ACCOUNT_EVENT = ['name', 'tshirt_size', 'allergies', 'food_preferences', 'passport_number',
                  'mobile']
-class AccountSerializer(ImageMixin,ModelSerializer):
+
+
+class AccountSerializer(ImageMixin, ModelSerializer):
     class Meta:
         model = Account
+        exclude = ['last_login']
+
     images = ImageSerializer(many=True)
     name = CharField(read_only=True)
-
-
 
 
 class UnprivilegedAccountSerializer(AccountSerializer):
@@ -40,6 +39,8 @@ class ParticipationAccountSerializer(AccountSerializer):
         fields = ACCOUNT_PUBLIC + ACCOUNT_EVENT
 
     images = ImageSerializer(many=True, read_only=True)
+
+
 class ParticipationSerializer(ModelSerializer):
     class Meta:
         model = Participation
