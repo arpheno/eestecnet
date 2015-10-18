@@ -1,5 +1,7 @@
 from fabric.context_managers import lcd
+from fabric.contrib.console import confirm
 from fabric.operations import local
+from fabric.api import *
 
 __author__ = 'swozn'
 import logging
@@ -34,8 +36,24 @@ def cleanup():
 def test():
     apps = local('ls  -d -1 apps/*/', capture=True).split()
     files = [app + "tests.py" for app in apps]
-    local(r'py.test -n 4 common/tests.py ' + " ".join(files))
+    return local(r'py.test -n 4 common/tests.py ' + " ".join(files))
 def coverage():
     apps = local('ls  -d -1 apps/*/', capture=True).split()
     files = [app + "tests.py" for app in apps]
     local(r'coverage run --omit="fabfile.py,settings/**,apps/legacy/**" --source . -m py.test common/tests.py ' + " ".join(files))
+
+
+env.hosts = ['arphen@37.59.106.189']
+
+
+def deploy():
+    # if test().failed and not confirm("Tests failed. Continue anyway?"):
+    #   abort("Aborting at user request.")
+    with cd("/var/www/test/"):
+        run("./reset.sh")
+
+
+def server_shell():
+    with cd("/var/www/test/"):
+        with prefix("source bin/activate"):
+            run("python manage.py shell --settings=settings.deployment")
