@@ -24,7 +24,7 @@ To do this, open an administrative command shell (cmd.exe) and copy&paste the fo
 
 When it's done installing please type ::
 
-    choco install git virtualbox vagrant
+    choco install git virtualbox vagrant ssh
 
 Alternativley install the dependencies manually and add them to your path.
 
@@ -34,8 +34,6 @@ Debian/Ubuntu
 In a command shell do ::
 
     sudo apt-get install git virtualbox vagrant
-
-
 
 Development tools
 =================
