@@ -4,8 +4,9 @@ from rest_framework.serializers import ModelSerializer
 
 from apps.accounts.serializers import GroupSerializer, UnprivilegedAccountSerializer
 from apps.events.models import Travel
-from common.serializers import ReportSerializer, ImageSerializer, URLSerializer, serializer_factory, LocationSerializer
+from common.serializers import ReportSerializer, ImageSerializer, URLSerializer, LocationSerializer
 
+from restframework_serializer_factory.serializers import modelserializer_factory
 __author__ = 'Sebastian Wozny'
 import logging
 
@@ -19,7 +20,7 @@ EVENT_LIST = ["pk", "images", "name", "organizing_committee", "locations"]
 
 
 def event_public_serializer_factory(mdl):
-    myserializer = serializer_factory(
+    myserializer = modelserializer_factory(
         mdl, fields=EVENT_PUBLIC,
         images=ImageSerializer(many=True, read_only=True),
         participants=UnprivilegedAccountSerializer(many=True, read_only=True),
@@ -29,7 +30,7 @@ def event_public_serializer_factory(mdl):
 
 
 def event_serializer_factory(mdl):
-    myserializer = serializer_factory(
+    myserializer = modelserializer_factory(
         mdl,
         owner=HiddenField(default=CurrentUserDefault()),
         reports=ReportSerializer(many=True, read_only=True),
@@ -41,7 +42,7 @@ def event_serializer_factory(mdl):
 
 
 def event_list_serializer_factory(mdl):
-    myserializer = serializer_factory(
+    myserializer = modelserializer_factory(
         mdl, fields=EVENT_LIST,
         images=ImageSerializer(many=True, read_only=True),
         locations=LocationSerializer(many=True, read_only=True))

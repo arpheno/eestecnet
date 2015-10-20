@@ -3,8 +3,8 @@ from rest_framework.fields import CurrentUserDefault
 from rest_framework.serializers import ModelSerializer
 
 from apps.teams.models import BaseTeam, InternationalTeam, Commitment
-from common.serializers import ImageSerializer, serializer_factory, LocationSerializer, URLSerializer
-
+from common.serializers import ImageSerializer, LocationSerializer, URLSerializer
+from restframework_serializer_factory.serializers import modelserializer_factory
 __author__ = 'Sebastian Wozny'
 import logging
 
@@ -16,7 +16,7 @@ TEAM_PUBLIC = ["pk", "images", "name", "locations",
 
 
 def team_serializer_factory(mdl):
-    return serializer_factory(
+    return modelserializer_factory(
         mdl,
         images=ImageSerializer(many=True, read_only=True),
         locations=LocationSerializer(many=True, read_only=True),
@@ -26,7 +26,7 @@ def team_serializer_factory(mdl):
 
 
 def team_public_serializer_factory(mdl):
-    return serializer_factory(
+    return modelserializer_factory(
         mdl, fields=TEAM_PUBLIC,
         locations=LocationSerializer(many=True, read_only=True),
         urls=URLSerializer(many=True, read_only=True),
@@ -35,7 +35,7 @@ def team_public_serializer_factory(mdl):
 
 
 def team_list_serializer_factory(mdl):
-    return serializer_factory(
+    return modelserializer_factory(
         mdl, fields=TEAM_LIST,
         locations=LocationSerializer(many=True, read_only=True),
         images=ImageSerializer(many=True, read_only=True)
