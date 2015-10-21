@@ -1,11 +1,9 @@
 from autoslug import AutoSlugField
 from autoslug.utils import slugify
-from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.loader import render_to_string
 from django.utils.datetime_safe import datetime
-from guardian.shortcuts import assign_perm
 
 from apps.gmapi.maps import Geocoder
 from apps.events.models import Event
@@ -25,9 +23,6 @@ class Team(models.Model):
     """ When Members are created first, a local event called Recruitment is automatically
      created. By applying to event, registered users can become part of one or more
      teams."""
-
-    class Meta:
-        permissions = (('view_team', 'Can view team'),)
     # General
     name = models.CharField(max_length=50, unique=True)
     thumbnail = models.ImageField(blank=True, null=True, upload_to="memberthumbs")
@@ -74,14 +69,8 @@ class Team(models.Model):
             self.lat, self.lng = results[0]['geometry']['location']['arg']
         except:
             pass
-
-        super(Team, self).save(*args, **kwargs)
-        privileged, created = Group.objects.get_or_create(name=self.slug + "_privileged")
-        privileged.save()
-        privileged.user_set = self.privileged()
-        privileged.save()
-        assign_perm('change_team', privileged, self)
         if not self.pk:
+            super(Team, self).save(*args, **kwargs)
             a = Event.objects.create(
                 name=str(self.slug + " recruitment"),
                 scope="local",
@@ -91,6 +80,8 @@ class Team(models.Model):
             )
             a.save()
             a.organizing_committee = [self]
+        else:
+            super(Team, self).save(*args, **kwargs)
 
     def __unicode__(self):
         if self.category not in ['jlc', 'lc', 'observer']:
@@ -114,8 +105,6 @@ class Team(models.Model):
 
 
 class Board(models.Model):
-    class Meta:
-        permissions = (('view_board', 'Can view board'),)
     year = models.PositiveIntegerField()
     treasurer = models.OneToOneField("account.Eestecer",
                                      related_name="treasurer_in_board",
@@ -133,9 +122,6 @@ class Board(models.Model):
 class MemberImage(models.Model):
     """ Helper class used to associate an arbitrary number of images with a
     :class:`Member` """
-
-    class Meta:
-        permissions = (('view_memberimage', 'Can view memberimage'),)
 
     property = models.ForeignKey(Team, related_name='images')
     image = models.ImageField(upload_to="memberimages")

@@ -4,14 +4,13 @@ import sha
 
 from autoslug import AutoSlugField
 from autoslug.utils import slugify
-from django.contrib.auth.models import Group
+from django.core.files import File
 from django.core.urlresolvers import reverse
 from django.db.models import ForeignKey
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
-from guardian.shortcuts import assign_perm
 from mailqueue.models import MailerMessage
 
 from apps.feedback.utils import create_answer_set
@@ -96,7 +95,6 @@ class Event(models.Model):
     feedbacksheet = ForeignKey('feedback.QuestionSet', null=True, blank=True,related_name="events")
     questionaire = models.ForeignKey('feedback.QuestionSet',blank=True,null=True,related_name="eventstwo",help_text="Optional: If you want your participants to answer more questions other than writing about their motivation, you can include it here")
     class Meta:
-        permissions = (('view_event', 'Can view event'),)
         verbose_name = "Event"
         ordering = ('name',)
         verbose_name_plural = "Events"
@@ -127,14 +125,49 @@ class Event(models.Model):
                         application.questionaire = create_answer_set(self.questionaire)
                         application.save()
         super(Event, self).save(force_insert, force_update, using, update_fields)
-        privileged, created = Group.objects.get_or_create(name=self.slug + "_privileged")
-        privileged.save()
-        privileged.user_set = self.organizers.all()
-        for oc in self.organizing_committee.all():
-            assign_perm('change_event', Group.objects.get(name=oc.slug + "_privileged"),
-                        self)
-        privileged.save()
-        assign_perm('change_event', privileged, self)
+
+    def clean(self):
+        if self.category == "training":
+            if not self.thumbnail:
+                if "ommunication" in self.name:
+                    thumbname = "communication-skills.jpg"
+                elif "motional" in self.name:
+                    thumbname = "emotional-intelligence.jpg"
+                elif "eedback" in self.name:
+                    thumbname = "feedback.jpg"
+                elif "resentation" in self.name:
+                    thumbname = "presentation-skills.jpg"
+                elif "rganizational" in self.name:
+                    thumbname = "organizational-management.jpg"
+                elif "eadership" in self.name:
+                    thumbname = "leadership.jpg"
+                elif "roject" in self.name:
+                    thumbname = "project-management.jpg"
+                elif "ime" in self.name and "anagement" in self.name:
+                    thumbname = "time-management.jpg"
+                elif "eambuilding" in self.name:
+                    thumbname = "teambuilding.JPG"
+                elif "acilitation" in self.name:
+                    thumbname = "facilitation.jpg"
+                elif "ynamics" in self.name:
+                    thumbname = "group-dynamics.jpg"
+                elif "ody" in self.name and "anguage" in self.name:
+                    thumbname = "body-language.jpg"
+                else:
+                    thumbname = "trtlogo.png"
+                with open('eestecnet/training/' + thumbname, 'rb') as doc_file:
+                    self.thumbnail.save("thumbname.jpg", File(doc_file), save=True)
+            if not str(self.start_date) in self.name:
+                self.name = self.name + "-" + str(self.start_date)
+        #if self.end_date:
+        #    if self.start_date > self.end_date:
+        #        raise ValidationError("The event may not begin after it ends.")
+        #    if self.end_date < self.start_date:
+        #        raise ValidationError("The event may not end before it starts.")
+        #    if self.deadline:
+        #        if self.deadline.date() > self.end_date:
+        #            raise ValidationError(
+        #                "The event deadline must be before the event ends.")
 
     def __str__(self):
         return self.name
@@ -152,7 +185,6 @@ class Event(models.Model):
 
 class Participation(models.Model):
     class Meta:
-        permissions = (('view_participation', 'Can view Participation'),)
         verbose_name = "Participant"
         verbose_name_plural = "Participants"
 
@@ -179,8 +211,6 @@ class Participation(models.Model):
 
 
 class Transportation(models.Model):
-    class Meta:
-        permissions = (('view_transportation', 'Can view Transportation'),)
     arrival = models.DateTimeField()
     arrive_by = models.CharField(max_length=20, choices=[('plane', 'Plane'),
                                                          ('bus', 'Bus'),
@@ -205,8 +235,8 @@ class Transportation(models.Model):
 class Application(models.Model):
     """Application objects link Users to :class:`Event` objects and provide additional
     information"""
+
     class Meta:
-        permissions = (('view_application', 'Can view Application'),)
         unique_together = (('applicant', 'target'),)
 
     applicant = models.ForeignKey('account.Eestecer')

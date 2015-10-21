@@ -10,24 +10,6 @@ from eestecnet.fields import HyperlinkedSorlImageField
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
-
-
-class PersonParticipationSerializer(serializers.HyperlinkedModelSerializer):
-    thumbnail = HyperlinkedSorlImageField(dimensions="500x500",
-                                          options={'crop': 'center'})
-
-    class Meta:
-        model = Eestecer
-        exclude = ('email', 'password')
-
-
-class PrivateSerializer(serializers.HyperlinkedModelSerializer):
-    thumbnail = HyperlinkedSorlImageField(dimensions="200x200",
-                                          options={'crop': 'center'})
-
-    class Meta:
-        model = Eestecer
-        exclude = ('password')
 class PersonSerializer(serializers.HyperlinkedModelSerializer):
     thumbnail = HyperlinkedSorlImageField(dimensions="200x200",
                                           options={'crop': 'center'})
@@ -49,12 +31,9 @@ class Base64ImageField(serializers.ImageField):
     """
 
     def to_representation(self, value):
-        try:
-            with open(value.path, "rb") as image_file:
-                value = base64.b64encode(image_file.read())
-            return value
-        except ValueError:
-            return ""
+        with open(value.path, "rb") as image_file:
+            value = base64.b64encode(image_file.read())
+        return value
     def to_internal_value(self, data):
         from django.core.files.base import ContentFile
         import base64
@@ -104,12 +83,9 @@ class Base64PdfField(serializers.FileField):
     """
 
     def to_representation(self, value):
-        try:
-            with open(value.path, "rb") as image_file:
-                value = base64.b64encode(image_file.read())
-            return value
-        except ValueError:
-            return ""
+        with open(value.path, "rb") as image_file:
+            value = base64.b64encode(image_file.read())
+        return value
     def to_internal_value(self, data):
         from django.core.files.base import ContentFile
         import base64
@@ -155,4 +131,12 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
             'thumbnail', 'first_name', 'middle_name', 'last_name', 'second_last_name',
             'is_superuser', 'slug', 'field_of_study', 'groups', 'user_permissions')
         # exclude=('email','password','passport_number','date_of_birth')
-
+class LegacyAccountSerializer(ModelSerializer):
+    class Meta:
+        model = Eestecer
+    thumbnail = Base64ImageField(
+        max_length=None, use_url=True,
+    )
+    curriculum_vitae= Base64PdfField(
+        max_length=None, use_url=True,
+    )

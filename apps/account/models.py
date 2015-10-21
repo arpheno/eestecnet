@@ -84,7 +84,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     #Basic Information
     def name(self):
         return self.get_full_name()
-    thumbnail = models.ImageField(upload_to="users",null=True,blank=True,default="/media/cvs/example.jpg")
+    thumbnail = models.ImageField(upload_to="users",null=True,blank=True)
     description = models.TextField(blank=True, null=True)
     slug = AutoSlugField(populate_from=get_eestecer_slug)
     #Contact information
@@ -116,7 +116,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     food_preferences = models.CharField(max_length=15, choices=FOOD_CHOICES,
                                         default='none')
     """ Food preferences, for example vegetarian or no pork. """
-    curriculum_vitae = models.FileField(upload_to="cvs", blank=True, null=True,default="/media/cvs/example.dat")
+    curriculum_vitae = models.FileField(upload_to="cvs", blank=True, null=True)
     """ For the future incorporation of Lykeion """
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     """Should be set by the user to the time they joined eestec. For new users it will
@@ -178,7 +178,6 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
 
 
     class Meta:
-        permissions = (('view_eestecer', 'Can view Eestecer'),)
         verbose_name = _('user')
         verbose_name_plural = _('users')
         unique_together = (('first_name', 'middle_name', 'last_name'),)
@@ -197,9 +196,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
         "Returns the short name for the user."
         return '%s %s' % (self.first_name, self.last_name)
     def __unicode__(self):
-        if self.middle_name:
-            return "-".join([self.first_name,self.middle_name,self.last_name])
-        return "-".join([self.first_name,self.last_name])
+        return self.get_full_name()
     def get_absolute_url(self):
         return "/people/"+  self.slug
     def update_forum(self,password=None):
@@ -236,15 +233,11 @@ class Position(models.Model):
     name = models.CharField(max_length=60, unique=True)
     description = models.TextField()
 
-    class Meta:
-        permissions = (('view_position', 'Can view position'),)
     def __unicode__(self):
         return self.name
 
 
 class Achievement(models.Model):
-    class Meta:
-        permissions = (('view_achievement', 'Can view achievement'),)
     person = models.ForeignKey(Eestecer, related_name='achievements')
     position = models.ForeignKey(Position)
     member = models.ForeignKey('teams.Team', blank=True, null=True)

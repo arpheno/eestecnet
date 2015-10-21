@@ -1,19 +1,11 @@
 from rest_framework import viewsets
-from rest_framework.filters import DjangoObjectPermissionsFilter
-from apps.news.models import Membership
-from apps.news.serializers import MembershipSerializer
 
-from eestecnet import permissions
+from apps.teams.models import Team
+from apps.teams.serializers import CitySerializer
 from eestecnet.serializers import AdminMixin
 
 
-class TeamMembers(AdminMixin, viewsets.ReadOnlyModelViewSet):
-    queryset = Membership.objects.all()
-    serializer_class = MembershipSerializer
-
-    def list(self, request, city_pk=None):
-        self.queryset = self.queryset.filter(team__pk=city_pk)
-        return super(TeamMembers, self).list(request)
-
-
+class Cities(AdminMixin, viewsets.ReadOnlyModelViewSet):
+    queryset = Team.objects.filter(category__in=["lc", "jlc", "observer"])
+    serializer_class = CitySerializer
 

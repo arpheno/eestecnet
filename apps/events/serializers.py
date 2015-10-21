@@ -1,10 +1,7 @@
 from rest_framework import serializers
-from rest_framework.relations import SlugRelatedField, StringRelatedField
-from rest_framework.serializers import ModelSerializer
 
 from apps.account.serializers import PersonSerializer, Base64ImageField
-from apps.events.models import Event, Participation
-from apps.feedback.serializers import LegacyQuestionSetSerializer
+from apps.events.models import Event
 from apps.teams.serializers import CitySerializer
 from eestecnet.fields import HyperlinkedSorlImageField
 
@@ -25,4 +22,9 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
         exclude = ['applicants', 'questionaire', 'feedbacksheet', 'pax_report',
                    'organizer_report']
 
-
+class LegacyEventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+    thumbnail = Base64ImageField(
+        max_length=None, use_url=True,
+    )

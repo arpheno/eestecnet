@@ -20,8 +20,6 @@ class Reference(Model):
 
 
 class WikiPage(Model):
-    class Meta:
-        permissions = (('view_wikipage', 'Can view wikipage'),)
     name = CharField(max_length=50)
     content = FroalaField(options={'height': 600},
                           default="This page does not exist yet, you can create it by clicking Update.")

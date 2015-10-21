@@ -9,7 +9,6 @@ class Membership(models.Model):
     information"""
 
     class Meta:
-        permissions = (('view_membership', 'Can view membership'),)
         unique_together = (('user', 'team'),)
 
     user = models.ForeignKey('account.Eestecer')
@@ -25,10 +24,7 @@ class Membership(models.Model):
             self.user.is_staff = True
             self.user.save()
             local, created = Group.objects.get_or_create(name='Local Admins')
-            privileged, created = Group.objects.get_or_create(
-                name=self.team.slug + "privileged")
             self.user.groups.add(local)
-            self.user.groups.add(privileged)
         super(Membership, self).save()
 
     def email(self):
@@ -46,7 +42,6 @@ class EntryManager(models.Manager):
 
 class Entry(models.Model):
     class Meta:
-        permissions = (('view_entry', 'Can view entry'),)
         verbose_name_plural = "entries"
 
     name = models.CharField(max_length=50, unique=True)
