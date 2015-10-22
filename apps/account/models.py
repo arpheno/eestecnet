@@ -202,7 +202,7 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
     def update_forum(self,password=None):
         import urllib2
         import urllib
-        url="http://forum.eestec.net/connector.php"
+        url="https://forum.eestec.net/connector.php"
         try:
             from eestecnet.settings.secret import FORUM_PASSWORD
         except:
@@ -226,7 +226,10 @@ class Eestecer(AbstractBaseUser, PermissionsMixin):
         req = urllib2.Request(url + u'?' + data)
         opener = urllib2.build_opener()
         opener.addheaders = [('User-agent', 'Mozilla/5.0')]
-        response = opener.open(url+'?'+data)
+        try:
+            response = opener.open(url+'?'+data)
+        except:
+            pass
 
 
 class Position(models.Model):

@@ -1,3 +1,5 @@
+/doc
+/.vagrant
 # Created by .ignore support plugin (hsz.mobi)
 *.pyc
 db.sqlite3
@@ -9,3 +11,4 @@ media
 .idea
 serve
 whoosh_index
+static/doc

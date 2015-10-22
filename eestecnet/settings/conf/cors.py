@@ -1,1 +1,1 @@
-CORS_ORIGIN_WHITELIST = ('localhost')
+CORS_ORIGIN_WHITELIST = ('localhost','localhost:8080')
