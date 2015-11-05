@@ -4,7 +4,7 @@
 {% for entry in object_list %}
 <section class="career">
     <h1><a style="color:#9a0008;"
-           href="{% url 'careeroffer' entry.slug %}">
+           href="{% url 'news' entry.slug %}">
         {{ entry.name }}
     </a><span>{{ entry.pub_date }}</span></h1>
 
