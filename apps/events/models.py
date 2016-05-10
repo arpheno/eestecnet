@@ -105,6 +105,18 @@ class Event(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
+        try:
+            if self.category == "training":
+                message = MailerMessage()
+                context = { 'user': self.applicant, }
+                body = render_to_string("events/training_tracker.txt", context)
+                message.subject = " ".join(self.organizers.all())+"organized a training: " + self.target.name +"EOM"
+                message.content = "end of message"
+                message.to_address = "trt-board@eestec.net"
+                message.save()
+        except:
+            pass
+
         self.slug = slugify(self.name)
         if (self.feedbacksheet):
             if self.pk:
