@@ -65,7 +65,12 @@ class Team(models.Model):
             self.slug = slugify(self.name)
             geocoder = Geocoder()
             address = self.address
-            results, status_code = geocoder.geocode({'address': self.name})
+            #Workaround for LC Athens appearing on the map as Athens, Georgia
+            if self.name == "Athens":
+                name = "Athina"
+            else:
+                name = self.name
+            results, status_code = geocoder.geocode({'address': name})
             self.lat, self.lng = results[0]['geometry']['location']['arg']
         except:
             pass
