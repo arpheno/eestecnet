@@ -22,7 +22,7 @@ django-cors-headers==1.0.0
 django-debugtools==1.2.1
 django-extra-views==0.6.5
 django-form-utils==1.0.2
-django-froala-editor==1.2.12
+django-froala-editor
 django-gmapi==1.0.1
 django-gunicorn==0.1.1
 django-haystack==2.3.1
