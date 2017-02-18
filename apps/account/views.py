@@ -103,7 +103,7 @@ class EestecerUpdateForm(BetterModelForm):
             ('Name',
              {'fields': ['first_name', 'middle_name', 'last_name', 'second_last_name']}),
             ('Additional Information', {'fields': [
-                'gender', 'date_of_birth', 'show_date_of_birth',
+                'gender', 'date_of_birth', 'show_date_of_birth','email',
                 'thumbnail', 'field_of_study', 'curriculum_vitae']}),
             ('Contact Information', {'fields': [
                 'hangouts', 'mobile', 'description', 'skype']}),
