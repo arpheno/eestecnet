@@ -27,7 +27,6 @@ from apps.events.models import Event, Application, Participation
 from apps.teams.forms import ApplicationInline, ParticipationInline
 from apps.teams.models import Team
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -55,6 +54,7 @@ class AddEvents(FormView):
     form_class = UploadEventsForm
     template_name = "events/add_events.html"
     success_url = "/"
+
     def form_valid(self, form):
         self.handle_events(self.request.FILES['file'])
         return super(AddEvents, self).form_valid(form)
@@ -126,6 +126,7 @@ class AddEvents(FormView):
                 new_event.name = event[0]
             new_event.save()
 
+
 class InternationalEvents(AdminOptions, Grids, ListView):
     model = Event
 
@@ -159,7 +160,7 @@ class InternationalEvents(AdminOptions, Grids, ListView):
                 eventlist['active_list'].append(event)
             if event.deadline and event.end_date and event.deadline < timezone.now() \
                     and event.end_date > \
-                    timezone.now().date():
+                            timezone.now().date():
                 eventlist['pending_list'].append(event)
             if event.deadline and event.end_date and event.end_date < timezone.now(
 
@@ -171,8 +172,11 @@ class InternationalEvents(AdminOptions, Grids, ListView):
 class InternationalProjects(InternationalEvents):
     def grids(self):
         return [
-            ("events/grids/base.html",Event.objects.filter(category="project"), "Current projects carried out in EESTEC"),
-            ]
+            ("events/grids/base.html", Event.objects.filter(category="project"),
+             "Current projects carried out in EESTEC"),
+        ]
+
+
 def confirm_event(request, slug):
     try:
         pa = Participation.objects.get(target__slug=slug, participant=request.user)
@@ -199,7 +203,8 @@ class EventDetail(AdminOptions, Information, Grids, DetailView):
             options.append(
                 ('Feedback', reverse_lazy('answer_feedback', kwargs=self.kwargs)))
         if not self.request.user.is_superuser and not Membership.objects.filter(
-                team__in=self.get_object().organizing_committee.all(), privileged=True, user=self.request.user):
+                team__in=self.get_object().organizing_committee.all(), privileged=True,
+                user=self.request.user) and not self.request.user in self.get_object().organizers.all():
             return options
         options.append(
             ('Change Details', reverse_lazy('eventchangedetails', kwargs=self.kwargs)))
@@ -305,8 +310,6 @@ class ApplyToEvent(EventMixin, DialogFormMixin, CreateView):
         context['object'] = Event.objects.get(slug=self.kwargs['slug'])
         return context
 
-
-
     def get_success_url(self):
         return reverse('event', kwargs=self.kwargs)
 
@@ -314,7 +317,7 @@ class ApplyToEvent(EventMixin, DialogFormMixin, CreateView):
         application = form.save(commit=False)
         application.applicant = self.request.user
         application.target = Event.objects.get(slug=self.kwargs['slug'])
-        if not self.request.user.teams.all() and application.target.category!="recruitment":
+        if not self.request.user.teams.all() and application.target.category != "recruitment":
             messages.add_message(
                 self.request,
                 messages.ERROR,
@@ -340,7 +343,7 @@ class ApplyToEvent(EventMixin, DialogFormMixin, CreateView):
             'Thank you for your application. You will be notified upon acceptance.')
         logger.info(
             str(self.request.user) + " just applied to " + str(application.target))
-        return super(ApplyToEvent,self).form_valid(form)
+        return super(ApplyToEvent, self).form_valid(form)
 
 
 class UpdateTransport(EventMixin, DialogFormMixin, UpdateView):
@@ -379,7 +382,7 @@ class FillInTransport(EventMixin, DialogFormMixin, CreateView):
             self.request,
             messages.INFO,
             'Thank you for filling in your transportation details.')
-        return super(FillInTransport,self).form_valid(form)
+        return super(FillInTransport, self).form_valid(form)
 
 
 class ChangeDetails(EventMixin, DialogFormMixin, UpdateView):
@@ -439,7 +442,7 @@ class ExportApplications(EventMixin, DetailView):
         for questionaire in questionaires:
             if questionaire:
                 for answer in questionaire.answer_set.all():
-                    columns.append((answer.q.q,10000))
+                    columns.append((answer.q.q, 10000))
 
         font_style = xlwt.XFStyle()
         font_style.font.bold = True
@@ -473,7 +476,7 @@ class ExportApplications(EventMixin, DetailView):
                 pax.applicant.mobile,
                 cv,
                 pax.letter,
-                ]
+            ]
             if pax.questionaire:
                 for answer in pax.questionaire.answer_set.all():
                     row.append(answer.a)
@@ -505,8 +508,8 @@ class ExportFeedback(EventMixin, DetailView):
         sheet = 0
         if self.get_object().feedbacksheet:
             for pax in self.get_participants():
-                ws = wb.add_sheet("Feedback #" + str(sheet),cell_overwrite_ok=True)
-                row_num=0
+                ws = wb.add_sheet("Feedback #" + str(sheet), cell_overwrite_ok=True)
+                row_num = 0
                 columns = [(u"Question", 7000), (u"Answer", 10000)]
                 font_style = xlwt.XFStyle()
                 font_style.font.bold = True
@@ -687,7 +690,3 @@ class CreateEvent(DialogFormMixin, CreateWithInlinesView):
         kwargs['user'] = self.request.user
         kwargs['teams'] = self.request.user.teams_administered()
         return kwargs
-
-
-
-
