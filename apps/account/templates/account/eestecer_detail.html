@@ -14,9 +14,7 @@
     <div id="userpersonal">
         <h1>Personal Note</h1>
         {% block description %}
-        {% autoescape off %}
             {{ object.description }}
-        {% endautoescape %}
         {% endblock %}
     </div>
     {% if object.achievements.all %}
