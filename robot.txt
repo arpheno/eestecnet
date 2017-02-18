@@ -1,0 +1,4 @@
+#protection of CV data
+
+Useragent: *
+Disallow: /media/cvs/
