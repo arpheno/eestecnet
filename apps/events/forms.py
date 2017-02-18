@@ -101,13 +101,13 @@ class EventCreationForm(BetterModelForm):
         queryset=Eestecer.objects.none(),
         widget=MultiSelectWidget,
         label="",
-        required=False
+        required=True
     )
     organizing_committee = ModelMultipleChoiceField(
         queryset=Team.objects.none(),
         widget=MultiSelectWidget,
         label="",
-        required=False
+        required=True
     )
     start_date = DateField(widget=TextInput(attrs={"class": "date"}))
     end_date = DateField(widget=TextInput(attrs={"class": "date"}))
