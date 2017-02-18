@@ -205,6 +205,11 @@ class EestecerCreate(DialogFormMixin, CreateView):
         logger.info(str(user) + " registered on the website.")
         user.is_active = False
         user.activation_link = id_generator(30)
+        user.first_name=user.first_name.strip()
+        user.middle_name=user.middle_name.strip()
+        user.last_name=user.last_name.strip()
+        user.email = user.email.strip()
+
         message = MailerMessage()
         context = {
             'site': RequestSite(self.request),
