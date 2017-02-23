@@ -1,5 +1,16 @@
 # EESTECNET
+## Set up
 
+Execute:
+
+    vagrant up
+    vagrant halt && vagrant up && vagrant ssh
+In vagrant:
+
+    cd /var/www/eestecnet
+    python manage.py runserver 0.0.0.0:8000
+    
+eestecnet will run on `localhost:8006`
 ## Motivation
 
 The motivation for creating this open source project is to provide an online platform for the
