@@ -9,5 +9,4 @@ sudo ln -s /vagrant/settings/etc/nginx.conf /etc/nginx/sites-enabled/default -f
 sudo service nginx start
 sudo nginx -s reload
 cd /vagrant
-fab remove_migrations
 

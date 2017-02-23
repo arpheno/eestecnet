@@ -22,7 +22,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision :shell, :path => "settings/vagrant/postgres.sh"
   config.vm.provision :shell, :path => "settings/vagrant/deploy.sh"
   config.vm.provision :shell, :path => "settings/vagrant/start.sh",run: "always"
-  config.vm.network "forwarded_port", guest: 8000, host: 8005
+  config.vm.network "forwarded_port", guest: 8000, host: 8006
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
